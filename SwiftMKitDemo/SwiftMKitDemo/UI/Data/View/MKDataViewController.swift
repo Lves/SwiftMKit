@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MKDataViewController: BaseListViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

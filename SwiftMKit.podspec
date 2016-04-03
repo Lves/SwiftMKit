@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|  
   s.name             = "SwiftMKit"  
-  s.version          = "1.0.0"  
+  s.version          = "1.0.1"  
   s.summary          = "Swift Kit used on iOS."  
   s.description      = "It is a swift kit used on iOS, which implement by Swift."
   s.homepage         = "https://github.com/cdtschange/SwiftMKit"  
@@ -15,12 +15,16 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = '10.7'  
   s.requires_arc = true  
   
-  s.source_files = 'SwiftMKit/*'  
+  s.source_files = 'SwiftMKit/**/*.{swift}'  
   # s.resources = 'Assets'  
   
   # s.ios.exclude_files = 'Classes/osx'  
   # s.osx.exclude_files = 'Classes/ios'  
   # s.public_header_files = 'Classes/**/*.h'  
   s.frameworks = 'Foundation', 'CoreGraphics', 'UIKit'  
-  
+
+  s.dependency 'Alamofire'
+  s.dependency 'CocoaLumberjack/Swift'
+  s.dependency 'ReactiveCocoa'
+
 end
