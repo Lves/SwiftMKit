@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|  
   s.name             = "SwiftMKit"  
-  s.version          = "1.0.1"  
+  s.version          = "1.0.2"  
   s.summary          = "Swift Kit used on iOS."  
   s.description      = "It is a swift kit used on iOS, which implement by Swift."
   s.homepage         = "https://github.com/cdtschange/SwiftMKit"  
   # s.screenshots      = "www.example.com/screenshots_1", "www.example.com/screenshots_2"  
   s.license          = 'MIT'  
   s.author           = { "山天大畜" => "cdts_change@aliyun.com" }  
-  s.source           = { :git => "https://github.com/cdtschange/SwiftMKit.git", :tag => s.version.to_s }  
+  s.source           = { :git => "https://github.com/cdtschange/SwiftMKit.git", :tag => "#{s.version}" }  
   # s.social_media_url = 'https://twitter.com/NAME'  
   
   s.platform     = :ios, '8.0'  
@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true  
   
   s.source_files = 'SwiftMKit/**/*.{swift}'  
+  # s.resources = 'SwiftMKit/**/*.{png,jpeg,jpg,storyboard,xib}'
   # s.resources = 'Assets'  
   
   # s.ios.exclude_files = 'Classes/osx'  
