@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FFB486E1CB0255C0096C775"
-               BuildableName = "SwiftKitDemo.app"
-               BlueprintName = "SwiftKitDemo"
-               ReferencedContainer = "container:SwiftKitDemo.xcodeproj">
+               BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+               BuildableName = "SwiftMKitDemo.app"
+               BlueprintName = "SwiftMKitDemo"
+               ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,30 +32,30 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FFB48821CB0255C0096C775"
-               BuildableName = "SwiftKitDemoTests.xctest"
-               BlueprintName = "SwiftKitDemoTests"
-               ReferencedContainer = "container:SwiftKitDemo.xcodeproj">
+               BlueprintIdentifier = "3F877C411CB0B96500426D76"
+               BuildableName = "SwiftMKitDemoTests.xctest"
+               BlueprintName = "SwiftMKitDemoTests"
+               ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FFB488D1CB0255C0096C775"
-               BuildableName = "SwiftKitDemoUITests.xctest"
-               BlueprintName = "SwiftKitDemoUITests"
-               ReferencedContainer = "container:SwiftKitDemo.xcodeproj">
+               BlueprintIdentifier = "3F877C4C1CB0B96500426D76"
+               BuildableName = "SwiftMKitDemoUITests.xctest"
+               BlueprintName = "SwiftMKitDemoUITests"
+               ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FFB486E1CB0255C0096C775"
-            BuildableName = "SwiftKitDemo.app"
-            BlueprintName = "SwiftKitDemo"
-            ReferencedContainer = "container:SwiftKitDemo.xcodeproj">
+            BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+            BuildableName = "SwiftMKitDemo.app"
+            BlueprintName = "SwiftMKitDemo"
+            ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -75,10 +75,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FFB486E1CB0255C0096C775"
-            BuildableName = "SwiftKitDemo.app"
-            BlueprintName = "SwiftKitDemo"
-            ReferencedContainer = "container:SwiftKitDemo.xcodeproj">
+            BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+            BuildableName = "SwiftMKitDemo.app"
+            BlueprintName = "SwiftMKitDemo"
+            ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,10 +94,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FFB486E1CB0255C0096C775"
-            BuildableName = "SwiftKitDemo.app"
-            BlueprintName = "SwiftKitDemo"
-            ReferencedContainer = "container:SwiftKitDemo.xcodeproj">
+            BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+            BuildableName = "SwiftMKitDemo.app"
+            BlueprintName = "SwiftMKitDemo"
+            ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,6 +1,6 @@
 //
-//  SwiftKitDemoUITests.swift
-//  SwiftKitDemoUITests
+//  SwiftMKitDemoUITests.swift
+//  SwiftMKitDemoUITests
 //
 //  Created by Mao on 4/3/16.
 //  Copyright © 2016 cdts. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class SwiftKitDemoUITests: XCTestCase {
+class SwiftMKitDemoUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

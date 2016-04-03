@@ -1,2 +1,2 @@
-# SwiftKit
-Swift Kit
+# SwiftMKit
+Swift MKit
