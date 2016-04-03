@@ -21,6 +21,11 @@
 		3F6C48161CB0E75600E9AAC0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48151CB0E75600E9AAC0 /* BaseViewModel.swift */; };
 		3F6C48181CB0E76400E9AAC0 /* BaseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48171CB0E76400E9AAC0 /* BaseListViewModel.swift */; };
 		3F6C481A1CB0E77A00E9AAC0 /* MKDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48191CB0E77A00E9AAC0 /* MKDataViewModel.swift */; };
+		3F6C481D1CB1169E00E9AAC0 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C481C1CB1169E00E9AAC0 /* BaseModel.swift */; };
+		3F6C481F1CB116B600E9AAC0 /* MKDataListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C481E1CB116B600E9AAC0 /* MKDataListModel.swift */; };
+		3F6C48211CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48201CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift */; };
+		3F6C48231CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48221CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift */; };
+		3F6C48251CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48241CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift */; };
 		3F877C321CB0B96500426D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F877C311CB0B96500426D76 /* AppDelegate.swift */; };
 		3F877C371CB0B96500426D76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F877C351CB0B96500426D76 /* Main.storyboard */; };
 		3F877C391CB0B96500426D76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F877C381CB0B96500426D76 /* Assets.xcassets */; };
@@ -60,6 +65,11 @@
 		3F6C48151CB0E75600E9AAC0 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		3F6C48171CB0E76400E9AAC0 /* BaseListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListViewModel.swift; sourceTree = "<group>"; };
 		3F6C48191CB0E77A00E9AAC0 /* MKDataViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataViewModel.swift; sourceTree = "<group>"; };
+		3F6C481C1CB1169E00E9AAC0 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		3F6C481E1CB116B600E9AAC0 /* MKDataListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataListModel.swift; sourceTree = "<group>"; };
+		3F6C48201CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestViewController.swift; sourceTree = "<group>"; };
+		3F6C48221CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestViewModel.swift; sourceTree = "<group>"; };
+		3F6C48241CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestModel.swift; sourceTree = "<group>"; };
 		3F877C2E1CB0B96500426D76 /* SwiftMKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F877C311CB0B96500426D76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F877C361CB0B96500426D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -173,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				3F6C480E1CB0E71D00E9AAC0 /* MKDataViewController.swift */,
+				3F6C48201CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,8 +192,19 @@
 			isa = PBXGroup;
 			children = (
 				3F6C48191CB0E77A00E9AAC0 /* MKDataViewModel.swift */,
+				3F6C48221CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3F6C481B1CB1167400E9AAC0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F6C481C1CB1169E00E9AAC0 /* BaseModel.swift */,
+				3F6C481E1CB116B600E9AAC0 /* MKDataListModel.swift */,
+				3F6C48241CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		3F877C251CB0B96500426D76 = {
@@ -211,6 +233,7 @@
 		3F877C301CB0B96500426D76 /* SwiftMKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3F6C481B1CB1167400E9AAC0 /* Data */,
 				3F6C48041CB0E63000E9AAC0 /* UI */,
 				3F877C311CB0B96500426D76 /* AppDelegate.swift */,
 				3F877C351CB0B96500426D76 /* Main.storyboard */,
@@ -473,15 +496,20 @@
 				3F6C48121CB0E73300E9AAC0 /* BaseKitViewModel.swift in Sources */,
 				3F6C48161CB0E75600E9AAC0 /* BaseViewModel.swift in Sources */,
 				3F6C48011CB0E3ED00E9AAC0 /* BaseKitViewController.swift in Sources */,
+				3F6C481D1CB1169E00E9AAC0 /* BaseModel.swift in Sources */,
 				3F6C47FA1CB0E3D000E9AAC0 /* SwiftMKit.swift in Sources */,
 				3F6C48181CB0E76400E9AAC0 /* BaseListViewModel.swift in Sources */,
 				3F6C48091CB0E69D00E9AAC0 /* BaseListViewController.swift in Sources */,
+				3F6C48231CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3F877C321CB0B96500426D76 /* AppDelegate.swift in Sources */,
 				3F6C48031CB0E3FC00E9AAC0 /* BaseListKitViewController.swift in Sources */,
 				3F6C48141CB0E74600E9AAC0 /* BaseListKitViewModel.swift in Sources */,
 				3F6C48101CB0E71D00E9AAC0 /* MKDataViewController.swift in Sources */,
+				3F6C481F1CB116B600E9AAC0 /* MKDataListModel.swift in Sources */,
 				3F6C481A1CB0E77A00E9AAC0 /* MKDataViewModel.swift in Sources */,
+				3F6C48211CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3F6C48071CB0E64F00E9AAC0 /* BaseViewController.swift in Sources */,
+				3F6C48251CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

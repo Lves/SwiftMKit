@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|  
   s.name             = "SwiftMKit"  
-  s.version          = "1.0.2"  
+  s.version          = "1.0.3"  
   s.summary          = "Swift Kit used on iOS."  
   s.description      = "It is a swift kit used on iOS, which implement by Swift."
   s.homepage         = "https://github.com/cdtschange/SwiftMKit"  
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/cdtschange/SwiftMKit.git", :tag => "#{s.version}" }  
   # s.social_media_url = 'https://twitter.com/NAME'  
   
-  s.platform     = :ios, '8.0'  
+  s.platform     = :ios, '8.0'   
   # s.ios.deployment_target = '5.0'  
   # s.osx.deployment_target = '10.7'  
   s.requires_arc = true  
@@ -27,5 +27,7 @@ Pod::Spec.new do |s|
   s.dependency 'Alamofire'
   s.dependency 'CocoaLumberjack/Swift'
   s.dependency 'ReactiveCocoa'
+  s.dependency 'SwiftyJSON'
+  s.dependency 'MJRefresh'
 
 end

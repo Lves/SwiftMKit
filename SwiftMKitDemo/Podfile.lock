@@ -7,9 +7,22 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
-  - SwiftMKit (1.0.0):
+  - ReactiveCocoa (4.1.0):
+    - ReactiveCocoa/UI (= 4.1.0)
+    - Result (~> 2.0)
+  - ReactiveCocoa/Core (4.1.0):
+    - ReactiveCocoa/no-arc
+    - Result (~> 2.0)
+  - ReactiveCocoa/no-arc (4.1.0):
+    - Result (~> 2.0)
+  - ReactiveCocoa/UI (4.1.0):
+    - ReactiveCocoa/Core
+    - Result (~> 2.0)
+  - Result (2.0.0)
+  - SwiftMKit (1.0.2):
     - Alamofire
     - CocoaLumberjack/Swift
+    - ReactiveCocoa
 
 DEPENDENCIES:
   - SwiftMKit
@@ -17,6 +30,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  SwiftMKit: 7e17e60cccb2cd4258338116fbb7f213995d293e
+  ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
+  Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  SwiftMKit: 71f055b312871a1eae29982c1a0a26cb63fe9fd7
 
 COCOAPODS: 0.39.0

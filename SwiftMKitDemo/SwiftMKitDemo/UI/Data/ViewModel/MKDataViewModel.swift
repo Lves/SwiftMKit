@@ -9,5 +9,9 @@
 import UIKit
 
 class MKDataViewModel: BaseListViewModel {
-
+    override init() {
+        super.init()
+        self.dataSource = [MKDataListModel]()
+        self.dataSource.append(MKDataListModel(title: "Network Request", detail: "Request a url"))
+    }
 }

@@ -8,6 +8,6 @@
 
 import UIKit
 
-class BaseKitViewModel: NSObject {
-
+public class BaseKitViewModel: NSObject {
+    public weak var viewController: BaseKitViewController!
 }
