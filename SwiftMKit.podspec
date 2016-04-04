@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|  
   s.name             = "SwiftMKit"  
-  s.version          = "1.0.3"  
+  s.version          = "1.0.4"  
   s.summary          = "Swift Kit used on iOS."  
   s.description      = "It is a swift kit used on iOS, which implement by Swift."
   s.homepage         = "https://github.com/cdtschange/SwiftMKit"  
@@ -16,6 +16,11 @@ Pod::Spec.new do |s|
   s.requires_arc = true  
   
   s.source_files = 'SwiftMKit/**/*.{swift}'  
+  s.resource_bundles = {
+    'MJRefresh' => [
+        'Pod/**/*.{png,jpeg,jpg,storyboard,xib}'
+    ]
+  }
   # s.resources = 'SwiftMKit/**/*.{png,jpeg,jpg,storyboard,xib}'
   # s.resources = 'Assets'  
   
