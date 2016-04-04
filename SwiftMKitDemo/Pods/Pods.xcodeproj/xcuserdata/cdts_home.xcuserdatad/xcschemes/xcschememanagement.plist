@@ -22,7 +22,7 @@
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>ReactiveCocoa.xcscheme</key>
 		<dict>
@@ -30,6 +30,11 @@
 			<false/>
 		</dict>
 		<key>Result.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftMKit-MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -58,6 +63,11 @@
 			<true/>
 		</dict>
 		<key>36BA64F964B7493A4BB1CF3CF5386568</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>47F801AB58E87132988CDE90C70FDD6A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

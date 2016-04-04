@@ -20,7 +20,7 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 2.0)
   - Result (2.0.0)
-  - SwiftMKit (1.0.3):
+  - SwiftMKit (1.0.4):
     - Alamofire
     - CocoaLumberjack/Swift
     - MJRefresh
@@ -37,7 +37,7 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  SwiftMKit: 53300a1897ead9e3beb90ee18dd0c4a02ad1e553
+  SwiftMKit: 79274f4423735e6c2b08ce14a3bb0b176e72cd6f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

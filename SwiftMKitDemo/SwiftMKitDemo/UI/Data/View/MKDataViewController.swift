@@ -46,7 +46,7 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row == 0 {
-            self.performSegueWithIdentifier(InnerConst.segueToNext, sender: nil)
+            self.routeToName(InnerConst.segueToNext, params: ["title":"Cities"])
         }
     }
 }

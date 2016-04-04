@@ -19,3 +19,17 @@ class MKDataNetworkRequestCityModel: BaseModel {
         super.init()
     }
 }
+
+class MKDataNetworkRequestShopModel: BaseModel {
+    var shopId: String
+    var name: String
+    var longitude: Double?
+    var latitude: Double?
+    var url: String
+    init(shopId:String, name:String, url:String) {
+        self.shopId = shopId
+        self.name = name
+        self.url = url
+        super.init()
+    }
+}

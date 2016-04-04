@@ -1,29 +1,30 @@
 //
-//  MKDataNetworkRequestViewController.swift
+//  MKDataNetworkWithImagesViewController.swift
 //  SwiftMKitDemo
 //
-//  Created by Mao on 4/3/16.
+//  Created by Mao on 4/4/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
 import UIKit
 import Alamofire
-import CocoaLumberjack
 import SwiftyJSON
+import CocoaLumberjack
 
-class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
+class MKDataNetworkWithImagesViewController: BaseListViewController {
+    var cityId: String?
+    
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
-        static let CellIdentifier = "MKDataNetworkRequestTableViewCell"
-        static let segueToNext = "routeToDataNetworkImages"
+        static let CellIdentifier = "MKDataNetworkImagesTableViewCell"
     }
-    var thisViewModel: MKDataNetworkRequestViewModel! {
+    var thisViewModel: MKDataNetworkImagesViewModel! {
         get {
             if viewModel == nil {
-                viewModel = MKDataNetworkRequestViewModel()
+                viewModel = MKDataNetworkImagesViewModel()
             }
-            return viewModel as! MKDataNetworkRequestViewModel
+            return viewModel as! MKDataNetworkImagesViewModel
         }
     }
     override var listView: UIScrollView! {
@@ -32,12 +33,12 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         }
     }
     override var listViewType: ListViewType {
-        get { return .ListViewTypeRefreshOnly }
+        get { return .ListViewTypeBoth }
     }
     
     override func setupUI() {
         super.setupUI()
-        self.title = "Network Request"
+        self.title = "Network Images"
         loadData()
     }
     override func loadData() {
@@ -46,20 +47,17 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func refreshData() {
         super.refreshData()
-        let request = NSMutableURLRequest(URL: NSURL(string: BaiduConfig.UrlCities)!)
-        request.HTTPMethod = "GET"
-        request.setValue(BaiduConfig.ApiKey, forHTTPHeaderField: "apikey")
-        Alamofire.request(request).responseJSON { response in
+        Alamofire.request(.GET, BaiduConfig.UrlShops, parameters: ["city_id":self.cityId!], headers: ["apikey":BaiduConfig.ApiKey]).responseJSON { response in
             self.tableView.mj_header.endRefreshing()
             switch response.result {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
                     DDLogVerbose("JSON: \(json)")
-                    let cities = json["cities"].arrayValue
-                    var models = [MKDataNetworkRequestCityModel]()
-                    for city in cities {
-                        let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
+                    let shops = json["data"]["shops"].arrayValue
+                    var models = [MKDataNetworkRequestShopModel]()
+                    for shop in shops {
+                        let model = MKDataNetworkRequestShopModel(shopId: shop["shop_id"].stringValue, name: shop["shop_name"].stringValue, url: shop["shop_murl"].stringValue)
                         models.append(model)
                     }
                     self.thisViewModel.dataSource = models
@@ -80,13 +78,11 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
+        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestShopModel
         cell?.textLabel?.text = model?.name
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
-        self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId])
     }
 }

@@ -75,7 +75,7 @@
         <!--Data Network Request View Controller-->
         <scene sceneID="hHX-fd-ae8">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zQz-Kw-al7" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MKDataNetworkRequestViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="zQz-Kw-al7" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b8l-Wt-4Qq"/>
                         <viewControllerLayoutGuide type="bottom" id="zaK-rG-vJp"/>
@@ -85,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BtM-OP-lvT">
-                                <rect key="frame" x="-4" y="64" width="383" height="554"/>
+                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MKDataNetworkRequestTableViewCell" textLabel="sFn-Z9-QOq" style="IBUITableViewCellStyleDefault" id="ubf-Wp-K07">
@@ -120,13 +120,62 @@
                             <constraint firstItem="BtM-OP-lvT" firstAttribute="leading" secondItem="teF-oz-t9O" secondAttribute="leadingMargin" constant="-20" id="dJa-XX-xcO"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="BtM-OP-lvT" id="7wV-jI-AgJ"/>
+                        <segue destination="x7y-zC-txb" kind="show" identifier="routeToDataNetworkImages" id="CDZ-h6-a4U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cPd-cG-4LL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2466.5" y="206.5"/>
+        </scene>
+        <!--Data Network With Images View Controller-->
+        <scene sceneID="rZN-GW-7dM">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="x7y-zC-txb" customClass="MKDataNetworkWithImagesViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lE2-Qr-Jcg"/>
+                        <viewControllerLayoutGuide type="bottom" id="yNF-lw-XQm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lya-JQ-DHc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BwW-I0-Mfd">
+                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MKDataNetworkImagesTableViewCell" id="eEA-bw-OvZ">
+                                        <rect key="frame" x="0.0" y="28" width="383" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eEA-bw-OvZ" id="bz1-HS-FeJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="x7y-zC-txb" id="Zzh-Du-xhG"/>
+                                    <outlet property="delegate" destination="x7y-zC-txb" id="bYV-0g-W94"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BwW-I0-Mfd" firstAttribute="leading" secondItem="Lya-JQ-DHc" secondAttribute="leadingMargin" constant="-20" id="Glc-X8-PS5"/>
+                            <constraint firstItem="yNF-lw-XQm" firstAttribute="top" secondItem="BwW-I0-Mfd" secondAttribute="bottom" id="UiN-vB-QVi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BwW-I0-Mfd" secondAttribute="trailing" constant="-20" id="XJP-NJ-GHk"/>
+                            <constraint firstItem="BwW-I0-Mfd" firstAttribute="top" secondItem="lE2-Qr-Jcg" secondAttribute="bottom" id="zn8-rz-n6h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="BwW-I0-Mfd" id="gXP-pJ-gXk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4df-3B-kdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2971.5" y="206.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="qc1-Bi-fay">
