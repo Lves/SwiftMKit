@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0A13C10AFE5A839975670089 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C6257ABB75594451A5A3BA /* Pods.framework */; };
+		27411AC01CB4FDF3002670B6 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411ABD1CB4FDF3002670B6 /* BaseModel.swift */; };
+		27411AC11CB4FDF3002670B6 /* MKDataListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411ABE1CB4FDF3002670B6 /* MKDataListModel.swift */; };
+		27411AC21CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411ABF1CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift */; };
+		27411AC41CB4FE23002670B6 /* MKitDemoApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411AC31CB4FE23002670B6 /* MKitDemoApiClient.swift */; };
+		27411AC61CB50417002670B6 /* MKitDemoApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411AC51CB50417002670B6 /* MKitDemoApiInfo.swift */; };
+		27A38AA61CB7A9B200644571 /* MKitApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A38AA51CB7A9B200644571 /* MKitApiRouter.swift */; };
+		27A38AA81CB7B21700644571 /* NetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A38AA71CB7B21700644571 /* NetApiData.swift */; };
+		27C126AA1CB3B5CE00103803 /* NetApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C126A91CB3B5CE00103803 /* NetApiClient.swift */; };
 		3F5163DD1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5163DC1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift */; };
 		3F5163DF1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5163DE1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift */; };
 		3F5163E21CB2AB09009646AC /* MKDataNetworkImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5163E11CB2AB09009646AC /* MKDataNetworkImagesTableViewCell.swift */; };
@@ -25,11 +33,8 @@
 		3F6C48161CB0E75600E9AAC0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48151CB0E75600E9AAC0 /* BaseViewModel.swift */; };
 		3F6C48181CB0E76400E9AAC0 /* BaseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48171CB0E76400E9AAC0 /* BaseListViewModel.swift */; };
 		3F6C481A1CB0E77A00E9AAC0 /* MKDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48191CB0E77A00E9AAC0 /* MKDataViewModel.swift */; };
-		3F6C481D1CB1169E00E9AAC0 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C481C1CB1169E00E9AAC0 /* BaseModel.swift */; };
-		3F6C481F1CB116B600E9AAC0 /* MKDataListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C481E1CB116B600E9AAC0 /* MKDataListModel.swift */; };
 		3F6C48211CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48201CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift */; };
 		3F6C48231CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48221CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift */; };
-		3F6C48251CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C48241CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift */; };
 		3F877C321CB0B96500426D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F877C311CB0B96500426D76 /* AppDelegate.swift */; };
 		3F877C371CB0B96500426D76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F877C351CB0B96500426D76 /* Main.storyboard */; };
 		3F877C391CB0B96500426D76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F877C381CB0B96500426D76 /* Assets.xcassets */; };
@@ -57,6 +62,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27411ABD1CB4FDF3002670B6 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		27411ABE1CB4FDF3002670B6 /* MKDataListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataListModel.swift; sourceTree = "<group>"; };
+		27411ABF1CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestModel.swift; sourceTree = "<group>"; };
+		27411AC31CB4FE23002670B6 /* MKitDemoApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiClient.swift; sourceTree = "<group>"; };
+		27411AC51CB50417002670B6 /* MKitDemoApiInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiInfo.swift; sourceTree = "<group>"; };
+		27A38AA51CB7A9B200644571 /* MKitApiRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitApiRouter.swift; sourceTree = "<group>"; };
+		27A38AA71CB7B21700644571 /* NetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiData.swift; sourceTree = "<group>"; };
+		27A38AAF1CB7CA6400644571 /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		27C126A91CB3B5CE00103803 /* NetApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiClient.swift; sourceTree = "<group>"; };
 		2DA4C87D6F2928804931FA98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3F5163DC1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkWithImagesViewController.swift; sourceTree = "<group>"; };
 		3F5163DE1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkImagesViewModel.swift; sourceTree = "<group>"; };
@@ -73,11 +87,8 @@
 		3F6C48151CB0E75600E9AAC0 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		3F6C48171CB0E76400E9AAC0 /* BaseListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListViewModel.swift; sourceTree = "<group>"; };
 		3F6C48191CB0E77A00E9AAC0 /* MKDataViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataViewModel.swift; sourceTree = "<group>"; };
-		3F6C481C1CB1169E00E9AAC0 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
-		3F6C481E1CB116B600E9AAC0 /* MKDataListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataListModel.swift; sourceTree = "<group>"; };
 		3F6C48201CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestViewController.swift; sourceTree = "<group>"; };
 		3F6C48221CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestViewModel.swift; sourceTree = "<group>"; };
-		3F6C48241CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestModel.swift; sourceTree = "<group>"; };
 		3F877C2E1CB0B96500426D76 /* SwiftMKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F877C311CB0B96500426D76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F877C361CB0B96500426D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -121,6 +132,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27411ABB1CB4FDF3002670B6 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				27411AC51CB50417002670B6 /* MKitDemoApiInfo.swift */,
+				27411AC31CB4FE23002670B6 /* MKitDemoApiClient.swift */,
+				27A38AA51CB7A9B200644571 /* MKitApiRouter.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		27411ABC1CB4FDF3002670B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27411ABD1CB4FDF3002670B6 /* BaseModel.swift */,
+				27411ABE1CB4FDF3002670B6 /* MKDataListModel.swift */,
+				27411ABF1CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		27C126A81CB3B5B500103803 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				27C126A91CB3B5CE00103803 /* NetApiClient.swift */,
+				27A38AA71CB7B21700644571 /* NetApiData.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		3F5163E01CB2AAF8009646AC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,18 +181,11 @@
 			isa = PBXGroup;
 			children = (
 				3F6C47F61CB0E3D000E9AAC0 /* SwiftMKit.swift */,
-				3F6C47F51CB0E3D000E9AAC0 /* Data */,
+				27C126A81CB3B5B500103803 /* Network */,
 				3F6C47F71CB0E3D000E9AAC0 /* UI */,
 			);
 			name = SwiftMKit;
 			path = ../SwiftMKit;
-			sourceTree = "<group>";
-		};
-		3F6C47F51CB0E3D000E9AAC0 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		3F6C47F71CB0E3D000E9AAC0 /* UI */ = {
@@ -227,9 +260,8 @@
 		3F6C481B1CB1167400E9AAC0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3F6C481C1CB1169E00E9AAC0 /* BaseModel.swift */,
-				3F6C481E1CB116B600E9AAC0 /* MKDataListModel.swift */,
-				3F6C48241CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift */,
+				27411ABB1CB4FDF3002670B6 /* Api */,
+				27411ABC1CB4FDF3002670B6 /* Model */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -268,6 +300,7 @@
 				3F877C381CB0B96500426D76 /* Assets.xcassets */,
 				3F877C3A1CB0B96500426D76 /* LaunchScreen.storyboard */,
 				3F877C3D1CB0B96500426D76 /* Info.plist */,
+				27A38AAF1CB7CA6400644571 /* SwiftMKitDemo-Bridging-Header.h */,
 			);
 			path = SwiftMKitDemo;
 			sourceTree = "<group>";
@@ -524,9 +557,13 @@
 				3F6C48121CB0E73300E9AAC0 /* BaseKitViewModel.swift in Sources */,
 				3F6C48161CB0E75600E9AAC0 /* BaseViewModel.swift in Sources */,
 				3F6C48011CB0E3ED00E9AAC0 /* BaseKitViewController.swift in Sources */,
-				3F6C481D1CB1169E00E9AAC0 /* BaseModel.swift in Sources */,
+				27411AC21CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift in Sources */,
 				3F6C47FA1CB0E3D000E9AAC0 /* SwiftMKit.swift in Sources */,
+				27411AC11CB4FDF3002670B6 /* MKDataListModel.swift in Sources */,
+				27A38AA81CB7B21700644571 /* NetApiData.swift in Sources */,
+				27A38AA61CB7A9B200644571 /* MKitApiRouter.swift in Sources */,
 				3F6C48181CB0E76400E9AAC0 /* BaseListViewModel.swift in Sources */,
+				27411AC01CB4FDF3002670B6 /* BaseModel.swift in Sources */,
 				3F6C48091CB0E69D00E9AAC0 /* BaseListViewController.swift in Sources */,
 				3F6C48231CB11D6900E9AAC0 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3F877C321CB0B96500426D76 /* AppDelegate.swift in Sources */,
@@ -535,13 +572,14 @@
 				3F5163DF1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift in Sources */,
 				3F6C48141CB0E74600E9AAC0 /* BaseListKitViewModel.swift in Sources */,
 				3F6C48101CB0E71D00E9AAC0 /* MKDataViewController.swift in Sources */,
-				3F6C481F1CB116B600E9AAC0 /* MKDataListModel.swift in Sources */,
+				27411AC61CB50417002670B6 /* MKitDemoApiInfo.swift in Sources */,
 				3F5163DD1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift in Sources */,
 				3F6C481A1CB0E77A00E9AAC0 /* MKDataViewModel.swift in Sources */,
 				3F5163E51CB2AB3D009646AC /* GlobalConfig.swift in Sources */,
 				3F6C48211CB11D4600E9AAC0 /* MKDataNetworkRequestViewController.swift in Sources */,
+				27411AC41CB4FE23002670B6 /* MKitDemoApiClient.swift in Sources */,
+				27C126AA1CB3B5CE00103803 /* NetApiClient.swift in Sources */,
 				3F6C48071CB0E64F00E9AAC0 /* BaseViewController.swift in Sources */,
-				3F6C48251CB137D100E9AAC0 /* MKDataNetworkRequestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,10 +723,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -696,10 +737,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 			};
 			name = Release;
 		};

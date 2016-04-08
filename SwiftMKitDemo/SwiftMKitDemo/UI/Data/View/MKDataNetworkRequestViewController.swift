@@ -46,6 +46,9 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func refreshData() {
         super.refreshData()
+        MKitDemoApiClient.requestJSON(BaiduApiRouter.Cities().URLRequest) { response in
+            
+        }
         let request = NSMutableURLRequest(URL: NSURL(string: BaiduConfig.UrlCities)!)
         request.HTTPMethod = "GET"
         request.setValue(BaiduConfig.ApiKey, forHTTPHeaderField: "apikey")
