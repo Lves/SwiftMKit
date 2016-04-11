@@ -13,7 +13,8 @@ import CocoaLumberjack
 import SwiftyJSON
 
 public class NetApiClient : NSObject {
-    class func requestJSON(request: NSURLRequest,
+    
+    func requestJSON(request: NSURLRequest,
                  completionHandler: (Response<AnyObject, NSError> -> Void)?)
         -> Request {
             return Alamofire.request(request).responseJSON { response in
@@ -32,7 +33,7 @@ public class NetApiClient : NSObject {
                 }
             }
     }
-    class func requestData(request: NSURLRequest,
+    func requestData(request: NSURLRequest,
                            completionHandler: (Response<NSData, NSError> -> Void)?)
         -> Request {
             return Alamofire.request(request).responseData { response in
@@ -48,7 +49,7 @@ public class NetApiClient : NSObject {
                 }
             }
     }
-    class func requestString(request: NSURLRequest,
+    func requestString(request: NSURLRequest,
                              completionHandler: (Response<String, NSError> -> Void)?)
         -> Request {
             return Alamofire.request(request).responseString { response in
@@ -67,13 +68,13 @@ public class NetApiClient : NSObject {
     
     
     
-    class func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>{
+    func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>{
         return response
     }
-    class func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>{
+    func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>{
         return response
     }
-    class func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>{
+    func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>{
         return response
     }
 }

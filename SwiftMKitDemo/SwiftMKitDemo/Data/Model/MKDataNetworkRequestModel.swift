@@ -18,6 +18,14 @@ class MKDataNetworkRequestCityModel: BaseModel {
         self.pinyin = pinyin
         super.init()
     }
+    
+//    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+//        return [
+//            "cityId":"city_id",
+//            "name":"city_name",
+//            "pinyin":"city_pinyin",
+//        ]
+//    }
 }
 
 class MKDataNetworkRequestShopModel: BaseModel {

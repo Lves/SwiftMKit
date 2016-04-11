@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import CocoaLumberjack
 import SwiftyJSON
+import ReactiveCocoa
 
 class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -46,32 +47,41 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func refreshData() {
         super.refreshData()
-        MKitDemoApiClient.requestJSON(BaiduApiRouter.Cities().URLRequest) { response in
-            
-        }
-        let request = NSMutableURLRequest(URL: NSURL(string: BaiduConfig.UrlCities)!)
-        request.HTTPMethod = "GET"
-        request.setValue(BaiduConfig.ApiKey, forHTTPHeaderField: "apikey")
-        Alamofire.request(request).responseJSON { response in
+        BaiduCitiesApiData().requestJSON().startWithNext { [unowned self] apiData in
             self.tableView.mj_header.endRefreshing()
-            switch response.result {
-            case .Success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    DDLogVerbose("JSON: \(json)")
-                    let cities = json["cities"].arrayValue
-                    var models = [MKDataNetworkRequestCityModel]()
-                    for city in cities {
-                        let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
-                        models.append(model)
-                    }
-                    self.thisViewModel.dataSource = models
-                    self.tableView.reloadData()
-                }
-            case .Failure(let error):
-                DDLogError("\(error)")
+            let data = apiData as! BaiduCitiesApiData
+            let cities = apiData.responseJSONData!["cities"].arrayValue
+            var models = [MKDataNetworkRequestCityModel]()
+            for city in cities {
+                let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
+                models.append(model)
             }
+            self.thisViewModel.dataSource = models
+            self.tableView.reloadData()
         }
+//        let request = NSMutableURLRequest(URL: NSURL(string: BaiduConfig.UrlCities)!)
+//        request.HTTPMethod = "GET"
+//        request.setValue(BaiduConfig.ApiKey, forHTTPHeaderField: "apikey")
+//        Alamofire.request(request).responseJSON { response in
+//            self.tableView.mj_header.endRefreshing()
+//            switch response.result {
+//            case .Success:
+//                if let value = response.result.value {
+//                    let json = JSON(value)
+//                    DDLogVerbose("JSON: \(json)")
+//                    let cities = json["cities"].arrayValue
+//                    var models = [MKDataNetworkRequestCityModel]()
+//                    for city in cities {
+//                        let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
+//                        models.append(model)
+//                    }
+//                    self.thisViewModel.dataSource = models
+//                    self.tableView.reloadData()
+//                }
+//            case .Failure(let error):
+//                DDLogError("\(error)")
+//            }
+//        }
         
     }
     

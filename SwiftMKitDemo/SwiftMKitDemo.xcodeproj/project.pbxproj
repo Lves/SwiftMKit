@@ -13,9 +13,9 @@
 		27411AC21CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411ABF1CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift */; };
 		27411AC41CB4FE23002670B6 /* MKitDemoApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411AC31CB4FE23002670B6 /* MKitDemoApiClient.swift */; };
 		27411AC61CB50417002670B6 /* MKitDemoApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27411AC51CB50417002670B6 /* MKitDemoApiInfo.swift */; };
-		27A38AA61CB7A9B200644571 /* MKitApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A38AA51CB7A9B200644571 /* MKitApiRouter.swift */; };
 		27A38AA81CB7B21700644571 /* NetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A38AA71CB7B21700644571 /* NetApiData.swift */; };
 		27C126AA1CB3B5CE00103803 /* NetApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C126A91CB3B5CE00103803 /* NetApiClient.swift */; };
+		27C186361CBB5533004869C4 /* MKitDemoApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C186351CBB5533004869C4 /* MKitDemoApiData.swift */; };
 		3F5163DD1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5163DC1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift */; };
 		3F5163DF1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5163DE1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift */; };
 		3F5163E21CB2AB09009646AC /* MKDataNetworkImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5163E11CB2AB09009646AC /* MKDataNetworkImagesTableViewCell.swift */; };
@@ -67,10 +67,10 @@
 		27411ABF1CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestModel.swift; sourceTree = "<group>"; };
 		27411AC31CB4FE23002670B6 /* MKitDemoApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiClient.swift; sourceTree = "<group>"; };
 		27411AC51CB50417002670B6 /* MKitDemoApiInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiInfo.swift; sourceTree = "<group>"; };
-		27A38AA51CB7A9B200644571 /* MKitApiRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitApiRouter.swift; sourceTree = "<group>"; };
 		27A38AA71CB7B21700644571 /* NetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiData.swift; sourceTree = "<group>"; };
 		27A38AAF1CB7CA6400644571 /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27C126A91CB3B5CE00103803 /* NetApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiClient.swift; sourceTree = "<group>"; };
+		27C186351CBB5533004869C4 /* MKitDemoApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiData.swift; sourceTree = "<group>"; };
 		2DA4C87D6F2928804931FA98 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3F5163DC1CB2AA07009646AC /* MKDataNetworkWithImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkWithImagesViewController.swift; sourceTree = "<group>"; };
 		3F5163DE1CB2AA1A009646AC /* MKDataNetworkImagesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkImagesViewModel.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			children = (
 				27411AC51CB50417002670B6 /* MKitDemoApiInfo.swift */,
 				27411AC31CB4FE23002670B6 /* MKitDemoApiClient.swift */,
-				27A38AA51CB7A9B200644571 /* MKitApiRouter.swift */,
+				27C186351CBB5533004869C4 /* MKitDemoApiData.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -555,13 +555,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F6C48121CB0E73300E9AAC0 /* BaseKitViewModel.swift in Sources */,
+				27C186361CBB5533004869C4 /* MKitDemoApiData.swift in Sources */,
 				3F6C48161CB0E75600E9AAC0 /* BaseViewModel.swift in Sources */,
 				3F6C48011CB0E3ED00E9AAC0 /* BaseKitViewController.swift in Sources */,
 				27411AC21CB4FDF3002670B6 /* MKDataNetworkRequestModel.swift in Sources */,
 				3F6C47FA1CB0E3D000E9AAC0 /* SwiftMKit.swift in Sources */,
 				27411AC11CB4FDF3002670B6 /* MKDataListModel.swift in Sources */,
 				27A38AA81CB7B21700644571 /* NetApiData.swift in Sources */,
-				27A38AA61CB7A9B200644571 /* MKitApiRouter.swift in Sources */,
 				3F6C48181CB0E76400E9AAC0 /* BaseListViewModel.swift in Sources */,
 				27411AC01CB4FDF3002670B6 /* BaseModel.swift in Sources */,
 				3F6C48091CB0E69D00E9AAC0 /* BaseListViewController.swift in Sources */,

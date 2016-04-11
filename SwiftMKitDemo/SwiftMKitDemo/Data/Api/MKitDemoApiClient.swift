@@ -11,4 +11,5 @@ import Alamofire
 import CocoaLumberjack
 
 class MKitDemoApiClient: NetApiClient {
+    static let sharedInstance = MKitDemoApiClient()
 }
