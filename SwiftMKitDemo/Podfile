@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+link_with 'SwiftMKitDemoTests', 'SwiftMKitDemoUITests'  
+
+platform :ios, '8.0'
+
+use_frameworks!
+
+pod 'SwiftMKit'
+
+pod 'MJExtension'
