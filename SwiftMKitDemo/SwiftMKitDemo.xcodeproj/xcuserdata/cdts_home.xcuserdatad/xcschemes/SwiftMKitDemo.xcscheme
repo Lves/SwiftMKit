@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+               BlueprintIdentifier = "3FC9DEF41CBFD35900C2D938"
                BuildableName = "SwiftMKitDemo.app"
                BlueprintName = "SwiftMKitDemo"
                ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F877C411CB0B96500426D76"
+               BlueprintIdentifier = "3FC9DF081CBFD35900C2D938"
                BuildableName = "SwiftMKitDemoTests.xctest"
                BlueprintName = "SwiftMKitDemoTests"
                ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F877C4C1CB0B96500426D76"
+               BlueprintIdentifier = "3FC9DF131CBFD35A00C2D938"
                BuildableName = "SwiftMKitDemoUITests.xctest"
                BlueprintName = "SwiftMKitDemoUITests"
                ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
@@ -52,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+            BlueprintIdentifier = "3FC9DEF41CBFD35900C2D938"
             BuildableName = "SwiftMKitDemo.app"
             BlueprintName = "SwiftMKitDemo"
             ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
@@ -69,25 +69,19 @@
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enableAddressSanitizer = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+            BlueprintIdentifier = "3FC9DEF41CBFD35900C2D938"
             BuildableName = "SwiftMKitDemo.app"
             BlueprintName = "SwiftMKitDemo"
             ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -100,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F877C2D1CB0B96500426D76"
+            BlueprintIdentifier = "3FC9DEF41CBFD35900C2D938"
             BuildableName = "SwiftMKitDemo.app"
             BlueprintName = "SwiftMKitDemo"
             ReferencedContainer = "container:SwiftMKitDemo.xcodeproj">

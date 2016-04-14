@@ -10,7 +10,7 @@ import UIKit
 import ReactiveCocoa
 import Alamofire
 import CocoaLumberjack
-import SwiftyJSON
+import ObjectMapper
 
 public class NetApiData: NSObject {
     
@@ -30,7 +30,7 @@ public class NetApiData: NSObject {
     public var apiUrl = ""
     public var apiTimeout = NetApiDataConst.DefaultTimeoutInterval
     public var request:Request?
-    public var responseJSONData:JSON?
+    public var responseJSONData:AnyObject?
     
     lazy private var runningApis = [NetApiData]()
     
@@ -42,7 +42,7 @@ public class NetApiData: NSObject {
         super.init()
     }
     
-    public func fill(json:JSON) {
+    public func fill(json: AnyObject) {
         //Need to complete
     }
     
@@ -71,13 +71,25 @@ public class NetApiData: NSObject {
     
     // MARK: JSON
     
-    class public func getArrayFromJson<T: NSObject>(json: AnyObject) -> Array<T>{
-        let arr = T.mj_objectArrayWithKeyValuesArray(json)
-        return arr as NSArray as! [T]
+    class public func getArrayFromJson<T: Mappable>(json: Array<AnyObject>?) -> Array<T>?{
+        if let jsonString = json {
+            var arr = [T]()
+            for item in jsonString {
+                let obj = Mapper<T>().map(item)
+                if let model = obj {
+                    arr.append(model)
+                }
+            }
+            return arr
+        }
+        return nil
     }
-    class public func getObjectFromJson<T: NSObject>(json: AnyObject) -> T{
-        let obj = T.mj_objectWithKeyValues(json)
-        return obj as NSObject as! T
+    class public func getObjectFromJson<T: Mappable>(json: AnyObject?) -> T?{
+        if let jsonString = json {
+            let obj = Mapper<T>().map(jsonString)
+            return obj
+        }
+        return nil
     }
     
     // MARK: Request
@@ -90,10 +102,8 @@ public class NetApiData: NSObject {
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
-                        let json = JSON(value)
-                        DDLogVerbose("JSON: \(json)")
-                        self.responseJSONData = json
-                        self.fill(json)
+                        self.responseJSONData = value
+                        self.fill(value)
                         sink.sendNext(self)
                         sink.sendCompleted()
                     }

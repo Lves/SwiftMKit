@@ -2,13 +2,11 @@
 //  SwiftMKitDemoTests.swift
 //  SwiftMKitDemoTests
 //
-//  Created by Mao on 4/3/16.
+//  Created by Mao on 4/14/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
 import XCTest
-import Alamofire
-
 @testable import SwiftMKitDemo
 
 class SwiftMKitDemoTests: XCTestCase {
@@ -26,13 +24,6 @@ class SwiftMKitDemoTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-//        Alamofire.request(.GET, "https://httpbin.org/get", parameters: ["foo": "bar"])
-//            .response { request, response, data, error in
-//                print(request)
-//                print(response)
-//                print(data)
-//                print(error)
-//        }
     }
     
     func testPerformanceExample() {

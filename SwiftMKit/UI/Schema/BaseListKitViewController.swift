@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import MJRefresh
-import ReactiveCocoa
 
 public enum ListViewType {
     case ListViewTypeNone

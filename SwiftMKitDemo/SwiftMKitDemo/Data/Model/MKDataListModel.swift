@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class MKDataListModel: BaseModel {
-    var title: String
-    var detail: String
+    var title: String?
+    var detail: String?
     init(title:String, detail:String) {
         self.title = title
         self.detail = detail
         super.init()
+    }
+    
+    required init?(_ map: Map) {
+        super.init(map)
     }
 }

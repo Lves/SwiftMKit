@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,40 +39,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftMKit-MJRefresh.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftMKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftyJSON.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0C019D1EF2E7BE8D16A7BCD1D61FEDD4</key>
+		<key>0D48FC138BDB676F52CE6696DBCDC0F0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1DE261E86E9F21A74C7CB551AC10AAC8</key>
+		<key>52CC09602F0D78881DECE0E33B7A864E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>36BA64F964B7493A4BB1CF3CF5386568</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>47F801AB58E87132988CDE90C70FDD6A</key>
+		<key>5A9BC9D16BBA5406D74DD02F92EB6A22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C2AC4CC9F3C59AF279FBD3E1D7657148</key>
+		<key>C8F54543305BD95F34FAB796C9CAAFCA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>D082FD9722F53B9C3A1229257D4008F7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D464DE07B22DDC5B6402ECC1DE0E30C6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

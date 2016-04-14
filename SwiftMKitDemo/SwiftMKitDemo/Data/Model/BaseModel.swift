@@ -7,7 +7,14 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class BaseModel: NSObject {
-
+class BaseModel: NSObject, Mappable {
+    required init?(_ map: Map) {
+    }
+    override init(){}
+    
+    // Mappable
+    func mapping(map: Map) {
+    }
 }

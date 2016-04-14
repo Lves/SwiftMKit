@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+import ObjectMapper
 
 class MKitDemoApiData: NetApiData {
 
@@ -38,9 +38,9 @@ class PX500PopularPhotosApiData: PX500DemoApiData {
                       "include_states": "votes"]
         super.init(client: MKitDemoApiClient.sharedInstance, url: "/photos", query: params, method: .GET)
     }
-    override func fill(json: JSON) {
-        
-    }
+//    override func fill(json: JSON) {
+//        
+//    }
 }
 
 class BaiduCitiesApiData: BaiduDemoApiData {
@@ -49,7 +49,11 @@ class BaiduCitiesApiData: BaiduDemoApiData {
     init() {
         super.init(client: MKitDemoApiClient.sharedInstance, url: "/cities", query: [:], method: .GET)
     }
-    override func fill(json: JSON) {
-//        self.cities = NetApiData.getArrayFromJson(json["cities"].arrayObject!)
+    override func fill(json: AnyObject) {
+        if let dict = json as? [String: AnyObject] {
+            if let array = dict["cities"] as? [AnyObject] {
+                self.cities =  NetApiData.getArrayFromJson(array)
+            }
+        }
     }
 }

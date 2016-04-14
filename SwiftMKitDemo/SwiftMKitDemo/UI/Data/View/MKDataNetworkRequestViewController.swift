@@ -9,8 +9,6 @@
 import UIKit
 import Alamofire
 import CocoaLumberjack
-import SwiftyJSON
-import ReactiveCocoa
 
 class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -47,18 +45,18 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func refreshData() {
         super.refreshData()
-        BaiduCitiesApiData().requestJSON().startWithNext({ [unowned self] apiData in
-            self.tableView.mj_header.endRefreshing()
-            let data = apiData as! BaiduCitiesApiData
-            let cities = apiData.responseJSONData!["cities"].arrayValue
-            var models = [MKDataNetworkRequestCityModel]()
-            for city in cities {
-                let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
-                models.append(model)
-            }
-            self.thisViewModel.dataSource = models
-            self.tableView.reloadData()
-            })
+//        BaiduCitiesApiData().requestJSON().startWithNext({ [unowned self] apiData in
+//            self.tableView.mj_header.endRefreshing()
+//            let data = apiData as! BaiduCitiesApiData
+//            let cities = apiData.responseJSONData!["cities"].arrayValue
+//            var models = [MKDataNetworkRequestCityModel]()
+//            for city in cities {
+//                let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
+//                models.append(model)
+//            }
+//            self.thisViewModel.dataSource = models
+//            self.tableView.reloadData()
+//            })
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.thisViewModel.dataSource.count
@@ -75,6 +73,6 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
-        self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId])
+        self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId!])
     }
 }

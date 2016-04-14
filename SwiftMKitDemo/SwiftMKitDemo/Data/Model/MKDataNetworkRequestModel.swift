@@ -7,37 +7,57 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class MKDataNetworkRequestCityModel: BaseModel {
-    var cityId: String
-    var name: String
-    var pinyin: String
-    init(cityId:String, name:String, pinyin:String) {
-        self.cityId = cityId
-        self.name = name
-        self.pinyin = pinyin
-        super.init()
-    }
+    var cityId: String?
+    var name: String?
+    var pinyin: String?
     
-//    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-//        return [
-//            "cityId":"city_id",
-//            "name":"city_name",
-//            "pinyin":"city_pinyin",
-//        ]
-//    }
+    required init?(_ map: Map) {
+        super.init(map)
+    }
+
+    // Mappable
+    override func mapping(map: Map) {
+        super.mapping(map)
+        cityId      <- (map["city_id"],transfromFromIntToString())
+        name        <- map["city_name"]
+        pinyin      <- map["city_pinyin"]
+    }
+    func transfromFromIntToString() -> TransformOf<String , Int>{
+        return TransformOf<String , Int>.init(fromJSON: { (number) -> String? in
+                if let result = number{
+                    return String(result)
+                }
+                return nil
+            }, toJSON: { (str) -> Int? in
+                if let result = str{
+                    return Int(result)
+                }
+                return nil
+        })
+    }
+
 }
 
 class MKDataNetworkRequestShopModel: BaseModel {
-    var shopId: String
-    var name: String
+    var shopId: String?
+    var name: String?
     var longitude: Double?
     var latitude: Double?
-    var url: String
-    init(shopId:String, name:String, url:String) {
-        self.shopId = shopId
-        self.name = name
-        self.url = url
-        super.init()
+    var url: String?
+    
+    required init?(_ map: Map) {
+        super.init(map)
+    }
+    // Mappable
+    override func mapping(map: Map) {
+        super.mapping(map)
+        shopId      <- map["shopId"]
+        name        <- map["name"]
+        longitude   <- map["longitude"]
+        latitude    <- map["latitude"]
+        url         <- map["url"]
     }
 }

@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import Alamofire
 import CocoaLumberjack
-import SwiftyJSON
 
 public class NetApiClient : NSObject {
     
@@ -22,8 +21,7 @@ public class NetApiClient : NSObject {
                 switch transferedResponse.result {
                 case .Success:
                     if let value = response.result.value {
-                        let json = JSON(value)
-                        DDLogVerbose("JSON: \(json)")
+                        DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
                     DDLogError("\(error)")
