@@ -45,18 +45,14 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func refreshData() {
         super.refreshData()
-//        BaiduCitiesApiData().requestJSON().startWithNext({ [unowned self] apiData in
-//            self.tableView.mj_header.endRefreshing()
-//            let data = apiData as! BaiduCitiesApiData
-//            let cities = apiData.responseJSONData!["cities"].arrayValue
-//            var models = [MKDataNetworkRequestCityModel]()
-//            for city in cities {
-//                let model = MKDataNetworkRequestCityModel(cityId: city["city_id"].stringValue, name: city["city_name"].stringValue, pinyin: city["city_pinyin"].stringValue)
-//                models.append(model)
-//            }
-//            self.thisViewModel.dataSource = models
-//            self.tableView.reloadData()
-//            })
+        BaiduCitiesApiData().requestJSON().startWithNext({ [unowned self] apiData in
+            self.tableView.mj_header.endRefreshing()
+            let data = apiData as! BaiduCitiesApiData
+            if let cities = data.cities {
+                self.thisViewModel.dataSource = cities
+                self.tableView.reloadData()
+            }
+        })
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.thisViewModel.dataSource.count

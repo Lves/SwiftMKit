@@ -38,9 +38,8 @@ class PX500PopularPhotosApiData: PX500DemoApiData {
                       "include_states": "votes"]
         super.init(client: MKitDemoApiClient.sharedInstance, url: "/photos", query: params, method: .GET)
     }
-//    override func fill(json: JSON) {
-//        
-//    }
+    override func fill(json: AnyObject) {
+    }
 }
 
 class BaiduCitiesApiData: BaiduDemoApiData {
@@ -53,6 +52,21 @@ class BaiduCitiesApiData: BaiduDemoApiData {
         if let dict = json as? [String: AnyObject] {
             if let array = dict["cities"] as? [AnyObject] {
                 self.cities =  NetApiData.getArrayFromJson(array)
+            }
+        }
+    }
+}
+
+class BaiduShopsApiData: BaiduDemoApiData {
+    var shops: Array<MKDataNetworkRequestShopModel>?
+    
+    init(cityId: String) {
+        super.init(client: MKitDemoApiClient.sharedInstance, url: "/searchshops", query: ["city_id":cityId], method: .GET)
+    }
+    override func fill(json: AnyObject) {
+        if let dict = json as? [String: AnyObject] {
+            if let array = dict["data"]?["shops"] as? [AnyObject] {
+                self.shops =  NetApiData.getArrayFromJson(array)
             }
         }
     }
