@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */; };
-		3FC9DEFB1CBFD35900C2D938 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFA1CBFD35900C2D938 /* ViewController.swift */; };
 		3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFC1CBFD35900C2D938 /* Main.storyboard */; };
 		3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFF1CBFD35900C2D938 /* Assets.xcassets */; };
 		3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DF011CBFD35900C2D938 /* LaunchScreen.storyboard */; };
@@ -65,7 +64,6 @@
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3FC9DEF51CBFD35900C2D938 /* SwiftMKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3FC9DEFA1CBFD35900C2D938 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3FC9DEFD1CBFD35900C2D938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FC9DEFF1CBFD35900C2D938 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FC9DF021CBFD35900C2D938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				3FC9DF3A1CBFD6D400C2D938 /* Data */,
 				3FC9DF431CBFD6D400C2D938 /* UI */,
 				3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */,
-				3FC9DEFA1CBFD35900C2D938 /* ViewController.swift */,
 				3FC9DEFC1CBFD35900C2D938 /* Main.storyboard */,
 				3FC9DEFF1CBFD35900C2D938 /* Assets.xcassets */,
 				3FC9DF011CBFD35900C2D938 /* LaunchScreen.storyboard */,
@@ -565,7 +562,6 @@
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
-				3FC9DEFB1CBFD35900C2D938 /* ViewController.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				3FC9DF621CBFD6D400C2D938 /* BaseListViewController.swift in Sources */,
