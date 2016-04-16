@@ -46,7 +46,7 @@ class MKDataNetworkWithImagesViewController: BaseListViewController {
     }
     override func refreshData() {
         super.refreshData()
-        BaiduShopsApiData(cityId: self.cityId!).requestJSON().startWithNext({ [unowned self] apiData in
+        NetApiData(api: BaiduShopsApiData(cityId: self.cityId!)).requestJSON().startWithNext({ [unowned self] apiData in
             self.tableView.mj_header.endRefreshing()
             let data = apiData as! BaiduShopsApiData
             if let shops = data.shops {

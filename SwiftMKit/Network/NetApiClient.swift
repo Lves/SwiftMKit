@@ -13,11 +13,11 @@ import CocoaLumberjack
 
 public class NetApiClient : NSObject {
     
-    func requestJSON(request: NSURLRequest,
+    class func requestJSON(request: NSURLRequest, api: NetApiProtocol,
                  completionHandler: (Response<AnyObject, NSError> -> Void)?)
         -> Request {
             return Alamofire.request(request).responseJSON { response in
-                let transferedResponse = self.transferResponseJSON(response)
+                let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
                     if let value = response.result.value {
@@ -31,11 +31,11 @@ public class NetApiClient : NSObject {
                 }
             }
     }
-    func requestData(request: NSURLRequest,
+    class func requestData(request: NSURLRequest, api: NetApiProtocol,
                            completionHandler: (Response<NSData, NSError> -> Void)?)
         -> Request {
             return Alamofire.request(request).responseData { response in
-                let transferedResponse = self.transferResponseData(response)
+                let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
                     DDLogVerbose("Data: \(response.result.value)")
@@ -47,11 +47,11 @@ public class NetApiClient : NSObject {
                 }
             }
     }
-    func requestString(request: NSURLRequest,
+    class func requestString(request: NSURLRequest, api: NetApiProtocol,
                              completionHandler: (Response<String, NSError> -> Void)?)
         -> Request {
             return Alamofire.request(request).responseString { response in
-                let transferedResponse = self.transferResponseString(response)
+                let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:
                     DDLogVerbose("String: \(response.result.value)")
@@ -62,17 +62,5 @@ public class NetApiClient : NSObject {
                     completionHandler!(transferedResponse)
                 }
             }
-    }
-    
-    
-    
-    func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>{
-        return response
-    }
-    func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>{
-        return response
-    }
-    func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>{
-        return response
     }
 }

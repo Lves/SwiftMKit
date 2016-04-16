@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
+		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
 		3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */; };
 		3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFC1CBFD35900C2D938 /* Main.storyboard */; };
 		3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFF1CBFD35900C2D938 /* Assets.xcassets */; };
@@ -21,9 +23,6 @@
 		3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF2F1CBFD53A00C2D938 /* BaseListKitViewController.swift */; };
 		3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF301CBFD53A00C2D938 /* BaseListKitViewModel.swift */; };
 		3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF391CBFD6D400C2D938 /* GlobalConfig.swift */; };
-		3FC9DF551CBFD6D400C2D938 /* MKitDemoApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF3C1CBFD6D400C2D938 /* MKitDemoApiClient.swift */; };
-		3FC9DF561CBFD6D400C2D938 /* MKitDemoApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF3D1CBFD6D400C2D938 /* MKitDemoApiData.swift */; };
-		3FC9DF571CBFD6D400C2D938 /* MKitDemoApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF3E1CBFD6D400C2D938 /* MKitDemoApiInfo.swift */; };
 		3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF401CBFD6D400C2D938 /* BaseModel.swift */; };
 		3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF411CBFD6D400C2D938 /* MKDataListModel.swift */; };
 		3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF421CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift */; };
@@ -62,6 +61,8 @@
 /* Begin PBXFileReference section */
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
+		3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoNetApi.swift; sourceTree = "<group>"; };
 		3FC9DEF51CBFD35900C2D938 /* SwiftMKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC9DEFD1CBFD35900C2D938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,9 +83,6 @@
 		3FC9DF2F1CBFD53A00C2D938 /* BaseListKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListKitViewController.swift; sourceTree = "<group>"; };
 		3FC9DF301CBFD53A00C2D938 /* BaseListKitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListKitViewModel.swift; sourceTree = "<group>"; };
 		3FC9DF391CBFD6D400C2D938 /* GlobalConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConfig.swift; sourceTree = "<group>"; };
-		3FC9DF3C1CBFD6D400C2D938 /* MKitDemoApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiClient.swift; sourceTree = "<group>"; };
-		3FC9DF3D1CBFD6D400C2D938 /* MKitDemoApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiData.swift; sourceTree = "<group>"; };
-		3FC9DF3E1CBFD6D400C2D938 /* MKitDemoApiInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoApiInfo.swift; sourceTree = "<group>"; };
 		3FC9DF401CBFD6D400C2D938 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		3FC9DF411CBFD6D400C2D938 /* MKDataListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataListModel.swift; sourceTree = "<group>"; };
 		3FC9DF421CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestModel.swift; sourceTree = "<group>"; };
@@ -210,6 +208,7 @@
 			children = (
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
+				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -253,9 +252,7 @@
 		3FC9DF3B1CBFD6D400C2D938 /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				3FC9DF3C1CBFD6D400C2D938 /* MKitDemoApiClient.swift */,
-				3FC9DF3D1CBFD6D400C2D938 /* MKitDemoApiData.swift */,
-				3FC9DF3E1CBFD6D400C2D938 /* MKitDemoApiInfo.swift */,
+				3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -564,16 +561,15 @@
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
+				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
 				3FC9DF621CBFD6D400C2D938 /* BaseListViewController.swift in Sources */,
-				3FC9DF571CBFD6D400C2D938 /* MKitDemoApiInfo.swift in Sources */,
-				3FC9DF551CBFD6D400C2D938 /* MKitDemoApiClient.swift in Sources */,
 				3FC9DF5D1CBFD6D400C2D938 /* MKDataNetworkWithImagesViewController.swift in Sources */,
 				3FC9DF611CBFD6D400C2D938 /* MKDataViewModel.swift in Sources */,
 				3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkImagesViewModel.swift in Sources */,
+				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
-				3FC9DF561CBFD6D400C2D938 /* MKitDemoApiData.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
 			);

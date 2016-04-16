@@ -12,38 +12,25 @@ import Alamofire
 import CocoaLumberjack
 import ObjectMapper
 
+
 public class NetApiData: NSObject {
     
-    static let sharedInstance = NetApiData()
-    private override init() {
-        self.apiClient = NetApiClient()
-        super.init()
-    }
-    
-    struct NetApiDataConst {
+    public struct NetApiDataConst {
         static let DefaultTimeoutInterval: NSTimeInterval = 45
     }
     
-    public var apiClient:NetApiClient
-    public var apiQuery = [String:AnyObject]()
-    public var apiMethod: Alamofire.Method = .GET
-    public var apiUrl = ""
-    public var apiTimeout = NetApiDataConst.DefaultTimeoutInterval
-    public var request:Request?
-    public var responseJSONData:AnyObject?
+    public var api: NetApiProtocol?
     
     lazy private var runningApis = [NetApiData]()
     
-    public init(client: NetApiClient, url: String, query: [String:AnyObject] = [String:AnyObject](), method: Alamofire.Method = .GET) {
-        self.apiClient = client
-        self.apiUrl = url
-        self.apiQuery = query
-        self.apiMethod = method;
+    private static let sharedInstance = NetApiData()
+    private override init() {
         super.init()
     }
     
-    public func fill(json: AnyObject) {
-        //Need to complete
+    public init(api: NetApiProtocol) {
+        self.api = api
+        super.init()
     }
     
     public func baseUrl() -> String {
@@ -94,17 +81,17 @@ public class NetApiData: NSObject {
     
     // MARK: Request
     
-    public func requestJSON() -> SignalProducer<NetApiData, NSError> {
+    public func requestJSON() -> SignalProducer<NetApiProtocol, NSError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
             let urlRequest = self.getURLRequest()
-            let request = self.apiClient.requestJSON(urlRequest) { response in
+            let request = NetApiClient.requestJSON(urlRequest, api:self.api!) { response in
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
-                        self.responseJSONData = value
-                        self.fill(value)
-                        sink.sendNext(self)
+                        self.api!.responseJSONData = value
+                        self.api!.fillJSON(value)
+                        sink.sendNext(self.api!)
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
@@ -113,29 +100,31 @@ public class NetApiData: NSObject {
                 }
                 NetApiData.removeApi(self)
             }
-            self.request = request
+            self.api!.request = request
         }
     }
     
-    public func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest{
-        return request
-    }
-    
     private func getURLRequest() -> NSURLRequest {
-        let (method, path, parameters) = (self.apiMethod, self.apiUrl, self.getQuery())
-        let URL = NSURL(string: self.baseUrl())!
-        var mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+        let (method, path, parameters) = (self.api!.method ?? .GET, self.api!.url ?? "", self.api!.query ?? [:])
+        let url = NSURL(string: path)!
+        var mutableURLRequest = NSMutableURLRequest(URL: url)
         mutableURLRequest.HTTPMethod = method.rawValue
-        mutableURLRequest = transferURLRequest(mutableURLRequest)
+        mutableURLRequest.timeoutInterval = self.api!.timeout ?? NetApiDataConst.DefaultTimeoutInterval
+        mutableURLRequest = self.api!.transferURLRequest(mutableURLRequest)
         DDLogInfo("Request Url: \(mutableURLRequest.URL?.absoluteString)")
         let encoding = Alamofire.ParameterEncoding.URL
         return encoding.encode(mutableURLRequest, parameters: parameters).0
     }
-    private func getQuery() -> [String: AnyObject] {
-        var query = self.baseQuery()
-        for (key, value) in self.apiQuery {
-            query[key] = value
+    
+    class public func combineQuery(base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {
+        if var queryBase = base {
+            if let queryAppend = append {
+                for (key, value) in queryAppend {
+                    queryBase[key] = value
+                }
+            }
+            return queryBase
         }
-        return query
+        return base
     }
 }
