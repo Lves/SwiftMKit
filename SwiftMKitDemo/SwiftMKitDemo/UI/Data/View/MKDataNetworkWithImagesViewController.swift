@@ -18,18 +18,12 @@ class MKDataNetworkWithImagesViewController: BaseListViewController {
     struct InnerConst {
         static let CellIdentifier = "MKDataNetworkImagesTableViewCell"
     }
-    var thisViewModel: MKDataNetworkImagesViewModel! {
-        get {
-            if viewModel == nil {
-                viewModel = MKDataNetworkImagesViewModel()
-            }
-            return viewModel as! MKDataNetworkImagesViewModel
-        }
+    private var _viewModel = MKDataNetworkImagesViewModel()
+    override var viewModel: BaseKitViewModel!{
+        get { return _viewModel }
     }
     override var listView: UIScrollView! {
-        get {
-            return tableView
-        }
+        get { return tableView }
     }
     override var listViewType: ListViewType {
         get { return .ListViewTypeBoth }
@@ -44,28 +38,28 @@ class MKDataNetworkWithImagesViewController: BaseListViewController {
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
     }
-    override func refreshData() {
-        super.refreshData()
-        NetApiData(api: BaiduShopsApiData(cityId: self.cityId!)).requestJSON().startWithNext({ [unowned self] apiData in
-            self.tableView.mj_header.endRefreshing()
-            let data = apiData as! BaiduShopsApiData
-            if let shops = data.shops {
-                self.thisViewModel.dataSource = shops
-                self.tableView.reloadData()
-            }
-        })
-    }
+//    override func refreshData() {
+//        super.refreshData()
+//        NetApiData(api: BaiduShopsApiData(cityId: self.cityId!)).requestJSON().startWithNext({ [unowned self] apiData in
+//            self.tableView.mj_header.endRefreshing()
+//            let data = apiData as! BaiduShopsApiData
+//            if let shops = data.shops {
+//                self.thisViewModel.dataSource = shops
+//                self.tableView.reloadData()
+//            }
+//        })
+//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.thisViewModel.dataSource.count
+        return _viewModel.dataSource.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestShopModel
-        cell?.textLabel?.text = model?.name
+//        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestShopModel
+//        cell?.textLabel?.text = model?.name
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

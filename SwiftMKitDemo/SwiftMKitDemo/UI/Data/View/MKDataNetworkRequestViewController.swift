@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import CocoaLumberjack
+import ReactiveCocoa
 
 class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -17,18 +18,12 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         static let CellIdentifier = "MKDataNetworkRequestTableViewCell"
         static let segueToNext = "routeToDataNetworkImages"
     }
-    var thisViewModel: MKDataNetworkRequestViewModel! {
-        get {
-            if viewModel == nil {
-                viewModel = MKDataNetworkRequestViewModel()
-            }
-            return viewModel as! MKDataNetworkRequestViewModel
-        }
+    private var _viewModel = MKDataNetworkRequestViewModel()
+    override var viewModel: BaseKitViewModel!{
+        get { return _viewModel }
     }
     override var listView: UIScrollView! {
-        get {
-            return tableView
-        }
+        get { return tableView }
     }
     override var listViewType: ListViewType {
         get { return .ListViewTypeRefreshOnly }
@@ -43,32 +38,21 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
     }
-    override func refreshData() {
-        super.refreshData()
-        NetApiData(api: BaiduCitiesApiData()).requestJSON().startWithNext({ [unowned self] apiData in
-            self.tableView.mj_header.endRefreshing()
-            let data = apiData as! BaiduCitiesApiData
-            if let cities = data.cities {
-                self.thisViewModel.dataSource = cities
-                self.tableView.reloadData()
-            }
-        })
-    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.thisViewModel.dataSource.count
+        return _viewModel.dataSource.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
+        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
         cell?.textLabel?.text = model?.name
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
+        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
         self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId!])
     }
 }

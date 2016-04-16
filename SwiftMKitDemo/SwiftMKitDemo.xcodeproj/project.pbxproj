@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
+		3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */; };
 		3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */; };
 		3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFC1CBFD35900C2D938 /* Main.storyboard */; };
 		3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9DEFF1CBFD35900C2D938 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
 		3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoNetApi.swift; sourceTree = "<group>"; };
+		3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		3FC9DEF51CBFD35900C2D938 /* SwiftMKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC9DEFD1CBFD35900C2D938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3F8FEAA21CC2749800F7EAF3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		3FC9DEEC1CBFD35900C2D938 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +205,7 @@
 		3FC9DF261CBFD53A00C2D938 /* SwiftMKit */ = {
 			isa = PBXGroup;
 			children = (
+				3F8FEAA21CC2749800F7EAF3 /* Extension */,
 				3FC9DF271CBFD53A00C2D938 /* Network */,
 				3FC9DF2A1CBFD53A00C2D938 /* SwiftMKit.swift */,
 				3FC9DF2B1CBFD53A00C2D938 /* UI */,
@@ -297,9 +308,9 @@
 		3FC9DF471CBFD6D400C2D938 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3FC9DF4A1CBFD6D400C2D938 /* MKDataViewController.swift */,
 				3FC9DF481CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift */,
 				3FC9DF491CBFD6D400C2D938 /* MKDataNetworkWithImagesViewController.swift */,
-				3FC9DF4A1CBFD6D400C2D938 /* MKDataViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,9 +318,9 @@
 		3FC9DF4B1CBFD6D400C2D938 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3FC9DF4C1CBFD6D400C2D938 /* MKDataNetworkImagesViewModel.swift */,
-				3FC9DF4D1CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift */,
 				3FC9DF4E1CBFD6D400C2D938 /* MKDataViewModel.swift */,
+				3FC9DF4D1CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift */,
+				3FC9DF4C1CBFD6D400C2D938 /* MKDataNetworkImagesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -559,6 +570,7 @@
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
+				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,

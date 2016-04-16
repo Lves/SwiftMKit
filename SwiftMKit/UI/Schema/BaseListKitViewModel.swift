@@ -9,13 +9,16 @@
 import UIKit
 
 public class BaseListKitViewModel: BaseKitViewModel {
-    public var listViewController: BaseListKitViewController? {
+    public var listViewController: BaseListKitViewController! {
         get {
-            return viewController as? BaseListKitViewController
+            return viewController as! BaseListKitViewController
         }
     }
     var dataSource:Array<AnyObject> = Array<AnyObject>()
     var dataIndex: UInt = 0
     let listLoadNumber: UInt = 20
     let listMaxNumber = UIntMax()
+    
+    public func fetchData() {
+    }
 }

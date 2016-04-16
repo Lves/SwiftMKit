@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
-public class BaseKitViewController : UIViewController{
+public protocol IndicatorProtocol {
+    func setIndicatorState(task: NSURLSessionTask?)
+}
+
+public class BaseKitViewController : UIViewController, IndicatorProtocol {
     public var params = Dictionary<String, AnyObject>() {
         didSet {
             for (key,value) in params {
@@ -18,29 +22,36 @@ public class BaseKitViewController : UIViewController{
             }
         }
     }
-    public var viewModel: BaseKitViewModel? {
-        didSet {
-            viewModel?.viewController = self
-        }
+    public var viewModel: BaseKitViewModel! {
+        get { return nil }
     }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if sender is NSDictionary && sender!["params"] != nil {
-            let vc = segue.destinationViewController
-            if vc is BaseKitViewController {
-                let baseVC: BaseKitViewController = vc as! BaseKitViewController
-                let dict: NSDictionary = sender as! NSDictionary
-                baseVC.params = dict["params"] as! NSDictionary as! Dictionary<String, AnyObject>
+        let vc = segue.destinationViewController
+        if let bvc = vc as? BaseKitViewController {
+            if let dict = sender as? NSDictionary {
+                if let params = dict["params"] as? Dictionary<String, AnyObject> {
+                    bvc.params = params
+                }
             }
         }
     }
     
     public func setupUI() {
+        viewModel.viewController = self
     }
     public func loadData() {
+    }
+    
+    public func setIndicatorState(task: NSURLSessionTask?){
+    }
+    
+    deinit {
+        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
     }
 }
 

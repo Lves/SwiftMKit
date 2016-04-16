@@ -63,7 +63,8 @@ class PX500NetApi: NetApiProtocol {
     }
     var timeout: NSTimeInterval?
     var request:Request?
-    var responseJSONData:AnyObject?
+    var responseData:AnyObject?
+    var indicator: IndicatorProtocol?
     
     func fillJSON(json: AnyObject) {
         
@@ -125,7 +126,8 @@ class BaiduNetApi: NetApiProtocol {
     }
     var timeout: NSTimeInterval?
     var request:Request?
-    var responseJSONData:AnyObject?
+    var responseData:AnyObject?
+    var indicator: IndicatorProtocol?
     
     func fillJSON(json: AnyObject) {
         

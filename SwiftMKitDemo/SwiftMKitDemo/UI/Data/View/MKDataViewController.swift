@@ -15,30 +15,24 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
         static let CellIdentifier = "MKDataTableViewCell"
         static let segueToNext = "routeToDataNetworkRequest"
     }
-
-    var thisViewModel: MKDataViewModel! {
-        get {
-            if viewModel == nil {
-                viewModel = MKDataViewModel()
-            }
-            return viewModel as! MKDataViewModel
-        }
+    
+    private var _viewModel = MKDataViewModel()
+    override var viewModel: BaseKitViewModel!{
+        get { return _viewModel }
     }
     override var listView: UIScrollView! {
-        get {
-            return tableView
-        }
+        get { return tableView }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.thisViewModel.dataSource.count
+        return _viewModel.dataSource.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataListModel
+        let model = _viewModel.dataSource[indexPath.row] as? MKDataListModel
         cell?.textLabel?.text = model?.title
         cell?.detailTextLabel?.text = model?.detail
         return cell!

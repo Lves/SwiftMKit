@@ -13,10 +13,24 @@ import CocoaLumberjack
 
 public class NetApiClient : NSObject {
     
+    class private func bindIndicator(api api:NetApiProtocol, task: NSURLSessionTask) {
+        if let indicator = api.indicator {
+            if indicator is IndicatorListProtocol {
+                let listIndicator = indicator as! IndicatorListProtocol
+                listIndicator.setIndicatorListState(task)
+            } else {
+                indicator.setIndicatorState(task)
+            }
+        }
+    }
+    
     class func requestJSON(request: NSURLRequest, api: NetApiProtocol,
                  completionHandler: (Response<AnyObject, NSError> -> Void)?)
         -> Request {
-            return Alamofire.request(request).responseJSON { response in
+            let request = Alamofire.request(request)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            return request.responseJSON { response in
                 let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
@@ -34,7 +48,10 @@ public class NetApiClient : NSObject {
     class func requestData(request: NSURLRequest, api: NetApiProtocol,
                            completionHandler: (Response<NSData, NSError> -> Void)?)
         -> Request {
-            return Alamofire.request(request).responseData { response in
+            let request = Alamofire.request(request)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            return request.responseData { response in
                 let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
@@ -50,7 +67,10 @@ public class NetApiClient : NSObject {
     class func requestString(request: NSURLRequest, api: NetApiProtocol,
                              completionHandler: (Response<String, NSError> -> Void)?)
         -> Request {
-            return Alamofire.request(request).responseString { response in
+            let request = Alamofire.request(request)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            return request.responseString { response in
                 let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:

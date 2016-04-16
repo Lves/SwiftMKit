@@ -33,16 +33,10 @@ public class NetApiData: NSObject {
         super.init()
     }
     
-    public func baseUrl() -> String {
-        return ""
-    }
-    public func baseQuery() -> [String:AnyObject] {
-        return [String:AnyObject]()
-    }
     
     // MARK: RunningApi
     
-    class public func requestingApis() -> Array<NetApiData> {
+    class public func requestingApis() -> [NetApiData] {
         return sharedInstance.runningApis
     }
     class public func addApi(api: NetApiData) {
@@ -84,12 +78,12 @@ public class NetApiData: NSObject {
     public func requestJSON() -> SignalProducer<NetApiProtocol, NSError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
-            let urlRequest = self.getURLRequest()
-            let request = NetApiClient.requestJSON(urlRequest, api:self.api!) { response in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestJSON(urlRequest, api:self.api!) { response in
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
-                        self.api!.responseJSONData = value
+                        self.api!.responseData = value
                         self.api!.fillJSON(value)
                         sink.sendNext(self.api!)
                         sink.sendCompleted()
@@ -100,17 +94,56 @@ public class NetApiData: NSObject {
                 }
                 NetApiData.removeApi(self)
             }
-            self.api!.request = request
+        }
+    }
+    public func requestData() -> SignalProducer<NetApiProtocol, NSError> {
+        NetApiData.addApi(self)
+        return SignalProducer { [unowned self] sink,disposable in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestData(urlRequest, api:self.api!) { response in
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        self.api!.responseData = value
+                        sink.sendNext(self.api!)
+                        sink.sendCompleted()
+                    }
+                case .Failure(let error):
+                    DDLogError("\(error)")
+                    sink.sendFailed(error)
+                }
+                NetApiData.removeApi(self)
+            }
+        }
+    }
+    public func requestString() -> SignalProducer<NetApiProtocol, NSError> {
+        NetApiData.addApi(self)
+        return SignalProducer { [unowned self] sink,disposable in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestString(urlRequest, api:self.api!) { response in
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        self.api!.responseData = value
+                        sink.sendNext(self.api!)
+                        sink.sendCompleted()
+                    }
+                case .Failure(let error):
+                    DDLogError("\(error)")
+                    sink.sendFailed(error)
+                }
+                NetApiData.removeApi(self)
+            }
         }
     }
     
-    private func getURLRequest() -> NSURLRequest {
-        let (method, path, parameters) = (self.api!.method ?? .GET, self.api!.url ?? "", self.api!.query ?? [:])
+    class private func getURLRequest(api: NetApiProtocol) -> NSURLRequest {
+        let (method, path, parameters) = (api.method ?? .GET, api.url ?? "", api.query ?? [:])
         let url = NSURL(string: path)!
         var mutableURLRequest = NSMutableURLRequest(URL: url)
         mutableURLRequest.HTTPMethod = method.rawValue
-        mutableURLRequest.timeoutInterval = self.api!.timeout ?? NetApiDataConst.DefaultTimeoutInterval
-        mutableURLRequest = self.api!.transferURLRequest(mutableURLRequest)
+        mutableURLRequest.timeoutInterval = api.timeout ?? NetApiDataConst.DefaultTimeoutInterval
+        mutableURLRequest = api.transferURLRequest(mutableURLRequest)
         DDLogInfo("Request Url: \(mutableURLRequest.URL?.absoluteString)")
         let encoding = Alamofire.ParameterEncoding.URL
         return encoding.encode(mutableURLRequest, parameters: parameters).0
