@@ -13,7 +13,7 @@ class MKDataNetworkRequestViewModel: BaseListViewModel {
     
     var signalBaiduCities: SignalProducer<BaiduCitiesApiData, NSError> {
         get {
-            return BaiduCitiesApiData().setIndicator(self.listViewController).signal().on(
+            return BaiduCitiesApiData().setIndicator(self.listViewController).setIndicatorList(self.listViewController).signal().on(
                 next: { [weak self] data in
                     if let cities = data.cities {
                         self?.dataSource = cities

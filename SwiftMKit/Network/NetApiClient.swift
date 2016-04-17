@@ -15,12 +15,14 @@ public class NetApiClient : NSObject {
     
     class private func bindIndicator(api api:NetApiProtocol, task: NSURLSessionTask) {
         if let indicator = api.indicator {
-            if indicator is IndicatorListProtocol {
-                let listIndicator = indicator as! IndicatorListProtocol
-                listIndicator.setIndicatorListState(task)
+            if let view = indicator.indicatorView {
+                indicator.setIndicatorState(task, view: view)
             } else {
                 indicator.setIndicatorState(task)
             }
+        }
+        if let indicator = api.indicatorList {
+            indicator.setIndicatorListState(task)
         }
     }
     
@@ -34,10 +36,12 @@ public class NetApiClient : NSObject {
                 let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
+                    DDLogInfo("Request Url Success: \(api.url)")
                     if let value = response.result.value {
                         DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
+                    DDLogError("Request Url Failed: \(api.url)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
@@ -55,8 +59,10 @@ public class NetApiClient : NSObject {
                 let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
+                    DDLogInfo("Request Url Success: \(api.url)")
                     DDLogVerbose("Data: \(response.result.value)")
                 case .Failure(let error):
+                    DDLogError("Request Url Failed: \(api.url)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
@@ -74,8 +80,10 @@ public class NetApiClient : NSObject {
                 let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:
+                    DDLogInfo("Request Url Success: \(api.url)")
                     DDLogVerbose("String: \(response.result.value)")
                 case .Failure(let error):
+                    DDLogError("Request Url Failed: \(api.url)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {

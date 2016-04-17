@@ -65,6 +65,7 @@ class PX500NetApi: NetApiProtocol {
     var request:Request?
     var responseData:AnyObject?
     var indicator: IndicatorProtocol?
+    var indicatorList: IndicatorListProtocol?
     
     func fillJSON(json: AnyObject) {
         
@@ -128,6 +129,7 @@ class BaiduNetApi: NetApiProtocol {
     var request:Request?
     var responseData:AnyObject?
     var indicator: IndicatorProtocol?
+    var indicatorList: IndicatorListProtocol?
     
     func fillJSON(json: AnyObject) {
         

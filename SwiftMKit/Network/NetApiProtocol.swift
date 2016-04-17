@@ -22,6 +22,7 @@ public protocol NetApiProtocol: class {
     var request: Request? { get set }
     var responseData: AnyObject? { get set }
     var indicator: IndicatorProtocol? { get set }
+    var indicatorList: IndicatorListProtocol? { get set }
     
     func fillJSON(json: AnyObject)
     func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest
@@ -49,8 +50,15 @@ public extension NetApiProtocol {
     }
     
     func setIndicator(indicator: IndicatorProtocol) -> Self {
+        return setIndicator(indicator, view: nil)
+    }
+    func setIndicator(indicator: IndicatorProtocol, view: UIView?) -> Self {
         self.indicator = indicator
+        self.indicator?.indicatorView = view
         return self
     }
-    
+    func setIndicatorList(indicator: IndicatorListProtocol) -> Self {
+        self.indicatorList = indicator
+        return self
+    }
 }

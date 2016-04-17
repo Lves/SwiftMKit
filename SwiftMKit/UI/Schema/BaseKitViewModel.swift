@@ -15,5 +15,10 @@ public class BaseKitViewModel: NSObject {
     public weak var viewController: BaseKitViewController!
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        DDLogInfo("Running tasks: \(runningApis.count)")
+        for task in runningApis {
+            DDLogInfo("Cancel task: \(task)")
+            task.cancel()
+        }
     }
 }
