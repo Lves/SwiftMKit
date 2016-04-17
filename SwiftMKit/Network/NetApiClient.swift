@@ -36,12 +36,12 @@ public class NetApiClient : NSObject {
                 let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("Request Url Success: \(api.url)")
+                    DDLogInfo("Request Url Success: \(api.url!)")
                     if let value = response.result.value {
                         DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
-                    DDLogError("Request Url Failed: \(api.url)")
+                    DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
@@ -59,10 +59,10 @@ public class NetApiClient : NSObject {
                 let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("Request Url Success: \(api.url)")
+                    DDLogInfo("Request Url Success: \(api.url!)")
                     DDLogVerbose("Data: \(response.result.value)")
                 case .Failure(let error):
-                    DDLogError("Request Url Failed: \(api.url)")
+                    DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
@@ -80,10 +80,10 @@ public class NetApiClient : NSObject {
                 let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("Request Url Success: \(api.url)")
+                    DDLogInfo("Request Url Success: \(api.url!)")
                     DDLogVerbose("String: \(response.result.value)")
                 case .Failure(let error):
-                    DDLogError("Request Url Failed: \(api.url)")
+                    DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {

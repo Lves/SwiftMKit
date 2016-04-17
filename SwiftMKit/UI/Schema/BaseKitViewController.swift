@@ -61,6 +61,8 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
     }
     public func loadData() {
     }
+    public func showEmptyView() {}
+    public func hideEmptyView() {}
     
     public func setIndicatorState(task: NSURLSessionTask?){
         setIndicatorState(task, view: self.view)

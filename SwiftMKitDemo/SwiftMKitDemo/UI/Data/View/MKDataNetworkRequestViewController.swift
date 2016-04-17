@@ -26,7 +26,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .ListViewTypeRefreshOnly }
+        get { return .Both }
     }
     
     override func setupUI() {
@@ -46,13 +46,13 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
+        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
         cell?.textLabel?.text = model?.name
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestCityModel
-        self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId!])
+        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
+//        self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId!])
     }
 }

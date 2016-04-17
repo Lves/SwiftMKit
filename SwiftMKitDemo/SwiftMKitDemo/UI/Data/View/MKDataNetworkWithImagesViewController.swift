@@ -26,7 +26,7 @@ class MKDataNetworkWithImagesViewController: BaseListViewController {
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .ListViewTypeBoth }
+        get { return .Both }
     }
     
     override func setupUI() {

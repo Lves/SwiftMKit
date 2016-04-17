@@ -11,12 +11,12 @@ import ReactiveCocoa
 
 class MKDataNetworkRequestViewModel: BaseListViewModel {
     
-    var signalBaiduCities: SignalProducer<BaiduCitiesApiData, NSError> {
+    var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NSError> {
         get {
-            return BaiduCitiesApiData().setIndicator(self.listViewController).setIndicatorList(self.listViewController).signal().on(
+            return PX500PopularPhotosApiData(page:dataIndex, number:listLoadNumber).setIndicator(self.listViewController).setIndicatorList(self.listViewController).signal().on(
                 next: { [weak self] data in
-                    if let cities = data.cities {
-                        self?.dataSource = cities
+                    if let photos = data.photos {
+                        self?.updateDataSource(photos)
                         let tableView = self?.listViewController?.listView as? UITableView
                         tableView?.reloadData()
                     }
@@ -27,6 +27,6 @@ class MKDataNetworkRequestViewModel: BaseListViewModel {
     }
     
     override func fetchData() {
-        signalBaiduCities.start()
+        signalPX500Photos.start()
     }
 }
