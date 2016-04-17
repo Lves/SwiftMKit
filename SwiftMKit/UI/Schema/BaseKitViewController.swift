@@ -13,7 +13,13 @@ import Alamofire
 import MBProgressHUD
 import ObjectiveC
 
+public protocol HUDProtocol {
+    func showHUDAddedTo(view: UIView, animated: Bool)
+    func hideHUDForView(view: UIView, animated: Bool) -> Bool
+}
+
 public protocol IndicatorProtocol {
+    var hud: HUDProtocol? { get set }
     var indicatorView: UIView? { get set }
     func setIndicatorState(task: NSURLSessionTask?)
     func setIndicatorState(task: NSURLSessionTask?, view: UIView)
@@ -27,6 +33,7 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
             }
         }
     }
+    public var hud: HUDProtocol? = HUDView()
     public var indicatorView: UIView?
     public var viewModel: BaseKitViewModel! {
         get { return nil }
@@ -99,7 +106,7 @@ class TaskObserver: NSObject {
         if let task = notify.object as? NSURLSessionTask {
             self.viewController.viewModel.runningApis.append(task)
             dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.showHUDAddedTo(task.view, animated: true)
+                self.viewController.hud?.showHUDAddedTo(task.view, animated: true)
             }
         }
     }
@@ -108,7 +115,7 @@ class TaskObserver: NSObject {
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideHUDForView(task.view, animated: true)
+                self.viewController.hud?.hideHUDForView(task.view, animated: true)
             }
         }
     }
@@ -117,7 +124,7 @@ class TaskObserver: NSObject {
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideHUDForView(task.view, animated: true)
+                self.viewController.hud?.hideHUDForView(task.view, animated: true)
             }
         }
     }
@@ -129,7 +136,7 @@ class TaskObserver: NSObject {
                 self.viewController.viewModel.runningApis.removeAtIndex(index)
             }
             dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideHUDForView(task.view, animated: true)
+                self.viewController.hud?.hideHUDForView(task.view, animated: true)
             }
         }
     }
@@ -147,8 +154,13 @@ extension NSURLSessionTask {
     }
 }
 
-extension UIViewController {
-    
+public class HUDView: HUDProtocol{
+    public func showHUDAddedTo(view: UIView, animated: Bool) {
+        MBProgressHUD.showHUDAddedTo(view, animated: animated)
+    }
+    public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
+        return MBProgressHUD.hideHUDForView(view, animated: animated)
+    }
 }
 
 extension UIViewController {
