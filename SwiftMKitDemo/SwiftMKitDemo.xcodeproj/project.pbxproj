@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E184E31CC48B2500F14923 /* BaseKitModel.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
 		3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18E184E31CC48B2500F14923 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
@@ -142,6 +144,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		18E184E11CC48B1600F14923 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				18E184E21CC48B1600F14923 /* Model */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		18E184E21CC48B1600F14923 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18E184E31CC48B2500F14923 /* BaseKitModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3F8FEAA21CC2749800F7EAF3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +233,7 @@
 				3FC9DF271CBFD53A00C2D938 /* Network */,
 				3FC9DF2A1CBFD53A00C2D938 /* SwiftMKit.swift */,
 				3FC9DF2B1CBFD53A00C2D938 /* UI */,
+				18E184E11CC48B1600F14923 /* Data */,
 			);
 			name = SwiftMKit;
 			path = ../SwiftMKit;
@@ -590,6 +609,7 @@
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
+				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
 			);
