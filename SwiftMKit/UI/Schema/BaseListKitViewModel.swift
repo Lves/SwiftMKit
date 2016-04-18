@@ -61,6 +61,8 @@ public class BaseListKitViewModel: BaseKitViewModel {
         } else {
             dataSource += newData
         }
+        let tableView = self.listViewController?.listView as? UITableView
+        tableView?.reloadData()
     }
     public func fetchData() {
     }

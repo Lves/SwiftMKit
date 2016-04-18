@@ -14,18 +14,23 @@ import MBProgressHUD
 import ObjectiveC
 
 public protocol HUDProtocol {
-    func showHUDAddedTo(view: UIView, animated: Bool)
+    func showHUDAddedTo(view: UIView, animated: Bool, text:String?)
+    func showHUDAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay:NSTimeInterval)
     func hideHUDForView(view: UIView, animated: Bool) -> Bool
 }
 
 public protocol IndicatorProtocol {
     var hud: HUDProtocol? { get set }
     var indicatorView: UIView? { get set }
-    func setIndicatorState(task: NSURLSessionTask?)
-    func setIndicatorState(task: NSURLSessionTask?, view: UIView)
+    var indicatorText: String? { get set }
+    func setIndicatorState(task: NSURLSessionTask?, text: String?)
+    func setIndicatorState(task: NSURLSessionTask?, view: UIView, text: String?)
 }
 
 public class BaseKitViewController : UIViewController, IndicatorProtocol {
+    struct InnerConstant {
+        static let HideTipAfterDelay: NSTimeInterval = 2
+    }
     public var params = Dictionary<String, AnyObject>() {
         didSet {
             for (key,value) in params {
@@ -35,6 +40,7 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
     }
     public var hud: HUDProtocol? = HUDView()
     public var indicatorView: UIView?
+    public var indicatorText: String?
     public var viewModel: BaseKitViewModel! {
         get { return nil }
     }
@@ -63,11 +69,17 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
     }
     public func showEmptyView() {}
     public func hideEmptyView() {}
-    
-    public func setIndicatorState(task: NSURLSessionTask?){
-        setIndicatorState(task, view: self.view)
+    public func showTip(tip: String) {
+        showTip(tip, view: self.view.window!)
     }
-    public func setIndicatorState(task: NSURLSessionTask?, view:UIView){
+    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = InnerConstant.HideTipAfterDelay) {
+        self.hud?.showHUDAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
+    }
+    
+    public func setIndicatorState(task: NSURLSessionTask?, text: String?){
+        setIndicatorState(task, view: self.view, text: text)
+    }
+    public func setIndicatorState(task: NSURLSessionTask?, view:UIView, text: String?){
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(taskObserver, name: Notifications.Task.DidResume, object: nil)
         notificationCenter.removeObserver(taskObserver, name: Notifications.Task.DidSuspend, object: nil)
@@ -75,6 +87,7 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
         notificationCenter.removeObserver(taskObserver, name: Notifications.Task.DidComplete, object: nil)
         if let networkTask = task {
             networkTask.view = view
+            networkTask.indicatorString = text
             if networkTask.state == .Running {
                 notificationCenter.addObserver(taskObserver, selector: #selector(TaskObserver.task_resume(_:)), name: Notifications.Task.DidResume, object: networkTask)
                 notificationCenter.addObserver(taskObserver, selector: #selector(TaskObserver.task_suspend(_:)), name: Notifications.Task.DidSuspend, object: networkTask)
@@ -108,7 +121,7 @@ class TaskObserver: NSObject {
         if let task = notify.object as? NSURLSessionTask {
             self.viewController.viewModel.runningApis.append(task)
             dispatch_async(dispatch_get_main_queue()) {
-                self.viewController.hud?.showHUDAddedTo(task.view, animated: true)
+                self.viewController.hud?.showHUDAddedTo(task.view, animated: true, text: task.indicatorString)
             }
         }
     }
@@ -145,6 +158,7 @@ class TaskObserver: NSObject {
 }
 
 private var viewAssociationKey: UInt8 = 0
+private var indicatorStringAssociationKey: UInt8 = 0
 extension NSURLSessionTask {
     var view: UIView! {
         get {
@@ -154,11 +168,31 @@ extension NSURLSessionTask {
             objc_setAssociatedObject(self, &viewAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
+    var indicatorString: String? {
+        get {
+            return objc_getAssociatedObject(self, &indicatorStringAssociationKey) as? String
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &indicatorStringAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+        }
+    }
 }
 
 public class HUDView: HUDProtocol{
-    public func showHUDAddedTo(view: UIView, animated: Bool) {
-        MBProgressHUD.showHUDAddedTo(view, animated: animated)
+    public func showHUDAddedTo(view: UIView, animated: Bool, text:String?) {
+        MBProgressHUD.hideHUDForView(view, animated: animated)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        if let indicateString = text {
+            hud.label.text = indicateString
+        }
+    }
+    public func showHUDAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval) {
+        MBProgressHUD.hideHUDForView(view, animated: animated)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        if let indicateString = text {
+            hud.label.text = indicateString
+        }
+        hud.hideAnimated(animated, afterDelay: hideAfterDelay)
     }
     public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
         return MBProgressHUD.hideHUDForView(view, animated: animated)

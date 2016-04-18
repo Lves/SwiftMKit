@@ -306,8 +306,8 @@
 		3FC9DF431CBFD6D400C2D938 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3FC9DF441CBFD6D400C2D938 /* Data */,
 				3FC9DF4F1CBFD6D400C2D938 /* Schema */,
+				3FC9DF441CBFD6D400C2D938 /* Data */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -353,10 +353,10 @@
 		3FC9DF4F1CBFD6D400C2D938 /* Schema */ = {
 			isa = PBXGroup;
 			children = (
-				3FC9DF501CBFD6D400C2D938 /* BaseListViewController.swift */,
-				3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */,
 				3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */,
 				3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */,
+				3FC9DF501CBFD6D400C2D938 /* BaseListViewController.swift */,
+				3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";

@@ -11,22 +11,21 @@ import ReactiveCocoa
 
 class MKDataNetworkRequestViewModel: BaseListViewModel {
     
-    var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NSError> {
-        get {
-            return PX500PopularPhotosApiData(page:dataIndex, number:listLoadNumber).setIndicator(self.listViewController).setIndicatorList(self.listViewController).signal().on(
-                next: { [weak self] data in
-                    if let photos = data.photos {
-                        self?.updateDataSource(photos)
-                        let tableView = self?.listViewController?.listView as? UITableView
-                        tableView?.reloadData()
-                    }
-                },
-                failed: { error in
-            })
-        }
-    }
+    lazy var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NSError> = { [unowned self] in
+        return PX500PopularPhotosApiData(page:self.dataIndex, number:self.listLoadNumber).setIndicator(self.listViewController).setIndicatorList(self.listViewController).signal().on(
+            next: { [weak self] data in
+                if let photos = data.photos {
+                    self?.updateDataSource(photos)
+                }
+            },
+            failed: { [weak self] error in
+                self?.viewController.showTip(error.description)
+        })
+    }()
     
     override func fetchData() {
         signalPX500Photos.start()
     }
+    
+    
 }

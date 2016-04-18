@@ -49,12 +49,13 @@ public extension NetApiProtocol {
         }
     }
     
-    func setIndicator(indicator: IndicatorProtocol) -> Self {
-        return setIndicator(indicator, view: nil)
+    func setIndicator(indicator: IndicatorProtocol, text: String? = nil) -> Self {
+        return setIndicator(indicator, view: nil, text: text)
     }
-    func setIndicator(indicator: IndicatorProtocol, view: UIView?) -> Self {
+    func setIndicator(indicator: IndicatorProtocol, view: UIView?, text: String? = nil) -> Self {
         self.indicator = indicator
         self.indicator?.indicatorView = view
+        self.indicator?.indicatorText = text
         return self
     }
     func setIndicatorList(indicator: IndicatorListProtocol) -> Self {
