@@ -25,5 +25,28 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        aspectConstraint = nil
+    }
+    
+    private var aspectConstraint : NSLayoutConstraint? {
+        didSet {
+            if oldValue != nil {
+                imgPic.removeConstraint(oldValue!)
+            }
+            if aspectConstraint != nil {
+                imgPic.addConstraint(aspectConstraint!)
+            }
+        }
+    }
+    func setPostImage(image : UIImage) {
+        
+        let aspect = image.size.width / image.size.height
+        
+        aspectConstraint = NSLayoutConstraint(item: imgPic, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: imgPic, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
+        
+        imgPic.image = image
+    }
 
 }

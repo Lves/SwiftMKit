@@ -41,6 +41,9 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
     }
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 370
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _viewModel.dataSource.count
     }
@@ -51,7 +54,11 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         cell?.lblContent?.text = model?.descriptionString
         cell?.imgHead.hnk_setImageFromURL(NSURL(string: (model?.userpic)!)!)
         if let imageUrl = model?.imageurl {
-            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, format: Format<UIImage>(name: "original"))
+            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, format: Format<UIImage>(name: "original")) {
+                image in
+                    cell?.setPostImage(image)
+                    cell?.layoutIfNeeded()
+            }
         }else {
             cell?.imgPic.image = nil
         }
