@@ -15,7 +15,7 @@ import ObjectiveC
 
 public protocol HUDProtocol {
     func showHUDAddedTo(view: UIView, animated: Bool, text:String?)
-    func showHUDAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay:NSTimeInterval)
+    func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay:NSTimeInterval)
     func hideHUDForView(view: UIView, animated: Bool) -> Bool
 }
 
@@ -73,7 +73,7 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
         showTip(tip, view: self.view.window!)
     }
     public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = InnerConstant.HideTipAfterDelay) {
-        self.hud?.showHUDAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
+        self.hud?.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
     }
     
     public func setIndicatorState(task: NSURLSessionTask?, text: String?){
@@ -186,9 +186,10 @@ public class HUDView: HUDProtocol{
             hud.label.text = indicateString
         }
     }
-    public func showHUDAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval) {
+    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval) {
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        hud.mode = .Text
         if let indicateString = text {
             hud.label.text = indicateString
         }

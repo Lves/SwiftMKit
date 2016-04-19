@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import CocoaLumberjack
 import ReactiveCocoa
+import Haneke
 
 class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +19,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         static let CellIdentifier = "MKDataNetworkRequestTableViewCell"
         static let segueToNext = "routeToDataNetworkImages"
     }
-    private var _viewModel = MKDataNetworkRequestViewModel()
+    lazy private var _viewModel = MKDataNetworkRequestViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
@@ -32,6 +33,8 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     override func setupUI() {
         super.setupUI()
         self.title = "Network Request"
+        self.tableView.estimatedRowHeight = self.tableView.rowHeight;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
         loadData()
     }
     override func loadData() {
@@ -42,12 +45,16 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         return _viewModel.dataSource.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
-        }
+        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKDataNetworkRequestTableViewCell
         let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
-        cell?.textLabel?.text = model?.name
+        cell?.lblTitle?.text = model?.name
+        cell?.lblContent?.text = model?.descriptionString
+        cell?.imgHead.hnk_setImageFromURL(NSURL(string: (model?.userpic)!)!)
+        if let imageUrl = model?.imageurl {
+            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, format: Format<UIImage>(name: "original"))
+        }else {
+            cell?.imgPic.image = nil
+        }
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

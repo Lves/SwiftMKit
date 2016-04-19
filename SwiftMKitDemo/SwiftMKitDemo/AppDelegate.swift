@@ -17,9 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        setenv("XcodeColors", "YES", 0);
         defaultDebugLevel = DDLogLevel.Info
         DDLog.addLogger(DDTTYLogger.sharedInstance())
         DDLog.addLogger(DDASLLogger.sharedInstance())
+        DDTTYLogger.sharedInstance().colorsEnabled = true
+        DDTTYLogger.sharedInstance().setForegroundColor(UIColor.blueColor(), backgroundColor: nil, forFlag: .Info)
+        DDTTYLogger.sharedInstance().setForegroundColor(UIColor(rgba: "#008040"), backgroundColor: nil, forFlag: .Verbose)
         DDLogVerbose("Verbose")
         DDLogDebug("Debug")
         DDLogInfo("Info")
