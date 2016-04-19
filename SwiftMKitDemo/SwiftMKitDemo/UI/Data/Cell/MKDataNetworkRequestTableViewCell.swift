@@ -27,6 +27,7 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
+        imgPic.image = nil
         aspectConstraint = nil
     }
     

@@ -16,6 +16,9 @@ public class BaseKitViewModel: NSObject {
     public var hud: HUDProtocol? {
         get { return self.viewController.hud }
     }
+    public func fetchData() {
+    }
+    
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
         DDLogInfo("Running tasks: \(runningApis.count)")

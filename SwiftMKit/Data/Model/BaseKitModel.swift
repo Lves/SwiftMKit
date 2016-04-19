@@ -19,6 +19,8 @@ class BaseKitModel: NSObject, Mappable {
         static let String2Float = TransformOf<Float, String>(fromJSON: { Float($0!) }, toJSON: { $0.map { String($0) } })
         /// JSON: String -> Obj:Double
         static let String2Double = TransformOf<Double, String>(fromJSON: { Double($0!) }, toJSON: { $0.map { String($0) } })
+        /// JSON: Int -> Obj:String
+        static let Int2String = TransformOf<String, Int>(fromJSON: { String($0!) }, toJSON: { $0.map { Int($0)! } })
     }
     
     override init(){}
@@ -46,6 +48,9 @@ extension Map {
         return (self, trans)
     }
     subscript(trans: TransformOf<String, String>) -> (Map, TransformOf<String, String>) {
+        return (self, trans)
+    }
+    subscript(trans: TransformOf<String, Int>) -> (Map, TransformOf<String, Int>) {
         return (self, trans)
     }
 }

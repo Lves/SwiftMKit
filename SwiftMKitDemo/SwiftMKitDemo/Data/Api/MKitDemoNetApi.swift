@@ -93,4 +93,20 @@ class PX500PopularPhotosApiData: PX500NetApi {
         }
     }
 }
+class PX500PhotoDetailApiData: PX500NetApi {
+    var photo: MKDataNetworkRequestPhotoModel?
+    init(photoId: String) {
+        super.init()
+        self.query = [:]
+        self.url = "/photo/" + photoId
+        self.method = .GET
+    }
+    override func fillJSON(json: AnyObject) {
+        if let dict = json as? [String: AnyObject] {
+            if let array = dict["photo"] as? [AnyObject] {
+                self.photo =  NetApiData.getObjectFromJson(array)
+            }
+        }
+    }
+}
 

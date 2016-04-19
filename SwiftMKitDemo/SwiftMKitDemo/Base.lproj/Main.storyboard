@@ -98,21 +98,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="752" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOp-58-vc7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOp-58-vc7">
                                                     <rect key="frame" x="84" y="16" width="32" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="752" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GU5-d8-XPf">
-                                                    <rect key="frame" x="84" y="39" width="283" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GU5-d8-XPf">
+                                                    <rect key="frame" x="84" y="39" width="52" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" misplaced="YES" image="view_default_loading" translatesAutoresizingMaskIntoConstraints="NO" id="85q-cl-8y5">
-                                                    <rect key="frame" x="84" y="64" width="283" height="148"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" image="view_default_loading" translatesAutoresizingMaskIntoConstraints="NO" id="85q-cl-8y5">
+                                                    <rect key="frame" x="84" y="64" width="148" height="148"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="148" id="V4F-GH-O7g"/>
                                                         <constraint firstAttribute="width" secondItem="85q-cl-8y5" secondAttribute="height" multiplier="77:37" constant="-25" id="fvP-GR-QhR"/>
                                                     </constraints>
                                                     <variation key="default">
@@ -130,15 +131,18 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="GU5-d8-XPf" secondAttribute="trailing" constant="8" id="3QB-XN-h2X"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="KOp-58-vc7" secondAttribute="trailing" constant="8" id="0i6-ov-Gce"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GU5-d8-XPf" secondAttribute="trailing" constant="8" id="3QB-XN-h2X"/>
                                                 <constraint firstItem="85q-cl-8y5" firstAttribute="leading" secondItem="GU5-d8-XPf" secondAttribute="leading" id="4a2-9q-iAD"/>
                                                 <constraint firstItem="xwq-RW-ieC" firstAttribute="top" secondItem="gDB-BI-gFT" secondAttribute="topMargin" constant="8" id="Ch0-wT-fzy"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="GU5-d8-XPf" secondAttribute="bottom" priority="750" constant="8" id="D5Y-Mg-usu"/>
                                                 <constraint firstItem="85q-cl-8y5" firstAttribute="top" secondItem="GU5-d8-XPf" secondAttribute="bottom" constant="8" id="Dlr-Kx-BEQ"/>
                                                 <constraint firstItem="KOp-58-vc7" firstAttribute="top" secondItem="xwq-RW-ieC" secondAttribute="top" id="Eao-lc-tSL"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="85q-cl-8y5" secondAttribute="trailing" constant="8" id="GPe-fL-jdj"/>
                                                 <constraint firstItem="KOp-58-vc7" firstAttribute="top" secondItem="gDB-BI-gFT" secondAttribute="topMargin" constant="8" id="Hmg-4K-zVj"/>
                                                 <constraint firstItem="xwq-RW-ieC" firstAttribute="top" secondItem="gDB-BI-gFT" secondAttribute="topMargin" id="OL0-MN-mml"/>
                                                 <constraint firstItem="GU5-d8-XPf" firstAttribute="top" secondItem="KOp-58-vc7" secondAttribute="bottom" constant="3" id="R5C-ir-JXj"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="85q-cl-8y5" secondAttribute="trailing" constant="143" id="UnS-Hq-bGm"/>
                                                 <constraint firstItem="GU5-d8-XPf" firstAttribute="leading" secondItem="KOp-58-vc7" secondAttribute="leading" id="aPq-zH-OtR"/>
                                                 <constraint firstItem="85q-cl-8y5" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GU5-d8-XPf" secondAttribute="trailing" id="caK-tC-DmQ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="85q-cl-8y5" secondAttribute="bottom" id="dLJ-Mh-ftF"/>
@@ -153,6 +157,7 @@
                                                     <exclude reference="fY7-qt-WAo"/>
                                                     <exclude reference="Eao-lc-tSL"/>
                                                     <exclude reference="D5Y-Mg-usu"/>
+                                                    <exclude reference="caK-tC-DmQ"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -181,7 +186,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="jqG-oK-0k5" id="Ubm-eV-c2e"/>
-                        <segue destination="UNi-fn-7nO" kind="show" identifier="routeToDataNetworkImages" id="fp8-J5-IUa">
+                        <segue destination="UNi-fn-7nO" kind="show" identifier="routeToNetworkRequestDetail" id="fp8-J5-IUa">
                             <nil key="action"/>
                         </segue>
                     </connections>
@@ -190,10 +195,10 @@
             </objects>
             <point key="canvasLocation" x="2466.5" y="206.5"/>
         </scene>
-        <!--Data Network With Images View Controller-->
+        <!--Data Network Request Detail View Controller-->
         <scene sceneID="ZOb-uz-zn2">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="UNi-fn-7nO" customClass="MKDataNetworkWithImagesViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="UNi-fn-7nO" customClass="MKDataNetworkRequestDetailViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ENo-oW-y9J"/>
                         <viewControllerLayoutGuide type="bottom" id="Rdd-CC-04B"/>
@@ -201,37 +206,8 @@
                     <view key="view" contentMode="scaleToFill" id="R3s-LN-EME">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zvG-DD-zUh">
-                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MKDataNetworkImagesTableViewCell" id="kec-so-boA">
-                                        <rect key="frame" x="0.0" y="28" width="383" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kec-so-boA" id="TjP-xF-NjW">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="UNi-fn-7nO" id="dzd-TY-hW3"/>
-                                    <outlet property="delegate" destination="UNi-fn-7nO" id="rj8-kw-NdJ"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="zvG-DD-zUh" secondAttribute="trailing" constant="-20" id="134-p4-m9z"/>
-                            <constraint firstItem="Rdd-CC-04B" firstAttribute="top" secondItem="zvG-DD-zUh" secondAttribute="bottom" id="6yg-N6-lIv"/>
-                            <constraint firstItem="zvG-DD-zUh" firstAttribute="leading" secondItem="R3s-LN-EME" secondAttribute="leadingMargin" constant="-20" id="kkv-SU-dJB"/>
-                            <constraint firstItem="zvG-DD-zUh" firstAttribute="top" secondItem="ENo-oW-y9J" secondAttribute="bottom" id="mh0-BV-oN3"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="tableView" destination="zvG-DD-zUh" id="Qrj-uT-sVI"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CwX-hU-hBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

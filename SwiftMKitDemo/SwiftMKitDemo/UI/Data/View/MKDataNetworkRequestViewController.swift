@@ -17,7 +17,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     
     struct InnerConst {
         static let CellIdentifier = "MKDataNetworkRequestTableViewCell"
-        static let segueToNext = "routeToDataNetworkImages"
+        static let SegueToNext = "routeToNetworkRequestDetail"
     }
     lazy private var _viewModel = MKDataNetworkRequestViewModel()
     override var viewModel: BaseKitViewModel!{
@@ -32,7 +32,8 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     
     override func setupUI() {
         super.setupUI()
-        self.title = "Network Request"
+        self.title = "Photos"
+        self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = self.tableView.rowHeight;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         loadData()
@@ -40,9 +41,6 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     override func loadData() {
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
-    }
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 370
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _viewModel.dataSource.count
@@ -52,9 +50,9 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
         cell?.lblTitle?.text = model?.name
         cell?.lblContent?.text = model?.descriptionString
-        cell?.imgHead.hnk_setImageFromURL(NSURL(string: (model?.userpic)!)!)
+        cell?.imgHead.hnk_setImageFromURL(NSURL(string: (model?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
         if let imageUrl = model?.imageurl {
-            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, format: Format<UIImage>(name: "original")) {
+            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
                 image in
                     cell?.setPostImage(image)
                     cell?.layoutIfNeeded()
@@ -67,6 +65,6 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
-//        self.routeToName(InnerConst.segueToNext, params: ["cityId":model!.cityId!])
+        self.routeToName(InnerConst.SegueToNext, params: ["photoId":model!.photoId!])
     }
 }

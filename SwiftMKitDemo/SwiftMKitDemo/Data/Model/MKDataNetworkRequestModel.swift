@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class MKDataNetworkRequestPhotoModel: BaseModel {
-//    var shopId: String?
+    var photoId: String?
     var name: String?
     var username: String?
     var userpic: String?
@@ -26,7 +26,7 @@ class MKDataNetworkRequestPhotoModel: BaseModel {
     // Mappable
     override func mapping(map: Map) {
         super.mapping(map)
-//        shopId      <- map["shopId"]
+        photoId             <- map["id"][ModelTypeTransfer.Int2String]
         name                <- map["name"]
         descriptionString   <- map["description"]
         username            <- map["user.fullname"]
