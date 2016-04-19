@@ -30,7 +30,7 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
         aspectConstraint = nil
     }
     
-    private var aspectConstraint : NSLayoutConstraint? {
+    internal var aspectConstraint : NSLayoutConstraint? {
         didSet {
             if oldValue != nil {
                 imgPic.removeConstraint(oldValue!)
