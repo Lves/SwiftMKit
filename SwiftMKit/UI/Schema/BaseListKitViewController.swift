@@ -68,16 +68,16 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol,
         }
         if self.listViewType == .Both || self.listViewType == .RefreshOnly {
             self.listView.mj_header = self.listViewHeaderWithRefreshingBlock {
-                [unowned self] in
-                self.listViewModel?.dataIndex = 0
-                self.listViewModel?.fetchData()
+                [weak self] in
+                self?.listViewModel?.dataIndex = 0
+                self?.listViewModel?.fetchData()
                 }
         }
         if self.listViewType == .Both || self.listViewType == .LoadMoreOnly {
             self.listView.mj_footer = self.listViewFooterWithRefreshingBlock {
-                [unowned self] in
-                self.listViewModel?.dataIndex += 1
-                self.listViewModel?.fetchData()
+                [weak self] in
+                self?.listViewModel?.dataIndex += 1
+                self?.listViewModel?.fetchData()
                 }
             self.listView.mj_footer.endRefreshingWithNoMoreData()
             if let footer = self.listView.mj_footer as? MJRefreshAutoStateFooter {
