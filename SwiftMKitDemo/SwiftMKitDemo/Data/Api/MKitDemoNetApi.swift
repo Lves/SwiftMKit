@@ -52,8 +52,8 @@ class PX500NetApi: NetApiProtocol {
     var timeout: NSTimeInterval?
     var request:Request?
     var responseData:AnyObject?
-    var indicator: IndicatorProtocol?
-    var indicatorList: IndicatorListProtocol?
+    weak var indicator: IndicatorProtocol?
+    weak var indicatorList: IndicatorListProtocol?
     
     func fillJSON(json: AnyObject) {
         

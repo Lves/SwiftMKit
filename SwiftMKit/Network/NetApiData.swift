@@ -12,6 +12,9 @@ import Alamofire
 import CocoaLumberjack
 import ObjectMapper
 
+public enum StatusCode: Int {
+    case Canceled = -999
+}
 
 public class NetApiData: NSObject {
     
@@ -89,6 +92,13 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            sink.sendInterrupted()
+                            return
+                        }
+                    }
                     DDLogError("\(error)")
                     sink.sendFailed(error)
                 }

@@ -41,6 +41,13 @@ public class NetApiClient : NSObject {
                         DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("Request Url Canceled: \(api.url!)")
+                            return
+                        }
+                    }
                     DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
@@ -62,6 +69,13 @@ public class NetApiClient : NSObject {
                     DDLogInfo("Request Url Success: \(api.url!)")
                     DDLogVerbose("Data: \(response.result.value)")
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("Request Url Canceled: \(api.url!)")
+                            return
+                        }
+                    }
                     DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
@@ -83,6 +97,13 @@ public class NetApiClient : NSObject {
                     DDLogInfo("Request Url Success: \(api.url!)")
                     DDLogVerbose("String: \(response.result.value)")
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("Request Url Canceled: \(api.url!)")
+                            return
+                        }
+                    }
                     DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }

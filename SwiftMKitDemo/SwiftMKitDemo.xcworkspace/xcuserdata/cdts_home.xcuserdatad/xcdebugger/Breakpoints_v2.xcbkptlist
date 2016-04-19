@@ -21,5 +21,53 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../SwiftMKit/Network/NetApiData.swift"
+            timestampString = "482771858.602147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "requestJSON()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftMKitDemo.NetApiData.(requestJSON () -&gt; ReactiveCocoa.SignalProducer&lt;SwiftMKitDemo.NetApiProtocol, __ObjC.NSError&gt;).(closure #1).(closure #1)"
+                  moduleName = "SwiftMKitDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cdts_home/Projects/Swift-MKit/SwiftMKit/Network/NetApiData.swift"
+                  timestampString = "482771967.062788"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "1545">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftMKitDemo.NetApiData.(requestJSON () -&gt; ReactiveCocoa.SignalProducer&lt;SwiftMKitDemo.NetApiProtocol, __ObjC.NSError&gt;).(closure #1).(closure #1).(implicit closure #1)"
+                  moduleName = "SwiftMKitDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cdts_home/Projects/Swift-MKit/SwiftMKit/Network/NetApiData.swift"
+                  timestampString = "482771967.062969"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

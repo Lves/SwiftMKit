@@ -13,13 +13,13 @@ import Alamofire
 import MBProgressHUD
 import ObjectiveC
 
-public protocol HUDProtocol {
+public protocol HUDProtocol : class {
     func showHUDAddedTo(view: UIView, animated: Bool, text:String?)
     func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay:NSTimeInterval)
     func hideHUDForView(view: UIView, animated: Bool) -> Bool
 }
 
-public protocol IndicatorProtocol {
+public protocol IndicatorProtocol : class {
     var hud: HUDProtocol? { get set }
     var indicatorView: UIView? { get set }
     var indicatorText: String? { get set }
@@ -104,13 +104,20 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
     
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        DDLogInfo("Running tasks: \(viewModel.runningApis.count)")
+        for task in viewModel.runningApis {
+            DDLogInfo("Cancel task: \(task)")
+            task.cancel()
+            let notify = NSNotification(name: "", object: task)
+            self.taskObserver.task_cancel(notify)
+        }
         NSNotificationCenter.defaultCenter().removeObserver(self.taskObserver)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
 
 class TaskObserver: NSObject {
-    private var viewController: BaseKitViewController
+    private weak var viewController: BaseKitViewController?
     init(viewController: BaseKitViewController) {
         self.viewController = viewController
     }
@@ -119,9 +126,9 @@ class TaskObserver: NSObject {
         DDLogInfo("Task resume")
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            self.viewController.viewModel.runningApis.append(task)
+            self.viewController?.viewModel.runningApis.append(task)
             dispatch_async(dispatch_get_main_queue()) {
-                self.viewController.hud?.showHUDAddedTo(task.view, animated: true, text: task.indicatorString)
+                self.viewController?.hud?.showHUDAddedTo(task.view, animated: true, text: task.indicatorString)
             }
         }
     }
@@ -130,7 +137,7 @@ class TaskObserver: NSObject {
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             dispatch_async(dispatch_get_main_queue()) {
-                self.viewController.hud?.hideHUDForView(task.view, animated: true)
+                self.viewController?.hud?.hideHUDForView(task.view, animated: true)
             }
         }
     }
@@ -139,7 +146,7 @@ class TaskObserver: NSObject {
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             dispatch_async(dispatch_get_main_queue()) {
-                self.viewController.hud?.hideHUDForView(task.view, animated: true)
+                self.viewController?.hud?.hideHUDForView(task.view, animated: true)
             }
         }
     }
@@ -147,11 +154,11 @@ class TaskObserver: NSObject {
         DDLogInfo("Task complete")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            if let index = self.viewController.viewModel.runningApis.indexOf(task) {
-                self.viewController.viewModel.runningApis.removeAtIndex(index)
+            if let index = self.viewController?.viewModel.runningApis.indexOf(task) {
+                self.viewController?.viewModel.runningApis.removeAtIndex(index)
             }
             dispatch_async(dispatch_get_main_queue()) {
-                self.viewController.hud?.hideHUDForView(task.view, animated: true)
+                self.viewController?.hud?.hideHUDForView(task.view, animated: true)
             }
         }
     }

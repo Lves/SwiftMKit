@@ -142,7 +142,7 @@
                                                 <constraint firstItem="KOp-58-vc7" firstAttribute="top" secondItem="gDB-BI-gFT" secondAttribute="topMargin" constant="8" id="Hmg-4K-zVj"/>
                                                 <constraint firstItem="xwq-RW-ieC" firstAttribute="top" secondItem="gDB-BI-gFT" secondAttribute="topMargin" id="OL0-MN-mml"/>
                                                 <constraint firstItem="GU5-d8-XPf" firstAttribute="top" secondItem="KOp-58-vc7" secondAttribute="bottom" constant="3" id="R5C-ir-JXj"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="85q-cl-8y5" secondAttribute="trailing" constant="143" id="UnS-Hq-bGm"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="85q-cl-8y5" secondAttribute="trailing" constant="143" id="UnS-Hq-bGm"/>
                                                 <constraint firstItem="GU5-d8-XPf" firstAttribute="leading" secondItem="KOp-58-vc7" secondAttribute="leading" id="aPq-zH-OtR"/>
                                                 <constraint firstItem="85q-cl-8y5" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GU5-d8-XPf" secondAttribute="trailing" id="caK-tC-DmQ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="85q-cl-8y5" secondAttribute="bottom" id="dLJ-Mh-ftF"/>

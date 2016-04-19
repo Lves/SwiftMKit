@@ -112,7 +112,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol,
 }
 
 class ListTaskObserver: NSObject {
-    private var viewController: BaseListKitViewController
+    private weak var viewController: BaseListKitViewController?
     init(viewController: BaseListKitViewController) {
         self.viewController = viewController
     }
@@ -121,17 +121,17 @@ class ListTaskObserver: NSObject {
         DDLogInfo("List Task resume")
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            self.viewController.viewModel.runningApis.append(task)
+            self.viewController?.viewModel.runningApis.append(task)
         }
     }
     @objc func task_list_suspend(notify:NSNotification) {
         DDLogInfo("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         dispatch_async(dispatch_get_main_queue()) {
-            if self.viewController.listViewModel.dataIndex == 0 {
-                self.viewController.listView.mj_header.endRefreshing()
+            if self.viewController?.listViewModel.dataIndex == 0 {
+                self.viewController?.listView.mj_header.endRefreshing()
             }else{
-                self.viewController.listView.mj_footer.endRefreshing()
+                self.viewController?.listView.mj_footer.endRefreshing()
             }
         }
     }
@@ -139,10 +139,10 @@ class ListTaskObserver: NSObject {
         DDLogInfo("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         dispatch_async(dispatch_get_main_queue()) {
-            if self.viewController.listViewModel.dataIndex == 0 {
-                self.viewController.listView.mj_header.endRefreshing()
+            if self.viewController?.listViewModel.dataIndex == 0 {
+                self.viewController?.listView.mj_header.endRefreshing()
             }else{
-                self.viewController.listView.mj_footer.endRefreshing()
+                self.viewController?.listView.mj_footer.endRefreshing()
             }
         }
     }
@@ -150,15 +150,15 @@ class ListTaskObserver: NSObject {
         DDLogInfo("List Task complete")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            if let index = self.viewController.viewModel.runningApis.indexOf(task) {
-                self.viewController.viewModel.runningApis.removeAtIndex(index)
+            if let index = self.viewController?.viewModel.runningApis.indexOf(task) {
+                self.viewController?.viewModel.runningApis.removeAtIndex(index)
             }
         }
         dispatch_async(dispatch_get_main_queue()) {
-            if self.viewController.listViewModel.dataIndex == 0 {
-                self.viewController.listView.mj_header.endRefreshing()
+            if self.viewController?.listViewModel.dataIndex == 0 {
+                self.viewController?.listView.mj_header.endRefreshing()
             }else{
-                self.viewController.listView.mj_footer.endRefreshing()
+                self.viewController?.listView.mj_footer.endRefreshing()
             }
         }
     }
