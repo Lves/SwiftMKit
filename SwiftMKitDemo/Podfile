@@ -9,6 +9,7 @@ use_frameworks!
 pod 'CocoaLumberjack/Swift'
 pod 'ReactiveCocoa'
 pod 'Alamofire'
+pod 'MagicalRecord'
 pod 'ObjectMapper'
 pod 'MJRefresh'
 pod 'HanekeSwift'
