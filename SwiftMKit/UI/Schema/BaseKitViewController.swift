@@ -64,6 +64,9 @@ public class BaseKitViewController : UIViewController, IndicatorProtocol {
     public func setupUI() {
         viewModel.viewController = self
         taskObserver = TaskObserver(viewController: self)
+        bindingData()
+    }
+    public func bindingData() {
     }
     public func loadData() {
     }

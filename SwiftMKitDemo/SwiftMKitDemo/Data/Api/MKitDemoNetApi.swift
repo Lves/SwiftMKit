@@ -23,7 +23,7 @@ class PX500ApiInfo: NSObject {
 }
 
 class PX500NetApi: NetApiProtocol {
-    static let baseQuery = [String: AnyObject]()
+    static let baseQuery = ["consumer_key": PX500Config.ConsumerKey]
     private var _query: [String: AnyObject]?
     var query: [String: AnyObject]? {
         get {
@@ -76,8 +76,7 @@ class PX500PopularPhotosApiData: PX500NetApi {
     var photos: Array<MKDataNetworkRequestPhotoModel>?
     init(page: UInt, number: UInt) {
         super.init()
-        self.query = ["consumer_key": PX500Config.ConsumerKey,
-                      "page": "\(page)",
+        self.query = ["page": "\(page)",
                       "feature": "popular",
                       "rpp": "\(number)",
                       "include_store": "store_download",
@@ -98,14 +97,12 @@ class PX500PhotoDetailApiData: PX500NetApi {
     init(photoId: String) {
         super.init()
         self.query = [:]
-        self.url = "/photo/" + photoId
+        self.url = "/photos/" + photoId
         self.method = .GET
     }
     override func fillJSON(json: AnyObject) {
         if let dict = json as? [String: AnyObject] {
-            if let array = dict["photo"] as? [AnyObject] {
-                self.photo =  NetApiData.getObjectFromJson(array)
-            }
+            self.photo =  NetApiData.getObjectFromJson(dict["photo"])
         }
     }
 }

@@ -17,12 +17,14 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
     var photoId: String? {
         get { return _viewController?.photoId }
     }
+    var photo = MutableProperty<MKDataNetworkRequestPhotoModel?>(nil)
     
     var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NSError> {
         get {
             return PX500PhotoDetailApiData(photoId: photoId!).setIndicator(self.viewController).signal().on(
                 next: { [weak self] data in
                     if let photo = data.photo {
+                        self?.photo.value = photo
                     }
                 },
                 failed: { error in
