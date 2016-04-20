@@ -23,9 +23,9 @@ extension NSLayoutConstraint {
             constant: constant)
         
         newConstraint.priority = priority
-        newConstraint.shouldBeArchived = self.shouldBeArchived
-        newConstraint.identifier = self.identifier
-        newConstraint.active = self.active
+//        newConstraint.shouldBeArchived = self.shouldBeArchived
+//        newConstraint.identifier = self.identifier
+//        newConstraint.active = self.active
         
         NSLayoutConstraint.deactivateConstraints([self])
         NSLayoutConstraint.activateConstraints([newConstraint])

@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E184E31CC48B2500F14923 /* BaseKitModel.swift */; };
 		27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */; };
+		27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C071CC748D60028E938 /* ImageParser.swift */; };
+		27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C081CC748D60028E938 /* ImageScout.swift */; };
+		27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C091CC748D60028E938 /* ScoutOperation.swift */; };
+		27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C0A1CC748D60028E938 /* SessionDelegate.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
+		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
 		3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */; };
@@ -104,8 +109,13 @@
 		18E184E31CC48B2500F14923 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
+		27276C071CC748D60028E938 /* ImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageParser.swift; sourceTree = "<group>"; };
+		27276C081CC748D60028E938 /* ImageScout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScout.swift; sourceTree = "<group>"; };
+		27276C091CC748D60028E938 /* ScoutOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoutOperation.swift; sourceTree = "<group>"; };
+		27276C0A1CC748D60028E938 /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
 		3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoNetApi.swift; sourceTree = "<group>"; };
@@ -201,6 +211,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				27276C051CC748D60028E938 /* Image */,
 				18E184E21CC48B1600F14923 /* Model */,
 			);
 			path = Data;
@@ -212,6 +223,33 @@
 				18E184E31CC48B2500F14923 /* BaseKitModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		27276C051CC748D60028E938 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				27276C061CC748D60028E938 /* ImageScout */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		27276C061CC748D60028E938 /* ImageScout */ = {
+			isa = PBXGroup;
+			children = (
+				27276C071CC748D60028E938 /* ImageParser.swift */,
+				27276C081CC748D60028E938 /* ImageScout.swift */,
+				27276C091CC748D60028E938 /* ScoutOperation.swift */,
+				27276C0A1CC748D60028E938 /* SessionDelegate.swift */,
+			);
+			path = ImageScout;
+			sourceTree = "<group>";
+		};
+		27BA394B1CC74E2400436D23 /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				27BA394C1CC74E2400436D23 /* Async.swift */,
+			);
+			path = Async;
 			sourceTree = "<group>";
 		};
 		3F8FEAA21CC2749800F7EAF3 /* Extension */ = {
@@ -298,6 +336,7 @@
 		3FC9DF271CBFD53A00C2D938 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				27BA394B1CC74E2400436D23 /* Async */,
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
 				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
@@ -652,11 +691,14 @@
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
+				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
 				3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */,
 				3FC9DF351CBFD53A00C2D938 /* BaseKitViewModel.swift in Sources */,
+				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
+				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
 				3FC77C471CC36AAE002F964B /* String+Extension.swift in Sources */,
 				3FC9DF311CBFD53A00C2D938 /* NetApiClient.swift in Sources */,
@@ -668,7 +710,9 @@
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
+				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
+				27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */,
 				3FC9DF621CBFD6D400C2D938 /* BaseListViewController.swift in Sources */,
 				3FC9DF5D1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewController.swift in Sources */,
 				3FC9DF611CBFD6D400C2D938 /* MKDataViewModel.swift in Sources */,

@@ -54,8 +54,8 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         if let imageUrl = model?.imageurl {
             cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
                 image in
-                    cell?.setPostImage(image)
-                    cell?.layoutIfNeeded()
+                cell?.setPostImage(image)
+                cell?.layoutIfNeeded()
             }
         }else {
             cell?.imgPic.image = nil

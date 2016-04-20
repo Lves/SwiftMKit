@@ -130,7 +130,7 @@ class TaskObserver: NSObject {
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             self.viewController?.viewModel.runningApis.append(task)
-            dispatch_async(dispatch_get_main_queue()) {
+            Async.main {
                 self.viewController?.hud?.showHUDAddedTo(task.view, animated: true, text: task.indicatorString)
             }
         }
@@ -139,7 +139,7 @@ class TaskObserver: NSObject {
         DDLogInfo("Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            dispatch_async(dispatch_get_main_queue()) {
+            Async.main {
                 self.viewController?.hud?.hideHUDForView(task.view, animated: true)
             }
         }
@@ -148,7 +148,7 @@ class TaskObserver: NSObject {
         DDLogInfo("Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            dispatch_async(dispatch_get_main_queue()) {
+            Async.main {
                 self.viewController?.hud?.hideHUDForView(task.view, animated: true)
             }
         }
@@ -160,7 +160,7 @@ class TaskObserver: NSObject {
             if let index = self.viewController?.viewModel.runningApis.indexOf(task) {
                 self.viewController?.viewModel.runningApis.removeAtIndex(index)
             }
-            dispatch_async(dispatch_get_main_queue()) {
+            Async.main {
                 self.viewController?.hud?.hideHUDForView(task.view, animated: true)
             }
         }

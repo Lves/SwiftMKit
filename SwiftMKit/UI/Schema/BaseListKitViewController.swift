@@ -127,7 +127,7 @@ class ListTaskObserver: NSObject {
     @objc func task_list_suspend(notify:NSNotification) {
         DDLogInfo("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        dispatch_async(dispatch_get_main_queue()) {
+        Async.main {
             if self.viewController?.listViewModel.dataIndex == 0 {
                 self.viewController?.listView.mj_header.endRefreshing()
             }else{
@@ -138,7 +138,7 @@ class ListTaskObserver: NSObject {
     @objc func task_list_cancel(notify:NSNotification) {
         DDLogInfo("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        dispatch_async(dispatch_get_main_queue()) {
+        Async.main {
             if self.viewController?.listViewModel.dataIndex == 0 {
                 self.viewController?.listView.mj_header.endRefreshing()
             }else{
@@ -154,7 +154,7 @@ class ListTaskObserver: NSObject {
                 self.viewController?.viewModel.runningApis.removeAtIndex(index)
             }
         }
-        dispatch_async(dispatch_get_main_queue()) {
+        Async.main {
             if self.viewController?.listViewModel.dataIndex == 0 {
                 self.viewController?.listView.mj_header.endRefreshing()
             }else{

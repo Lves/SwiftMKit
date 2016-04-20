@@ -113,6 +113,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" image="view_default_loading" translatesAutoresizingMaskIntoConstraints="NO" id="85q-cl-8y5">
                                                     <rect key="frame" x="84" y="64" width="148" height="148"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" secondItem="85q-cl-8y5" secondAttribute="height" multiplier="1:1" id="HVn-mz-50s"/>
                                                         <constraint firstAttribute="height" constant="148" id="V4F-GH-O7g"/>
                                                         <constraint firstAttribute="width" secondItem="85q-cl-8y5" secondAttribute="height" multiplier="77:37" constant="-25" id="fvP-GR-QhR"/>
                                                     </constraints>
@@ -157,11 +158,13 @@
                                                     <exclude reference="fY7-qt-WAo"/>
                                                     <exclude reference="Eao-lc-tSL"/>
                                                     <exclude reference="D5Y-Mg-usu"/>
+                                                    <exclude reference="UnS-Hq-bGm"/>
                                                     <exclude reference="caK-tC-DmQ"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="constraintImagePicAspect" destination="HVn-mz-50s" id="wWz-0R-eSN"/>
                                             <outlet property="imgHead" destination="xwq-RW-ieC" id="22F-O7-5Oa"/>
                                             <outlet property="imgPic" destination="85q-cl-8y5" id="oXu-Eq-mai"/>
                                             <outlet property="lblContent" destination="GU5-d8-XPf" id="8s1-8Q-U0h"/>
@@ -238,19 +241,30 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jj5-90-Ty6">
+                                <rect key="frame" x="309" y="308" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="pfY-qe-cpw"/>
+                                </constraints>
+                                <state key="normal" title="喜欢"/>
+                                <state key="selected" title="已喜欢"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Ew5-Ws-EFz" secondAttribute="trailing" constant="-20" id="2WF-87-amu"/>
+                            <constraint firstItem="jj5-90-Ty6" firstAttribute="centerY" secondItem="UvB-HZ-kFU" secondAttribute="centerY" id="5zl-Bl-Fd0"/>
                             <constraint firstItem="UvB-HZ-kFU" firstAttribute="top" secondItem="Ew5-Ws-EFz" secondAttribute="bottom" constant="19" id="6Xi-TT-VEz"/>
                             <constraint firstItem="1Ej-P2-OGo" firstAttribute="leading" secondItem="UvB-HZ-kFU" secondAttribute="leading" id="9fF-hi-GpT"/>
                             <constraint firstItem="GFP-Gd-MWZ" firstAttribute="centerY" secondItem="UvB-HZ-kFU" secondAttribute="centerY" id="AM2-BH-via"/>
+                            <constraint firstItem="jj5-90-Ty6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GFP-Gd-MWZ" secondAttribute="trailing" constant="8" id="IVF-Nf-0fP"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GFP-Gd-MWZ" secondAttribute="trailing" id="JTH-uq-bAr"/>
                             <constraint firstItem="GFP-Gd-MWZ" firstAttribute="leading" secondItem="UvB-HZ-kFU" secondAttribute="trailing" constant="8" id="OaO-CE-rPo"/>
                             <constraint firstItem="Ew5-Ws-EFz" firstAttribute="leading" secondItem="R3s-LN-EME" secondAttribute="leading" id="OpB-Mr-ekE"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UvB-HZ-kFU" secondAttribute="leading" id="TbB-T5-lMO"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="1Ej-P2-OGo" secondAttribute="trailing" id="VOB-KI-gU7"/>
                             <constraint firstItem="Ew5-Ws-EFz" firstAttribute="leading" secondItem="R3s-LN-EME" secondAttribute="leadingMargin" constant="-20" id="Xju-xm-cca"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jj5-90-Ty6" secondAttribute="trailing" id="Yzo-bm-1g9"/>
                             <constraint firstAttribute="trailing" secondItem="Ew5-Ws-EFz" secondAttribute="trailing" id="k7a-xm-JJ7"/>
                             <constraint firstItem="1Ej-P2-OGo" firstAttribute="top" secondItem="UvB-HZ-kFU" secondAttribute="bottom" constant="8" id="lHy-vK-wN4"/>
                             <constraint firstItem="Ew5-Ws-EFz" firstAttribute="top" secondItem="ENo-oW-y9J" secondAttribute="bottom" id="lxB-ZT-JWQ"/>
@@ -259,10 +273,12 @@
                             <mask key="constraints">
                                 <exclude reference="OpB-Mr-ekE"/>
                                 <exclude reference="k7a-xm-JJ7"/>
+                                <exclude reference="JTH-uq-bAr"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="btnLike" destination="jj5-90-Ty6" id="Np8-i4-j54"/>
                         <outlet property="constraintImgPicAspect" destination="VV6-g6-fUi" id="4fs-JE-VW5"/>
                         <outlet property="imgHead" destination="UvB-HZ-kFU" id="fev-x3-jEG"/>
                         <outlet property="imgPic" destination="Ew5-Ws-EFz" id="rZI-zs-h0A"/>

@@ -14,6 +14,7 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var imgPic: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblContent: UILabel!
+    @IBOutlet weak var constraintImagePicAspect: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,10 +45,9 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
     func setPostImage(image : UIImage) {
         
         let aspect = image.size.width / image.size.height
-        
-        aspectConstraint = NSLayoutConstraint(item: imgPic, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: imgPic, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
-        
+        constraintImagePicAspect.setMultiplier(aspect)
         imgPic.image = image
     }
+
 
 }

@@ -19,6 +19,7 @@ class MKDataNetworkRequestDetailViewController: BaseViewController {
     @IBOutlet weak var imgPic: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblContent: UILabel!
+    @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var constraintImgPicAspect: NSLayoutConstraint!
     
     private var _viewModel = MKDataNetworkRequestDetailViewModel()
@@ -31,6 +32,7 @@ class MKDataNetworkRequestDetailViewController: BaseViewController {
         self.title = "Photo Detail"
         self.lblName.text = ""
         self.lblContent.text = ""
+        self.btnLike.hidden = true
         loadData()
     }
     override func loadData() {
@@ -46,10 +48,18 @@ class MKDataNetworkRequestDetailViewController: BaseViewController {
                     self?.constraintImgPicAspect.setMultiplier(aspect)
                     self?.imgPic.image = image
                 }
+                self?.imgPic.hnk_setImageFromURL(NSURL(string: photo.imageurl!)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original"))
                 self?.imgHead.hnk_setImageFromURL(NSURL(string: (photo.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
                 self?.lblName.text = photo.username
                 self?.lblContent.text = photo.descriptionString
+                self?.btnLike.hidden = false
             }
         }
+        _viewModel.isLike.producer.startWithNext { [weak self] isLike in
+            self?.btnLike.selected = isLike
+        }
+        let aa = CocoaAction(_viewModel.actionLike, input:self.btnLike)
+        self.btnLike.addTarget(aa, action: CocoaAction.selector, forControlEvents: .TouchDown)
+        aa.execute(self.btnLike)
     }
 }
