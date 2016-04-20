@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E184E31CC48B2500F14923 /* BaseKitModel.swift */; };
+		27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
@@ -102,6 +103,7 @@
 /* Begin PBXFileReference section */
 		18E184E31CC48B2500F14923 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				3FC77C441CC36A6D002F964B /* Dictionary+Extension.swift */,
 				3FC77C461CC36AAE002F964B /* String+Extension.swift */,
 				27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */,
+				27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				3FC9DF311CBFD53A00C2D938 /* NetApiClient.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
+				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
