@@ -13,7 +13,7 @@ class SingleReqViewModel: BaseViewModel {
     private var signalTmpAds: SignalProducer<TmpADApiData, NSError> {
         get {
             // signal()： NetApiProtocol协议里的方法
-            return TmpADApiData().setIndicator(self.viewController).signal().on(
+            return TmpADApiData().setIndicator(self.indicator, view:self.view).signal().on(
                 next: { data in
                     if let ads = data.ads {
                         print("\(ads)")
@@ -39,20 +39,20 @@ class SingleReqViewModel: BaseViewModel {
                 let (result1, result2) = data
                 print("===\(result1.ads!)  \(result2.ads!)")
                 return (true, result1, result2)
-                }.on (
-                next: { (flag, data1, data2) in
-                    print("\(flag)  \(data1!.ads!)   \(data2!.ads!)")
-                    NSThread.sleepForTimeInterval(5)
-                    self.hud?.hideHUDForView(self.viewController.view, animated: true)
-                },
-                failed: { error in
-                    self.hud?.hideHUDForView(self.viewController.view, animated: true)
-                })
+                }
+//                .on(next: { (flag, data1, data2) in
+//                    print("\(flag)  \(data1!.ads!)   \(data2!.ads!)")
+//                    NSThread.sleepForTimeInterval(5)
+//                    self.hud?.hideHUDForView(self.viewController.view, animated: true)
+//                },
+//                failed: { error in
+//                    self.hud?.hideHUDForView(self.viewController.view, animated: true)
+//                })
         }
     }
     
     override func fetchData() {
         singal3!.start()
-        hud?.showHUDAddedTo(viewController.view, animated: true, text: "正在拼命加载中...")
+        hud.showHUDAddedTo(viewController.view, animated: true, text: "正在拼命加载中...")
     }
 }

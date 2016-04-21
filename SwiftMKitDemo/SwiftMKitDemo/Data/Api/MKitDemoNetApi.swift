@@ -52,9 +52,9 @@ class PX500NetApi: NetApiAbstract {
     }
 }
 
-class TmpNetApi: NetApiProtocol {
+class TmpNetApi: NetApiAbstract {
     private var _query: [String: AnyObject]?
-    var query: [String: AnyObject]? {
+    override var query: [String: AnyObject]? {
         get {
             return _query
         }
@@ -62,10 +62,9 @@ class TmpNetApi: NetApiProtocol {
             _query = newValue
         }
     }
-    var method: Alamofire.Method?
     static let baseUrl = PX500ApiInfo.apiBaseUrl + "/api"
     private var _url: String?
-    var url: String? {
+    override var url: String? {
         get {
             return _url
         }
@@ -76,27 +75,6 @@ class TmpNetApi: NetApiProtocol {
                 _url =  NSURL(string: TmpNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString
             }
         }
-    }
-    var timeout: NSTimeInterval?
-    var request:Request?
-    var responseData:AnyObject?
-    weak var indicator: IndicatorProtocol?
-    weak var indicatorList: IndicatorListProtocol?
-    
-    func fillJSON(json: AnyObject) {
-        
-    }
-    func transferURLRequest(request: NSMutableURLRequest) -> NSMutableURLRequest {
-        return request
-    }
-    func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError> {
-        return response
-    }
-    func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError> {
-        return response
-    }
-    func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError> {
-        return response
     }
 }
 
