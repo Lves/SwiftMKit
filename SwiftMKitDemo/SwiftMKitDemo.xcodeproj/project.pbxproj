@@ -13,6 +13,7 @@
 		18C2085F1CC8634000569F42 /* ComLatestReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2085E1CC8634000569F42 /* ComLatestReqViewModel.swift */; };
 		18C208611CC8635400569F42 /* MergeReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208601CC8635400569F42 /* MergeReqViewModel.swift */; };
 		18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208621CC8636400569F42 /* SingleReqViewModel.swift */; };
+		18C208651CC878DC00569F42 /* TmpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208641CC878DC00569F42 /* TmpModel.swift */; };
 		18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E184E31CC48B2500F14923 /* BaseKitModel.swift */; };
 		27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */; };
 		27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C071CC748D60028E938 /* ImageParser.swift */; };
@@ -120,6 +121,7 @@
 		18C2085E1CC8634000569F42 /* ComLatestReqViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComLatestReqViewModel.swift; sourceTree = "<group>"; };
 		18C208601CC8635400569F42 /* MergeReqViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeReqViewModel.swift; sourceTree = "<group>"; };
 		18C208621CC8636400569F42 /* SingleReqViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleReqViewModel.swift; sourceTree = "<group>"; };
+		18C208641CC878DC00569F42 /* TmpModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TmpModel.swift; sourceTree = "<group>"; };
 		18E184E31CC48B2500F14923 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				3FC9DF401CBFD6D400C2D938 /* BaseModel.swift */,
 				3FC9DF411CBFD6D400C2D938 /* MKDataListModel.swift */,
 				3FC9DF421CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift */,
+				18C208641CC878DC00569F42 /* TmpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
 				18C2085F1CC8634000569F42 /* ComLatestReqViewModel.swift in Sources */,
+				18C208651CC878DC00569F42 /* TmpModel.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
