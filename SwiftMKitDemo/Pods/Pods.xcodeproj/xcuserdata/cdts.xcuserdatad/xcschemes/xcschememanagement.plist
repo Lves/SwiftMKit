@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,15 +39,10 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ObjectMapper.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>ReactiveCocoa.xcscheme</key>
 		<dict>
@@ -57,12 +57,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>21304B6CF7A53002780598C0B3C7F903</key>
+		<key>2734B80F69D94EC1F19FB76E4FFDFCAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>22CD7F926D27B8C575363BF4C6323B9D</key>
+		<key>44E2D85872A0E53EAE84337C364B7D1C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6EDD051B8CB4720995CA8D2EEB97C15A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7C0126D717EB28DC6DB2EEA2E20B5172</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,22 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9477D0B0888221571E7641BFEA533DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C8F54543305BD95F34FAB796C9CAAFCA</key>
+		<key>ABA6C4F9D62C9B2347DD91BB48834866</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>D082FD9722F53B9C3A1229257D4008F7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D58D76EC529B4A92F3E5EDADE0A96661</key>
 		<dict>
 			<key>primary</key>
 			<true/>

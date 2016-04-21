@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogInfo("Info")
         DDLogWarn("Warn")
         DDLogError("Error")
+        MagicalRecord.setupCoreDataStack()
         return true
     }
 

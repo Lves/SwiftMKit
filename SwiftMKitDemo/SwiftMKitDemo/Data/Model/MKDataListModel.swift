@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ObjectMapper
 
 class MKDataListModel: BaseModel {
     var title: String?
@@ -16,9 +15,5 @@ class MKDataListModel: BaseModel {
         self.title = title
         self.detail = detail
         super.init()
-    }
-    
-    required init?(_ map: Map) {
-        super.init(map)
     }
 }

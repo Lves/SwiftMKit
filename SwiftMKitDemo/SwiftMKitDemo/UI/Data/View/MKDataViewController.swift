@@ -13,7 +13,8 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     
     struct InnerConst {
         static let CellIdentifier = "MKDataTableViewCell"
-        static let segueToNext = "routeToDataNetworkRequest"
+        static let SegueToNextNetwork = "routeToDataNetworkRequest"
+        static let SegueToNextStore = "routeToDataStore"
     }
     
     private var _viewModel = MKDataViewModel()
@@ -39,8 +40,13 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.row == 0 {
-            self.routeToName(InnerConst.segueToNext, params: ["title":"Cities"])
+        switch indexPath.row {
+        case 0:
+            self.routeToName(InnerConst.SegueToNextNetwork)
+        case 1:
+            self.routeToName(InnerConst.SegueToNextStore)
+        default:
+            break
         }
     }
 }
