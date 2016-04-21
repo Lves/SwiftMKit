@@ -73,5 +73,17 @@ extension BaseKitViewController {
     public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay) {
         self.hud.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
     }
+    public func showLoading(text: String = "") {
+        showLoading(text, view: self.view)
+    }
+    public func showLoading(text: String, view: UIView) {
+        self.hud.showHUDAddedTo(view, animated: true, text: text)
+    }
+    public func hideLoading() {
+        hideLoading(self.view)
+    }
+    public func hideLoading(view: UIView) {
+        self.hud.hideHUDForView(view, animated: true)
+    }
 }
 

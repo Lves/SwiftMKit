@@ -20,7 +20,7 @@ class MKDataNetworkRequestViewModel: BaseListViewModel {
                     }
                 },
                 failed: { [weak self] error in
-                    self?.viewController.showTip(error.description)
+                    self?.showTip(error.description)
                 })
         }
     }

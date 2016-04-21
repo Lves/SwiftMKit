@@ -20,7 +20,7 @@ class MKDataStoreViewModel: BaseListViewModel {
                     }
                 },
                 failed: { [weak self] error in
-                    self?.viewController.showTip(error.description)
+                    self?.showTip(error.description)
                 })
         }
     }

@@ -35,9 +35,22 @@ public class BaseKitViewModel: NSObject {
 extension BaseKitViewModel {
     
     public func showTip(tip: String) {
-        showTip(tip, view: self.view.window!)
+        viewController.showTip(tip)
     }
     public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay) {
-        self.hud.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
+        viewController.showTip(tip, view: view, hideAfterDelay: hideAfterDelay)
     }
+    public func showLoading(text: String = "") {
+        viewController.showLoading(text)
+    }
+    public func showLoading(text: String, view: UIView) {
+        viewController.showLoading(text, view: view)
+    }
+    public func hideLoading() {
+        viewController.hideLoading()
+    }
+    public func hideLoading(view: UIView) {
+        viewController.hideLoading(view)
+    }
+    
 }

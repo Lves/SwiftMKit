@@ -10,18 +10,19 @@ import UIKit
 import Alamofire
 
 class PX500ApiInfo: NSObject {
-    class var apiBaseUrl: String {
+    static var apiBaseUrl: String {
         get {
             switch NetworkConfig.Evn {
             case .Dev:
                 return NetworkConfig.PX500HostDev
             case .Product:
                 return NetworkConfig.PX500HostProduct
-            case .Tmp:
-                return NetworkConfig.TmpHost
             }
         }
     }
+}
+class BuDeJieApiInfo: NSObject {
+    static var apiBaseUrl: String = NetworkConfig.BuDeJieHost
 }
 
 class PX500NetApi: NetApiAbstract {
@@ -52,17 +53,8 @@ class PX500NetApi: NetApiAbstract {
     }
 }
 
-class TmpNetApi: NetApiAbstract {
-    private var _query: [String: AnyObject]?
-    override var query: [String: AnyObject]? {
-        get {
-            return _query
-        }
-        set {
-            _query = newValue
-        }
-    }
-    static let baseUrl = PX500ApiInfo.apiBaseUrl + "/api"
+class BuDeJieNetApi: NetApiAbstract {
+    static let baseUrl = BuDeJieApiInfo.apiBaseUrl + "/api"
     private var _url: String?
     override var url: String? {
         get {
@@ -72,14 +64,14 @@ class TmpNetApi: NetApiAbstract {
             if newValue != nil && newValue!.hasPrefix("http") {
                 _url = NSURL(string: newValue!)?.absoluteString
             }else{
-                _url =  NSURL(string: TmpNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString
+                _url =  NSURL(string: BuDeJieNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString
             }
         }
     }
 }
 
 class PX500PopularPhotosApiData: PX500NetApi {
-    var photos: Array<MKDataNetworkRequestPhotoModel>?
+    var photos: [MKDataNetworkRequestPhotoModel]?
     init(page: UInt, number: UInt) {
         super.init()
         NetworkConfig.Evn = .Product
@@ -125,12 +117,11 @@ class PX500PhotoDetailApiData: PX500NetApi {
     }
 }
 
-/// 广告ApiData
-class TmpADApiData: TmpNetApi {
-    var ads: Array<ADModel>?
+
+class BuDeJieADApiData: BuDeJieNetApi {
+    var ads: [BuDeJieADModel]?
     override init() {
         super.init()
-        NetworkConfig.Evn = .Tmp
         self.query = ["a": "get_top_promotion",
                       "c": "topic",
                       "client": "iphone",

@@ -11,6 +11,7 @@ import UIKit
 
 struct HUDConstant {
     static let HideTipAfterDelay: NSTimeInterval = 2
+    static let LoadingText: String = "正在加载"
 }
 
 public protocol HUDProtocol : class {

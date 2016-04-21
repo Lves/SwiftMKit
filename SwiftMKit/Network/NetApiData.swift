@@ -81,6 +81,9 @@ public class NetApiData: NSObject {
                 }
                 NetApiData.removeApi(self)
             }
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
+            }
         }
     }
     public func requestData() -> SignalProducer<NetApiProtocol, NSError> {
@@ -101,6 +104,9 @@ public class NetApiData: NSObject {
                 }
                 NetApiData.removeApi(self)
             }
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
+            }
         }
     }
     public func requestString() -> SignalProducer<NetApiProtocol, NSError> {
@@ -120,6 +126,9 @@ public class NetApiData: NSObject {
                     sink.sendFailed(error)
                 }
                 NetApiData.removeApi(self)
+            }
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
             }
         }
     }

@@ -8,16 +8,13 @@
 
 import UIKit
 
-class TmpModel: BaseModel {
 
-}
-
-class ADModel: BaseModel {
-    var ID: Int?
+class BuDeJieADModel: BaseModel {
+    var idstr: Int?
     var image: String?
     var url: String?
     
     override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-        return ["ID":"id"]
+        return ["idstr":"id"]
     }
 }

@@ -44,7 +44,8 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
                         self?.photo.value = photo
                     }
                 },
-                failed: { error in
+                failed: { [weak self] error in
+                    self?.showTip(error.description)
             })
         }
     }
