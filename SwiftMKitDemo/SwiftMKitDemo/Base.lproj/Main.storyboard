@@ -69,6 +69,7 @@
                         <segue destination="CUP-DE-Aoe" kind="show" identifier="routeToDataNetworkRequest" id="TT6-Eo-f5U">
                             <nil key="action"/>
                         </segue>
+                        <segue destination="WXb-cC-hfs" kind="show" identifier="routeToDataStore" id="INg-kf-bA6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7TA-rG-57D" sceneMemberID="firstResponder"/>
@@ -78,7 +79,7 @@
         <!--Data Network Request View Controller-->
         <scene sceneID="GYG-Gv-WXO">
             <objects>
-                <viewController storyboardIdentifier="MKDataNetworkRequestViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="CUP-DE-Aoe" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="CUP-DE-Aoe" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VUt-OO-Uz9"/>
                         <viewControllerLayoutGuide type="bottom" id="VDO-vU-uOD"/>
@@ -196,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLq-dD-Jou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2466.5" y="206.5"/>
+            <point key="canvasLocation" x="2466.5" y="-267.5"/>
         </scene>
         <!--Data Network Request Detail View Controller-->
         <scene sceneID="ZOb-uz-zn2">
@@ -416,9 +417,47 @@
             </objects>
             <point key="canvasLocation" x="1274.5" y="206.5"/>
         </scene>
+        <!--Data Store View Controller-->
+        <scene sceneID="7AD-ZQ-Oj3">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="WXb-cC-hfs" customClass="MKDataStoreViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RsC-iI-Bfv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wrk-Em-Iad"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fpK-R4-jlt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="221" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T02-Zl-cuO">
+                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="WXb-cC-hfs" id="pOd-IN-mtT"/>
+                                    <outlet property="delegate" destination="WXb-cC-hfs" id="GI3-z3-sTg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="T02-Zl-cuO" firstAttribute="leading" secondItem="fpK-R4-jlt" secondAttribute="leadingMargin" constant="-20" id="d7v-Mi-0T2"/>
+                            <constraint firstItem="T02-Zl-cuO" firstAttribute="top" secondItem="RsC-iI-Bfv" secondAttribute="bottom" id="jlD-SL-FaC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="T02-Zl-cuO" secondAttribute="trailing" constant="-20" id="sHb-WE-3oc"/>
+                            <constraint firstItem="Wrk-Em-Iad" firstAttribute="top" secondItem="T02-Zl-cuO" secondAttribute="bottom" id="wVE-QO-XUX"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="T02-Zl-cuO" id="UHX-ag-v3c"/>
+                        <segue destination="UNi-fn-7nO" kind="show" identifier="routeToNetworkRequestDetail" id="IMc-9u-5tL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BEA-lD-VMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2466.5" y="525.5"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="icon_user_head" width="60" height="60"/>
-        <image name="view_default_loading" width="308" height="127"/>
-    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fp8-J5-IUa"/>
+    </inferredMetricsTieBreakers>
 </document>

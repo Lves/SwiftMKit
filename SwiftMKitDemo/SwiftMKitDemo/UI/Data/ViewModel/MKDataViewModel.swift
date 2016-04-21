@@ -13,5 +13,6 @@ class MKDataViewModel: BaseListViewModel {
         super.init()
         self.dataSource = [MKDataListModel]()
         self.dataSource.append(MKDataListModel(title: "Network Request", detail: "Request a url"))
+        self.dataSource.append(MKDataListModel(title: "Data Store", detail: "CoreData"))
     }
 }

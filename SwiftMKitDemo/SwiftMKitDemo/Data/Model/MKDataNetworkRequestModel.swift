@@ -7,33 +7,40 @@
 //
 
 import UIKit
-import ObjectMapper
+import MagicalRecord
+import MJExtension
 
-class MKDataNetworkRequestPhotoModel: BaseModel {
+class MKDataNetworkRequestPhotoModel: NSObject {
     var photoId: String?
     var name: String?
     var username: String?
     var userpic: String?
     var descriptionString: String?
     var imageurl: String?
-//    var longitude: Double?
-//    var latitude: Double?
-//    var url: String?
     
-    required init?(_ map: Map) {
-        super.init(map)
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["photoId":"id",
+                "descriptionString":"description",
+                "username":"user.fullname",
+                "userpic":"user.userpic_url",
+                "imageurl":"image_url"]
     }
-    // Mappable
-    override func mapping(map: Map) {
-        super.mapping(map)
-        photoId             <- map["id"][ModelTypeTransfer.Int2String]
-        name                <- map["name"]
-        descriptionString   <- map["description"]
-        username            <- map["user.fullname"]
-        userpic             <- map["user.userpic_url"]
-        imageurl            <- map["image_url"]
-//        longitude   <- map["longitude"]
-//        latitude    <- map["latitude"]
-//        url         <- map["url"]
+}
+
+extension PX500PhotoEntity {
+    
+    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["photoId":"id",
+                "descriptionString":"description",
+                "imageUrl":"image_url"]
+    }
+}
+extension PX500UserEntity {
+    
+    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["userId":"id",
+                "userName":"username",
+                "fullName":"fullname",
+                "userPicUrl":"userpic_url"]
     }
 }

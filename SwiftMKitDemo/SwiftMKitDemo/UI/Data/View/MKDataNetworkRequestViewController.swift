@@ -33,6 +33,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     override func setupUI() {
         super.setupUI()
         self.title = "Photos"
+        self.tableView.registerNib(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = self.tableView.rowHeight;
         self.tableView.rowHeight = UITableViewAutomaticDimension;

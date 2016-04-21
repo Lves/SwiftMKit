@@ -87,7 +87,17 @@ class PX500PopularPhotosApiData: PX500NetApi {
     override func fillJSON(json: AnyObject) {
         if let dict = json as? [String: AnyObject] {
             if let array = dict["photos"] as? [AnyObject] {
-                self.photos =  NetApiData.getArrayFromJson(array)
+                self.photos = NSObject.arrayFromJson(array)
+            }
+        }
+    }
+}
+class PX500PopularPhotosCoreDataApiData: PX500PopularPhotosApiData {
+    var photosCoreData: [PX500PhotoEntity]?
+    override func fillJSON(json: AnyObject) {
+        if let dict = json as? [String: AnyObject] {
+            if let array = dict["photos"] as? [AnyObject] {
+                self.photosCoreData =  NSObject.arrayFromJson(array)
             }
         }
     }
@@ -102,7 +112,7 @@ class PX500PhotoDetailApiData: PX500NetApi {
     }
     override func fillJSON(json: AnyObject) {
         if let dict = json as? [String: AnyObject] {
-            self.photo =  NetApiData.getObjectFromJson(dict["photo"])
+            self.photo =  NSObject.objectFromJson(dict["photo"])
         }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import ReactiveCocoa
 import Alamofire
 import CocoaLumberjack
-import ObjectMapper
+import MJExtension
 
 public enum StatusCode: Int {
     case Canceled = -999
@@ -51,29 +51,6 @@ public class NetApiData: NSObject {
             sharedInstance.runningApis.removeAtIndex(index)
         }
         DDLogInfo("[Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
-    }
-    
-    // MARK: JSON
-    
-    class public func getArrayFromJson<T: Mappable>(json: Array<AnyObject>?) -> Array<T>?{
-        if let jsonString = json {
-            var arr = [T]()
-            for item in jsonString {
-                let obj = Mapper<T>().map(item)
-                if let model = obj {
-                    arr.append(model)
-                }
-            }
-            return arr
-        }
-        return nil
-    }
-    class public func getObjectFromJson<T: Mappable>(json: AnyObject?) -> T?{
-        if let jsonString = json {
-            let obj = Mapper<T>().map(jsonString)
-            return obj
-        }
-        return nil
     }
     
     // MARK: Request
