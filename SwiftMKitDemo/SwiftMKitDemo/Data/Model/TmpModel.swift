@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ObjectMapper
 
 class TmpModel: BaseModel {
 
@@ -18,10 +17,7 @@ class ADModel: BaseModel {
     var image: String?
     var url: String?
     
-    override func mapping(map: Map) {
-        super.mapping(map)
-        ID             <- map["id"]
-        image          <- map["image"]
-        url            <- map["url"]
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["ID":"id"]
     }
 }

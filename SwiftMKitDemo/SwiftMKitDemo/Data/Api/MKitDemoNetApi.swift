@@ -186,7 +186,7 @@ class TmpADApiData: TmpNetApi {
         if let dict = json as? [String: AnyObject] {
             print("\(dict)")
             if let array = dict["result"]!["list"] as? [AnyObject] {
-                ads =  NetApiData.getArrayFromJson(array)
+                ads =  NSObject.arrayFromJson(array)
             }
         }
     }
