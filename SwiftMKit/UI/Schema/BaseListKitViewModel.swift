@@ -19,6 +19,9 @@ public class BaseListKitViewModel: BaseKitViewModel {
             return viewController as! BaseListKitViewController
         }
     }
+    public var listIndicator: IndicatorListProtocol {
+        get { return self.listViewController.listIndicator }
+    }
     var dataSource:Array<AnyObject> = Array<AnyObject>() {
         didSet {
             if self.viewController == nil {

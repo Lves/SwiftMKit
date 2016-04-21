@@ -13,7 +13,7 @@ class MKDataStoreViewModel: BaseListViewModel {
     
     private var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NSError> {
         get {
-            return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listViewController).signal().on(
+            return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listIndicator).signal().on(
                 next: { [weak self] data in
                     if let photos = data.photosCoreData {
                         self?.updateDataSource(photos)

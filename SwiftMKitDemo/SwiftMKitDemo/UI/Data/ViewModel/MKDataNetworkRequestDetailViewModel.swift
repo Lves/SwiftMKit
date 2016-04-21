@@ -38,7 +38,7 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
     
     private var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NSError> {
         get {
-            return PX500PhotoDetailApiData(photoId: photoId!).setIndicator(self.viewController).signal().on(
+            return PX500PhotoDetailApiData(photoId: photoId!).setIndicator(self.indicator, view: self.view).signal().on(
                 next: { [weak self] data in
                     if let photo = data.photo {
                         self?.photo.value = photo

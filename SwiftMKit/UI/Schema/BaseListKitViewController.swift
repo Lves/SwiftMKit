@@ -19,9 +19,6 @@ public enum ListViewType {
     case Both
 }
 
-public protocol IndicatorListProtocol: IndicatorProtocol {
-    func setIndicatorListState(task: NSURLSessionTask?)
-}
 
 public protocol ListViewProtocol {
     var listViewType: ListViewType { get }
@@ -30,7 +27,7 @@ public protocol ListViewProtocol {
     func listViewFooterWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshFooter
 }
 
-public class BaseListKitViewController: BaseKitViewController, ListViewProtocol, IndicatorListProtocol {
+public class BaseListKitViewController: BaseKitViewController, ListViewProtocol {
     public var listViewModel: BaseListKitViewModel! {
         get {
             return viewModel as! BaseListKitViewModel
@@ -46,7 +43,9 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol,
             return .None
         }
     }
-    private var listTaskObserver: ListTaskObserver!
+    lazy public var listIndicator: IndicatorListProtocol = {
+        return TaskIndicatorList(listView: self.listView, viewModel: self.listViewModel)
+    }()
     
     public func listViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
         let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
@@ -59,7 +58,6 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol,
     }
     public override func setupUI() {
         super.setupUI()
-        listTaskObserver = ListTaskObserver(viewController: self)
         if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
             self.listView.mj_header = nil
         }
@@ -86,80 +84,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol,
         }
     }
     
-    public func setIndicatorListState(task: NSURLSessionTask?){
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.removeObserver(listTaskObserver, name: Notifications.Task.DidResume, object: nil)
-        notificationCenter.removeObserver(listTaskObserver, name: Notifications.Task.DidSuspend, object: nil)
-        notificationCenter.removeObserver(listTaskObserver, name: Notifications.Task.DidCancel, object: nil)
-        notificationCenter.removeObserver(listTaskObserver, name: Notifications.Task.DidComplete, object: nil)
-        if let networkTask = task {
-            if networkTask.state == .Running {
-                notificationCenter.addObserver(listTaskObserver, selector: #selector(ListTaskObserver.task_list_resume(_:)), name: Notifications.Task.DidResume, object: networkTask)
-                notificationCenter.addObserver(listTaskObserver, selector: #selector(ListTaskObserver.task_list_suspend(_:)), name: Notifications.Task.DidSuspend, object: networkTask)
-                notificationCenter.addObserver(listTaskObserver, selector: #selector(ListTaskObserver.task_list_cancel(_:)), name: Notifications.Task.DidCancel, object: networkTask)
-                notificationCenter.addObserver(listTaskObserver, selector: #selector(ListTaskObserver.task_list_end(_:)), name: Notifications.Task.DidComplete, object: networkTask)
-                let notify = NSNotification(name: "", object: networkTask)
-                listTaskObserver.task_list_resume(notify)
-            } else {
-                let notify = NSNotification(name: "", object: networkTask)
-                listTaskObserver.task_list_end(notify)
-            }
-        }
-    }
+   
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self.listTaskObserver)
-    }
-}
-
-class ListTaskObserver: NSObject {
-    private weak var viewController: BaseListKitViewController?
-    init(viewController: BaseListKitViewController) {
-        self.viewController = viewController
-    }
-    
-    @objc func task_list_resume(notify:NSNotification) {
-        DDLogInfo("List Task resume")
-        UIApplication.sharedApplication().showNetworkActivityIndicator()
-        if let task = notify.object as? NSURLSessionTask {
-            self.viewController?.viewModel.runningApis.append(task)
-        }
-    }
-    @objc func task_list_suspend(notify:NSNotification) {
-        DDLogInfo("List Task suspend")
-        UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        Async.main {
-            if self.viewController?.listViewModel.dataIndex == 0 {
-                self.viewController?.listView.mj_header.endRefreshing()
-            }else{
-                self.viewController?.listView.mj_footer.endRefreshing()
-            }
-        }
-    }
-    @objc func task_list_cancel(notify:NSNotification) {
-        DDLogInfo("List Task cancel")
-        UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        Async.main {
-            if self.viewController?.listViewModel.dataIndex == 0 {
-                self.viewController?.listView.mj_header.endRefreshing()
-            }else{
-                self.viewController?.listView.mj_footer.endRefreshing()
-            }
-        }
-    }
-    @objc func task_list_end(notify:NSNotification) {
-        DDLogInfo("List Task complete")
-        UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        if let task = notify.object as? NSURLSessionTask {
-            if let index = self.viewController?.viewModel.runningApis.indexOf(task) {
-                self.viewController?.viewModel.runningApis.removeAtIndex(index)
-            }
-        }
-        Async.main {
-            if self.viewController?.listViewModel.dataIndex == 0 {
-                self.viewController?.listView.mj_header.endRefreshing()
-            }else{
-                self.viewController?.listView.mj_footer.endRefreshing()
-            }
-        }
     }
 }

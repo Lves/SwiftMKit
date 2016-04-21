@@ -24,10 +24,10 @@ class PX500ApiInfo: NSObject {
     }
 }
 
-class PX500NetApi: NetApiProtocol {
+class PX500NetApi: NetApiAbstract {
     static let baseQuery = ["consumer_key": PX500Config.ConsumerKey]
     private var _query: [String: AnyObject]?
-    var query: [String: AnyObject]? {
+    override var query: [String: AnyObject]? {
         get {
             let result = NetApiData.combineQuery(PX500NetApi.baseQuery, append: _query)
             return result
@@ -36,10 +36,9 @@ class PX500NetApi: NetApiProtocol {
             _query = newValue
         }
     }
-    var method: Alamofire.Method?
     static let baseUrl = PX500ApiInfo.apiBaseUrl + "/v1"
     private var _url: String?
-    var url: String? {
+    override var url: String? {
         get {
             return _url
         }
@@ -50,27 +49,6 @@ class PX500NetApi: NetApiProtocol {
                 _url =  NSURL(string: PX500NetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString
             }
         }
-    }
-    var timeout: NSTimeInterval?
-    var request:Request?
-    var responseData:AnyObject?
-    weak var indicator: IndicatorProtocol?
-    weak var indicatorList: IndicatorListProtocol?
-    
-    func fillJSON(json: AnyObject) {
-        
-    }
-    func transferURLRequest(request: NSMutableURLRequest) -> NSMutableURLRequest {
-        return request
-    }
-    func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError> {
-        return response
-    }
-    func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError> {
-        return response
-    }
-    func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError> {
-        return response
     }
 }
 

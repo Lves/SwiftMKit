@@ -21,19 +21,6 @@ class BaseViewController: BaseKitViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    var _indicatorText: String?
-    override var indicatorText: String? {
-        get {
-            if _indicatorText == nil {
-                return "正在加载"
-            }
-            return _indicatorText
-        }
-        set {
-            _indicatorText = newValue
-        }
-    }
-    
     /*
      // MARK: - Navigation
      

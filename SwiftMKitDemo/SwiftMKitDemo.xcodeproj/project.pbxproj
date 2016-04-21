@@ -20,8 +20,13 @@
 		27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C081CC748D60028E938 /* ImageScout.swift */; };
 		27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C091CC748D60028E938 /* ScoutOperation.swift */; };
 		27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C0A1CC748D60028E938 /* SessionDelegate.swift */; };
-		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
-		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
+		273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */; };
+		273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51AA1CC8CAA1003ABE4A /* HUDProtocol.swift */; };
+		273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51AB1CC8CAA1003ABE4A /* MBHUDView.swift */; };
+		273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51AF1CC8CB1A003ABE4A /* IndicatorProtocol.swift */; };
+		273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */; };
+		273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */; };
+		273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */; };
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
@@ -53,8 +58,6 @@
 		3F9707F91CC67063002BBC83 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9707F71CC67063002BBC83 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F9707FB1CC67063002BBC83 /* MJRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9707FA1CC67063002BBC83 /* MJRefresh.framework */; };
 		3F9707FC1CC67063002BBC83 /* MJRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9707FA1CC67063002BBC83 /* MJRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3F9707FE1CC67063002BBC83 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9707FD1CC67063002BBC83 /* ObjectMapper.framework */; };
-		3F9707FF1CC67063002BBC83 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9707FD1CC67063002BBC83 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F9708011CC67063002BBC83 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9708001CC67063002BBC83 /* ReactiveCocoa.framework */; };
 		3F9708021CC67063002BBC83 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9708001CC67063002BBC83 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F9708041CC67063002BBC83 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9708031CC67063002BBC83 /* Result.framework */; };
@@ -147,8 +150,13 @@
 		27276C081CC748D60028E938 /* ImageScout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScout.swift; sourceTree = "<group>"; };
 		27276C091CC748D60028E938 /* ScoutOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoutOperation.swift; sourceTree = "<group>"; };
 		27276C0A1CC748D60028E938 /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
-		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
-		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		273F51AA1CC8CAA1003ABE4A /* HUDProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDProtocol.swift; sourceTree = "<group>"; };
+		273F51AB1CC8CAA1003ABE4A /* MBHUDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBHUDView.swift; sourceTree = "<group>"; };
+		273F51AF1CC8CB1A003ABE4A /* IndicatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorProtocol.swift; sourceTree = "<group>"; };
+		273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicator.swift; sourceTree = "<group>"; };
+		273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicatorList.swift; sourceTree = "<group>"; };
+		273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionTask+Extension.swift"; sourceTree = "<group>"; };
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -303,6 +311,34 @@
 			path = ImageScout;
 			sourceTree = "<group>";
 		};
+		273F51A41CC8C52A003ABE4A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				273F51AE1CC8CB10003ABE4A /* Indicator */,
+				273F51A91CC8CAA1003ABE4A /* HUD */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		273F51A91CC8CAA1003ABE4A /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				273F51AA1CC8CAA1003ABE4A /* HUDProtocol.swift */,
+				273F51AB1CC8CAA1003ABE4A /* MBHUDView.swift */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		273F51AE1CC8CB10003ABE4A /* Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				273F51AF1CC8CB1A003ABE4A /* IndicatorProtocol.swift */,
+				273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */,
+				273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */,
+			);
+			path = Indicator;
+			sourceTree = "<group>";
+		};
 		27A5B20B1CC86E6F005A59CA /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,10 +372,12 @@
 			children = (
 				2783E0061CC89E74007247F6 /* NSObject+Extension.swift */,
 				3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */,
+				273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */,
 				3FC77C441CC36A6D002F964B /* Dictionary+Extension.swift */,
 				3FC77C461CC36AAE002F964B /* String+Extension.swift */,
 				27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */,
 				27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */,
+				273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -418,9 +456,9 @@
 			isa = PBXGroup;
 			children = (
 				27BA394B1CC74E2400436D23 /* Async */,
+				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
-				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -429,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				3FC9DF2C1CBFD53A00C2D938 /* Schema */,
+				273F51A41CC8C52A003ABE4A /* View */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -515,7 +554,6 @@
 			children = (
 				3FC9DF4A1CBFD6D400C2D938 /* MKDataViewController.swift */,
 				3FC9DF481CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift */,
-				3FC9DF491CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewController.swift */,
 				18C208581CC862D800569F42 /* SingleReqViewController.swift */,
 				18C2085A1CC862FC00569F42 /* MergeReqViewController.swift */,
 				18C2085C1CC8631300569F42 /* ComLatestReqViewController.swift */,
@@ -530,12 +568,11 @@
 			children = (
 				3FC9DF4E1CBFD6D400C2D938 /* MKDataViewModel.swift */,
 				3FC9DF4D1CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift */,
+				274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */,
 				3FC9DF4C1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift */,
 				18C208621CC8636400569F42 /* SingleReqViewModel.swift */,
 				18C208601CC8635400569F42 /* MergeReqViewModel.swift */,
 				18C2085E1CC8634000569F42 /* ComLatestReqViewModel.swift */,
-				274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */,
-				3FC9DF4C1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -554,8 +591,6 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F9708031CC67063002BBC83 /* Result.framework */,
-				3F9708001CC67063002BBC83 /* ReactiveCocoa.framework */,
 				2783E0031CC89953007247F6 /* MJExtension.framework */,
 				2783E0001CC89953007247F6 /* MagicalRecord.framework */,
 				3F9708031CC67063002BBC83 /* Result.framework */,
@@ -787,17 +822,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */,
+				273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				18C2085B1CC862FC00569F42 /* MergeReqViewController.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
 				3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */,
+				273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */,
 				3FC9DF351CBFD53A00C2D938 /* BaseKitViewModel.swift in Sources */,
 				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
+				273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
+				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				18C2085D1CC8631300569F42 /* ComLatestReqViewController.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
@@ -815,6 +855,7 @@
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
+				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
 				27A5B21D1CC870F0005A59CA /* PX500PhotoEntity.m in Sources */,
@@ -832,6 +873,7 @@
 				3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */,
 				27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */,
 				274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */,
+				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
@@ -1103,6 +1145,7 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
 /* Begin XCVersionGroup section */
 		27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */ = {
 			isa = XCVersionGroup;

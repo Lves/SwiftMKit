@@ -15,14 +15,10 @@ public class NetApiClient : NSObject {
     
     class private func bindIndicator(api api:NetApiProtocol, task: NSURLSessionTask) {
         if let indicator = api.indicator {
-            if let view = indicator.indicatorView {
-                indicator.setIndicatorState(task, view: view, text: indicator.indicatorText)
-            } else {
-                indicator.setIndicatorState(task, text: indicator.indicatorText)
-            }
+            indicator.bindTask(task, view: api.indicatorInView, text: api.indicatorText)
         }
         if let indicator = api.indicatorList {
-            indicator.setIndicatorListState(task)
+            indicator.bindTaskForList(task)
         }
     }
     
