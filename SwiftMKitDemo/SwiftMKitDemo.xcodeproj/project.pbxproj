@@ -24,6 +24,7 @@
 		273ACFA61CC9AD5A00EB341D /* MagicalRecord.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 273ACFA41CC9AD5A00EB341D /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		273ACFA81CC9AD5A00EB341D /* MJExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273ACFA71CC9AD5A00EB341D /* MJExtension.framework */; };
 		273ACFA91CC9AD5A00EB341D /* MJExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 273ACFA71CC9AD5A00EB341D /* MJExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273ACFAA1CC9AE9600EB341D /* RACTests.swift */; };
 		273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */; };
 		273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51AA1CC8CAA1003ABE4A /* HUDProtocol.swift */; };
 		273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51AB1CC8CAA1003ABE4A /* MBHUDView.swift */; };
@@ -150,6 +151,7 @@
 		27276C0A1CC748D60028E938 /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
 		273ACFA41CC9AD5A00EB341D /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MagicalRecord.framework; path = "../Debug-iphonesimulator/MagicalRecord.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		273ACFA71CC9AD5A00EB341D /* MJExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MJExtension.framework; path = "../Debug-iphonesimulator/MJExtension.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		273ACFAA1CC9AE9600EB341D /* RACTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACTests.swift; sourceTree = "<group>"; };
 		273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		273F51AA1CC8CAA1003ABE4A /* HUDProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDProtocol.swift; sourceTree = "<group>"; };
 		273F51AB1CC8CAA1003ABE4A /* MBHUDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBHUDView.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				3FC9DF0D1CBFD35900C2D938 /* SwiftMKitDemoTests.swift */,
+				273ACFAA1CC9AE9600EB341D /* RACTests.swift */,
 				3FC9DF0F1CBFD35A00C2D938 /* Info.plist */,
 			);
 			path = SwiftMKitDemoTests;
@@ -884,6 +887,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */,
 				3FC9DF0E1CBFD35900C2D938 /* SwiftMKitDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
