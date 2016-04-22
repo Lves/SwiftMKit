@@ -59,7 +59,7 @@ public class NetApiAbstract: NetApiProtocol{
 
 public extension NetApiProtocol {
     
-    func signal(format:ApiFormatType = .JSON) -> SignalProducer<Self, NSError> {
+    func signal(format:ApiFormatType = .JSON) -> SignalProducer<Self, NetError> {
         switch format {
         case .JSON:
             return NetApiData(api: self).requestJSON().map { _ in

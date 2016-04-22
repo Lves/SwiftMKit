@@ -12,15 +12,11 @@ import Alamofire
 import CocoaLumberjack
 import MJExtension
 
-public enum StatusCode: Int {
-    case Canceled = -999
+public struct NetApiDataConst {
+    static let DefaultTimeoutInterval: NSTimeInterval = 45
 }
 
 public class NetApiData: NSObject {
-    
-    public struct NetApiDataConst {
-        static let DefaultTimeoutInterval: NSTimeInterval = 45
-    }
     
     public var api: NetApiProtocol?
     
@@ -55,7 +51,7 @@ public class NetApiData: NSObject {
     
     // MARK: Request
     
-    public func requestJSON() -> SignalProducer<NetApiProtocol, NSError> {
+    public func requestJSON() -> SignalProducer<NetApiProtocol, NetError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
             let urlRequest = NetApiData.getURLRequest(self.api!)
@@ -69,15 +65,18 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
-                    if let statusCode =  StatusCode(rawValue:error.code) {
+                    let err = NetError(error: error)
+                    if let statusCode =  StatusCode(rawValue:err.statusCode) {
                         switch(statusCode) {
                         case .Canceled:
                             sink.sendInterrupted()
                             return
+                        default:
+                            break
                         }
                     }
                     DDLogError("\(error)")
-                    sink.sendFailed(error)
+                    sink.sendFailed(err)
                 }
                 NetApiData.removeApi(self)
             }
@@ -86,7 +85,7 @@ public class NetApiData: NSObject {
             }
         }
     }
-    public func requestData() -> SignalProducer<NetApiProtocol, NSError> {
+    public func requestData() -> SignalProducer<NetApiProtocol, NetError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
             let urlRequest = NetApiData.getURLRequest(self.api!)
@@ -99,8 +98,9 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
+                    let err = NetError(error: error)
                     DDLogError("\(error)")
-                    sink.sendFailed(error)
+                    sink.sendFailed(err)
                 }
                 NetApiData.removeApi(self)
             }
@@ -109,7 +109,7 @@ public class NetApiData: NSObject {
             }
         }
     }
-    public func requestString() -> SignalProducer<NetApiProtocol, NSError> {
+    public func requestString() -> SignalProducer<NetApiProtocol, NetError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
             let urlRequest = NetApiData.getURLRequest(self.api!)
@@ -122,8 +122,9 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
+                    let err = NetError(error: error)
                     DDLogError("\(error)")
-                    sink.sendFailed(error)
+                    sink.sendFailed(err)
                 }
                 NetApiData.removeApi(self)
             }

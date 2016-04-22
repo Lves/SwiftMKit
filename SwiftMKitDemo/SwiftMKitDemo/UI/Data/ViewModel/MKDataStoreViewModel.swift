@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 class MKDataStoreViewModel: BaseListViewModel {
     
-    private var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NSError> {
+    private var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NetError> {
         get {
             return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listIndicator).signal().on(
                 next: { [weak self] data in
@@ -20,7 +20,7 @@ class MKDataStoreViewModel: BaseListViewModel {
                     }
                 },
                 failed: { [weak self] error in
-                    self?.showTip(error.description)
+                    self?.showTip(error.message)
                 })
         }
     }

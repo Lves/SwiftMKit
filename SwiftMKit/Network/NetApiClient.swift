@@ -42,6 +42,8 @@ public class NetApiClient : NSObject {
                         case .Canceled:
                             DDLogWarn("Request Url Canceled: \(api.url!)")
                             return
+                        default:
+                            break
                         }
                     }
                     DDLogError("Request Url Failed: \(api.url!)")
@@ -70,6 +72,8 @@ public class NetApiClient : NSObject {
                         case .Canceled:
                             DDLogWarn("Request Url Canceled: \(api.url!)")
                             return
+                        default:
+                            break
                         }
                     }
                     DDLogError("Request Url Failed: \(api.url!)")
@@ -98,6 +102,8 @@ public class NetApiClient : NSObject {
                         case .Canceled:
                             DDLogWarn("Request Url Canceled: \(api.url!)")
                             return
+                        default:
+                            break
                         }
                     }
                     DDLogError("Request Url Failed: \(api.url!)")

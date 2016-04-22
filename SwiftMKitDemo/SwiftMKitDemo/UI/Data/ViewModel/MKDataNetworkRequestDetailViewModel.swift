@@ -36,7 +36,7 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
         return CocoaAction(action, input:"")
     }()
     
-    private var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NSError> {
+    private var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NetError> {
         get {
             return PX500PhotoDetailApiData(photoId: photoId!).setIndicator(self.indicator, view: self.view).signal().on(
                 next: { [weak self] data in
@@ -45,7 +45,7 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
                     }
                 },
                 failed: { [weak self] error in
-                    self?.showTip(error.description)
+                    self?.showTip(error.message)
             })
         }
     }
