@@ -21,38 +21,50 @@ class JsonMapTests: XCTestCase {
         super.tearDown()
     }
     
-    var studentJSON = "{\"name\":\"张三\",\"age\":20,\"money\":100.21,\"height\":183.00,\"teacher\":{\"name\":\"李老师\",\"students\":[{\"name\":\"张三\",\"age\":20,\"money\":100.21,\"height\":183.00}]}}"
-    var teacherJSON = "{\"name\":\"李老师\",\"students\":[{\"name\":\"张三\",\"age\":20,\"money\":100.21,\"height\":183.00}]}"
+    var studentJSON = ["name":"张三","age":20,"money":100.21,"height":183.10,"teacher":["name":"李老师","students":[["name":"张三","age":20,"money":100.21,"height":183.10],["name":"李四","age":21,"money":101.21,"height":182.10]]]]
+    var teacherJSON = ["name":"李老师","students":[["name":"张三","age":20,"money":100.21,"height":183.10],["name":"李四","age":21,"money":101.21,"height":182.10]]]
 
     func validateStudent(student: TestStudent?) {
         XCTAssertNotNil(student)
         XCTAssertEqual("张三", student!.name)
         XCTAssertEqual(student!.name, student!.aliasName)
-        XCTAssertEqual(20, student!.age?.integerValue)
+        XCTAssertEqual(20, student!.age)
         XCTAssertEqual("100.21", student!.money?.stringValue)
-        XCTAssertEqual(183.0, student!.height?.doubleValue)
+        XCTAssertEqual(183.1, student!.height)
         XCTAssertNotNil(student?.teacher)
         XCTAssertEqual("李老师", student!.teacher?.name)
         XCTAssertNotNil(student?.teacher?.students)
-        XCTAssertEqual(1, student?.teacher?.students?.count)
+        XCTAssertEqual(2, student?.teacher?.students?.count)
+    }
+    func validateStudents(students: [TestStudent]?) {
+        XCTAssertEqual(2, students?.count)
+        let student:TestStudent? = students![0]
+        XCTAssertNotNil(student)
+        XCTAssertEqual("张三", student!.name)
+        XCTAssertEqual(student!.name, student!.aliasName)
+        XCTAssertEqual(20, student!.age)
+        XCTAssertEqual("100.21", student!.money?.stringValue)
+        XCTAssertEqual(183.1, student!.height)
     }
     func validateTeacher(teacher: TestTeacher?) {
         XCTAssertNotNil(teacher)
         XCTAssertEqual("李老师", teacher!.name)
         XCTAssertNotNil(teacher?.students)
-        XCTAssertEqual(1, teacher?.students?.count)
-        let studentInTeacher:TestStudent? = teacher?.students?.firstObject as? TestStudent
+        XCTAssertEqual(2, teacher?.students?.count)
+        let studentInTeacher:TestStudent? = teacher?.students?.first
         XCTAssertEqual("张三", studentInTeacher!.name)
         XCTAssertEqual(20, studentInTeacher!.age)
         XCTAssertEqual("100.21", studentInTeacher!.money?.stringValue)
-        XCTAssertEqual(183.0, studentInTeacher!.height)
+        XCTAssertEqual(183.1, studentInTeacher!.height)
     }
     
     func testMJExtension() {
         let student:TestStudent? = TestStudent.objectFromJson(studentJSON)
         let teacher:TestTeacher? = TestTeacher.objectFromJson(teacherJSON)
+        let students:[TestStudent]? = TestStudent.arrayFromJson(teacherJSON["students"] as? Array<AnyObject>)
         validateStudent(student)
         validateTeacher(teacher)
+        validateStudents(students)
     }
 
     func testPerformanceExample() {
@@ -67,9 +79,9 @@ class JsonMapTests: XCTestCase {
 class TestStudent : NSObject {
     var name:String?
     var aliasName:String?
-    var age:NSNumber?
+    var age:Int64 = 0
     var money:NSNumber?
-    var height:NSNumber?
+    var height:Double = 0
     var teacher:TestTeacher?
     
     override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
@@ -78,9 +90,9 @@ class TestStudent : NSObject {
 }
 class TestTeacher: NSObject {
     var name:String?
-    var students: NSArray?
+    var students:[TestStudent]?
     
     override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
-        return ["students": "TestStudent"]
+        return ["students": "SwiftMKitDemoTests.TestStudent"]
     }
 }
