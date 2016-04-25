@@ -33,6 +33,7 @@
 		273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */; };
 		273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */; };
 		273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */; };
+		274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274113CC1CCDC95600EECE5A /* JsonMapTests.swift */; };
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
@@ -161,6 +162,7 @@
 		273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicator.swift; sourceTree = "<group>"; };
 		273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicatorList.swift; sourceTree = "<group>"; };
 		273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionTask+Extension.swift"; sourceTree = "<group>"; };
+		274113CC1CCDC95600EECE5A /* JsonMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonMapTests.swift; sourceTree = "<group>"; };
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -423,9 +425,10 @@
 		3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				3FC9DF0F1CBFD35A00C2D938 /* Info.plist */,
 				3FC9DF0D1CBFD35900C2D938 /* SwiftMKitDemoTests.swift */,
 				273ACFAA1CC9AE9600EB341D /* RACTests.swift */,
-				3FC9DF0F1CBFD35A00C2D938 /* Info.plist */,
+				274113CC1CCDC95600EECE5A /* JsonMapTests.swift */,
 			);
 			path = SwiftMKitDemoTests;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 			files = (
 				273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */,
 				3FC9DF0E1CBFD35900C2D938 /* SwiftMKitDemoTests.swift in Sources */,
+				274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
