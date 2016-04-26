@@ -34,6 +34,10 @@
 		273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */; };
 		273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */; };
 		274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274113CC1CCDC95600EECE5A /* JsonMapTests.swift */; };
+		274113EE1CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113E71CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m */; };
+		274113EF1CCE0B6500EECE5A /* TestStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113E91CCE0B6500EECE5A /* TestStudentEntity.m */; };
+		274113F01CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113EB1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m */; };
+		274113F11CCE0B6500EECE5A /* TestTeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113ED1CCE0B6500EECE5A /* TestTeacherEntity.m */; };
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
@@ -163,6 +167,14 @@
 		273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicatorList.swift; sourceTree = "<group>"; };
 		273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionTask+Extension.swift"; sourceTree = "<group>"; };
 		274113CC1CCDC95600EECE5A /* JsonMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonMapTests.swift; sourceTree = "<group>"; };
+		274113E61CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestStudentEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		274113E71CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TestStudentEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		274113E81CCE0B6500EECE5A /* TestStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestStudentEntity.h; sourceTree = "<group>"; };
+		274113E91CCE0B6500EECE5A /* TestStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestStudentEntity.m; sourceTree = "<group>"; };
+		274113EA1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestTeacherEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		274113EB1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TestTeacherEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		274113EC1CCE0B6500EECE5A /* TestTeacherEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTeacherEntity.h; sourceTree = "<group>"; };
+		274113ED1CCE0B6500EECE5A /* TestTeacherEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTeacherEntity.m; sourceTree = "<group>"; };
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -356,6 +368,14 @@
 				27A5B2191CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m */,
 				27A5B21A1CC870F0005A59CA /* PX500PhotosEntity.h */,
 				27A5B21B1CC870F0005A59CA /* PX500PhotosEntity.m */,
+				274113E61CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.h */,
+				274113E71CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m */,
+				274113E81CCE0B6500EECE5A /* TestStudentEntity.h */,
+				274113E91CCE0B6500EECE5A /* TestStudentEntity.m */,
+				274113EA1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.h */,
+				274113EB1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m */,
+				274113EC1CCE0B6500EECE5A /* TestTeacherEntity.h */,
+				274113ED1CCE0B6500EECE5A /* TestTeacherEntity.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -857,11 +877,14 @@
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
+				274113EE1CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
+				274113EF1CCE0B6500EECE5A /* TestStudentEntity.m in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
+				274113F01CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m in Sources */,
 				27A5B21D1CC870F0005A59CA /* PX500PhotoEntity.m in Sources */,
 				27A5B21E1CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.m in Sources */,
 				27A5B21F1CC870F0005A59CA /* PX500UserEntity.m in Sources */,
@@ -883,6 +906,7 @@
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
+				274113F11CCE0B6500EECE5A /* TestTeacherEntity.m in Sources */,
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
 				27A5B2201CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
@@ -1070,6 +1094,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftMKitDemo.app/SwiftMKitDemo";
 			};
 			name = Debug;
@@ -1083,6 +1108,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftMKitDemo.app/SwiftMKitDemo";
 			};
 			name = Release;
@@ -1095,6 +1121,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				TEST_TARGET_NAME = SwiftMKitDemo;
 			};
 			name = Debug;
@@ -1107,6 +1134,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				TEST_TARGET_NAME = SwiftMKitDemo;
 			};
 			name = Release;

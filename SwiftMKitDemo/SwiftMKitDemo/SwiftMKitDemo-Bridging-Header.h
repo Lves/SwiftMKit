@@ -4,3 +4,5 @@
 #import "PX500PhotoEntity.h"
 #import "PX500PhotosEntity.h"
 #import "PX500UserEntity.h"
+#import "TestStudentEntity.h"
+#import "TestTeacherEntity.h"

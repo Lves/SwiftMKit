@@ -25,9 +25,23 @@
         <attribute name="userPicUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PX500PhotoEntity" inverseName="user" inverseEntity="PX500PhotoEntity" syncable="YES"/>
     </entity>
+    <entity name="TestStudentEntity" representedClassName="TestStudentEntity" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="aliasName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="money" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="teacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TestTeacherEntity" inverseName="students" inverseEntity="TestTeacherEntity" syncable="YES"/>
+    </entity>
+    <entity name="TestTeacherEntity" representedClassName="TestTeacherEntity" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TestStudentEntity" inverseName="teacher" inverseEntity="TestStudentEntity" syncable="YES"/>
+    </entity>
     <elements>
         <element name="PX500PhotoEntity" positionX="-513" positionY="-9" width="128" height="193"/>
-        <element name="PX500UserEntity" positionX="-308" positionY="-90" width="128" height="118"/>
         <element name="PX500PhotosEntity" positionX="-306" positionY="122" width="128" height="103"/>
+        <element name="PX500UserEntity" positionX="-308" positionY="-90" width="128" height="118"/>
+        <element name="TestStudentEntity" positionX="-594" positionY="303" width="128" height="133"/>
+        <element name="TestTeacherEntity" positionX="-414" positionY="309" width="128" height="73"/>
     </elements>
 </model>
