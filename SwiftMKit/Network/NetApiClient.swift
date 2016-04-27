@@ -28,7 +28,9 @@ public class NetApiClient : NSObject {
             let request = Alamofire.request(request)
             api.request = request
             self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
             return request.responseJSON { response in
+                DDLogWarn("Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
@@ -60,7 +62,9 @@ public class NetApiClient : NSObject {
             let request = Alamofire.request(request)
             api.request = request
             self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
             return request.responseData { response in
+                DDLogWarn("Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
@@ -90,7 +94,9 @@ public class NetApiClient : NSObject {
             let request = Alamofire.request(request)
             api.request = request
             self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
             return request.responseString { response in
+                DDLogWarn("Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:

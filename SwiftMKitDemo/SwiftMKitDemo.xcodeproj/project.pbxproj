@@ -34,24 +34,26 @@
 		273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */; };
 		273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */; };
 		274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274113CC1CCDC95600EECE5A /* JsonMapTests.swift */; };
-		274113EE1CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113E71CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m */; };
-		274113EF1CCE0B6500EECE5A /* TestStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113E91CCE0B6500EECE5A /* TestStudentEntity.m */; };
-		274113F01CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113EB1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m */; };
-		274113F11CCE0B6500EECE5A /* TestTeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 274113ED1CCE0B6500EECE5A /* TestTeacherEntity.m */; };
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
 		2778BA711CCF3B01009B926C /* CachePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778BA701CCF3B01009B926C /* CachePool.swift */; };
 		2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0061CC89E74007247F6 /* NSObject+Extension.swift */; };
+		279193391CD059D7009B08F3 /* TestStudentEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791932F1CD059D7009B08F3 /* TestStudentEntity+CoreDataProperties.swift */; };
+		2791933A1CD059D7009B08F3 /* TestStudentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193301CD059D7009B08F3 /* TestStudentEntity.swift */; };
+		2791933B1CD059D7009B08F3 /* PX500UserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193311CD059D7009B08F3 /* PX500UserEntity+CoreDataProperties.swift */; };
+		2791933C1CD059D7009B08F3 /* PX500UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193321CD059D7009B08F3 /* PX500UserEntity.swift */; };
+		2791933D1CD059D7009B08F3 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193331CD059D7009B08F3 /* PX500PhotosEntity+CoreDataProperties.swift */; };
+		2791933E1CD059D7009B08F3 /* PX500PhotosEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193341CD059D7009B08F3 /* PX500PhotosEntity.swift */; };
+		2791933F1CD059D7009B08F3 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193351CD059D7009B08F3 /* PX500PhotoEntity+CoreDataProperties.swift */; };
+		279193401CD059D7009B08F3 /* PX500PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193361CD059D7009B08F3 /* PX500PhotoEntity.swift */; };
+		279193411CD059D7009B08F3 /* TestTeacherEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193371CD059D7009B08F3 /* TestTeacherEntity+CoreDataProperties.swift */; };
+		279193421CD059D7009B08F3 /* TestTeacherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193381CD059D7009B08F3 /* TestTeacherEntity.swift */; };
+		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
+		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
-		27A5B21C1CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B2111CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.m */; };
-		27A5B21D1CC870F0005A59CA /* PX500PhotoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B2131CC870F0005A59CA /* PX500PhotoEntity.m */; };
-		27A5B21E1CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B2151CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.m */; };
-		27A5B21F1CC870F0005A59CA /* PX500UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B2171CC870F0005A59CA /* PX500UserEntity.m */; };
-		27A5B2201CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B2191CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m */; };
-		27A5B2211CC870F0005A59CA /* PX500PhotosEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B21B1CC870F0005A59CA /* PX500PhotosEntity.m */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
@@ -168,34 +170,26 @@
 		273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicatorList.swift; sourceTree = "<group>"; };
 		273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionTask+Extension.swift"; sourceTree = "<group>"; };
 		274113CC1CCDC95600EECE5A /* JsonMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonMapTests.swift; sourceTree = "<group>"; };
-		274113E61CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestStudentEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
-		274113E71CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TestStudentEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
-		274113E81CCE0B6500EECE5A /* TestStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestStudentEntity.h; sourceTree = "<group>"; };
-		274113E91CCE0B6500EECE5A /* TestStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestStudentEntity.m; sourceTree = "<group>"; };
-		274113EA1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestTeacherEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
-		274113EB1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TestTeacherEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
-		274113EC1CCE0B6500EECE5A /* TestTeacherEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTeacherEntity.h; sourceTree = "<group>"; };
-		274113ED1CCE0B6500EECE5A /* TestTeacherEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTeacherEntity.m; sourceTree = "<group>"; };
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
 		2778BA701CCF3B01009B926C /* CachePool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachePool.swift; sourceTree = "<group>"; };
 		2783E0061CC89E74007247F6 /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		2791932F1CD059D7009B08F3 /* TestStudentEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestStudentEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		279193301CD059D7009B08F3 /* TestStudentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStudentEntity.swift; sourceTree = "<group>"; };
+		279193311CD059D7009B08F3 /* PX500UserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500UserEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		279193321CD059D7009B08F3 /* PX500UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500UserEntity.swift; sourceTree = "<group>"; };
+		279193331CD059D7009B08F3 /* PX500PhotosEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500PhotosEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		279193341CD059D7009B08F3 /* PX500PhotosEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500PhotosEntity.swift; sourceTree = "<group>"; };
+		279193351CD059D7009B08F3 /* PX500PhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500PhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		279193361CD059D7009B08F3 /* PX500PhotoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500PhotoEntity.swift; sourceTree = "<group>"; };
+		279193371CD059D7009B08F3 /* TestTeacherEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestTeacherEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		279193381CD059D7009B08F3 /* TestTeacherEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTeacherEntity.swift; sourceTree = "<group>"; };
+		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
-		27A5B2101CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PX500PhotoEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
-		27A5B2111CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PX500PhotoEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
-		27A5B2121CC870F0005A59CA /* PX500PhotoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PX500PhotoEntity.h; sourceTree = "<group>"; };
-		27A5B2131CC870F0005A59CA /* PX500PhotoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PX500PhotoEntity.m; sourceTree = "<group>"; };
-		27A5B2141CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PX500UserEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
-		27A5B2151CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PX500UserEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
-		27A5B2161CC870F0005A59CA /* PX500UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PX500UserEntity.h; sourceTree = "<group>"; };
-		27A5B2171CC870F0005A59CA /* PX500UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PX500UserEntity.m; sourceTree = "<group>"; };
-		27A5B2181CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PX500PhotosEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
-		27A5B2191CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PX500PhotosEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
-		27A5B21A1CC870F0005A59CA /* PX500PhotosEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PX500PhotosEntity.h; sourceTree = "<group>"; };
-		27A5B21B1CC870F0005A59CA /* PX500PhotosEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PX500PhotosEntity.m; sourceTree = "<group>"; };
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -367,26 +361,16 @@
 			isa = PBXGroup;
 			children = (
 				27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */,
-				27A5B2101CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.h */,
-				27A5B2111CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.m */,
-				27A5B2121CC870F0005A59CA /* PX500PhotoEntity.h */,
-				27A5B2131CC870F0005A59CA /* PX500PhotoEntity.m */,
-				27A5B2141CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.h */,
-				27A5B2151CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.m */,
-				27A5B2161CC870F0005A59CA /* PX500UserEntity.h */,
-				27A5B2171CC870F0005A59CA /* PX500UserEntity.m */,
-				27A5B2181CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.h */,
-				27A5B2191CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m */,
-				27A5B21A1CC870F0005A59CA /* PX500PhotosEntity.h */,
-				27A5B21B1CC870F0005A59CA /* PX500PhotosEntity.m */,
-				274113E61CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.h */,
-				274113E71CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m */,
-				274113E81CCE0B6500EECE5A /* TestStudentEntity.h */,
-				274113E91CCE0B6500EECE5A /* TestStudentEntity.m */,
-				274113EA1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.h */,
-				274113EB1CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m */,
-				274113EC1CCE0B6500EECE5A /* TestTeacherEntity.h */,
-				274113ED1CCE0B6500EECE5A /* TestTeacherEntity.m */,
+				2791932F1CD059D7009B08F3 /* TestStudentEntity+CoreDataProperties.swift */,
+				279193301CD059D7009B08F3 /* TestStudentEntity.swift */,
+				279193311CD059D7009B08F3 /* PX500UserEntity+CoreDataProperties.swift */,
+				279193321CD059D7009B08F3 /* PX500UserEntity.swift */,
+				279193331CD059D7009B08F3 /* PX500PhotosEntity+CoreDataProperties.swift */,
+				279193341CD059D7009B08F3 /* PX500PhotosEntity.swift */,
+				279193351CD059D7009B08F3 /* PX500PhotoEntity+CoreDataProperties.swift */,
+				279193361CD059D7009B08F3 /* PX500PhotoEntity.swift */,
+				279193371CD059D7009B08F3 /* TestTeacherEntity+CoreDataProperties.swift */,
+				279193381CD059D7009B08F3 /* TestTeacherEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -403,6 +387,8 @@
 			isa = PBXGroup;
 			children = (
 				2783E0061CC89E74007247F6 /* NSObject+Extension.swift */,
+				279193431CD05C17009B08F3 /* Int+Extension.swift */,
+				279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */,
 				3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */,
 				273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */,
 				3FC77C441CC36A6D002F964B /* Dictionary+Extension.swift */,
@@ -861,8 +847,11 @@
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				18C2085B1CC862FC00569F42 /* MergeReqViewController.swift in Sources */,
+				2791933E1CD059D7009B08F3 /* PX500PhotosEntity.swift in Sources */,
+				279193401CD059D7009B08F3 /* PX500PhotoEntity.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
+				2791933D1CD059D7009B08F3 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
 				3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */,
 				273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */,
@@ -870,7 +859,9 @@
 				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
 				273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
+				279193421CD059D7009B08F3 /* TestTeacherEntity.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
+				2791933B1CD059D7009B08F3 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				2778BA711CCF3B01009B926C /* CachePool.swift in Sources */,
@@ -880,29 +871,27 @@
 				3FC77C471CC36AAE002F964B /* String+Extension.swift in Sources */,
 				3FC9DF311CBFD53A00C2D938 /* NetApiClient.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
+				2791933A1CD059D7009B08F3 /* TestStudentEntity.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				18C208611CC8635400569F42 /* MergeReqViewModel.swift in Sources */,
 				18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
+				2791933C1CD059D7009B08F3 /* PX500UserEntity.swift in Sources */,
 				18C2085F1CC8634000569F42 /* ComLatestReqViewModel.swift in Sources */,
+				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
+				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
-				274113EE1CCE0B6500EECE5A /* TestStudentEntity+CoreDataProperties.m in Sources */,
+				2791933F1CD059D7009B08F3 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
-				274113EF1CCE0B6500EECE5A /* TestStudentEntity.m in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
-				274113F01CCE0B6500EECE5A /* TestTeacherEntity+CoreDataProperties.m in Sources */,
-				27A5B21D1CC870F0005A59CA /* PX500PhotoEntity.m in Sources */,
-				27A5B21E1CC870F0005A59CA /* PX500UserEntity+CoreDataProperties.m in Sources */,
-				27A5B21F1CC870F0005A59CA /* PX500UserEntity.m in Sources */,
+				279193411CD059D7009B08F3 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
-				27A5B2211CC870F0005A59CA /* PX500PhotosEntity.m in Sources */,
-				27A5B21C1CC870F0005A59CA /* PX500PhotoEntity+CoreDataProperties.m in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
 				27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */,
@@ -912,15 +901,14 @@
 				3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */,
 				27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */,
 				274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */,
+				279193391CD059D7009B08F3 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
 				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
-				274113F11CCE0B6500EECE5A /* TestTeacherEntity.m in Sources */,
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
-				27A5B2201CC870F0005A59CA /* PX500PhotosEntity+CoreDataProperties.m in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
 			);

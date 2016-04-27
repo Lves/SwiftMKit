@@ -42,7 +42,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
     }
     
     @objc func task_resume(notify:NSNotification) {
-        DDLogInfo("Task resume")
+        DDLogVerbose("Task resume")
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             self.runningTasks.append(task)
@@ -52,7 +52,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         }
     }
     @objc func task_suspend(notify:NSNotification) {
-        DDLogInfo("Task suspend")
+        DDLogVerbose("Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             Async.main {
@@ -61,7 +61,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         }
     }
     @objc func task_cancel(notify:NSNotification) {
-        DDLogInfo("Task cancel")
+        DDLogVerbose("Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             Async.main {
@@ -70,7 +70,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         }
     }
     @objc func task_end(notify:NSNotification) {
-        DDLogInfo("Task complete")
+        DDLogVerbose("Task complete")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             if let index = self.runningTasks.indexOf(task) {
@@ -84,9 +84,9 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
 
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        DDLogInfo("Running tasks: \(runningTasks.count)")
+        DDLogVerbose("Running tasks: \(runningTasks.count)")
         for task in runningTasks {
-            DDLogInfo("Cancel task: \(task)")
+            DDLogVerbose("Cancel task: \(task)")
             task.cancel()
             let notify = NSNotification(name: "", object: task)
             self.task_cancel(notify)

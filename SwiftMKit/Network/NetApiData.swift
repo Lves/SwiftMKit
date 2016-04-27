@@ -40,13 +40,13 @@ public class NetApiData: NSObject {
     }
     class public func addApi(api: NetApiData) {
         sharedInstance.runningApis.append(api)
-        DDLogInfo("[Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
+        DDLogDebug("[Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     class public func removeApi(api: NetApiData) {
         if let index = sharedInstance.runningApis.indexOf(api) {
             sharedInstance.runningApis.removeAtIndex(index)
         }
-        DDLogInfo("[Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
+        DDLogDebug("[Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     
     // MARK: Request

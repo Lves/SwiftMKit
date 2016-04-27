@@ -9,6 +9,7 @@
 import XCTest
 import MJExtension
 import MagicalRecord
+@testable import SwiftMKitDemo
 
 class JsonMapTests: XCTestCase {
     
@@ -63,9 +64,9 @@ class JsonMapTests: XCTestCase {
         XCTAssertNotNil(student)
         XCTAssertEqual("张三", student!.name)
         XCTAssertEqual(student!.name, student!.aliasName)
-        XCTAssertEqual(20, student!.age?.integerValue)
-        XCTAssertEqual("100.21", student!.money?.stringValue)
-        XCTAssertEqual(183.1, student!.height?.doubleValue)
+        XCTAssertEqual(20, student!.age)
+        XCTAssertEqual(100.21, student!.money)
+        XCTAssertEqual(183.1, student!.height)
         XCTAssertNotNil(student?.teacher)
         XCTAssertEqual("李老师", student!.teacher?.name)
     }
@@ -75,9 +76,9 @@ class JsonMapTests: XCTestCase {
         XCTAssertNotNil(student)
         XCTAssertEqual("张三", student!.name)
         XCTAssertEqual(student!.name, student!.aliasName)
-        XCTAssertEqual(20, student!.age?.integerValue)
-        XCTAssertEqual("100.21", student!.money?.stringValue)
-        XCTAssertEqual(183.1, student!.height?.doubleValue)
+        XCTAssertEqual(20, student!.age)
+        XCTAssertEqual(100.21, student!.money)
+        XCTAssertEqual(183.1, student!.height)
     }
     func validateTeacherEntity(teacher: TestTeacherEntity?) {
         XCTAssertNotNil(teacher)
@@ -87,9 +88,9 @@ class JsonMapTests: XCTestCase {
         let set:NSOrderedSet = (teacher?.students)!
         let studentInTeacher:TestStudentEntity? = set.objectAtIndex(0) as? TestStudentEntity
         XCTAssertEqual("张三", studentInTeacher!.name)
-        XCTAssertEqual(20, studentInTeacher!.age?.integerValue)
-        XCTAssertEqual("100.21", studentInTeacher!.money?.stringValue)
-        XCTAssertEqual(183.1, studentInTeacher!.height?.doubleValue)
+        XCTAssertEqual(20, studentInTeacher!.age)
+        XCTAssertEqual(100.21, studentInTeacher!.money)
+        XCTAssertEqual(183.1, studentInTeacher!.height)
     }
     
     

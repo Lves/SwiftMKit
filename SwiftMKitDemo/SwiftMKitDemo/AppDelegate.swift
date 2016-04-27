@@ -10,17 +10,6 @@ import UIKit
 import CocoaLumberjack
 import MagicalRecord
 
-extension TestStudentEntity {
-    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-        return ["aliasName": "name"]
-    }
-}
-extension TestTeacherEntity {
-    override public static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
-        return ["students": "TestStudentEntity"]
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -31,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         setenv("XcodeColors", "YES", 0);
-        defaultDebugLevel = DDLogLevel.Info
+        defaultDebugLevel = DDLogLevel.Debug
         DDLog.addLogger(DDTTYLogger.sharedInstance())
         DDLog.addLogger(DDASLLogger.sharedInstance())
         DDTTYLogger.sharedInstance().colorsEnabled = true

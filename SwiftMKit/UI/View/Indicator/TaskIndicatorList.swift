@@ -44,14 +44,14 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
     
     
     @objc func task_list_resume(notify:NSNotification) {
-        DDLogInfo("List Task resume")
+        DDLogVerbose("List Task resume")
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             self.runningTasks.append(task)
         }
     }
     @objc func task_list_suspend(notify:NSNotification) {
-        DDLogInfo("List Task suspend")
+        DDLogVerbose("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
             if self.viewModel?.dataIndex == 0 {
@@ -62,7 +62,7 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         }
     }
     @objc func task_list_cancel(notify:NSNotification) {
-        DDLogInfo("List Task cancel")
+        DDLogVerbose("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
             if self.viewModel?.dataIndex == 0 {
@@ -73,7 +73,7 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         }
     }
     @objc func task_list_end(notify:NSNotification) {
-        DDLogInfo("List Task complete")
+        DDLogVerbose("List Task complete")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             if let index = self.runningTasks.indexOf(task) {
@@ -91,9 +91,9 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
     
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        DDLogInfo("Running list tasks: \(runningTasks.count)")
+        DDLogVerbose("Running list tasks: \(runningTasks.count)")
         for task in runningTasks {
-            DDLogInfo("Cancel list task: \(task)")
+            DDLogVerbose("Cancel list task: \(task)")
             task.cancel()
             let info = ["task": task] as NSDictionary
             let notify = NSNotification(name: "", object: info)
