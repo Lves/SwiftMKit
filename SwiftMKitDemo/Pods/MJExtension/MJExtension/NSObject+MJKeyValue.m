@@ -127,7 +127,12 @@ static NSNumberFormatter *numberFormatter_;
                 value = [NSMutableData dataWithData:value];
             }
             
+            /* remove by Cdts
             if (!type.isFromFoundation && propertyClass) { // 模型属性
+             */
+            //Add by Cdts
+            if (!type.isFromFoundation && propertyClass && propertyClass != [NSOrderedSet class]) {
+                //Finish add
                 value = [propertyClass mj_objectWithKeyValues:value context:context];
             } else if (objectClass) {
                 if (objectClass == [NSURL class] && [value isKindOfClass:[NSArray class]]) {
@@ -140,6 +145,39 @@ static NSNumberFormatter *numberFormatter_;
                     value = urlArray;
                 } else { // 字典数组-->模型数组
                     value = [objectClass mj_objectArrayWithKeyValuesArray:value context:context];
+                    
+                    //Add by Cdts
+                    if ((propertyClass == [NSOrderedSet class] || propertyClass == [NSSet class]) && [self isKindOfClass:[NSManagedObject class]]) {
+                        if (propertyClass == [NSOrderedSet class]) {
+                            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                            NSMutableOrderedSet *set = [self performSelector:NSSelectorFromString(property.name) withObject:nil];
+                            [set removeAllObjects];
+                            for (id x in value) {
+                                [set addObject:x];
+                            }
+                            NSString *selector = [NSString stringWithFormat:@"set%@:", [property.name firstCharUpper]];
+                            [self performSelector:NSSelectorFromString(selector) withObject:set];
+                            
+#pragma clang diagnostic pop
+                            return;
+                        }else if (propertyClass == [NSSet class]) {
+                            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                            NSMutableSet *set = [self performSelector:NSSelectorFromString(property.name) withObject:nil];
+                            for (id x in value) {
+                                [set addObject:x];
+                            }
+                            NSString *selector = [NSString stringWithFormat:@"set%@:", [property.name firstCharUpper]];
+                            [self performSelector:NSSelectorFromString(selector) withObject:nil];
+                            
+#pragma clang diagnostic pop
+                            return;
+                        }
+                    }
+                    //Finish add
                 }
             } else {
                 if (propertyClass == [NSString class]) {

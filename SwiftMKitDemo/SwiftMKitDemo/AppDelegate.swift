@@ -1,4 +1,4 @@
-//
+
 //  AppDelegate.swift
 //  SwiftMKitDemo
 //
@@ -9,6 +9,17 @@
 import UIKit
 import CocoaLumberjack
 import MagicalRecord
+
+extension TestStudentEntity {
+    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["aliasName": "name"]
+    }
+}
+extension TestTeacherEntity {
+    override public static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+        return ["students": "TestStudentEntity"]
+    }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogError("Error")
         MagicalRecord.setupCoreDataStack()
         return true
-    }
+    }    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

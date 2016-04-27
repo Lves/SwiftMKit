@@ -24,7 +24,7 @@ class JsonMapTests: XCTestCase {
         MagicalRecord.cleanUp()
     }
     
-    var studentJSON = ["name":"张三","age":20,"money":100.21,"height":183.10,"teacher":["name":"李老师","students":[["name":"张三","age":20,"money":100.21,"height":183.10],["name":"李四","age":21,"money":101.21,"height":182.10]]]]
+    var studentJSON = ["name":"张三","age":20,"money":100.21,"height":183.10,"teacher":["name":"李老师"]]
     var teacherJSON = ["name":"李老师","students":[["name":"张三","age":20,"money":100.21,"height":183.10],["name":"李四","age":21,"money":101.21,"height":182.10]]]
 
     func validateStudent(student: TestStudent?) {
@@ -36,8 +36,6 @@ class JsonMapTests: XCTestCase {
         XCTAssertEqual(183.1, student!.height)
         XCTAssertNotNil(student?.teacher)
         XCTAssertEqual("李老师", student!.teacher?.name)
-        XCTAssertNotNil(student?.teacher?.students)
-        XCTAssertEqual(2, student?.teacher?.students?.count)
     }
     func validateStudents(students: [TestStudent]?) {
         XCTAssertEqual(2, students?.count)
@@ -70,8 +68,6 @@ class JsonMapTests: XCTestCase {
         XCTAssertEqual(183.1, student!.height?.doubleValue)
         XCTAssertNotNil(student?.teacher)
         XCTAssertEqual("李老师", student!.teacher?.name)
-        XCTAssertNotNil(student?.teacher?.students)
-        XCTAssertEqual(2, student?.teacher?.students?.count)
     }
     func validateStudentsEntity(students: [TestStudentEntity]?) {
         XCTAssertEqual(2, students?.count)
@@ -149,7 +145,7 @@ extension TestStudentEntity {
     }
 }
 extension TestTeacherEntity {
-//    override public static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
-//        return ["students": "SwiftMKitDemoTests.TestStudentEntity"]
-//    }
+    override public static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+        return ["students": "TestStudentEntity"]
+    }
 }
