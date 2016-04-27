@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(PX500PhotoEntity)
-class PX500PhotoEntity: NSManagedObject {
+class PX500PhotoEntity: BaseEntity {
 
 // Insert code here to add functionality to your managed object subclass
 

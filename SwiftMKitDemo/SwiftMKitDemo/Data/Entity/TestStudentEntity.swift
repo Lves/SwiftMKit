@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(TestStudentEntity)
-class TestStudentEntity: NSManagedObject {
+class TestStudentEntity: BaseEntity {
 
 // Insert code here to add functionality to your managed object subclass
 

@@ -25,8 +25,8 @@ class JsonMapTests: XCTestCase {
         MagicalRecord.cleanUp()
     }
     
-    var studentJSON = ["name":"张三","age":20,"money":100.21,"height":183.10,"teacher":["name":"李老师"]]
-    var teacherJSON = ["name":"李老师","students":[["name":"张三","age":20,"money":100.21,"height":183.10],["name":"李四","age":21,"money":101.21,"height":182.10]]]
+    var studentJSON = ["id":1,"name":"张三","age":20,"money":100.21,"height":183.10,"teacher":["id":1,"name":"李老师"]]
+    var teacherJSON = ["id":1,"name":"李老师","students":[["id":1,"name":"张三","age":20,"money":100.21,"height":183.10],["id":2,"name":"李四","age":21,"money":101.21,"height":182.10]]]
 
     func validateStudent(student: TestStudent?) {
         XCTAssertNotNil(student)
@@ -142,10 +142,14 @@ class TestTeacher: NSObject {
 }
 extension TestStudentEntity {
     override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-        return ["aliasName": "name"]
+        return ["entityId":"id",
+                "aliasName": "name"]
     }
 }
 extension TestTeacherEntity {
+    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["entityId":"id"]
+    }
     override public static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
         return ["students": "TestStudentEntity"]
     }

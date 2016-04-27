@@ -1,5 +1,5 @@
 //
-//  TestTeacherEntity.swift
+//  BaseEntity.swift
 //  SwiftMKitDemo
 //
 //  Created by Mao on 4/27/16.
@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(TestTeacherEntity)
-class TestTeacherEntity: BaseEntity {
+@objc(BaseEntity)
+class BaseEntity: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
