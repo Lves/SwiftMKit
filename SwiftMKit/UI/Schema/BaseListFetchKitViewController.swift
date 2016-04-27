@@ -37,8 +37,14 @@ public class BaseListFetchKitViewController: BaseListKitViewController {
         DDLogError("Need to implement the function of 'getCellWithTableView'")
         return nil
     }
-    public func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+    public func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
         DDLogError("Need to implement the function of 'configureCell'")
+    }
+    public func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    }
+    public func objectByIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+        let object = fetchedResultsController?.sections?[indexPath.section].objects?[safe: indexPath.row]
+        return object
     }
     
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -54,7 +60,16 @@ public class BaseListFetchKitViewController: BaseListKitViewController {
     }
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = getCellWithTableView(tableView, indexPath: indexPath)!
-        configureCell(cell, indexPath: indexPath)
+        if let object = objectByIndexPath(indexPath) {
+            configureCell(cell, object: object, indexPath: indexPath)
+        }
         return cell
+    }
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        if let object = objectByIndexPath(indexPath) {
+            didSelectCell(cell, object: object, indexPath: indexPath)
+        }
     }
 }

@@ -47,29 +47,19 @@ class MKDataStoreViewController: BaseListFetchViewController, UITableViewDataSou
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _viewModel.dataSource.count
+    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
+        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKDataNetworkRequestTableViewCell
-        let model = _viewModel.dataSource[indexPath.row] as? PX500PhotoEntity
-        cell?.lblTitle?.text = model?.name
-        cell?.lblContent?.text = model?.descriptionString
-        cell?.imgHead.hnk_setImageFromURL(NSURL(string: (model?.user?.userPicUrl)!)!, placeholder: UIImage(named:"icon_user_head"))
-        if let imageUrl = model?.imageUrl {
-            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
-                image in
-                cell?.setPostImage(image)
-                cell?.layoutIfNeeded()
+    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        if let cell = tableViewCell as? MKDataNetworkRequestTableViewCell {
+            if let model = object as? PX500PhotoEntity {
+                cell.photoEntity = model
             }
-        }else {
-            cell?.imgPic.image = nil
         }
-        return cell!
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model = _viewModel.dataSource[indexPath.row] as? PX500PhotoEntity
-        self.routeToName(InnerConst.SegueToNext, params: ["photoId":model!.photoId!])
+    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        if let model = object as? PX500PhotoEntity {
+            self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId!])
+        }
     }
 }
