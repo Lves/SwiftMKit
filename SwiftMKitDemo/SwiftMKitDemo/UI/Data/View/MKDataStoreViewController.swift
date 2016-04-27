@@ -16,7 +16,7 @@ enum DataStoreType: Int {
     case Memory, CoreData
 }
 
-class MKDataStoreViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
+class MKDataStoreViewController: BaseListFetchViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
@@ -47,10 +47,10 @@ class MKDataStoreViewController: BaseListViewController, UITableViewDataSource, 
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _viewModel.dataSource.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKDataNetworkRequestTableViewCell
         let model = _viewModel.dataSource[indexPath.row] as? PX500PhotoEntity
         cell?.lblTitle?.text = model?.name

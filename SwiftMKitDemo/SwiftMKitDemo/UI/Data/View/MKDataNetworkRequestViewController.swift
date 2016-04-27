@@ -41,7 +41,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func loadData() {
         super.loadData()
-        self.tableView.mj_header.beginRefreshing()
+        self.listView.mj_header.beginRefreshing()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _viewModel.dataSource.count
