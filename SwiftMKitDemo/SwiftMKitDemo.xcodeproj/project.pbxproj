@@ -41,6 +41,7 @@
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
+		2778BA711CCF3B01009B926C /* CachePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778BA701CCF3B01009B926C /* CachePool.swift */; };
 		2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0061CC89E74007247F6 /* NSObject+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
@@ -178,6 +179,7 @@
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
+		2778BA701CCF3B01009B926C /* CachePool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachePool.swift; sourceTree = "<group>"; };
 		2783E0061CC89E74007247F6 /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2778BA6F1CCF3AD3009B926C /* Cache */,
 				27276C051CC748D60028E938 /* Image */,
 				18E184E21CC48B1600F14923 /* Model */,
 			);
@@ -350,6 +353,14 @@
 				273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */,
 			);
 			path = Indicator;
+			sourceTree = "<group>";
+		};
+		2778BA6F1CCF3AD3009B926C /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				2778BA701CCF3B01009B926C /* CachePool.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		27A5B20B1CC86E6F005A59CA /* Entity */ = {
@@ -468,8 +479,8 @@
 				3F8FEAA21CC2749800F7EAF3 /* Extension */,
 				3FC9DF271CBFD53A00C2D938 /* Network */,
 				3FC9DF2A1CBFD53A00C2D938 /* SwiftMKit.swift */,
-				3FC9DF2B1CBFD53A00C2D938 /* UI */,
 				18E184E11CC48B1600F14923 /* Data */,
+				3FC9DF2B1CBFD53A00C2D938 /* UI */,
 			);
 			name = SwiftMKit;
 			path = ../SwiftMKit;
@@ -862,6 +873,7 @@
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
+				2778BA711CCF3B01009B926C /* CachePool.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				18C2085D1CC8631300569F42 /* ComLatestReqViewController.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
