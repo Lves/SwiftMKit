@@ -3,9 +3,9 @@ Swift MKit
 
 ####一些类的使用方法
 + 避免数组越界
-```swift
-array[safe: index]
-```
+    ```swift
+    array[safe: index]
+    ```
 
 ---
 
