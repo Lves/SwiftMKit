@@ -41,7 +41,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     }
     override func loadData() {
         super.loadData()
-        self.tableView.mj_header.beginRefreshing()
+        self.listView.mj_header.beginRefreshing()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _viewModel.dataSource.count
@@ -49,18 +49,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKDataNetworkRequestTableViewCell
         let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
-        cell?.lblTitle?.text = model?.name
-        cell?.lblContent?.text = model?.descriptionString
-        cell?.imgHead.hnk_setImageFromURL(NSURL(string: (model?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
-        if let imageUrl = model?.imageurl {
-            cell?.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
-                image in
-                cell?.setPostImage(image)
-                cell?.layoutIfNeeded()
-            }
-        }else {
-            cell?.imgPic.image = nil
-        }
+        cell?.photoModel = model
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

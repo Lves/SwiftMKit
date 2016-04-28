@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haneke
 
 class MKDataNetworkRequestTableViewCell: UITableViewCell {
 
@@ -43,11 +44,42 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
         }
     }
     func setPostImage(image : UIImage) {
-        
         let aspect = image.size.width / image.size.height
         constraintImagePicAspect.setMultiplier(aspect)
         imgPic.image = image
     }
 
-
+    var photoModel: MKDataNetworkRequestPhotoModel? {
+        didSet {
+            self.lblTitle?.text = photoModel?.name
+            self.lblContent?.text = photoModel?.descriptionString
+            self.imgHead.hnk_setImageFromURL(NSURL(string: (photoModel?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
+            if let imageUrl = photoModel?.imageurl {
+                self.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
+                    [weak self] image in
+                    self?.setPostImage(image)
+                    self?.layoutIfNeeded()
+                }
+            }else {
+                self.imgPic.image = nil
+            }
+        }
+    }
+    
+    var photoEntity: PX500PhotoEntity? {
+        didSet {
+            self.lblTitle?.text = photoEntity?.name
+            self.lblContent?.text = photoEntity?.descriptionString
+            self.imgHead.hnk_setImageFromURL(NSURL(string: (photoEntity?.user?.userPicUrl)!)!, placeholder: UIImage(named:"icon_user_head"))
+            if let imageUrl = photoEntity?.imageUrl {
+                self.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
+                    [weak self] image in
+                    self?.setPostImage(image)
+                    self?.layoutIfNeeded()
+                }
+            }else {
+                self.imgPic.image = nil
+            }
+        }
+    }
 }

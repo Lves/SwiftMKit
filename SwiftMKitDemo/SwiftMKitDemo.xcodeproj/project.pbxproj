@@ -51,13 +51,17 @@
 		278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937F31CD0A5CC00F43699 /* TestTeacherEntity.swift */; };
 		278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937F41CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift */; };
 		278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937F51CD0A5CC00F43699 /* PX500UserEntity.swift */; };
-		278938031CD0A82500F43699 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 278938021CD0A82500F43699 /* README.md */; };
+		278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938041CD0BC3800F43699 /* BaseListFetchKitViewController.swift */; };
+		278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */; };
+		278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */; };
+		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
 		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
 		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
+		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
 		3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */; };
@@ -191,6 +195,10 @@
 		278937F41CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500UserEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		278937F51CD0A5CC00F43699 /* PX500UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500UserEntity.swift; sourceTree = "<group>"; };
 		278938021CD0A82500F43699 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		278938041CD0BC3800F43699 /* BaseListFetchKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchKitViewController.swift; sourceTree = "<group>"; };
+		278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchKitViewModel.swift; sourceTree = "<group>"; };
+		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
+		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
 		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -199,6 +207,7 @@
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
 		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
 		3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitDemoNetApi.swift; sourceTree = "<group>"; };
 		3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -400,6 +409,7 @@
 				3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */,
 				273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */,
 				3FC77C441CC36A6D002F964B /* Dictionary+Extension.swift */,
+				3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */,
 				3FC77C461CC36AAE002F964B /* String+Extension.swift */,
 				27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */,
 				27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */,
@@ -509,6 +519,8 @@
 				3FC9DF2E1CBFD53A00C2D938 /* BaseKitViewModel.swift */,
 				3FC9DF2F1CBFD53A00C2D938 /* BaseListKitViewController.swift */,
 				3FC9DF301CBFD53A00C2D938 /* BaseListKitViewModel.swift */,
+				278938041CD0BC3800F43699 /* BaseListFetchKitViewController.swift */,
+				278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -614,6 +626,8 @@
 				3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */,
 				3FC9DF501CBFD6D400C2D938 /* BaseListViewController.swift */,
 				3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */,
+				278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */,
+				2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -857,7 +871,7 @@
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				18C2085B1CC862FC00569F42 /* MergeReqViewController.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
-				278938031CD0A82500F43699 /* README.md in Sources */,
+				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
@@ -874,6 +888,7 @@
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				2778BA711CCF3B01009B926C /* CachePool.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
+				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				18C2085D1CC8631300569F42 /* ComLatestReqViewController.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
@@ -901,6 +916,7 @@
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
+				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
@@ -917,12 +933,14 @@
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
+				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
 				278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
+				3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

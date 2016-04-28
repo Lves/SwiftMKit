@@ -8,8 +8,9 @@
 
 import UIKit
 import ReactiveCocoa
+import CoreData
 
-class MKDataStoreViewModel: BaseListViewModel {
+class MKDataStoreViewModel: BaseListFetchViewModel {
     
     private var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NetError> {
         get {
@@ -23,6 +24,16 @@ class MKDataStoreViewModel: BaseListViewModel {
                     self?.showTip(error.message)
                 })
         }
+    }
+    private var _fetchRequest: NSFetchRequest?
+    override var fetchRequest: NSFetchRequest? {
+        if _fetchRequest == nil {
+            _fetchRequest = NSFetchRequest(entityName: "PX500PhotosEntity")
+            let sort1 = NSSortDescriptor(key: "entityUpdateTime", ascending: false)
+            let sort2 = NSSortDescriptor(key: "entityOrder", ascending: true)
+            _fetchRequest?.sortDescriptors = [sort1, sort2]
+        }
+        return _fetchRequest
     }
     
     override func fetchData() {
