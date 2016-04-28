@@ -7,6 +7,8 @@
 //
 
 import XCTest
+@testable import SwiftMKitDemo
+public extension NSTimeInterval
 
 class NSTimeIntervalTests: XCTestCase {
     
@@ -21,9 +23,43 @@ class NSTimeIntervalTests: XCTestCase {
     }
     
     func testNSTimeInterval() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        validateTime()
     }
+    
+    
+    func validateTime() {
+        var test: NSTimeInterval = 0
+        XCTAssertEqual(true, (0, 0, 0) == test.secondsToHHmmss())
+        XCTAssertEqual("00:00:00", test.secondsToHHmmssString())
+        test = 3600
+        XCTAssertEqual((1, 0, 0), test.secondsToHHmmss())
+        XCTAssertEqual("01:00:00", test.secondsToHHmmssString())
+        test = 60
+        XCTAssertEqual((0, 1, 0), test.secondsToHHmmss())
+        XCTAssertEqual("00:01:00", test.secondsToHHmmssString())
+        test = 1
+        XCTAssertEqual((0, 0, 1), test.secondsToHHmmss())
+        XCTAssertEqual("00:00:01", test.secondsToHHmmssString())
+        test = 3661
+        XCTAssertEqual((1, 1, 1), test.secondsToHHmmss())
+        XCTAssertEqual("01:01:01", test.secondsToHHmmssString())
+        test = 3601
+        XCTAssertEqual((1, 0, 1), test.secondsToHHmmss())
+        XCTAssertEqual("01:00:01", test.secondsToHHmmssString())
+        test = 61
+        XCTAssertEqual((0, 1, 1), test.secondsToHHmmss())
+        XCTAssertEqual("00:01:01", test.secondsToHHmmssString())
+        test = 360000
+        XCTAssertEqual((0, 0, 0), test.secondsToHHmmss())
+        XCTAssertEqual("100:00:00", test.secondsToHHmmssString())
+        test = -3600
+        XCTAssertEqual((0, 0, 0), test.secondsToHHmmss())
+        XCTAssertEqual("00:00:00", test.secondsToHHmmssString())
+        test = 20000000000000000000
+        XCTAssertEqual((0, 0, 0), test.secondsToHHmmss())
+        XCTAssertEqual("00:00:00", test.secondsToHHmmssString())
+    }
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
