@@ -11,6 +11,9 @@ PODS:
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
   - HanekeSwift (0.10.1)
+  - JSPatch (1.0):
+    - JSPatch/Core (= 1.0)
+  - JSPatch/Core (1.0)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/CocoaLumberjack (2.3.2):
@@ -32,27 +35,32 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 2.0)
   - Result (2.0.0)
+  - WebViewJavascriptBridge (5.0.5)
 
 DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack/Swift
   - HanekeSwift
+  - JSPatch
   - MagicalRecord
   - MagicalRecord/CocoaLumberjack
   - MBProgressHUD
   - MJExtension
   - MJRefresh
   - ReactiveCocoa
+  - WebViewJavascriptBridge
 
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  JSPatch: c689ea4dde17441f2f4a95d40dfedb8900c20099
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
 COCOAPODS: 0.39.0

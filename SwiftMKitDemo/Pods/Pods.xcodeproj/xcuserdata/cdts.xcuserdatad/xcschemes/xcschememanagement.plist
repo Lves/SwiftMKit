@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JSPatch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -54,25 +59,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>WebViewJavascriptBridge.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2734B80F69D94EC1F19FB76E4FFDFCAE</key>
+		<key>078754BF4ECAEE3B5CB4A25119575594</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44E2D85872A0E53EAE84337C364B7D1C</key>
+		<key>3D718DD130316F2CEE4A4D56F60680E5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6847254D016329D4A531D34ED2B6DF81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6EDD051B8CB4720995CA8D2EEB97C15A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7EA7440EBF7E2B323E3148FE4A88D1A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A3ACA592F80A2FDA6AC534DB63CE6718</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>ABA6C4F9D62C9B2347DD91BB48834866</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B13574E17EED8AAA9A85CE67AD5B4570</key>
 		<dict>
 			<key>primary</key>
 			<true/>

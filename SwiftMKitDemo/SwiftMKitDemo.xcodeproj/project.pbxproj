@@ -57,6 +57,10 @@
 		278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */; };
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
 		278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA411CD19849008AC629 /* BaseKitEntity.swift */; };
+		278CAA461CD1DCBC008AC629 /* JSPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA451CD1DCBC008AC629 /* JSPatch.framework */; };
+		278CAA471CD1DCBC008AC629 /* JSPatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA451CD1DCBC008AC629 /* JSPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		278CAA491CD1DCBC008AC629 /* WebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */; };
+		278CAA4A1CD1DCBC008AC629 /* WebViewJavascriptBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
 		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
@@ -111,6 +115,8 @@
 		3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */; };
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
+		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
+		E87D7BB47929B60BD485DBE4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,10 +143,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				278CAA471CD1DCBC008AC629 /* JSPatch.framework in Embed Frameworks */,
 				273ACFA61CC9AD5A00EB341D /* MagicalRecord.framework in Embed Frameworks */,
 				3F9707FC1CC67063002BBC83 /* MJRefresh.framework in Embed Frameworks */,
 				3F9707F91CC67063002BBC83 /* MBProgressHUD.framework in Embed Frameworks */,
 				273ACFA91CC9AD5A00EB341D /* MJExtension.framework in Embed Frameworks */,
+				278CAA4A1CD1DCBC008AC629 /* WebViewJavascriptBridge.framework in Embed Frameworks */,
 				3F9708051CC67063002BBC83 /* Result.framework in Embed Frameworks */,
 				3F9707F31CC67063002BBC83 /* CocoaLumberjack.framework in Embed Frameworks */,
 				3F9708021CC67063002BBC83 /* ReactiveCocoa.framework in Embed Frameworks */,
@@ -154,6 +162,7 @@
 
 /* Begin PBXFileReference section */
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
+		1054F8DADC2350EB4A7A137D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C208581CC862D800569F42 /* SingleReqViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleReqViewController.swift; sourceTree = "<group>"; };
 		18C2085A1CC862FC00569F42 /* MergeReqViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeReqViewController.swift; sourceTree = "<group>"; };
 		18C2085C1CC8631300569F42 /* ComLatestReqViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComLatestReqViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +212,8 @@
 		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
 		278CAA411CD19849008AC629 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
+		278CAA451CD1DCBC008AC629 /* JSPatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSPatch.framework; path = "../Debug-iphonesimulator/JSPatch.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = WebViewJavascriptBridge.framework; path = "../Debug-iphonesimulator/WebViewJavascriptBridge.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -265,10 +276,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278CAA461CD1DCBC008AC629 /* JSPatch.framework in Frameworks */,
 				273ACFA51CC9AD5A00EB341D /* MagicalRecord.framework in Frameworks */,
 				3F9707FB1CC67063002BBC83 /* MJRefresh.framework in Frameworks */,
 				3F9707F81CC67063002BBC83 /* MBProgressHUD.framework in Frameworks */,
 				273ACFA81CC9AD5A00EB341D /* MJExtension.framework in Frameworks */,
+				278CAA491CD1DCBC008AC629 /* WebViewJavascriptBridge.framework in Frameworks */,
 				3F9708041CC67063002BBC83 /* Result.framework in Frameworks */,
 				3F9707F21CC67063002BBC83 /* CocoaLumberjack.framework in Frameworks */,
 				3F9708011CC67063002BBC83 /* ReactiveCocoa.framework in Frameworks */,
@@ -281,6 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E87D7BB47929B60BD485DBE4 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +656,8 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */,
+				278CAA451CD1DCBC008AC629 /* JSPatch.framework */,
 				273ACFA71CC9AD5A00EB341D /* MJExtension.framework */,
 				273ACFA41CC9AD5A00EB341D /* MagicalRecord.framework */,
 				3F9708031CC67063002BBC83 /* Result.framework */,
@@ -650,6 +667,7 @@
 				3F9707F41CC67063002BBC83 /* Haneke.framework */,
 				3F9707F11CC67063002BBC83 /* CocoaLumberjack.framework */,
 				3F9707EE1CC67063002BBC83 /* Alamofire.framework */,
+				1054F8DADC2350EB4A7A137D /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
