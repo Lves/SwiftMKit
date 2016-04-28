@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct BaseEntityProperty {
     static let entityId = "entityId"
@@ -20,4 +21,11 @@ struct BaseEntityProperty {
     }
 }
 
-
+public class BaseKitEntity: NSManagedObject {
+    
+    @NSManaged var entityId: String?
+    @NSManaged var entityOrder: Int64
+    @NSManaged var entityType: String?
+    @NSManaged var entityUpdateTime: NSTimeInterval
+    
+}

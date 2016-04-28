@@ -16,7 +16,7 @@ public extension NSObject {
             let arr = T.mj_objectArrayWithKeyValuesArray(jsonString, context:context).copy() as? Array<T>
             //如果是第一页，删除旧数据
             if page == 0 {
-                if let entityType = T.self as? BaseEntity.Type {
+                if let entityType = T.self as? BaseKitEntity.Type {
                     let oldData = entityType.MR_findAllWithPredicate(BaseEntityProperty.predicateUpdateTimeNotNil())?.filter { (object) -> Bool in
                         if arr == nil {
                             return true
@@ -37,7 +37,7 @@ public extension NSObject {
                 var index:Int64 = 1
                 let time = NSDate().timeIntervalSince1970
                 for obj in arr! {
-                    if let entity = obj as? BaseEntity {
+                    if let entity = obj as? BaseKitEntity {
                         entity.entityUpdateTime = time
                         entity.entityOrder = index + Int(page * number)
                         index += 1
@@ -51,7 +51,7 @@ public extension NSObject {
     class public func objectFromJson<T: NSObject>(json: AnyObject?, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> T?{
         if let jsonString = json {
             let obj = T.mj_objectWithKeyValues(jsonString, context:context)
-            if let entity = obj as? BaseEntity {
+            if let entity = obj as? BaseKitEntity {
                 entity.entityUpdateTime = NSDate().timeIntervalSince1970
             }
             return obj
