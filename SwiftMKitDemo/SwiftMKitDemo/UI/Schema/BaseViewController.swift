@@ -21,6 +21,7 @@ class BaseViewController: BaseKitViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     /*
      // MARK: - Navigation
      
@@ -30,4 +31,10 @@ class BaseViewController: BaseKitViewController {
      // Pass the selected object to the new view controller.
      }
      */
+}
+
+extension BaseKitViewController {
+    override public func routeToUrl(url: String, name: String = "BaseWebViewController", params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+        super.routeToUrl(url, name: name, params: nextParams, pop: pop)
+    }
 }

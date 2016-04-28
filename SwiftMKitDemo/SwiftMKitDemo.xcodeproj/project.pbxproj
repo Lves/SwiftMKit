@@ -67,6 +67,8 @@
 		278CAA4F1CD1E6FC008AC629 /* BaseKitWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */; };
 		278CAA511CD1E944008AC629 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA501CD1E944008AC629 /* SnapKit.framework */; };
 		278CAA521CD1E944008AC629 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA501CD1E944008AC629 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */; };
+		278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA551CD20970008AC629 /* BaseWebViewModel.swift */; };
 		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
 		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
@@ -226,6 +228,8 @@
 		278CAA4C1CD1E00A008AC629 /* WebViewBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewBridge.swift; sourceTree = "<group>"; };
 		278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitWebViewController.swift; sourceTree = "<group>"; };
 		278CAA501CD1E944008AC629 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SnapKit.framework; path = "../Debug-iphonesimulator/SnapKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
+		278CAA551CD20970008AC629 /* BaseWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewModel.swift; sourceTree = "<group>"; };
 		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -682,6 +686,8 @@
 				3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */,
 				278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */,
 				2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */,
+				278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */,
+				278CAA551CD20970008AC629 /* BaseWebViewModel.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -927,6 +933,7 @@
 				273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */,
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
+				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
 				18C2085B1CC862FC00569F42 /* MergeReqViewController.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
@@ -960,6 +967,7 @@
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
+				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
 				18C208611CC8635400569F42 /* MergeReqViewModel.swift in Sources */,
 				18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,

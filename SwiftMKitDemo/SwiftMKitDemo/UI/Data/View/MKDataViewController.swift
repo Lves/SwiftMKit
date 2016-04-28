@@ -15,6 +15,7 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
         static let CellIdentifier = "MKDataTableViewCell"
         static let SegueToNextNetwork = "routeToDataNetworkRequest"
         static let SegueToNextStore = "routeToDataStore"
+        static let SegueToNextUrl = "http://www.baidu.com"
     }
     
     private var _viewModel = MKDataViewModel()
@@ -45,6 +46,8 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
             self.routeToName(InnerConst.SegueToNextNetwork)
         case 1:
             self.routeToName(InnerConst.SegueToNextStore)
+        case 2:
+            self.routeToUrl(InnerConst.SegueToNextUrl)
         default:
             break
         }

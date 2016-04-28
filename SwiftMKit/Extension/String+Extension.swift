@@ -10,6 +10,10 @@ import Foundation
 
 extension String {
     
+    var length: Int {
+        return characters.count
+    }
+    
     func stringByAddingPercentEncodingForURLQueryValue() -> String? {
         let allowedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
         

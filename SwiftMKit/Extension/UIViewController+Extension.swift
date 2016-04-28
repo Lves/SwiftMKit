@@ -13,6 +13,7 @@ import CocoaLumberjack
 //Route
 public extension UIViewController {
     public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+        DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
         var vc = instanceViewControllerInXibWithName(name)
         if (vc == nil) {
             vc = instanceViewControllerInStoryboardWithName(name)
@@ -51,5 +52,20 @@ public extension UIViewController {
         let segueTemplates = self.valueForKey("storyboardSegueTemplates")
         let filteredArray = segueTemplates?.filteredArrayUsingPredicate(NSPredicate(format: "identifier = %@", identifier))
         return filteredArray?.count > 0
+    }
+    
+    public func routeToUrl(url: String, name: String = "BaseKitWebViewController", params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+        var params = nextParams
+        params["url"] = url
+        routeToName(name, params: params, pop: pop)
+    }
+    
+    public func routeBack(animation: Bool = true, completeion: (() -> Void)? = nil) {
+        DDLogInfo("Route back")
+        if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
+            self.dismissViewControllerAnimated(animation, completion: completeion)
+        } else {
+            self.navigationController?.popViewControllerAnimated(animation)
+        }
     }
 }
