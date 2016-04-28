@@ -35,6 +35,7 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 2.0)
   - Result (2.0.0)
+  - SnapKit (0.20.0)
   - WebViewJavascriptBridge (5.0.5)
 
 DEPENDENCIES:
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - ReactiveCocoa
+  - SnapKit
   - WebViewJavascriptBridge
 
 SPEC CHECKSUMS:
@@ -61,6 +63,7 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
   WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
 COCOAPODS: 0.39.0
