@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */; };
 		034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */; };
+		03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */; };
 		18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208581CC862D800569F42 /* SingleReqViewController.swift */; };
 		18C2085B1CC862FC00569F42 /* MergeReqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2085A1CC862FC00569F42 /* MergeReqViewController.swift */; };
 		18C2085D1CC8631300569F42 /* ComLatestReqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2085C1CC8631300569F42 /* ComLatestReqViewController.swift */; };
@@ -169,6 +170,7 @@
 /* Begin PBXFileReference section */
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
 		034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableTuples.swift; sourceTree = "<group>"; };
+		03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DDLog+Extension.swift"; sourceTree = "<group>"; };
 		1054F8DADC2350EB4A7A137D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C208581CC862D800569F42 /* SingleReqViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleReqViewController.swift; sourceTree = "<group>"; };
 		18C2085A1CC862FC00569F42 /* MergeReqViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeReqViewController.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */,
 				27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */,
 				273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */,
+				03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				3FC9DF351CBFD53A00C2D938 /* BaseKitViewModel.swift in Sources */,
 				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
 				273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */,
+				03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */,
 				278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,

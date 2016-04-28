@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CocoaLumberjack
 @testable import SwiftMKitDemo
 
 class NSTimeIntervalTests: XCTestCase {
@@ -25,67 +26,43 @@ class NSTimeIntervalTests: XCTestCase {
         validateTime()
     }
     
-//wating for logout...by jenny
     func validateTime() {
+        func validateItem(expectTuple: (Int,Int,Int), tuple: (Int,Int,Int), expectResult: String, result: String, source: NSTimeInterval) {
+            XCTAssertEqual(expectTuple.0, tuple.0, "source: \(source)")
+            XCTAssertEqual(expectTuple.1, tuple.1, "source: \(source)")
+            XCTAssertEqual(expectTuple.2, tuple.2, "source: \(source)")
+            XCTAssertEqual(expectResult, result, "source: \(source)")
+        }
         var test: NSTimeInterval = 0
-        XCTAssertEqual(0, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(0, test.secondsToHHmmss().2)
-        XCTAssertEqual("00:00:00", test.secondsToHHmmssString())
+        validateItem((0,0,0), tuple: test.secondsToHHmmss(), expectResult: "00:00:00", result: test.secondsToHHmmssString(), source: test)
         
         test = 3600
-        XCTAssertEqual(1, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(0, test.secondsToHHmmss().2)
-        XCTAssertEqual("01:00:00", test.secondsToHHmmssString())
+        validateItem((1,0,0), tuple: test.secondsToHHmmss(), expectResult: "01:00:00", result: test.secondsToHHmmssString(), source: test)
         
         test = 60
-        XCTAssertEqual(0, test.secondsToHHmmss().0)
-        XCTAssertEqual(1, test.secondsToHHmmss().1)
-        XCTAssertEqual(0, test.secondsToHHmmss().2)
-        XCTAssertEqual("00:01:00", test.secondsToHHmmssString())
+        validateItem((0,1,0), tuple: test.secondsToHHmmss(), expectResult: "00:01:00", result: test.secondsToHHmmssString(), source: test)
         
         test = 1
-        XCTAssertEqual(0, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(1, test.secondsToHHmmss().2)
-        XCTAssertEqual("00:00:01", test.secondsToHHmmssString())
+        validateItem((0,0,1), tuple: test.secondsToHHmmss(), expectResult: "00:00:01", result: test.secondsToHHmmssString(), source: test)
         
         test = 3661
-        XCTAssertEqual(1, test.secondsToHHmmss().0)
-        XCTAssertEqual(1, test.secondsToHHmmss().1)
-        XCTAssertEqual(1, test.secondsToHHmmss().2)
-        XCTAssertEqual("01:01:01", test.secondsToHHmmssString())
+        validateItem((1,1,1), tuple: test.secondsToHHmmss(), expectResult: "01:01:01", result: test.secondsToHHmmssString(), source: test)
         
         test = 3601
-        XCTAssertEqual(1, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(1, test.secondsToHHmmss().2)
-        XCTAssertEqual("01:00:01", test.secondsToHHmmssString())
+        validateItem((1,0,1), tuple: test.secondsToHHmmss(), expectResult: "01:00:01", result: test.secondsToHHmmssString(), source: test)
         
         test = 61
-        XCTAssertEqual(0, test.secondsToHHmmss().0)
-        XCTAssertEqual(1, test.secondsToHHmmss().1)
-        XCTAssertEqual(1, test.secondsToHHmmss().2)
-        XCTAssertEqual("00:01:01", test.secondsToHHmmssString())
+        validateItem((0,1,1), tuple: test.secondsToHHmmss(), expectResult: "00:01:01", result: test.secondsToHHmmssString(), source: test)
         
         test = 360000
-        XCTAssertEqual(100, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(0, test.secondsToHHmmss().2)
-        XCTAssertEqual("100:00:00", test.secondsToHHmmssString())
+        validateItem((100,0,0), tuple: test.secondsToHHmmss(), expectResult: "100:00:00", result: test.secondsToHHmmssString(), source: test)
+        
+        test = 7272.72
+        validateItem((2,1,12), tuple: test.secondsToHHmmss(), expectResult: "02:01:12", result: test.secondsToHHmmssString(), source: test)
         
         test = -3600
-        XCTAssertEqual(0, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(0, test.secondsToHHmmss().2)
-        XCTAssertEqual("00:00:00", test.secondsToHHmmssString())
+        validateItem((0,0,0), tuple: test.secondsToHHmmss(), expectResult: "00:00:00", result: test.secondsToHHmmssString(), source: test)
         
-        test = 20000000000000000000
-        XCTAssertEqual(0, test.secondsToHHmmss().0)
-        XCTAssertEqual(0, test.secondsToHHmmss().1)
-        XCTAssertEqual(0, test.secondsToHHmmss().2)
-        XCTAssertEqual("00:00:00", test.secondsToHHmmssString())
     }
     
     

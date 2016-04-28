@@ -20,17 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         setenv("XcodeColors", "YES", 0);
-        defaultDebugLevel = DDLogLevel.Debug
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
-        DDLog.addLogger(DDASLLogger.sharedInstance())
-        DDTTYLogger.sharedInstance().colorsEnabled = true
-        DDTTYLogger.sharedInstance().setForegroundColor(UIColor.blueColor(), backgroundColor: nil, forFlag: .Info)
-        DDTTYLogger.sharedInstance().setForegroundColor(UIColor(rgba: "#008040"), backgroundColor: nil, forFlag: .Verbose)
-        DDLogVerbose("Verbose")
-        DDLogDebug("Debug")
-        DDLogInfo("Info")
-        DDLogWarn("Warn")
-        DDLogError("Error")
+        DDLog.setup(.Debug)
         MagicalRecord.setupCoreDataStack()
         return true
     }
