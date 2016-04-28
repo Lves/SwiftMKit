@@ -13,8 +13,11 @@ struct BaseEntityProperty {
     static let entityOrder = "entityOrder"
     static let entityUpdateTime = "entityUpdateTime"
     static let defaultSort = [
-        NSSortDescriptor(key: BaseEntityProperty.entityUpdateTime, ascending: false),
-        NSSortDescriptor(key: BaseEntityProperty.entityOrder, ascending: true)]
+        NSSortDescriptor(key: BaseEntityProperty.entityOrder, ascending: true),
+        NSSortDescriptor(key: BaseEntityProperty.entityUpdateTime, ascending: false)]
+    static func predicateUpdateTimeNotNil() -> NSPredicate {
+        return NSPredicate(format: "\(entityUpdateTime) != nil")
+    }
 }
 
 

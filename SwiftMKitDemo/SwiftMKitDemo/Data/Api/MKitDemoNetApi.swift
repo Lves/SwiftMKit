@@ -91,7 +91,7 @@ class PX500PopularPhotosApiData: PX500NetApi {
     override func fillJSON(json: AnyObject) {
         if let dict = json as? [String: AnyObject] {
             if let array = dict["photos"] as? [AnyObject] {
-                self.photos = NSObject.arrayFromJson(array, page: self.page, number: self.number)
+                self.photos = NSObject.arrayFromJson(array)
             }
         }
     }
@@ -101,7 +101,7 @@ class PX500PopularPhotosCoreDataApiData: PX500PopularPhotosApiData {
     override func fillJSON(json: AnyObject) {
         if let dict = json as? [String: AnyObject] {
             if let array = dict["photos"] as? [AnyObject] {
-                self.photosCoreData =  NSObject.arrayFromJson(array)
+                self.photosCoreData =  NSObject.arrayFromJson(array, page: self.page - 1, number: self.number)
             }
         }
     }
