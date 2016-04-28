@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
-    <entity name="PX500PhotoEntity" representedClassName="PX500PhotoEntity" syncable="YES">
+    <entity name="BaseEntity" representedClassName="BaseEntity" syncable="YES">
+        <attribute name="entityId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="entityOrder" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="entityType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="entityUpdateTime" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="PX500PhotoEntity" representedClassName="PX500PhotoEntity" parentEntity="BaseEntity" syncable="YES">
         <attribute name="descriptionString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favoritesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,20 +18,20 @@
         <relationship name="photos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PX500PhotosEntity" inverseName="photos" inverseEntity="PX500PhotosEntity" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PX500UserEntity" inverseName="photos" inverseEntity="PX500UserEntity" syncable="YES"/>
     </entity>
-    <entity name="PX500PhotosEntity" representedClassName="PX500PhotosEntity" syncable="YES">
+    <entity name="PX500PhotosEntity" representedClassName="PX500PhotosEntity" parentEntity="BaseEntity" syncable="YES">
         <attribute name="current_page" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="total_items" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="total_pages" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PX500PhotoEntity" inverseName="photos" inverseEntity="PX500PhotoEntity" syncable="YES"/>
     </entity>
-    <entity name="PX500UserEntity" representedClassName="PX500UserEntity" syncable="YES">
+    <entity name="PX500UserEntity" representedClassName="PX500UserEntity" parentEntity="BaseEntity" syncable="YES">
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userPicUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PX500PhotoEntity" inverseName="user" inverseEntity="PX500PhotoEntity" syncable="YES"/>
     </entity>
-    <entity name="TestStudentEntity" representedClassName="TestStudentEntity" syncable="YES">
+    <entity name="TestStudentEntity" representedClassName="TestStudentEntity" parentEntity="BaseEntity" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="aliasName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -33,12 +39,13 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="teacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TestTeacherEntity" inverseName="students" inverseEntity="TestTeacherEntity" syncable="YES"/>
     </entity>
-    <entity name="TestTeacherEntity" representedClassName="TestTeacherEntity" syncable="YES">
+    <entity name="TestTeacherEntity" representedClassName="TestTeacherEntity" parentEntity="BaseEntity" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TestStudentEntity" inverseName="teacher" inverseEntity="TestStudentEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PX500PhotoEntity" positionX="-513" positionY="-9" width="128" height="193"/>
+        <element name="BaseEntity" positionX="-693" positionY="-90" width="128" height="103"/>
+        <element name="PX500PhotoEntity" positionX="-83" positionY="-270" width="128" height="193"/>
         <element name="PX500PhotosEntity" positionX="-306" positionY="122" width="128" height="103"/>
         <element name="PX500UserEntity" positionX="-308" positionY="-90" width="128" height="118"/>
         <element name="TestStudentEntity" positionX="-594" positionY="303" width="128" height="133"/>

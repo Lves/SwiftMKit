@@ -55,6 +55,7 @@
 		278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */; };
 		278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */; };
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
+		278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA411CD19849008AC629 /* BaseKitEntity.swift */; };
 		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
 		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
@@ -199,6 +200,7 @@
 		278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchKitViewModel.swift; sourceTree = "<group>"; };
 		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
+		278CAA411CD19849008AC629 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
 		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				18E184E31CC48B2500F14923 /* BaseKitModel.swift */,
+				278CAA411CD19849008AC629 /* BaseKitEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
+				278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */,

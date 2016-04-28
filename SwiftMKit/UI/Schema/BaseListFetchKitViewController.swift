@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CocoaLumberjack
+import ReactiveCocoa
 
 public class BaseListFetchKitViewController: BaseListKitViewController {
     public var listFetchViewModel: BaseListFetchKitViewModel! {
@@ -31,6 +32,10 @@ public class BaseListFetchKitViewController: BaseListKitViewController {
             }
             return _fetchedResultsController
         }
+    }
+    public override func loadData() {
+        super.loadData()
+        listFetchViewModel.fetchCachedData()
     }
     
     public func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {

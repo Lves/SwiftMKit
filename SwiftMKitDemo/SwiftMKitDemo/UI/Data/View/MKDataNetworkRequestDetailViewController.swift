@@ -40,6 +40,7 @@ class MKDataNetworkRequestDetailViewController: BaseViewController {
         _viewModel.fetchData()
     }
     override func bindingData() {
+        super.bindingData()
         _viewModel.photo.producer.startWithNext { [weak self] model in
             if let photo = model {
                 self?.imgPic.hnk_setImageFromURL(NSURL(string: photo.imageurl!)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {

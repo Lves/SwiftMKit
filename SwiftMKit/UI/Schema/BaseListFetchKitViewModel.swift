@@ -21,7 +21,12 @@ public class BaseListFetchKitViewModel: BaseListKitViewModel {
             return nil
         }
     }
-    public override func fetchData() {
+    override var dataIndex: UInt {
+        didSet {
+            self.fetchRequest?.fetchLimit = Int(self.listLoadNumber * (self.dataIndex+1))
+        }
+    }
+    public func fetchCachedData() {
         let logPrefix = "[\(NSStringFromClass(self.dynamicType)) \(#function)]"
         if let fetchedController = listFetchViewController.fetchedResultsController {
             if fetchedController.fetchRequest.predicate != nil {
@@ -31,7 +36,8 @@ public class BaseListFetchKitViewModel: BaseListKitViewModel {
             }
             do {
                 try fetchedController.performFetch()
-                DDLogVerbose("FetchedResultsController found \(fetchedController.fetchedObjects?.count) objects")
+                DDLogInfo("FetchedResultsController found \(fetchedController.fetchedObjects?.count) objects")
+                self.updateDataSource(fetchedController.fetchedObjects)
                 if let table = listFetchViewController.listView as? UITableView {
                     table.reloadData()
                 } else if let collect = listFetchViewController.listView as? UICollectionView {

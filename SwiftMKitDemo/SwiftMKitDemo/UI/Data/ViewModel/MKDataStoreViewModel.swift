@@ -16,9 +16,7 @@ class MKDataStoreViewModel: BaseListFetchViewModel {
         get {
             return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listIndicator).signal().on(
                 next: { [weak self] data in
-                    if let photos = data.photosCoreData {
-                        self?.updateDataSource(photos)
-                    }
+                    self?.fetchCachedData()
                 },
                 failed: { [weak self] error in
                     self?.showTip(error.message)
@@ -28,10 +26,10 @@ class MKDataStoreViewModel: BaseListFetchViewModel {
     private var _fetchRequest: NSFetchRequest?
     override var fetchRequest: NSFetchRequest? {
         if _fetchRequest == nil {
-            _fetchRequest = NSFetchRequest(entityName: "PX500PhotosEntity")
-            let sort1 = NSSortDescriptor(key: "entityUpdateTime", ascending: false)
-            let sort2 = NSSortDescriptor(key: "entityOrder", ascending: true)
-            _fetchRequest?.sortDescriptors = [sort1, sort2]
+            _fetchRequest = NSFetchRequest(entityName: NSStringFromClass(PX500PhotoEntity))
+            _fetchRequest?.sortDescriptors = BaseEntityProperty.defaultSort
+            _fetchRequest?.fetchBatchSize = Int(listLoadNumber)
+            _fetchRequest?.fetchLimit = Int(listLoadNumber * (dataIndex + 1))
         }
         return _fetchRequest
     }

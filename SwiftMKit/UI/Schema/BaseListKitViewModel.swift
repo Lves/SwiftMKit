@@ -58,11 +58,17 @@ public class BaseListKitViewModel: BaseKitViewModel {
     let listLoadNumber: UInt = 20
     let listMaxNumber: UInt = UInt.max
     
-    public func updateDataSource(newData: Array<AnyObject>) {
-        if dataIndex == 0 {
-            dataSource = newData
+    public func updateDataSource(newData: Array<AnyObject>?) {
+        if let data = newData {
+            if dataIndex == 0 {
+                dataSource = data
+            } else {
+                dataSource += data
+            }
         } else {
-            dataSource += newData
+            if dataIndex == 0 {
+                dataSource = []
+            }
         }
         let tableView = self.listViewController?.listView as? UITableView
         tableView?.reloadData()

@@ -16,6 +16,6 @@ public extension NSTimeInterval {
     }
     func secondsToHHmmssString () -> String {
         let (h, m, s) = secondsToHHmmss ()
-        return "\(h):\(m):\(s)"
+        return "\(String(format: "%02d", h)):\(String(format: "%02d", m)):\(String(format: "%02d", s))"
     }
 }

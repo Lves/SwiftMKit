@@ -11,7 +11,7 @@ import MJExtension
 import MagicalRecord
 
 public extension NSObject {
-    class public func arrayFromJson<T: NSObject>(json: Array<AnyObject>?, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> [T]?{
+    class public func arrayFromJson<T: NSObject>(json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> [T]?{
         if let jsonString = json {
             let arr = T.mj_objectArrayWithKeyValuesArray(jsonString, context:context).copy() as? Array<T>
             if arr != nil {
@@ -20,7 +20,7 @@ public extension NSObject {
                 for obj in arr! {
                     if let entity = obj as? BaseEntity {
                         entity.entityUpdateTime = time
-                        entity.entityOrder = index
+                        entity.entityOrder = index + Int(page * number)
                         index += 1
                     }
                 }

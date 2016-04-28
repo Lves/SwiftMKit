@@ -201,16 +201,16 @@ class TestTeacher: NSObject {
     }
 }
 extension TestStudentEntity {
-    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override internal static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
         return ["entityId":"id",
                 "aliasName": "name"]
     }
 }
 extension TestTeacherEntity {
-    override public static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override internal static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
         return ["entityId":"id"]
     }
-    override public static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+    override internal static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
         return ["students": "TestStudentEntity"]
     }
 }

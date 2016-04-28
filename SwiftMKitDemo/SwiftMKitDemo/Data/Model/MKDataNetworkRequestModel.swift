@@ -27,10 +27,20 @@ class MKDataNetworkRequestPhotoModel: NSObject {
     }
 }
 
+extension PX500PhotosEntity {
+    
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["entityId":"current_page"]
+    }
+    override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+        return ["photos":"PX500PhotoEntity"]
+    }
+}
 extension PX500PhotoEntity {
     
     override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-        return ["photoId":"id",
+        return ["entityId":"id",
+                "photoId":"id",
                 "descriptionString":"description",
                 "imageUrl":"image_url"]
     }
@@ -38,7 +48,8 @@ extension PX500PhotoEntity {
 extension PX500UserEntity {
     
     override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-        return ["userId":"id",
+        return ["entityId":"id",
+                "userId":"id",
                 "userName":"username",
                 "fullName":"fullname",
                 "userPicUrl":"userpic_url"]

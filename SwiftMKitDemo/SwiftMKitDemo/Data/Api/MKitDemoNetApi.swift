@@ -72,8 +72,13 @@ class BuDeJieNetApi: NetApiAbstract {
 
 class PX500PopularPhotosApiData: PX500NetApi {
     var photos: [MKDataNetworkRequestPhotoModel]?
+    private var page: UInt = 0
+    private var number: UInt = 0
+    
     init(page: UInt, number: UInt) {
         super.init()
+        self.page = page
+        self.number = number
         NetworkConfig.Evn = .Product
         self.query = ["page": "\(page)",
                       "feature": "popular",
@@ -86,7 +91,7 @@ class PX500PopularPhotosApiData: PX500NetApi {
     override func fillJSON(json: AnyObject) {
         if let dict = json as? [String: AnyObject] {
             if let array = dict["photos"] as? [AnyObject] {
-                self.photos = NSObject.arrayFromJson(array)
+                self.photos = NSObject.arrayFromJson(array, page: self.page, number: self.number)
             }
         }
     }
