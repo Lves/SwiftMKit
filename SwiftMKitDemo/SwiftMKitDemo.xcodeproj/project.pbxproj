@@ -78,6 +78,8 @@
 		27959A401CD3314E00546424 /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27959A3F1CD3314E00546424 /* PINCache.framework */; };
 		27959A411CD3314E00546424 /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27959A3F1CD3314E00546424 /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27959A431CD3331900546424 /* PINCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A421CD3331900546424 /* PINCacheTests.swift */; };
+		27959A451CD33C1300546424 /* IQKeyboardManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27959A441CD33C1200546424 /* IQKeyboardManager.framework */; };
+		27959A461CD33C1300546424 /* IQKeyboardManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27959A441CD33C1200546424 /* IQKeyboardManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
@@ -163,6 +165,7 @@
 				273ACFA61CC9AD5A00EB341D /* MagicalRecord.framework in Embed Frameworks */,
 				3F9707FC1CC67063002BBC83 /* MJRefresh.framework in Embed Frameworks */,
 				278CAA521CD1E944008AC629 /* SnapKit.framework in Embed Frameworks */,
+				27959A461CD33C1300546424 /* IQKeyboardManager.framework in Embed Frameworks */,
 				3F9707F91CC67063002BBC83 /* MBProgressHUD.framework in Embed Frameworks */,
 				273ACFA91CC9AD5A00EB341D /* MJExtension.framework in Embed Frameworks */,
 				278CAA4A1CD1DCBC008AC629 /* WebViewJavascriptBridge.framework in Embed Frameworks */,
@@ -246,6 +249,7 @@
 		27959A3D1CD30BE400546424 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		27959A3F1CD3314E00546424 /* PINCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PINCache.framework; path = "../Debug-iphonesimulator/PINCache.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27959A421CD3331900546424 /* PINCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINCacheTests.swift; sourceTree = "<group>"; };
+		27959A441CD33C1200546424 /* IQKeyboardManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = IQKeyboardManager.framework; path = "../Debug-iphonesimulator/IQKeyboardManager.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				273ACFA51CC9AD5A00EB341D /* MagicalRecord.framework in Frameworks */,
 				3F9707FB1CC67063002BBC83 /* MJRefresh.framework in Frameworks */,
 				278CAA511CD1E944008AC629 /* SnapKit.framework in Frameworks */,
+				27959A451CD33C1300546424 /* IQKeyboardManager.framework in Frameworks */,
 				3F9707F81CC67063002BBC83 /* MBProgressHUD.framework in Frameworks */,
 				273ACFA81CC9AD5A00EB341D /* MJExtension.framework in Frameworks */,
 				278CAA491CD1DCBC008AC629 /* WebViewJavascriptBridge.framework in Frameworks */,
@@ -715,6 +720,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27959A441CD33C1200546424 /* IQKeyboardManager.framework */,
 				278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */,
 				27959A3F1CD3314E00546424 /* PINCache.framework */,
 				278CAA501CD1E944008AC629 /* SnapKit.framework */,

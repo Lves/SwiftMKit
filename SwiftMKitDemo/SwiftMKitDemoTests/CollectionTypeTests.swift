@@ -23,13 +23,13 @@ class CollectionTypeTests: XCTestCase {
 
     func testCollectionType() {
         
-        var testarry = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        let testarry = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         XCTAssertEqual(testarry[0], testarry[safe: 0])
         XCTAssertEqual(testarry[6], testarry[safe: 6])
         XCTAssertEqual(testarry[9], testarry[safe: 9])
         XCTAssertNil(testarry[safe: 11])
         
-        var nilarry:[Int] = []
+        let nilarry:[Int] = []
         XCTAssertNil(nilarry[safe: 0])
         
     }

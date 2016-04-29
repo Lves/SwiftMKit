@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PINCache
 
 class PINCacheTests: XCTestCase {
 
@@ -19,10 +20,50 @@ class PINCacheTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    var cache = PINCache.sharedCache()
+    
+    let userNameKey = "username"
+    
+    var userName: String? {
+        get {
+            return cache.objectForKey(userNameKey) as? String
+        }
+        set {
+            if let value = newValue {
+                cache.setObject(value, forKey: userNameKey)
+            }else {
+                cache.removeObjectForKey(userNameKey)
+            }
+        }
+    }
+    let userAgeKey = "userage"
+    var userAge: Int? {
+        get {
+            return cache.objectForKey(userAgeKey) as? Int
+        }
+        set {
+            if let value = newValue {
+                cache.setObject(value, forKey: userAgeKey)
+            }else {
+                cache.removeObjectForKey(userAgeKey)
+            }
+        }
+    }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testPINCache() {
+        userName = nil
+        userAge = nil
+        XCTAssertEqual(nil, userName)
+        userName = "abc"
+        XCTAssertEqual("abc", userName)
+        userName = nil
+        XCTAssertEqual(nil, userName)
+        XCTAssertEqual(nil, userAge)
+        userAge = 1
+        XCTAssertEqual(1, userAge)
+        userAge = nil
+        XCTAssertEqual(nil, userAge)
     }
 
     func testPerformanceExample() {
