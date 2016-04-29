@@ -19,6 +19,7 @@
 		18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208621CC8636400569F42 /* SingleReqViewModel.swift */; };
 		18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208641CC878DC00569F42 /* BuDeJieModel.swift */; };
 		18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E184E31CC48B2500F14923 /* BaseKitModel.swift */; };
+		18E5CE171CD30924001A3849 /* CachePoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E5CE161CD30924001A3849 /* CachePoolTests.swift */; };
 		27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */; };
 		27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C071CC748D60028E938 /* ImageParser.swift */; };
 		27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C081CC748D60028E938 /* ImageScout.swift */; };
@@ -184,6 +185,7 @@
 		18C208621CC8636400569F42 /* SingleReqViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleReqViewModel.swift; sourceTree = "<group>"; };
 		18C208641CC878DC00569F42 /* BuDeJieModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuDeJieModel.swift; sourceTree = "<group>"; };
 		18E184E31CC48B2500F14923 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
+		18E5CE161CD30924001A3849 /* CachePoolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachePoolTests.swift; sourceTree = "<group>"; };
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		27276C071CC748D60028E938 /* ImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageParser.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				274113CC1CCDC95600EECE5A /* JsonMapTests.swift */,
 				034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */,
 				03CC0D771CD211F300D234FF /* CollectionTypeTests.swift */,
+				18E5CE161CD30924001A3849 /* CachePoolTests.swift */,
 			);
 			path = SwiftMKitDemoTests;
 			sourceTree = "<group>";
@@ -1024,6 +1027,7 @@
 			files = (
 				034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */,
 				273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */,
+				18E5CE171CD30924001A3849 /* CachePoolTests.swift in Sources */,
 				3FC9DF0E1CBFD35900C2D938 /* SwiftMKitDemoTests.swift in Sources */,
 				03CC0D781CD211F300D234FF /* CollectionTypeTests.swift in Sources */,
 				274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */,
@@ -1161,14 +1165,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xianfeng Cheng (CUN4CK964J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianfeng Cheng (CUN4CK964J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jimubox.swiftmkitdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61a40102-9fb8-4448-acda-8d71782e8eef";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1179,14 +1183,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xianfeng Cheng (CUN4CK964J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianfeng Cheng (CUN4CK964J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jimubox.swiftmkitdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61a40102-9fb8-4448-acda-8d71782e8eef";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 			};
 			name = Release;
