@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PINCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,22 +77,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2BF1B97189D9E82B09BC1F98CA94D7E1</key>
+		<key>058EBE943D922F90383B2C97DDD714A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3E4A727411F0E5C35B8D234172DBBD4F</key>
+		<key>1318957A11BF40E7507BE8D3280819E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6847254D016329D4A531D34ED2B6DF81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>762EA3BE53837AEF1DAA3F8C69B61D69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DBC02340820EEF405529F531D67BD22</key>
+		<key>960E1C123D1B99142B0C59FE641FCBFC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9AB92A2AE7314091D107EAC8561B8977</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,17 +127,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BAE9CD5765608461DC364256425D66FF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB979C97302845510F4E7EA20DBB6CE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D082FD9722F53B9C3A1229257D4008F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EA8CEDF0EC5493B6B9B620B75C5C7089</key>
 		<dict>
 			<key>primary</key>
 			<true/>
