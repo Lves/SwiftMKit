@@ -34,8 +34,8 @@ class CachePoolTests: XCTestCase {
     }
     
     func testFreeDiskSpace() {
-        let result = CachePool.getFreeDiskspace()
-        print("手机剩余存储空间为：\(result / 1024 / 1024)MB")
+        let result = CachePool.freeDiskspace()
+        print("手机剩余存储空间为：\(result/1024/1024/1024)GB")
     }
     
 }
