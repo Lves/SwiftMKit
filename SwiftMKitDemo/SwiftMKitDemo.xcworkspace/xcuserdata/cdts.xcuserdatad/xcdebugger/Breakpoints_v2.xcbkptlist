@@ -19,5 +19,84 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftMKitDemoTests/RACTests.swift"
+            timestampString = "483593799.903304"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "testRACObserver()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftMKitDemoTests/RACTests.swift"
+            timestampString = "483593885.6872"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "testRACObserver()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftMKitDemoTests.RACTests.testRACObserver () -&gt; ()"
+                  moduleName = "SwiftMKitDemoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cdts/%E4%BB%A3%E7%A0%81/Work/Swift-MKit.git/SwiftMKitDemo/SwiftMKitDemoTests/RACTests.swift"
+                  timestampString = "483593904.731863"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "2795">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftMKitDemoTests.RACTests.(testRACObserver () -&gt; ()).(implicit closure #3)"
+                  moduleName = "SwiftMKitDemoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cdts/%E4%BB%A3%E7%A0%81/Work/Swift-MKit.git/SwiftMKitDemo/SwiftMKitDemoTests/RACTests.swift"
+                  timestampString = "483593904.731994"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftMKitDemoTests.RACTests.(testRACObserver () -&gt; ()).(implicit closure #4)"
+                  moduleName = "SwiftMKitDemoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cdts/%E4%BB%A3%E7%A0%81/Work/Swift-MKit.git/SwiftMKitDemo/SwiftMKitDemoTests/RACTests.swift"
+                  timestampString = "483593904.732101"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
