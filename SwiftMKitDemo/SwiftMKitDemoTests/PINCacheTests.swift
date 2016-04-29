@@ -50,20 +50,41 @@ class PINCacheTests: XCTestCase {
             }
         }
     }
+    let userInfoKey = "userinfo"
+    var userInfo: Dictionary<String,String>? {
+        get {
+            return cache.objectForKey(userInfoKey) as? Dictionary<String,String>
+        }
+        set {
+            if let value = newValue {
+                cache.setObject(value, forKey: userInfoKey)
+            }else {
+                cache.removeObjectForKey(userInfoKey)
+            }
+        }
+    }
 
     func testPINCache() {
         userName = nil
         userAge = nil
+        userInfo = nil
         XCTAssertEqual(nil, userName)
         userName = "abc"
         XCTAssertEqual("abc", userName)
         userName = nil
         XCTAssertEqual(nil, userName)
+        
         XCTAssertEqual(nil, userAge)
         userAge = 1
         XCTAssertEqual(1, userAge)
         userAge = nil
         XCTAssertEqual(nil, userAge)
+        
+        XCTAssertNil(userInfo)
+        userInfo = ["x":"a"]
+        XCTAssertEqual("a", userInfo?["x"])
+        userInfo = nil
+        XCTAssertNil(userAge)
     }
 
     func testPerformanceExample() {

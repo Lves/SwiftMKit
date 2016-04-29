@@ -58,4 +58,11 @@ public extension NSObject {
         }
         return nil
     }
+    
+    class func fromClassName(className : String) -> NSObject {
+        let className = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String + "." + className
+        let aClass = NSClassFromString(className) as! NSObject.Type
+        return aClass.init()
+    }
+
 }

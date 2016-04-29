@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseWebViewController" customModule="SwiftMKitDemo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseKitWebViewController" customModule="SwiftMKitDemo" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="iN0-l3-epB" id="gws-Ce-6ef"/>
+                <outlet property="view" destination="iN0-l3-epB" id="1Oe-aj-8IT"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

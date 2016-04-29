@@ -37,7 +37,7 @@ public extension UIViewController {
     public func instanceViewControllerInXibWithName(name: String) -> UIViewController? {
         let nibPath = NSBundle.mainBundle().pathForResource(name, ofType: "nib")
         if (nibPath != nil) {
-            return NSBundle.mainBundle().loadNibNamed(name, owner: self, options: nil).first as? UIViewController
+            return NSObject.fromClassName(name) as? UIViewController
         }
         return nil
     }

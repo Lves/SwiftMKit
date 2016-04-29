@@ -9,6 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import MagicalRecord
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setenv("XcodeColors", "YES", 0);
         DDLog.setup(.Debug)
         MagicalRecord.setupCoreDataStack()
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         return true
     }
 

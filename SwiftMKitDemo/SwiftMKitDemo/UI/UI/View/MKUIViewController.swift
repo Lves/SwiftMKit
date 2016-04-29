@@ -1,23 +1,23 @@
 //
-//  ViewController.swift
+//  MKUIViewController.swift
 //  SwiftMKitDemo
 //
-//  Created by Mao on 4/3/16.
+//  Created by Mao on 4/29/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
 import UIKit
 
-class MKDataViewController: BaseListViewController, UITableViewDelegate, UITableViewDataSource{
+class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
-        static let CellIdentifier = "MKDataTableViewCell"
-        static let SegueToNextNetwork = "routeToDataNetworkRequest"
-        static let SegueToNextStore = "routeToDataStore"
+        static let CellIdentifier = "MKUITableViewCell"
+        static let SegueToNextIQKeyboardManager = "routeToIQKeyboardManager"
+        static let SegueToNextUrl = "http://www.baidu.com"
     }
     
-    private var _viewModel = MKDataViewModel()
+    private var _viewModel = MKUIViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
@@ -42,12 +42,12 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            self.routeToName(InnerConst.SegueToNextNetwork)
+            self.routeToUrl(InnerConst.SegueToNextUrl)
         case 1:
-            self.routeToName(InnerConst.SegueToNextStore)
+            self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
         default:
             break
         }
     }
+    
 }
-
