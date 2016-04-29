@@ -125,6 +125,7 @@ class RACTests: XCTestCase {
         mmessage <~ textfield.rac_textSignalProducer()
         XCTAssertEqual("", mmessage.value)
         textfield.text = message
+        textfield.sendActionsForControlEvents(.EditingChanged)
         XCTAssertEqual(textfield.text, mmessage.value)
         textfield.rac_textSignalProducer().skip(1).startWithNext { text in
             XCTAssertEqual(message, text)
@@ -135,6 +136,7 @@ class RACTests: XCTestCase {
         mproperty.value = index
         property = index
         textfield.text = message
+        textfield.sendActionsForControlEvents(.EditingChanged)
         self.waitForExpectationsWithTimeout(100, handler: nil)
     }
     
