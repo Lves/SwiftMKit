@@ -76,8 +76,8 @@
                         <exclude reference="XE2-hm-WAK"/>
                         <exclude reference="bBQ-c7-Eii"/>
                         <exclude reference="Qba-0q-mCW"/>
-                        <exclude reference="kMs-Ie-8q4"/>
                         <exclude reference="Sz0-b0-mPu"/>
+                        <exclude reference="kMs-Ie-8q4"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

@@ -72,6 +72,8 @@
 		278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA551CD20970008AC629 /* BaseWebViewModel.swift */; };
 		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
 		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
+		27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A3B1CD3018900546424 /* BaseWebViewController.xib */; };
+		27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A3D1CD30BE400546424 /* UITextField+Extension.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
@@ -234,6 +236,8 @@
 		278CAA551CD20970008AC629 /* BaseWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewModel.swift; sourceTree = "<group>"; };
 		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		27959A3B1CD3018900546424 /* BaseWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseWebViewController.xib; sourceTree = "<group>"; };
+		27959A3D1CD30BE400546424 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
@@ -471,6 +475,7 @@
 				27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */,
 				273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */,
 				03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */,
+				27959A3D1CD30BE400546424 /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -690,6 +695,7 @@
 				278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */,
 				2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */,
 				278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */,
+				27959A3B1CD3018900546424 /* BaseWebViewController.xib */,
 				278CAA551CD20970008AC629 /* BaseWebViewModel.swift */,
 			);
 			path = Schema;
@@ -826,6 +832,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
 				274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */,
@@ -941,6 +948,7 @@
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
+				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,

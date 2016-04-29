@@ -99,6 +99,45 @@ class RACTests: XCTestCase {
         self.waitForExpectationsWithTimeout(100, handler: nil)
     }
     
+    var mproperty: MutableProperty<Int> = MutableProperty<Int>(1)
+    dynamic var property: Int = 1
+    var textfield: UITextField = UITextField()
+    var mmessage: MutableProperty<String> = MutableProperty<String>("")
+    
+    func testRACObserver() {
+        let expectation1 = self.expectationWithDescription("Observe Signal")
+        let expectation2 = self.expectationWithDescription("Observe Signal")
+        let expectation3 = self.expectationWithDescription("Observe Signal")
+        var index = 1
+        mproperty.producer.skip(1).startWithNext { x in
+            XCTAssertEqual(index, x)
+            print("mproperty: \(x)")
+            expectation1.fulfill()
+        }
+        DynamicProperty(object: self, keyPath: "property").producer.skip(1).map { x in
+            x as! Int
+        }.startWithNext { x in
+            XCTAssertEqual(index, x)
+            print("property: \(x)")
+            expectation2.fulfill()
+        }
+        let message = "abc"
+        mmessage <~ textfield.rac_textSignalProducer()
+        XCTAssertEqual("", mmessage.value)
+        textfield.text = message
+        XCTAssertEqual(textfield.text, mmessage.value)
+        textfield.rac_textSignalProducer().skip(1).startWithNext { text in
+            XCTAssertEqual(message, text)
+            print("message: \(text)")
+            expectation3.fulfill()
+        }
+        index = 2
+        mproperty.value = index
+        property = index
+        textfield.text = message
+        self.waitForExpectationsWithTimeout(100, handler: nil)
+    }
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

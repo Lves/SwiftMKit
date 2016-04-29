@@ -335,25 +335,6 @@
             </objects>
             <point key="canvasLocation" x="1274.5" y="206.5"/>
         </scene>
-        <!--Base Web View Controller-->
-        <scene sceneID="1VA-hk-k0x">
-            <objects>
-                <viewController storyboardIdentifier="BaseWebViewController" hidesBottomBarWhenPushed="YES" id="oVz-nz-1sR" customClass="BaseWebViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dfI-4C-JEp"/>
-                        <viewControllerLayoutGuide type="bottom" id="tlx-sj-key"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Drd-Ha-ZuN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tt2-JP-aHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="304.5" y="981.5"/>
-        </scene>
         <!--Data Store View Controller-->
         <scene sceneID="7AD-ZQ-Oj3">
             <objects>
