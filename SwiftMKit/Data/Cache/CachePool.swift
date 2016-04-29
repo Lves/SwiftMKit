@@ -9,8 +9,8 @@
 import Foundation
 
 public struct CachePoolConstant {
-    // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)
-    static let DefaultCapacity: Double = min(100*1024*1024, CachePool.freeDiskspace()) // 默认缓存池控件 100M
+    // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)DefaultCapacity = MIN(剩余空间, 100M)
+    static let DefaultCapacity: Double = min(100*1024*1024, CachePool.freeDiskspace()) // 默认缓存池空间 100M
 }
 
 private class CacheModel : NSObject {
@@ -19,7 +19,18 @@ private class CacheModel : NSObject {
     var expireTime: NSTimeInterval = 0
     var size: Double = 0
     var name: String = ""
+    var mimeType : String = ""
 }
+
+private struct CacheDictKey {
+    static let CreateTime = "createTime"
+    static let LastVisitTime = "lastVisitTime"
+    static let ExpireTime = "expireTime"
+    static let Size = "size"
+    static let Name = "name"
+    static let MimeType = "mimeType"
+}
+
 
 /// 缓存池：用于存储文件
 public class CachePool: NSObject {
@@ -39,7 +50,9 @@ public class CachePool: NSObject {
     public func objectForName(name: String) -> NSObject? {
         return nil
     }
-    
+    public func clearDisk() {
+        
+    }
 }
 
 extension CachePool {
@@ -50,6 +63,7 @@ extension CachePool {
         
     }
     
+    /// 获取设备剩余可用空间
     public class func freeDiskspace() -> Double {
         var totalSpace = 0.0
         var totalFreeSpace = 0.0
@@ -66,5 +80,10 @@ extension CachePool {
         totalFreeSpace = freeFileSystemSizeInBytes!.doubleValue
         print("总空间：\(totalSpace/1024/1024/1024)GB <====>  可用空间：\(totalFreeSpace/1024/1024/1024)GB")
         return totalFreeSpace
+    }
+    
+    ///  获取文件基本信息
+    private func fileInfo() -> String? {
+        return nil
     }
 }
