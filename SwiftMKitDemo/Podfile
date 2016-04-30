@@ -6,6 +6,15 @@ platform :ios, '8.0'
 
 use_frameworks!
 
-pod 'SwiftMKit'
-
+pod 'CocoaLumberjack/Swift'
+pod 'ReactiveCocoa'
+pod 'Alamofire'
+pod 'MagicalRecord'
+pod 'MagicalRecord/CocoaLumberjack'
 pod 'MJExtension'
+pod 'MJRefresh'
+pod 'JSPatch'
+pod 'WebViewJavascriptBridge'
+pod 'SnapKit'
+pod 'HanekeSwift'
+pod 'MBProgressHUD'

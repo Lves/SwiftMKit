@@ -14,12 +14,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HanekeSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSPatch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MagicalRecord.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -39,17 +59,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftMKit-MJRefresh.xcscheme</key>
+		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftMKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>WebViewJavascriptBridge.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,22 +72,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>08152EF566E3B287538E1B7AECACF56D</key>
+		<key>2BF1B97189D9E82B09BC1F98CA94D7E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12ED9640A846E2BFC61DA8A1E2765E87</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>40F2285840E234C2B2D9DB44AB46A71A</key>
+		<key>3E4A727411F0E5C35B8D234172DBBD4F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6847254D016329D4A531D34ED2B6DF81</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>762EA3BE53837AEF1DAA3F8C69B61D69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +102,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BC496BCB85BB2F32D66DB4822D1FB362</key>
+		<key>7DDF79495F24B309AF089ACC99FC1151</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9DBC02340820EEF405529F531D67BD22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABA6C4F9D62C9B2347DD91BB48834866</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B13574E17EED8AAA9A85CE67AD5B4570</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E971A977D3A66B5177C4A0ABE9269C83</key>
+		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F0F4364BF7C7BE565A21943C8231B420</key>
+		<key>EA8CEDF0EC5493B6B9B620B75C5C7089</key>
 		<dict>
 			<key>primary</key>
 			<true/>

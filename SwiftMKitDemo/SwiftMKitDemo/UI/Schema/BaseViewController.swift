@@ -32,3 +32,9 @@ class BaseViewController: BaseKitViewController {
      }
      */
 }
+
+extension BaseKitViewController {
+    override public func routeToUrl(url: String, name: String = "BaseWebViewController", params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+        super.routeToUrl(url, name: name, params: nextParams, pop: pop)
+    }
+}

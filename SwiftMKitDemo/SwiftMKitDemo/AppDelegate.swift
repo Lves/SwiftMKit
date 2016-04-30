@@ -1,13 +1,14 @@
-//
+
 //  AppDelegate.swift
 //  SwiftMKitDemo
 //
-//  Created by Mao on 4/3/16.
+//  Created by Mao on 4/14/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
 import UIKit
 import CocoaLumberjack
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,13 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
-        DDLog.addLogger(DDASLLogger.sharedInstance())
-        DDLogVerbose("Verbose")
-        DDLogDebug("Debug")
-        DDLogInfo("Info")
-        DDLogWarn("Warn")
-        DDLogError("Error")
+        
+        setenv("XcodeColors", "YES", 0);
+        DDLog.setup(.Debug)
+        MagicalRecord.setupCoreDataStack()
         return true
     }
 

@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 import CocoaLumberjack
+import Alamofire
+import MBProgressHUD
+import ObjectiveC
 
-public class BaseKitViewController : UIViewController{
+
+
+public class BaseKitViewController : UIViewController {
     public var params = Dictionary<String, AnyObject>() {
         didSet {
             for (key,value) in params {
@@ -18,71 +23,67 @@ public class BaseKitViewController : UIViewController{
             }
         }
     }
-    public var viewModel: BaseKitViewModel? {
-        didSet {
-            viewModel?.viewController = self
-        }
+    public var hud: HUDProtocol = MBHUDView()
+    lazy public var indicator: IndicatorProtocol = {
+        return TaskIndicator(hud: self.hud)
+    }()
+    public var viewModel: BaseKitViewModel! {
+        get { return nil }
     }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if sender is NSDictionary && sender!["params"] != nil {
-            let vc = segue.destinationViewController
-            if vc is BaseKitViewController {
-                let baseVC: BaseKitViewController = vc as! BaseKitViewController
-                let dict: NSDictionary = sender as! NSDictionary
-                baseVC.params = dict["params"] as! NSDictionary as! Dictionary<String, AnyObject>
+        let vc = segue.destinationViewController
+        if let bvc = vc as? BaseKitViewController {
+            if let dict = sender as? NSDictionary {
+                if let params = dict["params"] as? Dictionary<String, AnyObject> {
+                    bvc.params = params
+                }
             }
         }
     }
     
     public func setupUI() {
+        viewModel.viewController = self
+        bindingData()
+    }
+    public func bindingData() {
     }
     public func loadData() {
     }
+    public func showEmptyView() {}
+    public func hideEmptyView() {}
+    
+    deinit {
+        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 
-extension UIViewController {
-    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
-        var vc = instanceViewControllerInXibWithName(name)
-        if (vc == nil) {
-            vc = instanceViewControllerInStoryboardWithName(name)
-        }
-        if vc != nil {
-            if vc is BaseKitViewController {
-                let baseVC = vc as! BaseKitViewController
-                baseVC.params = nextParams
-            }
-            if pop {
-                self.presentViewController(vc!, animated: true, completion: nil)
-            } else {
-                self.navigationController?.pushViewController(vc!, animated: true)
-            }
-        } else if canPerformSegueWithIdentifier(name){
-            self.performSegueWithIdentifier(name, sender: ["params":nextParams])
-        } else {
-            DDLogError("Can't route to: \(name), please check the name")
-        }
+//HUD
+
+extension BaseKitViewController {
+    
+    public func showTip(tip: String) {
+        showTip(tip, view: self.view.window!)
     }
-    public func instanceViewControllerInXibWithName(name: String) -> UIViewController? {
-        let nibPath = NSBundle.mainBundle().pathForResource(name, ofType: "nib")
-        if (nibPath != nil) {
-            return NSBundle.mainBundle().loadNibNamed(name, owner: self, options: nil).first as? UIViewController
-        }
-        return nil
+    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay) {
+        self.hud.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
     }
-    public func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String = "Main") -> UIViewController? {
-        let story = self.storyboard != nil ? self.storyboard : UIStoryboard(name: storyboardName, bundle: nil)
-        if story?.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
-            return story?.instantiateViewControllerWithIdentifier(name)
-        }
-        return nil
+    public func showLoading(text: String = "") {
+        showLoading(text, view: self.view)
     }
-    public func canPerformSegueWithIdentifier(identifier: String) -> Bool {
-        let segueTemplates = self.valueForKey("storyboardSegueTemplates")
-        let filteredArray = segueTemplates?.filteredArrayUsingPredicate(NSPredicate(format: "identifier = %@", identifier))
-        return filteredArray?.count > 0
+    public func showLoading(text: String, view: UIView) {
+        self.hud.showHUDAddedTo(view, animated: true, text: text)
+    }
+    public func hideLoading() {
+        hideLoading(self.view)
+    }
+    public func hideLoading(view: UIView) {
+        self.hud.hideHUDForView(view, animated: true)
     }
 }
+

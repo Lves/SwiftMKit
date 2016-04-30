@@ -1,5 +1,8 @@
 PODS:
-  - Alamofire (3.3.0)
+  - Alamofire (3.3.1)
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -7,6 +10,17 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
+  - HanekeSwift (0.10.1)
+  - JSPatch (1.0):
+    - JSPatch/Core (= 1.0)
+  - JSPatch/Core (1.0)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/CocoaLumberjack (2.3.2):
+    - CocoaLumberjack (~> 2.0)
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.3.2)
+  - MBProgressHUD (0.9.2)
   - MJExtension (3.0.10)
   - MJRefresh (3.1.0)
   - ReactiveCocoa (4.1.0):
@@ -21,26 +35,35 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 2.0)
   - Result (2.0.0)
-  - SwiftMKit (1.0.4):
-    - Alamofire
-    - CocoaLumberjack/Swift
-    - MJRefresh
-    - ReactiveCocoa
-    - SwiftyJSON
-  - SwiftyJSON (2.3.2)
+  - SnapKit (0.20.0)
+  - WebViewJavascriptBridge (5.0.5)
 
 DEPENDENCIES:
+  - Alamofire
+  - CocoaLumberjack/Swift
+  - HanekeSwift
+  - JSPatch
+  - MagicalRecord
+  - MagicalRecord/CocoaLumberjack
+  - MBProgressHUD
   - MJExtension
-  - SwiftMKit
+  - MJRefresh
+  - ReactiveCocoa
+  - SnapKit
+  - WebViewJavascriptBridge
 
 SPEC CHECKSUMS:
-  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  JSPatch: c689ea4dde17441f2f4a95d40dfedb8900c20099
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  SwiftMKit: 79274f4423735e6c2b08ce14a3bb0b176e72cd6f
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
+  WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
 COCOAPODS: 0.39.0

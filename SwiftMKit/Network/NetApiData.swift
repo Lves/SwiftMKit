@@ -10,120 +10,152 @@ import UIKit
 import ReactiveCocoa
 import Alamofire
 import CocoaLumberjack
-import SwiftyJSON
+import MJExtension
+
+public struct NetApiDataConst {
+    static let DefaultTimeoutInterval: NSTimeInterval = 45
+}
 
 public class NetApiData: NSObject {
     
-    static let sharedInstance = NetApiData()
-    private override init() {
-        self.apiClient = NetApiClient()
-        super.init()
-    }
-    
-    struct NetApiDataConst {
-        static let DefaultTimeoutInterval: NSTimeInterval = 45
-    }
-    
-    public var apiClient:NetApiClient
-    public var apiQuery = [String:AnyObject]()
-    public var apiMethod: Alamofire.Method = .GET
-    public var apiUrl = ""
-    public var apiTimeout = NetApiDataConst.DefaultTimeoutInterval
-    public var request:Request?
-    public var responseJSONData:JSON?
+    public var api: NetApiProtocol?
     
     lazy private var runningApis = [NetApiData]()
     
-    public init(client: NetApiClient, url: String, query: [String:AnyObject] = [String:AnyObject](), method: Alamofire.Method = .GET) {
-        self.apiClient = client
-        self.apiUrl = url
-        self.apiQuery = query
-        self.apiMethod = method;
+    private static let sharedInstance = NetApiData()
+    private override init() {
         super.init()
     }
     
-    public func fill(json:JSON) {
-        //Need to complete
+    public init(api: NetApiProtocol) {
+        self.api = api
+        super.init()
     }
     
-    public func baseUrl() -> String {
-        return ""
-    }
-    public func baseQuery() -> [String:AnyObject] {
-        return [String:AnyObject]()
-    }
     
     // MARK: RunningApi
     
-    class public func requestingApis() -> Array<NetApiData> {
+    class public func requestingApis() -> [NetApiData] {
         return sharedInstance.runningApis
     }
     class public func addApi(api: NetApiData) {
         sharedInstance.runningApis.append(api)
-        DDLogInfo("[Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
+        DDLogDebug("[Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     class public func removeApi(api: NetApiData) {
-        sharedInstance.runningApis.append(api)
-        DDLogInfo("[Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
-    }
-    
-    // MARK: JSON
-    
-    class public func getArrayFromJson<T: NSObject>(json: AnyObject) -> Array<T>{
-        let arr = T.mj_objectArrayWithKeyValuesArray(json)
-        return arr as NSArray as! [T]
-    }
-    class public func getObjectFromJson<T: NSObject>(json: AnyObject) -> T{
-        let obj = T.mj_objectWithKeyValues(json)
-        return obj as NSObject as! T
+        if let index = sharedInstance.runningApis.indexOf(api) {
+            sharedInstance.runningApis.removeAtIndex(index)
+        }
+        DDLogDebug("[Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     
     // MARK: Request
     
-    public func requestJSON() -> SignalProducer<NetApiData, NSError> {
+    public func requestJSON() -> SignalProducer<NetApiProtocol, NetError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
-            let urlRequest = self.getURLRequest()
-            let request = self.apiClient.requestJSON(urlRequest) { response in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestJSON(urlRequest, api:self.api!) { response in
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
-                        let json = JSON(value)
-                        DDLogVerbose("JSON: \(json)")
-                        self.responseJSONData = json
-                        self.fill(json)
-                        sink.sendNext(self)
+                        self.api!.responseData = value
+                        self.api!.fillJSON(value)
+                        sink.sendNext(self.api!)
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
+                    let err = NetError(error: error)
+                    if let statusCode =  StatusCode(rawValue:err.statusCode) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            sink.sendInterrupted()
+                            return
+                        default:
+                            break
+                        }
+                    }
                     DDLogError("\(error)")
-                    sink.sendFailed(error)
+                    sink.sendFailed(err)
                 }
                 NetApiData.removeApi(self)
             }
-            self.request = request
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
+            }
+        }
+    }
+    public func requestData() -> SignalProducer<NetApiProtocol, NetError> {
+        NetApiData.addApi(self)
+        return SignalProducer { [unowned self] sink,disposable in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestData(urlRequest, api:self.api!) { response in
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        self.api!.responseData = value
+                        sink.sendNext(self.api!)
+                        sink.sendCompleted()
+                    }
+                case .Failure(let error):
+                    let err = NetError(error: error)
+                    DDLogError("\(error)")
+                    sink.sendFailed(err)
+                }
+                NetApiData.removeApi(self)
+            }
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
+            }
+        }
+    }
+    public func requestString() -> SignalProducer<NetApiProtocol, NetError> {
+        NetApiData.addApi(self)
+        return SignalProducer { [unowned self] sink,disposable in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestString(urlRequest, api:self.api!) { response in
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        self.api!.responseData = value
+                        sink.sendNext(self.api!)
+                        sink.sendCompleted()
+                    }
+                case .Failure(let error):
+                    let err = NetError(error: error)
+                    DDLogError("\(error)")
+                    sink.sendFailed(err)
+                }
+                NetApiData.removeApi(self)
+            }
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
+            }
         }
     }
     
-    public func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest{
-        return request
-    }
-    
-    private func getURLRequest() -> NSURLRequest {
-        let (method, path, parameters) = (self.apiMethod, self.apiUrl, self.getQuery())
-        let URL = NSURL(string: self.baseUrl())!
-        var mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+    class private func getURLRequest(api: NetApiProtocol) -> NSURLRequest {
+        let (method, path, parameters) = (api.method ?? .GET, api.url ?? "", api.query ?? [:])
+        let url = NSURL(string: path)!
+        var mutableURLRequest = NSMutableURLRequest(URL: url)
         mutableURLRequest.HTTPMethod = method.rawValue
-        mutableURLRequest = transferURLRequest(mutableURLRequest)
-        DDLogInfo("Request Url: \(mutableURLRequest.URL?.absoluteString)")
+        mutableURLRequest.timeoutInterval = api.timeout ?? NetApiDataConst.DefaultTimeoutInterval
+        mutableURLRequest = api.transferURLRequest(mutableURLRequest)
+        let parameterString = parameters.stringFromHttpParameters()
+        DDLogInfo("Request Url: \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
         let encoding = Alamofire.ParameterEncoding.URL
         return encoding.encode(mutableURLRequest, parameters: parameters).0
     }
-    private func getQuery() -> [String: AnyObject] {
-        var query = self.baseQuery()
-        for (key, value) in self.apiQuery {
-            query[key] = value
+    
+    class public func combineQuery(base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {
+        if var queryBase = base {
+            if let queryAppend = append {
+                for (key, value) in queryAppend {
+                    queryBase[key] = value
+                }
+            }
+            return queryBase
         }
-        return query
+        return base
     }
 }

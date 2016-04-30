@@ -10,22 +10,45 @@ import Foundation
 import UIKit
 import Alamofire
 import CocoaLumberjack
-import SwiftyJSON
 
 public class NetApiClient : NSObject {
     
-    func requestJSON(request: NSURLRequest,
+    class private func bindIndicator(api api:NetApiProtocol, task: NSURLSessionTask) {
+        if let indicator = api.indicator {
+            indicator.bindTask(task, view: api.indicatorInView, text: api.indicatorText)
+        }
+        if let indicator = api.indicatorList {
+            indicator.bindTaskForList(task)
+        }
+    }
+    
+    class func requestJSON(request: NSURLRequest, api: NetApiProtocol,
                  completionHandler: (Response<AnyObject, NSError> -> Void)?)
         -> Request {
-            return Alamofire.request(request).responseJSON { response in
-                let transferedResponse = self.transferResponseJSON(response)
+            let request = Alamofire.request(request)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
+            return request.responseJSON { response in
+                DDLogWarn("Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
+                    DDLogInfo("Request Url Success: \(api.url!)")
                     if let value = response.result.value {
-                        let json = JSON(value)
-                        DDLogVerbose("JSON: \(json)")
+                        DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("Request Url Canceled: \(api.url!)")
+                            return
+                        default:
+                            break
+                        }
+                    }
+                    DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
@@ -33,15 +56,31 @@ public class NetApiClient : NSObject {
                 }
             }
     }
-    func requestData(request: NSURLRequest,
+    class func requestData(request: NSURLRequest, api: NetApiProtocol,
                            completionHandler: (Response<NSData, NSError> -> Void)?)
         -> Request {
-            return Alamofire.request(request).responseData { response in
-                let transferedResponse = self.transferResponseData(response)
+            let request = Alamofire.request(request)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
+            return request.responseData { response in
+                DDLogWarn("Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
+                    DDLogInfo("Request Url Success: \(api.url!)")
                     DDLogVerbose("Data: \(response.result.value)")
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("Request Url Canceled: \(api.url!)")
+                            return
+                        default:
+                            break
+                        }
+                    }
+                    DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
@@ -49,32 +88,36 @@ public class NetApiClient : NSObject {
                 }
             }
     }
-    func requestString(request: NSURLRequest,
+    class func requestString(request: NSURLRequest, api: NetApiProtocol,
                              completionHandler: (Response<String, NSError> -> Void)?)
         -> Request {
-            return Alamofire.request(request).responseString { response in
-                let transferedResponse = self.transferResponseString(response)
+            let request = Alamofire.request(request)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
+            return request.responseString { response in
+                DDLogWarn("Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:
+                    DDLogInfo("Request Url Success: \(api.url!)")
                     DDLogVerbose("String: \(response.result.value)")
                 case .Failure(let error):
+                    if let statusCode =  StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("Request Url Canceled: \(api.url!)")
+                            return
+                        default:
+                            break
+                        }
+                    }
+                    DDLogError("Request Url Failed: \(api.url!)")
                     DDLogError("\(error)")
                 }
                 if completionHandler != nil {
                     completionHandler!(transferedResponse)
                 }
             }
-    }
-    
-    
-    
-    func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>{
-        return response
-    }
-    func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>{
-        return response
-    }
-    func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>{
-        return response
     }
 }

@@ -7,37 +7,51 @@
 //
 
 import UIKit
+import MagicalRecord
+import MJExtension
 
-class MKDataNetworkRequestCityModel: BaseModel {
-    var cityId: String
-    var name: String
-    var pinyin: String
-    init(cityId:String, name:String, pinyin:String) {
-        self.cityId = cityId
-        self.name = name
-        self.pinyin = pinyin
-        super.init()
-    }
+class MKDataNetworkRequestPhotoModel: NSObject {
+    var photoId: String?
+    var name: String?
+    var username: String?
+    var userpic: String?
+    var descriptionString: String?
+    var imageurl: String?
     
-//    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-//        return [
-//            "cityId":"city_id",
-//            "name":"city_name",
-//            "pinyin":"city_pinyin",
-//        ]
-//    }
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["photoId":"id",
+                "descriptionString":"description",
+                "username":"user.fullname",
+                "userpic":"user.userpic_url",
+                "imageurl":"image_url"]
+    }
 }
 
-class MKDataNetworkRequestShopModel: BaseModel {
-    var shopId: String
-    var name: String
-    var longitude: Double?
-    var latitude: Double?
-    var url: String
-    init(shopId:String, name:String, url:String) {
-        self.shopId = shopId
-        self.name = name
-        self.url = url
-        super.init()
+extension PX500PhotosEntity {
+    
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["entityId":"current_page"]
+    }
+    override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+        return ["photos":"PX500PhotoEntity"]
+    }
+}
+extension PX500PhotoEntity {
+    
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["entityId":"id",
+                "photoId":"id",
+                "descriptionString":"description",
+                "imageUrl":"image_url"]
+    }
+}
+extension PX500UserEntity {
+    
+    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["entityId":"id",
+                "userId":"id",
+                "userName":"username",
+                "fullName":"fullname",
+                "userPicUrl":"userpic_url"]
     }
 }

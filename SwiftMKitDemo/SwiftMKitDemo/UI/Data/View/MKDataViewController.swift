@@ -13,40 +13,43 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     
     struct InnerConst {
         static let CellIdentifier = "MKDataTableViewCell"
-        static let segueToNext = "routeToDataNetworkRequest"
+        static let SegueToNextNetwork = "routeToDataNetworkRequest"
+        static let SegueToNextStore = "routeToDataStore"
+        static let SegueToNextUrl = "http://www.baidu.com"
     }
-
-    var thisViewModel: MKDataViewModel! {
-        get {
-            if viewModel == nil {
-                viewModel = MKDataViewModel()
-            }
-            return viewModel as! MKDataViewModel
-        }
+    
+    private var _viewModel = MKDataViewModel()
+    override var viewModel: BaseKitViewModel!{
+        get { return _viewModel }
     }
     override var listView: UIScrollView! {
-        get {
-            return tableView
-        }
+        get { return tableView }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.thisViewModel.dataSource.count
+        return _viewModel.dataSource.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        let model = self.thisViewModel.dataSource[indexPath.row] as? MKDataListModel
+        let model = _viewModel.dataSource[indexPath.row] as? MKDataListModel
         cell?.textLabel?.text = model?.title
         cell?.detailTextLabel?.text = model?.detail
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.row == 0 {
-            self.routeToName(InnerConst.segueToNext, params: ["title":"Cities"])
+        switch indexPath.row {
+        case 0:
+            self.routeToName(InnerConst.SegueToNextNetwork)
+        case 1:
+            self.routeToName(InnerConst.SegueToNextStore)
+        case 2:
+            self.routeToUrl(InnerConst.SegueToNextUrl)
+        default:
+            break
         }
     }
 }
