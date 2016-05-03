@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */; };
 		034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */; };
+		038094B21CD8AE3C00DE2170 /* DictionarySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038094B11CD8AE3C00DE2170 /* DictionarySpec.swift */; };
 		03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */; };
 		03CC0D781CD211F300D234FF /* CollectionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC0D771CD211F300D234FF /* CollectionTypeTests.swift */; };
 		18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208581CC862D800569F42 /* SingleReqViewController.swift */; };
@@ -189,6 +190,7 @@
 /* Begin PBXFileReference section */
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
 		034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableTuples.swift; sourceTree = "<group>"; };
+		038094B11CD8AE3C00DE2170 /* DictionarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySpec.swift; sourceTree = "<group>"; };
 		03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DDLog+Extension.swift"; sourceTree = "<group>"; };
 		03CC0D771CD211F300D234FF /* CollectionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTypeTests.swift; sourceTree = "<group>"; };
 		1054F8DADC2350EB4A7A137D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -593,6 +595,7 @@
 				18E5CE161CD30924001A3849 /* CachePoolTests.swift */,
 				27959A421CD3331900546424 /* PINCacheTests.swift */,
 				27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */,
+				038094B11CD8AE3C00DE2170 /* DictionarySpec.swift */,
 			);
 			path = SwiftMKitDemoTests;
 			sourceTree = "<group>";
@@ -1106,6 +1109,7 @@
 				034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */,
 				273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */,
 				27959A431CD3331900546424 /* PINCacheTests.swift in Sources */,
+				038094B21CD8AE3C00DE2170 /* DictionarySpec.swift in Sources */,
 				27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */,
 				18E5CE171CD30924001A3849 /* CachePoolTests.swift in Sources */,
 				3FC9DF0E1CBFD35900C2D938 /* SwiftMKitDemoTests.swift in Sources */,
