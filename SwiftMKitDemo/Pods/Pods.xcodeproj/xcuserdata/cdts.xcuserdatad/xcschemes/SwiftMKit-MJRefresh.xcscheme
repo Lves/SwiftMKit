@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '44779B3F13D9927B889D6297'
-               BlueprintName = 'ReactiveCocoa'
+               BlueprintIdentifier = '1C3E5851419BB87F63676707'
+               BlueprintName = 'SwiftMKit-MJRefresh'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'ReactiveCocoa.framework'>
+               BuildableName = 'MJRefresh.bundle'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
