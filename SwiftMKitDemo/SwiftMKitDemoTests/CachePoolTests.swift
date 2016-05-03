@@ -37,18 +37,29 @@ class CachePoolTests: XCTestCase {
         let result = CachePool.freeDiskspace()
         print("手机剩余存储空间为：\(result/1024/1024/1024)GB")
     }
-    let fileName = "050301"
+    
+    let fileName = "fileName-\(arc4random_uniform(10000))"
     let namespace = "Test"
     func testInsertObject() {
         let cache = CachePool(namespace: namespace)
         cache.addObject(fileName, data: "content14556")
-        
     }
     
     func testReadObject() {
         let cache = CachePool(namespace: namespace)
         let data = cache.objectForName(fileName)
         print("==> \(data)")
+    }
+    
+    func testPreparePoolForSize() {
+        let cache = CachePool(namespace: namespace)
+        cache.preparePoolForSize(0)
+    }
+    
+    func testCleanDisk() {
+        let cache = CachePool(namespace: namespace)
+        var lastSize: Double = 10
+        cache.cleanDisk(&lastSize, size: 11)
     }
     
 }
