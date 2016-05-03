@@ -27,9 +27,13 @@ public class BaseKitViewController : UIViewController {
     lazy public var indicator: IndicatorProtocol = {
         return TaskIndicator(hud: self.hud)
     }()
-    public var viewModel: BaseKitViewModel! {
-        get { return nil }
+    
+    public var viewModel:BaseKitViewModel?{
+        return nil
     }
+    
+
+    
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +51,7 @@ public class BaseKitViewController : UIViewController {
     }
     
     public func setupUI() {
-        viewModel.viewController = self
+        viewModel!.viewController = self
         bindingData()
     }
     public func bindingData() {
