@@ -83,7 +83,46 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
             }
         }
     }
+    public func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
+        DDLogError("Need to implement the function of 'getCellWithTableView'")
+        return nil
+    }
+    public func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        DDLogError("Need to implement the function of 'configureCell'")
+    }
+    public func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    }
+    public func objectByIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+        let object = listViewModel.dataSource[indexPath.section][safe: indexPath.row]
+        return object
+    }
     
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        let sections = listViewModel.dataSource.count
+        return sections
+    }
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var rows = 0
+        if listViewModel.dataSource.count > 0 {
+            rows = listViewModel.dataSource[section].count
+        }
+        return rows
+    }
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        if let object = objectByIndexPath(indexPath) {
+            configureCell(cell, object: object, indexPath: indexPath)
+        }
+        return cell
+    }
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        if let object = objectByIndexPath(indexPath) {
+            didSelectCell(cell, object: object, indexPath: indexPath)
+        }
+    }
+
    
     deinit {
     }

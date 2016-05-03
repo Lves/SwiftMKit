@@ -11,9 +11,9 @@ import UIKit
 class MKUIViewModel: BaseListViewModel {
     override init() {
         super.init()
-        self.dataSource = [MKDataListModel]()
-        self.dataSource.append(MKDataListModel(title: "Web View", detail: "UIWebView"))
-        self.dataSource.append(MKDataListModel(title: "IQKeyboardManager", detail: "Keyboard Auto Scroll"))
+        self.dataArray = [MKDataListModel]()
+        self.dataArray.append(MKDataListModel(title: "Web View", detail: "UIWebView"))
+        self.dataArray.append(MKDataListModel(title: "IQKeyboardManager", detail: "Keyboard Auto Scroll"))
     }
 
 }

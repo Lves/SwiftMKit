@@ -11,8 +11,8 @@ import UIKit
 class MKDataViewModel: BaseListViewModel {
     override init() {
         super.init()
-        self.dataSource = [MKDataListModel]()
-        self.dataSource.append(MKDataListModel(title: "Network Request", detail: "Request a url"))
-        self.dataSource.append(MKDataListModel(title: "Data Store", detail: "CoreData"))
+        self.dataArray = [MKDataListModel]()
+        self.dataArray.append(MKDataListModel(title: "Network Request", detail: "Request a url"))
+        self.dataArray.append(MKDataListModel(title: "Data Store", detail: "CoreData"))
     }
 }

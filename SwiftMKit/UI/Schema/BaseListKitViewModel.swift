@@ -22,7 +22,18 @@ public class BaseListKitViewModel: BaseKitViewModel {
     public var listIndicator: IndicatorListProtocol {
         get { return self.listViewController.listIndicator }
     }
-    var dataSource:Array<AnyObject> = Array<AnyObject>() {
+    var dataArray:[AnyObject] {
+        get {
+            if dataSource.first == nil {
+                dataSource.append([AnyObject]())
+            }
+            return dataSource.first!
+        }
+        set {
+            dataSource = [newValue]
+        }
+    }
+    var dataSource:[[AnyObject]] = [[AnyObject]]() {
         didSet {
             if self.viewController == nil {
                 return
@@ -58,19 +69,30 @@ public class BaseListKitViewModel: BaseKitViewModel {
     let listLoadNumber: UInt = 20
     let listMaxNumber: UInt = UInt.max
     
-    public func updateDataSource(newData: Array<AnyObject>?) {
+    public func updateDataArray(newData: [AnyObject]?) {
         if let data = newData {
             if dataIndex == 0 {
-                dataSource = data
+                dataArray = data
             } else {
-                dataSource += data
+                dataArray += data
             }
         } else {
             if dataIndex == 0 {
-                dataSource = []
+                dataArray = []
             }
         }
-        let tableView = self.listViewController?.listView as? UITableView
-        tableView?.reloadData()
+        if let table = self.listViewController.listView as? UITableView {
+            table.reloadData()
+        } else if let collect = self.listViewController.listView as? UICollectionView {
+            collect.reloadData()
+        }
+    }
+    public func updateDataSource(newData: [[AnyObject]]?) {
+        dataSource = newData ?? [[AnyObject]]()
+        if let table = self.listViewController.listView as? UITableView {
+            table.reloadData()
+        } else if let collect = self.listViewController.listView as? UICollectionView {
+            collect.reloadData()
+        }
     }
 }
