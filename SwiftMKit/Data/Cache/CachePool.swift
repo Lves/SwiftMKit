@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import PINCache
 
 public struct CachePoolConstant {
     // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)DefaultCapacity = MIN(剩余空间, 100M)
     static let DefaultCapacity: Double = min(100*1024*1024, CachePool.freeDiskspace()) // 默认缓存池空间 100M
+    static let baseCachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first! + "/"
 }
 
 private class CacheModel : NSObject {
@@ -34,24 +36,87 @@ private struct CacheDictKey {
 
 /// 缓存池：用于存储文件
 public class CachePool: NSObject {
-    public var basePath: String
+    public var namespace: String = "CachePool"
     public var capacity: Double = CachePoolConstant.DefaultCapacity {
         didSet {
             capacity = min(oldValue, CachePool.freeDiskspace())
         }
     }
     
-    init(basePath: String) {
-        self.basePath = basePath
+    override init() {
         super.init()
+        self.createFolder(namespace, baseUrl: NSURL(fileURLWithPath: CachePoolConstant.baseCachePath, isDirectory: true))
     }
     
-    public func addObject(name: String, data: NSObject) {}
-    public func objectForName(name: String) -> NSObject? {
-        return nil
+    init(namespace: String?) {
+        super.init()
+        self.namespace = namespace ?? self.namespace
+        self.createFolder(self.namespace, baseUrl: NSURL(fileURLWithPath: CachePoolConstant.baseCachePath, isDirectory: true))
     }
+    
+    
+    ///  缓存对象
+    ///
+    ///  :param: name 键【 MD5(name+time) 】
+    ///  :param: data 值
+    public func addObject(name: String, data: AnyObject) {
+        // 核心方法：判断是否有足够的空间存储
+        self.preparePoolForSize(0)
+        // 保存属性字典
+        cacheDict = [
+            CacheDictKey.Name : name,
+            CacheDictKey.CreateTime : NSDate()
+        ]
+        print("\(cacheDict!)")
+        // 保存对象到沙河
+        let dir = CachePoolConstant.baseCachePath + namespace + "/"
+        let filePath:String = dir + name
+        let encodedObj = NSKeyedArchiver.archivedDataWithRootObject(data)
+        if encodedObj.writeToFile(filePath, atomically: true) {
+            print("文件写入成功：\(filePath)")
+            let attrs = self.getFileAttributes(filePath)
+            print("attrs = \(attrs)")
+        } else {
+            print("文件写入失败！")
+        }
+    }
+    
+    ///  取缓存对象
+    ///
+    ///  :param: name 键
+    ///
+    ///  :returns: 值
+    public func objectForName(name: String) -> AnyObject? {
+        let dir = CachePoolConstant.baseCachePath + namespace + "/"
+        let filePath:String = dir + name
+        let manager = NSFileManager.defaultManager()
+        let data = manager.contentsAtPath(filePath)
+        return NSKeyedUnarchiver.unarchiveObjectWithData(data!)
+    }
+    
+    ///  清空磁盘缓存
     public func clearDisk() {
+        let fileManager = NSFileManager.defaultManager()
         
+        let dir = CachePoolConstant.baseCachePath + namespace
+        try! fileManager.removeItemAtPath(dir)
+        try! fileManager.createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil)
+    }
+    
+    // 缓存相关
+    var cache = PINCache.sharedCache()
+    let cacheDictKey = "CacheDict"
+    var cacheDict: Dictionary<String, AnyObject>? {
+        get {
+            return cache.objectForKey(cacheDictKey) as? Dictionary<String, AnyObject>
+        }
+        set {
+            if let value = newValue {
+                cache.setObject(value, forKey: cacheDictKey)
+            }else {
+                cache.removeObjectForKey(cacheDictKey)
+            }
+        }
     }
 }
 
@@ -67,7 +132,7 @@ extension CachePool {
     public class func freeDiskspace() -> Double {
         var totalSpace = 0.0
         var totalFreeSpace = 0.0
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
         var dict:[String: AnyObject]?
         do {
             dict = try NSFileManager.defaultManager().attributesOfFileSystemForPath(paths.last!)
@@ -82,8 +147,24 @@ extension CachePool {
         return totalFreeSpace
     }
     
-    ///  获取文件基本信息
-    private func fileInfo() -> String? {
-        return nil
+    ///  创建文件夹
+    private func createFolder(name: String,baseUrl: NSURL){
+        let manager = NSFileManager.defaultManager()
+        let folder = baseUrl.URLByAppendingPathComponent(name, isDirectory: true)
+        print("文件夹: \(folder)")
+        let exist = manager.fileExistsAtPath(folder.path!)
+        if !exist {
+            try! manager.createDirectoryAtURL(folder, withIntermediateDirectories: true, attributes: nil)
+        }
     }
+    
+    ///  获取文件属性
+    ///
+    ///  :param: filePath 文件路径
+    private func getFileAttributes(filePath: String) -> [String: AnyObject]? {
+        let manager = NSFileManager.defaultManager()
+        let attributes = try? manager.attributesOfItemAtPath(filePath)
+        return attributes
+    }
+
 }
