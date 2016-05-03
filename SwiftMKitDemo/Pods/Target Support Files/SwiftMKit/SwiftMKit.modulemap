@@ -1,6 +1,0 @@
-framework module SwiftMKit {
-  umbrella header "SwiftMKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
