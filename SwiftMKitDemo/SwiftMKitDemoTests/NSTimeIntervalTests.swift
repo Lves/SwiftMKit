@@ -61,7 +61,7 @@ class NSTimeIntervalTests: XCTestCase {
         validateItem((2,1,12), tuple: test.secondsToHHmmss(), expectResult: "02:01:12", result: test.secondsToHHmmssString(), source: test)
         
         test = -3600
-        validateItem((0,0,0), tuple: test.secondsToHHmmss(), expectResult: "00:00:00", result: test.secondsToHHmmssString(), source: test)
+        validateItem((-1,0,0), tuple: test.secondsToHHmmss(), expectResult: "-1:00:00", result: test.secondsToHHmmssString(), source: test)
         
     }
     

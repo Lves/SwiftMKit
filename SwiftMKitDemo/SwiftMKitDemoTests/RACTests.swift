@@ -8,6 +8,7 @@
 
 import XCTest
 import ReactiveCocoa
+import Result
 @testable import SwiftMKitDemo
 
 class RACTests: XCTestCase {
@@ -138,6 +139,29 @@ class RACTests: XCTestCase {
         textfield.text = message
         textfield.sendActionsForControlEvents(.EditingChanged)
         self.waitForExpectationsWithTimeout(100, handler: nil)
+    }
+    
+    var button: UIButton = UIButton()
+    
+    func testRACSignalCombineAndMap() {
+        let validTextFieldSignal = textfield.rac_textSignal().toSignalProducer().map{ ($0 as! String).length >= 3 }.flatMapError { _ in return SignalProducer<Bool, NoError>.empty }
+        DynamicProperty(object: self.button, keyPath: "enabled") <~ combineLatest(validTextFieldSignal, mproperty.producer).map { textValid, value in
+            let result = textValid && value > 0
+            print("\(textValid) \(value): \(result)")
+            return result
+        }
+        mproperty.value = 0
+        textfield.text = "12"
+        textfield.sendActionsForControlEvents(.EditingChanged)
+        XCTAssertFalse(button.enabled)
+        textfield.text = "123"
+        textfield.sendActionsForControlEvents(.EditingChanged)
+        XCTAssertFalse(button.enabled)
+        mproperty.value = 1
+        XCTAssertTrue(button.enabled)
+        textfield.text = "12"
+        textfield.sendActionsForControlEvents(.EditingChanged)
+        XCTAssertFalse(button.enabled)
     }
     
 
