@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B3788C33F86A99F242F0A58A'
-               BlueprintName = 'MBProgressHUD'
+               BlueprintIdentifier = '82179CB4C2174D2F558EF45B'
+               BlueprintName = 'SwiftMKit-MJRefresh'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'MBProgressHUD.framework'>
+               BuildableName = 'MJRefresh.bundle'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
