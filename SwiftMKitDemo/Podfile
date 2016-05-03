@@ -6,6 +6,11 @@ platform :ios, '8.0'
 
 use_frameworks!
 
+def testing_pods
+    pod 'Quick'
+    pod 'Nimble'
+end
+
 pod 'CocoaLumberjack/Swift'
 pod 'ReactiveCocoa'
 pod 'Alamofire'
@@ -20,3 +25,11 @@ pod 'PINCache'
 pod 'SnapKit'
 pod 'HanekeSwift'
 pod 'MBProgressHUD'
+
+target 'SwiftMKitDemoTests' do
+    testing_pods
+end
+
+target 'SwiftMKitDemoUITests' do
+    testing_pods
+end
