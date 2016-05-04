@@ -21,39 +21,24 @@ class CachePoolTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
-//    func testFreeDiskSpace() {
-//        let result = CachePool.freeDiskspace()
-//        print("手机剩余存储空间为：\(result/1024/1024/1024)GB")
-//    }
-    
     let fileName = "fileName-\(arc4random_uniform(10000))"
     let namespace = "Test"
     func testMoveFile() {
         let cache = CachePool(namespace: namespace)
         let filePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first! + "/Test/com.pinterest.PINDiskCache.PINCache/CacheDict"
-        cache.addObject(fileName, filePath: filePath)
+        let encryptName = cache.addObject(fileName, filePath: filePath)
         let dir = cache.cachePath()
-        let destFilePath:String = dir + fileName
+        let destFilePath:String = dir + encryptName
         assert(cache.fileManager.fileExistsAtPath(destFilePath), "文件复制失败！")
     }
     
     func testInsertImage() {
         let cache = CachePool(namespace: namespace)
-        cache.addObject(fileName, image: UIImage(named: "icon_user_head")!)
+        let encryptName = cache.addObject(fileName, image: UIImage(named: "icon_user_head")!)
+        NSThread.sleepForTimeInterval(1)
+        assert(cache.objectForName(encryptName) != nil, "有延迟，或者文件被删除，或者缓存失败！")
     }
-    
+
     func testReadObject() {
         let cache = CachePool(namespace: namespace)
         let data = cache.objectForName("fileName-6571")
@@ -79,6 +64,11 @@ class CachePoolTests: XCTestCase {
     func testFreeDiskspace() {
         let (totalSpace, totalFreeSpace) = CachePool.freeDiskspace()
         assert(totalSpace < totalFreeSpace, "获取设备可用空间大小失败")
+    }
+    
+    func testMD5() {
+        let encryptStr = CachePool.md5(string: "Hello")
+        assert(encryptStr == "8b1a9953c4611296a827abf8c47804d7", "md5加密失败！")
     }
     
 }

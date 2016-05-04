@@ -18,6 +18,7 @@ public struct CachePoolConstant {
 
 private class CacheModel : NSObject, NSCoding {
     var name: String = ""
+    var encryptName: String = ""
     var createTime: NSTimeInterval = 0
     var size: Double = 0
     var lastVisitTime: NSTimeInterval = 0
@@ -26,6 +27,7 @@ private class CacheModel : NSObject, NSCoding {
     
     @objc func encodeWithCoder(aCoder: NSCoder){
         aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.encryptName, forKey: "encryptName")
         aCoder.encodeObject(self.createTime, forKey: "createTime")
         aCoder.encodeDouble(self.size, forKey: "size")
         aCoder.encodeObject(self.mimeType, forKey: "mimeType")
@@ -34,6 +36,7 @@ private class CacheModel : NSObject, NSCoding {
     @objc required init(coder aDecoder: NSCoder) {
         super.init()
         self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.encryptName = aDecoder.decodeObjectForKey("encryptName") as! String
         self.createTime = aDecoder.decodeObjectForKey("createTime") as! NSTimeInterval
         self.size = aDecoder.decodeDoubleForKey("size")
         self.mimeType = aDecoder.decodeObjectForKey("mimeType") as! String
@@ -44,7 +47,7 @@ private class CacheModel : NSObject, NSCoding {
     }
     
     override var description: String {
-        return "\(name)  \(createTime)  \(size)"
+        return "\(name)  \(encryptName)  \(createTime)  \(size)"
     }
 }
 
@@ -77,72 +80,92 @@ public class CachePool: NSObject {
     ///
     ///  :param: name 键【 MD5(name+time) 】
     ///  :param: data 值
-    public func addObject(name: String, data: NSData) {
-        // 核心方法：判断是否有足够的空间存储
-        // 保存属性字典
-        let cacheObj = CacheModel()
-        self.preparePoolForSize(Double(data.length))
-        // 已缓存的字典
-        var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
-        print("begin:已缓存的字典：\(cachedDict)")
-        cacheObj.name = name
-        cacheObj.createTime = NSDate().timeIntervalSince1970
-        cacheObj.size = Double(data.length)
-        cachedDict[name] = cacheObj
-        // 同步到PINCache
-        cacheDict = cachedDict
-        let cachedDict2 = cache!.objectForKey(cacheDictKey) as! [String: AnyObject]
-        print("end:已缓存的字典：\(cachedDict2)")
+    ///
+    ///  :returns: 加密后的文件名
+    public func addObject(name: String, data: NSData) -> String {
+        // 更新配置文件
+        let timestamp = NSDate().timeIntervalSince1970
+        let encryptName = self.updateConfig(name, timestamp:timestamp, size: Double(data.length))
         // 保存对象到沙河
         let dir = self.cachePath()
-        let filePath:String = dir + name
-        if data.writeToFile(filePath, atomically: true) {
-            print("文件写入成功：\(filePath)")
-//            let attrs = self.getFileAttributes(filePath)
-//            print("attrs = \(attrs)")
-//            // 更新size
-//            let size = attrs![NSFileSize] as! Double
-//            let model = cachedDict[name]
-//            model?.size = size
-//            cachedDict[name] = cacheObj
-//            // 同步到PINCache
-//            cacheDict = cachedDict
-//            print("\(model)")
-        } else {
-            print("文件写入失败！")
+        let filePath:String = dir + encryptName
+        Async.background {
+            if data.writeToFile(filePath, atomically: true) {
+                print("文件写入成功：\(filePath)")
+            } else {
+                print("文件写入失败！")
+            }
         }
+        return encryptName
     }
     
     ///  缓存图片
     ///
     ///  :param: name  文件名称
     ///  :param: image 图片
-    public func addObject(name: String, image: UIImage) {
+    ///
+    ///  :returns: 加密后的文件名
+    public func addObject(name: String, image: UIImage) -> String {
         let data = UIImagePNGRepresentation(image)
-        self .addObject(name, data: data!)
+        return self.addObject(name, data: data!)
     }
     
     ///  缓存文件（拷贝）
     ///
     ///  :param: name     文件名称
     ///  :param: filePath 源地址
-    public func addObject(name: String, filePath: String) {
+    ///
+    ///  :returns: 加密后的文件名
+    public func addObject(name: String, filePath: String) -> String {
         // 拷贝文件
         // 生成目标路径
+        let timestamp = NSDate().timeIntervalSince1970
+        let nameTime = name + "\(timestamp)"
+        let encryptName = CachePool.md5(string: nameTime)
         let dir = self.cachePath()
-        let destFilePath:String = dir + name
-        try! fileManager.moveItemAtPath(filePath, toPath: destFilePath)
+        let destFilePath:String = dir + encryptName
+        try! fileManager.copyItemAtPath(filePath, toPath: destFilePath)
         DDLogInfo("filePath: \(filePath)")
         DDLogInfo("destFilePath: \(destFilePath)")
-        // 读取文件
-        let data = NSData(contentsOfFile: destFilePath)
-        self.addObject(name, data: data!)
+        // 获取文件信息
+        if let attrs = self.getFileAttributes(destFilePath) {
+            DDLogInfo("file info:\(attrs)")
+            // 更新配置文件
+            let size = attrs[NSFileSize] as! Double
+            return self.updateConfig(name, timestamp:timestamp, size: size)
+        }
+        return name
+    }
+    
+    ///  更新配置文件
+    ///
+    ///  :param: name 文件名
+    ///  :param: size 文件大小
+    ///
+    ///  :returns: 加密后的文件名
+    private func updateConfig(name: String, timestamp: NSTimeInterval, size: Double) -> String {
+        // 核心方法：判断是否有足够的空间存储
+        self.preparePoolForSize(size)
+        let cacheObj = CacheModel()
+        // 已缓存的字典
+        var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+        let nameTime = name + "\(timestamp)"
+        let encryptName = CachePool.md5(string: nameTime)
+        cacheObj.name = name
+        cacheObj.encryptName = encryptName
+        cacheObj.createTime = timestamp
+        cacheObj.size = size
+        cachedDict[name] = cacheObj
+        // 同步到PINCache
+        cacheDict = cachedDict
+        return encryptName
     }
     
     ///  取缓存对象
     public func objectForName(name: String) -> NSData? {
         let dir = self.cachePath()
         let filePath:String = dir + name
+        DDLogInfo("objectForName filePath：" + filePath)
         let data = fileManager.contentsAtPath(filePath)
         if data == nil {
             return nil
@@ -184,7 +207,6 @@ public class CachePool: NSObject {
         let freeFileSystemSizeInBytes = dict![NSFileSystemFreeSize]
         totalSpace = fileSystemSizeInBytes!.doubleValue
         totalFreeSpace = freeFileSystemSizeInBytes!.doubleValue
-        // print("总空间：\(totalSpace/1024/1024/1024)GB <====>  可用空间：\(totalFreeSpace/1024/1024/1024)GB")
         return (totalSpace, totalFreeSpace)
     }
     
@@ -290,5 +312,28 @@ extension CachePool {
                 break
             }
         }
+    }
+    
+    public class func md5(string string: String) -> String {
+        var digest = [UInt8](count: Int(CC_MD5_DIGEST_LENGTH), repeatedValue: 0)
+        if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
+            CC_MD5(data.bytes, CC_LONG(data.length), &digest)
+        }
+        
+        var digestHex = ""
+        for index in 0..<Int(CC_MD5_DIGEST_LENGTH) {
+            digestHex += String(format: "%02x", digest[index])
+        }
+        DDLogError("加密前：\(string)")
+        DDLogError("加密后：\(digestHex)")
+        return digestHex
+    }
+    
+    private func dateStringToTimestamp(stringTime: String) -> Double {
+        let format = NSDateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = format.dateFromString(stringTime)
+        let datestamp = date!.timeIntervalSince1970
+        return datestamp
     }
 }
