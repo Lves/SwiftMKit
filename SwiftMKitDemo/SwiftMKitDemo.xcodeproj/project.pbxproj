@@ -59,6 +59,8 @@
 		278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */; };
 		278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */; };
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
+		2789749B1CD9A07300AC8700 /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */; };
+		2789749C1CD9A07300AC8700 /* ReachabilitySwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA411CD19849008AC629 /* BaseKitEntity.swift */; };
 		278CAA461CD1DCBC008AC629 /* JSPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA451CD1DCBC008AC629 /* JSPatch.framework */; };
 		278CAA471CD1DCBC008AC629 /* JSPatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA451CD1DCBC008AC629 /* JSPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -170,6 +172,7 @@
 				278CAA471CD1DCBC008AC629 /* JSPatch.framework in Embed Frameworks */,
 				27959A411CD3314E00546424 /* PINCache.framework in Embed Frameworks */,
 				273ACFA61CC9AD5A00EB341D /* MagicalRecord.framework in Embed Frameworks */,
+				2789749C1CD9A07300AC8700 /* ReachabilitySwift.framework in Embed Frameworks */,
 				3F9707FC1CC67063002BBC83 /* MJRefresh.framework in Embed Frameworks */,
 				278CAA521CD1E944008AC629 /* SnapKit.framework in Embed Frameworks */,
 				27959A461CD33C1300546424 /* IQKeyboardManager.framework in Embed Frameworks */,
@@ -242,6 +245,7 @@
 		278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchKitViewModel.swift; sourceTree = "<group>"; };
 		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
+		2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../Debug-iphonesimulator/ReachabilitySwift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		278CAA411CD19849008AC629 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
 		278CAA451CD1DCBC008AC629 /* JSPatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSPatch.framework; path = "../Debug-iphonesimulator/JSPatch.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = WebViewJavascriptBridge.framework; path = "../Debug-iphonesimulator/WebViewJavascriptBridge.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +331,7 @@
 				278CAA461CD1DCBC008AC629 /* JSPatch.framework in Frameworks */,
 				27959A401CD3314E00546424 /* PINCache.framework in Frameworks */,
 				273ACFA51CC9AD5A00EB341D /* MagicalRecord.framework in Frameworks */,
+				2789749B1CD9A07300AC8700 /* ReachabilitySwift.framework in Frameworks */,
 				3F9707FB1CC67063002BBC83 /* MJRefresh.framework in Frameworks */,
 				278CAA511CD1E944008AC629 /* SnapKit.framework in Frameworks */,
 				27959A451CD33C1300546424 /* IQKeyboardManager.framework in Frameworks */,
@@ -773,6 +778,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */,
 				27959A441CD33C1200546424 /* IQKeyboardManager.framework */,
 				278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */,
 				27959A3F1CD3314E00546424 /* PINCache.framework */,
