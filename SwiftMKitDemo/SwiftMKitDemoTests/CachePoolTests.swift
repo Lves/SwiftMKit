@@ -33,24 +33,33 @@ class CachePoolTests: XCTestCase {
         }
     }
     
-    func testFreeDiskSpace() {
-        let result = CachePool.freeDiskspace()
-        print("手机剩余存储空间为：\(result/1024/1024/1024)GB")
-    }
+//    func testFreeDiskSpace() {
+//        let result = CachePool.freeDiskspace()
+//        print("手机剩余存储空间为：\(result/1024/1024/1024)GB")
+//    }
     
     let fileName = "fileName-\(arc4random_uniform(10000))"
     let namespace = "Test"
-    func testInsertObject() {
+    func testMoveFile() {
         let cache = CachePool(namespace: namespace)
-        cache.addObject(fileName, data: "content14556")
+        let filePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first! + "/Test/com.pinterest.PINDiskCache.PINCache/CacheDict"
+        cache.addObject(fileName, filePath: filePath)
+        let dir = cache.cachePath()
+        let destFilePath:String = dir + fileName
+        assert(cache.fileManager.fileExistsAtPath(destFilePath), "文件复制失败！")
+    }
+    
+    func testInsertImage() {
+        let cache = CachePool(namespace: namespace)
+        cache.addObject(fileName, image: UIImage(named: "icon_user_head")!)
     }
     
     func testReadObject() {
         let cache = CachePool(namespace: namespace)
-        let data = cache.objectForName(fileName)
+        let data = cache.objectForName("fileName-6571")
         print("==> \(data)")
     }
-    
+
     func testPreparePoolForSize() {
         let cache = CachePool(namespace: namespace)
         cache.preparePoolForSize(0)
@@ -60,6 +69,16 @@ class CachePoolTests: XCTestCase {
         let cache = CachePool(namespace: namespace)
         var lastSize: Double = 10
         cache.cleanDisk(&lastSize, size: 11)
+    }
+    
+    func testCachedDiskspace() {
+        let cache = CachePool(namespace: namespace)
+        assert(cache.cachedDiskspace() > 0, "获取已缓存文件大小失败")
+    }
+    
+    func testFreeDiskspace() {
+        let (totalSpace, totalFreeSpace) = CachePool.freeDiskspace()
+        assert(totalSpace < totalFreeSpace, "获取设备可用空间大小失败")
     }
     
 }

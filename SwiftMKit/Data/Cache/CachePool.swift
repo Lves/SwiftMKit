@@ -11,8 +11,8 @@ import PINCache
 import CocoaLumberjack
 
 public struct CachePoolConstant {
-    // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)DefaultCapacity = MIN(剩余空间, 100M)
-    static let DefaultCapacity: Double = min(100*1024*1024, CachePool.freeDiskspace()) // 默认缓存池空间 100M
+    // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)
+    static let DefaultCapacity: Double = min(100*1024*1024, CachePool.freeDiskspace().1) // 默认缓存池空间 100M
     static let baseCachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first! + "/"
 }
 
@@ -28,6 +28,7 @@ private class CacheModel : NSObject, NSCoding {
         aCoder.encodeObject(self.name, forKey: "name")
         aCoder.encodeObject(self.createTime, forKey: "createTime")
         aCoder.encodeDouble(self.size, forKey: "size")
+        aCoder.encodeObject(self.mimeType, forKey: "mimeType")
     }
     
     @objc required init(coder aDecoder: NSCoder) {
@@ -35,6 +36,7 @@ private class CacheModel : NSObject, NSCoding {
         self.name = aDecoder.decodeObjectForKey("name") as! String
         self.createTime = aDecoder.decodeObjectForKey("createTime") as! NSTimeInterval
         self.size = aDecoder.decodeDoubleForKey("size")
+        self.mimeType = aDecoder.decodeObjectForKey("mimeType") as! String
     }
     
     override init() {
@@ -46,16 +48,6 @@ private class CacheModel : NSObject, NSCoding {
     }
 }
 
-private struct CacheDictKey {
-    static let CreateTime = "createTime"
-    static let LastVisitTime = "lastVisitTime"
-    static let ExpireTime = "expireTime"
-    static let Size = "size"
-    static let Name = "name"
-    static let MimeType = "mimeType"
-}
-
-
 /// 缓存池：用于存储文件
 public class CachePool: NSObject {
     let fileManager = NSFileManager.defaultManager()
@@ -63,7 +55,7 @@ public class CachePool: NSObject {
     public var namespace: String = "CachePool"
     public var capacity: Double = CachePoolConstant.DefaultCapacity {
         didSet {
-            capacity = min(oldValue, CachePool.freeDiskspace())
+            capacity = min(oldValue, CachePool.freeDiskspace().1)
         }
     }
     
@@ -85,17 +77,17 @@ public class CachePool: NSObject {
     ///
     ///  :param: name 键【 MD5(name+time) 】
     ///  :param: data 值
-    public func addObject(name: String, data: AnyObject) {
+    public func addObject(name: String, data: NSData) {
         // 核心方法：判断是否有足够的空间存储
-        let encodedObj = NSKeyedArchiver.archivedDataWithRootObject(data)
-        self.preparePoolForSize(Double(encodedObj.length))
+        // 保存属性字典
+        let cacheObj = CacheModel()
+        self.preparePoolForSize(Double(data.length))
         // 已缓存的字典
         var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
         print("begin:已缓存的字典：\(cachedDict)")
-        // 保存属性字典
-        let cacheObj = CacheModel()
         cacheObj.name = name
         cacheObj.createTime = NSDate().timeIntervalSince1970
+        cacheObj.size = Double(data.length)
         cachedDict[name] = cacheObj
         // 同步到PINCache
         cacheDict = cachedDict
@@ -104,33 +96,58 @@ public class CachePool: NSObject {
         // 保存对象到沙河
         let dir = self.cachePath()
         let filePath:String = dir + name
-        if encodedObj.writeToFile(filePath, atomically: true) {
+        if data.writeToFile(filePath, atomically: true) {
             print("文件写入成功：\(filePath)")
-            let attrs = self.getFileAttributes(filePath)
-            print("attrs = \(attrs)")
-            // 更新size
-            let size = attrs![NSFileSize] as! Double
-            let model = cachedDict[name]
-            model?.size = size
-            cachedDict[name] = cacheObj
-            // 同步到PINCache
-            cacheDict = cachedDict
-            print("\(model)")
+//            let attrs = self.getFileAttributes(filePath)
+//            print("attrs = \(attrs)")
+//            // 更新size
+//            let size = attrs![NSFileSize] as! Double
+//            let model = cachedDict[name]
+//            model?.size = size
+//            cachedDict[name] = cacheObj
+//            // 同步到PINCache
+//            cacheDict = cachedDict
+//            print("\(model)")
         } else {
             print("文件写入失败！")
         }
     }
     
+    ///  缓存图片
+    ///
+    ///  :param: name  文件名称
+    ///  :param: image 图片
+    public func addObject(name: String, image: UIImage) {
+        let data = UIImagePNGRepresentation(image)
+        self .addObject(name, data: data!)
+    }
+    
+    ///  缓存文件（拷贝）
+    ///
+    ///  :param: name     文件名称
+    ///  :param: filePath 源地址
+    public func addObject(name: String, filePath: String) {
+        // 拷贝文件
+        // 生成目标路径
+        let dir = self.cachePath()
+        let destFilePath:String = dir + name
+        try! fileManager.moveItemAtPath(filePath, toPath: destFilePath)
+        DDLogInfo("filePath: \(filePath)")
+        DDLogInfo("destFilePath: \(destFilePath)")
+        // 读取文件
+        let data = NSData(contentsOfFile: destFilePath)
+        self.addObject(name, data: data!)
+    }
+    
     ///  取缓存对象
-    public func objectForName(name: String) -> AnyObject? {
+    public func objectForName(name: String) -> NSData? {
         let dir = self.cachePath()
         let filePath:String = dir + name
-        let manager = NSFileManager.defaultManager()
-        let data = manager.contentsAtPath(filePath)
+        let data = fileManager.contentsAtPath(filePath)
         if data == nil {
             return nil
         }
-        return NSKeyedUnarchiver.unarchiveObjectWithData(data!)
+        return data!
     }
     
     ///  清空磁盘缓存
@@ -138,6 +155,37 @@ public class CachePool: NSObject {
         let dir = CachePoolConstant.baseCachePath + namespace
         try! fileManager.removeItemAtPath(dir)
         try! fileManager.createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil)
+    }
+    
+    ///  已缓存对象大小
+    public func cachedDiskspace() -> Double {
+        // 遍历配置文件
+        // 取出缓存字典
+        let cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+        var cachedSize: Double = 0
+        for value in cachedDict.values {
+            cachedSize += value.size
+        }
+        return cachedSize
+    }
+    
+    /// 获取设备剩余可用空间
+    public class func freeDiskspace() -> (Double, Double) {
+        var totalSpace = 0.0
+        var totalFreeSpace = 0.0
+        let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
+        var dict:[String: AnyObject]?
+        do {
+            dict = try NSFileManager.defaultManager().attributesOfFileSystemForPath(paths.last!)
+        } catch {
+            print("error")
+        }
+        let fileSystemSizeInBytes = dict![NSFileSystemSize]
+        let freeFileSystemSizeInBytes = dict![NSFileSystemFreeSize]
+        totalSpace = fileSystemSizeInBytes!.doubleValue
+        totalFreeSpace = freeFileSystemSizeInBytes!.doubleValue
+        // print("总空间：\(totalSpace/1024/1024/1024)GB <====>  可用空间：\(totalFreeSpace/1024/1024/1024)GB")
+        return (totalSpace, totalFreeSpace)
     }
     
     // 缓存相关
@@ -162,8 +210,9 @@ extension CachePool {
     ///  :param: size 即将存储的文件大小
     public func preparePoolForSize(size: Double) {
         // 剩余空间
-        var lastSize = CachePool.freeDiskspace()
+        var (_, lastSize) = CachePool.freeDiskspace()
         // 比较 设备剩余可用空间 & 文件大小
+        lastSize = min(lastSize, capacity)  // 取出最小可用空间
         if lastSize > size {
             // 正常保存
             print("设备可用空间：\(CachePool.freeDiskspace()), 文件大小：\(size), 正常保存")
@@ -172,25 +221,6 @@ extension CachePool {
             print("设备可用空间：\(CachePool.freeDiskspace()), 文件大小：\(size), 删除文件后保存")
             self.cleanDisk(&lastSize, size: size)
         }
-    }
-    
-    /// 获取设备剩余可用空间
-    public class func freeDiskspace() -> Double {
-        var totalSpace = 0.0
-        var totalFreeSpace = 0.0
-        let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
-        var dict:[String: AnyObject]?
-        do {
-            dict = try NSFileManager.defaultManager().attributesOfFileSystemForPath(paths.last!)
-        } catch {
-            print("error")
-        }
-        let fileSystemSizeInBytes = dict![NSFileSystemSize]
-        let freeFileSystemSizeInBytes = dict![NSFileSystemFreeSize]
-        totalSpace = fileSystemSizeInBytes!.doubleValue
-        totalFreeSpace = freeFileSystemSizeInBytes!.doubleValue
-//        print("总空间：\(totalSpace/1024/1024/1024)GB <====>  可用空间：\(totalFreeSpace/1024/1024/1024)GB")
-        return totalFreeSpace
     }
     
     ///  创建文件夹
@@ -210,7 +240,7 @@ extension CachePool {
         return attributes
     }
     
-    private func cachePath() -> String {
+    public func cachePath() -> String {
         return CachePoolConstant.baseCachePath + namespace + "/"
     }
     
@@ -252,6 +282,7 @@ extension CachePool {
             }
             // 从配置文件中删除
             cachedDict.removeValueForKey(key)
+            cacheDict = cachedDict
             // 更新剩余空间大小
             lastSize += model.size
             DDLogError("remove=\(key), save=\(model.size) byte  lastSize=\(lastSize)")
