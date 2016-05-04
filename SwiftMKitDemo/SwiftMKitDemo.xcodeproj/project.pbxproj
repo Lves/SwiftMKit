@@ -62,6 +62,7 @@
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
 		2789749B1CD9A07300AC8700 /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */; };
 		2789749C1CD9A07300AC8700 /* ReachabilitySwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2789749E1CD9DCD400AC8700 /* CacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */; };
 		278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA411CD19849008AC629 /* BaseKitEntity.swift */; };
 		278CAA461CD1DCBC008AC629 /* JSPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA451CD1DCBC008AC629 /* JSPatch.framework */; };
 		278CAA471CD1DCBC008AC629 /* JSPatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA451CD1DCBC008AC629 /* JSPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -248,6 +249,7 @@
 		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
 		2789749A1CD9A07300AC8700 /* ReachabilitySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../Debug-iphonesimulator/ReachabilitySwift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProtocol.swift; sourceTree = "<group>"; };
 		278CAA411CD19849008AC629 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
 		278CAA451CD1DCBC008AC629 /* JSPatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSPatch.framework; path = "../Debug-iphonesimulator/JSPatch.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		278CAA481CD1DCBC008AC629 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = WebViewJavascriptBridge.framework; path = "../Debug-iphonesimulator/WebViewJavascriptBridge.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -456,6 +458,7 @@
 		2778BA6F1CCF3AD3009B926C /* Cache */ = {
 			isa = PBXGroup;
 			children = (
+				2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */,
 				2778BA701CCF3B01009B926C /* CachePool.swift */,
 			);
 			path = Cache;
@@ -1079,6 +1082,7 @@
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
+				2789749E1CD9DCD400AC8700 /* CacheProtocol.swift in Sources */,
 				27959A4C1CD3446000546424 /* MKUIViewController.swift in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
