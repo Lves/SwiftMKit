@@ -28,8 +28,8 @@ public class BaseKitViewController : UIViewController {
         return TaskIndicator(hud: self.hud)
     }()
     
-    public var viewModel:BaseKitViewModel?{
-        return nil
+    public var viewModel: BaseKitViewModel? {
+        get { return nil }
     }
     
 
@@ -51,7 +51,7 @@ public class BaseKitViewController : UIViewController {
     }
     
     public func setupUI() {
-        viewModel!.viewController = self
+        viewModel?.viewController = self
         bindingData()
     }
     public func bindingData() {
