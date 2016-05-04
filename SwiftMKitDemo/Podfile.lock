@@ -10,6 +10,7 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
+  - EZSwiftExtensions (1.4)
   - HanekeSwift (0.10.1)
   - IQKeyboardManager (4.0.2)
   - JSPatch (1.0):
@@ -46,6 +47,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack/Swift
+  - EZSwiftExtensions
   - HanekeSwift
   - IQKeyboardManager
   - JSPatch
@@ -65,6 +67,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  EZSwiftExtensions: db7be0022fce8e92cdfe0fadddaf835fcd9696db
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   IQKeyboardManager: 2341089c4ae25fa2fa82ce356a259fcd267dc6b6
   JSPatch: c689ea4dde17441f2f4a95d40dfedb8900c20099

@@ -10,6 +10,7 @@ import XCTest
 import Quick
 import Nimble
 import Foundation
+import EZSwiftExtensions
 @testable import SwiftMKitDemo
 
 class DictionarySpec: QuickSpec {
