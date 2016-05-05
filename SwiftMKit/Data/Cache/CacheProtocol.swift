@@ -22,20 +22,18 @@ public protocol CacheModelProtocol {
     
 }
 public protocol CachePoolProtocol {
-    var capacity: Double { get }
+    var capacity: Double { get set }
     var size: Double { get set }
     var basePath: NSURL { get set }
     var name: String { get set }
     
-    func addData(data: NSData, name: String?) -> String
-    func addImage(image: UIImage, name: String?) -> String
-    func addFile(filePath: NSURL, name: String?) -> String
+    func addCache(data: NSData, name: String?) -> String
+    func addCache(image: UIImage, name: String?) -> String
+    func addCache(filePath: NSURL, name: String?) -> String
     
-    func getData(key: String) -> NSData?
-    func getImage(key: String) -> UIImage?
+    func getCache(key: String) -> AnyObject?
     
-    func removeData(key: String) -> Bool
-    func removeImage(key: String) -> Bool
+    func removeCache(key: String) -> Bool
     
     func all() -> [CacheModelProtocol]?
     

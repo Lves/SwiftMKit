@@ -17,159 +17,253 @@ class CachePoolSpec: QuickSpec {
     var cachePool: CachePoolProtocol?
 
     func testClear() {
-        describe("EnouphCache"){
+        describe("clear cache"){
             context("clear will be success"){
-                let isClear = self.cachePool?.clear()
+                let isCleared = self.cachePool?.clear()
                 it("return true"){
-                    expect(isClear).to(beTrue())
+                    expect(isCleared).to(beTrue())
                 }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
-                }
-            }
-        }
-    }
-    
-    func testEnouphCache() {
-        describe("EnouphCache") {
-            
-            context("imagename is notnil") {
-                
-                self.cachePool?.clear()
-                let fileName = "icon_user_head"
-                let inImage = UIImage(named: fileName)!
-                it("inimage should exist") {
-                    expect(inImage).toNot(beNil())
-                }
-                
-                let uniqueName = (self.cachePool?.addImage(inImage, name: fileName))!
-                it("key should exist") {
-                    expect(uniqueName).toNot(beNil())
-                }
-                
-                let outImage: UIImage = (self.cachePool?.getImage(uniqueName))!
-                it("outimage should equal to inimage") {
-                    expect(outImage).to(equal(inImage))
-                }
-                
-                it("cachesize is less than cachecapacity"){
-                    expect((self.cachePool?.size)!).to(beLessThan((self.cachePool?.capacity)!))
-                }
-                
-                let isRemoved = self.cachePool?.removeImage(uniqueName)
-                it("removeimage should be success"){
-                    expect(isRemoved).to(beTrue())
-                }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
-                }
-            }
-            
-            context("imagename is nil") {
-                self.cachePool?.clear()
-                
-                let fileName = ""
-                let inImage = UIImage(named: fileName)!
-                it("inimage should be nil") {
-                    expect(inImage).to(beNil())
-                }
-                
-                let uniqueName = (self.cachePool?.addImage(inImage, name: fileName))!
-                it("key should be nil") {
-                    expect(uniqueName).to(beNil())
-                }
-                
-                let outImage: UIImage = (self.cachePool?.getImage(uniqueName))!
-                it("outimage should be nil") {
-                    expect(outImage).to(beNil())
-                }
-                
-                let cacheUsedSize = (self.cachePool?.capacity)! - (self.cachePool?.size)!
-                it("filesize should be 0"){
-                    expect(cacheUsedSize).to(equal(0))
-                }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
-                }
-                
-                let isRemoved = self.cachePool?.removeImage(uniqueName)
-                it("removeimage should be success"){
-                    expect(isRemoved).to(beTrue())
-                }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
-                }
-            }
-            
-            context("NSdataname is notnil") {
-                self.cachePool?.clear()
-                
-                let fileName = "icon_user_head"
-                let inData: NSData = (UIImage(named: fileName)!).asData()
-                it("indata should exist") {
-                    expect(inData).toNot(beNil())
-                }
-                
-                let uniqueName = (self.cachePool?.addData(inData, name: fileName))!
-                it("key should exist") {
-                    expect(uniqueName).toNot(beNil())
-                }
-                
-                let outData: NSData = (self.cachePool?.getData(uniqueName))!
-                it("outdata should equal to indata") {
-                    expect(outData).to(equal(inData))
-                }
-                it("cachesize is less than cachecapacity"){
-                    expect((self.cachePool?.size)!).to(beLessThan((self.cachePool?.capacity)!))
-                }
-                
-                let isRemoved = self.cachePool?.removeData(uniqueName)
-                it("removedata should be success"){
-                    expect(isRemoved).to(beTrue())
-                }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
-                }
-            }
-            
-            context("NSdataname is nil") {
-                self.cachePool?.clear()
-                
-                let fileName = ""
-                let inData: NSData = (UIImage(named: fileName)!).asData()
-                it("indata should be nil") {
-                    expect(inData).to(beNil())
-                }
-                
-                let uniqueName = (self.cachePool?.addData(inData, name: fileName))!
-                it("key should be nil") {
-                    expect(uniqueName).to(beNil())
-                }
-                
-                let outData: NSData = (self.cachePool?.getData(uniqueName))!
-                it("outdata should be nil") {
-                    expect(outData).to(beNil())
-                }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
-                }
-                
-                let isRemoved = self.cachePool?.removeData(uniqueName)
-                it("removeimage should be success"){
-                    expect(isRemoved).to(beTrue())
-                }
-                it("cachesize should be equal to cachecapacity"){
-                    expect(self.cachePool?.size).to(equal(self.cachePool?.capacity))
+                it("cache size should be equal to capacity"){
+                    expect(self.cachePool?.size).to(equal(0.0))
                 }
             }
         }
     }
     
-        func testNotEnouphCache() {
-            describe("notEnouphCache") {
+    func testCacheModel() {
+        describe("cache model"){
+            context("cache model should work"){
                 
+                self.cachePool?.clear()
+                let fileName = "icon_user_head"
+                let image = UIImage(named: fileName)
+                it("image should exist") {
+                    expect(image).toNot(beNil())
+                }
+                let sizeBeforeCache = self.cachePool?.size ?? 0
+                let key = (self.cachePool?.addCache(image!, name: fileName))
+                it("key should exist") {
+                    expect(key).toNot(beNil())
+                }
+                
+                let cachedImage = (self.cachePool?.getCache(key!)) as? UIImage
+                it("cached image should equal to image") {
+                    expect(cachedImage).to(equal(image!))
+                }
+                let sizeAfterCache = self.cachePool?.size ?? 0
+                
+                var all = self.cachePool?.all()
+                it("all should have 1 model") {
+                    expect(all).notTo(beNil())
+                    expect(all?.count).to(equal(1))
+                }
+                let model = all?.first
+                it("cache size should be right"){
+                    expect(model?.size).to(equal(sizeAfterCache-sizeBeforeCache))
+                }
+                
+                self.cachePool?.clear()
+                all = self.cachePool?.all()
+                it("all should have 0 model") {
+                    expect(all).notTo(beNil())
+                    expect(all?.count).to(equal(0))
+                }
                 
             }
+        }
     }
+    func testNormalCache() {
+        describe("normal cache") {
+            beforeEach {
+                self.cachePool?.clear()
+            }
+            afterEach {
+                self.cachePool?.clear()
+            }
+            
+            context("cache image") {
+                
+                let fileName = "icon_user_head"
+                let image = UIImage(named: fileName)
+                it("image should exist") {
+                    expect(image).toNot(beNil())
+                }
+                let sizeBeforeCache = self.cachePool?.size
+                let key = (self.cachePool?.addCache(image!, name: fileName))
+                it("key should exist") {
+                    expect(key).toNot(beNil())
+                }
+                
+                let cachedImage = (self.cachePool?.getCache(key!)) as? UIImage
+                it("cached image should equal to image") {
+                    expect(cachedImage).to(equal(image!))
+                }
+                
+                let sizeAfterCache = self.cachePool?.size
+                it("cache size will be larger"){
+                    expect((sizeBeforeCache)!).to(beLessThan(sizeAfterCache))
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                
+                let isRemoved = self.cachePool?.removeCache(key!)
+                it("image should be removed successfully"){
+                    expect(isRemoved).to(beTrue())
+                }
+                let sizeAfterRemoved = self.cachePool?.size
+                it("cache size should be recovered"){
+                    expect((sizeBeforeCache)!).to(equal(sizeAfterRemoved))
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                let object = (self.cachePool?.getCache(key!))
+                it("cached image should be nil") {
+                    expect(object).to(beNil())
+                }
+            }
+            
+            
+            context("cache nsdata") {
+                
+                let fileName = "icon_user_head"
+                let data = UIImage(named: fileName)?.asData()
+                it("data should exist") {
+                    expect(data).toNot(beNil())
+                }
+                let sizeBeforeCache = self.cachePool?.size
+                let key = (self.cachePool?.addCache(data!, name: fileName))
+                it("key should exist") {
+                    expect(key).toNot(beNil())
+                }
+                
+                let cachedData = (self.cachePool?.getCache(key!)) as? NSData
+                it("cached data should equal to data") {
+                    expect(cachedData).to(equal(data!))
+                }
+                
+                let sizeAfterCache = self.cachePool?.size
+                it("cache size will be larger"){
+                    expect((sizeBeforeCache)!).to(beLessThan(sizeAfterCache))
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                
+                let isRemoved = self.cachePool?.removeCache(key!)
+                it("data should be removed successfully"){
+                    expect(isRemoved).to(beTrue())
+                }
+                let sizeAfterRemoved = self.cachePool?.size
+                it("cache size should be recovered"){
+                    expect((sizeBeforeCache)!).to(equal(sizeAfterRemoved))
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                let object = (self.cachePool?.getCache(key!))
+                it("cached data should be nil") {
+                    expect(object).to(beNil())
+                }
+            }
+            
+            
+        }
+    }
+    
+    func testEdgeCache() {
+        describe("edge cache") {
+            beforeEach {
+                self.cachePool?.clear()
+            }
+            afterEach {
+                self.cachePool?.clear()
+            }
+            context("cache size only match 1") {
+                
+                let fileName = "icon_user_head"
+                let image = UIImage(named: fileName)
+                it("image should exist") {
+                    expect(image).toNot(beNil())
+                }
+                let sizeBeforeCache = self.cachePool?.size ?? 0.0
+                let key = (self.cachePool?.addCache(image!, name: fileName))
+                it("key should exist") {
+                    expect(key).toNot(beNil())
+                }
+                let sizeAfterCache = self.cachePool?.size ?? 0.0
+                let sizeOfImage = sizeAfterCache - sizeBeforeCache
+                
+                self.cachePool?.clear()
+                self.cachePool?.capacity = sizeOfImage * 1.5
+                
+                let key1 = (self.cachePool?.addCache(image!, name: fileName + "1"))
+                it("key1 should exist") {
+                    expect(key1).toNot(beNil())
+                }
+                var cachedImage1 = (self.cachePool?.getCache(key1!)) as? UIImage
+                it("cached image 1 should equal to image") {
+                    expect(cachedImage1).notTo(beNil())
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                let key2 = (self.cachePool?.addCache(image!, name: fileName + "2"))
+                it("key2 should exist") {
+                    expect(key2).toNot(beNil())
+                }
+                let cachedImage2 = (self.cachePool?.getCache(key2!)) as? UIImage
+                it("cached image 2 should equal to image") {
+                    expect(cachedImage2).notTo(beNil())
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                
+                cachedImage1 = (self.cachePool?.getCache(key1!)) as? UIImage
+                it("cached image 1 should be nil") {
+                    expect(cachedImage1).to(beNil())
+                }
+                
+            }
+            
+            context("cache size match many objects") {
+                
+                let fileName = "icon_user_head"
+                let cacheCount = 10
+                let image = UIImage(named: fileName)
+                it("image should exist") {
+                    expect(image).toNot(beNil())
+                }
+                let sizeBeforeCache = self.cachePool?.size ?? 0.0
+                let key = (self.cachePool?.addCache(image!, name: fileName))
+                it("key should exist") {
+                    expect(key).toNot(beNil())
+                }
+                let sizeAfterCache = self.cachePool?.size ?? 0.0
+                let sizeOfImage = sizeAfterCache - sizeBeforeCache
+                
+                self.cachePool?.clear()
+                self.cachePool?.capacity = sizeOfImage * cacheCount.toDouble
+                
+                for i in 0..<cacheCount*2 {
+                    let key1 = (self.cachePool?.addCache(image!, name: fileName + i.toString))
+                    it("key\(i) should exist") {
+                        expect(key1).toNot(beNil())
+                    }
+                    let cachedImage1 = (self.cachePool?.getCache(key1!)) as? UIImage
+                    it("cached image \(i) should equal to image") {
+                        expect(cachedImage1).notTo(beNil())
+                    }
+                    it("cache size is less than capacity"){
+                        expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                    }
+                }
+                
+            }
+        }
+    }
+    
 
 }
