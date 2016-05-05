@@ -125,5 +125,10 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
 
    
     deinit {
+        DDLogInfo("Running tasks list: \(listIndicator.runningTasks.count)")
+        for task in listIndicator.runningTasks {
+            DDLogInfo("Cancel task: \(task)")
+            task.cancel()
+        }
     }
 }

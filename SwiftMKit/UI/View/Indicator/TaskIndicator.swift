@@ -14,7 +14,7 @@ import CocoaLumberjack
 
 public class TaskIndicator: NSObject, IndicatorProtocol {
     private weak var hud: HUDProtocol?
-    lazy private var runningTasks = [NSURLSessionTask]()
+    lazy public var runningTasks = [NSURLSessionTask]()
     
     init(hud: HUDProtocol){
         self.hud = hud

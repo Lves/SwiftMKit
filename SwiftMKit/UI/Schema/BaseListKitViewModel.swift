@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import CocoaLumberjack
 
 public class BaseListKitViewModel: BaseKitViewModel {
     private struct InnerConstant {

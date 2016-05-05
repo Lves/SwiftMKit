@@ -16,7 +16,7 @@ import MJRefresh
 public class TaskIndicatorList: NSObject, IndicatorListProtocol {
     private weak var listView: UIScrollView?
     private weak var viewModel: BaseListKitViewModel?
-    lazy private var runningTasks = [NSURLSessionTask]()
+    lazy public var runningTasks = [NSURLSessionTask]()
     
     init(listView: UIScrollView, viewModel: BaseListKitViewModel){
         self.listView = listView

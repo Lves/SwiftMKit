@@ -64,6 +64,11 @@ public class BaseKitViewController : UIViewController {
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        DDLogInfo("Running tasks: \(indicator.runningTasks.count)")
+        for task in indicator.runningTasks {
+            DDLogInfo("Cancel task: \(task)")
+            task.cancel()
+        }
     }
 }
 
