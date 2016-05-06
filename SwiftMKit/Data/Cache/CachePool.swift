@@ -42,54 +42,6 @@ import CocoaLumberjack
 //                  别人笑我忒疯癫，我笑自己命太贱；
 //                  不见满街漂亮妹，哪个归得程序员？
 
-/**
- *
- * ━━━━━━神兽出没━━━━━━
- * 　　　┏┓　　　┏┓
- * 　　┏┛┻━━━┛┻┓
- * 　　┃　　　　　　　┃
- * 　　┃　　　━　　　┃
- * 　　┃　┳┛　┗┳　┃
- * 　　┃　　　　　　　┃
- * 　　┃　　　┻　　　┃
- * 　　┃　　　　　　　┃
- * 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
- * 　　　　┃　　　┃    神兽保佑,代码无bug
- * 　　　　┃　　　┃
- * 　　　　┃　　　┗━━━┓
- * 　　　　┃　　　　　　　┣┓
- * 　　　　┃　　　　　　　┏┛
- * 　　　　┗┓┓┏━┳┓┏┛
- * 　　　　　┃┫┫　┃┫┫
- * 　　　　　┗┻┛　┗┻┛
- *
- * ━━━━━━感觉萌萌哒━━━━━━
- */
-
-/**
- * 　　　　　　　　┏┓　　　┏┓
- * 　　　　　　　┏┛┻━━━┛┻┓
- * 　　　　　　　┃　　　　　　　┃
- * 　　　　　　　┃　　　━　　　┃
- * 　　　　　　　┃　＞　　　＜　┃
- * 　　　　　　　┃　　　　　　　┃
- * 　　　　　　　┃...　⌒　...　┃
- * 　　　　　　　┃　　　　　　　┃
- * 　　　　　　　┗━┓　　　┏━┛
- * 　　　　　　　　　┃　　　┃　Code is far away from bug with the animal protecting
- * 　　　　　　　　　┃　　　┃   神兽保佑,代码无bug
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┗━━━┓
- * 　　　　　　　　　┃　　　　　　　┣┓
- * 　　　　　　　　　┃　　　　　　　┏┛
- * 　　　　　　　　　┗┓┓┏━┳┓┏┛
- * 　　　　　　　　　　┃┫┫　┃┫┫
- * 　　　　　　　　　　┗┻┛　┗┻┛
- */
-
 public struct CachePoolConstant {
     // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)
     static let DefaultCapacity: Double = min(100*1024*1024, CachePool.freeDiskspace().1) // 默认缓存池空间 100M
