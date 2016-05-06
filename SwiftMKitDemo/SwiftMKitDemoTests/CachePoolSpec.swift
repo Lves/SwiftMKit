@@ -16,7 +16,7 @@ class CachePoolSpec: QuickSpec {
     
     var cachePool: CachePoolProtocol?
 
-    func testClear() {
+    override func spec() {
         describe("clear cache"){
             context("clear will be success"){
                 let isCleared = self.cachePool?.clear()
@@ -28,9 +28,7 @@ class CachePoolSpec: QuickSpec {
                 }
             }
         }
-    }
-    
-    func testCacheModel() {
+
         describe("cache model"){
             context("cache model should work"){
                 
@@ -71,8 +69,7 @@ class CachePoolSpec: QuickSpec {
                 
             }
         }
-    }
-    func testNormalCache() {
+
         describe("normal cache") {
             beforeEach {
                 self.cachePool?.clear()
@@ -177,7 +174,7 @@ class CachePoolSpec: QuickSpec {
             context("cache file") {
                 
                 let filePath = NSBundle.mainBundle().pathForResource("testhaha", ofType: "jpg")
-                let fileName = ""
+                let fileName = " "
                 it("path should exist") {
                     expect(filePath).toNot(beNil())
                 }
@@ -226,9 +223,7 @@ class CachePoolSpec: QuickSpec {
 
             
         }
-    }
-    
-    func testEdgeCache() {
+
         describe("edge cache") {
             beforeEach {
                 self.cachePool?.clear()
