@@ -88,15 +88,11 @@ class CachePoolSpec: QuickSpec {
                 it("image should exist") {
                     expect(image).toNot(beNil())
                 }
+                
                 let sizeBeforeCache = self.cachePool?.size
                 let key = (self.cachePool?.addCache(image!, name: fileName))
                 it("key should exist") {
                     expect(key).toNot(beNil())
-                }
-                
-                let cachedImage = (self.cachePool?.getCache(key!)) as? UIImage
-                it("cached image should equal to image") {
-                    expect(cachedImage).to(equal(image!))
                 }
                 
                 let sizeAfterCache = self.cachePool?.size
@@ -107,10 +103,16 @@ class CachePoolSpec: QuickSpec {
                     expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
                 }
                 
+                let cachedImage = (self.cachePool?.getCache(key!)) as? UIImage
+                it("cached image should equal to image") {
+                    expect(cachedImage).toNot(beNil())
+                }
+                
                 let isRemoved = self.cachePool?.removeCache(key!)
                 it("image should be removed successfully"){
                     expect(isRemoved).to(beTrue())
                 }
+                
                 let sizeAfterRemoved = self.cachePool?.size
                 it("cache size should be recovered"){
                     expect((sizeBeforeCache)!).to(equal(sizeAfterRemoved))
@@ -118,6 +120,7 @@ class CachePoolSpec: QuickSpec {
                 it("cache size is less than capacity"){
                     expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
                 }
+                
                 let object = (self.cachePool?.getCache(key!))
                 it("cached image should be nil") {
                     expect(object).to(beNil())
@@ -132,15 +135,68 @@ class CachePoolSpec: QuickSpec {
                 it("data should exist") {
                     expect(data).toNot(beNil())
                 }
+                
                 let sizeBeforeCache = self.cachePool?.size
                 let key = (self.cachePool?.addCache(data!, name: fileName))
                 it("key should exist") {
                     expect(key).toNot(beNil())
                 }
                 
+                let sizeAfterCache = self.cachePool?.size
+                it("cache size will be larger"){
+                    expect((sizeBeforeCache)!).to(beLessThan(sizeAfterCache))
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                
                 let cachedData = (self.cachePool?.getCache(key!)) as? NSData
-                it("cached data should equal to data") {
-                    expect(cachedData).to(equal(data!))
+                it("cached image should equal to image") {
+                    expect(cachedData).toNot(beNil())
+                }
+                
+                let isRemoved = self.cachePool?.removeCache(key!)
+                it("data should be removed successfully"){
+                    expect(isRemoved).to(beTrue())
+                }
+                
+                let sizeAfterRemoved = self.cachePool?.size
+                it("cache size should be recovered"){
+                    expect((sizeBeforeCache)!).to(equal(sizeAfterRemoved))
+                }
+                it("cache size is less than capacity"){
+                    expect((self.cachePool?.size)!).to(beLessThanOrEqualTo((self.cachePool?.capacity)!))
+                }
+                
+                let object = (self.cachePool?.getCache(key!))
+                it("cached data should be nil") {
+                    expect(object).to(beNil())
+                }
+            }
+            
+            context("cache file") {
+                
+                let filePath = NSBundle.mainBundle().pathForResource("testhaha", ofType: "jpg")
+                let fileName = ""
+                it("path should exist") {
+                    expect(filePath).toNot(beNil())
+                }
+                
+                let fileUrl = NSURL(fileURLWithPath: filePath!)
+            
+                it("URL should exist") {
+                    expect(fileUrl).toNot(beNil())
+                }
+                
+                let sizeBeforeCache = self.cachePool?.size
+                let key = (self.cachePool?.addCache(fileUrl, name: fileName))
+                it("key should exist") {
+                    expect(key).toNot(beNil())
+                }
+                
+                let cachedfile = (self.cachePool?.getCache(key!)) as? UIImage
+                it("cached file should equal to file") {
+                    expect(cachedfile).toNot(beNil())
                 }
                 
                 let sizeAfterCache = self.cachePool?.size
@@ -152,7 +208,7 @@ class CachePoolSpec: QuickSpec {
                 }
                 
                 let isRemoved = self.cachePool?.removeCache(key!)
-                it("data should be removed successfully"){
+                it("file should be removed successfully"){
                     expect(isRemoved).to(beTrue())
                 }
                 let sizeAfterRemoved = self.cachePool?.size
@@ -167,7 +223,7 @@ class CachePoolSpec: QuickSpec {
                     expect(object).to(beNil())
                 }
             }
-            
+
             
         }
     }

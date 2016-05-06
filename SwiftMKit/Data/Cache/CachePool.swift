@@ -190,7 +190,7 @@ public class CachePool: NSObject {
         // 更新配置文件
         let timestamp = NSDate().timeIntervalSince1970
         let encryptName = self.updateConfig(name, timestamp:timestamp, size: Double(data.length))
-        // 保存对象到沙河
+        // 保存对象到沙盒
         let dir = self.cachePath()
         let filePath:String = dir + encryptName
         Async.background {
