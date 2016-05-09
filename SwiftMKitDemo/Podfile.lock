@@ -10,6 +10,7 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
+  - CryptoSwift (0.4.1)
   - EZSwiftExtensions (1.4)
   - HanekeSwift (0.10.1)
   - IQKeyboardManager (4.0.2)
@@ -47,6 +48,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack/Swift
+  - CryptoSwift
   - EZSwiftExtensions
   - HanekeSwift
   - IQKeyboardManager
@@ -67,6 +69,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
   EZSwiftExtensions: db7be0022fce8e92cdfe0fadddaf835fcd9696db
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   IQKeyboardManager: 2341089c4ae25fa2fa82ce356a259fcd267dc6b6

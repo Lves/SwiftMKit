@@ -149,7 +149,7 @@ public class CachePool: CachePoolProtocol {
         // 生成目标路径
         let timestamp = NSDate().timeIntervalSince1970
         let nameTime = name ?? "" + "\(timestamp)"
-        let encryptName = CachePool.md5(string: nameTime)
+        let encryptName = nameTime.md5
         let dir = self.cachePath()
         let destFilePath:String = dir + encryptName
         try! fileManager.copyItemAtPath(filePath.path!, toPath: destFilePath)
@@ -277,7 +277,7 @@ extension CachePool {
         // 已缓存的字典
         var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
         let nameTime = name ?? "" + "\(timestamp)"
-        let encryptName = CachePool.md5(string: nameTime)
+        let encryptName = nameTime.md5
         cacheObj.name = name ?? ""
         cacheObj.key = encryptName
         cacheObj.createTime = timestamp
@@ -363,20 +363,6 @@ extension CachePool {
                 break
             }
         }
-    }
-    
-    private class func md5(string string: String) -> String {
-        var digest = [UInt8](count: Int(CC_MD5_DIGEST_LENGTH), repeatedValue: 0)
-        if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
-            CC_MD5(data.bytes, CC_LONG(data.length), &digest)
-        }
-        var digestHex = ""
-        for index in 0..<Int(CC_MD5_DIGEST_LENGTH) {
-            digestHex += String(format: "%02x", digest[index])
-        }
-        DDLogError("加密前：\(string)")
-        DDLogError("加密后：\(digestHex)")
-        return digestHex
     }
     
     private func dateStringToTimestamp(stringTime: String) -> Double {

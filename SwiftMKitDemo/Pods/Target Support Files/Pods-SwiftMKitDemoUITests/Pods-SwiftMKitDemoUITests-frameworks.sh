@@ -86,6 +86,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoUITests/Alamofire.framework"
   install_framework "Pods-SwiftMKitDemoUITests/CocoaLumberjack.framework"
+  install_framework "Pods-SwiftMKitDemoUITests/CryptoSwift.framework"
   install_framework "Pods-SwiftMKitDemoUITests/EZSwiftExtensions.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Haneke.framework"
   install_framework "Pods-SwiftMKitDemoUITests/IQKeyboardManager.framework"
@@ -106,6 +107,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoUITests/Alamofire.framework"
   install_framework "Pods-SwiftMKitDemoUITests/CocoaLumberjack.framework"
+  install_framework "Pods-SwiftMKitDemoUITests/CryptoSwift.framework"
   install_framework "Pods-SwiftMKitDemoUITests/EZSwiftExtensions.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Haneke.framework"
   install_framework "Pods-SwiftMKitDemoUITests/IQKeyboardManager.framework"

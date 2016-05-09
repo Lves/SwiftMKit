@@ -110,6 +110,8 @@
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
+		27C5A3761CE057F9003C0562 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5A3751CE057F9003C0562 /* CryptoSwift.framework */; };
+		27C5A3771CE057F9003C0562 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5A3751CE057F9003C0562 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
@@ -177,6 +179,7 @@
 			files = (
 				27A18F2C1CDAF94700609C22 /* PINCache.framework in Embed Frameworks */,
 				27A18F321CDAF94700609C22 /* Result.framework in Embed Frameworks */,
+				27C5A3771CE057F9003C0562 /* CryptoSwift.framework in Embed Frameworks */,
 				27A18F261CDAF94700609C22 /* MBProgressHUD.framework in Embed Frameworks */,
 				27A18F241CDAF94600609C22 /* MagicalRecord.framework in Embed Frameworks */,
 				27A18F221CDAF94600609C22 /* JSPatch.framework in Embed Frameworks */,
@@ -289,6 +292,7 @@
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		27C5A3751CE057F9003C0562 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CryptoSwift.framework; path = "../Debug-iphonesimulator/CryptoSwift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickDemoSpec.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 			files = (
 				27A18F2B1CDAF94700609C22 /* PINCache.framework in Frameworks */,
 				27A18F311CDAF94700609C22 /* Result.framework in Frameworks */,
+				27C5A3761CE057F9003C0562 /* CryptoSwift.framework in Frameworks */,
 				27A18F251CDAF94700609C22 /* MBProgressHUD.framework in Frameworks */,
 				27A18F231CDAF94600609C22 /* MagicalRecord.framework in Frameworks */,
 				27A18F211CDAF94600609C22 /* JSPatch.framework in Frameworks */,
@@ -793,6 +798,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27C5A3751CE057F9003C0562 /* CryptoSwift.framework */,
 				27A18F141CDAF92F00609C22 /* WebViewJavascriptBridge.framework */,
 				27A18F111CDAF92F00609C22 /* SnapKit.framework */,
 				27A18F0E1CDAF92F00609C22 /* Result.framework */,
