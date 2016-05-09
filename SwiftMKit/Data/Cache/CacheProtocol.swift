@@ -37,7 +37,7 @@ public protocol CacheModelProtocol {
     var key: String { get }
     var name: String { get set }
     var filePath: NSURL { get }
-    var size: Double { get }
+    var size: Int64 { get }
     var mimeType : String { get set }
     var createTime: NSTimeInterval { get }
     var lastVisitTime: NSTimeInterval { get set }
@@ -47,9 +47,9 @@ public protocol CacheModelProtocol {
 public protocol CachePoolProtocol {
     // MARK: - 属性列表
     /// 缓存池容量
-    var capacity: Double { get set }
+    var capacity: Int64 { get set }
     /// 已缓存大小
-    var size: Double { get }
+    var size: Int64 { get }
     /// 缓存根路径
     var basePath: NSURL? { get set }
     /// 缓存文件夹名称
