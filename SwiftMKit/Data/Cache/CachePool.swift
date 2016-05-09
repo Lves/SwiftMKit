@@ -42,6 +42,7 @@ import CocoaLumberjack
 //                  别人笑我忒疯癫，我笑别人看不穿；
 //                  不见满街漂亮妹，哪个归得程序员？
 
+
 public struct CachePoolConstant {
     // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)
     static let DefaultCapacity: Int64 = 100*1024*1024 // 默认缓存池空间 100M
@@ -154,7 +155,11 @@ public class CachePool: CachePoolProtocol {
         let cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
         if let obj = cachedDict[key] {
             if obj.mimeType == CachePoolConstant.MimeType4Image {
-                return UIImage(data: fileManager.contentsAtPath(filePath)!)
+                if let data = fileManager.contentsAtPath(filePath) {
+                    return UIImage(data: data)
+                } else {
+                    return nil
+                }
             }
         }
         return fileManager.contentsAtPath(filePath)
