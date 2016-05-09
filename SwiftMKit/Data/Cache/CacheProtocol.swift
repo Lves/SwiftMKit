@@ -51,7 +51,7 @@ public protocol CachePoolProtocol {
     /// 已缓存大小
     var size: Double { get }
     /// 缓存根路径
-    var basePath: NSURL { get set }
+    var basePath: NSURL? { get set }
     /// 缓存文件夹名称
     var namespace: String { get set }
     
@@ -72,6 +72,8 @@ public protocol CachePoolProtocol {
     ///
     ///  :returns: 加密后的文件名
     func addCache(filePath: NSURL, name: String?) -> String
+    ///  获取所有缓存对象
+    func all() -> [CacheModelProtocol]?
     ///  获取缓存对象
     ///
     ///  :param: key key
@@ -80,8 +82,6 @@ public protocol CachePoolProtocol {
     ///
     ///  :param: key key
     func removeCache(key: String) -> Bool
-    ///  获取所有缓存对象
-    func all() -> [CacheModelProtocol]?
     ///  清空缓存
     func clear() -> Bool
 }
