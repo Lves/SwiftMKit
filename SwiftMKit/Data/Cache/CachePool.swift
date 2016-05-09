@@ -226,21 +226,8 @@ public class CachePool: CachePoolProtocol {
 
 extension CachePool {
     /// 获取设备剩余可用空间
-    private class func freeDiskspace() -> (Double, Double) {
-        var totalSpace = 0.0
-        var totalFreeSpace = 0.0
-        let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
-        var dict:[String: AnyObject]?
-        do {
-            dict = try NSFileManager.defaultManager().attributesOfFileSystemForPath(paths.last!)
-        } catch {
-            print("error")
-        }
-        let fileSystemSizeInBytes = dict![NSFileSystemSize]
-        let freeFileSystemSizeInBytes = dict![NSFileSystemFreeSize]
-        totalSpace = fileSystemSizeInBytes!.doubleValue
-        totalFreeSpace = freeFileSystemSizeInBytes!.doubleValue
-        return (totalSpace, totalFreeSpace)
+    private class func freeDiskspace() -> (Int64, Int64) {
+        return (UIDevice.totalDiskSpaceInBytes, UIDevice.freeDiskSpaceInBytes)
     }
     
     ///  存储文件之前，判断是否有足够的空间存储

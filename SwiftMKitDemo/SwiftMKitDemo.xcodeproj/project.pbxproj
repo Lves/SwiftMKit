@@ -112,6 +112,7 @@
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		27C5A3761CE057F9003C0562 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5A3751CE057F9003C0562 /* CryptoSwift.framework */; };
 		27C5A3771CE057F9003C0562 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5A3751CE057F9003C0562 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */; };
 		27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
@@ -293,6 +294,7 @@
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		27C5A3751CE057F9003C0562 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CryptoSwift.framework; path = "../Debug-iphonesimulator/CryptoSwift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickDemoSpec.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */,
 				03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */,
 				27959A3D1CD30BE400546424 /* UITextField+Extension.swift */,
+				27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				2778BA711CCF3B01009B926C /* CachePool.swift in Sources */,
+				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
