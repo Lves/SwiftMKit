@@ -24,7 +24,7 @@ class CachePoolSpec: QuickSpec {
                     expect(isCleared).to(beTrue())
                 }
                 it("cache size should be equal to capacity"){
-                    expect(self.cachePool?.size).to(equal(0.0))
+                    expect(self.cachePool?.size).to(equal(0))
                 }
             }
         }
@@ -238,16 +238,16 @@ class CachePoolSpec: QuickSpec {
                 it("image should exist") {
                     expect(image).toNot(beNil())
                 }
-                let sizeBeforeCache = self.cachePool?.size ?? 0.0
+                let sizeBeforeCache = self.cachePool?.size ?? 0
                 let key = (self.cachePool?.addCache(image!, name: fileName))
                 it("key should exist") {
                     expect(key).toNot(beNil())
                 }
-                let sizeAfterCache = self.cachePool?.size ?? 0.0
+                let sizeAfterCache = self.cachePool?.size ?? 0
                 let sizeOfImage = sizeAfterCache - sizeBeforeCache
                 
                 self.cachePool?.clear()
-                self.cachePool?.capacity = sizeOfImage * 1.5
+                self.cachePool?.capacity = sizeOfImage * 2
                 
                 let key1 = (self.cachePool?.addCache(image!, name: fileName + "1"))
                 it("key1 should exist") {
@@ -287,16 +287,16 @@ class CachePoolSpec: QuickSpec {
                 it("image should exist") {
                     expect(image).toNot(beNil())
                 }
-                let sizeBeforeCache = self.cachePool?.size ?? 0.0
+                let sizeBeforeCache = self.cachePool?.size ?? 0
                 let key = (self.cachePool?.addCache(image!, name: fileName))
                 it("key should exist") {
                     expect(key).toNot(beNil())
                 }
-                let sizeAfterCache = self.cachePool?.size ?? 0.0
+                let sizeAfterCache = self.cachePool?.size ?? 0
                 let sizeOfImage = sizeAfterCache - sizeBeforeCache
                 
                 self.cachePool?.clear()
-                self.cachePool?.capacity = sizeOfImage * cacheCount.toDouble
+                self.cachePool?.capacity = sizeOfImage * Int64(cacheCount)
                 
                 for i in 0..<cacheCount*2 {
                     let key1 = (self.cachePool?.addCache(image!, name: fileName + i.toString))
