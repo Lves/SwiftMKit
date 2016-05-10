@@ -115,6 +115,8 @@
 		27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */; };
 		27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */; };
 		27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */; };
+		27F7ADD01CE1BB1F00C24706 /* NetWorkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCF1CE1BB1F00C24706 /* NetWorkSpec.swift */; };
+		27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
@@ -298,6 +300,8 @@
 		27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewModel.swift; sourceTree = "<group>"; };
 		27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewController.swift; sourceTree = "<group>"; };
 		27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewModel.swift; sourceTree = "<group>"; };
+		27F7ADCF1CE1BB1F00C24706 /* NetWorkSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkSpec.swift; sourceTree = "<group>"; };
+		27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
 		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
@@ -631,6 +635,7 @@
 				27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */,
 				038094B11CD8AE3C00DE2170 /* DictionarySpec.swift */,
 				03503E6B1CD9D28C00D12145 /* CachePoolSpec.swift */,
+				27F7ADCF1CE1BB1F00C24706 /* NetWorkSpec.swift */,
 			);
 			path = SwiftMKitDemoTests;
 			sourceTree = "<group>";
@@ -666,6 +671,7 @@
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
 				273ACFAC1CC9D60600EB341D /* NetError.swift */,
+				27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1075,6 +1081,7 @@
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				2778BA711CCF3B01009B926C /* CachePool.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
+				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
@@ -1147,6 +1154,7 @@
 			files = (
 				034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */,
 				273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */,
+				27F7ADD01CE1BB1F00C24706 /* NetWorkSpec.swift in Sources */,
 				27959A431CD3331900546424 /* PINCacheTests.swift in Sources */,
 				038094B21CD8AE3C00DE2170 /* DictionarySpec.swift in Sources */,
 				27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */,

@@ -9,24 +9,8 @@
 import UIKit
 import Alamofire
 
-class PX500ApiInfo: NSObject {
-    static var apiBaseUrl: String {
-        get {
-            switch NetworkConfig.Evn {
-            case .Dev:
-                return NetworkConfig.PX500HostDev
-            case .Product:
-                return NetworkConfig.PX500HostProduct
-            }
-        }
-    }
-}
-class BuDeJieApiInfo: NSObject {
-    static var apiBaseUrl: String = NetworkConfig.BuDeJieHost
-}
-
 class PX500NetApi: NetApiAbstract {
-    static let baseQuery = ["consumer_key": PX500Config.ConsumerKey]
+    static let baseQuery = ["consumer_key": PX500Config.consumerKey]
     private var _query: [String: AnyObject]?
     override var query: [String: AnyObject]? {
         get {
@@ -37,7 +21,7 @@ class PX500NetApi: NetApiAbstract {
             _query = newValue
         }
     }
-    static let baseUrl = PX500ApiInfo.apiBaseUrl + "/v1"
+    static let baseUrl = PX500Config.urlHost + "/v1"
     private var _url: String?
     override var url: String? {
         get {
@@ -54,7 +38,7 @@ class PX500NetApi: NetApiAbstract {
 }
 
 class BuDeJieNetApi: NetApiAbstract {
-    static let baseUrl = BuDeJieApiInfo.apiBaseUrl + "/api"
+    static let baseUrl = BuDeJieConfig.urlHost + "/api"
     private var _url: String?
     override var url: String? {
         get {
@@ -79,7 +63,6 @@ class PX500PopularPhotosApiData: PX500NetApi {
         super.init()
         self.page = page
         self.number = number
-        NetworkConfig.Evn = .Product
         self.query = ["page": "\(page)",
                       "feature": "popular",
                       "rpp": "\(number)",
@@ -110,7 +93,6 @@ class PX500PhotoDetailApiData: PX500NetApi {
     var photo: MKDataNetworkRequestPhotoModel?
     init(photoId: String) {
         super.init()
-        NetworkConfig.Evn = .Product
         self.query = [:]
         self.url = "/photos/" + photoId
         self.method = .GET
