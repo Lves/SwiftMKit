@@ -111,6 +111,10 @@
 		27C5A3771CE057F9003C0562 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5A3751CE057F9003C0562 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */; };
 		27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */; };
+		27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */; };
+		27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */; };
+		27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */; };
+		27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
@@ -290,6 +294,10 @@
 		27C5A3751CE057F9003C0562 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CryptoSwift.framework; path = "../Debug-iphonesimulator/CryptoSwift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickDemoSpec.swift; sourceTree = "<group>"; };
+		27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewController.swift; sourceTree = "<group>"; };
+		27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewModel.swift; sourceTree = "<group>"; };
+		27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewController.swift; sourceTree = "<group>"; };
+		27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewModel.swift; sourceTree = "<group>"; };
 		310227F5FBDD439577E6254A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
 		3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetApiProtocol.swift; sourceTree = "<group>"; };
@@ -504,6 +512,8 @@
 			children = (
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
+				27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */,
+				27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -513,6 +523,8 @@
 			children = (
 				27959A4D1CD3447100546424 /* MKUIViewModel.swift */,
 				27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */,
+				27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */,
+				27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1044,6 +1056,7 @@
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
+				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
@@ -1064,6 +1077,7 @@
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
+				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
@@ -1081,6 +1095,7 @@
 				27959A4E1CD3447100546424 /* MKUIViewModel.swift in Sources */,
 				18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
+				27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
 				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
@@ -1120,6 +1135,7 @@
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
 				278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
+				27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
 				3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */,
 			);

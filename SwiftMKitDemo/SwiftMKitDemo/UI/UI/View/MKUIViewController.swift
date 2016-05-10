@@ -14,6 +14,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
     struct InnerConst {
         static let CellIdentifier = "MKUITableViewCell"
         static let SegueToNextIQKeyboardManager = "routeToIQKeyboardManager"
+        static let SegueToNextSideView = "routeToSideView"
+        static let SegueToNextChartView = "routeToChartView"
         static let SegueToNextUrl = "http://www.baidu.com"
     }
     
@@ -44,6 +46,10 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.routeToUrl(InnerConst.SegueToNextUrl)
         case 1:
             self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
+        case 2:
+            self.routeToName(InnerConst.SegueToNextSideView)
+        case 3:
+            self.routeToName(InnerConst.SegueToNextChartView)
         default:
             break
         }
