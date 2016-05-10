@@ -74,6 +74,7 @@
 		27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */; };
 		27959A521CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */; };
 		27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A531CD3531900546424 /* BaseKitWebViewController.xib */; };
+		2796B3561CE17B1100670574 /* DocumentCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796B3551CE17B1100670574 /* DocumentCache.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A18F171CDAF94600609C22 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A18EBB1CDAF89700609C22 /* Alamofire.framework */; };
 		27A18F181CDAF94600609C22 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A18EBB1CDAF89700609C22 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -272,6 +273,7 @@
 		27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIIQKeyboardManagerViewController.swift; sourceTree = "<group>"; };
 		27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIIQKeyboardManagerViewModel.swift; sourceTree = "<group>"; };
 		27959A531CD3531900546424 /* BaseKitWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitWebViewController.xib; sourceTree = "<group>"; };
+		2796B3551CE17B1100670574 /* DocumentCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentCache.swift; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A18EBB1CDAF89700609C22 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A18EBE1CDAF89700609C22 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -475,6 +477,7 @@
 			children = (
 				2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */,
 				2778BA701CCF3B01009B926C /* CachePool.swift */,
+				2796B3551CE17B1100670574 /* DocumentCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
+				2796B3561CE17B1100670574 /* DocumentCache.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,

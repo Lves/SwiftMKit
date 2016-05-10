@@ -21,12 +21,12 @@ public extension UIDevice {
     //The value in this property remains the same while the app (or another app from the same vendor) is installed on the iOS device. The value changes when the user deletes all of that vendor’s apps from the device and subsequently reinstalls one or more of them.
     var uuid: String {
         get {
-            if let id = PINMemoryCache.sharedCache().objectForKey(Constant.UUIDString) as? String {
+            if let id = DocumentCache.sharedCache().objectForKey(Constant.UUIDString) as? String {
                 DDLogInfo("UUID: \(id)")
                 return id
             }
             let id = UIDevice.currentDevice().identifierForVendor!.UUIDString
-            PINMemoryCache.sharedCache().setObject(id, forKey: Constant.UUIDString)
+            DocumentCache.sharedCache().setObject(id, forKey: Constant.UUIDString)
             DDLogInfo("UUID: \(id)")
             return id
         }
