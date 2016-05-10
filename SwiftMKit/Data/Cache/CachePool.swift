@@ -135,13 +135,14 @@ public class CachePool: CachePoolProtocol {
         let dir = self.cachePath()
         let destFilePath:String = dir + encryptName
         try! fileManager.copyItemAtPath(filePath.path!, toPath: destFilePath)
-        DDLogInfo("filePath: \(filePath)")
+        DDLogInfo("filePath: \(filePath.path!)")
         DDLogInfo("destFilePath: \(destFilePath)")
         // 获取文件信息
         if let attrs = self.getFileAttributes(destFilePath) {
             DDLogInfo("file info:\(attrs)")
             // 更新配置文件
-            let size: Int64 = attrs[NSFileSize] as? Int64 ?? 0
+            let num = attrs[NSFileSize] as? NSNumber ?? 0
+            let size = num.longLongValue
             return self.updateConfig(name, timestamp:timestamp, size: size)
         }
         // TODO: 返回值需要思考一下
@@ -161,6 +162,7 @@ public class CachePool: CachePoolProtocol {
                     return nil
                 }
             }
+            return fileManager.contentsAtPath(filePath)
         }
         return fileManager.contentsAtPath(filePath)
     }
@@ -239,9 +241,9 @@ extension CachePool {
         let filePath:String = dir + encryptName
         Async.background {
             if data.writeToFile(filePath, atomically: true) {
-                print("文件写入成功：\(filePath)")
+                DDLogDebug("文件写入成功：\(filePath)")
             } else {
-                print("文件写入失败！")
+                DDLogDebug("文件写入失败！")
             }
         }
         return encryptName
@@ -281,7 +283,7 @@ extension CachePool {
         let cacheObj = CacheModel()
         // 已缓存的字典
         var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
-        let nameTime = name ?? "" + "\(timestamp)"
+        let nameTime = (name ?? "") + "\(timestamp)"
         let encryptName = nameTime.md5
         cacheObj.name = name ?? ""
         cacheObj.key = encryptName
@@ -333,11 +335,11 @@ extension CachePool {
         // 遍历配置文件
         // 取出缓存字典
         var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
-        DDLogInfo("排序前：\(cachedDict)")
+        DDLogVerbose("排序前：\(cachedDict)")
         // 升序，最新的数据在最下面(目的：删除日期最小的旧数据)
         let sortedList = cachedDict.sort { $0.1.createTime < $1.1.createTime }
-        print("=========================================================")
-        DDLogInfo("排序后：\(sortedList)")
+        DDLogVerbose("=========================================================")
+        DDLogVerbose("排序后：\(sortedList)")
         
         // obj 是一个元组类型
         for (key, model) in sortedList {
@@ -351,19 +353,11 @@ extension CachePool {
             cacheDict = cachedDict
             // 更新剩余空间大小
             leftCapacity += model.size
-            DDLogError("remove=\(key), save=\(model.size) byte  lastSize=\(leftCapacity)  size=\(size)")
+            DDLogVerbose("remove=\(key), save=\(model.size) byte  lastSize=\(leftCapacity)  size=\(size)")
             if leftCapacity > size {
                 break
             }
         }
         return leftCapacity
-    }
-    
-    private func dateStringToTimestamp(stringTime: String) -> Double {
-        let format = NSDateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = format.dateFromString(stringTime)
-        let datestamp = date!.timeIntervalSince1970
-        return datestamp
     }
 }

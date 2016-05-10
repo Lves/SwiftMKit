@@ -195,7 +195,7 @@ class CachePoolSpec: QuickSpec {
                     expect(key).toNot(beNil())
                     
                     sleep(1)
-                    let cachedfile = (cachePool.getCache(key)) as? UIImage
+                    let cachedfile = UIImage(data: (cachePool.getCache(key) as! NSData))
                     //cached file should equal to file
                     expect(cachedfile).toNot(beNil())
                     
