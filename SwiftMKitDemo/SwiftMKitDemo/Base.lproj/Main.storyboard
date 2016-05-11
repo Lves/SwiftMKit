@@ -339,6 +339,7 @@
                         <segue destination="SFb-W0-hoM" kind="show" identifier="routeToIQKeyboardManager" id="OPZ-gO-RQs"/>
                         <segue destination="krO-bu-mcT" kind="show" identifier="routeToSideView" id="i6P-ks-57X"/>
                         <segue destination="0s0-xI-KRw" kind="show" identifier="routeToChartView" id="Kkd-fS-GDU"/>
+                        <segue destination="PDj-dL-c9a" kind="show" identifier="routeToKeyboardView" id="RUo-Pf-1AG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -435,6 +436,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e1A-O0-S7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3351.5" y="717.5"/>
+        </scene>
+        <!--Keyboard View Controller-->
+        <scene sceneID="v8m-xJ-05U">
+            <objects>
+                <viewController storyboardIdentifier="MKUIKeyboardViewController" id="PDj-dL-c9a" customClass="MKUIKeyboardViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BQx-D5-41g"/>
+                        <viewControllerLayoutGuide type="bottom" id="5ql-jw-o0f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mGn-xS-uTh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wRv-Uk-V0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3825.5" y="703.5"/>
         </scene>
         <!--Data Store View Controller-->
         <scene sceneID="7AD-ZQ-Oj3">

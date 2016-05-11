@@ -104,6 +104,8 @@
 		27A18F351CDAF94700609C22 /* WebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A18F141CDAF92F00609C22 /* WebViewJavascriptBridge.framework */; };
 		27A18F361CDAF94700609C22 /* WebViewJavascriptBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A18F141CDAF92F00609C22 /* WebViewJavascriptBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
+		27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */; };
+		27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		27C5A3761CE057F9003C0562 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C5A3751CE057F9003C0562 /* CryptoSwift.framework */; };
@@ -290,6 +292,8 @@
 		27A18F111CDAF92F00609C22 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A18F141CDAF92F00609C22 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebViewJavascriptBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewController.swift; sourceTree = "<group>"; };
+		27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewModel.swift; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -520,6 +524,7 @@
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
 				27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */,
 				27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */,
+				27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 				27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */,
 				27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */,
 				27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */,
+				27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1150,6 +1156,7 @@
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				2789749E1CD9DCD400AC8700 /* CacheProtocol.swift in Sources */,
+				27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */,
 				27959A4C1CD3446000546424 /* MKUIViewController.swift in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
@@ -1170,6 +1177,7 @@
 				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
+				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
