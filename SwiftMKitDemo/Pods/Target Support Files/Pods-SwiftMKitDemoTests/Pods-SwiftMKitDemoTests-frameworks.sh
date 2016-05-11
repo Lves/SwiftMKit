@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/Alamofire.framework"
+  install_framework "Pods-SwiftMKitDemoTests/Charts.framework"
   install_framework "Pods-SwiftMKitDemoTests/CocoaLumberjack.framework"
   install_framework "Pods-SwiftMKitDemoTests/CryptoSwift.framework"
   install_framework "Pods-SwiftMKitDemoTests/EZSwiftExtensions.framework"
@@ -106,6 +107,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/Alamofire.framework"
+  install_framework "Pods-SwiftMKitDemoTests/Charts.framework"
   install_framework "Pods-SwiftMKitDemoTests/CocoaLumberjack.framework"
   install_framework "Pods-SwiftMKitDemoTests/CryptoSwift.framework"
   install_framework "Pods-SwiftMKitDemoTests/EZSwiftExtensions.framework"

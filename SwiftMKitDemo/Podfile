@@ -28,6 +28,7 @@ pod 'PINCache'
 pod 'SnapKit'
 pod 'HanekeSwift'
 pod 'MBProgressHUD'
+pod 'Charts'
 
 target 'SwiftMKitDemoTests' do
     testing_pods
