@@ -21,6 +21,15 @@ class MKUISegmentViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func setupUI() {
+        if let vc1 = self.instanceViewControllerInStoryboardWithName("MKUISegmentAViewController") {
+            view.addSubview(vc1.view)
+        }
+        if let vc2 = self.instanceViewControllerInStoryboardWithName("MKUISegmentBViewController") {
+            view.addSubview(vc2.view)
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

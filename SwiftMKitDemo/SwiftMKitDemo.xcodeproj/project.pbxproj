@@ -106,8 +106,6 @@
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */; };
 		27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */; };
-		27A4CA241CE3512000516802 /* MKUISegmentAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA211CE3512000516802 /* MKUISegmentAViewController.swift */; };
-		27A4CA251CE3512000516802 /* MKUISegmentBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA221CE3512000516802 /* MKUISegmentBViewController.swift */; };
 		27A4CA261CE3512000516802 /* MKUISegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */; };
 		27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
@@ -298,8 +296,6 @@
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewController.swift; sourceTree = "<group>"; };
 		27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewModel.swift; sourceTree = "<group>"; };
-		27A4CA211CE3512000516802 /* MKUISegmentAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentAViewController.swift; sourceTree = "<group>"; };
-		27A4CA221CE3512000516802 /* MKUISegmentBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentBViewController.swift; sourceTree = "<group>"; };
 		27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentViewController.swift; sourceTree = "<group>"; };
 		27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentViewModel.swift; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
@@ -534,8 +530,6 @@
 				27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */,
 				27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */,
 				27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */,
-				27A4CA211CE3512000516802 /* MKUISegmentAViewController.swift */,
-				27A4CA221CE3512000516802 /* MKUISegmentBViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1119,7 +1113,6 @@
 				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
-				27A4CA241CE3512000516802 /* MKUISegmentAViewController.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
@@ -1160,7 +1153,6 @@
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
 				27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
-				27A4CA251CE3512000516802 /* MKUISegmentBViewController.swift in Sources */,
 				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
