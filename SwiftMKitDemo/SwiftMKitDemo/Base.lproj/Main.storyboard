@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NgF-8Z-793">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -340,6 +339,7 @@
                         <segue destination="krO-bu-mcT" kind="show" identifier="routeToSideView" id="i6P-ks-57X"/>
                         <segue destination="0s0-xI-KRw" kind="show" identifier="routeToChartView" id="Kkd-fS-GDU"/>
                         <segue destination="PDj-dL-c9a" kind="show" identifier="routeToKeyboardView" id="RUo-Pf-1AG"/>
+                        <segue destination="EoT-S5-18E" kind="show" identifier="routeToSegmentViewController" id="qN9-hz-umY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,7 +349,7 @@
         <!--IQKeyboardManager-->
         <scene sceneID="MoF-M0-SaB">
             <objects>
-                <viewController title="IQKeyboardManager" id="SFb-W0-hoM" customClass="MKUIIQKeyboardManagerViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="IQKeyboardManager" hidesBottomBarWhenPushed="YES" id="SFb-W0-hoM" customClass="MKUIIQKeyboardManagerViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kQi-EL-Cue"/>
                         <viewControllerLayoutGuide type="bottom" id="Aba-2f-pvU"/>
@@ -401,10 +401,75 @@
             </objects>
             <point key="canvasLocation" x="2466.5" y="717.5"/>
         </scene>
+        <!--SegmentViewController-->
+        <scene sceneID="pcf-LN-OXX">
+            <objects>
+                <viewController storyboardIdentifier="MKUISegmentViewController" title="SegmentViewController" hidesBottomBarWhenPushed="YES" id="EoT-S5-18E" customClass="MKUISegmentViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iQe-AP-Kfi"/>
+                        <viewControllerLayoutGuide type="bottom" id="axg-Ef-5Fu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Qj-n7-Xjw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="b1F-Zo-AgK">
+                                <rect key="frame" x="127" y="88" width="121" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F1N-AS-1Ez" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2466.5" y="1431.5"/>
+        </scene>
+        <!--SegmentA View Controller-->
+        <scene sceneID="RMZ-Jw-aXQ">
+            <objects>
+                <viewController id="cEO-b5-Gnq" customClass="MKUISegmentAViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hVE-PX-FA8"/>
+                        <viewControllerLayoutGuide type="bottom" id="qmT-HR-1eK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xb0-pu-n6A">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jUs-62-Jsp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2920.5" y="1431.5"/>
+        </scene>
+        <!--SegmentB View Controller-->
+        <scene sceneID="YKQ-ol-Qgs">
+            <objects>
+                <viewController id="RcL-Sb-e3l" customClass="MKUISegmentBViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UCz-JC-XcW"/>
+                        <viewControllerLayoutGuide type="bottom" id="qGj-18-z4b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PMu-82-b6Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ttr-ik-xL9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3351.5" y="1431.5"/>
+        </scene>
         <!--Side View Controller-->
         <scene sceneID="QzA-WU-V1K">
             <objects>
-                <viewController id="krO-bu-mcT" customClass="MKUISideViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="krO-bu-mcT" customClass="MKUISideViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uAU-5c-xUX"/>
                         <viewControllerLayoutGuide type="bottom" id="w72-Mg-r2G"/>
@@ -422,7 +487,7 @@
         <!--Chart View Controller-->
         <scene sceneID="3mj-fe-YV1">
             <objects>
-                <viewController id="0s0-xI-KRw" customClass="MKUIChartViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="0s0-xI-KRw" customClass="MKUIChartViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6re-zW-3rh"/>
                         <viewControllerLayoutGuide type="bottom" id="T8h-BB-aEF"/>
@@ -440,7 +505,7 @@
         <!--Keyboard View Controller-->
         <scene sceneID="v8m-xJ-05U">
             <objects>
-                <viewController storyboardIdentifier="MKUIKeyboardViewController" id="PDj-dL-c9a" customClass="MKUIKeyboardViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MKUIKeyboardViewController" hidesBottomBarWhenPushed="YES" id="PDj-dL-c9a" customClass="MKUIKeyboardViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BQx-D5-41g"/>
                         <viewControllerLayoutGuide type="bottom" id="5ql-jw-o0f"/>
@@ -512,6 +577,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UL-eT-2fr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1274.5" y="601.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="TeD-Wd-gNX">
+            <objects>
+                <viewController id="Lvg-JP-3xh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lc1-E3-Lte"/>
+                        <viewControllerLayoutGuide type="bottom" id="K2p-H2-UHy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Sd-pU-Net">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CMY-bi-jLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2920.5" y="1431.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

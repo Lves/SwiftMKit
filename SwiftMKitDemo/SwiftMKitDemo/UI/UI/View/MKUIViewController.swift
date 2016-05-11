@@ -17,6 +17,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         static let SegueToNextSideView = "routeToSideView"
         static let SegueToNextChartView = "routeToChartView"
         static let SegueToNextKeyboardView = "routeToKeyboardView"
+        static let SegueToNextSegmentViewController = "routeToSegmentViewController"
         static let SegueToNextUrl = "http://www.baidu.com"
     }
     
@@ -53,6 +54,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.routeToName(InnerConst.SegueToNextChartView)
         case 4:
             self.routeToName(InnerConst.SegueToNextKeyboardView)
+        case 5:
+            self.routeToName(InnerConst.SegueToNextSegmentViewController)
         default:
             break
         }
