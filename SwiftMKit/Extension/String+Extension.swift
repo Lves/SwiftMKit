@@ -17,6 +17,22 @@ extension String {
         return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
     }
     
+    // MARK: Format
+    func formatCurrency(locale: String = "en_US") -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: locale)
+        if let currency = formatter.stringFromNumber(NSString(string: self).doubleValue) {
+            if currency.hasPrefix("$") {
+                return currency.toNSString.substringFromIndex(1)
+            } else {
+                return currency
+            }
+        } else {
+            return self
+        }
+    }
+    
     // MARK: Encrypt
     
     var md5: String! {

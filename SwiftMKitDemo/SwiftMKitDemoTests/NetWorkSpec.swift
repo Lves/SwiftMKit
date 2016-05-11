@@ -119,7 +119,7 @@ class NetWorkSpec: QuickSpec {
         describe("") { 
             context("") {
                 it("") {
-                    waitUntil { done in
+                    waitUntil(timeout: 100) { done in
                         let signal = TestPX500PhotosApiData(page:1, number:5).signal().on(
                             next: { [weak self] data in
                                 if let photos = data.photos {
