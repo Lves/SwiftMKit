@@ -198,7 +198,7 @@ public class SegmentContainerAnimatedTransition : NSObject, UIViewControllerAnim
         static let ChildViewPadding: CGFloat = 0
         static let Damping: CGFloat = 1
         static let InitialSpringVelocity: CGFloat = 0.5
-        static let Duration: Double = 1
+        static let Duration: Double = 0.4
     }
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return InnerConstant.Duration

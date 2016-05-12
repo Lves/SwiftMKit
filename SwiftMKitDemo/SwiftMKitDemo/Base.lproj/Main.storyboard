@@ -708,6 +708,10 @@
         <scene sceneID="o9D-C1-eMM">
             <objects>
                 <viewController id="SnV-Eb-LcB" customClass="SegmentContainerViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5HG-8n-aZ7"/>
+                        <viewControllerLayoutGuide type="bottom" id="SA5-Ww-MqL"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="46S-Vr-MJw">
                         <rect key="frame" x="0.0" y="0.0" width="383" height="474"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
