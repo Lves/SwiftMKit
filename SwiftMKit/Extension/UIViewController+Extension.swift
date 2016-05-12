@@ -45,7 +45,7 @@ public extension UIViewController {
         return self.instanceViewControllerInStoryboardWithName(name, storyboardName: nil)
     }
     public func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String?) -> UIViewController? {
-        let story = storyboardName ? UIStoryboard(name: storyboardName, bundle: nil) : self.storyboard
+        let story = storyboardName != nil ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
         if story?.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
             return story?.instantiateViewControllerWithIdentifier(name)
         }
