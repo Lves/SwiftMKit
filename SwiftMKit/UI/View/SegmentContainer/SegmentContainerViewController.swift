@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import ReactiveCocoa
 
 public protocol SegmentContainerViewControllerDelegate : class {
     func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController)
@@ -47,6 +48,7 @@ public class SegmentContainerViewController: UIViewController {
     public weak var delegate: SegmentContainerViewControllerDelegate?
     public var animated: Bool = true
     public var interactive: Bool = false
+    public var animating = MutableProperty<Bool>(false)
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -63,25 +65,31 @@ public class SegmentContainerViewController: UIViewController {
         selectSegment(0)
     }
     
-    public func selectSegment(index: Int) {
+    public func selectSegment(index: Int) -> Bool {
         if index < 0 || index >= _viewControllers.count {
             DDLogError("Segment Index out of bounds")
-            return
+            return false
         }
         if index == selectedSegment {
             DDLogDebug("Segment Index is same to old one, do nothing")
-            return
+            return true
         }
-        transitionSegment(to: viewControllers[index])
+        let result = transitionSegment(to: viewControllers[index])
         _selectedSegment = index
+        return result
     }
     
-    public func transitionSegment(to toViewController: UIViewController) {
+    public func transitionSegment(to toViewController: UIViewController) -> Bool {
+        if animating.value {
+            DDLogWarn("Segment animation is not completed, do nothing")
+            return false
+        }
+        animating.value = true
         let fromIndex = _selectedSegment
         let toIndex = viewControllers.indexOf(toViewController)!
         let fromViewController = selectedViewController
         if fromViewController == toViewController || self.isViewLoaded() == false {
-            return
+            return false
         }
         let toView = toViewController.view
         toView.frame = self.view.bounds
@@ -91,7 +99,8 @@ public class SegmentContainerViewController: UIViewController {
         if fromViewController == nil {
             self.view.addSubview(toView)
             toViewController.didMoveToParentViewController(self)
-            return
+            self.animating.value = false
+            return true
         }
         let animator = delegate?.animationForTransition(self, fromIndex: fromIndex, toIndex: toIndex, fromViewController: fromViewController!, toViewController: toViewController) ?? SegmentContainerAnimatedTransition()
         let transitionContext = SegmentContainerTransitionContext(fromViewController: fromViewController!, toViewController: toViewController, goRight: toIndex > fromIndex)
@@ -102,8 +111,10 @@ public class SegmentContainerViewController: UIViewController {
             fromViewController?.removeFromParentViewController()
             toViewController.didMoveToParentViewController(self)
             animator.animationEnded?(complete)
+            self?.animating.value = false
         }
         animator.animateTransition(transitionContext)
+        return true
     }
 }
 
@@ -187,7 +198,7 @@ public class SegmentContainerAnimatedTransition : NSObject, UIViewControllerAnim
         static let ChildViewPadding: CGFloat = 0
         static let Damping: CGFloat = 1
         static let InitialSpringVelocity: CGFloat = 0.5
-        static let Duration: Double = 0.4
+        static let Duration: Double = 1
     }
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return InnerConstant.Duration

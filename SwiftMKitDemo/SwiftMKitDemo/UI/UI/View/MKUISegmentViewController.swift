@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import ReactiveCocoa
 
 class MKUISegmentViewController: BaseViewController {
 
@@ -34,6 +35,9 @@ class MKUISegmentViewController: BaseViewController {
     }
     override func bindingData() {
         super.bindingData()
+        segmentContainer.animating.producer.startWithNext { [weak self] animating in
+            self?.segment.enabled = !animating
+        }
         segment.rac_signalForControlEvents(.ValueChanged).toSignalProducer().startWithNext { [weak self] _ in
             let index = self?.segment.selectedSegmentIndex ?? 0
             DDLogInfo("Segment index: \(index)")
