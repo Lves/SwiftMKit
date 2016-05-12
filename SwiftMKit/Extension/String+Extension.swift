@@ -22,15 +22,8 @@ extension String {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         formatter.locale = NSLocale(localeIdentifier: locale)
-        if let currency = formatter.stringFromNumber(NSString(string: self).doubleValue) {
-            if currency.hasPrefix("$") {
-                return currency.toNSString.substringFromIndex(1)
-            } else {
-                return currency
-            }
-        } else {
-            return self
-        }
+        formatter.currencySymbol = ""
+        return formatter.stringFromNumber(NSString(string: self).doubleValue) ?? self
     }
     
     // MARK: Encrypt
