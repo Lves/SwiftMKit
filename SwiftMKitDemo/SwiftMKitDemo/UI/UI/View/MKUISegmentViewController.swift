@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class MKUISegmentViewController: BaseViewController {
 
+    @IBOutlet weak var segment: UISegmentedControl!
+    var segmentContainer: SegmentContainerViewController {
+        get { return childViewControllers.first as! SegmentContainerViewController }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,13 +27,18 @@ class MKUISegmentViewController: BaseViewController {
     }
     
     override func setupUI() {
-        if let vc1 = self.instanceViewControllerInStoryboardWithName("MKUISegmentAViewController") {
-            view.addSubview(vc1.view)
+        super.setupUI()
+        let vc1 = self.instanceViewControllerInStoryboardWithName("MKUISegmentAViewController")!
+        let vc2 = self.instanceViewControllerInStoryboardWithName("MKUISegmentBViewController")!
+        segmentContainer.addSegmentViewControllers([vc1,vc2])
+    }
+    override func bindingData() {
+        super.bindingData()
+        segment.rac_signalForControlEvents(.ValueChanged).toSignalProducer().startWithNext { [weak self] _ in
+            let index = self?.segment.selectedSegmentIndex ?? 0
+            DDLogInfo("Segment index: \(index)")
+            self?.segmentContainer.selectSegment(index)
         }
-        if let vc2 = self.instanceViewControllerInStoryboardWithName("MKUISegmentBViewController") {
-            view.addSubview(vc2.view)
-        }
-        
     }
 
     /*

@@ -15,6 +15,7 @@ public extension UIDevice {
     
     private struct Constant {
         static let UUIDString = "UUIDString"
+        static let DeviceName = "DeviceName"
     }
     
     //MARK: UUID
@@ -29,6 +30,18 @@ public extension UIDevice {
             DocumentCache.sharedCache().setObject(id, forKey: Constant.UUIDString)
             DDLogInfo("UUID: \(id)")
             return id
+        }
+    }
+    var deviceName: String {
+        get {
+            if let name = PINMemoryCache.sharedCache().objectForKey(Constant.DeviceName) as? String {
+                DDLogInfo("DeviceName: \(name)")
+                return name
+            }
+            let name = UIDevice.currentDevice().name
+            PINMemoryCache.sharedCache().setObject(name, forKey: Constant.DeviceName)
+            DDLogInfo("DeviceName: \(name)")
+            return name
         }
     }
     
