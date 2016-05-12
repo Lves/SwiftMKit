@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class MKUIChartViewController: BaseViewController,ChartViewDelegate {
+class MKUIChartViewController: BaseViewController {
     let screenSize = UIScreen.mainScreen().bounds.size
     var lineChart:LineChartView!
     var barChartView:BarChartView!
@@ -18,12 +18,26 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ///折线图
+        ///1.0 折线图
         lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 500))
         self.lineChart.delegate = self
         self.setLineData()
         
-        //柱状图
+        
+        let xAxis = lineChart.xAxis
+        xAxis.labelPosition = .Bottom;          //x轴线位置
+        xAxis.labelFont = UIFont.systemFontOfSize(10);
+        xAxis.drawGridLinesEnabled = false       // 是否显示x轴网格线
+        xAxis.spaceBetweenLabels = 1
+        //是否显示右侧轴线
+        lineChart.rightAxis.enabled = false
+        lineChart.xAxis.drawGridLinesEnabled = false
+        lineChart.dragEnabled = true //是否可以滑动
+        lineChart.drawGridBackgroundEnabled = false //背景色
+        
+        
+        
+        //2.0 柱状图
         barChartView = BarChartView(frame: CGRectMake(0, 500,screenSize.width , 500))
         self.barChartView.delegate = self
         self.setChartData()
@@ -105,8 +119,17 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
         
     }
-    
-    
-
-
 }
+
+
+extension MKUIChartViewController:ChartViewDelegate  {
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        print("Seleted");
+    }
+    func chartValueNothingSelected(chartView: ChartViewBase) {
+         print("NothingSeleted");
+    }
+}
+
+
+
