@@ -45,7 +45,6 @@ protocol SideMenuProtocol : NSObjectProtocol {
     optional func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
 }
 
-
 /// 自定义抽屉菜单
 public class SideMenu: UIViewController {
     let screenSize = UIScreen.mainScreen().bounds.size
@@ -55,7 +54,7 @@ public class SideMenu: UIViewController {
     let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.75
     
     // TODO: 内存泄露！！！
-    var mainVc: UIViewController?
+    weak var mainVc: UIViewController?
     var menuVc: UIViewController?
     /// 代理
     weak var delegate: SideMenuDelegate?
