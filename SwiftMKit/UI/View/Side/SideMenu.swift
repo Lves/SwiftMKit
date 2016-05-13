@@ -46,7 +46,7 @@ protocol SideMenuProtocol : NSObjectProtocol {
 }
 
 /// 自定义抽屉菜单
-public class SideMenu: UIViewController {
+public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     let screenSize = UIScreen.mainScreen().bounds.size
     lazy private var coverView: UIControl = UIControl()
     let duration = 0.25
@@ -60,6 +60,7 @@ public class SideMenu: UIViewController {
     weak var delegate: SideMenuDelegate?
     /// 跳转到菜单子项的Nav
     private var destNav: UINavigationController?
+    private var originalPoint: CGPoint = CGPoint()
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -88,6 +89,28 @@ public class SideMenu: UIViewController {
         if let vc = menuVc as? SideMenuProtocol {
             vc.sideMenu = self
         }
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized(_:)))
+        panGestureRecognizer.delegate = self
+        menuVc.view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    func panGestureRecognized(recognizer: UIPanGestureRecognizer) {
+        delegate?.sideMenuDidRecognizePanGesture?(self, recongnizer: recognizer)
+        let point: CGPoint = recognizer.translationInView(view)
+        DDLogInfo("====> \(point)")
+        if menuVc?.view.x <= -menuVc!.view.frame.width {
+            hideMenu()
+            return
+        }
+        menuVc?.view.frame.x -= abs(point.x)
+    }
+    
+    // MARK: - 解决手势冲突问题
+    @objc public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let gestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        let cell = gestureRecognizer.view
+        let point = gestureRecognizer.translationInView(cell?.superview)
+        return fabsf(Float(point.x)) > fabsf(Float(point.y))
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -115,7 +138,7 @@ public class SideMenu: UIViewController {
             coverView.frame = UIScreen.mainScreen().bounds
             coverView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.45)
             menuVc?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
-            self.mainVc?.tabBarController?.tabBar.sendSubviewToBack(coverView)
+            self.mainVc?.navigationController?.view.sendSubviewToBack(coverView)
             UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
             var view = mainVc!.view
             if let nav = mainVc?.navigationController {
