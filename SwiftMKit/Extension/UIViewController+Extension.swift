@@ -14,6 +14,19 @@ import CocoaLumberjack
 public extension UIViewController {
     public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
         DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
+        if let vc = initialedViewController(name, params: nextParams) {
+            if pop {
+                self.presentViewController(vc, animated: true, completion: nil)
+            } else {
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        } else if canPerformSegueWithIdentifier(name){
+            self.performSegueWithIdentifier(name, sender: ["params":nextParams])
+        } else {
+            DDLogError("Can't route to: \(name), please check the name")
+        }
+    }
+    public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) -> UIViewController? {
         var vc = instanceViewControllerInXibWithName(name)
         if (vc == nil) {
             vc = instanceViewControllerInStoryboardWithName(name)
@@ -23,16 +36,8 @@ public extension UIViewController {
                 let baseVC = vc as! BaseKitViewController
                 baseVC.params = nextParams
             }
-            if pop {
-                self.presentViewController(vc!, animated: true, completion: nil)
-            } else {
-                self.navigationController?.pushViewController(vc!, animated: true)
-            }
-        } else if canPerformSegueWithIdentifier(name){
-            self.performSegueWithIdentifier(name, sender: ["params":nextParams])
-        } else {
-            DDLogError("Can't route to: \(name), please check the name")
         }
+        return vc
     }
     public func instanceViewControllerInXibWithName(name: String) -> UIViewController? {
         let nibPath = NSBundle.mainBundle().pathForResource(name, ofType: "nib")
