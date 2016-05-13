@@ -9,8 +9,6 @@
 import UIKit
 import CocoaLumberjack
 
-// TODO: 状态栏显示与隐藏
-
 class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
     var sideMenu: SideMenu? = SideMenu()
     let screenSize = UIScreen.mainScreen().bounds.size
@@ -35,7 +33,7 @@ class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProt
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         DDLogInfo("显示菜单")
-        sideMenu?.routeToSideMenu("")
+        sideMenu?.routeToSideMenu()
         flag = true
     }
     
@@ -71,34 +69,18 @@ class MKUISideTableViewController: UITableViewController, SideMenuProtocol {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         DDLogInfo("选中了第\(indexPath.row)行")
-//        let nav = UINavigationController(rootViewController: self.instanceViewControllerInXibWithName("SubViewController")!)
-        
-        // TODO: present操作应该封装到SideMenu控件里面，接收一个输入参数（作为rootViewController）
-        sideMenu?.routeToSideContainer("")
-        let nav = UINavigationController(rootViewController: SubViewController())
-        
-        let fromVc = sideMenu?.mainVc?.navigationController
-        let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
-        nav.transitioningDelegate = effect
-        fromVc?.presentViewController(nav, animated: true, completion: nil)
+        sideMenu?.routeToSideContainer("SubViewController", params: ["title" : "第\(indexPath.row)行"])
     }
-    
 }
 
 
 class SubViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "SubViewController"
         view.backgroundColor = UIColor.grayColor()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        SideMenu.routeToBack(navigationController)
     }
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////
-// TODO: 待封装成单独的文件
-
-

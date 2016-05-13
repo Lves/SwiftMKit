@@ -30,13 +30,15 @@ public class SideMenu: UIViewController {
     lazy private var coverView: UIControl = UIControl()
     let duration = 0.25
     let factor: CGFloat = 0.5
-    let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.5
+    let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.75
     
-    weak var mainVc: UIViewController?
-    weak var menuVc: UIViewController?
+    // TODO: 内存泄露！！！
+    var mainVc: UIViewController?
+    var menuVc: UIViewController?
     
     weak var delegate: SideMenuDelegate?
     
+    private var destNav: UINavigationController?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +84,6 @@ public class SideMenu: UIViewController {
     func showMenu(animated: Bool = true) {
         if (coverView.superview == nil) {
             self.mainVc?.tabBarController?.tabBar.sendSubviewToBack(coverView)
-            //            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
             var view = mainVc!.view
             if let nav = mainVc?.navigationController {
                 view = nav.view
@@ -100,7 +101,7 @@ public class SideMenu: UIViewController {
     }
     
     func hideMenu(animated: Bool = true) {
-        //        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
         if animated {
             UIView.animateWithDuration(duration, animations: {
                 self.menuVc!.view.frame = CGRectMake(-self.menuWidth, 0, self.menuWidth, self.screenSize.height)
@@ -120,9 +121,43 @@ public class SideMenu: UIViewController {
     }
     
     
-    public func routeToSideMenu(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
+    public func routeToSideMenu(nextParams: Dictionary<String, AnyObject> = [:]) {
+        if (coverView.superview == nil) {
+            self.mainVc?.tabBarController?.tabBar.sendSubviewToBack(coverView)
+            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+            var view = mainVc!.view
+            if let nav = mainVc?.navigationController {
+                view = nav.view
+            }
+            view.addSubview(menuVc!.view)
+            view.insertSubview(coverView, belowSubview: menuVc!.view)
+            UIView.animateWithDuration(duration) {
+                self.menuVc!.view.frame = CGRectMake(0, 0, self.menuWidth, self.screenSize.height)
+            }
+        }
     }
+    
     public func routeToSideContainer(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
-        
+        var destVc = initialedViewController(name, params: nextParams)
+        if destVc == nil {
+            destVc = NSObject.fromClassName(name) as? UIViewController
+            if let title = nextParams["title"] {
+                destVc?.title = title as? String
+            }
+        }
+        if destVc != nil {
+            let destNav = UINavigationController(rootViewController: destVc!)
+            self.destNav = destNav
+            let fromVc = self.mainVc?.navigationController
+            let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
+            destNav.transitioningDelegate = effect
+            fromVc?.presentViewController(destNav, animated: true, completion: nil)
+            UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+        }
+    }
+    
+    public class func routeToBack(nav: UINavigationController?) {
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+        nav?.dismissViewControllerAnimated(true, completion: nil)
     }
 }
