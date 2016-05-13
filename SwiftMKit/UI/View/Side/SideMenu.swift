@@ -61,6 +61,10 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     /// 跳转到菜单子项的Nav
     private var destNav: UINavigationController?
     private var originalPoint: CGPoint = CGPoint()
+    private var lastDrugPoint: CGPoint = CGPoint()
+    private var startDrugPoint: CGPoint = CGPoint()
+    private var drug2Right = false
+    
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -94,15 +98,61 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         menuVc.view.addGestureRecognizer(panGestureRecognizer)
     }
     
+    ///  监听滑动手势
     func panGestureRecognized(recognizer: UIPanGestureRecognizer) {
         delegate?.sideMenuDidRecognizePanGesture?(self, recongnizer: recognizer)
-        let point: CGPoint = recognizer.translationInView(view)
-        DDLogInfo("====> \(point)")
-        if menuVc?.view.x <= -menuVc!.view.frame.width {
+        
+        let currentView = menuVc!.view   // 菜单视图
+        let baseView = mainVc!.view
+        let velocity = recognizer.velocityInView(baseView)
+        drug2Right = velocity.x > 0
+        if (currentView.x >= 0 && drug2Right) {
+            return
+        }
+        if currentView.x <= -menuWidth {
             hideMenu()
             return
         }
-        menuVc?.view.frame.x -= abs(point.x)
+        if recognizer.state == .Began {
+            
+        } else if (recognizer.state == .Changed) {
+            let currentPoint: CGPoint = recognizer.translationInView(baseView)
+            var xOffset = startDrugPoint.x + currentPoint.x
+            DDLogInfo("\(xOffset)  \(currentView.x)")
+            if xOffset < 0 {
+                if coverView.superview != nil {
+                    xOffset = xOffset < -menuWidth ? -menuWidth : xOffset
+                } else {
+                    xOffset = 0
+                }
+            }
+            if xOffset != currentView.x {
+                currentView.x = xOffset
+            }
+        } else if (recognizer.state == .Ended) {
+            if currentView.x == 0 {
+                
+            } else {
+                if drug2Right && currentView.x < -menuWidth {
+                    let animatedTime = abs((menuWidth + currentView.x) / menuWidth  * 0.25)
+                    UIView.setAnimationCurve(.EaseInOut)
+                    UIView.animateWithDuration(Double(animatedTime), animations: {
+                        currentView.x = -self.menuWidth
+                    })
+                } else {
+                    DDLogDebug("\(currentView.x)")
+                }
+            }
+            if drug2Right {
+                UIView.animateWithDuration(duration, animations: { 
+                    currentView.x = 0
+                })
+            } else {
+                hideMenu()
+            }
+            lastDrugPoint = CGPointZero
+        }
+        
     }
     
     // MARK: - 解决手势冲突问题
