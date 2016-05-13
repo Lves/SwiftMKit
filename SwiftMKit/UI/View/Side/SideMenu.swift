@@ -64,6 +64,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     private var lastDrugPoint: CGPoint = CGPoint()
     private var startDrugPoint: CGPoint = CGPoint()
     private var drug2Right = false
+    private var panGestureRecognizer: UIPanGestureRecognizer?
     
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -94,8 +95,14 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             vc.sideMenu = self
         }
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized(_:)))
+        self.panGestureRecognizer = panGestureRecognizer
         panGestureRecognizer.delegate = self
         menuVc.view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    deinit {
+        panGestureRecognizer?.delegate = nil
+        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
     }
     
     ///  监听滑动手势
@@ -182,7 +189,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc private func coverClick() {
+    @objc public func coverClick() {
         DDLogInfo("隐藏菜单")
         delegate?.sideMenuDidHideMenuViewController?(self, menuViewController: menuVc!)
         hideMenu()

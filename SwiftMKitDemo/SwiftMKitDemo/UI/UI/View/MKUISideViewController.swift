@@ -22,6 +22,8 @@ class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProt
         title = "侧滑🐷视图"
         sideMenu = SideMenu(mainVc: self, menuVc: MKUISideTableViewController())
         sideMenu?.delegate = self
+        // 禁用滑动返回
+        navigationController?.interactivePopGestureRecognizer?.enabled = false
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -61,7 +63,7 @@ class MKUISideTableViewController: UITableViewController, SideMenuProtocol {
 class SubViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.grayColor()
+        view.backgroundColor = UIColor.greenColor()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
