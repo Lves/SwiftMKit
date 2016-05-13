@@ -66,3 +66,14 @@ public extension NSObject {
     }
 
 }
+
+public protocol Then {}
+
+extension Then {
+    func then(closure: Self -> Void) -> Self {
+        closure(self)
+        return self
+    }
+}
+
+extension NSObject: Then {}

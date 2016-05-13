@@ -1,0 +1,128 @@
+//
+//  SideMenu.swift
+//  SwiftMKitDemo
+//
+//  Created by apple on 16/5/13.
+//  Copyright © 2016年 cdts. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import CocoaLumberjack
+
+protocol SideMenuProtocol : NSObjectProtocol {
+    var sideMenu: SideMenu? { get set }
+}
+
+// MARK: - 弹出菜单
+@objc protocol SideMenuDelegate {
+    optional func sideMenuDidRecognizePanGesture(sideMenu: SideMenu, recongnizer: UIPanGestureRecognizer)
+    optional func sideMenuDidShowMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
+    optional func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
+}
+
+
+/// 自定义抽屉
+/// 输入参数：MainVC、MenuVc
+public class SideMenu: UIViewController {
+    //    let kWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
+    let screenSize = UIScreen.mainScreen().bounds.size
+    lazy private var coverView: UIControl = UIControl()
+    let duration = 0.25
+    let factor: CGFloat = 0.5
+    let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.5
+    
+    weak var mainVc: UIViewController?
+    weak var menuVc: UIViewController?
+    
+    weak var delegate: SideMenuDelegate?
+    
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        coverView.addTarget(self, action: #selector(coverClick), forControlEvents: UIControlEvents.TouchUpInside)
+        coverView.frame = UIScreen.mainScreen().bounds
+        coverView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.45)
+        menuVc?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
+    }
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    //    init<T:UIViewController where T: SideMenuProtocol>(mainVc: T, menuVc: T) {
+    //        super.init(nibName: nil, bundle: nil)
+    //        self.mainVc = mainVc
+    //        self.menuVc = menuVc
+    ////        var mvc = mainVc
+    ////        mvc.sideMenu = self
+    ////        var svc = menuVc
+    ////        svc.sideMenu = self
+    //
+    ////        mainVc.sideMenu = self
+    ////        menuVc.sideMenu = self
+    //    }
+    
+    public init<T:UIViewController>(mainVc: T, menuVc: T) {
+        super.init(nibName: nil, bundle: nil)
+        self.mainVc = mainVc
+        self.menuVc = menuVc
+        if let vc = mainVc as? SideMenuProtocol {
+            vc.sideMenu = self
+        }
+        if let vc = menuVc as? SideMenuProtocol {
+            vc.sideMenu = self
+        }
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func showMenu(animated: Bool = true) {
+        if (coverView.superview == nil) {
+            self.mainVc?.tabBarController?.tabBar.sendSubviewToBack(coverView)
+            //            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+            var view = mainVc!.view
+            if let nav = mainVc?.navigationController {
+                view = nav.view
+            }
+            view.addSubview(menuVc!.view)
+            view.insertSubview(coverView, belowSubview: menuVc!.view)
+            if animated {
+                UIView.animateWithDuration(duration) {
+                    self.menuVc!.view.frame = CGRectMake(0, 0, self.menuWidth, self.screenSize.height)
+                }
+            } else {
+                self.menuVc!.view.frame = CGRectMake(0, 0, self.menuWidth, self.screenSize.height)
+            }
+        }
+    }
+    
+    func hideMenu(animated: Bool = true) {
+        //        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+        if animated {
+            UIView.animateWithDuration(duration, animations: {
+                self.menuVc!.view.frame = CGRectMake(-self.menuWidth, 0, self.menuWidth, self.screenSize.height)
+            }) { (flag) in
+                self.coverView.removeFromSuperview()
+            }
+        } else {
+            self.menuVc!.view.frame = CGRectMake(-self.menuWidth, 0, self.menuWidth, self.screenSize.height)
+            self.coverView.removeFromSuperview()
+        }
+    }
+    
+    @objc private func coverClick() {
+        DDLogInfo("隐藏菜单")
+        delegate?.sideMenuDidHideMenuViewController?(self, menuViewController: menuVc!)
+        hideMenu()
+    }
+    
+    
+    public func routeToSideMenu(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
+    }
+    public func routeToSideContainer(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
+        
+    }
+}
