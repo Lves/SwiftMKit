@@ -106,6 +106,9 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         let baseView = mainVc!.view
         let velocity = recognizer.velocityInView(baseView)
         drug2Right = velocity.x > 0
+        if currentView.x >= 0 {
+            currentView.x = 0
+        }
         if (currentView.x >= 0 && drug2Right) {
             return
         }
@@ -118,6 +121,9 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         } else if (recognizer.state == .Changed) {
             let currentPoint: CGPoint = recognizer.translationInView(baseView)
             var xOffset = startDrugPoint.x + currentPoint.x
+            if (xOffset >= 0 && drug2Right) {
+                return
+            }
             DDLogInfo("\(xOffset)  \(currentView.x)")
             if xOffset < 0 {
                 if coverView.superview != nil {
