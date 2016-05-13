@@ -54,22 +54,14 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         DDLogVerbose("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
-            if self.viewModel?.dataIndex == 0 {
-                self.listView?.mj_header.endRefreshing()
-            }else{
-                self.listView?.mj_footer.endRefreshing()
-            }
+            self.endRefresh()
         }
     }
     @objc func task_list_cancel(notify:NSNotification) {
         DDLogVerbose("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
-            if self.viewModel?.dataIndex == 0 {
-                self.listView?.mj_header.endRefreshing()
-            }else{
-                self.listView?.mj_footer.endRefreshing()
-            }
+            self.endRefresh()
         }
     }
     @objc func task_list_end(notify:NSNotification) {
@@ -81,11 +73,14 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
             }
         }
         Async.main {
-            if self.viewModel?.dataIndex == 0 {
-                self.listView?.mj_header.endRefreshing()
-            }else{
-                self.listView?.mj_footer.endRefreshing()
-            }
+            self.endRefresh()
+        }
+    }
+    func endRefresh() {
+        if self.viewModel?.dataIndex == 0 {
+            self.listView?.mj_header.endRefreshing()
+        }else{
+            self.listView?.mj_footer.endRefreshing()
         }
     }
     

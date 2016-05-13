@@ -121,6 +121,8 @@
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */; };
 		27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */; };
+		27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */; };
+		27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */; };
 		27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */; };
 		27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */; };
 		27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */; };
@@ -318,6 +320,8 @@
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickDemoSpec.swift; sourceTree = "<group>"; };
+		27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewController.swift; sourceTree = "<group>"; };
+		27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewModel.swift; sourceTree = "<group>"; };
 		27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewController.swift; sourceTree = "<group>"; };
 		27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewModel.swift; sourceTree = "<group>"; };
 		27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewController.swift; sourceTree = "<group>"; };
@@ -795,6 +799,8 @@
 				278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */,
 				278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */,
 				27959A531CD3531900546424 /* BaseKitWebViewController.xib */,
+				27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */,
+				27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -1207,10 +1213,12 @@
 				18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
 				27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */,
+				27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
 				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,
 				2724D2191CE4201700F4CE03 /* SegmentContainerViewController.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
+				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,

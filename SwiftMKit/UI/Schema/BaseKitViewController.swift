@@ -13,8 +13,6 @@ import Alamofire
 import MBProgressHUD
 import ObjectiveC
 
-
-
 public class BaseKitViewController : UIViewController {
     public var params = Dictionary<String, AnyObject>() {
         didSet {
