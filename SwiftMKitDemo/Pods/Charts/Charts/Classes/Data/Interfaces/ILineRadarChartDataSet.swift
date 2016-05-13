@@ -44,4 +44,11 @@ public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
     
     /// Returns true if filled drawing is enabled, false if not
     var isDrawFilledEnabled: Bool { get }
+    
+    //Modify By LiXingLe
+    //是否RangeFill
+    var drawRangeFilledEnabled:Bool { get set }
+    
+    var fillYValues:[ChartDataEntry]{ get set }
+    
 }

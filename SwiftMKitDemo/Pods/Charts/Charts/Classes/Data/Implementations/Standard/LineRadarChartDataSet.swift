@@ -75,11 +75,23 @@ public class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRad
     /// Disabling this will give great performance boost.
     /// Please note that this method uses the path clipping for drawing the filled area (with images, gradients and layers).
     public var drawFilledEnabled = false
+   
+    //Modify By LiXingLe
+    //是否RangeFill
+    public var drawRangeFilledEnabled = false
+    ///fillrange的较低值
+    public var fillYValues:[ChartDataEntry] = []
+    
     
     /// Returns true if filled drawing is enabled, false if not
     public var isDrawFilledEnabled: Bool
     {
         return drawFilledEnabled
+    }
+    
+    public var isDrawRangeFilledEnabled: Bool
+    {
+        return drawRangeFilledEnabled
     }
     
     // MARK: NSCopying
@@ -90,6 +102,7 @@ public class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRad
         copy.fillColor = fillColor
         copy._lineWidth = _lineWidth
         copy.drawFilledEnabled = drawFilledEnabled
+        copy.drawRangeFilledEnabled = drawRangeFilledEnabled
         return copy
     }
     
