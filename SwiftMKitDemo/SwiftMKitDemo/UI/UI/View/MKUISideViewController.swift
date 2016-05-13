@@ -10,51 +10,35 @@ import UIKit
 import CocoaLumberjack
 
 class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
-    var sideMenu: SideMenu? = SideMenu()
-    let screenSize = UIScreen.mainScreen().bounds.size
-    let kWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
+    var sideMenu: SideMenu?
     
     private var _viewModel = MKUISideViewModel()
-    override var viewModel: BaseKitViewModel!{
+    override var viewModel: BaseKitViewModel! {
         get { return _viewModel }
     }
-    let subVc = MKUISideTableViewController()
-    var flag = false
+    
     override func setupUI() {
         super.setupUI()
         title = "侧滑🐷视图"
-        let v1 = self
-        let v2 = MKUISideTableViewController()
-        
-        sideMenu = SideMenu(mainVc: v1, menuVc: v2)
+        sideMenu = SideMenu(mainVc: self, menuVc: MKUISideTableViewController())
         sideMenu?.delegate = self
-        DDLogInfo("\(sideMenu?.view)")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         DDLogInfo("显示菜单")
         sideMenu?.routeToSideMenu()
-        flag = true
     }
     
     func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {
-        DDLogInfo("\(sideMenu)   \(menuViewController)")
         DDLogInfo(#function)
     }
 }
 
 class MKUISideTableViewController: UITableViewController, SideMenuProtocol {
     var sideMenu: SideMenu?
-    let kWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
-    let screenSize = UIScreen.mainScreen().bounds.size
-    lazy private var coverView: UIControl = UIControl()
-    let duration = 0.25
-    let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.7
-    var menuView: UIView?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.frame = CGRectMake(-screenSize.width * 0.7, 0, screenSize.width * 0.7, screenSize.height)
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

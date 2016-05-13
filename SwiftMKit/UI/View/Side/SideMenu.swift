@@ -6,6 +6,30 @@
 //  Copyright © 2016年 cdts. All rights reserved.
 //
 
+/**
+ * 　　　　　　　　┏┓　　　┏┓
+ * 　　　　　　　┏┛┻━━━┛┻┓
+ * 　　　　　　　┃　　　　　　　┃
+ * 　　　　　　　┃　　　━　　　┃
+ * 　　　　　　　┃　＞　　　＜　┃
+ * 　　　　　　　┃　　　　　　　┃
+ * 　　　　　　　┃...　⌒　...　┃
+ * 　　　　　　　┃　　　　　　　┃
+ * 　　　　　　　┗━┓　　　┏━┛
+ * 　　　　　　　　　┃　　　┃　Code is far away from bug with the animal protecting
+ * 　　　　　　　　　┃　　　┃   神兽保佑,代码无bug
+ * 　　　　　　　　　┃　　　┃
+ * 　　　　　　　　　┃　　　┃
+ * 　　　　　　　　　┃　　　┃
+ * 　　　　　　　　　┃　　　┃
+ * 　　　　　　　　　┃　　　┗━━━┓
+ * 　　　　　　　　　┃　　　　　　　┣┓
+ * 　　　　　　　　　┃　　　　　　　┏┛
+ * 　　　　　　　　　┗┓┓┏━┳┓┏┛
+ * 　　　　　　　　　　┃┫┫　┃┫┫
+ * 　　　　　　　　　　┗┻┛　┗┻┛
+ */
+
 import Foundation
 import UIKit
 import CocoaLumberjack
@@ -22,31 +46,21 @@ protocol SideMenuProtocol : NSObjectProtocol {
 }
 
 
-/// 自定义抽屉
-/// 输入参数：MainVC、MenuVc
+/// 自定义抽屉菜单
 public class SideMenu: UIViewController {
-    //    let kWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
     let screenSize = UIScreen.mainScreen().bounds.size
     lazy private var coverView: UIControl = UIControl()
     let duration = 0.25
-    let factor: CGFloat = 0.5
+    let factor: CGFloat = 0.75
     let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.75
     
     // TODO: 内存泄露！！！
     var mainVc: UIViewController?
     var menuVc: UIViewController?
-    
+    /// 代理
     weak var delegate: SideMenuDelegate?
-    
+    /// 跳转到菜单子项的Nav
     private var destNav: UINavigationController?
-    
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        coverView.addTarget(self, action: #selector(coverClick), forControlEvents: UIControlEvents.TouchUpInside)
-        coverView.frame = UIScreen.mainScreen().bounds
-        coverView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.45)
-        menuVc?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
-    }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -81,35 +95,11 @@ public class SideMenu: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showMenu(animated: Bool = true) {
-        if (coverView.superview == nil) {
-            self.mainVc?.tabBarController?.tabBar.sendSubviewToBack(coverView)
-            var view = mainVc!.view
-            if let nav = mainVc?.navigationController {
-                view = nav.view
-            }
-            view.addSubview(menuVc!.view)
-            view.insertSubview(coverView, belowSubview: menuVc!.view)
-            if animated {
-                UIView.animateWithDuration(duration) {
-                    self.menuVc!.view.frame = CGRectMake(0, 0, self.menuWidth, self.screenSize.height)
-                }
-            } else {
-                self.menuVc!.view.frame = CGRectMake(0, 0, self.menuWidth, self.screenSize.height)
-            }
-        }
-    }
-    
-    func hideMenu(animated: Bool = true) {
+    private func hideMenu() {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
-        if animated {
-            UIView.animateWithDuration(duration, animations: {
-                self.menuVc!.view.frame = CGRectMake(-self.menuWidth, 0, self.menuWidth, self.screenSize.height)
-            }) { (flag) in
-                self.coverView.removeFromSuperview()
-            }
-        } else {
+        UIView.animateWithDuration(duration, animations: {
             self.menuVc!.view.frame = CGRectMake(-self.menuWidth, 0, self.menuWidth, self.screenSize.height)
+        }) { (flag) in
             self.coverView.removeFromSuperview()
         }
     }
@@ -120,9 +110,12 @@ public class SideMenu: UIViewController {
         hideMenu()
     }
     
-    
     public func routeToSideMenu(nextParams: Dictionary<String, AnyObject> = [:]) {
         if (coverView.superview == nil) {
+            coverView.addTarget(self, action: #selector(coverClick), forControlEvents: UIControlEvents.TouchUpInside)
+            coverView.frame = UIScreen.mainScreen().bounds
+            coverView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.45)
+            menuVc?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
             self.mainVc?.tabBarController?.tabBar.sendSubviewToBack(coverView)
             UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
             var view = mainVc!.view
