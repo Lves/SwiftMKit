@@ -41,7 +41,10 @@ public class BaseKitViewController : UIViewController {
         let vc = segue.destinationViewController
         if let bvc = vc as? BaseKitViewController {
             if let dict = sender as? NSDictionary {
-                if let params = dict["params"] as? Dictionary<String, AnyObject> {
+                if var params = dict["params"] as? Dictionary<String, AnyObject> {
+                    if params["hidesBottomBarWhenPushed"] == nil {
+                        params["hidesBottomBarWhenPushed"] = true
+                    }
                     bvc.params = params
                 }
             }
@@ -76,9 +79,24 @@ public class BaseKitViewController : UIViewController {
     }
 }
 
+public extension UIViewController {
+        /// 禁用滑动返回
+    var forbiddenSwipBackGesture: Bool {
+        get {
+            if let enable = navigationController?.interactivePopGestureRecognizer?.enabled {
+                return !enable
+            }
+            return false
+        }
+        set {
+            navigationController?.interactivePopGestureRecognizer?.enabled = !newValue
+        }
+    }
+}
+
 //HUD
 
-extension BaseKitViewController {
+public extension BaseKitViewController {
     
     public func showTip(tip: String) {
         showTip(tip, view: self.view.window!)

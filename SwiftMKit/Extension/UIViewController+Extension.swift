@@ -26,17 +26,17 @@ public extension UIViewController {
             DDLogError("Can't route to: \(name), please check the name")
         }
     }
-    public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) -> UIViewController? {
+    public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "") -> UIViewController? {
         var vc = instanceViewControllerInXibWithName(name)
         if (vc == nil) {
-            vc = instanceViewControllerInStoryboardWithName(name)
-        }
-        var params = nextParams
-        if params["hidesBottomBarWhenPushed"] == nil {
-            params["hidesBottomBarWhenPushed"] = true
+            vc = instanceViewControllerInStoryboardWithName(name, storyboardName: storyboardName)
         }
         if vc != nil {
             if vc is BaseKitViewController {
+                var params = nextParams
+                if params["hidesBottomBarWhenPushed"] == nil {
+                    params["hidesBottomBarWhenPushed"] = true
+                }
                 let baseVC = vc as! BaseKitViewController
                 baseVC.params = params
             }
@@ -54,7 +54,7 @@ public extension UIViewController {
         return self.instanceViewControllerInStoryboardWithName(name, storyboardName: nil)
     }
     public func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String?) -> UIViewController? {
-        let story = storyboardName != nil ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
+        let story = storyboardName != nil && storyboardName?.length > 0 ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
         if story?.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
             return story?.instantiateViewControllerWithIdentifier(name)
         }

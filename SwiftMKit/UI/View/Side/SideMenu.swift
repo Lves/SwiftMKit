@@ -33,31 +33,51 @@
 import Foundation
 import UIKit
 import CocoaLumberjack
+import ReactiveCocoa
 
 protocol SideMenuProtocol : NSObjectProtocol {
     var sideMenu: SideMenu? { get set }
 }
 
 // MARK: - 弹出菜单
-@objc protocol SideMenuDelegate {
-    optional func sideMenuDidRecognizePanGesture(sideMenu: SideMenu, recongnizer: UIPanGestureRecognizer)
-    optional func sideMenuDidShowMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
-    optional func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
+public protocol SideMenuDelegate: class {
+    func sideMenuDidRecognizePanGesture(sideMenu: SideMenu, recongnizer: UIPanGestureRecognizer)
+    func sideMenuDidShowMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
+    func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController)
+}
+public extension SideMenuDelegate {
+    func sideMenuDidRecognizePanGesture(sideMenu: SideMenu, recongnizer: UIPanGestureRecognizer) {}
+    func sideMenuDidShowMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {}
+    func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {}
 }
 
 /// 自定义抽屉菜单
 public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
-    let screenSize = UIScreen.mainScreen().bounds.size
+    struct InnerConstant {
+        static let AnimationDuration = 0.25
+        static let MenuWidthPercent = 0.75
+        static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
+    }
     lazy private var coverView: UIControl = UIControl()
-    let duration = 0.25
-    let factor: CGFloat = 0.75
-    let menuWidth = UIScreen.mainScreen().bounds.size.width * 0.75
-    
-    // TODO: 内存泄露！！！
-    weak var mainVc: UIViewController?
-    var menuVc: UIViewController?
-    /// 代理
+    public var animationDuration = InnerConstant.AnimationDuration
+    public var menuWidthPercent = InnerConstant.MenuWidthPercent
+    public var maskColor = InnerConstant.MaskColor
+    var screenSize: CGSize {
+        get {
+            return UIScreen.mainScreen().bounds.size
+        }
+    }
+    var menuWidth: CGFloat {
+        get {
+            return screenSize.width * CGFloat(menuWidthPercent)
+        }
+    }
+    weak var masterViewController: UIViewController?
+    weak var menuViewController: UIViewController?
     weak var delegate: SideMenuDelegate?
+    
+    var menuShowed = MutableProperty<Bool>(false)
+    
     /// 跳转到菜单子项的Nav
     private var destNav: UINavigationController?
     private var originalPoint: CGPoint = CGPoint()
@@ -70,34 +90,31 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    //    init<T:UIViewController where T: SideMenuProtocol>(mainVc: T, menuVc: T) {
-    //        super.init(nibName: nil, bundle: nil)
-    //        self.mainVc = mainVc
-    //        self.menuVc = menuVc
-    ////        var mvc = mainVc
-    ////        mvc.sideMenu = self
-    ////        var svc = menuVc
-    ////        svc.sideMenu = self
-    //
-    ////        mainVc.sideMenu = self
-    ////        menuVc.sideMenu = self
-    //    }
-    
-    public init<T:UIViewController>(mainVc: T, menuVc: T) {
+    public init(masterViewController: UIViewController, menuViewController: UIViewController) {
         super.init(nibName: nil, bundle: nil)
-        self.mainVc = mainVc
-        self.menuVc = menuVc
-        if let vc = mainVc as? SideMenuProtocol {
+        self.masterViewController = masterViewController
+        self.menuViewController = menuViewController
+        if let vc = masterViewController as? SideMenuProtocol {
             vc.sideMenu = self
         }
-        if let vc = menuVc as? SideMenuProtocol {
+        if let vc = menuViewController as? SideMenuProtocol {
             vc.sideMenu = self
+        }
+        menuShowed.producer.startWithNext { [weak self] showed in
+            if showed {
+                self?.hideStatusBar()
+            } else {
+                self?.showStatusBar()
+            }
         }
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized(_:)))
         self.panGestureRecognizer = panGestureRecognizer
         panGestureRecognizer.delegate = self
-        menuVc.view.addGestureRecognizer(panGestureRecognizer)
+        menuViewController.view.addGestureRecognizer(panGestureRecognizer)
     }
     
     deinit {
@@ -107,10 +124,10 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     ///  监听滑动手势
     func panGestureRecognized(recognizer: UIPanGestureRecognizer) {
-        delegate?.sideMenuDidRecognizePanGesture?(self, recongnizer: recognizer)
+        delegate?.sideMenuDidRecognizePanGesture(self, recongnizer: recognizer)
         
-        let currentView = menuVc!.view   // 菜单视图
-        let baseView = mainVc!.view
+        let currentView = menuViewController!.view   // 菜单视图
+        let baseView = masterViewController!.view
         let velocity = recognizer.velocityInView(baseView)
         drug2Right = velocity.x > 0
         if currentView.x >= 0 {
@@ -157,7 +174,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
             if drug2Right {
-                UIView.animateWithDuration(duration, animations: { 
+                UIView.animateWithDuration(animationDuration, animations: {
                     currentView.x = 0
                 })
             } else {
@@ -176,66 +193,59 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         return fabsf(Float(point.x)) > fabsf(Float(point.y))
     }
     
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func hideMenu() {
+    private func showStatusBar() {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
-        UIView.animateWithDuration(duration, animations: {
-            self.menuVc!.view.frame = CGRectMake(-self.menuWidth, 0, self.menuWidth, self.screenSize.height)
-        }) { (flag) in
+    }
+    private func hideStatusBar() {
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+    }
+    private func hideMenu() {
+        menuShowed.value = false
+        UIView.animateWithDuration(animationDuration, animations: {
+            self.coverView.backgroundColor = UIColor.clearColor()
+            self.menuViewController?.view.x = -self.menuWidth
+        }) { _ in
+            self.menuViewController?.view.removeFromSuperview()
             self.coverView.removeFromSuperview()
         }
     }
     
-    @objc public func coverClick() {
-        DDLogInfo("隐藏菜单")
-        delegate?.sideMenuDidHideMenuViewController?(self, menuViewController: menuVc!)
+    public func click_mask() {
+        DDLogInfo("Hide Side Menu")
+        if let vc = menuViewController {
+            delegate?.sideMenuDidHideMenuViewController(self, menuViewController: vc)
+        }
         hideMenu()
     }
     
     public func routeToSideMenu(nextParams: Dictionary<String, AnyObject> = [:]) {
+        DDLogInfo("Show Side Menu")
         if (coverView.superview == nil) {
-            coverView.addTarget(self, action: #selector(coverClick), forControlEvents: UIControlEvents.TouchUpInside)
+            coverView.addTarget(self, action: #selector(click_mask), forControlEvents: UIControlEvents.TouchUpInside)
             coverView.frame = UIScreen.mainScreen().bounds
-            coverView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.45)
-            menuVc?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
-            self.mainVc?.navigationController?.view.sendSubviewToBack(coverView)
-            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
-            var view = mainVc!.view
-            if let nav = mainVc?.navigationController {
+            coverView.backgroundColor = UIColor.clearColor()
+            menuViewController?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
+            var view = masterViewController!.view
+            if let nav = masterViewController?.navigationController {
                 view = nav.view
             }
-            view.addSubview(menuVc!.view)
-            view.insertSubview(coverView, belowSubview: menuVc!.view)
-            UIView.animateWithDuration(duration) {
-                self.menuVc!.view.frame = CGRectMake(0, 0, self.menuWidth, self.screenSize.height)
+            view.addSubview(menuViewController!.view)
+            view.insertSubview(coverView, belowSubview: menuViewController!.view)
+            UIView.animateWithDuration(animationDuration) {
+                self.coverView.backgroundColor = self.maskColor
+                self.menuViewController?.view.x = 0
             }
+            menuShowed.value = true
         }
     }
     
-    public func routeToSideContainer(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
-        var destVc = initialedViewController(name, params: nextParams)
-        if destVc == nil {
-            destVc = NSObject.fromClassName(name) as? UIViewController
-            if let title = nextParams["title"] {
-                destVc?.title = title as? String
-            }
-        }
-        if destVc != nil {
-            let destNav = UINavigationController(rootViewController: destVc!)
-            self.destNav = destNav
-            let fromVc = self.mainVc?.navigationController
+    public func routeToSideMaster(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
+        if let viewController = masterViewController?.initialedViewController(name, params: nextParams) {
+            let navigationController = UINavigationController(rootViewController: viewController)
             let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
-            destNav.transitioningDelegate = effect
-            fromVc?.presentViewController(destNav, animated: true, completion: nil)
-            UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+            navigationController.transitioningDelegate = effect
+            masterViewController?.presentViewController(navigationController, animated: true, completion: nil)
+            menuShowed.value = false
         }
-    }
-    
-    public class func routeToBack(nav: UINavigationController?) {
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
-        nav?.dismissViewControllerAnimated(true, completion: nil)
     }
 }

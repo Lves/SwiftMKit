@@ -10,7 +10,9 @@ import UIKit
 import CocoaLumberjack
 
 class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
+    @IBOutlet weak var btnTopMenu: UIBarButtonItem!
     var sideMenu: SideMenu?
+    var menuViewController: UIViewController?
     
     private var _viewModel = MKUISideViewModel()
     override var viewModel: BaseKitViewModel! {
@@ -19,54 +21,71 @@ class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProt
     
     override func setupUI() {
         super.setupUI()
-        title = "侧滑🐷视图"
-        sideMenu = SideMenu(mainVc: self, menuVc: MKUISideTableViewController())
+        menuViewController = self.initialedViewController("MKUISideMenuViewController")
+        sideMenu = SideMenu(masterViewController: self, menuViewController: menuViewController!)
         sideMenu?.delegate = self
-        // 禁用滑动返回
-        navigationController?.interactivePopGestureRecognizer?.enabled = false
+        self.forbiddenSwipBackGesture = true
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        DDLogInfo("显示菜单")
+    @IBAction func click_menu(sender: UIBarButtonItem) {
         sideMenu?.routeToSideMenu()
     }
-    
     func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {
-        DDLogInfo(#function)
+        DDLogVerbose("Side Menu Did Hide")
+    }
+    func sideMenuDidShowMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {
+        DDLogVerbose("Side Menu Did Show")
     }
 }
 
-class MKUISideTableViewController: UITableViewController, SideMenuProtocol {
+class MKUISideMenuViewController: BaseListViewController, SideMenuProtocol {
+    
+    struct InnerConst {
+        static let CellIdentifier = "MKUISideMenuTableViewCell"
+        static let SegueToNextSideViewDetail = "MKUISideDetailViewController"
+    }
+    
     var sideMenu: SideMenu?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var _viewModel = BaseListViewModel()
+    override var viewModel: BaseKitViewModel!{
+        get { return _viewModel }
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    override var listView: UIScrollView! {
+        get { return tableView }
+    }
+    override func setupUI() {
+        super.setupUI()
+        loadData()
+    }
+    override func loadData() {
+        super.loadData()
+        listViewModel.dataArray = [1,2,3,4,5,6,7,8,9,10]
+        tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
-        cell?.textLabel?.text = "hello -- \(indexPath.row)"
-        return cell!
+    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
+        var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
+        }
+        return cell
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        DDLogInfo("选中了第\(indexPath.row)行")
-        sideMenu?.routeToSideContainer("SubViewController", params: ["title" : "第\(indexPath.row)行"])
+    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        tableViewCell.textLabel?.text = "Menu - \(indexPath.row)"
+    }
+    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        sideMenu?.routeToSideMaster(InnerConst.SegueToNextSideViewDetail)
     }
 }
 
-
-class SubViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.greenColor()
+class MKUISideDetailViewController: BaseViewController {
+    private var _viewModel = BaseViewModel()
+    override var viewModel: BaseKitViewModel!{
+        get { return _viewModel }
     }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        SideMenu.routeToBack(navigationController)
+    @IBAction func click_back(sender: UIBarButtonItem) {
+        self.routeBack()
     }
 }

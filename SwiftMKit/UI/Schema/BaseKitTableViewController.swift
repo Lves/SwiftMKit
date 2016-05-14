@@ -45,7 +45,10 @@ public class BaseKitTableViewController: UITableViewController {
         let vc = segue.destinationViewController
         if let bvc = vc as? BaseKitViewController {
             if let dict = sender as? NSDictionary {
-                if let params = dict["params"] as? Dictionary<String, AnyObject> {
+                if var params = dict["params"] as? Dictionary<String, AnyObject> {
+                    if params["hidesBottomBarWhenPushed"] == nil {
+                        params["hidesBottomBarWhenPushed"] = true
+                    }
                     bvc.params = params
                 }
             }
