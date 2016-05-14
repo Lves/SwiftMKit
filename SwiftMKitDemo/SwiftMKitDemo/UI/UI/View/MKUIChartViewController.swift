@@ -162,7 +162,7 @@ class MKUIChartViewController: BaseViewController {
         set1.drawFilledEnabled = true
         set1.drawRangeFilledEnabled = true
         ///设置底部fill线
-        set1.fillYValues = yValues1Lower
+        set1.fillLowerYValues = yValues1Lower
         set1.fillColor = UIColor.orangeColor()
         set1.setColor(UIColor.orangeColor())
         set1.drawCirclesEnabled = false
@@ -191,7 +191,7 @@ class MKUIChartViewController: BaseViewController {
         set2.drawCirclesEnabled = false
         set2.drawRangeFilledEnabled = true
         ///设置底部fill线
-        set2.fillYValues = yValues2Lower
+        set2.fillLowerYValues = yValues2Lower
         set2.lineWidth = 0
         set2.drawValuesEnabled = false  //是否显示数字
        
@@ -274,40 +274,4 @@ extension MKUIChartViewController:ChartViewDelegate  {
          print("NothingSeleted");
     }
 }
-
-//protocol ExILineRadarChartDataSet {
-//    
-//    //Modify By LiXingLe
-//    //是否RangeFill
-//    var drawRangeFilledEnabled:Bool { get set }
-//    
-//    var fillYValues:[ChartDataEntry]{ get set }
-//}
-//
-//public class ExLineRadarChartDataSet : LineRadarChartDataSet, ExILineRadarChartDataSet {
-//    
-//    //Modify By LiXingLe
-//    //是否RangeFill
-//    public var drawRangeFilledEnabled = false
-//    ///fillrange的较低值
-//    public var fillYValues:[ChartDataEntry] = []
-//    
-//    
-//    public var isDrawRangeFilledEnabled: Bool
-//    {
-//        return drawRangeFilledEnabled
-//    }
-//    
-//    
-//    public override func copyWithZone(zone: NSZone) -> AnyObject
-//    {
-//        let copy = super.copyWithZone(zone) as! LineRadarChartDataSet
-//        copy.fillColor = fillColor
-//        copy._lineWidth = _lineWidth
-//        copy.drawFilledEnabled = drawFilledEnabled
-//        copy.drawRangeFilledEnabled = drawRangeFilledEnabled
-//        return copy
-//    }
-//}
-
 

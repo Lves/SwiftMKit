@@ -11,14 +11,15 @@ array[safe: index]
 ---
 
 ####升级Pod的时候需要注意的问题
-+ MBProgressHUD
+#####MBProgressHUD
+
 + 从Git上下载最新的代码覆盖
 
-+ MJExtension
+#####MJExtension 
 + 在NSObject+MJKeyValue文件的顶部增加如下代码：
 
 ```objc
-//Add by Cdts
+// ModifySourceCode Add by Cdts
 @interface NSManagedObject (PrimaryKey)
 + (NSString *)primaryKeyPropertyName;
 @end
@@ -35,10 +36,10 @@ return @"entityId";
 方法中修改如下代码：
 
 ```objc
-/* remove by Cdts
+/* ModifySourceCode remove by Cdts
 if (!type.isFromFoundation && propertyClass) { // 模型属性
 */
-//Add by Cdts
+// ModifySourceCode Add by Cdts
 if (!type.isFromFoundation && propertyClass && propertyClass != [NSOrderedSet class]) {
 //Finish add
 ```
@@ -46,7 +47,7 @@ if (!type.isFromFoundation && propertyClass && propertyClass != [NSOrderedSet cl
 } else { // 字典数组-->模型数组
 value = [objectClass mj_objectArrayWithKeyValuesArray:value context:context];
 
-//Add by Cdts
+// ModifySourceCode Add by Cdts
 if ((propertyClass == [NSOrderedSet class] || propertyClass == [NSSet class]) && [self isKindOfClass:[NSManagedObject class]]) {
 if (propertyClass == [NSOrderedSet class]) {
 
@@ -85,10 +86,10 @@ return;
 
 ```objc
 if ([self isSubclassOfClass:[NSManagedObject class]] && context) {
-/* Remove by Cdts
+/* ModifySourceCode Remove by Cdts
 return [[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context] mj_setKeyValues:keyValues context:context];
 */
-//Add by Cdts
+// ModifySourceCode Add by Cdts
 NSManagedObject *obj = nil;
 NSString *pkProperyName = [NSManagedObject primaryKeyPropertyName];
 NSString *key = [[[self class] mj_replacedKeyFromPropertyName] objectForKey:pkProperyName];
@@ -113,5 +114,56 @@ return [obj mj_setKeyValues:keyValues context:context];
 //Finish add
 }
 ```
+#####Charts
++ ILineRadarChartDataSet 增加接口：
+```swift
+// ModifySourceCode Add By LiXingLe
+//是否RangeFill
+var drawRangeFilledEnabled:Bool { get set }
+//fillRange的较低值
+var fillLowerYValues:[ChartDataEntry]{ get set }
+//Finish add
+```
++ LineRadarChartDataSet 增加实现：
+```swift
+//ModifySourceCode Add By LiXingLe
+//是否RangeFill
+public var drawRangeFilledEnabled = false
+//fillRange的较低值
+public var fillLowerYValues:[ChartDataEntry] = []
+//Finish add
+```
++ generateFilledPath 修改方法：
+```swift
+/* ModifySourceCode Remove By LiXingLe
+if e != nil
+{
+CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
+}
+*/
+// ModifySourceCode Add By LiXingLe
+if dataSet.drawRangeFilledEnabled {
+if e != nil
+{
+let eLower: ChartDataEntry! = dataSet.fillLowerYValues[e.xIndex]
+CGPathAddLineToPoint(filled, &matrix, CGFloat(eLower.xIndex), CGFloat(eLower.value)) // 第二条线的右上角
+}
+
+// create a Second path
+for x in (to - 1).stride(to: Int(from-1), by: -1)
+{
+let eLower = dataSet.fillLowerYValues[x]
+CGPathAddLineToPoint(filled, &matrix, CGFloat(eLower.xIndex), CGFloat(eLower.value) * phaseY)
+}
+
+}else{
+if e != nil
+{
+CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
+}
+}
+//Finish add
+```
+
 
 ---

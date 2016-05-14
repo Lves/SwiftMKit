@@ -31,10 +31,14 @@ public extension UIViewController {
         if (vc == nil) {
             vc = instanceViewControllerInStoryboardWithName(name)
         }
+        var params = nextParams
+        if params["hidesBottomBarWhenPushed"] == nil {
+            params["hidesBottomBarWhenPushed"] = true
+        }
         if vc != nil {
             if vc is BaseKitViewController {
                 let baseVC = vc as! BaseKitViewController
-                baseVC.params = nextParams
+                baseVC.params = params
             }
         }
         return vc

@@ -455,19 +455,24 @@ public class LineChartRenderer: LineRadarChartRenderer
         
         // close up
         e = dataSet.entryForIndex(max(min(Int(ceil(CGFloat(to - from) * phaseX + CGFloat(from))) - 1, dataSet.entryCount - 1), 0))
-        
-        //Modify By LiXingLe
+        /* ModifySourceCode Remove By LiXingLe
+        if e != nil
+        {
+            CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
+        }
+        */
+        // ModifySourceCode Add By LiXingLe
         if dataSet.drawRangeFilledEnabled {
             if e != nil
             {
-                var eLower: ChartDataEntry! = dataSet.fillYValues[e.xIndex]
+                let eLower: ChartDataEntry! = dataSet.fillLowerYValues[e.xIndex]
                 CGPathAddLineToPoint(filled, &matrix, CGFloat(eLower.xIndex), CGFloat(eLower.value)) // 第二条线的右上角
             }
             
             // create a Second path
             for x in (to - 1).stride(to: Int(from-1), by: -1)
             {
-                let eLower = dataSet.fillYValues[x]
+                let eLower = dataSet.fillLowerYValues[x]
                 CGPathAddLineToPoint(filled, &matrix, CGFloat(eLower.xIndex), CGFloat(eLower.value) * phaseY)
             }
 
@@ -477,7 +482,7 @@ public class LineChartRenderer: LineRadarChartRenderer
                 CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
             }
         }
-        
+        //Finish add
         CGPathCloseSubpath(filled)
         
         return filled

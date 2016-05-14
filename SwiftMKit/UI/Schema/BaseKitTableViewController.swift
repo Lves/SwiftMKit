@@ -80,7 +80,13 @@ public class BaseKitTableViewController: UITableViewController {
             }
         }
         
+        setupNavigation()
+        setupNotification()
         bindingData()
+    }
+    public func setupNotification() {
+    }
+    public func setupNavigation() {
     }
     public func bindingData() {
     }

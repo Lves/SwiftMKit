@@ -79,7 +79,7 @@
         <!--Data Network Request View Controller-->
         <scene sceneID="GYG-Gv-WXO">
             <objects>
-                <viewController storyboardIdentifier="MKDataNetworkRequestViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="CUP-DE-Aoe" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MKDataNetworkRequestViewController" automaticallyAdjustsScrollViewInsets="NO" id="CUP-DE-Aoe" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VUt-OO-Uz9"/>
                         <viewControllerLayoutGuide type="bottom" id="VDO-vU-uOD"/>
@@ -270,6 +270,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="63F-5L-2p1">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="8lI-nI-Uhx" kind="relationship" relationship="rootViewController" id="Axd-v1-GNm"/>
                     </connections>
@@ -350,7 +354,7 @@
         <!--IQKeyboardManager-->
         <scene sceneID="MoF-M0-SaB">
             <objects>
-                <viewController title="IQKeyboardManager" hidesBottomBarWhenPushed="YES" id="SFb-W0-hoM" customClass="MKUIIQKeyboardManagerViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="IQKeyboardManager" id="SFb-W0-hoM" customClass="MKUIIQKeyboardManagerViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kQi-EL-Cue"/>
                         <viewControllerLayoutGuide type="bottom" id="Aba-2f-pvU"/>
@@ -405,7 +409,7 @@
         <!--SegmentViewController-->
         <scene sceneID="pcf-LN-OXX">
             <objects>
-                <viewController storyboardIdentifier="MKUISegmentViewController" title="SegmentViewController" hidesBottomBarWhenPushed="YES" id="EoT-S5-18E" customClass="MKUISegmentViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MKUISegmentViewController" title="SegmentViewController" id="EoT-S5-18E" customClass="MKUISegmentViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iQe-AP-Kfi"/>
                         <viewControllerLayoutGuide type="bottom" id="axg-Ef-5Fu"/>
@@ -595,7 +599,7 @@
         <!--Side View Controller-->
         <scene sceneID="QzA-WU-V1K">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="krO-bu-mcT" customClass="MKUISideViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="krO-bu-mcT" customClass="MKUISideViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uAU-5c-xUX"/>
                         <viewControllerLayoutGuide type="bottom" id="w72-Mg-r2G"/>
@@ -613,7 +617,7 @@
         <!--Chart View Controller-->
         <scene sceneID="3mj-fe-YV1">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="0s0-xI-KRw" customClass="MKUIChartViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0s0-xI-KRw" customClass="MKUIChartViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6re-zW-3rh"/>
                         <viewControllerLayoutGuide type="bottom" id="T8h-BB-aEF"/>
@@ -631,7 +635,7 @@
         <!--Keyboard View Controller-->
         <scene sceneID="v8m-xJ-05U">
             <objects>
-                <viewController storyboardIdentifier="MKUIKeyboardViewController" hidesBottomBarWhenPushed="YES" id="PDj-dL-c9a" customClass="MKUIKeyboardViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MKUIKeyboardViewController" id="PDj-dL-c9a" customClass="MKUIKeyboardViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BQx-D5-41g"/>
                         <viewControllerLayoutGuide type="bottom" id="5ql-jw-o0f"/>
@@ -649,7 +653,7 @@
         <!--Data Store View Controller-->
         <scene sceneID="7AD-ZQ-Oj3">
             <objects>
-                <viewController storyboardIdentifier="MKDataStoreViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="WXb-cC-hfs" customClass="MKDataStoreViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MKDataStoreViewController" automaticallyAdjustsScrollViewInsets="NO" id="WXb-cC-hfs" customClass="MKDataStoreViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RsC-iI-Bfv"/>
                         <viewControllerLayoutGuide type="bottom" id="Wrk-Em-Iad"/>
@@ -688,7 +692,7 @@
         <!--UI-->
         <scene sceneID="Zsj-OE-7NW">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="WJc-Xq-iXi" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WJc-Xq-iXi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="UI" id="imm-US-KYQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5WX-By-00f">
@@ -696,6 +700,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wYx-17-gcQ">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="UGJ-l3-oPi" kind="relationship" relationship="rootViewController" id="aB6-av-iWj"/>
                     </connections>
@@ -724,6 +732,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IMc-9u-5tL"/>
+        <segue reference="fp8-J5-IUa"/>
     </inferredMetricsTieBreakers>
 </document>

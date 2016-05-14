@@ -50,7 +50,13 @@ public class BaseKitViewController : UIViewController {
     
     public func setupUI() {
         viewModel?.viewController = self
+        setupNavigation()
+        setupNotification()
         bindingData()
+    }
+    public func setupNotification() {
+    }
+    public func setupNavigation() {
     }
     public func bindingData() {
     }

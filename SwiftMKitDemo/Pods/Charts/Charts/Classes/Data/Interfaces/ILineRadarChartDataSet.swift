@@ -45,10 +45,10 @@ public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
     /// Returns true if filled drawing is enabled, false if not
     var isDrawFilledEnabled: Bool { get }
     
-    //Modify By LiXingLe
+    // ModifySourceCode Add By LiXingLe
     //是否RangeFill
     var drawRangeFilledEnabled:Bool { get set }
-    
-    var fillYValues:[ChartDataEntry]{ get set }
-    
+    //fillRange的较低值
+    var fillLowerYValues:[ChartDataEntry]{ get set }
+    //Finish add
 }

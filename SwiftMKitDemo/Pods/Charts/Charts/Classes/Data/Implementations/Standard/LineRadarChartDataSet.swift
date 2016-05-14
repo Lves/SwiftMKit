@@ -76,11 +76,12 @@ public class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRad
     /// Please note that this method uses the path clipping for drawing the filled area (with images, gradients and layers).
     public var drawFilledEnabled = false
    
-    //Modify By LiXingLe
+    //ModifySourceCode Add By LiXingLe
     //是否RangeFill
     public var drawRangeFilledEnabled = false
-    ///fillrange的较低值
-    public var fillYValues:[ChartDataEntry] = []
+    //fillRange的较低值
+    public var fillLowerYValues:[ChartDataEntry] = []
+    //Finish add
     
     
     /// Returns true if filled drawing is enabled, false if not
