@@ -118,6 +118,11 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         self.panGestureRecognizer = panGestureRecognizer
         panGestureRecognizer.delegate = self
         menuViewController.view.addGestureRecognizer(panGestureRecognizer)
+        masterViewController.rac_signalForSelector(#selector(UIViewController.viewWillAppear(_:))).toSignalProducer().startWithNext { [weak self] _ in
+            if self?.menuShowed.value ?? false {
+                self?.hideStatusBar()
+            }
+        }
     }
     
     deinit {
@@ -141,24 +146,20 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         case .Left:
             offsetX = 0
             if newX < -menuWidth || newX > 0 { // [-menuWidth newX 0]
-                DDLogError("out of bounds:\(newX) \(translation.x)")
                 return
             }
         case .Right: // [screenSize.width-menuWidth newX screenSize.width]
             offsetX = screenSize.width - menuWidth
             if newX < 0 || newX > menuWidth {
-                DDLogError("out of bounds:\(newX) \(translation.x)")
                 return
             }
         }
         switch recognizer.state {
         case .Began:
             draggingPoint = translation
-            DDLogError("begin1:\(draggingPoint.x)")
             recognizer.view?.x = draggingPoint.x + offsetX
         case .Changed:
             draggingPoint.x += translation.x
-            DDLogError("change1:\(draggingPoint.x)")
             recognizer.view?.x = draggingPoint.x + offsetX
         case .Ended:
             fallthrough
@@ -267,7 +268,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
             navigationController.transitioningDelegate = effect
             masterViewController?.presentViewController(navigationController, animated: true, completion: nil)
-            menuShowed.value = false
+            showStatusBar()
         }
     }
 }

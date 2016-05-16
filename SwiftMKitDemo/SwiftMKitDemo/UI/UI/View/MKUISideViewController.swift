@@ -44,7 +44,9 @@ class MKUISideMenuViewController: BaseListViewController, SideMenuProtocol {
         static let CellIdentifier = "MKUISideMenuTableViewCell"
         static let SegueToNextSideViewDetail = "MKUISideDetailViewController"
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     var sideMenu: SideMenu?
     @IBOutlet weak var tableView: UITableView!
     
