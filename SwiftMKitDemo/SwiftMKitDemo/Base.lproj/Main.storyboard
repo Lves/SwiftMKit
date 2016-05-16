@@ -623,7 +623,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="353" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -638,11 +638,31 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="JgN-lX-FnX" secondAttribute="trailing" constant="-20" id="30u-B4-Cmg"/>
+                            <constraint firstItem="JgN-lX-FnX" firstAttribute="top" secondItem="hTi-Ds-tgv" secondAttribute="bottom" id="BzG-yE-uZB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JgN-lX-FnX" secondAttribute="trailing" constant="-20" id="Gjk-yb-5rv"/>
+                            <constraint firstItem="x9Q-sb-PEW" firstAttribute="top" secondItem="JgN-lX-FnX" secondAttribute="bottom" id="Kxq-gE-I65"/>
+                            <constraint firstItem="JgN-lX-FnX" firstAttribute="leading" secondItem="ZhN-a8-Zcm" secondAttribute="leadingMargin" constant="-20" id="MWA-ma-AWZ"/>
                             <constraint firstItem="JgN-lX-FnX" firstAttribute="leading" secondItem="ZhN-a8-Zcm" secondAttribute="leadingMargin" constant="-20" id="RWQ-Hj-e3d"/>
+                            <constraint firstItem="x9Q-sb-PEW" firstAttribute="top" secondItem="JgN-lX-FnX" secondAttribute="bottom" id="RXb-Uw-F48"/>
+                            <constraint firstItem="JgN-lX-FnX" firstAttribute="top" secondItem="hTi-Ds-tgv" secondAttribute="bottom" id="mYP-aP-qYW"/>
                             <constraint firstItem="x9Q-sb-PEW" firstAttribute="top" secondItem="JgN-lX-FnX" secondAttribute="bottom" id="mn8-BF-2lM"/>
                             <constraint firstItem="JgN-lX-FnX" firstAttribute="top" secondItem="hTi-Ds-tgv" secondAttribute="bottom" id="rPi-gA-Me3"/>
+                            <constraint firstItem="JgN-lX-FnX" firstAttribute="leading" secondItem="ZhN-a8-Zcm" secondAttribute="leadingMargin" constant="-20" id="wzV-cp-UWh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JgN-lX-FnX" secondAttribute="trailing" constant="-20" id="xcb-gN-Qgx"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="30u-B4-Cmg"/>
+                                <exclude reference="RWQ-Hj-e3d"/>
+                                <exclude reference="mYP-aP-qYW"/>
+                                <exclude reference="rPi-gA-Me3"/>
+                                <exclude reference="wzV-cp-UWh"/>
+                                <exclude reference="xcb-gN-Qgx"/>
+                                <exclude reference="RXb-Uw-F48"/>
+                                <exclude reference="mn8-BF-2lM"/>
+                            </mask>
+                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -666,10 +686,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hello I'm Side View Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-vA-yq5">
-                                <rect key="frame" x="90" y="291" width="194" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello I'm Side View Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-vA-yq5">
+                                <rect key="frame" x="90" y="323" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

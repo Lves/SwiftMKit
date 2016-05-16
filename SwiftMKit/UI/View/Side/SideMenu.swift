@@ -35,6 +35,10 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 
+public enum SideMenuDirection: Int {
+    case Left, Right
+}
+
 protocol SideMenuProtocol : NSObjectProtocol {
     var sideMenu: SideMenu? { get set }
 }
@@ -62,6 +66,8 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     public var animationDuration = InnerConstant.AnimationDuration
     public var menuWidthPercent = InnerConstant.MenuWidthPercent
     public var maskColor = InnerConstant.MaskColor
+    public var direction: SideMenuDirection = .Left
+    public var interactive: Bool = true
     var screenSize: CGSize {
         get {
             return UIScreen.mainScreen().bounds.size
@@ -78,10 +84,9 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     var menuShowed = MutableProperty<Bool>(false)
     
-    /// 跳转到菜单子项的Nav
-    private var destNav: UINavigationController?
+    private var draggingPoint: CGPoint = CGPointZero
+    private var lastDrugPoint: CGPoint = CGPoint()
     private var startDrugPoint: CGPoint = CGPoint()
-    private var drug2Right = false
     private var panGestureRecognizer: UIPanGestureRecognizer?
     
     
@@ -113,6 +118,11 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         self.panGestureRecognizer = panGestureRecognizer
         panGestureRecognizer.delegate = self
         menuViewController.view.addGestureRecognizer(panGestureRecognizer)
+        masterViewController.rac_signalForSelector(#selector(UIViewController.viewWillAppear(_:))).toSignalProducer().startWithNext { [weak self] _ in
+            if self?.menuShowed.value ?? false {
+                self?.hideStatusBar()
+            }
+        }
     }
     
     deinit {
@@ -122,59 +132,69 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     ///  监听滑动手势
     func panGestureRecognized(recognizer: UIPanGestureRecognizer) {
+        if !interactive {
+            return
+        }
         delegate?.sideMenuDidRecognizePanGesture(self, recongnizer: recognizer)
         
-        let currentView = menuViewController!.view   // 菜单视图
-        let baseView = masterViewController!.view
-        let velocity = recognizer.velocityInView(baseView)
-        drug2Right = velocity.x > 0
-        if currentView.x >= 0 {
-            currentView.x = 0
-        }
-        if (currentView.x >= 0 && drug2Right) {
-            return
-        }
-        if currentView.x <= -menuWidth {
-            hideMenu()
-            return
-        }
-        if recognizer.state == .Began {
-            
-        } else if (recognizer.state == .Changed) {
-            let currentPoint: CGPoint = recognizer.translationInView(baseView)
-            var xOffset = startDrugPoint.x + currentPoint.x
-            if (xOffset >= 0 && drug2Right) {
+        let translation = recognizer.translationInView(recognizer.view)
+        recognizer.setTranslation(CGPointZero, inView: recognizer.view)
+        let velocity = recognizer.velocityInView(recognizer.view)
+        let newX = draggingPoint.x + translation.x
+        var offsetX: CGFloat = 0
+        switch direction {
+        case .Left:
+            offsetX = 0
+            if newX < -menuWidth || newX > 0 { // [-menuWidth newX 0]
                 return
             }
-            DDLogInfo("\(xOffset)  \(currentView.x)")
-            if xOffset < 0 {
-                if coverView.superview != nil {
-                    xOffset = xOffset < -menuWidth ? -menuWidth : xOffset
+        case .Right: // [screenSize.width-menuWidth newX screenSize.width]
+            offsetX = screenSize.width - menuWidth
+            if newX < 0 || newX > menuWidth {
+                return
+            }
+        }
+        switch recognizer.state {
+        case .Began:
+            draggingPoint = translation
+            recognizer.view?.x = draggingPoint.x + offsetX
+        case .Changed:
+            draggingPoint.x += translation.x
+            recognizer.view?.x = draggingPoint.x + offsetX
+        case .Ended:
+            fallthrough
+        case .Cancelled:
+            switch direction {
+            case .Left:
+                if velocity.x < 0 || newX < -0.5 * menuWidth {
+                    hideMenu()
                 } else {
-                    xOffset = 0
+                    UIView.animateWithDuration(animationDuration) {
+                        recognizer.view?.x = 0
+                    }
                 }
-                // 这个if 只有在xOffset<0(向左滑动)的时候才应该执行
-                if xOffset != currentView.x {
-                    currentView.x = xOffset
+            case .Right:
+                if velocity.x > 0 || newX > 0.5 * menuWidth {
+                    hideMenu()
+                } else {
+                    UIView.animateWithDuration(animationDuration) {
+                        recognizer.view?.x = offsetX
+                    }
                 }
             }
-        } else if (recognizer.state == .Ended) {
-            if drug2Right {
-                UIView.animateWithDuration(animationDuration, animations: {
-                    currentView.x = 0
-                })
-            } else {
-                hideMenu()
-            }
+        default:
+            break
         }
     }
     
-    // MARK: - 解决手势冲突问题
+    // 解决手势冲突问题
     @objc public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let gestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
-        let cell = gestureRecognizer.view
-        let point = gestureRecognizer.translationInView(cell?.superview)
-        return fabsf(Float(point.x)) > fabsf(Float(point.y))
+        if let gesture = gestureRecognizer as? UIPanGestureRecognizer {
+            let view = gesture.view
+            let translation = gesture.translationInView(view)
+            return fabsf(Float(translation.x)) > fabsf(Float(translation.y))
+        }
+        return true
     }
     
     private func showStatusBar() {
@@ -187,7 +207,13 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         menuShowed.value = false
         UIView.animateWithDuration(animationDuration, animations: {
             self.coverView.backgroundColor = UIColor.clearColor()
-            self.menuViewController?.view.x = -self.menuWidth
+            switch self.direction {
+            case .Left:
+                self.menuViewController?.view.x = -self.menuWidth
+            case .Right:
+                self.menuViewController?.view.x = self.screenSize.width
+            }
+            
         }) { _ in
             self.menuViewController?.view.removeFromSuperview()
             self.coverView.removeFromSuperview()
@@ -208,19 +234,31 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             coverView.addTarget(self, action: #selector(click_mask), forControlEvents: UIControlEvents.TouchUpInside)
             coverView.frame = UIScreen.mainScreen().bounds
             coverView.backgroundColor = UIColor.clearColor()
-            menuViewController?.view.frame = CGRectMake(-menuWidth, 0, menuWidth, screenSize.height)
             var view = masterViewController!.view
             if let nav = masterViewController?.navigationController {
                 view = nav.view
             }
+            menuViewController?.view.frame = CGRectMake(0, 0, menuWidth, screenSize.height)
             view.addSubview(menuViewController!.view)
             view.insertSubview(coverView, belowSubview: menuViewController!.view)
-            UIView.animateWithDuration(animationDuration) {
-                self.coverView.backgroundColor = self.maskColor
-                self.menuViewController?.view.x = 0
+            switch direction {
+            case .Left:
+                menuViewController?.view.x = -menuWidth
+                UIView.animateWithDuration(animationDuration) {
+                    self.coverView.backgroundColor = self.maskColor
+                    self.menuViewController?.view.x = 0
+                }
+            case .Right:
+                menuViewController?.view.x = screenSize.width
+                UIView.animateWithDuration(animationDuration) {
+                    self.coverView.backgroundColor = self.maskColor
+                    self.menuViewController?.view.x = self.screenSize.width - self.menuWidth
+                }
             }
             menuShowed.value = true
-            delegate?.sideMenuDidShowMenuViewController(self, menuViewController: menuViewController!)
+            if let vc = menuViewController {
+                delegate?.sideMenuDidShowMenuViewController(self, menuViewController: vc)
+            }
         }
     }
     
@@ -230,7 +268,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
             navigationController.transitioningDelegate = effect
             masterViewController?.presentViewController(navigationController, animated: true, completion: nil)
-            menuShowed.value = false
+            showStatusBar()
         }
     }
 }
