@@ -166,6 +166,7 @@
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
 		65CEE67EA1D94B6E3DF90E9B /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */; };
+		6CE46A691CE9B66700474D27 /* MKChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46A681CE9B66700474D27 /* MKChartMarker.swift */; };
 		B328980230E598BB01E9042E /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */; };
 		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
 		E87D7BB47929B60BD485DBE4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
@@ -371,6 +372,7 @@
 		3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListViewModel.swift; sourceTree = "<group>"; };
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -585,6 +587,7 @@
 				27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */,
 				27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */,
 				27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */,
+				6CE46A681CE9B66700474D27 /* MKChartMarker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 				3FC9DF351CBFD53A00C2D938 /* BaseKitViewModel.swift in Sources */,
 				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
 				273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */,
+				6CE46A691CE9B66700474D27 /* MKChartMarker.swift in Sources */,
 				03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */,
 				278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,

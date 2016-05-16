@@ -60,6 +60,17 @@ class MKUIChartViewController: BaseViewController {
         lineChart.rightAxis.enabled = false           //是否显示右侧轴线
         lineChart.dragEnabled = true                  //是否可以滑动
         lineChart.drawGridBackgroundEnabled = false   //背景色
+        lineChart.doubleTapToZoomEnabled = false      //双击缩放
+        lineChart.legend.form = .Line
+        
+        let marker =  MKChartMarker(color: UIColor.orangeColor(), font: UIFont.systemFontOfSize(12), insets: UIEdgeInsetsMake(8, 8, 20, 8))
+//        marker.minimumSize = CGSizeMake(80, 40)
+//        let marker = ChartMarker()
+        marker.image = UIImage(named: "BubblePopRight")
+        marker.leftImage = UIImage(named: "BubblePopLeft")
+//
+        lineChart.marker = marker
+
         
         self.lineChart.delegate = self
         self.setLineData()
@@ -126,6 +137,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.rightAxis.enabled = false           //是否显示右侧轴线
         lineChart2.dragEnabled = true                  //是否可以滑动
         lineChart2.drawGridBackgroundEnabled = false   //背景色
+        lineChart2.doubleTapToZoomEnabled = false      //双击缩放
         lineChart2.legend.enabled = true  //是否显示说明
         self.lineChart2.delegate = self
         self.setLine2Data()
@@ -236,6 +248,7 @@ class MKUIChartViewController: BaseViewController {
     func buildBarChartUI()  {
         barChartView = BarChartView(frame: CGRectMake(0, 1020,screenSize.width , 500))
         self.barChartView.delegate = self
+        self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
         self.setChartData()
     }
     
