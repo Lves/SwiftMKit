@@ -57,6 +57,9 @@ class MKUISideMenuViewController: BaseListViewController, SideMenuProtocol {
     }
     override func setupUI() {
         super.setupUI()
+        tableView.snp_remakeConstraints { (make) in
+            make.top.bottom.left.right.equalTo(0)
+        }
         loadData()
     }
     override func loadData() {
