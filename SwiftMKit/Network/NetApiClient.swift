@@ -10,8 +10,70 @@ import Foundation
 import UIKit
 import Alamofire
 import CocoaLumberjack
+import ReactiveCocoa
+import ReachabilitySwift
+
+public enum NetworkStatus: CustomStringConvertible {
+    
+    case Unknown, NotReachable, ReachableViaWiFi, ReachableViaWWAN
+    
+    public var description: String {
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .ReachableViaWWAN:
+            return "Cellular"
+        case .ReachableViaWiFi:
+            return "WiFi"
+        case .NotReachable:
+            return "No Connection"
+        }
+    }
+}
 
 public class NetApiClient : NSObject {
+    public var networkStatus = MutableProperty<NetworkStatus>(.Unknown)
+    private var reachability: Reachability?
+    
+    private override init() {
+    }
+    public static let shared = NetApiClient()
+    
+    public func startNotifyNetworkStatus() {
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            DDLogError("Unable to create Reachability")
+            return
+        }
+        reachability?.whenReachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue()) {
+                if reachability.isReachableViaWiFi() {
+                    DDLogInfo("Network Status Change: Reachable via WiFi")
+                    self.networkStatus.value = .ReachableViaWiFi
+                } else {
+                    DDLogInfo("Network Status Change: Reachable via Cellular")
+                    self.networkStatus.value = .ReachableViaWWAN
+                }
+            }
+        }
+        reachability?.whenUnreachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue()) {
+                DDLogInfo("Network Status Change: Not reachable")
+                self.networkStatus.value = .NotReachable
+            }
+        }
+        
+        do {
+            try self.reachability?.startNotifier()
+        } catch {
+            DDLogError("Unable to start notifier")
+        }
+    }
     
     class private func bindIndicator(api api:NetApiProtocol, task: NSURLSessionTask) {
         if let indicator = api.indicator {
