@@ -80,8 +80,6 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     /// 跳转到菜单子项的Nav
     private var destNav: UINavigationController?
-    private var originalPoint: CGPoint = CGPoint()
-    private var lastDrugPoint: CGPoint = CGPoint()
     private var startDrugPoint: CGPoint = CGPoint()
     private var drug2Right = false
     private var panGestureRecognizer: UIPanGestureRecognizer?
@@ -155,24 +153,12 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     xOffset = 0
                 }
-            }
-            if xOffset != currentView.x {
-                currentView.x = xOffset
-            }
-        } else if (recognizer.state == .Ended) {
-            if currentView.x == 0 {
-                
-            } else {
-                if drug2Right && currentView.x < -menuWidth {
-                    let animatedTime = abs((menuWidth + currentView.x) / menuWidth  * 0.25)
-                    UIView.setAnimationCurve(.EaseInOut)
-                    UIView.animateWithDuration(Double(animatedTime), animations: {
-                        currentView.x = -self.menuWidth
-                    })
-                } else {
-                    DDLogDebug("\(currentView.x)")
+                // 这个if 只有在xOffset<0(向左滑动)的时候才应该执行
+                if xOffset != currentView.x {
+                    currentView.x = xOffset
                 }
             }
+        } else if (recognizer.state == .Ended) {
             if drug2Right {
                 UIView.animateWithDuration(animationDuration, animations: {
                     currentView.x = 0
@@ -180,9 +166,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             } else {
                 hideMenu()
             }
-            lastDrugPoint = CGPointZero
         }
-        
     }
     
     // MARK: - 解决手势冲突问题
@@ -236,6 +220,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
                 self.menuViewController?.view.x = 0
             }
             menuShowed.value = true
+            delegate?.sideMenuDidShowMenuViewController(self, menuViewController: menuViewController!)
         }
     }
     
