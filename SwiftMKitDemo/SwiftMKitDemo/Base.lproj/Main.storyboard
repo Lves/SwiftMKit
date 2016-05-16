@@ -345,6 +345,7 @@
                         <segue destination="0s0-xI-KRw" kind="show" identifier="routeToChartView" id="Kkd-fS-GDU"/>
                         <segue destination="PDj-dL-c9a" kind="show" identifier="routeToKeyboardView" id="RUo-Pf-1AG"/>
                         <segue destination="EoT-S5-18E" kind="show" identifier="routeToSegmentViewController" id="qN9-hz-umY"/>
+                        <segue destination="kWl-XK-QSQ" kind="show" identifier="routeToGesturePassword" id="U0f-4M-F26"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,6 +674,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9FE-G7-Spq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3825.5" y="1442.5"/>
+        </scene>
+        <!--Gesture Password View Controller-->
+        <scene sceneID="pm5-bB-vRv">
+            <objects>
+                <viewController id="kWl-XK-QSQ" customClass="MKUIGesturePasswordViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rrW-Dl-xPS"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Vu-6V-j5Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="shV-JQ-pK1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bld-lE-KZT" customClass="GesturePasswordView" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="89" y="193" width="256" height="258"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="258" id="Ebj-d4-4Oa"/>
+                                    <constraint firstAttribute="width" constant="256" id="RoG-ZC-enR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="selected" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="success" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bld-lE-KZT" firstAttribute="centerY" secondItem="shV-JQ-pK1" secondAttribute="centerY" id="RgQ-dm-xxa"/>
+                            <constraint firstItem="bld-lE-KZT" firstAttribute="centerX" secondItem="shV-JQ-pK1" secondAttribute="centerX" id="ltt-wc-Y7V"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7S-gq-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4283.5" y="703.5"/>
         </scene>
         <!--Side View Detail-->
         <scene sceneID="aRT-Ha-gtM">

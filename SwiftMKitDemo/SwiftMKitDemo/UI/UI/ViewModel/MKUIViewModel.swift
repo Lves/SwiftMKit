@@ -18,6 +18,7 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "Chart View", detail: "Chart View"))
         self.dataArray.append(MKDataListModel(title: "Keyboard View", detail: "Custom Keyboard"))
         self.dataArray.append(MKDataListModel(title: "Segment ViewController", detail: "Child ViewController"))
+        self.dataArray.append(MKDataListModel(title: "Gesture Password", detail: "Gesture View"))
     }
 
 }

@@ -57,6 +57,16 @@
 		18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208621CC8636400569F42 /* SingleReqViewModel.swift */; };
 		18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208641CC878DC00569F42 /* BuDeJieModel.swift */; };
 		18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E184E31CC48B2500F14923 /* BaseKitModel.swift */; };
+		270692B11CE9B75D00CF211A /* CachePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692AC1CE9B75D00CF211A /* CachePool.swift */; };
+		270692B21CE9B75D00CF211A /* CacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692AD1CE9B75D00CF211A /* CacheProtocol.swift */; };
+		270692B31CE9B75D00CF211A /* DocumentCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692AE1CE9B75D00CF211A /* DocumentCache.swift */; };
+		270692B41CE9B75D00CF211A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692B01CE9B75D00CF211A /* KeychainWrapper.swift */; };
+		270692B71CE9B7DC00CF211A /* GesturePasswordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692B61CE9B7DC00CF211A /* GesturePasswordProtocol.swift */; };
+		270692B91CE9B82100CF211A /* GesturePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692B81CE9B82100CF211A /* GesturePassword.swift */; };
+		270692BB1CE9BD4000CF211A /* GesturePasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692BA1CE9BD4000CF211A /* GesturePasswordButton.swift */; };
+		270692BD1CE9CD9800CF211A /* MKUIGesturePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692BC1CE9CD9800CF211A /* MKUIGesturePasswordViewController.swift */; };
+		270692BF1CE9CDA900CF211A /* MKUIGesturePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692BE1CE9CDA900CF211A /* MKUIGesturePasswordViewModel.swift */; };
+		270692C11CE9E2F300CF211A /* GesturePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692C01CE9E2F300CF211A /* GesturePasswordView.swift */; };
 		2724D2191CE4201700F4CE03 /* SegmentContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2724D2181CE4201700F4CE03 /* SegmentContainerViewController.swift */; };
 		27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */; };
 		27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C071CC748D60028E938 /* ImageParser.swift */; };
@@ -76,7 +86,6 @@
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
-		2778BA711CCF3B01009B926C /* CachePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778BA701CCF3B01009B926C /* CachePool.swift */; };
 		277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C01CE40FBF00295259 /* RegexHelper.swift */; };
 		277C49C31CE4108800295259 /* RegexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C21CE4108800295259 /* RegexSpec.swift */; };
 		277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */; };
@@ -96,7 +105,6 @@
 		278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */; };
 		278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */; };
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
-		2789749E1CD9DCD400AC8700 /* CacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */; };
 		278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA411CD19849008AC629 /* BaseKitEntity.swift */; };
 		278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA4C1CD1E00A008AC629 /* WebViewBridge.swift */; };
 		278CAA4F1CD1E6FC008AC629 /* BaseKitWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */; };
@@ -112,7 +120,6 @@
 		27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */; };
 		27959A521CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */; };
 		27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A531CD3531900546424 /* BaseKitWebViewController.xib */; };
-		2796B3561CE17B1100670574 /* DocumentCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796B3551CE17B1100670574 /* DocumentCache.swift */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */; };
@@ -241,6 +248,16 @@
 		18C208641CC878DC00569F42 /* BuDeJieModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuDeJieModel.swift; sourceTree = "<group>"; };
 		18E184E31CC48B2500F14923 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
 		199C65544CEFC546821FD670 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		270692AC1CE9B75D00CF211A /* CachePool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachePool.swift; sourceTree = "<group>"; };
+		270692AD1CE9B75D00CF211A /* CacheProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProtocol.swift; sourceTree = "<group>"; };
+		270692AE1CE9B75D00CF211A /* DocumentCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentCache.swift; sourceTree = "<group>"; };
+		270692B01CE9B75D00CF211A /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		270692B61CE9B7DC00CF211A /* GesturePasswordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordProtocol.swift; sourceTree = "<group>"; };
+		270692B81CE9B82100CF211A /* GesturePassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePassword.swift; sourceTree = "<group>"; };
+		270692BA1CE9BD4000CF211A /* GesturePasswordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordButton.swift; sourceTree = "<group>"; };
+		270692BC1CE9CD9800CF211A /* MKUIGesturePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGesturePasswordViewController.swift; sourceTree = "<group>"; };
+		270692BE1CE9CDA900CF211A /* MKUIGesturePasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGesturePasswordViewModel.swift; sourceTree = "<group>"; };
+		270692C01CE9E2F300CF211A /* GesturePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordView.swift; sourceTree = "<group>"; };
 		2724D2181CE4201700F4CE03 /* SegmentContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentContainerViewController.swift; sourceTree = "<group>"; };
 		27276C031CC71F640028E938 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		27276C071CC748D60028E938 /* ImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageParser.swift; sourceTree = "<group>"; };
@@ -260,7 +277,6 @@
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
-		2778BA701CCF3B01009B926C /* CachePool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachePool.swift; sourceTree = "<group>"; };
 		277C49C01CE40FBF00295259 /* RegexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
 		277C49C21CE4108800295259 /* RegexSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexSpec.swift; sourceTree = "<group>"; };
 		277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboard.swift; sourceTree = "<group>"; };
@@ -281,7 +297,6 @@
 		278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchKitViewModel.swift; sourceTree = "<group>"; };
 		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
-		2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProtocol.swift; sourceTree = "<group>"; };
 		278CAA411CD19849008AC629 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
 		278CAA4C1CD1E00A008AC629 /* WebViewBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewBridge.swift; sourceTree = "<group>"; };
 		278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitWebViewController.swift; sourceTree = "<group>"; };
@@ -297,7 +312,6 @@
 		27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIIQKeyboardManagerViewController.swift; sourceTree = "<group>"; };
 		27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIIQKeyboardManagerViewModel.swift; sourceTree = "<group>"; };
 		27959A531CD3531900546424 /* BaseKitWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitWebViewController.xib; sourceTree = "<group>"; };
-		2796B3551CE17B1100670574 /* DocumentCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentCache.swift; sourceTree = "<group>"; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		27A18EBB1CDAF89700609C22 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A18EBE1CDAF89700609C22 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,7 +478,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2778BA6F1CCF3AD3009B926C /* Cache */,
+				270692AA1CE9B75D00CF211A /* Local */,
 				27276C051CC748D60028E938 /* Image */,
 				18E184E21CC48B1600F14923 /* Model */,
 			);
@@ -478,6 +492,44 @@
 				278CAA411CD19849008AC629 /* BaseKitEntity.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		270692AA1CE9B75D00CF211A /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				270692AB1CE9B75D00CF211A /* Cache */,
+				270692AF1CE9B75D00CF211A /* Keychain */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		270692AB1CE9B75D00CF211A /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				270692AC1CE9B75D00CF211A /* CachePool.swift */,
+				270692AD1CE9B75D00CF211A /* CacheProtocol.swift */,
+				270692AE1CE9B75D00CF211A /* DocumentCache.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		270692AF1CE9B75D00CF211A /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				270692B01CE9B75D00CF211A /* KeychainWrapper.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		270692B51CE9B7C000CF211A /* GesturePassword */ = {
+			isa = PBXGroup;
+			children = (
+				270692B61CE9B7DC00CF211A /* GesturePasswordProtocol.swift */,
+				270692B81CE9B82100CF211A /* GesturePassword.swift */,
+				270692BA1CE9BD4000CF211A /* GesturePasswordButton.swift */,
+				270692C01CE9E2F300CF211A /* GesturePasswordView.swift */,
+			);
+			path = GesturePassword;
 			sourceTree = "<group>";
 		};
 		2724D2171CE41FF800F4CE03 /* SegmentContainer */ = {
@@ -510,6 +562,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				270692B51CE9B7C000CF211A /* GesturePassword */,
 				277EA9F71CE9A9D200AA62A0 /* Keyboard */,
 				181C72EC1CE582A30072FB7A /* Animation */,
 				181C72E91CE582000072FB7A /* Side */,
@@ -538,16 +591,6 @@
 				273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */,
 			);
 			path = Indicator;
-			sourceTree = "<group>";
-		};
-		2778BA6F1CCF3AD3009B926C /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				2789749D1CD9DCD400AC8700 /* CacheProtocol.swift */,
-				2778BA701CCF3B01009B926C /* CachePool.swift */,
-				2796B3551CE17B1100670574 /* DocumentCache.swift */,
-			);
-			path = Cache;
 			sourceTree = "<group>";
 		};
 		277C49C41CE4108D00295259 /* Opertaion */ = {
@@ -602,6 +645,7 @@
 				27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */,
 				27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */,
 				6CE46A681CE9B66700474D27 /* MKChartMarker.swift */,
+				270692BC1CE9CD9800CF211A /* MKUIGesturePasswordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -615,6 +659,7 @@
 				27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */,
 				27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */,
 				27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */,
+				270692BE1CE9CDA900CF211A /* MKUIGesturePasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1179,14 +1224,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				270692B31CE9B75D00CF211A /* DocumentCache.swift in Sources */,
 				273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */,
 				273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */,
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
+				270692B71CE9B7DC00CF211A /* GesturePasswordProtocol.swift in Sources */,
 				181C72EB1CE5821F0072FB7A /* SideMenu.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
+				270692B91CE9B82100CF211A /* GesturePassword.swift in Sources */,
 				27A4CA261CE3512000516802 /* MKUISegmentViewController.swift in Sources */,
 				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
@@ -1206,9 +1254,9 @@
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
-				2778BA711CCF3B01009B926C /* CachePool.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
+				270692BB1CE9BD4000CF211A /* GesturePasswordButton.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
@@ -1222,7 +1270,7 @@
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
-				2796B3561CE17B1100670574 /* DocumentCache.swift in Sources */,
+				270692BD1CE9CD9800CF211A /* MKUIGesturePasswordViewController.swift in Sources */,
 				27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
@@ -1239,15 +1287,17 @@
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
+				270692B11CE9B75D00CF211A /* CachePool.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
+				270692BF1CE9CDA900CF211A /* MKUIGesturePasswordViewModel.swift in Sources */,
+				270692B21CE9B75D00CF211A /* CacheProtocol.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
-				2789749E1CD9DCD400AC8700 /* CacheProtocol.swift in Sources */,
 				27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */,
 				27959A4C1CD3446000546424 /* MKUIViewController.swift in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
@@ -1272,7 +1322,9 @@
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
+				270692C11CE9E2F300CF211A /* GesturePasswordView.swift in Sources */,
 				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,
+				270692B41CE9B75D00CF211A /* KeychainWrapper.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,

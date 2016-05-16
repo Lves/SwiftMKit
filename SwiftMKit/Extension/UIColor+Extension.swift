@@ -19,7 +19,7 @@ public enum UIColorInputError : ErrorType {
     MismatchedHexStringLength
 }
 
-extension UIColor {
+public extension UIColor {
     /**
      The shorthand three-digit hexadecimal representation of color.
      #RGB defines to the color #RRGGBB.
@@ -145,5 +145,16 @@ extension UIColor {
     
     public override var debugDescription: String {
         return self.hexString(true)
+    }
+}
+
+public extension UIColor {
+    public func colorComponents() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+        var red:CGFloat = 0
+        var green:CGFloat = 0
+        var blue:CGFloat = 0
+        var alpha:CGFloat = 0
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return (red, green, blue, alpha)
     }
 }
