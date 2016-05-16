@@ -62,6 +62,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     public var animationDuration = InnerConstant.AnimationDuration
     public var menuWidthPercent = InnerConstant.MenuWidthPercent
     public var maskColor = InnerConstant.MaskColor
+    public var interactive: Bool = true
     var screenSize: CGSize {
         get {
             return UIScreen.mainScreen().bounds.size
@@ -78,8 +79,8 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     var menuShowed = MutableProperty<Bool>(false)
     
-    /// 跳转到菜单子项的Nav
-    private var destNav: UINavigationController?
+    private var originalPoint: CGPoint = CGPoint()
+    private var lastDrugPoint: CGPoint = CGPoint()
     private var startDrugPoint: CGPoint = CGPoint()
     private var drug2Right = false
     private var panGestureRecognizer: UIPanGestureRecognizer?
@@ -122,7 +123,28 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     ///  监听滑动手势
     func panGestureRecognized(recognizer: UIPanGestureRecognizer) {
+        if !interactive {
+            return
+        }
         delegate?.sideMenuDidRecognizePanGesture(self, recongnizer: recognizer)
+        let translation = recognizer.translationInView(recognizer.view)
+        let velocity = recognizer.velocityInView(recognizer.view)
+        switch recognizer.state {
+        case .Began:
+            recognizer.setTranslation(CGPointMake(recognizer.view?.x ?? 0, 0), inView: recognizer.view)
+        case .Changed:
+            recognizer.view?.transform = CGAffineTransformMakeTranslation(max(0,translation.x), 0)
+        case .Ended:
+            fallthrough
+        case .Cancelled:
+            if velocity.x > 5.0 || velocity.x >= -1.0 && translation.x >  {
+                <#code#>
+            }
+        case .Failed: 
+            <#statement#>
+        case .Recognized: 
+            <#statement#>
+        }
         
         let currentView = menuViewController!.view   // 菜单视图
         let baseView = masterViewController!.view
@@ -171,10 +193,12 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - 解决手势冲突问题
     @objc public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let gestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
-        let cell = gestureRecognizer.view
-        let point = gestureRecognizer.translationInView(cell?.superview)
-        return fabsf(Float(point.x)) > fabsf(Float(point.y))
+        if let gesture = gestureRecognizer as? UIPanGestureRecognizer {
+            let cell = gesture.view
+            let point = gesture.translationInView(cell?.superview)
+            return fabsf(Float(point.x)) > fabsf(Float(point.y))
+        }
+        return true
     }
     
     private func showStatusBar() {
