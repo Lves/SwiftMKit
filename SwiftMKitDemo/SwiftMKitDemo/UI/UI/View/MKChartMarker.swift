@@ -14,7 +14,7 @@ import Charts
 class MKChartMarker: ChartMarker {
 //    public var color: UIColor?
 //    public var arrowSize = CGSize(width: 15, height: 11)
-    public var font: UIFont?
+    var font: UIFont?
 //    public var insets = UIEdgeInsets()
 //    public var minimumSize = CGSize()
     
@@ -27,7 +27,7 @@ class MKChartMarker: ChartMarker {
     
     var leftImage: NSUIImage?
     
-    public init(color: UIColor, font: UIFont, insets: UIEdgeInsets)
+    init(color: UIColor, font: UIFont, insets: UIEdgeInsets)
     {
         super.init()
         
@@ -41,7 +41,7 @@ class MKChartMarker: ChartMarker {
     
 //    public override var size: CGSize { return _size; }
     
-    public override func draw(context context: CGContext, point: CGPoint)
+    override func draw(context context: CGContext, point: CGPoint)
     {
         
         
@@ -65,7 +65,7 @@ class MKChartMarker: ChartMarker {
 
     }
     
-    public override func refreshContent(entry entry: ChartDataEntry, highlight: ChartHighlight)
+    override func refreshContent(entry entry: ChartDataEntry, highlight: ChartHighlight)
     {
         let label = entry.value.description
         labelns = label as NSString

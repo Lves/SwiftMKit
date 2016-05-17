@@ -54,7 +54,7 @@ class MKUIChartViewController: BaseViewController {
         xAxis.drawGridLinesEnabled = false       // 是否显示x轴网格线
         xAxis.spaceBetweenLabels = 1
         xAxis.axisLineWidth = 0                  //线宽度
-        xAxis.drawGridLinesEnabled = false       //是否显示有网格线
+ 
         
         lineChart.leftAxis.axisLineWidth = 0          //左侧线宽度
         lineChart.rightAxis.enabled = false           //是否显示右侧轴线
@@ -96,6 +96,7 @@ class MKUIChartViewController: BaseViewController {
         set0.drawFilledEnabled = true
         set0.drawCirclesEnabled = false
         set0.lineWidth = 0
+        set0.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
         
         //Line2
@@ -110,6 +111,7 @@ class MKUIChartViewController: BaseViewController {
         set2.drawFilledEnabled = false
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
+        set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
         
         let data = LineChartData(xVals: xValues, dataSets: [set0,set2])
@@ -139,6 +141,13 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.drawGridBackgroundEnabled = false   //背景色
         lineChart2.doubleTapToZoomEnabled = false      //双击缩放
         lineChart2.legend.enabled = true  //是否显示说明
+        
+        let marker =  MKChartMarker(color: UIColor.orangeColor(), font: UIFont.systemFontOfSize(12), insets: UIEdgeInsetsMake(8, 8, 20, 8))
+        marker.image = UIImage(named: "BubblePopRight")
+        marker.leftImage = UIImage(named: "BubblePopLeft")
+        lineChart2.marker = marker
+        
+        
         self.lineChart2.delegate = self
         self.setLine2Data()
         
@@ -180,6 +189,7 @@ class MKUIChartViewController: BaseViewController {
         set1.drawCirclesEnabled = false
         set1.lineWidth = 0
         set1.drawValuesEnabled = false  //是否显示数字
+        set1.highlightEnabled = false   //是否可以高亮
         
         
         //Line 2
@@ -206,6 +216,7 @@ class MKUIChartViewController: BaseViewController {
         set2.fillLowerYValues = yValues2Lower
         set2.lineWidth = 0
         set2.drawValuesEnabled = false  //是否显示数字
+        set2.highlightEnabled = false   //是否可以高亮
        
 
         //Line3 
@@ -221,6 +232,7 @@ class MKUIChartViewController: BaseViewController {
         setMiddle.setColor(UIColor.orangeColor())
         setMiddle.lineWidth = 1
         setMiddle.circleRadius = 3
+        setMiddle.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
 
        
@@ -287,4 +299,6 @@ extension MKUIChartViewController:ChartViewDelegate  {
          print("NothingSeleted");
     }
 }
+
+
 
