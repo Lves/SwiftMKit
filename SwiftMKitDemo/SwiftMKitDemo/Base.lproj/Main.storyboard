@@ -346,6 +346,7 @@
                         <segue destination="PDj-dL-c9a" kind="show" identifier="routeToKeyboardView" id="RUo-Pf-1AG"/>
                         <segue destination="EoT-S5-18E" kind="show" identifier="routeToSegmentViewController" id="qN9-hz-umY"/>
                         <segue destination="kWl-XK-QSQ" kind="show" identifier="routeToGesturePassword" id="U0f-4M-F26"/>
+                        <segue destination="atU-Gq-X8U" kind="show" identifier="routeToIndicatorButton" id="uPy-5b-dVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -687,8 +688,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bld-lE-KZT" customClass="GesturePasswordView" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="89" y="193" width="256" height="258"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bld-lE-KZT" customClass="GesturePasswordView" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="59" y="221" width="256" height="258"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="258" id="Ebj-d4-4Oa"/>
@@ -698,14 +699,14 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="selected" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="success" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                        <real key="value" value="2"/>
+                                        <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bld-lE-KZT" firstAttribute="centerY" secondItem="shV-JQ-pK1" secondAttribute="centerY" id="RgQ-dm-xxa"/>
+                            <constraint firstItem="bld-lE-KZT" firstAttribute="centerY" secondItem="shV-JQ-pK1" secondAttribute="centerY" constant="16.5" id="RgQ-dm-xxa"/>
                             <constraint firstItem="bld-lE-KZT" firstAttribute="centerX" secondItem="shV-JQ-pK1" secondAttribute="centerX" id="ltt-wc-Y7V"/>
                         </constraints>
                     </view>
@@ -898,7 +899,53 @@
             </objects>
             <point key="canvasLocation" x="2466.5" y="2114"/>
         </scene>
+        <!--Indicator Button View Controller-->
+        <scene sceneID="uUX-Ul-Wbs">
+            <objects>
+                <viewController id="atU-Gq-X8U" customClass="MKUIIndicatorButtonViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GYZ-6D-G1q"/>
+                        <viewControllerLayoutGuide type="bottom" id="zJ4-r0-gKH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PWw-aZ-fNj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJA-Fe-LQi" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="19.5" y="166" width="335" height="42"/>
+                                <state key="normal" title="测试" backgroundImage="btn_blue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="btn_blue_h"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GJA-Fe-LQi" firstAttribute="top" secondItem="GYZ-6D-G1q" secondAttribute="bottom" constant="102" id="NX0-eB-aEr"/>
+                            <constraint firstItem="GJA-Fe-LQi" firstAttribute="leading" secondItem="PWw-aZ-fNj" secondAttribute="leadingMargin" constant="92" id="QiS-uh-ize"/>
+                            <constraint firstItem="GJA-Fe-LQi" firstAttribute="centerX" secondItem="PWw-aZ-fNj" secondAttribute="centerX" id="V5U-2G-GcK"/>
+                            <constraint firstItem="zJ4-r0-gKH" firstAttribute="top" secondItem="GJA-Fe-LQi" secondAttribute="bottom" constant="422" id="VsC-Cl-skr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QiS-uh-ize"/>
+                                <exclude reference="VsC-Cl-skr"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="btnTest" destination="GJA-Fe-LQi" id="OsL-pz-xEO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sir-aT-5R0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2920.5" y="2193.5"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="btn_blue" width="335" height="42"/>
+        <image name="btn_blue_h" width="335" height="42"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fp8-J5-IUa"/>
     </inferredMetricsTieBreakers>
