@@ -688,33 +688,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bld-lE-KZT" customClass="GesturePasswordView" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="59" y="221" width="256" height="258"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="258" id="Ebj-d4-4Oa"/>
-                                    <constraint firstAttribute="width" constant="256" id="RoG-ZC-enR"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="selected" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="success" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0G-tK-30U">
+                                <rect key="frame" x="157" y="149" width="60" height="30"/>
+                                <state key="normal" title="设置密码"/>
+                                <connections>
+                                    <action selector="click_setPassword:" destination="kWl-XK-QSQ" eventType="touchUpInside" id="Aem-AP-9ie"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0R-qR-r9p">
+                                <rect key="frame" x="157" y="223" width="60" height="30"/>
+                                <state key="normal" title="验证密码"/>
+                                <connections>
+                                    <action selector="click_verifyPassword:" destination="kWl-XK-QSQ" eventType="touchUpInside" id="fXj-Ln-vh6"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bld-lE-KZT" firstAttribute="centerY" secondItem="shV-JQ-pK1" secondAttribute="centerY" constant="16.5" id="RgQ-dm-xxa"/>
-                            <constraint firstItem="bld-lE-KZT" firstAttribute="centerX" secondItem="shV-JQ-pK1" secondAttribute="centerX" id="ltt-wc-Y7V"/>
+                            <constraint firstItem="p0G-tK-30U" firstAttribute="centerX" secondItem="shV-JQ-pK1" secondAttribute="centerX" id="9aE-h3-LYH"/>
+                            <constraint firstItem="o0R-qR-r9p" firstAttribute="top" secondItem="p0G-tK-30U" secondAttribute="bottom" constant="44" id="IMB-0o-EUS"/>
+                            <constraint firstItem="p0G-tK-30U" firstAttribute="leading" secondItem="o0R-qR-r9p" secondAttribute="leading" id="PSb-WY-lRq"/>
+                            <constraint firstItem="p0G-tK-30U" firstAttribute="top" secondItem="rrW-Dl-xPS" secondAttribute="bottom" constant="85" id="kzV-3i-zT4"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="gesturePasswordView" destination="bld-lE-KZT" id="k1P-vR-M2J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J7S-gq-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4283.5" y="703.5"/>
+            <point key="canvasLocation" x="2920.5" y="2210.5"/>
         </scene>
         <!--Side View Detail-->
         <scene sceneID="aRT-Ha-gtM">
@@ -899,6 +903,75 @@
             </objects>
             <point key="canvasLocation" x="2466.5" y="2114"/>
         </scene>
+        <!--Gesture Password Controller-->
+        <scene sceneID="7ws-ND-DIc">
+            <objects>
+                <viewController storyboardIdentifier="GesturePasswordController" id="a0E-S2-40h" customClass="GesturePasswordController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4AS-p3-809"/>
+                        <viewControllerLayoutGuide type="bottom" id="joZ-cq-qTJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Ub-kO-vbz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-lg-jvd">
+                                <rect key="frame" x="170" y="246" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bld-lE-KZT" customClass="GesturePasswordView" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="258" id="Ebj-d4-4Oa"/>
+                                    <constraint firstAttribute="width" constant="256" id="RoG-ZC-enR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="selected" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="success" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonPanelLeading">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonPanelTrailing">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonPanelBottom">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Ebj-d4-4Oa"/>
+                                        <exclude reference="RoG-ZC-enR"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.25882352939999997" green="0.52156862749999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="bld-lE-KZT" firstAttribute="top" secondItem="4AS-p3-809" secondAttribute="bottom" id="0rR-Yp-3bF"/>
+                            <constraint firstItem="joZ-cq-qTJ" firstAttribute="top" secondItem="bld-lE-KZT" secondAttribute="bottom" id="5lj-ef-KzM"/>
+                            <constraint firstItem="bld-lE-KZT" firstAttribute="leading" secondItem="2Ub-kO-vbz" secondAttribute="leadingMargin" id="7Oy-qK-PjR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bld-lE-KZT" secondAttribute="trailing" id="Xf2-z5-RwE"/>
+                            <constraint firstItem="joZ-cq-qTJ" firstAttribute="top" secondItem="Wee-lg-jvd" secondAttribute="bottom" constant="400" id="Z9c-oR-sT9"/>
+                            <constraint firstItem="Wee-lg-jvd" firstAttribute="centerX" secondItem="2Ub-kO-vbz" secondAttribute="centerX" id="yuT-o1-HwB"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="gesturePasswordView" destination="bld-lE-KZT" id="e1Z-6p-Whg"/>
+                        <outlet property="lblInfo" destination="Wee-lg-jvd" id="GNY-Ws-azH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="698-J6-Gn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3351.5" y="2210.5"/>
+        </scene>
         <!--Indicator Button View Controller-->
         <scene sceneID="uUX-Ul-Wbs">
             <objects>
@@ -939,7 +1012,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sir-aT-5R0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2920.5" y="2193.5"/>
+            <point key="canvasLocation" x="3825.5" y="2210.5"/>
         </scene>
     </scenes>
     <resources>
