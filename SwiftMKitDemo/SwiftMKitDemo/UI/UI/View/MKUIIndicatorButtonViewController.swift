@@ -18,12 +18,15 @@ class MKUIIndicatorButtonViewController: BaseViewController {
         
         btnTest.cornerRadius = 3
         btnTest.upToDown = false
-        self.btnTest.setTitle("正在拼命加载中...", forState: .Disabled)
-        btnTest.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) in
-            DDLogInfo("\(sender)")
-            self.btnTest.enabled = false
-            print(self.btnTest.currentTitle)
-            print("\(self.btnTest.state)")
+        self.btnTest.setTitle("测试", forState: .Normal)
+        self.btnTest.setTitle("测试正在拼命加载中...", forState: .Disabled)
+        // FIXME: 注意内存泄露！！！
+        btnTest.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self](sender) in
+            self?.btnTest.enabled = false
         }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.btnTest.enabled = true
     }
 }

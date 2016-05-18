@@ -2,14 +2,39 @@
 //  IndicatorButton.swift
 //  SwiftMKitDemo
 //
-//  Created by Mao on 5/17/16.
+//  Created by apple on 5/17/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
 import UIKit
 
+/**
+ *
+ * ━━━━━━神兽出没━━━━━━
+ * 　　　┏┓　　　┏┓
+ * 　　┏┛┻━━━┛┻┓
+ * 　　┃　　　　　　　┃
+ * 　　┃　　　━　　　┃
+ * 　　┃　┳┛　┗┳　┃
+ * 　　┃　　　　　　　┃
+ * 　　┃　　　┻　　　┃
+ * 　　┃　　　　　　　┃
+ * 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
+ * 　　　　┃　　　┃    神兽保佑,代码无bug
+ * 　　　　┃　　　┃
+ * 　　　　┃　　　┗━━━┓
+ * 　　　　┃　　　　　　　┣┓
+ * 　　　　┃　　　　　　　┏┛
+ * 　　　　┗┓┓┏━┳┓┏┛
+ * 　　　　　┃┫┫　┃┫┫
+ * 　　　　　┗┻┛　┗┻┛
+ *
+ * ━━━━━━感觉萌萌哒━━━━━━
+ */
+
+
 public class IndicatorButton: UIButton {
-    // MARK: - 可视化编辑属性
+    // MARK: - 公开属性
     /// 标识是否是向下切换title
     var upToDown: Bool = false
     /// borderColor
@@ -31,25 +56,35 @@ public class IndicatorButton: UIButton {
         }
     }
     
-//    public override var enabled: Bool {
-//        didSet {
-//            if oldValue != enabled {
-//                if oldValue {
-//                    // 动画切换title，显示菊花
-//                    ib_loadingWithTitle(currentTitle)
-//                } else {
-//                    // 重置按钮，隐藏菊花
-//                    ib_resetToNormalState()
-//                }
-//            }
-//        }
-//    }
+    public override var enabled: Bool {
+        didSet {
+            if oldValue != enabled {
+                if oldValue {
+                    // 动画切换title，显示菊花
+                    lastDisabledTitle = titleForState(.Disabled)
+                    ib_loadingWithTitle(lastDisabledTitle)
+                    setTitle("", forState: .Disabled)
+                } else {
+                    // 重置按钮，隐藏菊花
+                    ib_resetToNormalState()
+                    setTitle(lastDisabledTitle, forState: .Disabled)
+                }
+            }
+        }
+    }
     
     // MARK: - 私有属性
     lazy var backView = UIView()
     lazy var lblMessage = UILabel()
     lazy var indicatorView = UIActivityIndicatorView()
     private var lastTitle: String?
+    private var lastDisabledTitle: String?
+    private let margin: CGFloat = 8
+    private var transformY: CGFloat {
+        get {
+            return self.h * (upToDown ? (-1) : 1)
+        }
+    }
     
     // MARK: - 构造方法
     required public init?(coder decoder: NSCoder) {
@@ -62,46 +97,8 @@ public class IndicatorButton: UIButton {
         setup()
     }
     
-    // MARK: - 公开方法
-    func ib_loadingWithTitle(title: String?) {
-        // TODO: 如果title和旧title相同  不需要显示动画滚动
-        // TODO: lblMessage 和 indicatorView 的位置
-        lblMessage.text = title
-        lblMessage.sizeToFit()
-        lblMessage.center = CGPointMake(self.w * 0.5, self.h * 0.5)
-        
-        indicatorView.centerY = lblMessage.centerY
-        indicatorView.left = lblMessage.left - 20 - indicatorView.w
-        indicatorView.startAnimating()
-        // TODO: 滚动方向
-        if title == currentTitle {
-            
-        }
-        backView.transform = CGAffineTransformMakeTranslation(0, self.h)
-        UIView.animateWithDuration(0.5) {
-            self.titleLabel!.alpha = 0
-            self.backView.alpha = 1
-            self.backView.transform = CGAffineTransformIdentity
-        }
-    }
-    
-    func ib_resetToNormalState() {
-        UIView.animateWithDuration(0.5, animations: {
-            self.titleLabel!.alpha = 1
-            self.backView.alpha = 0
-            // TODO: 滚动方向
-            self.backView.transform = CGAffineTransformMakeTranslation(0, self.h)
-        }) { (finished) in
-            self.backView.transform = CGAffineTransformIdentity
-            self.indicatorView.stopAnimating()
-        }
-    }
-    
     // MARK: - 私有方法
     private func setup() {
-        // 初始化按钮
-        titleLabel?.font = UIFont.systemFontOfSize(14)
-        backgroundColor = UIColor.blueColor()
         layer.masksToBounds = true
         // 初始化backView及其子视图
         lblMessage.textColor = titleLabel?.textColor
@@ -110,14 +107,60 @@ public class IndicatorButton: UIButton {
         
         indicatorView.activityIndicatorViewStyle = .White
         indicatorView.hidesWhenStopped = true
+        indicatorView.sizeToFit()
         backView.addSubview(indicatorView)
         
-        backView.frame = CGRectMake(0, 0, self.w, self.h)
+        // 要先设置高度  再设置center
+        backView.h = self.h
+        backView.center = CGPointMake(self.w * 0.5, self.h * 0.5)
         backView.backgroundColor = UIColor.clearColor()
         backView.alpha = 0
         
         addSubview(backView)
         
         lastTitle = currentTitle
+    }
+    
+    private func ib_loadingWithTitle(title: String?) {
+        let color = self.titleColorForState(.Disabled)
+        let shadowColor = self.titleShadowColorForState(.Disabled)
+        lblMessage.text = title
+        lblMessage.textColor = color
+        lblMessage.shadowColor = shadowColor
+        lblMessage.sizeToFit()
+        // 计算lblMessage 和 indicatorView 的位置
+        indicatorView.centerY = backView.centerY
+        lblMessage.centerY = indicatorView.centerY
+        lblMessage.left = indicatorView.right + margin
+        backView.right = lblMessage.right
+        backView.w = indicatorView.w + margin + lblMessage.w
+        backView.left = (self.w - backView.w ) * 0.5
+        
+        indicatorView.startAnimating()
+        if title == lastTitle {
+            // 如果title和旧title相同  不需要显示动画滚动
+        } else {
+            backView.transform = CGAffineTransformMakeTranslation(0, transformY)
+        }
+        UIView.animateWithDuration(0.5) {
+            self.titleLabel!.alpha = 0
+            self.backView.alpha = 1
+            self.backView.transform = CGAffineTransformIdentity
+        }
+    }
+    
+    private func ib_resetToNormalState() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.titleLabel!.alpha = 1
+            self.backView.alpha = 0
+            if self.currentTitle == self.lastDisabledTitle {
+                // 如果title和旧title相同  不需要显示动画滚动
+            } else {
+                self.backView.transform = CGAffineTransformMakeTranslation(0, self.transformY)
+            }
+        }) { (finished) in
+            self.backView.transform = CGAffineTransformIdentity
+            self.indicatorView.stopAnimating()
+        }
     }
 }
