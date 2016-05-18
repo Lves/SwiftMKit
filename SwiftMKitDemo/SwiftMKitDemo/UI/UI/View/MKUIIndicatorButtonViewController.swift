@@ -18,9 +18,12 @@ class MKUIIndicatorButtonViewController: BaseViewController {
         
         btnTest.cornerRadius = 3
         btnTest.upToDown = false
+        self.btnTest.setTitle("正在拼命加载中...", forState: .Disabled)
         btnTest.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) in
             DDLogInfo("\(sender)")
-            self.btnTest.ib_loadingWithTitle("正在拼命加载中...")
+            self.btnTest.enabled = false
+            print(self.btnTest.currentTitle)
+            print("\(self.btnTest.state)")
         }
     }
 }
