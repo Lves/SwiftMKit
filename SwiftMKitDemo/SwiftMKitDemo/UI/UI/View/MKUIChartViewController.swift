@@ -42,14 +42,12 @@ class MKUIChartViewController: BaseViewController {
     }
     //MARK: 折线图
     func buildLineChartUI() {
-        lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 500))
+        lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 400))
         lineChart.backgroundColor = kBlackColor
         lineChart.alpha = 0.8
         lineChart.pinchZoomEnabled = false
-        
-        
+        lineChart.descriptionText = ""
 
-        
         
         let xAxis = lineChart.xAxis
         xAxis.labelPosition = .Bottom;          //x轴线位置
@@ -78,6 +76,8 @@ class MKUIChartViewController: BaseViewController {
         
         self.lineChart.delegate = self
         self.setLineData()
+        
+        self.lineChart.animate(xAxisDuration: 3.0)
         
     }
     
@@ -132,7 +132,7 @@ class MKUIChartViewController: BaseViewController {
     //MARK: 折线图2
     
     func buildLineChart2UI() {
-        lineChart2 = LineChartView(frame: CGRectMake(0, 510,screenSize.width , 500))
+        lineChart2 = LineChartView(frame: CGRectMake(0, 420,screenSize.width , 400))
         lineChart2.backgroundColor = kBlackColor
         lineChart2.alpha = 0.8
         
@@ -156,6 +156,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.drawGridBackgroundEnabled = false   //背景色
         lineChart2.doubleTapToZoomEnabled = false      //双击缩放
         lineChart2.legend.enabled = true  //是否显示说明
+        lineChart2.descriptionText = ""
         
         let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12))
         marker.image = UIImage(named: "BubblePopRight")
@@ -284,9 +285,22 @@ class MKUIChartViewController: BaseViewController {
     
     //MARK: 柱状图
     func buildBarChartUI()  {
-        barChartView = BarChartView(frame: CGRectMake(0, 1020,screenSize.width , 500))
+        barChartView = BarChartView(frame: CGRectMake(0, 900,screenSize.width , 400))
         self.barChartView.delegate = self
         self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
+        self.barChartView.xAxis.drawGridLinesEnabled = false
+        self.barChartView.leftAxis.drawGridLinesEnabled = false
+        self.barChartView.rightAxis.enabled = false
+        self.barChartView.xAxis.enabled = false
+        self.barChartView.leftAxis.axisLineWidth = 0
+        self.barChartView.descriptionText = ""
+        
+        let percentFormatter = NSNumberFormatter()
+        percentFormatter.positiveSuffix = "%"
+        percentFormatter.negativeSuffix = "%"
+        self.barChartView.leftAxis.valueFormatter = percentFormatter
+        self.barChartView.leftAxis.labelPosition = .InsideChart
+        
         self.setChartData()
     }
     
@@ -309,9 +323,20 @@ class MKUIChartViewController: BaseViewController {
         }
         
         let set1 = BarChartDataSet(yVals: yVals1, label: "Compnay A")
+        set1.setColors([UIColor.redColor(),
+            UIColor.blueColor(),
+            UIColor.orangeColor(),
+            UIColor.blackColor(),
+            UIColor.grayColor(),
+            UIColor.darkGrayColor(),
+            UIColor.purpleColor(),
+            UIColor.yellowColor(),
+            UIColor.greenColor(),
+            UIColor.brownColor()], alpha: 1.0)
         let barChartData = BarChartData(xVals: xVals, dataSets: [set1])
         self.barChartView.data = barChartData
         
+        self.barChartView.animate(yAxisDuration: 3.0)
         
     }
 }

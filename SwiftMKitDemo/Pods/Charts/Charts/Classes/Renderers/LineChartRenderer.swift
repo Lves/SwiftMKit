@@ -200,7 +200,7 @@ public class LineChartRenderer: LineRadarChartRenderer
         {
             return
         }
-        /// modify by lixingle
+        // ModifySourceCode Add By LiXingLe
         if dataSet.drawRangeFilledEnabled {
             //调用绘制路径
             drawCubicFillPath(context: context, dataSet: dataSet, spline: spline, matrix: matrix)
@@ -234,7 +234,7 @@ public class LineChartRenderer: LineRadarChartRenderer
     }
     
     //MARK: 填充曲线rangefill
-    //midify by lixingle
+    // ModifySourceCode Add By LiXingLe
     func drawCubicFillPath(context context: CGContext, dataSet: ILineChartDataSet, spline: CGMutablePath, matrix: CGAffineTransform){
         guard let
             trans = dataProvider?.getTransformer(dataSet.axisDependency),
@@ -248,8 +248,8 @@ public class LineChartRenderer: LineRadarChartRenderer
         let intensity = dataSet.cubicIntensity
       
         guard let
-            entryFrom:ChartDataEntry! = dataSet.fillLowerYValues[entryCount-1],
-            entryTo:ChartDataEntry! =  dataSet.fillLowerYValues.first
+            entryFrom:ChartDataEntry! = dataSet.fillLowerYValues[self.maxX],
+            entryTo:ChartDataEntry! =  dataSet.fillLowerYValues[self.minX < 0 ? self.minX : 0]
             else { return }
         
         let diff = (entryFrom == entryTo) ? 1 : 0
@@ -277,7 +277,7 @@ public class LineChartRenderer: LineRadarChartRenderer
             // 最低线的最后一个
             CGPathAddLineToPoint(spline, &valueToPixelMatrix, CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
             
-            for (var j = maxx; j >= 1 ; j-- )
+            for (var j = min(size, entryCount - 1); j >= 1 ; j-- )
             {
                 prevPrev = prev  //前一个的前一个
                 prev = cur       //前一个

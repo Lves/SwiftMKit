@@ -167,7 +167,7 @@ CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
 
 ```
 
-+  drawCubicFill 修改方法：
++  LineChartRenderer.swift 中 func drawCubicFill 修改方法：
 
 ```
 
@@ -194,7 +194,7 @@ CGPathCloseSubpath(spline)
 
 ```
 
-/// modify by lixingle
+//ModifySourceCode Add By LiXingLe
 if dataSet.drawRangeFilledEnabled {
 //调用绘制路径
 drawCubicFillPath(context: context, dataSet: dataSet, spline: spline, matrix: matrix)
@@ -223,7 +223,7 @@ CGPathCloseSubpath(spline)
 
 ```
 
-//midify by lixingle
+//ModifySourceCode Add By LiXingLe
 func drawCubicFillPath(context context: CGContext, dataSet: ILineChartDataSet, spline: CGMutablePath, matrix: CGAffineTransform){
 guard let
 trans = dataProvider?.getTransformer(dataSet.axisDependency),
@@ -290,6 +290,35 @@ CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
 }
 CGPathCloseSubpath(spline)
 }
+
+```
++ LineScatterCandleRadarChartRenderer.swift func:drawHighlightLines中修改绘制活动游标的方法
+
+```
+  if set.isVerticalHighlightIndicatorEnabled
+        {
+           CGContextBeginPath(context)
+           CGContextMoveToPoint(context, point.x, viewPortHandler.contentTop)
+           CGContextAddLineToPoint(context, point.x, viewPortHandler.contentBottom)
+           CGContextStrokePath(context)
+            
+        }
+
+```
+修改为：
+
+```
+        // modify by  lxingle
+        if set.isVerticalHighlightIndicatorEnabled
+        {
+            //方案一 ModifySourceCode update By LiXingLe
+            CGContextSaveGState(context);
+            UIColor.whiteColor().setFill()
+            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: 15, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop-30))
+            path.lineWidth = 0.1
+            path.fill()
+            CGContextRestoreGState( context );
+        }
 
 ```
 

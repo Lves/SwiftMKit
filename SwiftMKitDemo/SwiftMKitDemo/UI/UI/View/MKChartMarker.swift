@@ -66,6 +66,7 @@ class MKChartMarker: ChartMarker {
     {
         let label = entry.value.description
         labelns = label as NSString
+        labelns = labelns?.stringByAppendingString("%")
         
         _drawAttributes.removeAll()
         _drawAttributes[NSFontAttributeName] = self.font
