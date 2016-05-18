@@ -67,6 +67,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     private var gestureTriedNumber: Int = 0
     public var buttons = [GesturePasswordButton]()
     public var tentacleView: GestureTentacleView?
+    private var buttonPannel: UIView = UIView()
     public weak var delegate: GesturePasswordViewDelegate?
     private var previousPassword: String = ""
     
@@ -79,24 +80,39 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         super.init(frame: frame)
         setupUI()
     }
+    deinit {
+        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+    }
     
     public func setupUI() {
         self.backgroundColor = UIColor.clearColor()
+        buttonPannel.frame = self.frame
+        for index in 0..<9 {
+            let button = GesturePasswordButton(frame: CGRectZero)
+            button.tag = index + 1
+            buttons.append(button)
+            buttonPannel.addSubview(button)
+        }
+        self.addSubview(buttonPannel)
+        tentacleView = GestureTentacleView(frame: buttonPannel.frame)
+        tentacleView?.buttonArray = buttons
+        tentacleView?.delegate = self
+        tentacleView?.style = style
+        self.addSubview(tentacleView!)
     }
-    
     public override func drawRect(rect: CGRect) {
-        self.removeSubviews()
+        DDLogError("drawed again")
         let left = buttonPanelLeading
         let width = self.w - buttonPanelLeading - buttonPanelTrailing
         let height = width
         let top = self.h - buttonPanelBottom - height
         let length = (width - 2 * padding) / 3
-        
-        let buttonPanel = UIView(frame: self.frame)
-        for index in 0..<9 {
+        buttonPannel.frame = self.frame
+        for index in 0..<buttons.count {
+            let button = buttons[index]
             let row = index / 3
             let col = index % 3
-            let button = GesturePasswordButton(frame: CGRectMake(left + CGFloat(row) * (length + padding), top + CGFloat(col) * (length + padding), length, length))
+            button.frame = CGRectMake(left + CGFloat(row) * (length + padding), top + CGFloat(col) * (length + padding), length, length)
             button.lineSuccessColor = lineSuccessColor
             button.lineFailureColor = lineFailureColor
             button.dotSuccessColor = dotSuccessColor
@@ -104,17 +120,8 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             button.colorFillAlpha = colorFillAlpha
             button.dotNormalColor = dotNormalColor
             button.buttonBorderWidth = buttonBorderWidth
-            button.tag = index + 1
-            buttons.append(button)
-            buttonPanel.addSubview(button)
         }
-        self.addSubview(buttonPanel)
-        
-        tentacleView = GestureTentacleView(frame: buttonPanel.frame)
-        tentacleView?.buttonArray = buttons
-        tentacleView?.delegate = self
-        tentacleView?.style = style
-        self.addSubview(tentacleView!)
+        tentacleView?.frame = buttonPannel.frame
         
     }
     
@@ -177,5 +184,8 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
                 return false
             }
         }
+    }
+    public func reset() {
+        tentacleView?.enterArgin()
     }
 }

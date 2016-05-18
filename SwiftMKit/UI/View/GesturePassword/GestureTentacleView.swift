@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 public enum GestureTentacleStyle : Int {
     case Verify, Reset
@@ -53,6 +54,10 @@ public class GestureTentacleView: UIView {
         super.init(coder: aDecoder)
         setupUI()
     }
+    deinit {
+        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+    }
+    
     
     public func setupUI() {
         self.backgroundColor = UIColor.clearColor()
@@ -181,9 +186,6 @@ public class GestureTentacleView: UIView {
         for i in 0..<touchesArray.count {
             let context: CGContextRef = UIGraphicsGetCurrentContext()!
             
-            if i >= touchesArray.count {
-                continue
-            }
             if(touchesArray[i]["num"] == nil){
                 touchesArray.removeAtIndex(i)
                 //i = i-1;

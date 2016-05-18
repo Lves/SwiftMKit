@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
+//Alert
+public extension UIViewController {
+    
+    public func showAlert(alert: UIAlertController, animated: Bool = true, completion: (() -> Void)?) {
+        self.presentViewController(alert, animated: animated, completion: completion)
+    }
+}
+
 //Route
 public extension UIViewController {
     public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {

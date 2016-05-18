@@ -105,6 +105,7 @@
 		278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */; };
 		278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */; };
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
+		278A26791CEC4FB700326690 /* FingerPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A26781CEC4FB700326690 /* FingerPrint.swift */; };
 		278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA411CD19849008AC629 /* BaseKitEntity.swift */; };
 		278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA4C1CD1E00A008AC629 /* WebViewBridge.swift */; };
 		278CAA4F1CD1E6FC008AC629 /* BaseKitWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */; };
@@ -302,6 +303,7 @@
 		278938061CD0BC7600F43699 /* BaseListFetchKitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchKitViewModel.swift; sourceTree = "<group>"; };
 		278938081CD0CC3500F43699 /* BaseListFetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewController.swift; sourceTree = "<group>"; };
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
+		278A26781CEC4FB700326690 /* FingerPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FingerPrint.swift; sourceTree = "<group>"; };
 		278CAA411CD19849008AC629 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
 		278CAA4C1CD1E00A008AC629 /* WebViewBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewBridge.swift; sourceTree = "<group>"; };
 		278CAA4E1CD1E6FC008AC629 /* BaseKitWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitWebViewController.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				278A26771CEC4F9E00326690 /* FingerPrint */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
 				270692CF1CE9F27D00CF211A /* GesturePassword */,
 				277EA9F71CE9A9D200AA62A0 /* Keyboard */,
@@ -620,6 +623,14 @@
 				277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		278A26771CEC4F9E00326690 /* FingerPrint */ = {
+			isa = PBXGroup;
+			children = (
+				278A26781CEC4FB700326690 /* FingerPrint.swift */,
+			);
+			path = FingerPrint;
 			sourceTree = "<group>";
 		};
 		278CAA4B1CD1DFD8008AC629 /* Web */ = {
@@ -1099,7 +1110,7 @@
 				TargetAttributes = {
 					3FC9DEF41CBFD35900C2D938 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 5ANNR8X46Q;
+						DevelopmentTeam = TE2BYM67AU;
 					};
 					3FC9DF081CBFD35900C2D938 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1345,6 +1356,7 @@
 				274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */,
 				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,
 				270692CD1CE9F27100CF211A /* DocumentCache.swift in Sources */,
+				278A26791CEC4FB700326690 /* FingerPrint.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
@@ -1515,15 +1527,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mao Wei (HKSREA36X8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mao Wei (HKSREA36X8)";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jimu.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c5c7fc25-ea53-4a68-a2c0-a811b30c61b6";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1534,15 +1546,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mao Wei (HKSREA36X8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mao Wei (HKSREA36X8)";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jimu.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c5c7fc25-ea53-4a68-a2c0-a811b30c61b6";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 			};
 			name = Release;

@@ -702,19 +702,31 @@
                                     <action selector="click_verifyPassword:" destination="kWl-XK-QSQ" eventType="touchUpInside" id="fXj-Ln-vh6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbo-CE-Iza">
+                                <rect key="frame" x="135" y="299" width="105" height="30"/>
+                                <state key="normal" title="弹窗后验证密码"/>
+                                <connections>
+                                    <action selector="click_alert:" destination="kWl-XK-QSQ" eventType="touchUpInside" id="zP6-hb-Q5g"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="p0G-tK-30U" firstAttribute="centerX" secondItem="shV-JQ-pK1" secondAttribute="centerX" id="9aE-h3-LYH"/>
-                            <constraint firstItem="o0R-qR-r9p" firstAttribute="top" secondItem="p0G-tK-30U" secondAttribute="bottom" constant="44" id="IMB-0o-EUS"/>
-                            <constraint firstItem="p0G-tK-30U" firstAttribute="leading" secondItem="o0R-qR-r9p" secondAttribute="leading" id="PSb-WY-lRq"/>
-                            <constraint firstItem="p0G-tK-30U" firstAttribute="top" secondItem="rrW-Dl-xPS" secondAttribute="bottom" constant="85" id="kzV-3i-zT4"/>
+                            <constraint firstItem="Dbo-CE-Iza" firstAttribute="top" secondItem="o0R-qR-r9p" secondAttribute="bottom" constant="46" id="7Dg-dZ-cho"/>
+                            <constraint firstItem="p0G-tK-30U" firstAttribute="centerX" secondItem="shV-JQ-pK1" secondAttribute="centerX" id="9Bm-Sq-RZl"/>
+                            <constraint firstItem="Dbo-CE-Iza" firstAttribute="centerX" secondItem="o0R-qR-r9p" secondAttribute="centerX" id="C9Q-YI-Gl0"/>
+                            <constraint firstItem="p0G-tK-30U" firstAttribute="top" secondItem="rrW-Dl-xPS" secondAttribute="bottom" constant="85" id="EPv-wW-9yQ"/>
+                            <constraint firstItem="o0R-qR-r9p" firstAttribute="top" secondItem="p0G-tK-30U" secondAttribute="bottom" constant="44" id="RGt-VK-jyB"/>
+                            <constraint firstItem="o0R-qR-r9p" firstAttribute="leading" secondItem="Dbo-CE-Iza" secondAttribute="leading" id="khs-zJ-hFW"/>
+                            <constraint firstItem="p0G-tK-30U" firstAttribute="leading" secondItem="o0R-qR-r9p" secondAttribute="leading" id="neR-rH-FVr"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="khs-zJ-hFW"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="gesturePasswordView" destination="bld-lE-KZT" id="k1P-vR-M2J"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J7S-gq-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -915,14 +927,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-lg-jvd">
-                                <rect key="frame" x="170" y="246" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bld-lE-KZT" customClass="GesturePasswordView" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="-4" y="20" width="383" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="258" id="Ebj-d4-4Oa"/>
@@ -941,7 +947,7 @@
                                         <real key="value" value="50"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="buttonPanelBottom">
-                                        <real key="value" value="100"/>
+                                        <real key="value" value="150"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
@@ -951,19 +957,37 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-lg-jvd">
+                                <rect key="frame" x="170" y="146" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDG-Yz-rSW">
+                                <rect key="frame" x="157" y="557" width="60" height="30"/>
+                                <state key="normal" title="指纹解锁">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="click_fingerPrint:" destination="a0E-S2-40h" eventType="touchUpInside" id="dWF-zs-KSs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.25882352939999997" green="0.52156862749999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bld-lE-KZT" firstAttribute="top" secondItem="4AS-p3-809" secondAttribute="bottom" id="0rR-Yp-3bF"/>
                             <constraint firstItem="joZ-cq-qTJ" firstAttribute="top" secondItem="bld-lE-KZT" secondAttribute="bottom" id="5lj-ef-KzM"/>
-                            <constraint firstItem="bld-lE-KZT" firstAttribute="leading" secondItem="2Ub-kO-vbz" secondAttribute="leadingMargin" id="7Oy-qK-PjR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bld-lE-KZT" secondAttribute="trailing" id="Xf2-z5-RwE"/>
-                            <constraint firstItem="joZ-cq-qTJ" firstAttribute="top" secondItem="Wee-lg-jvd" secondAttribute="bottom" constant="400" id="Z9c-oR-sT9"/>
+                            <constraint firstItem="bld-lE-KZT" firstAttribute="leading" secondItem="2Ub-kO-vbz" secondAttribute="leadingMargin" constant="-20" id="7Oy-qK-PjR"/>
+                            <constraint firstItem="joZ-cq-qTJ" firstAttribute="top" secondItem="KDG-Yz-rSW" secondAttribute="bottom" constant="80" id="MVV-C5-RJR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bld-lE-KZT" secondAttribute="trailing" constant="-20" id="Xf2-z5-RwE"/>
+                            <constraint firstItem="joZ-cq-qTJ" firstAttribute="top" secondItem="Wee-lg-jvd" secondAttribute="bottom" constant="500" id="Z9c-oR-sT9"/>
+                            <constraint firstItem="KDG-Yz-rSW" firstAttribute="centerX" secondItem="2Ub-kO-vbz" secondAttribute="centerX" id="p6g-WT-337"/>
                             <constraint firstItem="Wee-lg-jvd" firstAttribute="centerX" secondItem="2Ub-kO-vbz" secondAttribute="centerX" id="yuT-o1-HwB"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="btnFingerPrint" destination="KDG-Yz-rSW" id="WZl-dM-O6P"/>
                         <outlet property="gesturePasswordView" destination="bld-lE-KZT" id="e1Z-6p-Whg"/>
                         <outlet property="lblInfo" destination="Wee-lg-jvd" id="GNY-Ws-azH"/>
                     </connections>
