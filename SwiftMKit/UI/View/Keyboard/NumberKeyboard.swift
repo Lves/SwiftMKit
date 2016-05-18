@@ -113,13 +113,12 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 range.location += 1
                 self.setSelectedRange(range)
             }
-            if self.type == .Money {
+            //判断是否需要处理限制两位小数逻辑
+            if self.limitWithTwoPoint() {
                 let dotArray = self.text.componentsSeparatedByString(".")
                 if let forward = dotArray.first {
                     if var behind = dotArray.last {
-                        if behind.length > 2 {
-                            behind = behind.toNSString.substringToIndex(2)
-                        }
+                        behind = behind.toNSString.substringToIndex(2)
                         self.textField?.text = forward + "." + behind
                         self.setSelectedRange(range)
                     }
@@ -148,6 +147,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                     return
                 }
             }
+            //删除
             let forward = self.getForwardString(self.text, range: range)
             let behind = self.getBehindString(self.text, range: NSMakeRange(range.location + 1, range.length))
             self.textField?.text = forward + behind
@@ -168,12 +168,15 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                         return
                     }
                 }
-                //判断是否需要处理限制两位小数逻辑
-                if self.limitWithTwoPoint() {
-                    return
-                }
+                //添加
                 let forward = self.getForwardString(self.text, range: range)
                 let behind = self.getBehindString(self.text, range: range)
+                if forward.contains(".") {
+                    //判断是否需要处理限制两位小数逻辑
+                    if self.limitWithTwoPoint() {
+                        return
+                    }
+                }
                 self.textField?.text = forward + inputText + behind
                 self.setSelectedRange(NSMakeRange(range.location+1, 0))
             }
@@ -232,7 +235,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             if self.text.contains(".") {
                 let dotArray = self.text.componentsSeparatedByString(".")
                 if let behind = dotArray.last {
-                    if behind.length == 2 {
+                    if behind.length >= 2 {
                         return true
                     }
                 }
