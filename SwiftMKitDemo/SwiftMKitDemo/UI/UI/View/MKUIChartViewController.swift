@@ -42,11 +42,12 @@ class MKUIChartViewController: BaseViewController {
     }
     //MARK: 折线图
     func buildLineChartUI() {
-        lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 500))
+        lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 400))
         lineChart.backgroundColor = kBlackColor
         lineChart.alpha = 0.8
         lineChart.pinchZoomEnabled = false
-        
+        lineChart.descriptionText = ""
+
         
         let xAxis = lineChart.xAxis
         xAxis.labelPosition = .Bottom;          //x轴线位置
@@ -54,8 +55,12 @@ class MKUIChartViewController: BaseViewController {
         xAxis.drawGridLinesEnabled = false       // 是否显示x轴网格线
         xAxis.spaceBetweenLabels = 1
         xAxis.axisLineWidth = 0                  //线宽度
- 
         
+        
+        let percentFormatter = NSNumberFormatter()
+        percentFormatter.positiveSuffix = "%"
+        percentFormatter.negativeSuffix = "%"
+        lineChart.leftAxis.valueFormatter = percentFormatter  //y轴显示格式化
         lineChart.leftAxis.axisLineWidth = 0          //左侧线宽度
         lineChart.rightAxis.enabled = false           //是否显示右侧轴线
         lineChart.dragEnabled = true                  //是否可以滑动
@@ -63,25 +68,23 @@ class MKUIChartViewController: BaseViewController {
         lineChart.doubleTapToZoomEnabled = false      //双击缩放
         lineChart.legend.form = .Line
         
-        let marker =  MKChartMarker(color: UIColor.orangeColor(), font: UIFont.systemFontOfSize(12), insets: UIEdgeInsetsMake(8, 8, 20, 8))
-//        marker.minimumSize = CGSizeMake(80, 40)
-//        let marker = ChartMarker()
+        let marker =  MKChartMarker(font: UIFont.systemFontOfSize(12))
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
-//
         lineChart.marker = marker
 
         
         self.lineChart.delegate = self
         self.setLineData()
         
+        self.lineChart.animate(xAxisDuration: 3.0)
+        
     }
     
     func setLineData(){
         var xValues = [String]()
         for index in 0...10 {
-            let flotVa = Float(index*1)
-            xValues.append("\(flotVa)")
+            xValues.append("\(2005+index)")
         }
         
         //Line 0
@@ -96,14 +99,15 @@ class MKUIChartViewController: BaseViewController {
         set0.drawFilledEnabled = true
         set0.drawCirclesEnabled = false
         set0.lineWidth = 0
+        set0.setColor(UIColor.blackColor())
+        set0.drawValuesEnabled = false  //是否显示数字
         set0.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
         
         //Line2
         var anotherYValues = [ChartDataEntry]()
         for yIndex in  0...10 {
-            
-            let flotVa = Double(pow(Float(yIndex), 2.0))
+            let flotVa = Double(pow(Float(yIndex), 2.0)) - (Double) (arc4random()%10)
             anotherYValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
 
@@ -112,19 +116,30 @@ class MKUIChartViewController: BaseViewController {
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
+
         
+        //格式化数据
+        let percentFormatter = NSNumberFormatter()
+        percentFormatter.positiveSuffix = "%"
+        percentFormatter.negativeSuffix = "%"
         
-        let data = LineChartData(xVals: xValues, dataSets: [set0,set2])
+        let lineData =  LineChartData(xVals: xValues, dataSets: [set0,set2])
+        lineData.setValueFormatter(percentFormatter);
         
-        self.lineChart!.data = data
+        self.lineChart!.data = lineData
     }
     
     //MARK: 折线图2
     
     func buildLineChart2UI() {
-        lineChart2 = LineChartView(frame: CGRectMake(0, 510,screenSize.width , 500))
+        lineChart2 = LineChartView(frame: CGRectMake(0, 420,screenSize.width , 400))
         lineChart2.backgroundColor = kBlackColor
         lineChart2.alpha = 0.8
+        
+        let percentFormatter = NSNumberFormatter()
+        percentFormatter.positiveSuffix = "%"
+        percentFormatter.negativeSuffix = "%"
+        lineChart2.leftAxis.valueFormatter = percentFormatter  //y轴显示格式化
         
         
         let xAxis = lineChart2.xAxis
@@ -141,8 +156,9 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.drawGridBackgroundEnabled = false   //背景色
         lineChart2.doubleTapToZoomEnabled = false      //双击缩放
         lineChart2.legend.enabled = true  //是否显示说明
+        lineChart2.descriptionText = ""
         
-        let marker =  MKChartMarker(color: UIColor.orangeColor(), font: UIFont.systemFontOfSize(12), insets: UIEdgeInsetsMake(8, 8, 20, 8))
+        let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12))
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart2.marker = marker
@@ -159,15 +175,21 @@ class MKUIChartViewController: BaseViewController {
         //设置x轴
         var xValues = [String]()
         for index in 0...10 {
-            let flotVa = Float(index*1)
-            xValues.append("\(flotVa)")
+            xValues.append("\(2005 + index)")
         }
+        
+        
+        //格式化数据
+        let percentFormatter = NSNumberFormatter()
+        percentFormatter.positiveSuffix = "%"
+        percentFormatter.negativeSuffix = "%"
+        
         
         
         //Line1
         var yValues1 = [ChartDataEntry]()
         for yIndex in  0...10 {
-            let flotVa = Double(Float(yIndex) * 100)
+            let flotVa = Double(Float(yIndex) * 100) - (Double) (arc4random()%20)
             yValues1.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
@@ -175,27 +197,29 @@ class MKUIChartViewController: BaseViewController {
         var yValues1Lower = [ChartDataEntry]()
         for yIndex in  0...10 {
             
-            let flotVa = Double(Float(yIndex) * 10)
+            let flotVa = Double(Float(yIndex) * 10) - (Double) (arc4random()%20)
             yValues1Lower.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
         let set1 = LineChartDataSet(yVals: yValues1, label: "DataSet 1")
         set1.drawFilledEnabled = true
-        set1.drawRangeFilledEnabled = true
-        ///设置底部fill线
-        set1.fillLowerYValues = yValues1Lower
+        
         set1.fillColor = UIColor.orangeColor()
         set1.setColor(UIColor.orangeColor())
         set1.drawCirclesEnabled = false
         set1.lineWidth = 0
         set1.drawValuesEnabled = false  //是否显示数字
         set1.highlightEnabled = false   //是否可以高亮
+        set1.drawRangeFilledEnabled = true    //是否区域填充
+        set1.fillLowerYValues = yValues1Lower ///设置底部fill线
+        set1.drawCubicEnabled = true  //是否显示曲线形式
+        set1.valueFormatter = percentFormatter
         
         
         //Line 2
         var yValues2 = [ChartDataEntry]()
         for yIndex in  0...10 {
-            let flotVa = Double(Float(yIndex) * 75)
+            let flotVa = Double(Float(yIndex) * 75) - (Double) (arc4random()%50)
             yValues2.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
@@ -203,20 +227,23 @@ class MKUIChartViewController: BaseViewController {
         var yValues2Lower = [ChartDataEntry]()
         for yIndex in  0...10 {
             
-            let flotVa = Double(Float(yIndex) * 25)
+            let flotVa = Double(Float(yIndex) * 25) - (Double) (arc4random()%50)
             yValues2Lower.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
         let set2 = LineChartDataSet(yVals: yValues2, label: "DataSet 2")
         set2.fillColor = UIColor.purpleColor()
+        set2.setColor(UIColor.purpleColor())
         set2.drawFilledEnabled = true
         set2.drawCirclesEnabled = false
-        set2.drawRangeFilledEnabled = true
-        ///设置底部fill线
-        set2.fillLowerYValues = yValues2Lower
         set2.lineWidth = 0
         set2.drawValuesEnabled = false  //是否显示数字
         set2.highlightEnabled = false   //是否可以高亮
+        set2.drawCubicEnabled = true  //是否显示曲线形式
+        set2.drawRangeFilledEnabled = true //部分填充
+        ///设置底部fill线
+        set2.fillLowerYValues = yValues2Lower
+        set2.valueFormatter = percentFormatter
        
 
         //Line3 
@@ -233,15 +260,15 @@ class MKUIChartViewController: BaseViewController {
         setMiddle.lineWidth = 1
         setMiddle.circleRadius = 3
         setMiddle.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
+        setMiddle.drawCubicEnabled = true  //是否显示曲线形式
+        setMiddle.valueFormatter = percentFormatter
         
 
-       
+        
+        let lineData =  LineChartData(xVals: xValues, dataSets: [set1,set2,setMiddle])
+        lineData.setValueFormatter(percentFormatter);
 
-        
-        
-        let data = LineChartData(xVals: xValues, dataSets: [set1,set2,setMiddle])
-        
-        self.lineChart2!.data = data
+        self.lineChart2!.data = lineData
     }
     
     
@@ -258,9 +285,22 @@ class MKUIChartViewController: BaseViewController {
     
     //MARK: 柱状图
     func buildBarChartUI()  {
-        barChartView = BarChartView(frame: CGRectMake(0, 1020,screenSize.width , 500))
+        barChartView = BarChartView(frame: CGRectMake(0, 900,screenSize.width , 400))
         self.barChartView.delegate = self
         self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
+        self.barChartView.xAxis.drawGridLinesEnabled = false
+        self.barChartView.leftAxis.drawGridLinesEnabled = false
+        self.barChartView.rightAxis.enabled = false
+        self.barChartView.xAxis.enabled = false
+        self.barChartView.leftAxis.axisLineWidth = 0
+        self.barChartView.descriptionText = ""
+        
+        let percentFormatter = NSNumberFormatter()
+        percentFormatter.positiveSuffix = "%"
+        percentFormatter.negativeSuffix = "%"
+        self.barChartView.leftAxis.valueFormatter = percentFormatter
+        self.barChartView.leftAxis.labelPosition = .InsideChart
+        
         self.setChartData()
     }
     
@@ -283,9 +323,20 @@ class MKUIChartViewController: BaseViewController {
         }
         
         let set1 = BarChartDataSet(yVals: yVals1, label: "Compnay A")
+        set1.setColors([UIColor.redColor(),
+            UIColor.blueColor(),
+            UIColor.orangeColor(),
+            UIColor.blackColor(),
+            UIColor.grayColor(),
+            UIColor.darkGrayColor(),
+            UIColor.purpleColor(),
+            UIColor.yellowColor(),
+            UIColor.greenColor(),
+            UIColor.brownColor()], alpha: 1.0)
         let barChartData = BarChartData(xVals: xVals, dataSets: [set1])
         self.barChartView.data = barChartData
         
+        self.barChartView.animate(yAxisDuration: 3.0)
         
     }
 }

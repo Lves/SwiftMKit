@@ -134,7 +134,8 @@ public var fillLowerYValues:[ChartDataEntry] = []
 //Finish add
 ```
 + generateFilledPath 修改方法：
-```swift
+
+```
 /* ModifySourceCode Remove By LiXingLe
 if e != nil
 {
@@ -163,6 +164,162 @@ CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
 }
 }
 //Finish add
+
+```
+
++  LineChartRenderer.swift 中 func drawCubicFill 修改方法：
+
+```
+
+let fillMin = dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, dataProvider: dataProvider) ?? 0.0
+// Take the from/to xIndex from the entries themselves,
+// so missing entries won't screw up the filling.
+// What we need to draw is line from points of the xIndexes - not arbitrary entry indexes!
+let xTo = dataSet.entryForIndex(to - 1)?.xIndex ?? 0
+let xFrom = dataSet.entryForIndex(from)?.xIndex ?? 0
+
+var pt1 = CGPoint(x: CGFloat(xTo), y: fillMin)
+var pt2 = CGPoint(x: CGFloat(xFrom), y: fillMin)
+pt1 = CGPointApplyAffineTransform(pt1, matrix)
+pt2 = CGPointApplyAffineTransform(pt2, matrix)
+
+CGPathAddLineToPoint(spline, nil, pt1.x, pt1.y)
+CGPathAddLineToPoint(spline, nil, pt2.x, pt2.y)
+CGPathCloseSubpath(spline)
+
+```
+
+
+改成：
+
+```
+
+//ModifySourceCode Add By LiXingLe
+if dataSet.drawRangeFilledEnabled {
+//调用绘制路径
+drawCubicFillPath(context: context, dataSet: dataSet, spline: spline, matrix: matrix)
+
+}else{
+let fillMin = dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, dataProvider: dataProvider) ?? 0.0
+// Take the from/to xIndex from the entries themselves,
+// so missing entries won't screw up the filling.
+// What we need to draw is line from points of the xIndexes - not arbitrary entry indexes!
+let xTo = dataSet.entryForIndex(to - 1)?.xIndex ?? 0
+let xFrom = dataSet.entryForIndex(from)?.xIndex ?? 0
+
+var pt1 = CGPoint(x: CGFloat(xTo), y: fillMin)
+var pt2 = CGPoint(x: CGFloat(xFrom), y: fillMin)
+pt1 = CGPointApplyAffineTransform(pt1, matrix)
+pt2 = CGPointApplyAffineTransform(pt2, matrix)
+
+CGPathAddLineToPoint(spline, nil, pt1.x, pt1.y)
+CGPathAddLineToPoint(spline, nil, pt2.x, pt2.y)
+CGPathCloseSubpath(spline)
+}
+
+```
+
++ drawCubicFillPath 新添加方法 用于绘制折线图的部分填充
+
+```
+
+//ModifySourceCode Add By LiXingLe
+func drawCubicFillPath(context context: CGContext, dataSet: ILineChartDataSet, spline: CGMutablePath, matrix: CGAffineTransform){
+guard let
+trans = dataProvider?.getTransformer(dataSet.axisDependency),
+animator = animator
+else { return }
+
+let phaseX = animator.phaseX
+let phaseY = animator.phaseY
+
+let entryCount = dataSet.fillLowerYValues.count
+let intensity = dataSet.cubicIntensity
+
+guard let
+entryFrom:ChartDataEntry! = dataSet.fillLowerYValues[entryCount-1],
+entryTo:ChartDataEntry! =  dataSet.fillLowerYValues.first
+else { return }
+
+let diff = (entryFrom == entryTo) ? 1 : 0
+let minx = 0
+let maxx = entryCount-1
+
+var valueToPixelMatrix = trans.valueToPixelMatrix
+
+let size = Int(ceil(CGFloat(maxx - minx) * phaseX + CGFloat(minx)))
+
+if (size - minx >= 2)
+{
+var prevDx: CGFloat = 0.0
+var prevDy: CGFloat = 0.0
+var curDx: CGFloat = 0.0
+var curDy: CGFloat = 0.0
+
+var prevPrev: ChartDataEntry! = dataSet.fillLowerYValues[maxx]
+var prev: ChartDataEntry! = prevPrev
+var cur: ChartDataEntry! = prev
+var next: ChartDataEntry! = dataSet.fillLowerYValues[maxx - 1]
+
+if cur == nil || next == nil { return }
+
+// 最低线的最后一个
+CGPathAddLineToPoint(spline, &valueToPixelMatrix, CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
+
+for (var j = maxx; j >= 1 ; j-- )
+{
+prevPrev = prev  //前一个的前一个
+prev = cur       //前一个
+cur = next       //当前
+next = dataSet.fillLowerYValues[j - 1] //下一个
+
+if next == nil { break }
+
+prevDx = CGFloat(cur.xIndex - prevPrev.xIndex) * intensity
+prevDy = CGFloat(cur.value - prevPrev.value) * intensity
+curDx = CGFloat(next.xIndex - prev.xIndex) * intensity
+curDy = CGFloat(next.value - prev.value) * intensity
+
+// the last cubic
+CGPathAddCurveToPoint(spline, &valueToPixelMatrix,
+CGFloat(prev.xIndex) + prevDx,(CGFloat(prev.value) + prevDy) * phaseY,
+CGFloat(cur.xIndex) - curDx,(CGFloat(cur.value) - curDy) * phaseY,
+CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
+}
+
+}
+CGPathCloseSubpath(spline)
+}
+
+```
++ LineScatterCandleRadarChartRenderer.swift func:drawHighlightLines中修改绘制活动游标的方法
+
+```
+  if set.isVerticalHighlightIndicatorEnabled
+        {
+           CGContextBeginPath(context)
+           CGContextMoveToPoint(context, point.x, viewPortHandler.contentTop)
+           CGContextAddLineToPoint(context, point.x, viewPortHandler.contentBottom)
+           CGContextStrokePath(context)
+            
+        }
+
+```
+修改为：
+
+```
+        // modify by  lxingle
+        if set.isVerticalHighlightIndicatorEnabled
+        {
+            //方案一 ModifySourceCode update By LiXingLe
+            CGContextSaveGState(context);
+            UIColor.whiteColor().setFill()
+            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: 15, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop-30))
+            path.lineWidth = 0.1
+            path.fill()
+            CGContextRestoreGState( context );
+        }
+
 ```
 
 

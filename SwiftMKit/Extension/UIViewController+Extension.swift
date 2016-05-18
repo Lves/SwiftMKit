@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
+//Alert
+public extension UIViewController {
+    
+    public func showAlert(alert: UIAlertController, animated: Bool = true, completion: (() -> Void)?) {
+        self.presentViewController(alert, animated: animated, completion: completion)
+    }
+}
+
 //Route
 public extension UIViewController {
     public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
@@ -57,6 +65,13 @@ public extension UIViewController {
         let story = storyboardName != nil && storyboardName?.length > 0 ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
         if story?.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
             return story?.instantiateViewControllerWithIdentifier(name)
+        }
+        return nil
+    }
+    public class func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String) -> UIViewController? {
+        let story = UIStoryboard(name: storyboardName, bundle: nil)
+        if story.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
+            return story.instantiateViewControllerWithIdentifier(name)
         }
         return nil
     }

@@ -29,13 +29,22 @@ public class LineScatterCandleRadarChartRenderer: ChartDataRendererBase
     /// :param: vertical
     public func drawHighlightLines(context context: CGContext, point: CGPoint, set: ILineScatterCandleRadarChartDataSet)
     {
-        // draw vertical highlight lines
+        // draw vertical highlight lines 
+        //ModifySourceCode update By LiXingLe
         if set.isVerticalHighlightIndicatorEnabled
         {
-            CGContextBeginPath(context)
-            CGContextMoveToPoint(context, point.x, viewPortHandler.contentTop)
-            CGContextAddLineToPoint(context, point.x, viewPortHandler.contentBottom)
-            CGContextStrokePath(context)
+//            CGContextBeginPath(context)
+//            CGContextMoveToPoint(context, point.x, viewPortHandler.contentTop)
+//            CGContextAddLineToPoint(context, point.x, viewPortHandler.contentBottom)
+//            CGContextStrokePath(context)
+            
+            //方案一
+            CGContextSaveGState(context);
+            UIColor.whiteColor().setFill()
+            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: 15, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop-30))
+            path.lineWidth = 0.1
+            path.fill()
+            CGContextRestoreGState( context );
         }
         
         // draw horizontal highlight lines

@@ -9,9 +9,9 @@
 import Foundation
 
 public protocol GesturePasswordProtocol {
-    var passwordKey: String { get set }
-    func verify(password: String) -> Bool
-    func change(password: String) -> Bool
-    func exist() -> Bool
-    func clear() -> Bool
+    static var passwordKey: String { get set }
+    static func verify(password: String) -> Bool
+    static func change(password: String) -> Bool
+    static func exist() -> Bool
+    static func clear() -> Bool
 }

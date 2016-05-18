@@ -11,9 +11,9 @@ import CocoaLumberjack
 
 public class GesturePassword: GesturePasswordProtocol {
     
-    public var passwordKey: String = "GesturePassword"
+    public static var passwordKey: String = "GesturePassword"
     
-    public func verify(password: String) -> Bool {
+    public class func verify(password: String) -> Bool {
         if password.length > 0 {
             if let mPassword = KeychainWrapper.stringForKey(passwordKey) {
                 if mPassword == password {
@@ -25,14 +25,14 @@ public class GesturePassword: GesturePasswordProtocol {
         DDLogError("[GesturePassword] Failed: \(password)")
         return false
     }
-    public func change(password: String) -> Bool {
+    public class func change(password: String) -> Bool {
         DDLogInfo("[GesturePassword] Changed: \(password)")
         return KeychainWrapper.setString(password, forKey: passwordKey)
     }
-    public func exist() -> Bool {
+    public class func exist() -> Bool {
         return KeychainWrapper.stringForKey(passwordKey) != nil
     }
-    public func clear() -> Bool {
+    public class func clear() -> Bool {
         DDLogInfo("[GesturePassword] Clear")
         return KeychainWrapper.removeObjectForKey(passwordKey)
     }
