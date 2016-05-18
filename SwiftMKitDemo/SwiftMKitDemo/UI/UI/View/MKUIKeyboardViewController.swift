@@ -10,10 +10,17 @@ import UIKit
 
 class MKUIKeyboardViewController: BaseViewController {
 
+    @IBOutlet weak var txtDemo: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    override func setupUI() {
+        super.setupUI()
+        let keyboard = NumberKeyboard.keyboard(self.txtDemo, type: .Money)
+        self.txtDemo.inputView = keyboard
     }
 
     override func didReceiveMemoryWarning() {
