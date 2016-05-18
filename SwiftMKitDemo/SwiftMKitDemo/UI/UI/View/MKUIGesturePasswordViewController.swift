@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import ReactiveCocoa
 
 class MKUIGesturePasswordViewController: BaseViewController {
 
@@ -33,18 +34,19 @@ class MKUIGesturePasswordViewController: BaseViewController {
 class GesturePasswordViewController: BaseViewController, GesturePasswordViewDelegate {
     
     @IBOutlet weak var lblInfo: UILabel!
+    @IBOutlet weak var btnFingerPrint: UIButton!
     @IBOutlet weak var gesturePasswordView: GesturePasswordView?
     static var screenLocked = false
     var style: GestureTentacleStyle = .Verify {
         didSet {
             gesturePasswordView?.style = style
-            if isViewLoaded() {
-                switch style {
-                case .Verify:
-                    lblInfo.text = "请绘制手势密码解锁"
-                case .Reset:
-                    lblInfo.text = "请绘制手势密码"
-                }
+            updateUI()
+        }
+    }
+    @IBAction func click_fingerPrint(sender: UIButton) {
+        FingerPrint.authenticate("指纹解锁").observeOn(QueueScheduler.mainQueueScheduler).startWithNext { success in
+            if success {
+                GesturePasswordViewController.unlockScreen()
             }
         }
     }
@@ -91,11 +93,23 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         super.setupUI()
         gesturePasswordView?.delegate = self
         gesturePasswordView?.style = style
-        switch style {
-        case .Verify:
-            lblInfo.text = "请绘制手势密码解锁"
-        case .Reset:
-            lblInfo.text = "请绘制手势密码"
+        updateUI()
+        if style == .Verify {
+            FingerPrint.isSupport().on(
+                next: { [weak self] _ in self?.btnFingerPrint.hidden = false},
+                failed: { [weak self] _ in self?.btnFingerPrint.hidden = true }).start()
+        }
+    }
+    func updateUI() {
+        if isViewLoaded() {
+            switch style {
+            case .Verify:
+                lblInfo.text = "请绘制手势密码解锁"
+                self.btnFingerPrint.hidden = false
+            case .Reset:
+                lblInfo.text = "请绘制手势密码"
+                self.btnFingerPrint.hidden = true
+            }
         }
     }
     func reset() {
@@ -104,7 +118,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
     }
     
     func gp_verification(success: Bool, message: String, canTryAgain: Bool) {
-        DDLogInfo("\(success) \(message) \(canTryAgain)")
+        DDLogInfo("结果：\(success) 消息：\(message) 能否再试：\(canTryAgain)")
         lblInfo.text = message
         if success {
             lblInfo.text = message
@@ -119,7 +133,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         }
     }
     func gp_setPassword(success: Bool, message: String) {
-        DDLogInfo("\(success) \(message)")
+        DDLogInfo("结果：\(success) 消息：\(message)")
         lblInfo.text = message
         if success {
             lblInfo.text = message
@@ -128,7 +142,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         }
     }
     func gp_confirmSetPassword(success: Bool, message: String) {
-        DDLogInfo("\(success) \(message)")
+        DDLogInfo("结果：\(success) 消息：\(message)")
         lblInfo.text = message
         if success {
             lblInfo.text = message
