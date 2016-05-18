@@ -17,6 +17,14 @@ class MKUIGesturePasswordViewController: BaseViewController {
     @IBAction func click_verifyPassword(sender: UIButton) {
         GesturePasswordViewController.lockScreen()
     }
+    @IBAction func click_alert(sender: UIButton) {
+        let alert = UIAlertController(title: "提示", message: "我是一个弹窗", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "我知道了", style: .Default, handler: nil))
+        self.showAlert(alert, completion: nil)
+        Async.main(after: 1) {
+            GesturePasswordViewController.lockScreen()
+        }
+    }
     
     
 }
@@ -30,30 +38,50 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
     var style: GestureTentacleStyle = .Verify {
         didSet {
             gesturePasswordView?.style = style
+            if isViewLoaded() {
+                switch style {
+                case .Verify:
+                    lblInfo.text = "请绘制手势密码解锁"
+                case .Reset:
+                    lblInfo.text = "请绘制手势密码"
+                }
+            }
         }
     }
     
-    static let shared: GesturePasswordViewController = UIViewController.instanceViewControllerInStoryboardWithName("GesturePasswordViewController", storyboardName: "Main") as! GesturePasswordViewController
+    private static let sharedViewController: GesturePasswordViewController = UIViewController.instanceViewControllerInStoryboardWithName("GesturePasswordViewController", storyboardName: "Main") as! GesturePasswordViewController
+    class func shared() -> GesturePasswordViewController {
+        return GesturePasswordViewController.sharedViewController
+    }
     
     class func lockScreen(style: GestureTentacleStyle = .Verify) {
         DDLogInfo("Lock screen")
         if screenLocked {
             return
         }
-        let vc = GesturePasswordViewController.shared
+        let vc = GesturePasswordViewController.shared()
         vc.style = style
         let window = UIApplication.sharedApplication().delegate?.window
         window??.windowLevel = UIWindowLevelStatusBar
         window??.addSubview(vc.view)
         screenLocked = true
+        vc.view.alpha = 0
+        UIView.animateWithDuration(0.4) {
+            vc.view.alpha = 1
+        }
     }
     class func unlockScreen() {
         DDLogInfo("Unlock screen")
         if !screenLocked {
             return
         }
-        let vc = GesturePasswordViewController.shared
-        vc.view.removeFromSuperview()
+        let vc = GesturePasswordViewController.shared()
+        UIView.animateWithDuration(0.4, animations: {
+            vc.view.alpha = 0
+        }) { completed in
+            vc.view.removeFromSuperview()
+            vc.reset()
+        }
         let window = UIApplication.sharedApplication().delegate?.window
         window??.windowLevel = UIWindowLevelNormal
         screenLocked = false
@@ -69,6 +97,10 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         case .Reset:
             lblInfo.text = "请绘制手势密码"
         }
+    }
+    func reset() {
+        lblInfo.text = ""
+        gesturePasswordView?.reset()
     }
     
     func gp_verification(success: Bool, message: String, canTryAgain: Bool) {
