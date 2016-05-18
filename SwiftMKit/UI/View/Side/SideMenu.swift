@@ -85,8 +85,6 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     var menuShowed = MutableProperty<Bool>(false)
     
     private var draggingPoint: CGPoint = CGPointZero
-    private var lastDrugPoint: CGPoint = CGPoint()
-    private var startDrugPoint: CGPoint = CGPoint()
     private var panGestureRecognizer: UIPanGestureRecognizer?
     
     

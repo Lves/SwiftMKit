@@ -34,9 +34,20 @@ import UIKit
 
 
 public class IndicatorButton: UIButton {
+    
+    public enum AnimateDirection: Int {
+        case FromDownToUp, FromUpToDown
+    }
+    
     // MARK: - 公开属性
     /// 标识是否是向下切换title
-    var upToDown: Bool = false
+    var animateDirection: AnimateDirection = .FromDownToUp
+    var indicatorStyle: UIActivityIndicatorViewStyle = .White {
+        didSet {
+            indicatorView.activityIndicatorViewStyle = indicatorStyle
+        }
+    }
+    var indicatorMargin: CGFloat = 8
     /// borderColor
     var borderColor: UIColor = UIColor.clearColor() {
         didSet {
@@ -79,10 +90,9 @@ public class IndicatorButton: UIButton {
     lazy var indicatorView = UIActivityIndicatorView()
     private var lastTitle: String?
     private var lastDisabledTitle: String?
-    private let margin: CGFloat = 8
     private var transformY: CGFloat {
         get {
-            return self.h * (upToDown ? (-1) : 1)
+            return self.h * (animateDirection == .FromDownToUp ? 1 : -1)
         }
     }
     
@@ -105,7 +115,7 @@ public class IndicatorButton: UIButton {
         lblMessage.font = titleLabel?.font
         backView.addSubview(lblMessage)
         
-        indicatorView.activityIndicatorViewStyle = .White
+        indicatorView.activityIndicatorViewStyle = indicatorStyle
         indicatorView.hidesWhenStopped = true
         indicatorView.sizeToFit()
         backView.addSubview(indicatorView)
@@ -131,10 +141,19 @@ public class IndicatorButton: UIButton {
         // 计算lblMessage 和 indicatorView 的位置
         indicatorView.centerY = backView.centerY
         lblMessage.centerY = indicatorView.centerY
-        lblMessage.left = indicatorView.right + margin
+        lblMessage.left = indicatorView.right + indicatorMargin
         backView.right = lblMessage.right
-        backView.w = indicatorView.w + margin + lblMessage.w
-        backView.left = (self.w - backView.w ) * 0.5
+        backView.w = indicatorView.w + indicatorMargin + lblMessage.w
+        backView.left = (self.w - backView.w) * 0.5
+        indicatorView.hidden = false
+        if backView.left < 0 { // 文字太长
+            backView.w = lblMessage.w
+            indicatorView.hidden = true
+            if backView.w > self.w {
+                backView.w = self.w
+                lblMessage.w = backView.w
+            }
+        }
         
         indicatorView.startAnimating()
         if title == lastTitle {
