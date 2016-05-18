@@ -903,10 +903,10 @@
             </objects>
             <point key="canvasLocation" x="2466.5" y="2114"/>
         </scene>
-        <!--Gesture Password Controller-->
+        <!--Gesture Password View Controller-->
         <scene sceneID="7ws-ND-DIc">
             <objects>
-                <viewController storyboardIdentifier="GesturePasswordController" id="a0E-S2-40h" customClass="GesturePasswordController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GesturePasswordViewController" id="a0E-S2-40h" customClass="GesturePasswordViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4AS-p3-809"/>
                         <viewControllerLayoutGuide type="bottom" id="joZ-cq-qTJ"/>

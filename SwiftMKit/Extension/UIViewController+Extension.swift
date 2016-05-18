@@ -60,6 +60,13 @@ public extension UIViewController {
         }
         return nil
     }
+    public class func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String) -> UIViewController? {
+        let story = UIStoryboard(name: storyboardName, bundle: nil)
+        if story.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
+            return story.instantiateViewControllerWithIdentifier(name)
+        }
+        return nil
+    }
     public func canPerformSegueWithIdentifier(identifier: String) -> Bool {
         let segueTemplates = self.valueForKey("storyboardSegueTemplates")
         let filteredArray = segueTemplates?.filteredArrayUsingPredicate(NSPredicate(format: "identifier = %@", identifier))

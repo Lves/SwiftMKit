@@ -121,6 +121,9 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     // MARK: Delegate
     
     public func verification(result: String) -> Bool {
+        Async.main(after: 1) { [weak self] in
+            self?.tentacleView?.enterArgin()
+        }
         gestureTriedNumber += 1
         if gestureTriedNumber > maxGestureTryNumber {
             let message = "错误次数已达上限，解锁失败"
@@ -130,7 +133,6 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         if result.length < minGestureNumber {
             gestureTriedNumber -= 1
             delegate?.gp_verification(false, message: "至少要绘制3个点，请重试", canTryAgain: gestureTriedNumber < maxGestureTryNumber)
-            tentacleView?.enterArgin()
             return false
         }
         let success = GesturePassword.verify(result)
@@ -149,7 +151,9 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     public func resetPassword(result: String) -> Bool {
         if result.length < minGestureNumber {
             delegate?.gp_setPassword(false, message: "至少要绘制3个点，请重试")
-            tentacleView?.enterArgin()
+            Async.main(after: 1) { [weak self] in
+                self?.tentacleView?.enterArgin()
+            }
             return false
         }
         if previousPassword.length == 0 {
@@ -158,13 +162,17 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             tentacleView?.enterArgin()
             return true
         } else {
-            previousPassword = ""
+            Async.main(after: 1) { [weak self] in
+                self?.tentacleView?.enterArgin()
+            }
             if previousPassword == result {
+                previousPassword = ""
                 let success = GesturePassword.change(result)
                 let message = success ? "设置手势密码成功" : "确认失败，请重新设置手势密码"
                 delegate?.gp_confirmSetPassword(success, message: message)
                 return success
             } else {
+                previousPassword = ""
                 delegate?.gp_confirmSetPassword(false, message: "确认失败，请重新设置手势密码")
                 return false
             }

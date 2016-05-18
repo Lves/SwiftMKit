@@ -42,6 +42,8 @@ public class GestureTentacleView: UIView {
     var success: Bool = false
     var drawed: Bool = false
     
+    private var touching: Bool = false
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -59,6 +61,7 @@ public class GestureTentacleView: UIView {
     }
     
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        touching = true
         var touchPoint: CGPoint
         let touch: UITouch? = touches.first
         
@@ -130,6 +133,7 @@ public class GestureTentacleView: UIView {
     }
     
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        touching = false
         var resultString:String = ""
         
         //println("end....\(touchedArray)")
@@ -177,6 +181,9 @@ public class GestureTentacleView: UIView {
         for i in 0..<touchesArray.count {
             let context: CGContextRef = UIGraphicsGetCurrentContext()!
             
+            if i >= touchesArray.count {
+                continue
+            }
             if(touchesArray[i]["num"] == nil){
                 touchesArray.removeAtIndex(i)
                 //i = i-1;
@@ -206,6 +213,9 @@ public class GestureTentacleView: UIView {
     
     
     public func enterArgin() {
+        if touching {
+            return
+        }
         touchesArray.removeAll()
         touchedArray.removeAll()
         for i in 0..<buttonArray.count {
