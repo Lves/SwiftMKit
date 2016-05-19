@@ -29,11 +29,7 @@ class MKUIIndicatorButtonViewController: BaseViewController {
         super.bindingData()
         for button in buttons {
             button.cornerRadius = 3
-            let action = _viewModel.actionButton
-            action.unsafeCocoaAction.rac_valuesForKeyPath("enabled", observer: nil).toSignalProducer().map{ $0! as! Bool }.startWithNext { enabled in
-                button.enabled = enabled
-            }
-            button.addTarget(action.unsafeCocoaAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+            button.addTarget(_viewModel.actionButton.toCocoaAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
 
         }
     }

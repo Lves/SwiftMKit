@@ -52,24 +52,6 @@ public class IndicatorButton: UIButton {
     }
     var indicatorPosition: IndicatorPosition = .Left
     var indicatorMargin: CGFloat = 8
-    /// borderColor
-    var borderColor: UIColor = UIColor.clearColor() {
-        didSet {
-            layer.borderColor = borderColor.CGColor
-        }
-    }
-    /// borderWidth
-    var borderWidth: CGFloat = 0 {
-        didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    /// cornerRadius
-    var cornerRadius: CGFloat = 0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-        }
-    }
     
     public override var enabled: Bool {
         willSet {
