@@ -15,17 +15,6 @@ public enum NumberKeyboardType: Int {
     case Normal, NoDot, Money
 }
 
-
-public protocol NumberKeyboardProtocol {
-    var type: NumberKeyboardType { get set }
-    func clear()
-    func matchInputDot(old : String, new : String) -> String
-    func matchInputNumber(old : String, new : String) -> String
-    func matchInputDel(old : String, new : String) -> String
-}
-
-
-
 public class NumberKeyboard: UIView, NumberKeyboardProtocol {
 
     @IBOutlet weak var btn1: UIButton!

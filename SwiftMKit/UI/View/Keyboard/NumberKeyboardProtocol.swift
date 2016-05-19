@@ -10,13 +10,9 @@ import Foundation
 import UIKit
 
 public protocol NumberKeyboardProtocol {
-    
     var type: NumberKeyboardType { get set }
-    var numberIn: String { get set }
-    var numberOut: String { get }
-    
     func clear()
-    //delete
-    //location
-    //input
+    func matchInputDot(old : String, new : String) -> String
+    func matchInputNumber(old : String, new : String) -> String
+    func matchInputDel(old : String, new : String) -> String
 }
