@@ -259,7 +259,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 if old.contains(".") {
                     return old
                 } else {
-                    
+                     
                 }
             } else {
                 if let returnString = new.toFloat() {
