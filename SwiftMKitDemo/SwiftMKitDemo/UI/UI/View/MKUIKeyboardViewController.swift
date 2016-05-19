@@ -21,7 +21,7 @@ class MKUIKeyboardViewController: BaseViewController {
     }
     override func setupUI() {
         super.setupUI()
-        let keyboard = NumberKeyboard.keyboard(self.txtDemo, type: .Money)
+        let keyboard = NumberKeyboard.keyboard(self.txtDemo, type: .Normal)
         self.txtDemo.inputView = keyboard
     }
 

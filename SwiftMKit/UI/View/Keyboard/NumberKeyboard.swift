@@ -104,8 +104,8 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             //获取光标位置
             var range = self.selectedRange()
             if range.location == 0 {
-                self.textField?.text = "0." + self.text
                 //重新设置光标位置
+                self.textField?.text = "0." + self.text
                 range.location += 2
                 self.setSelectedRange(range)
             } else {
@@ -124,12 +124,6 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                     }
                 }
             }
-        }
-    }
-    //键盘回收
-    private func bindKeyButtonAction(button: UIButton) {
-        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
-            self?.textField?.resignFirstResponder()
         }
     }
     //删除事件
@@ -161,25 +155,37 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 if inputText.length <= 0 {
                     return
                 }
-                //光标处理
-                let range = self.selectedRange()   //获取光标位置
+                //获取光标位置
+                let range = self.selectedRange()
                 if let tempDeleget = self.textField?.delegate {
                     if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
                         return
                     }
                 }
-                //添加
-                let forward = self.getForwardString(self.text, range: range)
-                let behind = self.getBehindString(self.text, range: range)
-                if forward.contains(".") {
-                    //判断是否需要处理限制两位小数逻辑
-                    if self.limitWithTwoPoint() {
-                        return
+                //输入第二位时第一位为 0 的情况处理
+                if self.text == "0" {
+                    self.textField?.text = inputText
+                    self.setSelectedRange(NSMakeRange(1, 0))
+                } else {
+                    //添加
+                    let forward = self.getForwardString(self.text, range: range)
+                    let behind = self.getBehindString(self.text, range: range)
+                    if forward.contains(".") {
+                        //判断是否需要处理限制两位小数逻辑
+                        if self.limitWithTwoPoint() {
+                            return
+                        }
                     }
+                    self.textField?.text = forward + inputText + behind
+                    self.setSelectedRange(NSMakeRange(range.location+1, 0))
                 }
-                self.textField?.text = forward + inputText + behind
-                self.setSelectedRange(NSMakeRange(range.location+1, 0))
             }
+        }
+    }
+    //键盘回收
+    private func bindKeyButtonAction(button: UIButton) {
+        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+            self?.textField?.resignFirstResponder()
         }
     }
     /**
