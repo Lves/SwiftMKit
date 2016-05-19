@@ -17,9 +17,10 @@ public enum NumberKeyboardType: Int {
 
 public protocol NumberKeyboardProtocol {
     var type: NumberKeyboardType { get set }
-    var text: String { get set }
-    var textField: UITextField? { get }
     func clear()
+    func matchInputDot(old : String, new : String) -> String
+    func matchInputNumber(old : String, new : String) -> String
+    func matchInputDel(old : String, new : String) -> String
 }
 
 
@@ -144,7 +145,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             //删除
             let forward = self.getForwardString(self.text, range: range)
             let behind = self.getBehindString(self.text, range: NSMakeRange(range.location + 1, range.length))
-            self.textField?.text = forward + behind
+            self.textField?.text = self.matchInputDel(self.text, new: forward + behind)
             self.setSelectedRange(range)
         }
     }
@@ -249,25 +250,57 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
         return false
     }
-    //数字匹配
-    private func numberMatch(old : String, new : String, input : String) -> String {
-        let result = (new =~ "^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$")    //匹配浮点数
-        if result {
+    //输入小数点---匹配
+    public func matchInputDot(old : String, new : String) -> String {
+        if matchNumber(new) {
             return new
         } else {
-            if input == "." {
-                if old.contains(".") {
-                    return old
-                } else {
-                     
-                }
+            if old.contains(".") {
+                return old
             } else {
-                if let returnString = new.toFloat() {
-                    return String(format: "%.2f",returnString)
+                if new.toNSString.substringToIndex(1) == "." {
+                    return "0" + new
+                } else {
+                    return new
                 }
             }
         }
-        return old
+    }
+    //输入数字---匹配
+    public func matchInputNumber(old : String, new : String) -> String {
+        if matchNumber(new) {
+            return new
+        } else {
+            if let returnString = new.toFloat() {
+                return String(format: "%.2f",returnString)
+            } else {
+                return old
+            }
+        }
+    }
+    //删除---匹配
+    public func matchInputDel(old : String, new : String) -> String {
+        if matchNumber(new) {
+            return new
+        } else {
+            if new.length <= 0 {
+                return new
+            } else {
+                if new.toNSString.substringToIndex(1) == "." {
+                    return "0" + new
+                } else {
+                    if let returnString = new.toFloat() {
+                        return String(format: "%.2f",returnString)
+                    } else {
+                        return old
+                    }
+                }
+            }
+        }
+    }
+    //数字正则匹配 
+    private func matchNumber(string : String) -> Bool {
+        return (string =~ "^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$")
     }
     
     
