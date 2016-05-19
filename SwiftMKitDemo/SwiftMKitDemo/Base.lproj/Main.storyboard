@@ -1020,18 +1020,55 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJA-Fe-LQi" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="19.5" y="166" width="335" height="42"/>
-                                <state key="normal" title="测试" backgroundImage="btn_blue">
+                                <state key="normal" title="开始" backgroundImage="btn_blue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled" backgroundImage="btn_blue"/>
+                                <state key="highlighted" backgroundImage="btn_blue_h"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eP-hx-gTw" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="238" width="335" height="42"/>
+                                <state key="normal" title="开始" backgroundImage="btn_blue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" title="进行中" backgroundImage="btn_blue"/>
+                                <state key="highlighted" backgroundImage="btn_blue_h"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ae-r7-ibH" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="310" width="165" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="RHz-eF-WvC"/>
+                                </constraints>
+                                <state key="normal" title="开始" backgroundImage="btn_blue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" title="这是一段很长的文字" backgroundImage="btn_blue"/>
+                                <state key="highlighted" backgroundImage="btn_blue_h"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzY-5l-H7w" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="382" width="120" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="JMt-3K-uSO"/>
+                                </constraints>
+                                <state key="normal" title="开始" backgroundImage="btn_blue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" title="这是一段很长的文字"/>
                                 <state key="highlighted" backgroundImage="btn_blue_h"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tzY-5l-H7w" firstAttribute="leading" secondItem="6ae-r7-ibH" secondAttribute="leading" id="5MZ-Gm-zjC"/>
                             <constraint firstItem="GJA-Fe-LQi" firstAttribute="top" secondItem="GYZ-6D-G1q" secondAttribute="bottom" constant="102" id="NX0-eB-aEr"/>
                             <constraint firstItem="GJA-Fe-LQi" firstAttribute="leading" secondItem="PWw-aZ-fNj" secondAttribute="leadingMargin" constant="92" id="QiS-uh-ize"/>
+                            <constraint firstItem="6ae-r7-ibH" firstAttribute="top" secondItem="5eP-hx-gTw" secondAttribute="bottom" constant="30" id="Rsh-kK-Joa"/>
                             <constraint firstItem="GJA-Fe-LQi" firstAttribute="centerX" secondItem="PWw-aZ-fNj" secondAttribute="centerX" id="V5U-2G-GcK"/>
                             <constraint firstItem="zJ4-r0-gKH" firstAttribute="top" secondItem="GJA-Fe-LQi" secondAttribute="bottom" constant="422" id="VsC-Cl-skr"/>
+                            <constraint firstItem="5eP-hx-gTw" firstAttribute="top" secondItem="GJA-Fe-LQi" secondAttribute="bottom" constant="30" id="lSz-j5-KRr"/>
+                            <constraint firstItem="6ae-r7-ibH" firstAttribute="leading" secondItem="5eP-hx-gTw" secondAttribute="leading" id="oM0-qL-f20"/>
+                            <constraint firstItem="5eP-hx-gTw" firstAttribute="centerX" secondItem="GJA-Fe-LQi" secondAttribute="centerX" id="ogK-wz-ipw"/>
+                            <constraint firstItem="tzY-5l-H7w" firstAttribute="top" secondItem="6ae-r7-ibH" secondAttribute="bottom" constant="30" id="xa0-40-0lE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1041,7 +1078,10 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="btnTest" destination="GJA-Fe-LQi" id="OsL-pz-xEO"/>
+                        <outletCollection property="buttons" destination="GJA-Fe-LQi" collectionClass="NSMutableArray" id="K8G-cG-BYD"/>
+                        <outletCollection property="buttons" destination="5eP-hx-gTw" collectionClass="NSMutableArray" id="vtu-n6-ly0"/>
+                        <outletCollection property="buttons" destination="6ae-r7-ibH" collectionClass="NSMutableArray" id="EL3-cf-HRe"/>
+                        <outletCollection property="buttons" destination="tzY-5l-H7w" collectionClass="NSMutableArray" id="H1p-OE-Eja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sir-aT-5R0" userLabel="First Responder" sceneMemberID="firstResponder"/>

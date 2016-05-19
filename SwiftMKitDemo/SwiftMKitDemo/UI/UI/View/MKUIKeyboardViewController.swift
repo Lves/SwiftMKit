@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 class MKUIKeyboardViewController: BaseViewController {
 
@@ -14,7 +15,8 @@ class MKUIKeyboardViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        IQKeyboardManager.sharedManager().disabledToolbarClasses.addObject(MKUIKeyboardViewController)
+        
         // Do any additional setup after loading the view.
     }
     override func setupUI() {

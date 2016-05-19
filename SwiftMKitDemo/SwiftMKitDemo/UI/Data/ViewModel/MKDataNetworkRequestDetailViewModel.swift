@@ -30,7 +30,10 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
                 sink.sendCompleted()
             }
         }
-        action.errors.observe { error in
+        action.values.observeNext { values in
+            DDLogVerbose("\(values)")
+        }
+        action.errors.observeNext { error in
             DDLogError("\(error)")
         }
         return CocoaAction(action, input:"")

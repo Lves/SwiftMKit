@@ -11,13 +11,24 @@ import ReactiveCocoa
 
 class MKUIIndicatorButtonViewModel: BaseViewModel {
     
-    lazy var actionButton: CocoaAction = {
-        let action = Action<AnyObject, AnyObject, NSError> { [weak self] input in
-            return SignalProducer { [weak self] (sink, _) in
-                    sink.sendNext(input)
-                    sink.sendCompleted()
-                }.delay(2, onScheduler: QueueScheduler())
+    func actionButton(button: UIButton) -> CocoaAction {
+        let action = Action<AnyObject, AnyObject, NSError> { input in
+            return SignalProducer { (sink, _) in
+                sink.sendNext(input)
+                sink.sendCompleted()
+            }.delay(1, onScheduler: QueueScheduler())
         }
-        return CocoaAction(action, input:"")
-    }()
+        return CocoaAction(action, input: button)
+    }
+    
+    var actionButton: Action<AnyObject, AnyObject, NSError> {
+        get {
+        return Action { input in
+            return SignalProducer { (sink, _) in
+                sink.sendNext(input)
+                sink.sendCompleted()
+                }.delay(1, onScheduler: QueueScheduler())
+        }
+        }
+    }
 }

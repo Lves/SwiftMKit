@@ -38,6 +38,9 @@ public class IndicatorButton: UIButton {
     public enum AnimateDirection: Int {
         case FromDownToUp, FromUpToDown
     }
+    public enum IndicatorPosition: Int {
+        case Left, Right
+    }
     
     // MARK: - 公开属性
     /// 标识是否是向下切换title
@@ -47,6 +50,7 @@ public class IndicatorButton: UIButton {
             indicatorView.activityIndicatorViewStyle = indicatorStyle
         }
     }
+    var indicatorPosition: IndicatorPosition = .Left
     var indicatorMargin: CGFloat = 8
     /// borderColor
     var borderColor: UIColor = UIColor.clearColor() {
@@ -68,17 +72,28 @@ public class IndicatorButton: UIButton {
     }
     
     public override var enabled: Bool {
+        willSet {
+            if newValue != enabled {
+                Async.main {
+                    if let title = self.titleForState(.Disabled) {
+                        if title.length > 0 {
+                            self.disabledTitle = title
+                            self.setTitle("", forState: .Disabled)
+                        }
+                    }
+                }
+            }
+        }
         didSet {
             if oldValue != enabled {
-                if oldValue {
-                    // 动画切换title，显示菊花
-                    lastDisabledTitle = titleForState(.Disabled)
-                    ib_loadingWithTitle(lastDisabledTitle)
-                    setTitle("", forState: .Disabled)
-                } else {
-                    // 重置按钮，隐藏菊花
-                    ib_resetToNormalState()
-                    setTitle(lastDisabledTitle, forState: .Disabled)
+                Async.main {
+                    if oldValue {
+                        // 动画切换title，显示菊花
+                        self.ib_loadingWithTitle(self.disabledTitle)
+                    } else {
+                        // 重置按钮，隐藏菊花
+                        self.ib_resetToNormalState()
+                    }
                 }
             }
         }
@@ -89,7 +104,7 @@ public class IndicatorButton: UIButton {
     lazy var lblMessage = UILabel()
     lazy var indicatorView = UIActivityIndicatorView()
     private var lastTitle: String?
-    private var lastDisabledTitle: String?
+    private var disabledTitle: String?
     private var transformY: CGFloat {
         get {
             return self.h * (animateDirection == .FromDownToUp ? 1 : -1)
@@ -113,6 +128,7 @@ public class IndicatorButton: UIButton {
         // 初始化backView及其子视图
         lblMessage.textColor = titleLabel?.textColor
         lblMessage.font = titleLabel?.font
+        lblMessage.textAlignment = .Center
         backView.addSubview(lblMessage)
         
         indicatorView.activityIndicatorViewStyle = indicatorStyle
@@ -129,11 +145,13 @@ public class IndicatorButton: UIButton {
         addSubview(backView)
         
         lastTitle = currentTitle
+        disabledTitle = titleForState(.Disabled)
+        self.setTitle("", forState: .Disabled)
     }
     
     private func ib_loadingWithTitle(title: String?) {
-        let color = self.titleColorForState(.Disabled)
-        let shadowColor = self.titleShadowColorForState(.Disabled)
+        let color = titleColorForState(.Disabled)
+        let shadowColor = titleShadowColorForState(.Disabled)
         lblMessage.text = title
         lblMessage.textColor = color
         lblMessage.shadowColor = shadowColor
@@ -141,21 +159,29 @@ public class IndicatorButton: UIButton {
         // 计算lblMessage 和 indicatorView 的位置
         indicatorView.centerY = backView.centerY
         lblMessage.centerY = indicatorView.centerY
-        lblMessage.left = indicatorView.right + indicatorMargin
-        backView.right = lblMessage.right
+        switch indicatorPosition {
+        case .Left:
+            lblMessage.left = indicatorView.right + indicatorMargin
+            backView.right = lblMessage.right
+        case .Right:
+            indicatorView.left = lblMessage.right + indicatorMargin
+            backView.right = indicatorView.right
+        }
         backView.w = indicatorView.w + indicatorMargin + lblMessage.w
         backView.left = (self.w - backView.w) * 0.5
-        indicatorView.hidden = false
         if backView.left < 0 { // 文字太长
             backView.w = lblMessage.w
-            indicatorView.hidden = true
+            lblMessage.left = 0
             if backView.w > self.w {
-                backView.w = self.w
-                lblMessage.w = backView.w
+                lblMessage.w = self.w
+                lblMessage.adjustsFontSizeToFitWidth = true
+                backView.w = lblMessage.w
             }
+            backView.left = (self.w - backView.w) * 0.5
+        } else {
+            indicatorView.startAnimating()
         }
         
-        indicatorView.startAnimating()
         if title == lastTitle {
             // 如果title和旧title相同  不需要显示动画滚动
         } else {
@@ -172,14 +198,16 @@ public class IndicatorButton: UIButton {
         UIView.animateWithDuration(0.5, animations: {
             self.titleLabel!.alpha = 1
             self.backView.alpha = 0
-            if self.currentTitle == self.lastDisabledTitle {
+            if self.currentTitle == self.disabledTitle {
                 // 如果title和旧title相同  不需要显示动画滚动
             } else {
                 self.backView.transform = CGAffineTransformMakeTranslation(0, self.transformY)
             }
         }) { (finished) in
-            self.backView.transform = CGAffineTransformIdentity
-            self.indicatorView.stopAnimating()
+            if self.enabled {
+                self.backView.transform = CGAffineTransformIdentity
+                self.indicatorView.stopAnimating()
+            }
         }
     }
 }
