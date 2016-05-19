@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */; };
 		0343417F1CDC775A00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
 		034341801CDC775F00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
 		034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */; };
@@ -239,6 +240,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardProtocol.swift; sourceTree = "<group>"; };
 		0343417E1CDC775A00249EE3 /* testhaha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testhaha.jpg; sourceTree = "<group>"; };
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
 		034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableTuples.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */,
+				030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */,
 				277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */,
 			);
 			path = Keyboard;
@@ -1378,6 +1381,7 @@
 				278A26791CEC4FB700326690 /* FingerPrint.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */,
+				030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,

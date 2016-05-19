@@ -7,3 +7,16 @@
 //
 
 import Foundation
+import UIKit
+
+public protocol NumberKeyboardProtocol {
+    
+    var type: NumberKeyboardType { get set }
+    var numberIn: String { get set }
+    var numberOut: String { get }
+    
+    func clear()
+    //delete
+    //location
+    //input
+}
