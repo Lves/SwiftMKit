@@ -249,6 +249,26 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
         return false
     }
+    //数字匹配
+    private func numberMatch(old : String, new : String, input : String) -> String {
+        let result = (new =~ "^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$")    //匹配浮点数
+        if result {
+            return new
+        } else {
+            if input == "." {
+                if old.contains(".") {
+                    return old
+                } else {
+                    
+                }
+            } else {
+                if let returnString = new.toFloat() {
+                    return String(format: "%.2f",returnString)
+                }
+            }
+        }
+        return old
+    }
     
     
     /*
