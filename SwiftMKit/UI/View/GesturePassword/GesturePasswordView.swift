@@ -101,7 +101,6 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         self.addSubview(tentacleView!)
     }
     public override func drawRect(rect: CGRect) {
-        DDLogError("drawed again")
         let left = buttonPanelLeading
         let width = self.w - buttonPanelLeading - buttonPanelTrailing
         let height = width

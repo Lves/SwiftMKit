@@ -7,13 +7,22 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 class MKUIKeyboardViewController: BaseViewController {
 
+    @IBOutlet weak var txtDemo: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        IQKeyboardManager.sharedManager().disabledToolbarClasses.addObject(MKUIKeyboardViewController)
+        
         // Do any additional setup after loading the view.
+    }
+    override func setupUI() {
+        super.setupUI()
+        let keyboard = NumberKeyboard.keyboard(self.txtDemo, type: .Normal)
+        self.txtDemo.inputView = keyboard
     }
 
     override func didReceiveMemoryWarning() {

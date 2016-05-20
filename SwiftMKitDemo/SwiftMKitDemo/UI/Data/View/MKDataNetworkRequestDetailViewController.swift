@@ -59,6 +59,6 @@ class MKDataNetworkRequestDetailViewController: BaseViewController {
         _viewModel.isLike.producer.startWithNext { [weak self] isLike in
             self?.btnLike.selected = isLike
         }
-        self.btnLike.addTarget(_viewModel.actionLike, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+        self.btnLike.addTarget(_viewModel.actionLike.toCocoaAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
     }
 }

@@ -20,7 +20,7 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
     }
     var photo = MutableProperty<MKDataNetworkRequestPhotoModel?>(nil)
     var isLike = MutableProperty<Bool>(false)
-    lazy var actionLike: CocoaAction = {
+    lazy var actionLike: Action<AnyObject, AnyObject, NSError> = {
         let action = Action<AnyObject, AnyObject, NSError> { [weak self] input in
             return SignalProducer { [weak self] (sink, _) in
                 if let like = self?.isLike.value {
@@ -30,10 +30,13 @@ class MKDataNetworkRequestDetailViewModel: BaseViewModel {
                 sink.sendCompleted()
             }
         }
-        action.errors.observe { error in
+        action.values.observeNext { values in
+            DDLogVerbose("\(values)")
+        }
+        action.errors.observeNext { error in
             DDLogError("\(error)")
         }
-        return CocoaAction(action, input:"")
+        return action
     }()
     
     private var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NetError> {

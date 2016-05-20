@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NumberKeyboard" customModule="SwiftMKitDemo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -301,6 +301,22 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btn0" destination="l5n-uN-b4o" id="LMM-VC-8FC"/>
+                <outlet property="btn1" destination="xc6-dw-TTQ" id="kMZ-KM-KDa"/>
+                <outlet property="btn2" destination="tzb-xB-lK8" id="YBf-zy-uxZ"/>
+                <outlet property="btn3" destination="vg2-zU-P4V" id="iKW-e8-6gm"/>
+                <outlet property="btn4" destination="Wtg-Bu-cVm" id="f57-XV-Ya4"/>
+                <outlet property="btn5" destination="BJ5-P9-HoH" id="MsL-tG-8gy"/>
+                <outlet property="btn6" destination="gBV-In-nSI" id="HMT-Qn-yow"/>
+                <outlet property="btn7" destination="q4f-ty-VC1" id="6w5-OH-jiD"/>
+                <outlet property="btn8" destination="7yK-Ji-zBW" id="D4F-KZ-L1R"/>
+                <outlet property="btn9" destination="CtV-mQ-LHe" id="cB3-5T-oq7"/>
+                <outlet property="btnDel" destination="2dJ-d0-4lt" id="Jql-q3-q1D"/>
+                <outlet property="btnDot" destination="gXe-pT-9Ni" id="xG3-sj-GAO"/>
+                <outlet property="btnKey" destination="U5Q-bR-4nB" id="HZN-6s-fzS"/>
+                <outlet property="btnOk" destination="Z1M-MJ-NH5" id="Bxc-rC-Txl"/>
+            </connections>
             <point key="canvasLocation" x="356" y="333"/>
         </view>
     </objects>

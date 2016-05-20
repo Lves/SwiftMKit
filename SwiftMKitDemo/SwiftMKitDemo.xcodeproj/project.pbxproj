@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */; };
 		0343417F1CDC775A00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
 		034341801CDC775F00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
 		034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */; };
@@ -73,6 +74,8 @@
 		27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C081CC748D60028E938 /* ImageScout.swift */; };
 		27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C091CC748D60028E938 /* ScoutOperation.swift */; };
 		27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27276C0A1CC748D60028E938 /* SessionDelegate.swift */; };
+		272F397F1CED51EC003C02F4 /* Action+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272F397E1CED51EC003C02F4 /* Action+Extension.swift */; };
+		272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272F39801CED51F6003C02F4 /* UIButton+Extension.swift */; };
 		273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273ACFAA1CC9AE9600EB341D /* RACTests.swift */; };
 		273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273ACFAC1CC9D60600EB341D /* NetError.swift */; };
 		273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */; };
@@ -185,6 +188,7 @@
 		B328980230E598BB01E9042E /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */; };
 		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
 		E87D7BB47929B60BD485DBE4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
+		FB50BE5E1CEDB326007673F4 /* NumberKeyboardSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +240,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardProtocol.swift; sourceTree = "<group>"; };
 		0343417E1CDC775A00249EE3 /* testhaha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testhaha.jpg; sourceTree = "<group>"; };
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
 		034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableTuples.swift; sourceTree = "<group>"; };
@@ -270,6 +275,8 @@
 		27276C081CC748D60028E938 /* ImageScout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScout.swift; sourceTree = "<group>"; };
 		27276C091CC748D60028E938 /* ScoutOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoutOperation.swift; sourceTree = "<group>"; };
 		27276C0A1CC748D60028E938 /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
+		272F397E1CED51EC003C02F4 /* Action+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Action+Extension.swift"; sourceTree = "<group>"; };
+		272F39801CED51F6003C02F4 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		273ACFAA1CC9AE9600EB341D /* RACTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACTests.swift; sourceTree = "<group>"; };
 		273ACFAC1CC9D60600EB341D /* NetError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetError.swift; sourceTree = "<group>"; };
 		273F51A01CC8BF20003ABE4A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -404,6 +411,7 @@
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -620,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */,
+				030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */,
 				277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */,
 			);
 			path = Keyboard;
@@ -778,6 +787,8 @@
 				03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */,
 				27959A3D1CD30BE400546424 /* UITextField+Extension.swift */,
 				27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */,
+				272F397E1CED51EC003C02F4 /* Action+Extension.swift */,
+				272F39801CED51F6003C02F4 /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -825,6 +836,7 @@
 		3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB50BE5F1CEDB337007673F4 /* View */,
 				27F7ADDA1CE1D4A200C24706 /* Data */,
 				27F7ADD91CE1D49B00C24706 /* Network */,
 				27F7ADD81CE1D47B00C24706 /* Extension */,
@@ -1034,6 +1046,14 @@
 				17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB50BE5F1CEDB337007673F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1299,6 +1319,7 @@
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
 				181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */,
+				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
@@ -1341,6 +1362,7 @@
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
+				272F397F1CED51EC003C02F4 /* Action+Extension.swift in Sources */,
 				278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
 				278CAA4F1CD1E6FC008AC629 /* BaseKitWebViewController.swift in Sources */,
@@ -1359,6 +1381,7 @@
 				278A26791CEC4FB700326690 /* FingerPrint.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */,
+				030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
@@ -1380,6 +1403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB50BE5E1CEDB326007673F4 /* NumberKeyboardSpec.swift in Sources */,
 				034FB8891CD1B1B900E90738 /* NSTimeIntervalTests.swift in Sources */,
 				273ACFAB1CC9AE9600EB341D /* RACTests.swift in Sources */,
 				27F7ADD01CE1BB1F00C24706 /* NetWorkSpec.swift in Sources */,
