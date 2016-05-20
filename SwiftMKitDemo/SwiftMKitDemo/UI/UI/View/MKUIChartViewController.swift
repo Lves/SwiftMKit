@@ -17,21 +17,22 @@ class MKUIChartViewController: BaseViewController {
     var lineChart:LineChartView!
     var lineChart2:LineChartView!
     var barChartView:BarChartView!
+    var lineChart1Data:ChartData?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ///1.0 折线图
+        //1.0 折线图
         self.buildLineChartUI()
         //2.0 折线图2
         self.buildLineChart2UI()
         
-        //2.0 柱状图
+        //3.0 柱状图
         self.buildBarChartUI()
-        //3. ScrollView
-        let scrollView = UIScrollView(frame: CGRectMake(0, 64, screenSize.width, screenSize.height-64-55))
-        scrollView.contentSize = CGSizeMake(screenSize.width, screenSize.height*3.0)
+        //4.0 ScrollView
+        let scrollView = UIScrollView(frame: CGRectMake(0, 64, screenSize.width, screenSize.height-64))
+        scrollView.contentSize = CGSizeMake(screenSize.width, 500*3.0)
         self.view.addSubview(scrollView)
         
         scrollView.addSubview(self.lineChart)
@@ -42,6 +43,9 @@ class MKUIChartViewController: BaseViewController {
     }
     //MARK: 折线图
     func buildLineChartUI() {
+        //获得数据
+        self.buildLineData1()
+        
         lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 400))
         lineChart.backgroundColor = kBlackColor
         lineChart.alpha = 0.8
@@ -66,22 +70,24 @@ class MKUIChartViewController: BaseViewController {
         lineChart.dragEnabled = true                  //是否可以滑动
         lineChart.drawGridBackgroundEnabled = false   //背景色
         lineChart.doubleTapToZoomEnabled = false      //双击缩放
-        lineChart.legend.form = .Line
+        lineChart.legend.form = .Circle               //图例样式
+        lineChart.legend.position = .AboveChartCenter //图例位置
         
-        let marker =  MKChartMarker(font: UIFont.systemFontOfSize(12))
+        let marker =  MKChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart.marker = marker
 
         
         self.lineChart.delegate = self
-        self.setLineData()
+        //设置数据
+        self.lineChart.data = self.lineChart1Data
         
         self.lineChart.animate(xAxisDuration: 3.0)
         
     }
     
-    func setLineData(){
+    func buildLineData1(){
         var xValues = [String]()
         for index in 0...10 {
             xValues.append("\(2005+index)")
@@ -103,7 +109,6 @@ class MKUIChartViewController: BaseViewController {
         set0.drawValuesEnabled = false  //是否显示数字
         set0.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
-        
         //Line2
         var anotherYValues = [ChartDataEntry]()
         for yIndex in  0...10 {
@@ -112,11 +117,11 @@ class MKUIChartViewController: BaseViewController {
         }
 
         let set2 = LineChartDataSet(yVals: anotherYValues, label: "DataSet 2")
-        set2.drawFilledEnabled = false
+        set2.fillColor = UIColor.orangeColor()
+        set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
-
         
         //格式化数据
         let percentFormatter = NSNumberFormatter()
@@ -126,7 +131,7 @@ class MKUIChartViewController: BaseViewController {
         let lineData =  LineChartData(xVals: xValues, dataSets: [set0,set2])
         lineData.setValueFormatter(percentFormatter);
         
-        self.lineChart!.data = lineData
+        self.lineChart1Data = lineData
     }
     
     //MARK: 折线图2
@@ -157,8 +162,10 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.doubleTapToZoomEnabled = false      //双击缩放
         lineChart2.legend.enabled = true  //是否显示说明
         lineChart2.descriptionText = ""
+        lineChart2.legend.position = .AboveChartCenter  //图例位置
         
-        let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12))
+
+        let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12),data: nil)
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart2.marker = marker

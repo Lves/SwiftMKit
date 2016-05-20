@@ -15,19 +15,26 @@ class MKChartMarker: ChartMarker {
 
     var font: UIFont?
     private var labelns: NSString?
+    private var subLabelns: NSString?
     private var _labelSize: CGSize = CGSize()
+    private var _subLabelSize: CGSize = CGSize()
     private var _size: CGSize = CGSize()
     private var _paragraphStyle: NSMutableParagraphStyle?
     private var _drawAttributes = [String : AnyObject]()
+    private var _subDrawAttributes = [String : AnyObject]()
+    
+    
+    var data: ChartData?
     
     
     var leftImage: NSUIImage?
     
-    init(font: UIFont)
+    init(font: UIFont , data: ChartData?)
     {
         super.init()
         
         self.font = font
+        self.data = data
         
         _paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as? NSMutableParagraphStyle
         _paragraphStyle?.alignment = .Center
@@ -56,8 +63,24 @@ class MKChartMarker: ChartMarker {
             rect.origin.x += 2.0
         }
         
-        rect.origin.y += (size.height - self.font!.pointSize)/2.0
-        labelns?.drawInRect(rect, withAttributes: _drawAttributes)
+        if data != nil{
+            
+            let offsetX = point.x > UIScreen.mainScreen().bounds.size.width/2.0 ? -size.width : 0.0
+            
+            let topRect = CGRect(x: point.x + offset.x + offsetX, y: point.y - self.font!.pointSize-5.0, width: size.width, height: self.font!.pointSize)
+            labelns?.drawInRect(topRect, withAttributes: _drawAttributes)
+            
+            let bottomRect = CGRect(x: point.x + offset.x + offsetX, y: point.y + 2.0  , width: size.width, height: self.font!.pointSize)
+            subLabelns?.drawInRect(bottomRect, withAttributes: _subDrawAttributes)
+            
+            
+        }else{
+            rect.origin.y += (size.height - self.font!.pointSize)/2.0
+            labelns?.drawInRect(rect, withAttributes: _drawAttributes)
+        }
+        
+        
+        
         UIGraphicsPopContext()
 
     }
@@ -68,11 +91,34 @@ class MKChartMarker: ChartMarker {
         labelns = label as NSString
         labelns = labelns?.stringByAppendingString("%")
         
+        if let sets = data?.dataSets {
+            for index in 0..<sets.count {
+                let set = sets[index]
+                let nextEntry = set.entryForIndex(highlight.xIndex)
+                let value = nextEntry!.value.description
+                if 1 == index {
+                    labelns = value as NSString
+                    labelns = labelns?.stringByAppendingString("%")
+                }else {
+                    subLabelns = value as NSString
+                    subLabelns = subLabelns?.stringByAppendingString("%")
+                }
+                
+                
+            }
+            
+        }
+        
+        
         _drawAttributes.removeAll()
         _drawAttributes[NSFontAttributeName] = self.font
         _drawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
-        
         _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
+        
+        _subDrawAttributes.removeAll()
+        _subDrawAttributes[NSFontAttributeName] = self.font
+        _subDrawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
+        _subLabelSize = subLabelns?.sizeWithAttributes(_subDrawAttributes) ?? CGSizeZero
 
     }
 }
