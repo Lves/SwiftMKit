@@ -21,7 +21,7 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
     lazy public var manager = CLLocationManager()
     public static var shared = LocationManager()
     
-    public class func start(accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) {
+    public class func start(accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
         if always {
             shared.manager.requestAlwaysAuthorization()
         } else {
@@ -31,9 +31,12 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             shared.manager.delegate = shared
             shared.manager.desiredAccuracy = accuracy
             shared.manager.startUpdatingLocation()
+            DDLogInfo("[LocationManager] Started");
+            return true
         }
         else{
-            print("Location service disabled");
+            DDLogError("[LocationManager] Disabled");
+            return false
         }
     }
     
