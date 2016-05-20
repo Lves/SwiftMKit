@@ -115,6 +115,16 @@ public class GalaryCollectionViewController: UICollectionViewController {
         view.addSubview(lblDesc)
     }
     
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // 设置布局属性
+        let width = collectionView!.frame.size.width * 0.69
+        let height = collectionView!.frame.size.height * 0.71
+        layout.itemSize = CGSizeMake(width, height)
+        layout.scrollDirection = .Horizontal
+        layout.minimumLineSpacing = 10
+    }
+    
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
