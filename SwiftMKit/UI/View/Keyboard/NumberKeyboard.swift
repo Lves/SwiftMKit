@@ -95,16 +95,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             }
             //获取光标位置
             var range = self.selectedRange()
-            if range.location == 0 {
-                //重新设置光标位置
-                self.textField?.text = "0." + self.text
-                range.location += 2
-                self.setSelectedRange(range)
-            } else {
-                self.textField?.text = self.getForwardString(self.text, range: range) + "." + self.getBehindString(self.text, range: range)
-                range.location += 1
-                self.setSelectedRange(range)
-            }
+            let forward = self.getForwardString(self.text, range: range)
+            let behind = self.getBehindString(self.text, range: range)
+            self.textField?.text = self.matchInputDot(self.text, new: forward + "." + behind)
+            range.location += 1
+            self.setSelectedRange(range)
             //判断是否需要处理限制两位小数逻辑
             if self.limitWithTwoPoint() {
                 let dotArray = self.text.componentsSeparatedByString(".")
@@ -149,28 +144,16 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 }
                 //获取光标位置
                 let range = self.selectedRange()
-                if let tempDeleget = self.textField?.delegate {
-                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
+                let forward = self.getForwardString(self.text, range: range)
+                let behind = self.getBehindString(self.text, range: range)
+                if forward.contains(".") {
+                    //判断是否需要处理限制两位小数逻辑
+                    if self.limitWithTwoPoint() {
                         return
                     }
                 }
-                //输入第二位时第一位为 0 的情况处理
-                if self.text == "0" {
-                    self.textField?.text = inputText
-                    self.setSelectedRange(NSMakeRange(1, 0))
-                } else {
-                    //添加
-                    let forward = self.getForwardString(self.text, range: range)
-                    let behind = self.getBehindString(self.text, range: range)
-                    if forward.contains(".") {
-                        //判断是否需要处理限制两位小数逻辑
-                        if self.limitWithTwoPoint() {
-                            return
-                        }
-                    }
-                    self.textField?.text = forward + inputText + behind
-                    self.setSelectedRange(NSMakeRange(range.location+1, 0))
-                }
+                self.textField?.text = self.matchInputNumber(self.text, new: forward + inputText + behind)
+                self.setSelectedRange(NSMakeRange(range.location+1, 0))
             }
         }
     }
@@ -262,10 +245,16 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         if matchNumber(new) {
             return new
         } else {
-            if let returnString = new.toFloat() {
-                return String(format: "%.2f",returnString)
+            if new.length <= 0 {
+                return new
+            } else if old.contains(".") {
+                if new.toNSString.substringToIndex(1) == "0" {
+                    return old
+                } else {
+                    return new
+                }
             } else {
-                return old
+                return new
             }
         }
     }
@@ -279,19 +268,21 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             } else {
                 if new.toNSString.substringToIndex(1) == "." {
                     return "0" + new
-                } else {
-                    if let returnString = new.toFloat() {
-                        return String(format: "%.2f",returnString)
+                } else if new.toNSString.substringToIndex(1) == "0" {
+                    if let returnString = new.toInt() {
+                        return String(format: "%d",returnString)
                     } else {
                         return old
                     }
+                } else {
+                    return new
                 }
             }
         }
     }
     //数字正则匹配 
     private func matchNumber(string : String) -> Bool {
-        return (string =~ "^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$")
+        return (string =~ "^([1-9]\\d+|0)(\\.[\\d]{1,2})?$")
     }
     
     

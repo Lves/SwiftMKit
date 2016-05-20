@@ -11,7 +11,9 @@ import IQKeyboardManager
 
 class MKUIKeyboardViewController: BaseViewController {
 
-    @IBOutlet weak var txtDemo: UITextField!
+    @IBOutlet weak var txtNormal: UITextField!
+    @IBOutlet weak var txtNoDot: UITextField!
+    @IBOutlet weak var txtMoney: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +23,12 @@ class MKUIKeyboardViewController: BaseViewController {
     }
     override func setupUI() {
         super.setupUI()
-        let keyboard = NumberKeyboard.keyboard(self.txtDemo, type: .Normal)
-        self.txtDemo.inputView = keyboard
+        var keyboard = NumberKeyboard.keyboard(self.txtNormal, type: .Normal)
+        self.txtNormal.inputView = keyboard
+        keyboard = NumberKeyboard.keyboard(self.txtNoDot, type: .NoDot)
+        self.txtNoDot.inputView = keyboard
+        keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .Money)
+        self.txtMoney.inputView = keyboard
     }
 
     override func didReceiveMemoryWarning() {
