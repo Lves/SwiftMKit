@@ -771,6 +771,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="W3a-at-2M2" id="qOu-RH-P8H"/>
                         <outlet property="tableView" destination="afj-CF-BVD" id="bqa-Ba-e0U"/>
                     </connections>
                 </viewController>

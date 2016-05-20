@@ -10,6 +10,7 @@ import UIKit
 
 class MKUIGalaryCollectionViewController: BaseListViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var containerView: UIView!
 
     override var listView: UIScrollView! {
         get { return tableView }
