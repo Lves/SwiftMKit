@@ -103,17 +103,6 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             let (text, newRange) = self.matchInputDot(self.text, new: forward + "." + behind)
             self.textField?.text = text
             self.setSelectedRange(newRange)
-            //判断是否需要处理限制两位小数逻辑
-            if self.limitWithTwoPoint() {
-                let dotArray = self.text.componentsSeparatedByString(".")
-                if let forward = dotArray.first {
-                    if var behind = dotArray.last {
-                        behind = behind.toNSString.substringToIndex(2)
-                        self.textField?.text = forward + "." + behind
-                        self.setSelectedRange(newRange)
-                    }
-                }
-            }
         }
     }
     //删除事件
@@ -144,14 +133,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 let range = self.selectedRange()
                 let forward = self.getForwardString(self.text, range: range)
                 let behind = self.getBehindString(self.text, range: range)
-                //判断是否需要处理限制两位小数逻辑
-                if forward.contains(".") {
-                    if self.limitWithTwoPoint() {
-                        return
-                    }
-                }
-                self.textField?.text = forward + inputText + behind
-                self.setSelectedRange(NSMakeRange(range.location+1, 0))
+                let (text, newRange) = self.matchInputNumber(self.text, new: forward + inputText + behind)
+                self.textField?.text = text
+                self.setSelectedRange(newRange)
             }
         }
     }
@@ -182,6 +166,16 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 } else {
                     range.location += 1
                     result = new
+                }
+            }
+        }
+        //金额类型的特殊处理
+        if self.limitWithTwoPoint(result) {
+            let dotArray = result.componentsSeparatedByString(".")
+            if let forward = dotArray.first {
+                if var behind = dotArray.last {
+                    behind = behind.toNSString.substringToIndex(2)
+                    result = forward + "." + behind
                 }
             }
         }
@@ -231,30 +225,17 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         //获取光标位置
         var range = self.selectedRange()
         var result = old
-        if matchNumber(new) {
+        //判断是否需要处理限制两位小数逻辑
+        if !self.limitWithTwoPoint(old) {
             range.location += 1
             result = new
-        } else {
-            if new.length <= 0 {
-                range.location += 1
-                result = new
-            } else if old.contains(".") {
-                if new.toNSString.substringToIndex(1) == "0" {
-                    result = old
-                } else {
-                    range.location += 1
-                    result = new
-                }
-            } else {
-                range.location += 1
-                result = new
-            }
         }
         return (result, range)
     }
-    //数字正则匹配 
+    //数字正则匹配
     private func matchNumber(string : String) -> Bool {
-        return (string =~ "^[0-9]+[.][0-9]+$")
+        //(string =~ "^[0-9]+[.][0-9]+$") || string =~ "^[0-9]+$"
+        return string =~ "^\\d+\\.?\\d*$"
     }
     /**
      *  光标选择的范围
@@ -304,9 +285,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return self.text.toNSString.substringWithRange(NSMakeRange(range.location, length - range.location))
     }
     //限制两位小数逻辑处理
-    private func limitWithTwoPoint() -> Bool {
-        if self.type == .Money {
-            let dotArray = self.text.componentsSeparatedByString(".")
+    private func limitWithTwoPoint(string : String) -> Bool {
+        if self.type == .Money && string.contains(".") {
+            let dotArray = string.componentsSeparatedByString(".")
             if let behind = dotArray.last {
                 if behind.length >= 2 {
                     return true
