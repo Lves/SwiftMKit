@@ -679,7 +679,6 @@
 		27959A491CD3444500546424 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6C53F9D51CEEB67E00C42080 /* MKMultipleChartMarker.swift */,
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
 				27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */,
@@ -689,6 +688,7 @@
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				6CE46A681CE9B66700474D27 /* MKChartMarker.swift */,
+				6C53F9D51CEEB67E00C42080 /* MKMultipleChartMarker.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
 			);
 			path = View;
