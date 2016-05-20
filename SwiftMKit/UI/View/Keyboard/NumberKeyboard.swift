@@ -159,6 +159,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     private func bindKeyButtonAction(button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             self?.textField?.resignFirstResponder()
+            if let temp = self?.text.toFloat() {
+                self?.textField?.text = String(format: "\(temp)")
+            }
         }
     }
     //输入小数点---匹配

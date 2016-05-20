@@ -15,5 +15,9 @@ public protocol NumberKeyboardProtocol {
     func matchInputDot(old : String, new : String) -> (String, NSRange)
     func matchInputNumber(old : String, new : String) -> (String, NSRange)
     func matchInputDel(old : String, new : String) -> (String, NSRange)
+    //删除小数点
+    func matchDeleteDot(old : String, new : String) -> (String, NSRange)
+    //删除数字
+    func matchDeleteNumber(old : String, new : String) -> (String, NSRange)
     static func keyboard(textField: UITextField, type:NumberKeyboardType) -> UIView?
 }
