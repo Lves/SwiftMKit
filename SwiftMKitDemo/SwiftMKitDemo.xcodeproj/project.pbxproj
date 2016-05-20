@@ -184,6 +184,7 @@
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
 		65CEE67EA1D94B6E3DF90E9B /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */; };
+		6C53F9D41CEEACEA00C42080 /* MKMultipleChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F9D31CEEACEA00C42080 /* MKMultipleChartMarker.swift */; };
 		6CE46A691CE9B66700474D27 /* MKChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46A681CE9B66700474D27 /* MKChartMarker.swift */; };
 		B328980230E598BB01E9042E /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */; };
 		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
@@ -409,6 +410,7 @@
 		3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListViewModel.swift; sourceTree = "<group>"; };
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		6C53F9D31CEEACEA00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
 		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardSpec.swift; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				6CE46A681CE9B66700474D27 /* MKChartMarker.swift */,
+				6C53F9D31CEEACEA00C42080 /* MKMultipleChartMarker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1291,6 +1294,7 @@
 				270692D41CE9F27D00CF211A /* GesturePassword.swift in Sources */,
 				27A1C5ED1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift in Sources */,
 				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
+				6C53F9D41CEEACEA00C42080 /* MKMultipleChartMarker.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,

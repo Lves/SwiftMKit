@@ -73,7 +73,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart.legend.form = .Circle               //图例样式
         lineChart.legend.position = .AboveChartCenter //图例位置
         
-        let marker =  MKChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
+        let marker =  MKMultipleChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart.marker = marker
@@ -100,12 +100,12 @@ class MKUIChartViewController: BaseViewController {
             yValues0.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
-        let set0 = LineChartDataSet(yVals: yValues0, label: "DataSet 0")
-        set0.fillColor = UIColor.blackColor()
+        let set0 = LineChartDataSet(yVals: yValues0, label: "沪深300")
+        set0.fillColor = UIColor.purpleColor()
         set0.drawFilledEnabled = true
         set0.drawCirclesEnabled = false
         set0.lineWidth = 0
-        set0.setColor(UIColor.blackColor())
+        set0.setColor(UIColor.purpleColor())
         set0.drawValuesEnabled = false  //是否显示数字
         set0.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
@@ -116,7 +116,7 @@ class MKUIChartViewController: BaseViewController {
             anotherYValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
 
-        let set2 = LineChartDataSet(yVals: anotherYValues, label: "DataSet 2")
+        let set2 = LineChartDataSet(yVals: anotherYValues, label: "璇玑组合")
         set2.fillColor = UIColor.orangeColor()
         set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
@@ -165,7 +165,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.legend.position = .AboveChartCenter  //图例位置
         
 
-        let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12),data: nil)
+        let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12))
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart2.marker = marker
