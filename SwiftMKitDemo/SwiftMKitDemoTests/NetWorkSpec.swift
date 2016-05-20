@@ -10,6 +10,7 @@ import XCTest
 import Quick
 import Nimble
 import PINCache
+import EZSwiftExtensions
 @testable import SwiftMKitDemo
 
 
@@ -116,19 +117,44 @@ class TestPhotoModel: NSObject {
 class NetWorkSpec: QuickSpec {
     
     override func spec() {
-        describe("") { 
-            context("") {
-                it("") {
+        describe("") {
+            context("api return successfully") {
+                it("should get json") {
                     waitUntil(timeout: 100) { done in
                         let signal = TestPX500PhotosApiData(page:1, number:5).signal().on(
-                            next: { [weak self] data in
+                            next: { data in
                                 if let photos = data.photos {
-                                    //expect
+                                    expect(photos.count).to(beGreaterThan(0))
+                                    expect(photos.first?.photoId?.length).to(beGreaterThan(0))
                                 }
                                 done()
                             },
-                            failed: { [weak self] error in
-                                //expect
+                            failed: { error in
+                                expect(error).notTo(beNil())
+                                done()
+                            })
+                        signal.start()
+                    }
+                }
+                
+            }
+            
+            context("get api timeout") {
+                it("should get nothing") {
+                    
+                    let api = TestPX500PhotosApiData(page:1, number:5)
+                    api.timeout = 0.01
+                    waitUntil(timeout: 100) { done in
+                        let signal = api.signal().on(
+                            next: { data in
+                                if let photos = data.photos {
+                                    expect(photos.first).to(beNil())
+                                }
+                                done()
+                            },
+                            failed: { error in
+                                expect(error.message.contains("timed out")).to(beTrue())
+                                expect(error.code).to(equal(NSURLErrorTimedOut))
                                 done()
                             })
                         signal.start()

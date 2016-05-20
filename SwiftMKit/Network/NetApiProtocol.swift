@@ -25,7 +25,7 @@ public protocol NetApiProtocol: NetApiIndicatorProtocol {
     var query: [String: AnyObject]? { get }
     var method: Alamofire.Method? { get }
     var url: String? { get }
-    var timeout: NSTimeInterval? { get }
+    var timeout: NSTimeInterval? { get set }
     var request: Request? { get set }
     var responseData: AnyObject? { get set }
     

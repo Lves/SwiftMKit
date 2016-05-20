@@ -8,31 +8,6 @@
 
 import UIKit
 
-/**
- *
- * ━━━━━━神兽出没━━━━━━
- * 　　　┏┓　　　┏┓
- * 　　┏┛┻━━━┛┻┓
- * 　　┃　　　　　　　┃
- * 　　┃　　　━　　　┃
- * 　　┃　┳┛　┗┳　┃
- * 　　┃　　　　　　　┃
- * 　　┃　　　┻　　　┃
- * 　　┃　　　　　　　┃
- * 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
- * 　　　　┃　　　┃    神兽保佑,代码无bug
- * 　　　　┃　　　┃
- * 　　　　┃　　　┗━━━┓
- * 　　　　┃　　　　　　　┣┓
- * 　　　　┃　　　　　　　┏┛
- * 　　　　┗┓┓┏━┳┓┏┛
- * 　　　　　┃┫┫　┃┫┫
- * 　　　　　┗┻┛　┗┻┛
- *
- * ━━━━━━感觉萌萌哒━━━━━━
- */
-
-
 public class IndicatorButton: UIButton {
     
     public enum AnimateDirection: Int {
@@ -87,6 +62,7 @@ public class IndicatorButton: UIButton {
     lazy var indicatorView = UIActivityIndicatorView()
     private var lastTitle: String?
     private var disabledTitle: String?
+    private var fastEnabled: Bool = false
     private var transformY: CGFloat {
         get {
             return self.h * (animateDirection == .FromDownToUp ? 1 : -1)
@@ -169,14 +145,21 @@ public class IndicatorButton: UIButton {
         } else {
             backView.transform = CGAffineTransformMakeTranslation(0, transformY)
         }
-        UIView.animateWithDuration(0.5) {
-            self.titleLabel!.alpha = 0
-            self.backView.alpha = 1
-            self.backView.transform = CGAffineTransformIdentity
+        fastEnabled = false
+        Async.main(after: 0.5) {
+            if self.fastEnabled {
+                return
+            }
+            UIView.animateWithDuration(0.5) {
+                self.titleLabel!.alpha = 0
+                self.backView.alpha = 1
+                self.backView.transform = CGAffineTransformIdentity
+            }
         }
     }
     
     private func ib_resetToNormalState() {
+        fastEnabled = true
         UIView.animateWithDuration(0.5, animations: {
             self.titleLabel!.alpha = 1
             self.backView.alpha = 0

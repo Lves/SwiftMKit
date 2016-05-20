@@ -14,11 +14,13 @@ public class GalaryLinearLayout: UICollectionViewFlowLayout {
         static let MinScaleW: CGFloat = 0.8
         static let MinScaleH: CGFloat = 0.3
         static let MinAlpha: CGFloat = 0
+        static let SetAlpha = true
     }
 
     public var minScaleW = InnerConstant.MinScaleW
     public var minScaleH = InnerConstant.MinScaleH
     public var minAlpha = InnerConstant.MinAlpha
+    public var setAlpha = InnerConstant.SetAlpha
     
     // MARK: - 公开属性
     ///  准备操作  设置一些初始化参数
@@ -57,8 +59,10 @@ public class GalaryLinearLayout: UICollectionViewFlowLayout {
             let alpha = minAlpha + baseScale * (1 - minAlpha)
             // 改变transform（越到中间 越大）
             attrs.transform = CGAffineTransformMakeScale(scaleW, scaleH)
-            // 改变透明度（越到中间 越不透明）
-            attrs.alpha = abs(alpha)
+            if setAlpha {
+                // 改变透明度（越到中间 越不透明）
+                attrs.alpha = abs(alpha)
+            }
         }
         return attributesCopy
     }
