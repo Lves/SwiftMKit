@@ -189,8 +189,7 @@
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
 		65CEE67EA1D94B6E3DF90E9B /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */; };
-		6C53F9D41CEEACEA00C42080 /* MKMultipleChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F9D31CEEACEA00C42080 /* MKMultipleChartMarker.swift */; };
-		6C53F9D61CEEB67E00C42080 /* MKMultipleChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F9D51CEEB67E00C42080 /* MKMultipleChartMarker.swift */; };
+		6C53F9D81CEEB79E00C42080 /* MKMultipleChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F9D71CEEB79E00C42080 /* MKMultipleChartMarker.swift */; };
 		6CE46A691CE9B66700474D27 /* MKChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46A681CE9B66700474D27 /* MKChartMarker.swift */; };
 		B328980230E598BB01E9042E /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */; };
 		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
@@ -421,8 +420,8 @@
 		3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListViewModel.swift; sourceTree = "<group>"; };
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
-		6C53F9D31CEEACEA00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
-		6C53F9D51CEEB67E00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
+		6C53F9D71CEEB79E00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
+		6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MKMultipleChartMarker.swift; path = SwiftMKitDemo/UI/UI/View/MKMultipleChartMarker.swift; sourceTree = "<group>"; };
 		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardSpec.swift; sourceTree = "<group>"; };
@@ -679,6 +678,7 @@
 		27959A491CD3444500546424 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C53F9D71CEEB79E00C42080 /* MKMultipleChartMarker.swift */,
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
 				27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */,
@@ -688,7 +688,6 @@
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				6CE46A681CE9B66700474D27 /* MKChartMarker.swift */,
-				6C53F9D51CEEB67E00C42080 /* MKMultipleChartMarker.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
 			);
 			path = View;
@@ -832,6 +831,7 @@
 		3FC9DEEC1CBFD35900C2D938 = {
 			isa = PBXGroup;
 			children = (
+				6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */,
 				3FC9DF261CBFD53A00C2D938 /* SwiftMKit */,
 				3FC9DEF71CBFD35900C2D938 /* SwiftMKitDemo */,
 				3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */,
@@ -1315,6 +1315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C53F9D81CEEB79E00C42080 /* MKMultipleChartMarker.swift in Sources */,
 				273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */,
 				273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */,
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
@@ -1328,7 +1329,6 @@
 				270692D41CE9F27D00CF211A /* GesturePassword.swift in Sources */,
 				27A1C5ED1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift in Sources */,
 				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
-				6C53F9D41CEEACEA00C42080 /* MKMultipleChartMarker.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
@@ -1349,7 +1349,6 @@
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
-				6C53F9D61CEEB67E00C42080 /* MKMultipleChartMarker.swift in Sources */,
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
 				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
