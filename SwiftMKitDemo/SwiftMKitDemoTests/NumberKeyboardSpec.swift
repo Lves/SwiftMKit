@@ -256,13 +256,6 @@ class NumberKeyboardSpec: QuickSpec {
                     (final, _) = numberKeyboard.matchInputNumber(old, new: new)
                     expect(final).toNot(beNil())
                     expect(final).to(equal("10.10"))
-                    
-                    //无法再次从小数部分输入数字
-                    old = "123.21"
-                    new = "123.21"
-                    (final, _) = numberKeyboard.matchInputNumber(old, new: new)
-                    expect(final).toNot(beNil())
-                    expect(final).to(equal("123.21"))
                 }
             }
             
@@ -287,8 +280,6 @@ class NumberKeyboardSpec: QuickSpec {
                     (final, _) = numberKeyboard.matchInputDel(old, new: new)
                     expect(final).toNot(beNil())
                     expect(final).to(equal("01"))
-                    
-                    //未完待续
                 }
             }
             

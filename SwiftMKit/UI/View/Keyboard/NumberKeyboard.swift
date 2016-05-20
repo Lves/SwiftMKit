@@ -143,10 +143,23 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     private func bindKeyButtonAction(button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             self?.textField?.resignFirstResponder()
-            if let temp = self?.text.toFloat() {
-                self?.textField?.text = String(format: "\(temp)")
+            if let temp = self?.text {
+                self?.textField?.text = self?.matchConfirm(temp)
             }
         }
+    }
+    //删除
+    private func matchInputDel(old : String, new : String) -> (String, NSRange) {
+        //删除小数点匹配
+        if old.contains(".") && !new.contains(".") {
+            return matchDeleteDot(old, new: new)
+        } else {
+            return matchDeleteNumber(old, new: new)
+        }
+    }
+    //确定---匹配
+    public func matchConfirm(input : String) -> String {
+        return String(format: "\(input.toFloat())")
     }
     //输入小数点---匹配
     public func matchInputDot(old : String, new : String) -> (String, NSRange) {
@@ -181,15 +194,6 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
         return (result, range)
     }
-    //删除---匹配
-    public func matchInputDel(old : String, new : String) -> (String, NSRange) {
-        //删除小数点匹配
-        if old.contains(".") && !new.contains(".") {
-            return matchDeleteDot(old, new: new)
-        } else {
-            return matchDeleteNumber(old, new: new)
-        }
-    }
     //删除小数点---匹配
     public func matchDeleteDot(old : String, new : String) -> (String, NSRange) {
         //获取光标位置
@@ -213,13 +217,6 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
         return (result, range)
     }
-    //删除数字---匹配
-    public func matchDeleteNumber(old : String, new : String) -> (String, NSRange) {
-        //获取光标位置
-        var range = self.selectedRange()
-        range.location -= 1
-        return (new, range)
-    }
     //输入数字---匹配
     public func matchInputNumber(old : String, new : String) -> (String, NSRange) {
         //获取光标位置
@@ -231,6 +228,13 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             result = new
         }
         return (result, range)
+    }
+    //删除数字---匹配
+    public func matchDeleteNumber(old : String, new : String) -> (String, NSRange) {
+        //获取光标位置
+        var range = self.selectedRange()
+        range.location -= 1
+        return (new, range)
     }
     //数字正则匹配
     private func matchNumber(string : String) -> Bool {
