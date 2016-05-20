@@ -14,15 +14,295 @@ import Nimble
 class NumberKeyboardSpec: QuickSpec {
     
     override func spec() {
-        describe("") {
+
+        var numberKeyboard: NumberKeyboardProtocol = NumberKeyboard()
+        
+        describe("clear") {
+            
             context("") {
-                
+
                 it("") {
+
                 
                 }
             }
         }
         
-    }
+        describe("matchInputDot") {
+            context("normal type") {
+                it("should output natrual number") {
+                    numberKeyboard.type = .Normal
+                    
+                    var old = "12.3"
+                    var new = "1.2.3"
+                    var final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("12.3"))
+                    
+                    old = "123"
+                    new = "12.3"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("12.3"))
+                    
+                    old = "123"
+                    new = ".123"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.123"))
+                    
+                    old = "123"
+                    new = "123."
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("123."))
+                    
+                    old = "10"
+                    new = "1.0"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("1.0"))
+                    
+                    old = "0"
+                    new = ".0"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0."))
+                    
+                    old = ""
+                    new = "."
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0."))
+                }
+            }
+            
+            context("money type") {
+                it("should output money number") {
+                    numberKeyboard.type = .Money
+                    
+                    var old = "12.3"
+                    var new = "1.2.3"
+                    var final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("12.3"))
+                    
+                    old = "123"
+                    new = "12.3"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("12.3"))
+                    
+                    old = "123"
+                    new = ".123"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.12"))
+                    
+                    old = "123"
+                    new = "123."
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("123."))
+                    
+                    old = "10"
+                    new = "1.0"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("1.0"))
+                    
+                    old = "100"
+                    new = ".100"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.10"))
+                    
+                    old = "0"
+                    new = ".0"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0."))
+                    
+                    old = ""
+                    new = "."
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0."))
+                }
+            }
+
+        }
+        
+        describe("matchInputNumber") {
+            context("normal type") {
+                it("should output natrual number") {
+                    numberKeyboard.type = .Normal
+                    
+                    var old = "0"
+                    var new = "01"
+                    var final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("1"))
+                    
+                    old = "0"
+                    new = "00"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0"))
+                    
+                    old = "0.1"
+                    new = "00.1"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.1"))
+                    
+                    old = "0.1"
+                    new = "0.01"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.01"))
+                    
+                    old = "0.1"
+                    new = "0.10"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.10"))
+                    
+                    old = "0.1"
+                    new = "10.1"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("10.1"))
+                    
+                    old = "0.1"
+                    new = "02.1"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("2.1"))
+                    
+                    old = "10.10"
+                    new = "10.105"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("10.105"))
+                    
+                    old = "10.10"
+                    new = "10.100"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("10.100"))
+                    
+                    old = "123.21"
+                    new = "123.321"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("123.321"))
+                }
+            }
+            context("money type") {
+                it("should output money number") {
+                    numberKeyboard.type = .Money
+                    
+                    var old = "0"
+                    var new = "01"
+                    var final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("1"))
+                    
+                    old = "0"
+                    new = "00"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0"))
+                    
+                    old = "0.1"
+                    new = "00.1"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.1"))
+                    
+                    old = "0.1"
+                    new = "0.01"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.01"))
+                    
+                    old = "0.1"
+                    new = "0.10"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0.10"))
+                    
+                    old = "0.1"
+                    new = "10.1"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("10.1"))
+                    
+                    old = "0.1"
+                    new = "02.1"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("2.1"))
+                    
+                    old = "10.10"
+                    new = "10.105"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("10.10"))
+                    
+                    old = "10.10"
+                    new = "10.100"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("10.10"))
+                    
+                    //无法再次从小数部分输入数字
+                    old = "123.21"
+                    new = "123.21"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("123.21"))
+                }
+            }
+            
+            context("nodot type") {
+                it("should output nodot number") {
+                    numberKeyboard.type = .NoDot
+                    
+                    var old = "0"
+                    var new = "01"
+                    var final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("1"))
+                    
+                    old = "0"
+                    new = "00"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("0"))
+                    
+                    old = "1"
+                    new = "01"
+                    final = numberKeyboard.matchInputDel(old, new: new)
+                    expect(final).toNot(beNil())
+                    expect(final).to(equal("1"))
+                    
+                    //未完待续
+                }
+            }
+            
+        }
     
+        describe("matchInputDel") {
+            context("") {
+    
+                it("") {
+    
+                }
+            }
+        }
+    
+    }
+
 }
