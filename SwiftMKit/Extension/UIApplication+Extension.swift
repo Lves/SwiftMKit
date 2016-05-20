@@ -49,7 +49,6 @@ public extension UIApplication {
     var bundleIdentifier: String {
         get {
             if let identifier = PINMemoryCache.sharedCache().objectForKey(Constant.BundleIdentifier) as? String {
-                DDLogInfo("BundleIdentifier: \(identifier)")
                 return identifier
             }
             let identifier = NSBundle.mainBundle().infoDictionary?[kCFBundleIdentifierKey as String] as? String ?? ""
@@ -61,7 +60,6 @@ public extension UIApplication {
     var minTargetVersion: String {
         get {
             if let version = PINMemoryCache.sharedCache().objectForKey(Constant.CFBundleInfoDictionaryVersion) as? String {
-                DDLogInfo("CFBundleInfoDictionaryVersion: \(version)")
                 return version
             }
             let version = NSBundle.mainBundle().infoDictionary?[Constant.CFBundleInfoDictionaryVersion] as? String ?? ""
@@ -73,7 +71,6 @@ public extension UIApplication {
     var bundleVersion: String {
         get {
             if let version = PINMemoryCache.sharedCache().objectForKey(Constant.CFBundleVersion) as? String {
-                DDLogInfo("CFBundleVersion: \(version)")
                 return version
             }
             let version = NSBundle.mainBundle().infoDictionary?[Constant.CFBundleVersion] as? String ?? ""
@@ -85,7 +82,6 @@ public extension UIApplication {
     var bundleShortVersionString: String {
         get {
             if let version = PINMemoryCache.sharedCache().objectForKey(Constant.CFBundleShortVersionString) as? String {
-                DDLogInfo("CFBundleShortVersionString: \(version)")
                 return version
             }
             let version = NSBundle.mainBundle().infoDictionary?[Constant.CFBundleShortVersionString] as? String ?? ""

@@ -24,9 +24,11 @@ public class NetError : NSError {
     convenience init(error: NSError){
         self.init(statusCode: error.code, message: error.description)
     }
-    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    public override var description: String {
+        return "[NetError] StatusCode: \(statusCode) Message:\(message)"
     }
     
 }

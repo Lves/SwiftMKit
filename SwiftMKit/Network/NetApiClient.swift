@@ -101,7 +101,7 @@ public class NetApiClient : NSObject {
                         DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
-                    if let statusCode =  StatusCode(rawValue:error.code) {
+                    if let statusCode = StatusCode(rawValue:error.code) {
                         switch(statusCode) {
                         case .Canceled:
                             DDLogWarn("Request Url Canceled: \(api.url!)")

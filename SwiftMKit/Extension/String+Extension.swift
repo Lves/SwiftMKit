@@ -26,6 +26,17 @@ extension String {
         return formatter.stringFromNumber(NSString(string: self).doubleValue) ?? self
     }
     
+    func jsonStringToDictionary() -> [String: AnyObject]? {
+        if let data = self.dataUsingEncoding(NSUTF8StringEncoding) {
+            do {
+                return try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
+            } catch let error as NSError {
+                DDLogError(error.description)
+            }
+        }
+        return nil
+    }
+    
     // MARK: Encrypt
     
     var md5: String! {
