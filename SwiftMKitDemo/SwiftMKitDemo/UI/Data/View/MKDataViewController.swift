@@ -29,13 +29,31 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Fade)
         }
     }
-    
+    var locationInfo: String = "Unknown" {
+        didSet {
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Fade)
+        }
+    }
+    override func setupNotification() {
+        super.setupNotification()
+        NSNotificationCenter.defaultCenter().addObserverForName(LocationManager.NotificationLocationUpdatedName, object: nil, queue: nil) { [weak self] _ in
+            self?.locationInfo = "(\(String(format: "%.2f",LocationManager.shared.longitude ?? 0)), \(String(format: "%.2f",LocationManager.shared.latitude ?? 0)))"
+            LocationManager.stop()
+        }
+    }
     override func bindingData() {
         super.bindingData()
         NetApiClient.shared.networkStatus.producer.startWithNext { [weak self] status in
             self?.networkStatus = status.description
         }
+        let result = LocationManager.start()
+        if result {
+            locationInfo = "Locating"
+        } else {
+            locationInfo = "Disabled"
+        }
     }
+    
     
     override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
         var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
@@ -51,6 +69,9 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
             if indexPath.row == 0 {
                 tableViewCell.detailTextLabel?.text = networkStatus
                 tableViewCell.accessoryType = .None
+            } else if indexPath.row == 1 {
+                tableViewCell.detailTextLabel?.text = locationInfo
+                tableViewCell.accessoryType = .None
             } else {
                 tableViewCell.accessoryType = .DisclosureIndicator
             }
@@ -59,10 +80,12 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
         switch indexPath.row {
         case 0:
-            break
+            fallthrough
         case 1:
-            self.routeToName(InnerConst.SegueToNextNetwork)
+            break
         case 2:
+            self.routeToName(InnerConst.SegueToNextNetwork)
+        case 3:
             self.routeToName(InnerConst.SegueToNextStore)
         default:
             break

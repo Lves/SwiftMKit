@@ -10,8 +10,12 @@ import Foundation
 import CoreLocation
 import PINCache
 import CocoaLumberjack
+import ReactiveCocoa
+
 
 public class LocationManager : NSObject, CLLocationManagerDelegate {
+    
+    static let NotificationLocationUpdatedName = "NotificationLocationUpdated"
     
     private struct Constant {
         static let Longitude = "LocationLongitude"
@@ -39,14 +43,19 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             return false
         }
     }
+    public class func stop() {
+        shared.manager.stopUpdatingLocation()
+        DDLogInfo("[LocationManager] Stopped");
+    }
     
     @objc public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             let long = location.coordinate.longitude
             let lat = location.coordinate.latitude
-            DDLogInfo("[LocationManager]: long-\(long) lat-\(lat)")
+            DDLogInfo("[LocationManager]:（\(long), \(lat))")
             self.longitude = long
             self.latitude = lat
+            NSNotificationCenter.defaultCenter().postNotificationName(LocationManager.NotificationLocationUpdatedName, object: nil)
         }
     }
     
