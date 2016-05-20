@@ -139,6 +139,11 @@
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */; };
 		27CE4CAB1CD83C3000323EB7 /* QuickDemoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */; };
+		27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9AA1CEEA00400B511D7 /* LocationManager.swift */; };
+		27D1A9AD1CEEA02A00B511D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */; };
+		27D1A9B01CEEA78300B511D7 /* GalaryLinearLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9AF1CEEA78300B511D7 /* GalaryLinearLayout.swift */; };
+		27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */; };
+		27D1A9B41CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9B31CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift */; };
 		27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */; };
 		27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */; };
 		27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */; };
@@ -358,6 +363,11 @@
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		27CE4CAA1CD83C3000323EB7 /* QuickDemoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickDemoSpec.swift; sourceTree = "<group>"; };
+		27D1A9AA1CEEA00400B511D7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		27D1A9AF1CEEA78300B511D7 /* GalaryLinearLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalaryLinearLayout.swift; sourceTree = "<group>"; };
+		27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGalaryCollectionViewController.swift; sourceTree = "<group>"; };
+		27D1A9B31CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGalaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewController.swift; sourceTree = "<group>"; };
 		27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewModel.swift; sourceTree = "<group>"; };
 		27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +429,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27D1A9AD1CEEA02A00B511D7 /* CoreLocation.framework in Frameworks */,
 				189D7C3B1CE5DBCA0044E6EC /* Alamofire.framework in Frameworks */,
 				189D7C551CE5DBCB0044E6EC /* PINCache.framework in Frameworks */,
 				189D7C531CE5DBCB0044E6EC /* MJRefresh.framework in Frameworks */,
@@ -498,6 +509,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				27D1A9A91CEEA00400B511D7 /* Location */,
 				270692C41CE9F27100CF211A /* Local */,
 				27276C051CC748D60028E938 /* Image */,
 				18E184E21CC48B1600F14923 /* Model */,
@@ -583,6 +595,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
 				278A26771CEC4F9E00326690 /* FingerPrint */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
 				270692CF1CE9F27D00CF211A /* GesturePassword */,
@@ -679,6 +692,7 @@
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				6CE46A681CE9B66700474D27 /* MKChartMarker.swift */,
+				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -694,6 +708,7 @@
 				27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */,
 				270692DA1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift */,
 				27A1C5EE1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift */,
+				27D1A9B31CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -730,6 +745,22 @@
 				27BA394C1CC74E2400436D23 /* Async.swift */,
 			);
 			path = Async;
+			sourceTree = "<group>";
+		};
+		27D1A9A91CEEA00400B511D7 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				27D1A9AA1CEEA00400B511D7 /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		27D1A9AE1CEEA70A00B511D7 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				27D1A9AF1CEEA78300B511D7 /* GalaryLinearLayout.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		27F7ADD71CE1D46E00C24706 /* Resources */ = {
@@ -1023,6 +1054,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */,
 				189D7C421CE5DBCB0044E6EC /* CryptoSwift.framework */,
 				189D7C3D1CE5DBCA0044E6EC /* Charts.framework */,
 				27A18F141CDAF92F00609C22 /* WebViewJavascriptBridge.framework */,
@@ -1306,6 +1338,7 @@
 				03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */,
 				278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
+				27D1A9B41CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
@@ -1330,6 +1363,7 @@
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
+				27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */,
 				27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
@@ -1354,6 +1388,7 @@
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				27A1C5EF1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
+				27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */,
@@ -1361,6 +1396,7 @@
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
+				27D1A9B01CEEA78300B511D7 /* GalaryLinearLayout.swift in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
 				272F397F1CED51EC003C02F4 /* Action+Extension.swift in Sources */,
 				278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */,
