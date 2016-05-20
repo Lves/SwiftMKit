@@ -13,6 +13,10 @@ import Charts
 
 class MKMultipleChartMarker: ChartMarker {
     var font: UIFont?
+
+    //圆的半径
+    let circleR:CGFloat = 4.0
+    let textMargin:CGFloat = 5.0
     
     //title
     private var titleLabelns: NSString?
@@ -58,10 +62,15 @@ class MKMultipleChartMarker: ChartMarker {
         let offset = self.offsetForDrawingAtPos(point)
         var size = _labelSize.width > _subLabelSize.width ?  _labelSize : _subLabelSize
         
-        size = CGSizeMake(size.width+40, 60.0)
+        size = CGSizeMake(size.width+2*circleR + textMargin + 35, 60.0)
         
+        
+        let offsetX = point.x > UIScreen.mainScreen().bounds.size.width/2.0 ? -size.width : 0.0
+        
+//        CGContextSaveGState(context)
         UIGraphicsPushContext(context)
         var rect = CGRectZero
+        var isLeft = false
         if point.x > UIScreen.mainScreen().bounds.size.width/2.0 {
             rect = CGRect(x: point.x + offset.x - size.width, y: point.y - size.height/2.0, width: size.width, height: size.height)
             leftImage!.drawInRect(rect)
@@ -71,20 +80,38 @@ class MKMultipleChartMarker: ChartMarker {
             rect = CGRect(x: point.x + offset.x, y: point.y - size.height/2.0, width: size.width, height: size.height)
             image!.drawInRect(rect)
             rect.origin.x += 2.0
+            isLeft = true
         }
         
         if data != nil{
             
-            let offsetX = point.x > UIScreen.mainScreen().bounds.size.width/2.0 ? -size.width : 0.0
-            //title
-            let titleRect  = CGRect(x: point.x + offset.x + offsetX, y: point.y - self.font!.pointSize*2 - 5.0 , width: size.width, height: self.font!.pointSize)
+            let circleX = point.x + offset.x + offsetX + ( isLeft ? 30 : 15)
+            let titleX  = circleX + circleR + textMargin
+            
+            //1.0 title
+            let titleRect  = CGRect(x: titleX, y: point.y - self.font!.pointSize*2 - 5.0 , width: _titleLabelSize.width, height: _titleLabelSize.height)
             titleLabelns?.drawInRect(titleRect, withAttributes: _titleDrawAttributes)
             
-            //top
-            let topRect = CGRect(x: point.x + offset.x + offsetX, y: point.y - self.font!.pointSize, width: size.width, height: self.font!.pointSize)
+            //2.0 绘制第一个圆
+            
+            CGContextSetFillColorWithColor(context, _drawAttributes[NSForegroundColorAttributeName]!.CGColor)
+            
+            CGContextAddArc(context, circleX, point.y - _labelSize.height + _labelSize.height/2.0, circleR, 0, (CGFloat)(2.0*M_PI), 0)
+            CGContextDrawPath(context, .Fill)
+            
+            //2.1 top
+            let topRect = CGRect(x: titleX, y: point.y - _labelSize.height, width: _labelSize.width, height: _labelSize.height)
             labelns?.drawInRect(topRect, withAttributes: _drawAttributes)
-            //bottom
-            let bottomRect = CGRect(x: point.x + offset.x + offsetX, y: point.y + 5.0  , width: size.width, height: self.font!.pointSize)
+            
+            
+            //3.0 绘制第二个圆
+            CGContextSetFillColorWithColor(context, _subDrawAttributes[NSForegroundColorAttributeName]!.CGColor)
+
+            CGContextAddArc(context, circleX, point.y + 5.0 + _labelSize.height/2.0, circleR, 0, (CGFloat)(2.0*M_PI), 0)
+            CGContextDrawPath(context, .Fill)
+            
+            //3.1 bottom
+            let bottomRect = CGRect(x: titleX, y: point.y + 5.0  , width: _subLabelSize.width, height: _subLabelSize.height)
             subLabelns?.drawInRect(bottomRect, withAttributes: _subDrawAttributes)
             
             
@@ -93,9 +120,9 @@ class MKMultipleChartMarker: ChartMarker {
             labelns?.drawInRect(rect, withAttributes: _drawAttributes)
         }
         
-        
-        
         UIGraphicsPopContext()
+
+//        CGContextRestoreGState(context)
         
     }
     
@@ -105,7 +132,7 @@ class MKMultipleChartMarker: ChartMarker {
         _titleDrawAttributes.removeAll()
         _titleDrawAttributes[NSFontAttributeName] = self.font
         _titleDrawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
-        _titleLabelSize = titleLabelns?.sizeWithAttributes(_titleDrawAttributes) ?? CGSizeZero
+       
         
         
         _drawAttributes.removeAll()
@@ -131,7 +158,7 @@ class MKMultipleChartMarker: ChartMarker {
             
             let xValues = data?.xVals[highlight.xIndex]
             titleLabelns = xValues! as NSString
-            
+            _titleLabelSize = titleLabelns?.sizeWithAttributes(_titleDrawAttributes) ?? CGSizeZero
             
             
             for index in 0..<sets.count {
@@ -151,7 +178,7 @@ class MKMultipleChartMarker: ChartMarker {
             
         }
         
-         _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
+        _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
         _subLabelSize = subLabelns?.sizeWithAttributes(_subDrawAttributes) ?? CGSizeZero
         
         

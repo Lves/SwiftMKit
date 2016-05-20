@@ -47,4 +47,9 @@ public class ChartDataRendererBase: ChartRendererBase
     {
         fatalError("drawHighlighted() cannot be called on ChartDataRendererBase")
     }
+    // ModifySourceCode Add By LiXingLe  绘制高亮圆点
+    public func drawCircleIndex(context context: CGContext, indices: [ChartHighlight]) {
+    
+    }
+    
 }

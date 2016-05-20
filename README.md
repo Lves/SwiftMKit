@@ -322,5 +322,132 @@ CGPathCloseSubpath(spline)
 
 ```
 
+#### 显示高亮圆点逻辑
+1. 在`ChartViewBase.swift`文件中添加是否显示高亮circle的属性
+
+```
+// ModifySourceCode Add By LiXingLe
+public var showAllHighlightCircles = false
+```
+
+2. 在父类`ChartDataRendererBase`中添加 绘制单个高亮圆点的空函数
+
+```
+// ModifySourceCode Add By LiXingLe
+public func drawCircleIndex(context context: CGContext, indices: [ChartHighlight]) {
+
+}
+```
+
+3. 在`LineChartRenderer`中实现绘制高亮圆心的方法
+
+```
+//绘制高亮圆心
+// ModifySourceCode Add By LiXingLe
+public override func drawCircleIndex(context context: CGContext , indices: [ChartHighlight]) {
+guard let
+dataProvider = dataProvider,
+lineData = dataProvider.lineData,
+animator = animator
+else { return }
+
+let phaseX = animator.phaseX
+let phaseY = animator.phaseY
+
+let dataSets = lineData.dataSets
+
+var pt = CGPoint()
+var rect = CGRect()
+
+CGContextSaveGState(context)
+
+for i in 0 ..< dataSets.count
+{
+guard let dataSet = lineData.getDataSetByIndex(i) as? ILineChartDataSet else { continue }
+
+if !dataSet.isVisible || dataSet.entryCount == 0
+{
+continue
+}
+
+let trans = dataProvider.getTransformer(dataSet.axisDependency)
+let valueToPixelMatrix = trans.valueToPixelMatrix
+
+let entryCount = dataSet.entryCount
+
+let circleRadius = dataSet.circleRadius
+let circleDiameter = circleRadius * 2.0
+let circleHoleDiameter = circleRadius
+let circleHoleRadius = circleHoleDiameter / 2.0
+let isDrawCircleHoleEnabled = dataSet.isDrawCircleHoleEnabled
+
+guard let
+entryFrom = dataSet.entryForXIndex(self.minX < 0 ? self.minX : 0, rounding: .Down),
+entryTo = dataSet.entryForXIndex(self.maxX, rounding: .Up)
+else { continue }
+
+let diff = (entryFrom == entryTo) ? 1 : 0
+let minx = max(dataSet.entryIndex(entry: entryFrom) - diff, 0)
+let maxx = min(max(minx + 2, dataSet.entryIndex(entry: entryTo) + 1), entryCount)
+
+for j in minx ..< Int(ceil(CGFloat(maxx - minx) * phaseX + CGFloat(minx)))
+{
+
+if indices[0].xIndex != j {
+continue
+}
+
+guard let e = dataSet.entryForIndex(j) else { break }
+
+pt.x = CGFloat(e.xIndex)
+pt.y = CGFloat(e.value) * phaseY
+pt = CGPointApplyAffineTransform(pt, valueToPixelMatrix)
+
+if (!viewPortHandler.isInBoundsRight(pt.x))
+{
+break
+}
+
+// make sure the circles don't do shitty things outside bounds
+if (!viewPortHandler.isInBoundsLeft(pt.x) || !viewPortHandler.isInBoundsY(pt.y))
+{
+continue
+}
+
+CGContextSetFillColorWithColor(context, dataSet.getCircleColor(j)!.CGColor)
+
+rect.origin.x = pt.x - circleRadius
+rect.origin.y = pt.y - circleRadius
+rect.size.width = circleDiameter
+rect.size.height = circleDiameter
+CGContextFillEllipseInRect(context, rect)
+
+if (isDrawCircleHoleEnabled)
+{
+CGContextSetFillColorWithColor(context, dataSet.circleHoleColor.CGColor)
+
+rect.origin.x = pt.x - circleHoleRadius
+rect.origin.y = pt.y - circleHoleRadius
+rect.size.width = circleHoleDiameter
+rect.size.height = circleHoleDiameter
+CGContextFillEllipseInRect(context, rect)
+}
+}
+}
+
+CGContextRestoreGState(context)
+}
+
+```
+
+4. 在`BarLineChartViewBase` 中`renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)`下面调用绘制高亮函数
+
+```
+// ModifySourceCode Add By LiXingLe
+if showAllHighlightCircles {
+renderer?.drawCircleIndex(context: context, indices: _indicesToHighlight)
+}
+```
+
 
 ---

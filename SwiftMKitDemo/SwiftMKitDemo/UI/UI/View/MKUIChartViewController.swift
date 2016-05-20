@@ -10,6 +10,26 @@ import UIKit
 import Charts
 
 
+/*
+一.显示高亮圆点 
+ 1.设置图形是否开启高亮圆点功能： 
+    lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
+ 2.设置数据源DataSet的圆点样式：
+    set2.setCircleColor(UIColor.orangeColor())            //圆点圆环颜色
+    set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
+ 
+二、部分填充区域
+ 2.设置数据源DataSet属性，yValues1Lower:[ChartDataEntry]() 是底部线的数组
+    set1.drawRangeFilledEnabled = true    //是否区域填充
+    set1.fillLowerYValues = yValues1Lower ///设置底部fill线
+ 
+三、 自定义ChartMarker
+ 1. 两条线的弹框使用 MKMultipleChartMarker，其中有一个参数是数据源Data
+    let marker =  MKMultipleChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
+ 2. 单条线的弹框使用 MKChartMarker
+ 
+*/
+
 
 class MKUIChartViewController: BaseViewController {
     let screenSize = UIScreen.mainScreen().bounds.size
@@ -51,13 +71,14 @@ class MKUIChartViewController: BaseViewController {
         lineChart.alpha = 0.8
         lineChart.pinchZoomEnabled = false
         lineChart.descriptionText = ""
+        lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
 
         
         let xAxis = lineChart.xAxis
         xAxis.labelPosition = .Bottom;                  //x轴线位置
         xAxis.labelFont = UIFont.systemFontOfSize(10);
         xAxis.drawGridLinesEnabled = false              //是否显示x轴网格线
-        xAxis.spaceBetweenLabels = 1
+        xAxis.labelTextColor = UIColor.whiteColor()     //label颜色
         xAxis.axisLineWidth = 0                         //线宽度
         xAxis.setLabelsToSkip(11)                       //xlabel步长
         
@@ -66,14 +87,16 @@ class MKUIChartViewController: BaseViewController {
         let percentFormatter = NSNumberFormatter()
         percentFormatter.positiveSuffix = "%"
         percentFormatter.negativeSuffix = "%"
-        lineChart.leftAxis.valueFormatter = percentFormatter  //y轴显示格式化
-        lineChart.leftAxis.axisLineWidth = 0          //左侧线宽度
-        lineChart.rightAxis.enabled = false           //是否显示右侧轴线
-        lineChart.dragEnabled = true                  //是否可以滑动
-        lineChart.drawGridBackgroundEnabled = false   //背景色
-        lineChart.doubleTapToZoomEnabled = false      //双击缩放
-        lineChart.legend.form = .Circle               //图例样式
-        lineChart.legend.position = .AboveChartCenter //图例位置
+        lineChart.leftAxis.valueFormatter = percentFormatter//y轴显示格式化
+        lineChart.leftAxis.axisLineWidth = 0                //左侧线宽度
+        lineChart.leftAxis.labelTextColor = UIColor.whiteColor()  //label颜色
+        lineChart.rightAxis.enabled = false                 //是否显示右侧轴线
+        lineChart.dragEnabled = true                        //是否可以滑动
+        lineChart.drawGridBackgroundEnabled = false         //背景色
+        lineChart.doubleTapToZoomEnabled = false            //双击缩放
+        lineChart.legend.form = .Circle                     //图例样式
+        lineChart.legend.position = .AboveChartCenter       //图例位置
+        lineChart.legend.textColor = UIColor.whiteColor()   //图例label颜色
         
         let marker =  MKMultipleChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
         marker.image = UIImage(named: "BubblePopRight")
@@ -84,14 +107,14 @@ class MKUIChartViewController: BaseViewController {
         self.lineChart.delegate = self
         //设置数据
         self.lineChart.data = self.lineChart1Data
-        
-        self.lineChart.animate(xAxisDuration: 3.0)
+        //动画
+//        self.lineChart.animate(xAxisDuration: 3.0)
         
     }
     
     func buildLineData1(){
         var xValues = [String]()
-        for index in 0...120 {
+        for index in 0...108 {
             if index%12 == 0 {
                  xValues.append("\(2007+index/12)")
             }else{
@@ -102,7 +125,7 @@ class MKUIChartViewController: BaseViewController {
         
         //Line 0
         var yValues0 = [ChartDataEntry]()
-        for yIndex in  0...120 {
+        for yIndex in  0...108 {
             let flotVa =  (Double) (arc4random()%20)
             yValues0.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
@@ -110,7 +133,10 @@ class MKUIChartViewController: BaseViewController {
         let set0 = LineChartDataSet(yVals: yValues0, label: "沪深300")
         set0.fillColor = UIColor.purpleColor()
         set0.drawFilledEnabled = true
-        set0.drawCirclesEnabled = false
+        set0.drawCirclesEnabled = false                       //是否显示圆点
+        set0.setCircleColor(UIColor.purpleColor())            //圆颜色
+        set0.circleHoleColor = UIColor.purpleColor()          //圆点圆心颜色
+        set0.circleRadius = 6.0                               //圆半径
         set0.lineWidth = 0
         set0.setColor(UIColor.purpleColor())
         set0.drawValuesEnabled = false  //是否显示数字
@@ -118,7 +144,7 @@ class MKUIChartViewController: BaseViewController {
         
         //Line2
         var anotherYValues = [ChartDataEntry]()
-        for yIndex in  0...120 {
+        for yIndex in  0...108 {
             let flotVa = (Double) (arc4random()%20) + 20.0
             anotherYValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
@@ -128,6 +154,9 @@ class MKUIChartViewController: BaseViewController {
         set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
+        set2.setCircleColor(UIColor.orangeColor())            //圆点圆环颜色
+        set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
+        set2.circleRadius = 6.0                               //圆半径
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         
         //格式化数据
@@ -167,7 +196,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.dragEnabled = true                  //是否可以滑动
         lineChart2.drawGridBackgroundEnabled = false   //背景色
         lineChart2.doubleTapToZoomEnabled = false      //双击缩放
-        lineChart2.legend.enabled = true  //是否显示说明
+        lineChart2.legend.enabled = true               //是否显示说明
         lineChart2.descriptionText = ""
         lineChart2.legend.position = .AboveChartCenter  //图例位置
         
@@ -226,7 +255,7 @@ class MKUIChartViewController: BaseViewController {
         set1.highlightEnabled = false   //是否可以高亮
         set1.drawRangeFilledEnabled = true    //是否区域填充
         set1.fillLowerYValues = yValues1Lower ///设置底部fill线
-        set1.drawCubicEnabled = true  //是否显示曲线形式
+        set1.drawCubicEnabled = true          //是否显示曲线形式
         set1.valueFormatter = percentFormatter
         
         
@@ -284,17 +313,6 @@ class MKUIChartViewController: BaseViewController {
 
         self.lineChart2!.data = lineData
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     //MARK: 柱状图

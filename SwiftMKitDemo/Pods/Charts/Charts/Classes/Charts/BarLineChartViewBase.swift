@@ -242,6 +242,11 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         if (valuesToHighlight())
         {
             renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
+            // ModifySourceCode Add By LiXingLe
+            if showAllHighlightCircles {
+                 renderer?.drawCircleIndex(context: context, indices: _indicesToHighlight)
+            }
+           
         }
 
         // Removes clipping rectangle

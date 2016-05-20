@@ -49,6 +49,10 @@ public class ChartViewBase: NSUIView, ChartDataProvider, ChartAnimatorDelegate
     {
         return _xAxis
     }
+    //是否显示高亮圆点
+    // ModifySourceCode Add By LiXingLe
+    public var showAllHighlightCircles = false
+    
     
     /// the default value formatter
     internal var _defaultValueFormatter: NSNumberFormatter = ChartUtils.defaultValueFormatter()
