@@ -41,15 +41,15 @@ struct BuDeJieConfig {
 class DemoNetworkConfig : NetworkConfig {
     
     private struct Constant {
-        static let Point = "NetworkPoint"
+        static let Station = "NetworkStation"
     }
     
-    static var Point: Int {
+    static var Station: Int {
         get {
-            return PINDiskCache.sharedCache().objectForKey(Constant.Point) as? Int ?? 0
+            return PINDiskCache.sharedCache().objectForKey(Constant.Station) as? Int ?? 0
         }
         set {
-            PINDiskCache.sharedCache().setObject(newValue, forKey: Constant.Point)
+            PINDiskCache.sharedCache().setObject(newValue, forKey: Constant.Station)
         }
     }
 }
