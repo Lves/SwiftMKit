@@ -6,30 +6,6 @@
 //  Copyright © 2016年 cdts. All rights reserved.
 //
 
-/**
- * 　　　　　　　　┏┓　　　┏┓
- * 　　　　　　　┏┛┻━━━┛┻┓
- * 　　　　　　　┃　　　　　　　┃
- * 　　　　　　　┃　　　━　　　┃
- * 　　　　　　　┃　＞　　　＜　┃
- * 　　　　　　　┃　　　　　　　┃
- * 　　　　　　　┃...　⌒　...　┃
- * 　　　　　　　┃　　　　　　　┃
- * 　　　　　　　┗━┓　　　┏━┛
- * 　　　　　　　　　┃　　　┃　Code is far away from bug with the animal protecting
- * 　　　　　　　　　┃　　　┃   神兽保佑,代码无bug
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┃
- * 　　　　　　　　　┃　　　┗━━━┓
- * 　　　　　　　　　┃　　　　　　　┣┓
- * 　　　　　　　　　┃　　　　　　　┏┛
- * 　　　　　　　　　┗┓┓┏━┳┓┏┛
- * 　　　　　　　　　　┃┫┫　┃┫┫
- * 　　　　　　　　　　┗┻┛　┗┻┛
- */
-
 import Foundation
 import UIKit
 import CocoaLumberjack
