@@ -10,13 +10,19 @@ import Foundation
 import UIKit
 
 public class GalaryLinearLayout: UICollectionViewFlowLayout {
+    private struct InnerConstant {
+        static let MinScaleW: CGFloat = 0.8
+        static let MinScaleH: CGFloat = 0.3
+        static let MinAlpha: CGFloat = 0
+    }
+
+    public var minScaleW = InnerConstant.MinScaleW
+    public var minScaleH = InnerConstant.MinScaleH
+    public var minAlpha = InnerConstant.MinAlpha
+    
+    // MARK: - 公开属性
     ///  准备操作  设置一些初始化参数
     override public func prepareLayout() {
-        let width = collectionView!.frame.size.width * 0.69
-        let height = collectionView!.frame.size.height * 0.71
-        itemSize = CGSizeMake(width, height)
-        scrollDirection = .Horizontal
-        minimumLineSpacing = 10
         let inset = (collectionView!.frame.size.width - itemSize.width) * 0.5
         sectionInset = UIEdgeInsetsMake(0, inset, 0, inset)
         // 要后调用super.prepareLayout()方法，否则有很多警告……
@@ -44,9 +50,6 @@ public class GalaryLinearLayout: UICollectionViewFlowLayout {
             let delta = abs(centerX - attrs.center.x)
             // W：[0.8 ~ 1.0]
             // H：[0.3 ~ 1.0]
-            let minScaleW: CGFloat = 0.8
-            let minScaleH: CGFloat = 0.3
-            let minAlpha: CGFloat = 0
             // 反比
             let baseScale = 1 - delta / (collectionView!.frame.size.width + itemSize.width)
             let scaleW = minScaleW + baseScale * (1 - minScaleW)
