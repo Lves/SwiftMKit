@@ -18,8 +18,9 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         static let SegueToNextChartView = "routeToChartView"
         static let SegueToNextKeyboardView = "routeToKeyboardView"
         static let SegueToNextSegmentViewController = "routeToSegmentViewController"
-        static let SegueToNextGesturePasswordViewController = "routeToGesturePassword"
-        static let SegueToNextIndicatorButtonViewController = "routeToIndicatorButton"
+        static let SegueToNextGesturePasswordView = "routeToGesturePassword"
+        static let SegueToNextIndicatorButtonView = "routeToIndicatorButton"
+        static let SegueToNextGalaryCollectionView = "routeToGalaryCollectionView"
         static let SegueToNextUrl = "http://www.baidu.com"
     }
     
@@ -59,9 +60,11 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         case 5:
             self.routeToName(InnerConst.SegueToNextSegmentViewController)
         case 6:
-            self.routeToName(InnerConst.SegueToNextGesturePasswordViewController)
+            self.routeToName(InnerConst.SegueToNextGesturePasswordView)
         case 7:
-            self.routeToName(InnerConst.SegueToNextIndicatorButtonViewController)
+            self.routeToName(InnerConst.SegueToNextIndicatorButtonView)
+        case 8:
+            self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
         default:
             break
         }

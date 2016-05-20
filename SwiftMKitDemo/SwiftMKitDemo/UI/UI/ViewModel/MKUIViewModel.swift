@@ -20,6 +20,8 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "Segment ViewController", detail: "Child ViewController"))
         self.dataArray.append(MKDataListModel(title: "Gesture Password", detail: "Gesture View"))
         self.dataArray.append(MKDataListModel(title: "Indicator Button", detail: "Button"))
+        self.dataArray.append(MKDataListModel(title: "Galary Collection View", detail: "Collection View"))
+        
     }
 
 }
