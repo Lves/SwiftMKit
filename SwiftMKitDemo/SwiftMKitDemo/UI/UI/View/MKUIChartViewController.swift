@@ -54,11 +54,13 @@ class MKUIChartViewController: BaseViewController {
 
         
         let xAxis = lineChart.xAxis
-        xAxis.labelPosition = .Bottom;          //x轴线位置
+        xAxis.labelPosition = .Bottom;                  //x轴线位置
         xAxis.labelFont = UIFont.systemFontOfSize(10);
-        xAxis.drawGridLinesEnabled = false       // 是否显示x轴网格线
+        xAxis.drawGridLinesEnabled = false              //是否显示x轴网格线
         xAxis.spaceBetweenLabels = 1
-        xAxis.axisLineWidth = 0                  //线宽度
+        xAxis.axisLineWidth = 0                         //线宽度
+        xAxis.setLabelsToSkip(11)                       //xlabel步长
+        
         
         
         let percentFormatter = NSNumberFormatter()
@@ -89,14 +91,19 @@ class MKUIChartViewController: BaseViewController {
     
     func buildLineData1(){
         var xValues = [String]()
-        for index in 0...10 {
-            xValues.append("\(2005+index)")
+        for index in 0...120 {
+            if index%12 == 0 {
+                 xValues.append("\(2007+index/12)")
+            }else{
+                xValues.append("\(2007+index/12)/\(index%12)")
+            }
+            
         }
         
         //Line 0
         var yValues0 = [ChartDataEntry]()
-        for yIndex in  0...10 {
-            let flotVa =  (Double) (arc4random()%50)
+        for yIndex in  0...120 {
+            let flotVa =  (Double) (arc4random()%20)
             yValues0.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
@@ -111,8 +118,8 @@ class MKUIChartViewController: BaseViewController {
         
         //Line2
         var anotherYValues = [ChartDataEntry]()
-        for yIndex in  0...10 {
-            let flotVa = Double(pow(Float(yIndex), 2.0)) - (Double) (arc4random()%10)
+        for yIndex in  0...120 {
+            let flotVa = (Double) (arc4random()%20) + 20.0
             anotherYValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
 

@@ -56,7 +56,7 @@ class MKMultipleChartMarker: ChartMarker {
         
         
         let offset = self.offsetForDrawingAtPos(point)
-        var size = _labelSize
+        var size = _labelSize.width > _subLabelSize.width ?  _labelSize : _subLabelSize
         
         size = CGSizeMake(size.width+40, 60.0)
         
@@ -110,14 +110,13 @@ class MKMultipleChartMarker: ChartMarker {
         
         _drawAttributes.removeAll()
         _drawAttributes[NSFontAttributeName] = self.font
-        
         _drawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
-        _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
+       
         
         _subDrawAttributes.removeAll()
         _subDrawAttributes[NSFontAttributeName] = self.font
         _subDrawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
-        _subLabelSize = subLabelns?.sizeWithAttributes(_subDrawAttributes) ?? CGSizeZero
+        
         
 
         
@@ -144,7 +143,7 @@ class MKMultipleChartMarker: ChartMarker {
                 if 1 == index {
                     _drawAttributes[NSForegroundColorAttributeName] = set.colorAt(highlight.xIndex)
                     labelns = "\(set.label! as NSString) \(value as NSString)%"
-                }else {
+                }else if 0 == index  {
                     _subDrawAttributes[NSForegroundColorAttributeName] = set.colorAt(highlight.xIndex)
                     subLabelns = "\(set.label! as NSString) \(value as NSString)%"
                 }
@@ -152,7 +151,8 @@ class MKMultipleChartMarker: ChartMarker {
             
         }
         
-        
+         _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
+        _subLabelSize = subLabelns?.sizeWithAttributes(_subDrawAttributes) ?? CGSizeZero
         
         
         
