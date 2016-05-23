@@ -131,7 +131,7 @@ public class NetApiClient : NSObject {
                 switch transferedResponse.result {
                 case .Success:
                     DDLogInfo("Request Url Success: \(api.url!)")
-                    DDLogVerbose("Data: \(response.result.value)")
+                    DDLogVerbose("Data: \(response.result.value?.length) bytes")
                 case .Failure(let error):
                     if let statusCode =  StatusCode(rawValue:error.code) {
                         switch(statusCode) {
