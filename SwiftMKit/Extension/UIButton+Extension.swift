@@ -11,6 +11,7 @@ import UIKit
 
 public extension UIButton {
     /// cornerRadius
+    @IBInspectable
     public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
@@ -20,6 +21,7 @@ public extension UIButton {
         }
     }
     /// borderColor
+    @IBInspectable
     public var borderColor: UIColor {
         get {
             return UIColor(CGColor: layer.borderColor ?? UIColor.clearColor().CGColor)
@@ -29,6 +31,7 @@ public extension UIButton {
         }
     }
     /// borderWidth
+    @IBInspectable
     public var borderWidth: CGFloat {
         get {
             return layer.borderWidth
