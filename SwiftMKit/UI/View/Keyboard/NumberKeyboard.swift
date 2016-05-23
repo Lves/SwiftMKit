@@ -159,10 +159,16 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //确定---匹配
     public func matchConfirm(input : String) -> String {
-        if let output = input.toDouble() {
-            return String(format:"%f", output)
+        if input.contains(".") {
+            let dotArray = input.toNSString.componentsSeparatedByString(".")
+            let length = dotArray.last?.length
+            if let output = input.toDouble() {
+                return "\(output.format(String(length)))"
+            } else {
+                return input
+            }
         } else {
-            return input
+            return String(input.toDouble())
         }
     }
     //输入小数点---匹配

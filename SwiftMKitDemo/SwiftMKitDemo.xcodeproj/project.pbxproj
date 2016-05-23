@@ -194,6 +194,7 @@
 		B328980230E598BB01E9042E /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */; };
 		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
 		E87D7BB47929B60BD485DBE4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
+		FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445D921CF2E47400A391E6 /* Double+Extension.swift */; };
 		FB50BE5E1CEDB326007673F4 /* NumberKeyboardSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */; };
 /* End PBXBuildFile section */
 
@@ -424,6 +425,7 @@
 		6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MKMultipleChartMarker.swift; path = SwiftMKitDemo/UI/UI/View/MKMultipleChartMarker.swift; sourceTree = "<group>"; };
 		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -808,6 +810,7 @@
 			isa = PBXGroup;
 			children = (
 				2783E0061CC89E74007247F6 /* NSObject+Extension.swift */,
+				FB445D921CF2E47400A391E6 /* Double+Extension.swift */,
 				279193431CD05C17009B08F3 /* Int+Extension.swift */,
 				279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */,
 				3F8FEAA31CC274DB00F7EAF3 /* UIApplication+Extension.swift */,
@@ -1383,6 +1386,7 @@
 				27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
 				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,
+				FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */,
 				2724D2191CE4201700F4CE03 /* SegmentContainerViewController.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,

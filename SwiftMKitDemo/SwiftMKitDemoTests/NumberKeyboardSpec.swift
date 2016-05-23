@@ -415,6 +415,11 @@ class NumberKeyboardSpec: QuickSpec {
                     (output) = numberKeyboard.matchConfirm(input)
                     expect(output).toNot(beNil())
                     expect(output).to(equal("0.0"))
+                    
+                    input = "0.00000005"
+                    (output) = numberKeyboard.matchConfirm(input)
+                    expect(output).toNot(beNil())
+                    expect(output).to(equal("0.00000005"))
                 }
             }
         }
