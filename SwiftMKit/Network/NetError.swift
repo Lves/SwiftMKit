@@ -11,7 +11,6 @@ import Foundation
 public enum StatusCode: Int {
     case Default = 0
     case Canceled = -999
-    case ValidateFailed = -99999
 }
 
 public class NetError : NSError {

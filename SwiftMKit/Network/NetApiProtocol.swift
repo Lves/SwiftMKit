@@ -22,7 +22,6 @@ public protocol NetApiIndicatorProtocol : class {
 }
 
 public protocol NetApiProtocol: NetApiIndicatorProtocol {
-    var error: NetError? { get }
     var query: [String: AnyObject]? { get }
     var method: Alamofire.Method? { get }
     var url: String? { get }
@@ -38,7 +37,6 @@ public protocol NetApiProtocol: NetApiIndicatorProtocol {
 }
 
 public class NetApiAbstract: NetApiProtocol{
-    public var error: NetError?
     public var query: [String: AnyObject]?
     public var method: Alamofire.Method?
     public var url: String?
@@ -51,12 +49,6 @@ public class NetApiAbstract: NetApiProtocol{
     public var indicatorText: String?
     public var indicatorList: IndicatorListProtocol?
     
-    public convenience init(error: NetError) {
-        self.init()
-        self.error = error
-    }
-    public init() {
-    }
     public func fillJSON(json: AnyObject) {}
     public func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest { return request }
     public func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError> { return response }
@@ -68,11 +60,6 @@ public class NetApiAbstract: NetApiProtocol{
 public extension NetApiProtocol {
     
     func signal(format:ApiFormatType = .JSON) -> SignalProducer<Self, NetError> {
-        if let err = error {
-            return SignalProducer { sink, _ in
-                sink.sendFailed(err)
-            }
-        }
         switch format {
         case .JSON:
             return NetApiData(api: self).requestJSON().map { _ in
@@ -89,14 +76,14 @@ public extension NetApiProtocol {
         }
     }
     
-    func setIndicator<T: NetApiProtocol>(indicator: IndicatorProtocol, view: UIView, text: String? = nil) -> T {
+    func setIndicator(indicator: IndicatorProtocol, view: UIView, text: String? = nil) -> Self {
         self.indicator = indicator
         self.indicatorInView = view
         self.indicatorText = text
-        return self as! T
+        return self
     }
-    func setIndicatorList<T: NetApiProtocol>(indicator: IndicatorListProtocol) -> T {
+    func setIndicatorList(indicator: IndicatorListProtocol) -> Self {
         self.indicatorList = indicator
-        return self as! T
+        return self
     }
 }
