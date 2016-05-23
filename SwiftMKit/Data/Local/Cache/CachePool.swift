@@ -166,9 +166,18 @@ public class CachePool: CachePoolProtocol {
             let fileArray:[AnyObject]? = fileManager.subpathsAtPath(cachepath)
             for fn in fileArray!{
                 let subpath = cachepath + "/\(fn)";
-                if fileManager.fileExistsAtPath(subpath) {
-                    try! fileManager.removeItemAtPath(subpath)
+                var flag: ObjCBool = false
+                if fileManager.fileExistsAtPath(subpath, isDirectory: &flag) {
+                    if flag {
+                        // 是文件夹
+                        continue
+                    } else {
+                        try! fileManager.removeItemAtPath(subpath)
+                    }
                 }
+//                if fileManager.fileExistsAtPath(subpath) {
+//                    try! fileManager.removeItemAtPath(subpath)
+//                }
             }
 //            try! fileManager.removeItemAtPath(cachepath)
 //            try! fileManager.createDirectoryAtPath(cachepath, withIntermediateDirectories: true, attributes: nil)
