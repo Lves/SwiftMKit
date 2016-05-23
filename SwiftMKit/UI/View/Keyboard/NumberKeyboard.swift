@@ -159,7 +159,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //确定---匹配
     public func matchConfirm(input : String) -> String {
-        return String(format: "\(input.toFloat())")
+        if let output = input.toDouble() {
+            return String(format:"%f", output)
+        } else {
+            return input
+        }
     }
     //输入小数点---匹配
     public func matchInputDot(old : String, new : String) -> (String, NSRange) {
@@ -200,10 +204,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         var range = self.selectedRange()
         var result = old
         if matchNumber(new) {
-            range.location -= 1
-            result = new
-        } else {
-            if new.toNSString.substringToIndex(1) == "0" {
+            if new.toNSString.substringToIndex(1) == "0" && new != "0" {
                 if let returnString = new.toInt() {
                     range.location = 0
                     result = String(format: "%d",returnString)
@@ -214,6 +215,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 range.location -= 1
                 result = new
             }
+        } else {
+            range.location -= 1
+            result = new
         }
         return (result, range)
     }
