@@ -34,7 +34,7 @@ public extension UIViewController {
 
 //Route
 public extension UIViewController {
-    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", pop: Bool = false) {
+    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", pop: Bool = false) -> Bool {
         DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
         if let vc = initialedViewController(name, params: nextParams, storyboardName: storyboardName) {
             if pop {
@@ -42,10 +42,13 @@ public extension UIViewController {
             } else {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            return true
         } else if canPerformSegueWithIdentifier(name){
             self.performSegueWithIdentifier(name, sender: ["params": nextParams])
+            return true
         } else {
             DDLogError("Can't route to: \(name), please check the name")
+            return false
         }
     }
     public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "") -> UIViewController? {
