@@ -20,16 +20,16 @@ public extension UIViewController {
 
 //Route
 public extension UIViewController {
-    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", pop: Bool = false) {
         DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
-        if let vc = initialedViewController(name, params: nextParams) {
+        if let vc = initialedViewController(name, params: nextParams, storyboardName: storyboardName) {
             if pop {
                 self.presentViewController(vc, animated: true, completion: nil)
             } else {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         } else if canPerformSegueWithIdentifier(name){
-            self.performSegueWithIdentifier(name, sender: ["params":nextParams])
+            self.performSegueWithIdentifier(name, sender: ["params": nextParams])
         } else {
             DDLogError("Can't route to: \(name), please check the name")
         }
