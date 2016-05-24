@@ -191,8 +191,8 @@
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
 		65CEE67EA1D94B6E3DF90E9B /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */; };
-		6C91E1E81CF3F06D00336B93 /* MKChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C91E1E61CF3F06D00336B93 /* MKChartMarker.swift */; };
-		6C91E1E91CF3F06D00336B93 /* MKMultipleChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C91E1E71CF3F06D00336B93 /* MKMultipleChartMarker.swift */; };
+		6C91E1ED1CF3F16D00336B93 /* MKChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C91E1EB1CF3F16D00336B93 /* MKChartMarker.swift */; };
+		6C91E1EE1CF3F16D00336B93 /* MKMultipleChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C91E1EC1CF3F16D00336B93 /* MKMultipleChartMarker.swift */; };
 		B328980230E598BB01E9042E /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0164572FC8137802D1EE1 /* Pods_SwiftMKitDemoUITests.framework */; };
 		C761977685A7F0638A21DF9E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
 		E87D7BB47929B60BD485DBE4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054F8DADC2350EB4A7A137D /* Pods.framework */; };
@@ -425,8 +425,8 @@
 		3FC9DF511CBFD6D400C2D938 /* BaseListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListViewModel.swift; sourceTree = "<group>"; };
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
-		6C91E1E61CF3F06D00336B93 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
-		6C91E1E71CF3F06D00336B93 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
+		6C91E1EB1CF3F16D00336B93 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
+		6C91E1EC1CF3F16D00336B93 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardSpec.swift; sourceTree = "<group>"; };
@@ -605,7 +605,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6C91E1E51CF3F06D00336B93 /* Charts */,
+				6C91E1EA1CF3F16D00336B93 /* Charts */,
 				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
 				270692CF1CE9F27D00CF211A /* GesturePassword */,
@@ -1061,11 +1061,11 @@
 			path = Schema;
 			sourceTree = "<group>";
 		};
-		6C91E1E51CF3F06D00336B93 /* Charts */ = {
+		6C91E1EA1CF3F16D00336B93 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				6C91E1E61CF3F06D00336B93 /* MKChartMarker.swift */,
-				6C91E1E71CF3F06D00336B93 /* MKMultipleChartMarker.swift */,
+				6C91E1EB1CF3F16D00336B93 /* MKChartMarker.swift */,
+				6C91E1EC1CF3F16D00336B93 /* MKMultipleChartMarker.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -1364,7 +1364,7 @@
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
-				6C91E1E91CF3F06D00336B93 /* MKMultipleChartMarker.swift in Sources */,
+				6C91E1EE1CF3F16D00336B93 /* MKMultipleChartMarker.swift in Sources */,
 				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
 				270692D91CE9F28800CF211A /* MKUIGesturePasswordViewController.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
@@ -1411,7 +1411,7 @@
 				27A1C5EF1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
 				27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */,
-				6C91E1E81CF3F06D00336B93 /* MKChartMarker.swift in Sources */,
+				6C91E1ED1CF3F16D00336B93 /* MKChartMarker.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */,
