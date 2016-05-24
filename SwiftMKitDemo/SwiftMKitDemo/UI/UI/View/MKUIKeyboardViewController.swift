@@ -29,6 +29,7 @@ class MKUIKeyboardViewController: BaseViewController {
         self.txtNoDot.inputView = keyboard
         keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .Money)
         self.txtMoney.inputView = keyboard
+        self.view.addSubview(PasswordText.init(frame: CGRectMake(0, 300, 100, 100)))
     }
 
     override func didReceiveMemoryWarning() {

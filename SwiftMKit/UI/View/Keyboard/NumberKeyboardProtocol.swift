@@ -6,7 +6,6 @@
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 public protocol NumberKeyboardProtocol {
