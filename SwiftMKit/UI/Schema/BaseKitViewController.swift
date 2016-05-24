@@ -98,11 +98,11 @@ public extension UIViewController {
 
 public extension BaseKitViewController {
     
-    public func showTip(tip: String) {
-        showTip(tip, view: self.view.window!)
+    public func showTip(tip: String, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
+        showTip(tip, view: self.view, hideAfterDelay: hideAfterDelay, completion: completion)
     }
-    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay) {
-        self.hud.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay)
+    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
+        self.hud.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay, completion: completion)
     }
     public func showLoading(text: String = "") {
         showLoading(text, view: self.view)
