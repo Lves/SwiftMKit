@@ -41,7 +41,7 @@ public class LineScatterCandleRadarChartRenderer: ChartDataRendererBase
             //方案一
             CGContextSaveGState(context);
             UIColor.whiteColor().setFill()
-            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: 5.0, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop-10.0))
+            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: viewPortHandler.contentTop, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop))
             path.lineWidth = 0.1
             path.fill()
             CGContextRestoreGState( context );

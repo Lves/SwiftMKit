@@ -150,7 +150,7 @@ class MKUIChartViewController: BaseViewController {
         }
 
         let set2 = LineChartDataSet(yVals: anotherYValues, label: "璇玑组合")
-        set2.fillColor = UIColor.orangeColor()
+        
         set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
@@ -158,6 +158,16 @@ class MKUIChartViewController: BaseViewController {
         set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
         set2.circleRadius = 6.0                               //圆半径
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
+//        set2.fillColor = UIColor.orangeColor()
+        
+        let gradientColors = [
+                              ChartColorTemplates.colorFromString("#00000000").CGColor,UIColor.orangeColor().CGColor ]
+        let gradient = CGGradientCreateWithColors(nil, gradientColors, nil)
+        set2.fill = ChartFill(linearGradient: gradient!, angle: 100.0)
+        set2.fillAlpha = 0.8
+        
+
+        
         
         //格式化数据
         let percentFormatter = NSNumberFormatter()
