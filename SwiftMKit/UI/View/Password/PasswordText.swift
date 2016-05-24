@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 
 public class PasswordText : UIView {
+    public var passwordLength: UInt = 0 {
+        didSet {
+            if passwordLength > 6 {
+                passwordLength = 6
+            }
+            
+        }
+    }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
