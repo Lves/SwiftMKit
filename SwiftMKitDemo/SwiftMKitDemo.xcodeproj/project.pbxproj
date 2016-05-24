@@ -422,7 +422,6 @@
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6C53F9D71CEEB79E00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
-		6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MKMultipleChartMarker.swift; path = SwiftMKitDemo/UI/UI/View/MKMultipleChartMarker.swift; sourceTree = "<group>"; };
 		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -834,7 +833,6 @@
 		3FC9DEEC1CBFD35900C2D938 = {
 			isa = PBXGroup;
 			children = (
-				6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */,
 				3FC9DF261CBFD53A00C2D938 /* SwiftMKit */,
 				3FC9DEF71CBFD35900C2D938 /* SwiftMKitDemo */,
 				3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */,
