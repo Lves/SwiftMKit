@@ -115,6 +115,8 @@
 		278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA551CD20970008AC629 /* BaseWebViewModel.swift */; };
 		279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193431CD05C17009B08F3 /* Int+Extension.swift */; };
 		279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */; };
+		2792D42B1CF3DD3800F51608 /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2792D42A1CF3DD3800F51608 /* pop.framework */; };
+		2792D42C1CF3DD3800F51608 /* pop.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2792D42A1CF3DD3800F51608 /* pop.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A3B1CD3018900546424 /* BaseWebViewController.xib */; };
 		27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A3D1CD30BE400546424 /* UITextField+Extension.swift */; };
 		27959A431CD3331900546424 /* PINCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A421CD3331900546424 /* PINCacheTests.swift */; };
@@ -233,6 +235,7 @@
 				189D7C3F1CE5DBCA0044E6EC /* Charts.framework in Embed Frameworks */,
 				189D7C5E1CE5DBCB0044E6EC /* SnapKit.framework in Embed Frameworks */,
 				189D7C4E1CE5DBCB0044E6EC /* MagicalRecord.framework in Embed Frameworks */,
+				2792D42C1CF3DD3800F51608 /* pop.framework in Embed Frameworks */,
 				189D7C461CE5DBCB0044E6EC /* EZSwiftExtensions.framework in Embed Frameworks */,
 				189D7C4A1CE5DBCB0044E6EC /* IQKeyboardManager.framework in Embed Frameworks */,
 				189D7C5C1CE5DBCB0044E6EC /* Result.framework in Embed Frameworks */,
@@ -324,6 +327,7 @@
 		278CAA551CD20970008AC629 /* BaseWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewModel.swift; sourceTree = "<group>"; };
 		279193431CD05C17009B08F3 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		279193451CD05C5B009B08F3 /* NSTimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		2792D42A1CF3DD3800F51608 /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = pop.framework; path = "../Debug-iphonesimulator/pop.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27959A3B1CD3018900546424 /* BaseWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseWebViewController.xib; sourceTree = "<group>"; };
 		27959A3D1CD30BE400546424 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		27959A421CD3331900546424 /* PINCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINCacheTests.swift; sourceTree = "<group>"; };
@@ -422,7 +426,6 @@
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6C53F9D71CEEB79E00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMultipleChartMarker.swift; sourceTree = "<group>"; };
-		6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MKMultipleChartMarker.swift; path = SwiftMKitDemo/UI/UI/View/MKMultipleChartMarker.swift; sourceTree = "<group>"; };
 		6CE46A681CE9B66700474D27 /* MKChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartMarker.swift; sourceTree = "<group>"; };
 		89CF53A8CF3643DB6953429B /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -446,6 +449,7 @@
 				189D7C3E1CE5DBCA0044E6EC /* Charts.framework in Frameworks */,
 				189D7C5D1CE5DBCB0044E6EC /* SnapKit.framework in Frameworks */,
 				189D7C4D1CE5DBCB0044E6EC /* MagicalRecord.framework in Frameworks */,
+				2792D42B1CF3DD3800F51608 /* pop.framework in Frameworks */,
 				189D7C451CE5DBCB0044E6EC /* EZSwiftExtensions.framework in Frameworks */,
 				189D7C491CE5DBCB0044E6EC /* IQKeyboardManager.framework in Frameworks */,
 				189D7C5B1CE5DBCB0044E6EC /* Result.framework in Frameworks */,
@@ -834,7 +838,6 @@
 		3FC9DEEC1CBFD35900C2D938 = {
 			isa = PBXGroup;
 			children = (
-				6C53F9D91CEEB91C00C42080 /* MKMultipleChartMarker.swift */,
 				3FC9DF261CBFD53A00C2D938 /* SwiftMKit */,
 				3FC9DEF71CBFD35900C2D938 /* SwiftMKitDemo */,
 				3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */,
@@ -1062,6 +1065,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2792D42A1CF3DD3800F51608 /* pop.framework */,
 				27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */,
 				189D7C421CE5DBCB0044E6EC /* CryptoSwift.framework */,
 				189D7C3D1CE5DBCA0044E6EC /* Charts.framework */,
