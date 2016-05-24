@@ -18,6 +18,9 @@ public class MBHUDView: HUDProtocol{
         }
     }
     public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval) {
+        self.showHUDTextAddedTo(view, animated: animated, text: text, hideAfterDelay: hideAfterDelay, completion: {})
+    }
+    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void)) {
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
         hud.mode = .Text
@@ -25,6 +28,7 @@ public class MBHUDView: HUDProtocol{
             hud.label.text = indicateString
         }
         hud.hideAnimated(animated, afterDelay: hideAfterDelay)
+        Async.main(after: hideAfterDelay, block: completion)
     }
     public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
         return MBProgressHUD.hideHUDForView(view, animated: animated)
