@@ -10,6 +10,20 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
+public extension UIViewController {
+    public static var topController: UIViewController? {
+        get {
+            if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                return topController
+            }
+            return nil
+        }
+    }
+}
+
 //Alert
 public extension UIViewController {
     
