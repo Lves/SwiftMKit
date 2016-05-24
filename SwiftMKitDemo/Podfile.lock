@@ -31,6 +31,7 @@ PODS:
   - MJRefresh (3.1.0)
   - Nimble (4.0.1)
   - PINCache (2.2.2)
+  - pop (1.0.9)
   - Quick (0.9.2)
   - ReachabilitySwift (2.3.3)
   - ReactiveCocoa (4.1.0):
@@ -64,6 +65,7 @@ DEPENDENCIES:
   - MJRefresh
   - Nimble
   - PINCache
+  - pop
   - Quick
   - ReachabilitySwift
   - ReactiveCocoa
@@ -85,6 +87,7 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949

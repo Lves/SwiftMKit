@@ -102,6 +102,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/Result.framework"
   install_framework "Pods-SwiftMKitDemoTests/SnapKit.framework"
   install_framework "Pods-SwiftMKitDemoTests/WebViewJavascriptBridge.framework"
+  install_framework "Pods-SwiftMKitDemoTests/pop.framework"
   install_framework "Pods-SwiftMKitDemoTests/Nimble.framework"
   install_framework "Pods-SwiftMKitDemoTests/Quick.framework"
 fi
@@ -124,6 +125,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/Result.framework"
   install_framework "Pods-SwiftMKitDemoTests/SnapKit.framework"
   install_framework "Pods-SwiftMKitDemoTests/WebViewJavascriptBridge.framework"
+  install_framework "Pods-SwiftMKitDemoTests/pop.framework"
   install_framework "Pods-SwiftMKitDemoTests/Nimble.framework"
   install_framework "Pods-SwiftMKitDemoTests/Quick.framework"
 fi
