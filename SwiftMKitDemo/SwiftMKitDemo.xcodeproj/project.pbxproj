@@ -199,9 +199,9 @@
 		FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445D921CF2E47400A391E6 /* Double+Extension.swift */; };
 		FB50BE5E1CEDB326007673F4 /* NumberKeyboardSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */; };
 		FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A331CF3F983001C493A /* PasswordPannel.swift */; };
-		FBE54A3A1CF42983001C493A /* PasswordText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A391CF42983001C493A /* PasswordText.swift */; };
+		FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A391CF42983001C493A /* PasswordTextView.swift */; };
 		FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE54A3B1CF434C0001C493A /* PasswordPannel.xib */; };
-		FBE54A3E1CF48F2D001C493A /* PasswordText.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE54A3D1CF48F2D001C493A /* PasswordText.xib */; };
+		FBE54A3E1CF48F2D001C493A /* PasswordTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE54A3D1CF48F2D001C493A /* PasswordTextView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -435,9 +435,9 @@
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FB50BE5D1CEDB326007673F4 /* NumberKeyboardSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardSpec.swift; sourceTree = "<group>"; };
 		FBE54A331CF3F983001C493A /* PasswordPannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordPannel.swift; sourceTree = "<group>"; };
-		FBE54A391CF42983001C493A /* PasswordText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordText.swift; sourceTree = "<group>"; };
+		FBE54A391CF42983001C493A /* PasswordTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextView.swift; sourceTree = "<group>"; };
 		FBE54A3B1CF434C0001C493A /* PasswordPannel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordPannel.xib; sourceTree = "<group>"; };
-		FBE54A3D1CF48F2D001C493A /* PasswordText.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordText.xib; sourceTree = "<group>"; };
+		FBE54A3D1CF48F2D001C493A /* PasswordTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordTextView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1112,8 +1112,8 @@
 		FBE54A2E1CF3F2A3001C493A /* Password */ = {
 			isa = PBXGroup;
 			children = (
-				FBE54A391CF42983001C493A /* PasswordText.swift */,
-				FBE54A3D1CF48F2D001C493A /* PasswordText.xib */,
+				FBE54A391CF42983001C493A /* PasswordTextView.swift */,
+				FBE54A3D1CF48F2D001C493A /* PasswordTextView.xib */,
 				FBE54A331CF3F983001C493A /* PasswordPannel.swift */,
 				FBE54A3B1CF434C0001C493A /* PasswordPannel.xib */,
 			);
@@ -1232,7 +1232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */,
-				FBE54A3E1CF48F2D001C493A /* PasswordText.xib in Resources */,
+				FBE54A3E1CF48F2D001C493A /* PasswordTextView.xib in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
 				034341801CDC775F00249EE3 /* testhaha.jpg in Resources */,
@@ -1362,7 +1362,7 @@
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
-				FBE54A3A1CF42983001C493A /* PasswordText.swift in Sources */,
+				FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */,
 				3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */,
 				273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */,
 				270692CE1CE9F27100CF211A /* KeychainWrapper.swift in Sources */,

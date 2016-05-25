@@ -877,7 +877,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Normal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7V-FV-6Ul">
-                                <rect key="frame" x="37.5" y="150" width="300" height="30"/>
+                                <rect key="frame" x="37" y="150" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Auf-br-P8N"/>
                                 </constraints>
@@ -900,6 +900,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZf-IH-WWZ">
+                                <rect key="frame" x="37" y="310" width="300" height="52"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="8wN-My-PE5"/>
+                                    <constraint firstAttribute="width" constant="300" id="nxn-dQ-51p"/>
+                                </constraints>
+                                <state key="normal" title="提交"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -907,11 +916,14 @@
                             <constraint firstItem="enx-RW-Xeo" firstAttribute="centerX" secondItem="Bxs-Pb-b2D" secondAttribute="centerX" id="Btj-L6-RyS"/>
                             <constraint firstItem="enx-RW-Xeo" firstAttribute="top" secondItem="Bxs-Pb-b2D" secondAttribute="bottom" constant="20" id="Cf9-o6-zsD"/>
                             <constraint firstItem="Bxs-Pb-b2D" firstAttribute="top" secondItem="T7V-FV-6Ul" secondAttribute="bottom" constant="20" id="JDJ-1E-uEB"/>
+                            <constraint firstItem="kZf-IH-WWZ" firstAttribute="centerX" secondItem="enx-RW-Xeo" secondAttribute="centerX" id="UZT-hD-dxd"/>
                             <constraint firstItem="T7V-FV-6Ul" firstAttribute="top" secondItem="BQx-D5-41g" secondAttribute="bottom" constant="86" id="XHe-gl-GgR"/>
+                            <constraint firstItem="kZf-IH-WWZ" firstAttribute="top" secondItem="enx-RW-Xeo" secondAttribute="bottom" constant="30" id="c4b-7c-w6X"/>
                             <constraint firstItem="T7V-FV-6Ul" firstAttribute="centerX" secondItem="mGn-xS-uTh" secondAttribute="centerX" id="m8U-pQ-Jw1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCommit" destination="kZf-IH-WWZ" id="iz2-mT-tX2"/>
                         <outlet property="txtMoney" destination="enx-RW-Xeo" id="0kZ-t4-euX"/>
                         <outlet property="txtNoDot" destination="Bxs-Pb-b2D" id="mdl-gI-T12"/>
                         <outlet property="txtNormal" destination="T7V-FV-6Ul" id="gUT-1Y-FV1"/>

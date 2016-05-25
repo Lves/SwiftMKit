@@ -8,43 +8,52 @@
 
 import UIKit
 
+public protocol PasswordPannelDelegate: class {
+    func pp_didCancel(pannel: PasswordPannel?)
+    func pp_forgetPassword(pannel: PasswordPannel?)
+    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String) -> Void))
+    func pp_didFinished(pannel: PasswordPannel?, success: Bool)
+}
+public extension PasswordPannelDelegate {
+    func pp_didCancel(pannel: PasswordPannel?) {}
+    func pp_didFinished(pannel: PasswordPannel?, success: Bool) {}
+}
+
 public class PasswordPannel: UIView, UITextFieldDelegate{
     private struct InnerConstant {
-        static let PasswordViewAnimationDuration = 0.25
+        static let AnimationDuration = 0.25
+        static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
     }
+    public weak var delegate: PasswordPannelDelegate?
+    public var animationDuration = InnerConstant.AnimationDuration
+    public var maskColor = InnerConstant.MaskColor
     @IBOutlet weak var imgRotation: UIImageView!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var btnForget: UIButton!
     @IBOutlet weak var passwordInputView: UIView! {
         didSet {
-            passwordInputView.addSubview(passwordText!)
+            passwordInputView.addSubview(passwordTextView)
         }
     }
     @IBOutlet weak var txtPassword: UITextField! {
         didSet {
-            let keyboard = NumberKeyboard.keyboard(self.txtPassword, type: .NoDot)
-            keyboard.enableAutoToolbar = false
+            keyboard = NumberKeyboard.keyboard(self.txtPassword, type: .NoDot)
             txtPassword.inputView = keyboard
             txtPassword.delegate = self
         }
     }
-    public var passwordText = PasswordText.passwordText()
+    public var passwordTextView = PasswordTextView.passwordTextView()
     public var coverView : UIControl = UIControl()
     
     public var loadingText = ""
-    public var password : String = ""{
+    public var password : String = "" {
         didSet {
-            passwordText.passwordLength = UInt(password.length)
+            passwordTextView.passwordLength = password.length
         }
     }
-    
-    //Block
-    public var forgetPasswordBlock : (() -> Void)?
-    public var cancelBlock : (() -> Void)?
-    public var requestSuccess : (() -> (Void))?
-    public var requestFail : (() -> (Void))?
-    public var finishBlock : ((password : String, completion: ((Bool, String) -> Void)) -> Void)?
+    private var keyboard: NumberKeyboard?
+    private var originEnableAutoToolbar: Bool?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,61 +61,79 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public static func pannel() -> PasswordPannel? {
-        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil).first as? PasswordPannel
-        view?.setUI()
+    public static func pannel() -> PasswordPannel {
+        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil).first as! PasswordPannel
+        view.setupUI()
         return view
     }
-    private func setUI() {
-        bindCancelButtonAction(btnClose)
-        bindForgetButtonAction(btnForget)
-        //把背景色设为透明
-        self.backgroundColor = UIColor.clearColor()
-        coverView.backgroundColor = UIColor.blackColor()
-        coverView.alpha = 0.4
+    private func setupUI() {
+        self.btnClose.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+            self?.txtPassword.resignFirstResponder()
+            self?.hide()
+            self?.password = ""
+            self?.delegate?.pp_didCancel(self)
+        }
+        self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+            self?.delegate?.pp_forgetPassword(self)
+        }
+        imgRotation.hidden = true
+        lblMessage.text = ""
         passwordInputView.addTapGesture(target: self, action: #selector(tapGestureRecognized(_:)))
         
     }
     func tapGestureRecognized(recognizer : UITapGestureRecognizer) {
-        self.txtPassword.becomeFirstResponder()
+        showKeyboard()
     }
-    /** 键盘弹出接口 */
-    public func showPasswordPannelInView(viewController : UIViewController) {
+    private func showKeyboard() {
+        originEnableAutoToolbar = keyboard?.enableAutoToolbar
+        keyboard?.enableAutoToolbar = false
+        txtPassword.becomeFirstResponder()
+    }
+    private func hideKeyboard() {
+        keyboard?.enableAutoToolbar = originEnableAutoToolbar ?? true
+        txtPassword.resignFirstResponder()
+    }
+    /** 弹出 */
+    public func show(viewController : UIViewController) {
         var view = viewController.view
         if let nav = viewController.navigationController {
             view = nav.view
         }
         coverView.frame = view.bounds
+        coverView.backgroundColor = UIColor.clearColor()
         view.addSubview(coverView)
         view.addSubview(self)
-        view.insertSubview(coverView, belowSubview: self)
         password = ""
         showKeyboard()
-    }
-    /** 隐藏键盘接口 */
-    public func hidenPasswordPannel() {
-        hidenKeyboard()
-    }
-    /** 开始加载 */
-    public func startLoading() {
-        self.startRotation(imgRotation)
-        disEnalbeCloseButton(false)
-    }
-    /** 加载完成 */
-    public func stopLoading() {
-        self.stopRotation(imgRotation)
-        disEnalbeCloseButton(true)
-    }
-    /** 请求完成 */
-    public func requestComplete(state : Bool, message : NSString) {
-        if state {
-            self.requestComplete(state, message: "支付成功")
-        } else {
-            self.requestComplete(state, message: "支付失败")
+        Async.main {
+            self.y = self.coverView.h
+            UIView.animateWithDuration(self.animationDuration) {
+                self.coverView.backgroundColor = self.maskColor
+                self.y = self.coverView.h - self.h;
+            }
         }
     }
-    /** 开始旋转 */
-    public func startRotation(view: UIView) {
+    /** 隐藏 */
+    public func hide() {
+        Async.main {
+            self.hideKeyboard()
+            UIView.animateWithDuration(self.animationDuration, animations: {
+                self.y = self.coverView.h
+                self.coverView.backgroundColor = UIColor.clearColor()
+            }) { _ in
+                self.removeFromSuperview()
+                self.coverView.removeFromSuperview()
+            }
+        }
+    }
+    /** 加载期间禁止按钮点击 */
+    private func freezePanel(freeze: Bool) {
+        btnClose.userInteractionEnabled = !freeze;
+        self.btnForget.userInteractionEnabled = !freeze;
+    }
+    /** 开始加载 */
+    private func startLoading() {
+        freezePanel(true)
         imgRotation.hidden = false
         lblMessage.hidden = false
         var rotationAnimation = CABasicAnimation()
@@ -115,30 +142,23 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
         rotationAnimation.duration = 2.0;
         rotationAnimation.cumulative = true;
         rotationAnimation.repeatCount = MAXFLOAT;
-        view.layer .addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        imgRotation.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
     }
-    /** 结束旋转 */
-    public func stopRotation(view: UIView) {
-        view.layer .removeAllAnimations()
-    }
-    /** 键盘弹出 */
-    private func showKeyboard() {
-        txtPassword.becomeFirstResponder()
-        self.y = coverView.h
-        UIView.animateWithDuration(InnerConstant.PasswordViewAnimationDuration) { 
-            self.y = self.coverView.h - self.h;
+    /** 加载完成 */
+    public func stopLoading(success: Bool, message: String) {
+        freezePanel(false)
+        imgRotation.layer.removeAllAnimations()
+        if success {
+            // 请求成功
+            self.lblMessage.text = message;
+            self.imgRotation.image = UIImage.init(named: "password_success")
+        } else {
+            // 请求成功
+            self.lblMessage.text = message;
+            self.imgRotation.image = UIImage.init(named: "password_error")
         }
     }
-    /** 键盘消失 */
-    private func hidenKeyboard() {
-        txtPassword.resignFirstResponder()
-        UIView.animateWithDuration(InnerConstant.PasswordViewAnimationDuration) {
-            self.transform = CGAffineTransformIdentity;
-        }
-    }
-    public func hide() {
-        self.removeFromSuperview()
-    }
+    /** 输入删除 TextField 监听的代理方法 */
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.length == 0 {
             if password.length == 0 {
@@ -150,56 +170,21 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
         } else if password.length <= 6 {
             password += string
             if password.length == 6 {
-                if let existBlock = finishBlock {
-                    self.hidenKeyboard()
-                    self.startLoading()
-                    existBlock(password: password, completion: { (success, message) in
-                        self.stopLoading()
-                        self.requestComplete(success, message: message)
-                        self.hide()
-                    })
-                    self.finishBlock = nil
+                hideKeyboard()
+                startLoading()
+                lblMessage.text = loadingText
+                delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message) in
+                    self?.stopLoading(success, message: message)
+                    Async.main(after: 1) { [weak self] in
+                        self?.hide()
+                        self?.delegate?.pp_didFinished(self, success: success)
+                    }
                 }
             }
             return true
         } else {
             return false
         }
-    }
-    //叉叉
-    private func bindCancelButtonAction(button: UIButton) {
-        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
-            self.txtPassword.resignFirstResponder()
-            self.hidenPasswordPannel()
-            self.password = ""
-            self.removeFromSuperview()
-            self.coverView.removeFromSuperview()
-            self.passwordText.setNeedsDisplay()
-        }
-        if let exsistBlock = self.cancelBlock {
-            exsistBlock()
-        }
-    }
-    //忘记密码
-    private func bindForgetButtonAction(button: UIButton) {
-        btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
-            self.txtPassword.resignFirstResponder()
-            self.hidenPasswordPannel()
-            self.password = ""
-            self.removeFromSuperview()
-            self.coverView.removeFromSuperview()
-            self.passwordText.setNeedsDisplay()
-            
-            //跳转到忘记密码页面
-            if let exsistBlock = self.forgetPasswordBlock {
-                exsistBlock()
-                self.forgetPasswordBlock = nil
-            }
-        }
-    }
-    private func disEnalbeCloseButton(enable: Bool) {
-        btnClose.userInteractionEnabled = enable;
-        self.btnForget.userInteractionEnabled = enable;
     }
     
 }
