@@ -161,7 +161,7 @@ class MKUIChartViewController: BaseViewController {
 //        set2.fillColor = UIColor.orangeColor()
         
         let gradientColors = [
-                              ChartColorTemplates.colorFromString("#00000000").CGColor,UIColor.orangeColor().CGColor ]
+                              ChartColorTemplates.colorFromString("#00000000").CGColor,UIColor.orangeColor().CGColor]
         let gradient = CGGradientCreateWithColors(nil, gradientColors, nil)
         set2.fill = ChartFill(linearGradient: gradient!, angle: 100.0)
         set2.fillAlpha = 0.8
