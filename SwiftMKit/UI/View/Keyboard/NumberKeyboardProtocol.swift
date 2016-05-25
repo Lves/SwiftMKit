@@ -21,5 +21,5 @@ public protocol NumberKeyboardProtocol {
     func matchDeleteNumber(old : String, new : String) -> (String, NSRange)
     //确定---匹配
     func matchConfirm(input : String) -> String
-    static func keyboard(textField: UITextField, type:NumberKeyboardType) -> UIView?
+    static func keyboard(textField: UITextField, type:NumberKeyboardType) -> NumberKeyboard
 }

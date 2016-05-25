@@ -29,8 +29,14 @@ class MKUIKeyboardViewController: BaseViewController {
         self.txtNoDot.inputView = keyboard
         keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .Money)
         self.txtMoney.inputView = keyboard
+        
+        
         if let pannel = PasswordPannel.pannel() {
-            pannel.showPasswordPannelInView(self)
+            pannel.finishBlock = { (password, completion) in
+                //api network
+                //result 
+                completion(true, "")
+            }
         }
     }
 

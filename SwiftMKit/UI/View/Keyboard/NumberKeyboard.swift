@@ -41,6 +41,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     public var type: NumberKeyboardType = .Normal
     public var textField: UITextField?
     public var text: String = ""
+    public var enableAutoToolbar = true {
+        willSet {
+            IQKeyboardManager.sharedManager().enableAutoToolbar = newValue
+        }
+    }
     
     lazy var inputAction: CocoaAction = {
         let action = Action<AnyObject, AnyObject, NSError> { [weak self] input in
@@ -56,12 +61,12 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return CocoaAction(action, input:"")
     }()
     
-    public static func keyboard(textField: UITextField, type:NumberKeyboardType = .Normal) -> UIView? {
+    public static func keyboard(textField: UITextField, type:NumberKeyboardType = .Normal) -> NumberKeyboard {
         let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil).first as? NumberKeyboard
         view?.textField = textField
         view?.type = type
         view?.initUI()
-        return view
+        return view!
     }
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,6 +103,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             }
             //获取光标位置
             let range = self.selectedRange()
+            if let tempDeleget = self.textField?.delegate {
+                if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: ".") {
+                    return
+                }
+            }
             let forward = self.getForwardString(self.text, range: range)
             let behind = self.getBehindString(self.text, range: range)
             let (text, newRange) = self.matchInputDot(self.text, new: forward + "." + behind)
@@ -112,6 +122,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             var range = self.selectedRange()
             if range.location == 0 {
                 return
+            }
+            if let tempDeleget = self.textField?.delegate {
+                if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
+                    return
+                }
             }
             //删除
             range.location -= 1
@@ -131,6 +146,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 }
                 //获取光标位置
                 let range = self.selectedRange()
+                if let tempDeleget = self.textField?.delegate {
+                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
+                        return
+                    }
+                }
                 let forward = self.getForwardString(self.text, range: range)
                 let behind = self.getBehindString(self.text, range: range)
                 let (text, newRange) = self.matchInputNumber(self.text, new: forward + inputText + behind)
