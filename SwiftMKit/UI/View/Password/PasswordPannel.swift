@@ -99,6 +99,7 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
         if let nav = viewController.navigationController {
             view = nav.view
         }
+        self.size.width = view.size.width
         coverView.frame = view.bounds
         coverView.backgroundColor = UIColor.clearColor()
         view.addSubview(coverView)
@@ -167,7 +168,7 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
                 password = password.toNSString.substringToIndex(password.length - 1)
                 return true
             }
-        } else if password.length <= 6 {
+        } else if password.length < 6 {
             password += string
             if password.length == 6 {
                 hideKeyboard()
