@@ -84,6 +84,15 @@ public class NetApiClient : NSObject {
         }
     }
     
+    class func clearCookie() {
+        DDLogInfo("[NetApi] 清除缓存")
+        let cookieJar = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
+    }
+    
     class func requestJSON(request: NSURLRequest, api: NetApiProtocol,
                  completionHandler: (Response<AnyObject, NSError> -> Void)?)
         -> Request {
