@@ -24,13 +24,15 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
     
     lazy public var manager = CLLocationManager()
     public static var shared = LocationManager()
+    private var autoStop: Bool = false
     
-    public class func start(accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
+    public class func start(autoStop autoStop: Bool = false, accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
         if always {
             shared.manager.requestAlwaysAuthorization()
         } else {
             shared.manager.requestWhenInUseAuthorization()
         }
+        shared.autoStop = autoStop
         if CLLocationManager.locationServicesEnabled() {
             shared.manager.delegate = shared
             shared.manager.desiredAccuracy = accuracy
@@ -56,6 +58,9 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             self.longitude = long
             self.latitude = lat
             NSNotificationCenter.defaultCenter().postNotificationName(LocationManager.NotificationLocationUpdatedName, object: nil)
+        }
+        if autoStop {
+            LocationManager.stop()
         }
     }
     

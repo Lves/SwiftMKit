@@ -22,6 +22,7 @@ public class BaseKitTableViewController: UITableViewController {
             }
         }
     }
+    public var completion: () -> Void = {}
     public var hud: HUDProtocol = MBHUDView()
     lazy public var indicator: IndicatorProtocol = {
         return TaskIndicator(hud: self.hud)
