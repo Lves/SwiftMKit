@@ -17,6 +17,11 @@ public extension UIViewController {
                 while let presentedViewController = topController.presentedViewController {
                     topController = presentedViewController
                 }
+                if let nav = topController as? UINavigationController {
+                    if let vc = nav.viewControllers.last {
+                        topController = vc
+                    }
+                }
                 return topController
             }
             return nil
@@ -111,5 +116,9 @@ public extension UIViewController {
         } else {
             self.navigationController?.popViewControllerAnimated(animation)
         }
+    }
+    public func routeToRoot(animation: Bool = true) {
+        DDLogInfo("Route to root")
+        self.navigationController?.popToRootViewControllerAnimated(animation)
     }
 }
