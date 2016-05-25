@@ -30,6 +30,7 @@ pod 'pop'
 pod 'HanekeSwift'
 pod 'MBProgressHUD'
 pod 'Charts'
+pod 'RATreeView'
 
 target 'SwiftMKitDemoTests' do
     testing_pods
