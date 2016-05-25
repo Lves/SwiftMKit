@@ -409,17 +409,22 @@ class NumberKeyboardSpec: QuickSpec {
                     input = "1.00"
                     (output) = numberKeyboard.matchConfirm(input)
                     expect(output).toNot(beNil())
-                    expect(output).to(equal("1.0"))
+                    expect(output).to(equal("1"))
                     
                     input = "0.0"
                     (output) = numberKeyboard.matchConfirm(input)
                     expect(output).toNot(beNil())
-                    expect(output).to(equal("0.0"))
+                    expect(output).to(equal("0"))
                     
                     input = "0.00000005"
                     (output) = numberKeyboard.matchConfirm(input)
                     expect(output).toNot(beNil())
                     expect(output).to(equal("0.00000005"))
+                    
+                    input = ""
+                    (output) = numberKeyboard.matchConfirm(input)
+                    expect(output).toNot(beNil())
+                    expect(output).to(equal(""))
                 }
             }
         }

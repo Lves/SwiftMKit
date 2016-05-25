@@ -179,6 +179,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //确定---匹配
     public func matchConfirm(input : String) -> String {
+        if input == "" {
+            return ""
+        }
         let output =  NSDecimalNumber(string : input)
         return "\(output)"
 //        var output = input
