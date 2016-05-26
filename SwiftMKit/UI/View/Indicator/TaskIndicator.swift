@@ -77,7 +77,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
                 self.runningTasks.removeAtIndex(index)
             }
             Async.main {
-                self.hud?.hideHUDForView(task.indicatorView, animated: true)
+                self.hud?.hideIndicatorHUDForView(task.indicatorView, animated: true)
             }
         }
     }

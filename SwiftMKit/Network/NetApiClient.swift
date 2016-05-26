@@ -85,7 +85,7 @@ public class NetApiClient : NSObject {
     }
     
     class func clearCookie() {
-        DDLogInfo("[NetApi] 清除缓存")
+        DDLogInfo("[NetApi] 清除Cookie")
         let cookieJar = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         
         for cookie in cookieJar.cookies! {
@@ -106,7 +106,7 @@ public class NetApiClient : NSObject {
                 switch transferedResponse.result {
                 case .Success:
                     DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
-                    if let value = response.result.value {
+                    if let value = transferedResponse.result.value {
                         DDLogVerbose("[NetApi] JSON: \(value)")
                     }
                 case .Failure(let error):
@@ -140,7 +140,7 @@ public class NetApiClient : NSObject {
                 switch transferedResponse.result {
                 case .Success:
                     DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
-                    DDLogVerbose("[NetApi] Data: \(response.result.value?.length) bytes")
+                    DDLogVerbose("[NetApi] Data: \(transferedResponse.result.value?.length) bytes")
                 case .Failure(let error):
                     if let statusCode =  StatusCode(rawValue:error.code) {
                         switch(statusCode) {
@@ -172,7 +172,7 @@ public class NetApiClient : NSObject {
                 switch transferedResponse.result {
                 case .Success:
                     DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
-                    DDLogVerbose("[NetApi] String: \(response.result.value)")
+                    DDLogVerbose("[NetApi] String: \(transferedResponse.result.value)")
                 case .Failure(let error):
                     if let statusCode =  StatusCode(rawValue:error.code) {
                         switch(statusCode) {
