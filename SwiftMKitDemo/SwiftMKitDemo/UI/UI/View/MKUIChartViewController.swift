@@ -381,19 +381,18 @@ class MKUIChartViewController: BaseViewController {
         var yVals1 = [BarChartDataEntry]()
         
         for yIndex in 1...10 {
-            let val = (Double) (arc4random()%100);
+            var val = (Double) (arc4random()%100);
+
             let dataEntity = BarChartDataEntry(value: val, xIndex: yIndex)
             yVals1.append(dataEntity)
         }
         
         //底部填充线
         var yResultValues = [ChartDataEntry]()
-        for yIndex in  0...10 {
-            let flotVa = (Double) (arc4random()%100);
+        for yIndex in  1...10 {
+            var flotVa = (Double) (arc4random()%100);
             yResultValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
-        
-        
         
         let set1 = BarChartDataSet(yVals: yVals1, label: "Compnay A")
         set1.animationVals = yResultValues
@@ -407,9 +406,7 @@ class MKUIChartViewController: BaseViewController {
             UIColor.yellowColor(),
             UIColor.greenColor(),
             UIColor.brownColor()], alpha: 1.0)
-        
-        
-        
+
         let barChartData = BarChartData(xVals: xVals, dataSets: [set1])
         self.barChartView.data = barChartData
         

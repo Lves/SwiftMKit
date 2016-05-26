@@ -245,7 +245,7 @@ public class BarChartRenderer: ChartDataRendererBase
         CGContextRestoreGState(context)
     }
 
-    // ModifySourceCode Add By LiXingLe
+    //MARK: ModifySourceCode Add By LiXingLe
     public override func drawAnimationData(context context: CGContext,animateBack: Bool)
     {
         guard let dataProvider = dataProvider, barData = dataProvider.barData else { return }
@@ -265,7 +265,7 @@ public class BarChartRenderer: ChartDataRendererBase
             }
         }
     }
-    // ModifySourceCode Add By LiXingLe
+    //MARK: ModifySourceCode Add By LiXingLe
     public func drawAnimeDataSet(context context: CGContext, dataSet: IBarChartDataSet, index: Int , animateBack: Bool)
     {
         guard let
@@ -316,37 +316,46 @@ public class BarChartRenderer: ChartDataRendererBase
                 var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
                 
                 var newTop = isInverted ? (newY <= 0.0 ? CGFloat(newY) : 0) : (newY >= 0.0 ? CGFloat(newY) : 0)
+                var newBottom = isInverted ? (newY >= 0.0 ? CGFloat(newY) : 0) : (newY <= 0.0 ? CGFloat(newY) : 0)
                 // multiply the height of the rect with the phase
                 
+
                 if animateBack {
                     if (top > 0)
                     {
                         //                    top *= phaseY
                         newTop += (top - newTop)*phaseY
+                        newBottom = 0.0
                     }
                     else
                     {
-                        bottom *= phaseY
+//                            bottom *= phaseY
+                        newBottom += (bottom - newBottom)*phaseY
+                        newTop = 0.0
                     }
                 }else {
                     if (newTop > 0)
                     {
-                        //                    top *= phaseY
+                        //       top *= phaseY
                         top += (newTop - top)*phaseY
+                        bottom = 0.0
                     }
                     else
                     {
-                        bottom *= phaseY
+//                            bottom *= phaseY
+                        bottom += (newBottom - bottom)*phaseY
+                        top = 0.0
                     }
                 }
                 //s
-                var useTop  = animateBack ? newTop : top
-               
+                let useTop  = animateBack ? newTop : top
+                let useBottom = animateBack ? newBottom : bottom
+
                 
                 barRect.origin.x = left
                 barRect.size.width = right - left
                 barRect.origin.y = useTop
-                barRect.size.height = bottom - useTop
+                barRect.size.height = useBottom - useTop
                 
                 trans.rectValueToPixel(&barRect)
                 
