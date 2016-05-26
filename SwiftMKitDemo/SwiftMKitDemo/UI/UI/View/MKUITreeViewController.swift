@@ -19,6 +19,7 @@ class MKUITreeViewController: UIViewController {
         setupData()
         tableView.dataArray = dataArray
         automaticallyAdjustsScrollViewInsets = false
+        tableView.separatorStyle = .None
     }
     
     func setupData() {
@@ -36,10 +37,10 @@ class MKUITreeViewController: UIViewController {
         
         let japan = Node(parentId: -1, nodeId: 7, name: "Japan", depth: 0, expand: true, children: nil)
         let dongjing = Node(parentId: 7, nodeId: 8, name: "Dong Jing", depth: 1, expand: false, children: nil)
-        let xijing = Node(parentId: 7, nodeId: 9, name: "Xi Jing", depth: 1, expand: false, children: nil)
-        japan.children = [dongjing, xijing]
+        japan.children = [dongjing]
         
-        dataArray = [tianchao, shiyan, beijing, shanghai, usa, luoshanji, dezhou, japan, dongjing, xijing]
+        let sanpang = Node(parentId: -1, nodeId: 9, name: "San Pang", depth: 0, expand: true, children: nil)
+        dataArray = [tianchao, shiyan, beijing, shanghai, usa, luoshanji, dezhou, japan, dongjing, sanpang]
     }
     
     deinit {
@@ -85,7 +86,8 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
         dataSource = self
         delegate = self
         // 注册cell
-        self.registerNib(UINib(nibName: InnerConst.CellName, bundle:nil), forCellReuseIdentifier: InnerConst.CellID)
+//        self.registerNib(UINib(nibName: InnerConst.CellName, bundle:nil), forCellReuseIdentifier: InnerConst.CellID)
+//        self.registerClass(MKUITreeViewCellTableViewCell.self, forCellReuseIdentifier: InnerConst.CellID)
     }
     
     // MARK: - <TableViewDelegate>
@@ -94,12 +96,18 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = dequeueReusableCellWithIdentifier(InnerConst.CellID)!
+//        let cell = dequeueReusableCellWithIdentifier(InnerConst.CellID) as! MKUITreeViewCellTableViewCell
         let node = tmpDataArray![indexPath.row]
-        // 缩进
-        cell.indentationLevel = node.depth
-        cell.indentationWidth = InnerConst.CellIndentationWidth
-        cell.textLabel?.text = node.name
+        let isParentNode = node.parentId == -1
+        let cell = MKUITreeViewCellTableViewCell.getCell(tableView, isParentNode: isParentNode)
+        if !isParentNode {
+            // 找出 parentNode
+            let filterArray = tmpDataArray?.filter({ obj -> Bool in
+                obj.nodeId == node.parentId
+            })
+            cell.parentNode = filterArray?.first
+        }
+        cell.node = node
         return cell
     }
     
