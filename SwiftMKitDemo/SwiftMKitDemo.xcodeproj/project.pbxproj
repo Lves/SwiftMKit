@@ -95,6 +95,7 @@
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
 		27784AA91CF686C500960071 /* Aspects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27784AA81CF686C500960071 /* Aspects.framework */; };
 		27784AAA1CF686C500960071 /* Aspects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27784AA81CF686C500960071 /* Aspects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27784AAE1CF6E25200960071 /* SendCodeButton.swift */; };
 		277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C01CE40FBF00295259 /* RegexHelper.swift */; };
 		277C49C31CE4108800295259 /* RegexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C21CE4108800295259 /* RegexSpec.swift */; };
 		277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */; };
@@ -314,6 +315,7 @@
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
 		27784AA81CF686C500960071 /* Aspects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Aspects.framework; path = "../Debug-iphonesimulator/Aspects.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27784AAE1CF6E25200960071 /* SendCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCodeButton.swift; sourceTree = "<group>"; };
 		277C49C01CE40FBF00295259 /* RegexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
 		277C49C21CE4108800295259 /* RegexSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexSpec.swift; sourceTree = "<group>"; };
 		277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboard.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */,
+				27784AAE1CF6E25200960071 /* SendCodeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1471,6 +1474,7 @@
 				270692CD1CE9F27100CF211A /* DocumentCache.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */,
+				27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */,
 				030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
