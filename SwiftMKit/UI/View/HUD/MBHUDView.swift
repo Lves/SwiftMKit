@@ -10,6 +10,10 @@ import Foundation
 import MBProgressHUD
 
 public class MBHUDView: HUDProtocol{
+    struct InnerConstant {
+        static let TitleToDetailTextLenght: Int = 10
+    }
+    
     private var indicatorShowed: Bool = false
     
     public func showHUDAddedTo(view: UIView, animated: Bool, text:String?) {
@@ -29,7 +33,11 @@ public class MBHUDView: HUDProtocol{
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
         hud.mode = .Text
         if let indicateString = text {
-            hud.label.text = indicateString
+            if text?.length > InnerConstant.TitleToDetailTextLenght {
+                hud.detailsLabel.text = indicateString
+            } else {
+                hud.label.text = indicateString
+            }
         }
         hud.hideAnimated(animated, afterDelay: hideAfterDelay)
         Async.main(after: hideAfterDelay, block: completion)

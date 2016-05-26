@@ -9,10 +9,10 @@
 import UIKit
 
 public protocol PasswordPannelDelegate: class {
-    func pp_didCancel(pannel: PasswordPannel?)
-    func pp_forgetPassword(pannel: PasswordPannel?)
-    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String) -> Void))
-    func pp_didFinished(pannel: PasswordPannel?, success: Bool)
+    mutating func pp_didCancel(pannel: PasswordPannel?)
+    mutating func pp_forgetPassword(pannel: PasswordPannel?)
+    mutating func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String) -> Void))
+    mutating func pp_didFinished(pannel: PasswordPannel?, success: Bool)
 }
 public extension PasswordPannelDelegate {
     func pp_didCancel(pannel: PasswordPannel?) {}
