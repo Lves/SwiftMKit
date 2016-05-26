@@ -8,44 +8,83 @@
 
 import UIKit
 
-class MKUITreeViewController: BaseListViewController {
+class MKUITreeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     struct InnerConst {
         static let CellName = "MKUITreeViewCellTableViewCell"
         static let CellID = "MKUITreeViewCellTableViewCell"
     }
-    
-    private var _viewModel = MKUIViewModel()
-    override var viewModel: BaseKitViewModel!{
-        get { return _viewModel }
-    }
-    override var listView: UIScrollView! {
-        get { return tableView }
-    }
+}
 
+class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+    struct InnerConst {
+        static let CellName = "MKUITreeViewCellTableViewCell"
+        static let CellID = "MKUITreeViewCellTableViewCell"
+        static let CellIndentationWidth: CGFloat = 30
+    }
+    /// 数据源
+    var dataArray: [Node]? {
+        willSet {
+            if let data = dataArray {
+                for node in data {
+                    if node.expand {
+                        tmpDataArray?.append(node)
+                    }
+                }
+            }
+        }
+    }
+    /// 保存需要展开的节点模型
+    var tmpDataArray: [Node]?
+    
+    override init(frame: CGRect, style: UITableViewStyle) {
+        super.init(frame: frame, style: .Grouped)
+        setup()
+    }
+    
+    required init?(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+        setup()
+    }
+    
+    func setup() {
+        // 设置代理
+        dataSource = self
+        delegate = self
+        // 注册cell
+        self.registerNib(UINib(nibName: InnerConst.CellName, bundle:nil), forCellReuseIdentifier: InnerConst.CellID)
+    }
+    
     // MARK: - <TableViewDelegate>
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tmpDataArray?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return dataSource?.count ?? 0
-        return 30
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellID) as! MKUITreeViewCellTableViewCell
-//        let os = dataSource![indexPath.row]
-        cell.textLabel?.text = "-- \(indexPath.row)"
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = dequeueReusableCellWithIdentifier(InnerConst.CellID)!
+        let node = tmpDataArray![indexPath.row]
+        // 缩进
+        cell.indentationLevel = node.depth
+        cell.indentationWidth = InnerConst.CellIndentationWidth
+        cell.textLabel?.text = node.name
         return cell
     }
+}
+
+class Node {
+    var parentId: Int
+    var nodeId: Int
+    var name: String
+    var depth: Int
+    var expand: Bool
+    var children: [Node]?
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // 动态插入一行
-//        let os = dataSource![indexPath.row]
-//        dataSource?.append(OrderState(name: "\(os.stateName!)\(indexPath.row)", date: os.date!, children: nil))
-//        let nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-//        tableView.insertRowsAtIndexPaths([nextIndexPath], withRowAnimation: .Fade)
-//        tableView.reloadData()
+    init(parentId: Int, nodeId: Int, name: String, depth: Int, expand: Bool, children: [Node]?) {
+        self.parentId = parentId
+        self.nodeId = nodeId
+        self.name = name
+        self.depth = depth
+        self.expand = expand
+        self.children = children
     }
 }
