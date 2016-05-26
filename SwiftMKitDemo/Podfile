@@ -27,10 +27,10 @@ pod 'WebViewJavascriptBridge'
 pod 'PINCache'
 pod 'SnapKit'
 pod 'pop'
+pod 'Aspects'
 pod 'HanekeSwift'
 pod 'MBProgressHUD'
 pod 'Charts'
-pod 'RATreeView'
 
 target 'SwiftMKitDemoTests' do
     testing_pods

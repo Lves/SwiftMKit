@@ -89,6 +89,8 @@
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
+		27784AA91CF686C500960071 /* Aspects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27784AA81CF686C500960071 /* Aspects.framework */; };
+		27784AAA1CF686C500960071 /* Aspects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27784AA81CF686C500960071 /* Aspects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C01CE40FBF00295259 /* RegexHelper.swift */; };
 		277C49C31CE4108800295259 /* RegexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C21CE4108800295259 /* RegexSpec.swift */; };
 		277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */; };
@@ -125,8 +127,6 @@
 		27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */; };
 		27959A521CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */; };
 		27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A531CD3531900546424 /* BaseKitWebViewController.xib */; };
-		279A59B91CF592A100C6C5EB /* RATreeView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279A59B81CF592A100C6C5EB /* RATreeView.framework */; };
-		279A59BA1CF592A100C6C5EB /* RATreeView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 279A59B81CF592A100C6C5EB /* RATreeView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5EA1CEAC5F0004FEA63 /* GestureTentacleView.swift */; };
 		27A1C5ED1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */; };
@@ -238,9 +238,9 @@
 				189D7C481CE5DBCB0044E6EC /* Haneke.framework in Embed Frameworks */,
 				189D7C3F1CE5DBCA0044E6EC /* Charts.framework in Embed Frameworks */,
 				189D7C5E1CE5DBCB0044E6EC /* SnapKit.framework in Embed Frameworks */,
-				279A59BA1CF592A100C6C5EB /* RATreeView.framework in Embed Frameworks */,
 				189D7C4E1CE5DBCB0044E6EC /* MagicalRecord.framework in Embed Frameworks */,
 				2792D42C1CF3DD3800F51608 /* pop.framework in Embed Frameworks */,
+				27784AAA1CF686C500960071 /* Aspects.framework in Embed Frameworks */,
 				189D7C461CE5DBCB0044E6EC /* EZSwiftExtensions.framework in Embed Frameworks */,
 				189D7C4A1CE5DBCB0044E6EC /* IQKeyboardManager.framework in Embed Frameworks */,
 				189D7C5C1CE5DBCB0044E6EC /* Result.framework in Embed Frameworks */,
@@ -305,6 +305,7 @@
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
+		27784AA81CF686C500960071 /* Aspects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Aspects.framework; path = "../Debug-iphonesimulator/Aspects.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		277C49C01CE40FBF00295259 /* RegexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
 		277C49C21CE4108800295259 /* RegexSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexSpec.swift; sourceTree = "<group>"; };
 		277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboard.swift; sourceTree = "<group>"; };
@@ -446,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27D1A9AD1CEEA02A00B511D7 /* CoreLocation.framework in Frameworks */,
+				27784AA91CF686C500960071 /* Aspects.framework in Frameworks */,
 				189D7C3B1CE5DBCA0044E6EC /* Alamofire.framework in Frameworks */,
 				189D7C551CE5DBCB0044E6EC /* PINCache.framework in Frameworks */,
 				189D7C531CE5DBCB0044E6EC /* MJRefresh.framework in Frameworks */,
@@ -456,7 +458,6 @@
 				189D7C471CE5DBCB0044E6EC /* Haneke.framework in Frameworks */,
 				189D7C3E1CE5DBCA0044E6EC /* Charts.framework in Frameworks */,
 				189D7C5D1CE5DBCB0044E6EC /* SnapKit.framework in Frameworks */,
-				279A59B91CF592A100C6C5EB /* RATreeView.framework in Frameworks */,
 				189D7C4D1CE5DBCB0044E6EC /* MagicalRecord.framework in Frameworks */,
 				2792D42B1CF3DD3800F51608 /* pop.framework in Frameworks */,
 				189D7C451CE5DBCB0044E6EC /* EZSwiftExtensions.framework in Frameworks */,
@@ -1073,6 +1074,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27784AA81CF686C500960071 /* Aspects.framework */,
 				279A59B81CF592A100C6C5EB /* RATreeView.framework */,
 				2792D42A1CF3DD3800F51608 /* pop.framework */,
 				27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */,

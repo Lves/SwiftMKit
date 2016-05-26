@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/Alamofire.framework"
+  install_framework "Pods-SwiftMKitDemoTests/Aspects.framework"
   install_framework "Pods-SwiftMKitDemoTests/Charts.framework"
   install_framework "Pods-SwiftMKitDemoTests/CocoaLumberjack.framework"
   install_framework "Pods-SwiftMKitDemoTests/CryptoSwift.framework"
@@ -97,7 +98,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/MJRefresh.framework"
   install_framework "Pods-SwiftMKitDemoTests/MagicalRecord.framework"
   install_framework "Pods-SwiftMKitDemoTests/PINCache.framework"
-  install_framework "Pods-SwiftMKitDemoTests/RATreeView.framework"
   install_framework "Pods-SwiftMKitDemoTests/ReachabilitySwift.framework"
   install_framework "Pods-SwiftMKitDemoTests/ReactiveCocoa.framework"
   install_framework "Pods-SwiftMKitDemoTests/Result.framework"
@@ -109,6 +109,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/Alamofire.framework"
+  install_framework "Pods-SwiftMKitDemoTests/Aspects.framework"
   install_framework "Pods-SwiftMKitDemoTests/Charts.framework"
   install_framework "Pods-SwiftMKitDemoTests/CocoaLumberjack.framework"
   install_framework "Pods-SwiftMKitDemoTests/CryptoSwift.framework"
@@ -121,7 +122,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoTests/MJRefresh.framework"
   install_framework "Pods-SwiftMKitDemoTests/MagicalRecord.framework"
   install_framework "Pods-SwiftMKitDemoTests/PINCache.framework"
-  install_framework "Pods-SwiftMKitDemoTests/RATreeView.framework"
   install_framework "Pods-SwiftMKitDemoTests/ReachabilitySwift.framework"
   install_framework "Pods-SwiftMKitDemoTests/ReactiveCocoa.framework"
   install_framework "Pods-SwiftMKitDemoTests/Result.framework"

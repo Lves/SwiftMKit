@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/Aspects.framework"
   install_framework "Pods/Charts.framework"
   install_framework "Pods/CocoaLumberjack.framework"
   install_framework "Pods/CryptoSwift.framework"
@@ -97,7 +98,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/MagicalRecord.framework"
   install_framework "Pods/PINCache.framework"
-  install_framework "Pods/RATreeView.framework"
   install_framework "Pods/ReachabilitySwift.framework"
   install_framework "Pods/ReactiveCocoa.framework"
   install_framework "Pods/Result.framework"
@@ -107,6 +107,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/Aspects.framework"
   install_framework "Pods/Charts.framework"
   install_framework "Pods/CocoaLumberjack.framework"
   install_framework "Pods/CryptoSwift.framework"
@@ -119,7 +120,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/MagicalRecord.framework"
   install_framework "Pods/PINCache.framework"
-  install_framework "Pods/RATreeView.framework"
   install_framework "Pods/ReachabilitySwift.framework"
   install_framework "Pods/ReactiveCocoa.framework"
   install_framework "Pods/Result.framework"
