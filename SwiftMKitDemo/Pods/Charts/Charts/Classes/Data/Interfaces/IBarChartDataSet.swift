@@ -38,4 +38,9 @@ public protocol IBarChartDataSet: IBarLineScatterCandleBubbleChartDataSet
     
     /// array of labels used to describe the different values of the stacked bars
     var stackLabels: [String] { get set }
+    
+    // ModifySourceCode Add By LiXingLe
+    //动画数据源 BarAnimation
+    var animationVals: [ChartDataEntry]? { get set }
+    // Add end
 }

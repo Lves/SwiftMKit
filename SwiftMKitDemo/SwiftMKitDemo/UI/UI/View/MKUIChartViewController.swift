@@ -28,6 +28,14 @@ import Charts
     let marker =  MKMultipleChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
  2. 单条线的弹框使用 MKChartMarker
  
+四、 柱状图两种数值变化Animation
+ 1. 设置数据源DataSet属性，animationVals是动画后的数组
+    set1.animationVals = yResultValues
+ 2.点击按钮开始动画
+     self.barChartView.customAnimating = true
+     self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
+     self.barChartView.animate(yAxisDuration: 3.0)
+ 
 */
 
 
@@ -48,6 +56,15 @@ class MKUIChartViewController: BaseViewController {
         //2.0 折线图2
         self.buildLineChart2UI()
         
+        let button = UIButton(frame: CGRectMake(100, 900, 100, 44))
+        button.setTitle("Animate", forState: .Normal)
+        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
+            self.barChartView.customAnimating = true
+            self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
+            self.barChartView.animate(yAxisDuration: 3.0)
+        }
+        
         //3.0 柱状图
         self.buildBarChartUI()
         //4.0 ScrollView
@@ -57,6 +74,7 @@ class MKUIChartViewController: BaseViewController {
         
         scrollView.addSubview(self.lineChart)
         scrollView.addSubview(self.lineChart2)
+        scrollView.addSubview(button)
         scrollView.addSubview(self.barChartView)
         
         
@@ -327,7 +345,11 @@ class MKUIChartViewController: BaseViewController {
     
     //MARK: 柱状图
     func buildBarChartUI()  {
-        barChartView = BarChartView(frame: CGRectMake(0, 900,screenSize.width , 400))
+        
+       
+        
+        
+        barChartView = BarChartView(frame: CGRectMake(0, 944,screenSize.width , 400))
         self.barChartView.delegate = self
         self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
         self.barChartView.xAxis.drawGridLinesEnabled = false
@@ -364,7 +386,17 @@ class MKUIChartViewController: BaseViewController {
             yVals1.append(dataEntity)
         }
         
+        //底部填充线
+        var yResultValues = [ChartDataEntry]()
+        for yIndex in  0...10 {
+            let flotVa = (Double) (arc4random()%100);
+            yResultValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
+        }
+        
+        
+        
         let set1 = BarChartDataSet(yVals: yVals1, label: "Compnay A")
+        set1.animationVals = yResultValues
         set1.setColors([UIColor.redColor(),
             UIColor.blueColor(),
             UIColor.orangeColor(),
@@ -375,6 +407,9 @@ class MKUIChartViewController: BaseViewController {
             UIColor.yellowColor(),
             UIColor.greenColor(),
             UIColor.brownColor()], alpha: 1.0)
+        
+        
+        
         let barChartData = BarChartData(xVals: xVals, dataSets: [set1])
         self.barChartView.data = barChartData
         
@@ -386,10 +421,10 @@ class MKUIChartViewController: BaseViewController {
 
 extension MKUIChartViewController:ChartViewDelegate  {
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        print("Seleted");
+       
     }
     func chartValueNothingSelected(chartView: ChartViewBase) {
-         print("NothingSeleted");
+         
     }
 }
 

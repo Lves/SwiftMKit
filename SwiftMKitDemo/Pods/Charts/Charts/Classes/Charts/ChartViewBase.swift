@@ -52,8 +52,15 @@ public class ChartViewBase: NSUIView, ChartDataProvider, ChartAnimatorDelegate
     //是否显示高亮圆点
     // ModifySourceCode Add By LiXingLe
     public var showAllHighlightCircles = false
+    //Add end
     
-    
+    // ModifySourceCode Add By LiXingLe
+    //自定义动画状态 BarAnimation
+    public var customAnimating  = false
+    //是否是返回动画 BarAnimation
+    public var isCustomAnimateBack  = true
+    //Add end
+
     /// the default value formatter
     internal var _defaultValueFormatter: NSNumberFormatter = ChartUtils.defaultValueFormatter()
     
