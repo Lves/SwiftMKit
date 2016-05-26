@@ -34,7 +34,7 @@ public class BaseKitViewModel: NSObject {
 extension BaseKitViewModel {
     
     public func showTip(tip: String, completion : () -> Void = {}) {
-        viewController.showTip(tip, view: self.view, hideAfterDelay: HUDConstant.HideTipAfterDelay, completion: completion)
+        viewController.showTip(tip, view: viewController.view, hideAfterDelay: HUDConstant.HideTipAfterDelay, completion: completion)
     }
     public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
         viewController.showTip(tip, view: view, hideAfterDelay: hideAfterDelay, completion: completion)
