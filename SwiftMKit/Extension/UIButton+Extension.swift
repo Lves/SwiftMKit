@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ReactiveCocoa
 
 public extension UIButton {
     /// cornerRadius
@@ -41,4 +42,10 @@ public extension UIButton {
         }
     }
     
+}
+
+extension UIControl {
+    func addTarget_(target: AnyObject?) {
+        addTarget(target, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+    }
 }
