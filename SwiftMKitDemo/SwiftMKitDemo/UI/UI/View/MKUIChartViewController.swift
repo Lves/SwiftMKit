@@ -35,6 +35,8 @@ import Charts
      self.barChartView.customAnimating = true
      self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
      self.barChartView.animate(yAxisDuration: 3.0)
+五、设置高亮点形状
+    set0.form = .Square //数据点形状
  
 */
 
@@ -125,8 +127,9 @@ class MKUIChartViewController: BaseViewController {
         self.lineChart.delegate = self
         //设置数据
         self.lineChart.data = self.lineChart1Data
-        //动画
-//        self.lineChart.animate(xAxisDuration: 3.0)
+        let height = ChartHighlight(xIndex: 107, dataSetIndex: 1)
+        self.lineChart.highlightValues([height])
+
         
     }
     
@@ -152,9 +155,10 @@ class MKUIChartViewController: BaseViewController {
         set0.fillColor = UIColor.purpleColor()
         set0.drawFilledEnabled = true
         set0.drawCirclesEnabled = false                       //是否显示圆点
-        set0.setCircleColor(UIColor.purpleColor())            //圆颜色
+        set0.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆环颜色
         set0.circleHoleColor = UIColor.purpleColor()          //圆点圆心颜色
-        set0.circleRadius = 6.0                               //圆半径
+        set0.form = .Square                                   //数据点形状
+        set0.circleRadius = 10.0                               //圆半径
         set0.lineWidth = 0
         set0.setColor(UIColor.purpleColor())
         set0.drawValuesEnabled = false  //是否显示数字
@@ -172,9 +176,9 @@ class MKUIChartViewController: BaseViewController {
         set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
-        set2.setCircleColor(UIColor.orangeColor())            //圆点圆环颜色
+        set2.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆点圆环颜色
         set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
-        set2.circleRadius = 6.0                               //圆半径
+        set2.circleRadius = 10.0                               //圆半径
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
 //        set2.fillColor = UIColor.orangeColor()
         
@@ -600,7 +604,8 @@ class MKMultipleChartMarker: ChartMarker {
             //3.0 绘制第二个圆
             CGContextSetFillColorWithColor(context, _subDrawAttributes[NSForegroundColorAttributeName]!.CGColor)
             
-            CGContextAddArc(context, circleX, point.y + 5.0 + _labelSize.height/2.0, circleR, 0, (CGFloat)(2.0*M_PI), 0)
+//            CGContextAddArc(context, circleX, point.y + 5.0 + _labelSize.height/2.0, circleR, 0, (CGFloat)(2.0*M_PI), 0)
+            CGContextFillRect(context, CGRectMake(circleX - circleR , point.y + 5.0 + (_subLabelSize.height/2.0 - circleR) , circleR*2, circleR*2))
             CGContextDrawPath(context, .Fill)
             
             //3.1 bottom
