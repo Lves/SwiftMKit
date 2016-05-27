@@ -37,10 +37,19 @@ class MKUITreeViewController: UIViewController {
         
         let japan = Node(parentId: -1, nodeId: 7, name: "Japan", depth: 0, expand: true, children: nil)
         let dongjing = Node(parentId: 7, nodeId: 8, name: "Dong Jing", depth: 1, expand: false, children: nil)
-        japan.children = [dongjing]
+        let dongjing2 = Node(parentId: 7, nodeId: 10, name: "Dong Jing2", depth: 1, expand: false, children: nil)
+        let dongjing3 = Node(parentId: 7, nodeId: 11, name: "Dong Jing3", depth: 1, expand: false, children: nil)
+        let dongjing4 = Node(parentId: 7, nodeId: 12, name: "Dong Jing4", depth: 1, expand: false, children: nil)
+        let dongjing5 = Node(parentId: 7, nodeId: 13, name: "Dong Jing5", depth: 1, expand: false, children: nil)
+        let dongjing6 = Node(parentId: 7, nodeId: 14, name: "Dong Jing6", depth: 1, expand: false, children: nil)
+        let dongjing7 = Node(parentId: 7, nodeId: 15, name: "Dong Jing7", depth: 1, expand: false, children: nil)
+        let dongjing8 = Node(parentId: 7, nodeId: 16, name: "Dong Jing8", depth: 1, expand: false, children: nil)
+        let dongjing9 = Node(parentId: 7, nodeId: 17, name: "Dong Jing9", depth: 1, expand: false, children: nil)
+        let dongjing10 = Node(parentId: 7, nodeId: 18, name: "Dong Jing10", depth: 1, expand: false, children: nil)
+        japan.children = [dongjing, dongjing2, dongjing3, dongjing4, dongjing5, dongjing6, dongjing7, dongjing8, dongjing9, dongjing10]
         
         let sanpang = Node(parentId: -1, nodeId: 9, name: "San Pang", depth: 0, expand: true, children: nil)
-        dataArray = [tianchao, shiyan, beijing, shanghai, usa, luoshanji, dezhou, japan, dongjing, sanpang]
+        dataArray = [tianchao, shiyan, beijing, shanghai, usa, luoshanji, dezhou, japan, dongjing, sanpang, dongjing2, dongjing3, dongjing4, dongjing5, dongjing6, dongjing7, dongjing8, dongjing9, dongjing10]
     }
     
     deinit {
@@ -70,6 +79,8 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     /// 保存需要展开的节点模型
     var tmpDataArray: [Node]?
+    var startIndex = 0
+    var expandNodeCount = 0
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: .Grouped)
@@ -118,17 +129,41 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
         let startPosition = indexPath.row + 1
         var endPosition = startPosition
         var expand = false
-        for node in dataArray! {
-            if node.parentId == parentNode.nodeId {
-                node.expand = !node.expand
-                if node.expand {
+//        for node in dataArray! {
+//            if node.parentId == parentNode.nodeId {
+//                node.expand = !node.expand
+//                if node.expand {
+//                    tmpDataArray?.insert(node, atIndex: endPosition)
+//                    expand = true
+//                    endPosition += 1
+//                } else {
+//                    expand = false
+//                    endPosition = removeAllNodesAtParentNode(parentNode)
+//                    break
+//                }
+//            }
+//        }
+        if let children = parentNode.children {
+            if children.first!.expand {
+                // 折叠节点
+                expand = false
+                startIndex = (tmpDataArray! as NSArray).indexOfObject(parentNode)
+                expandNodeCount += (startIndex + 1)
+                endPosition = removeAllNodesAtParentNode(parentNode)
+                // 删除被折叠的元素
+                for _ in startIndex + 1 ..< endPosition {
+                    tmpDataArray?.removeAtIndex(startIndex + 1)
+                }
+                // 重置状态
+                startIndex = 0
+                expandNodeCount = 0
+            } else {
+                // 展开节点
+                expand = true
+                for node in children {
                     tmpDataArray?.insert(node, atIndex: endPosition)
-                    expand = true
                     endPosition += 1
-                } else {
-                    expand = false
-                    endPosition = removeAllNodesAtParentNode(parentNode)
-                    break
+                    node.expand = true
                 }
             }
         }
@@ -138,7 +173,7 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
             let indexPath = NSIndexPath(forRow: i, inSection: 0)
             indexPathArray.append(indexPath)
         }
-        // 选择箭头
+        // 旋转箭头
         if expand {
             insertRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
             DDLogInfo("展开：向下->向上")
@@ -164,36 +199,50 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - 删除当前节点下的所有子节点
     func removeAllNodesAtParentNode(parentNode: Node) -> Int {
-        let startPosition = (tmpDataArray! as NSArray).indexOfObject(parentNode)
-        var endPosition = startPosition
-        
-        for i in (startPosition + 1) ..< tmpDataArray!.count {
-            let node = tmpDataArray![i]
-            endPosition += 1
-            if node.depth <= parentNode.depth {
-                break
-            }
-            
-            if endPosition == tmpDataArray!.count - 1 {
-                endPosition += 1
-                node.expand = false
-                break
-            }
-            
+        // 递归删除该节点下的所有子节点
+        for node in parentNode.children! {
+            expandNodeCount += 1
             node.expand = false
-        }
-        if endPosition > startPosition {
-            let range = NSMakeRange(startPosition + 1, endPosition - startPosition - 1)
-            let list: NSArray = tmpDataArray! as NSArray
-            let listM: NSMutableArray = NSMutableArray(array: list)
-            listM.removeObjectsInRange(range)
-            tmpDataArray?.removeAll()
-            for obj in listM {
-                tmpDataArray?.append(obj as! Node)
+            if let children = node.children {
+                if children.count > 0 && children.first!.expand {
+                    removeAllNodesAtParentNode(node)
+                }
             }
         }
-        return endPosition
+        return expandNodeCount
     }
+    
+//    func removeAllNodesAtParentNode(parentNode: Node) -> Int {
+//        let startPosition = (tmpDataArray! as NSArray).indexOfObject(parentNode)
+//        var endPosition = startPosition
+//        
+//        for i in (startPosition + 1) ..< tmpDataArray!.count {
+//            let node = tmpDataArray![i]
+//            endPosition += 1
+//            if node.depth <= parentNode.depth {
+//                break
+//            }
+//            
+//            if endPosition == tmpDataArray!.count - 1 {
+//                endPosition += 1
+//                node.expand = false
+//                break
+//            }
+//            
+//            node.expand = false
+//        }
+//        if endPosition > startPosition {
+//            let range = NSMakeRange(startPosition + 1, endPosition - startPosition - 1)
+//            let list: NSArray = tmpDataArray! as NSArray
+//            let listM: NSMutableArray = NSMutableArray(array: list)
+//            listM.removeObjectsInRange(range)
+//            tmpDataArray?.removeAll()
+//            for obj in listM {
+//                tmpDataArray?.append(obj as! Node)
+//            }
+//        }
+//        return endPosition
+//    }
 }
 
 class Node {
