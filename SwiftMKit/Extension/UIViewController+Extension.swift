@@ -117,6 +117,33 @@ public extension UIViewController {
             self.navigationController?.popViewControllerAnimated(animation)
         }
     }
+    public func routeBack(name name: String, params: Dictionary<String, AnyObject> = [:], animation: Bool = true) -> Bool {
+        DDLogInfo("Route back to \(name)")
+        if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
+            return false
+        } else {
+            var vc: UIViewController?
+            let count = self.navigationController?.viewControllers.count ?? 0
+            for index in 0..<count {
+                if let viewController = self.navigationController?.viewControllers[count - 1 - index] {
+                    if viewController.className == name {
+                        vc = viewController
+                        break
+                    }
+                }
+            }
+            if vc != nil {
+                if vc is BaseKitViewController {
+                    let baseVC = vc as! BaseKitViewController
+                    baseVC.params = params
+                }
+                self.navigationController?.popToViewController(vc!, animated: animation)
+                return true
+            } else {
+                return false
+            }
+        }
+    }
     public func routeToRoot(animation: Bool = true) {
         DDLogInfo("Route to root")
         self.navigationController?.popToRootViewControllerAnimated(animation)
