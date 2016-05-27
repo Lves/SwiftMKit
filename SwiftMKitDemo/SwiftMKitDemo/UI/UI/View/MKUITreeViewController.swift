@@ -52,7 +52,7 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     struct InnerConst {
         static let CellName = "MKUITreeViewCellTableViewCell"
         static let CellID = "MKUITreeViewCellTableViewCell"
-        static let CellIndentationWidth: CGFloat = 30
+        static let Duration = 0.25
     }
     /// 数据源
     var dataArray: [Node]? {
@@ -85,9 +85,6 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
         // 设置代理
         dataSource = self
         delegate = self
-        // 注册cell
-//        self.registerNib(UINib(nibName: InnerConst.CellName, bundle:nil), forCellReuseIdentifier: InnerConst.CellID)
-//        self.registerClass(MKUITreeViewCellTableViewCell.self, forCellReuseIdentifier: InnerConst.CellID)
     }
     
     // MARK: - <TableViewDelegate>
@@ -96,7 +93,6 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = dequeueReusableCellWithIdentifier(InnerConst.CellID) as! MKUITreeViewCellTableViewCell
         let node = tmpDataArray![indexPath.row]
         let isParentNode = node.parentId == -1
         let cell = MKUITreeViewCellTableViewCell.getCell(tableView, isParentNode: isParentNode)
@@ -106,6 +102,11 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
                 obj.nodeId == node.parentId
             })
             cell.parentNode = filterArray?.first
+        } else {
+            let lastParentNode = tmpDataArray?.filter({ (obj) -> Bool in
+                obj.parentId == -1
+            }).last
+            cell.imgLastArrow.hidden = !(lastParentNode!.nodeId == node.nodeId)
         }
         cell.node = node
         return cell
@@ -137,11 +138,27 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
             let indexPath = NSIndexPath(forRow: i, inSection: 0)
             indexPathArray.append(indexPath)
         }
-        
+        // 选择箭头
         if expand {
             insertRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
+            DDLogInfo("展开：向下->向上")
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MKUITreeViewCellTableViewCell
+            guard let imgArrow = cell.imgArrow else {
+                return
+            }
+            UIView.animateWithDuration(InnerConst.Duration) {
+                imgArrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            }
         } else {
             deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
+            DDLogInfo("关闭：向上->向下")
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MKUITreeViewCellTableViewCell
+            guard let imgArrow = cell.imgArrow else {
+                return
+            }
+            UIView.animateWithDuration(InnerConst.Duration) {
+                imgArrow.transform = CGAffineTransformMakeRotation(-CGFloat(M_PI * 2))
+            }
         }
     }
     

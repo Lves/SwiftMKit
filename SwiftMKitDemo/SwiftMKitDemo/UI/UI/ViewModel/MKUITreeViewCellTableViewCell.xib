@@ -11,12 +11,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ybg-y6-veo">
                         <rect key="frame" x="24" y="0.0" width="1" height="44"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.71372549019607845" green="0.71372549019607845" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="KHa-lZ-kTh"/>
                         </constraints>
@@ -34,18 +34,30 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="AWa-wE-nmX">
+                        <rect key="frame" x="291" y="12" width="14" height="8"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="DZL-WY-HxI">
+                        <rect key="frame" x="17" y="36" width="14" height="8"/>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="AWa-wE-nmX" firstAttribute="centerY" secondItem="uRW-qf-AJm" secondAttribute="centerY" id="33s-Gt-sb6"/>
                     <constraint firstItem="uRW-qf-AJm" firstAttribute="leading" secondItem="aLm-GI-3u8" secondAttribute="trailing" constant="8" id="66N-sD-t9n"/>
                     <constraint firstItem="uRW-qf-AJm" firstAttribute="centerY" secondItem="aLm-GI-3u8" secondAttribute="centerY" id="8ED-X9-jSx"/>
                     <constraint firstItem="aLm-GI-3u8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ChE-CH-rWz"/>
                     <constraint firstAttribute="bottom" secondItem="Ybg-y6-veo" secondAttribute="bottom" id="Gkj-Rz-wHP"/>
+                    <constraint firstItem="DZL-WY-HxI" firstAttribute="bottom" secondItem="Ybg-y6-veo" secondAttribute="bottom" id="LPJ-WA-mzj"/>
                     <constraint firstItem="Ybg-y6-veo" firstAttribute="top" secondItem="aLm-GI-3u8" secondAttribute="top" constant="-8" id="Mkl-mM-F8t"/>
+                    <constraint firstItem="DZL-WY-HxI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16.5" id="d0L-Pj-IDl"/>
                     <constraint firstItem="aLm-GI-3u8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="leA-AP-mNy"/>
+                    <constraint firstAttribute="trailing" secondItem="AWa-wE-nmX" secondAttribute="trailing" constant="15" id="lpu-TB-cMa"/>
                     <constraint firstItem="Ybg-y6-veo" firstAttribute="centerX" secondItem="aLm-GI-3u8" secondAttribute="centerX" id="t8V-jM-6Tj"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgArrow" destination="AWa-wE-nmX" id="iDh-lY-1Xw"/>
+                <outlet property="imgLastArrow" destination="DZL-WY-HxI" id="u20-eD-Bl6"/>
                 <outlet property="imgPoint" destination="aLm-GI-3u8" id="6xa-qU-rNv"/>
                 <outlet property="lblName" destination="uRW-qf-AJm" id="dew-oF-52a"/>
                 <outlet property="lblName_LeftConstraint" destination="66N-sD-t9n" id="uik-3L-I2b"/>
@@ -62,7 +74,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shd-Xg-ocs">
                         <rect key="frame" x="23" y="0.0" width="1" height="44"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.71372549019607845" green="0.71372549019607845" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="CaH-sF-8db"/>
                         </constraints>
@@ -125,6 +137,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow_bottom" width="14" height="8"/>
         <image name="point_left" width="16" height="17"/>
     </resources>
 </document>
