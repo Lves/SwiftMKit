@@ -143,7 +143,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart.marker = marker
-        ///李兴乐 默认选中
+        ///默认选中
         defaultHighlight = ChartHighlight(xIndex: (self.lineChart1Data?.xValCount)! - 1, dataSetIndex: 1)
         self.lineChart.indicesDefaultToHighlight = [defaultHighlight!]
         
@@ -225,11 +225,10 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     }
     //MARK: 代理
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        //李兴乐
-        defaultHighlight = highlight
+        defaultHighlight = highlight //更新最后高亮
     }
     func chartValueNothingSelected(chartView: ChartViewBase) {
-        //李兴乐
+        //设置默认高亮
         if defaultHighlight == nil {
             let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
             chartView.indicesDefaultToHighlight = [height]

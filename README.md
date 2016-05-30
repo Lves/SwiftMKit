@@ -519,7 +519,7 @@ else {
 	}
 }
 ```
-3. 移动 `CGContextRestoreGState(context)` 位置，从277移到250行。为了解决高亮点在x、y轴之上
+3. 移动 `CGContextRestoreGState(context)` 位置，从277移到264和274行。解决高亮点在第一个或者最后一个绘制一半的问题
 
 
 ####自定义BarChartView 数值变化动画
