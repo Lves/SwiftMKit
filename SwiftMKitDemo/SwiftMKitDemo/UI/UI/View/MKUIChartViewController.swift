@@ -84,6 +84,8 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
             self.barChartView.customAnimating = true
             self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
+//            self.barChartView.leftAxis.axisMaxValue =  self.barChartView.isCustomAnimateBack ? 100 : 50
+//            self.barChartView.leftAxis.resetCustomAxisMax()
             self.barChartView.animate(yAxisDuration: 3.0)
         }
         
@@ -131,6 +133,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         lineChart.leftAxis.valueFormatter = percentFormatter//y轴显示格式化
         lineChart.leftAxis.axisLineWidth = 0                //左侧线宽度
         lineChart.leftAxis.labelTextColor = UIColor.whiteColor()  //label颜色
+        
         lineChart.rightAxis.enabled = false                 //是否显示右侧轴线
         lineChart.dragEnabled = true                        //是否可以滑动
         lineChart.drawGridBackgroundEnabled = false         //背景色
@@ -393,10 +396,12 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         self.barChartView.delegate = self
         self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
         self.barChartView.xAxis.drawGridLinesEnabled = false
-        self.barChartView.leftAxis.drawGridLinesEnabled = false
+        
+
+        
         self.barChartView.rightAxis.enabled = false
         self.barChartView.xAxis.enabled = false
-        self.barChartView.leftAxis.axisLineWidth = 0
+
         self.barChartView.descriptionText = ""
         
         let percentFormatter = NSNumberFormatter()
@@ -404,6 +409,12 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         percentFormatter.negativeSuffix = "%"
         self.barChartView.leftAxis.valueFormatter = percentFormatter
         self.barChartView.leftAxis.labelPosition = .InsideChart
+        self.barChartView.leftAxis.drawGridLinesEnabled = false
+        self.barChartView.leftAxis.axisLineWidth = 0
+        
+
+        
+        
         
         self.setChartData()
     }
@@ -421,7 +432,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         var yVals1 = [BarChartDataEntry]()
         
         for yIndex in 1...10 {
-            var val = (Double) (arc4random()%100);
+            let val = (Double) (arc4random()%100);
 
             let dataEntity = BarChartDataEntry(value: val, xIndex: yIndex)
             yVals1.append(dataEntity)
@@ -430,7 +441,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         //底部填充线
         var yResultValues = [ChartDataEntry]()
         for yIndex in  1...10 {
-            var flotVa = (Double) (arc4random()%100);
+            let flotVa = (Double) (arc4random()%100);
             yResultValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
