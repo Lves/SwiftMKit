@@ -69,6 +69,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.hidesBottomBarWhenPushed = true
             self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
         case 9:
+            self.hidesBottomBarWhenPushed = true
             self.routeToName(InnerConst.SegueToNextTreeView)
         default:
             break

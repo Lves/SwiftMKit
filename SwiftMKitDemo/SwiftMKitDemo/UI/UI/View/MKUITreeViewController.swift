@@ -23,6 +23,7 @@ class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "订单详情"
         setupData()
         tableView.dataArray = dataArray
         automaticallyAdjustsScrollViewInsets = false
@@ -72,7 +73,7 @@ class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
             ["key左5" : "value右5"]
         ]
         containerVc?.dataArray = data
-        containerView.h = CGFloat(44 * data.count)
+        containerView.h = CGFloat(44 * data.count + 30)
     }
     
     deinit {
@@ -331,6 +332,28 @@ class ContainerTableViewController: UITableViewController {
             cell.lblRight.text = "\(value)"
         }
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGrayColor()
+        let lblTitle = UILabel()
+        lblTitle.text = "明细"
+        lblTitle.sizeToFit()
+        lblTitle.right = UIScreen.mainScreen().bounds.size.width * 0.5
+        lblTitle.h = 30
+        view.addSubview(lblTitle)
+        
+        let btnTip = UIButton(type: .InfoLight)
+        btnTip.x = lblTitle.right + 10
+        btnTip.centerY = lblTitle.centerY
+        view.addSubview(btnTip)
+        
+        return view
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 30
     }
 }
 
