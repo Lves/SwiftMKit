@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NgF-8Z-793">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NgF-8Z-793">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -350,6 +351,7 @@
                         <segue destination="atU-Gq-X8U" kind="show" identifier="routeToIndicatorButton" id="uPy-5b-dVt"/>
                         <segue destination="z0g-R5-LbD" kind="show" identifier="routeToGalaryCollectionView" id="UWy-Wn-mzS"/>
                         <segue destination="cLF-gu-AkB" kind="show" identifier="routeToTreeView" id="LnB-cV-NZc"/>
+                        <segue destination="L2r-Dj-pu0" kind="show" identifier="routeToCustomAlertViewController" id="HFe-K1-DNk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -751,7 +753,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="W3a-at-2M2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <connections>
                                         <segue destination="mHx-YZ-xLr" kind="embed" id="7JK-uP-C0n"/>
@@ -759,7 +761,7 @@
                                 </containerView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="h6y-nT-TH5">
-                                        <rect key="frame" x="0.0" y="227" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="579" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h6y-nT-TH5" id="WVW-2F-BqE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -789,13 +791,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xIF-3P-NXC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContainerTableViewCell" id="xIF-3P-NXC" customClass="ContainerTableViewCell" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xIF-3P-NXC" id="J0C-Jg-nm2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="左边" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ht4-YG-hRg">
+                                            <rect key="frame" x="50" y="12" width="34" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="右边" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqH-1c-Z7f">
+                                            <rect key="frame" x="204" y="12" width="34" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ht4-YG-hRg" firstAttribute="leading" secondItem="J0C-Jg-nm2" secondAttribute="leading" constant="50" id="PGc-en-9kd"/>
+                                        <constraint firstItem="qqH-1c-Z7f" firstAttribute="leading" secondItem="J0C-Jg-nm2" secondAttribute="centerX" constant="16" id="aBE-JD-qgH"/>
+                                        <constraint firstItem="qqH-1c-Z7f" firstAttribute="centerY" secondItem="ht4-YG-hRg" secondAttribute="centerY" id="dxz-wo-aVW"/>
+                                        <constraint firstItem="ht4-YG-hRg" firstAttribute="centerY" secondItem="J0C-Jg-nm2" secondAttribute="centerY" id="xkN-qq-L3f"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lblLeft" destination="ht4-YG-hRg" id="6fq-Cj-0RW"/>
+                                    <outlet property="lblRight" destination="qqH-1c-Z7f" id="WH3-L6-Rcq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -947,14 +973,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Normal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7V-FV-6Ul">
-                                <rect key="frame" x="37" y="150" width="300" height="30"/>
+                                <rect key="frame" x="38" y="150" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Auf-br-P8N"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NoDot" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bxs-Pb-b2D">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NoDot" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bxs-Pb-b2D">
                                 <rect key="frame" x="37" y="200" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="h5H-Kv-Cfo"/>
@@ -962,7 +988,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Money" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="enx-RW-Xeo">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Money" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="enx-RW-Xeo">
                                 <rect key="frame" x="37" y="250" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Lv9-sg-mJL"/>
@@ -1064,6 +1090,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UL-eT-2fr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1274.5" y="601.5"/>
+        </scene>
+        <!--Custom Alert View Controller-->
+        <scene sceneID="9aN-Hr-JHr">
+            <objects>
+                <viewController id="L2r-Dj-pu0" customClass="MKUICustomAlertViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aee-xg-xvt"/>
+                        <viewControllerLayoutGuide type="bottom" id="bLw-rt-ved"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cST-Xf-CDq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLN-mp-QQ1">
+                                <rect key="frame" x="111" y="247" width="153" height="73"/>
+                                <state key="normal" title="弹框"/>
+                                <connections>
+                                    <action selector="click_show:" destination="L2r-Dj-pu0" eventType="touchUpInside" id="OXm-xo-V9F"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="BuL-Kl-jEb"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9rq-gv-Eni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1811.5" y="2441.5"/>
         </scene>
         <!--Segment Container View Controller-->
         <scene sceneID="o9D-C1-eMM">
@@ -1176,7 +1231,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJA-Fe-LQi" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJA-Fe-LQi" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="166" width="335" height="42"/>
                                 <state key="normal" title="开始" backgroundImage="btn_blue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1184,7 +1239,7 @@
                                 <state key="disabled" backgroundImage="btn_blue"/>
                                 <state key="highlighted" backgroundImage="btn_blue_h"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eP-hx-gTw" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eP-hx-gTw" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="238" width="335" height="42"/>
                                 <state key="normal" title="开始" backgroundImage="btn_blue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1192,7 +1247,7 @@
                                 <state key="disabled" title="进行中" backgroundImage="btn_blue"/>
                                 <state key="highlighted" backgroundImage="btn_blue_h"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ae-r7-ibH" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ae-r7-ibH" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="310" width="165" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="165" id="RHz-eF-WvC"/>
@@ -1203,7 +1258,7 @@
                                 <state key="disabled" title="这是一段很长的文字" backgroundImage="btn_blue"/>
                                 <state key="highlighted" backgroundImage="btn_blue_h"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzY-5l-H7w" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzY-5l-H7w" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="382" width="120" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="JMt-3K-uSO"/>

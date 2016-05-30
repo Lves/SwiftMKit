@@ -51,6 +51,7 @@ class MKUITreeViewCellTableViewCell: UITableViewCell {
                         return
                     }
                     // 这里可以正常使用children变量
+                    imgArrow.hidden = false
                 }
             }
         }

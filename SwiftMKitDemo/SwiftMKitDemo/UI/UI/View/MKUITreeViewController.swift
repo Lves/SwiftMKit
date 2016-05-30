@@ -12,17 +12,26 @@ import CocoaLumberjack
 class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
     @IBOutlet weak var tableView: TreeTableView!
     @IBOutlet weak var containerView: UIView!
+    private var containerVc: ContainerTableViewController? {
+        get {
+            return (self.childViewControllers.first) as? ContainerTableViewController
+        }
+    }
+
     var dataArray: [Node]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "订单详情"
         setupData()
         tableView.dataArray = dataArray
         automaticallyAdjustsScrollViewInsets = false
         tableView.separatorStyle = .None
         // 设置代理
         tableView.tt_delegate = self
+        
+        setupContainerViewData()
     }
     
     func setupData() {
@@ -53,6 +62,18 @@ class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
         
         let sanpang = Node(parentId: -1, nodeId: 9, name: "San Pang", depth: 0, expand: true, children: nil)
         dataArray = [tianchao, shiyan, beijing, shanghai, usa, luoshanji, dezhou, japan, dongjing, sanpang, dongjing2, dongjing3, dongjing4, dongjing5, dongjing6, dongjing7, dongjing8, dongjing9, dongjing10]
+    }
+    
+    func setupContainerViewData() {
+        let data = [
+            ["key左1" : "value右1"],
+            ["key左2" : "value右2"],
+            ["key左3" : "value右3"],
+            ["key左4" : "value右4"],
+            ["key左5" : "value右5"]
+        ]
+        containerVc?.dataArray = data
+        containerView.h = CGFloat(44 * data.count + 30)
     }
     
     deinit {
@@ -125,13 +146,13 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
         let node = tmpDataArray![indexPath.row]
         let isParentNode = node.parentId == -1
         let cell = MKUITreeViewCellTableViewCell.getCell(tableView, isParentNode: isParentNode)
-        if !isParentNode {
+        if !isParentNode {  // 不是父节点
             // 找出 parentNode
             let filterArray = tmpDataArray?.filter({ obj -> Bool in
                 obj.nodeId == node.parentId
             })
             cell.parentNode = filterArray?.first
-        } else {
+        } else {    // 是父节点
             let lastParentNode = tmpDataArray?.filter({ (obj) -> Bool in
                 obj.parentId == -1
             }).last
@@ -269,6 +290,7 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
 //    }
 }
 
+// MARK: - 模型：Node
 public class Node {
     var parentId: Int
     var nodeId: Int
@@ -288,7 +310,54 @@ public class Node {
 }
 
 
-// MARK: - ContainerViewController
+// MARK: - ContainerTableViewController
 class ContainerTableViewController: UITableViewController {
+    // 数据源
+    var dataArray:[[String: String]]? {
+        didSet {
+            // 刷新表格
+            tableView.reloadData()
+        }
+    }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataArray?.count ?? 0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ContainerTableViewCell") as! ContainerTableViewCell
+        let data = dataArray![indexPath.row]
+        for (key, value) in data {
+            cell.lblLeft.text = "\(key)"
+            cell.lblRight.text = "\(value)"
+        }
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGrayColor()
+        let lblTitle = UILabel()
+        lblTitle.text = "明细"
+        lblTitle.sizeToFit()
+        lblTitle.right = UIScreen.mainScreen().bounds.size.width * 0.5
+        lblTitle.h = 30
+        view.addSubview(lblTitle)
+        
+        let btnTip = UIButton(type: .InfoLight)
+        btnTip.x = lblTitle.right + 10
+        btnTip.centerY = lblTitle.centerY
+        view.addSubview(btnTip)
+        
+        return view
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 30
+    }
+}
+
+class ContainerTableViewCell: UITableViewCell {
+    @IBOutlet weak var lblLeft: UILabel!
+    @IBOutlet weak var lblRight: UILabel!
 }

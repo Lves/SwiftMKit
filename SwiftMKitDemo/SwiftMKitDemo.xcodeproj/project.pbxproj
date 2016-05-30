@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016502A41CF6F88B001B063F /* AlertCustomBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016502A31CF6F88B001B063F /* AlertCustomBaseView.swift */; };
+		016502A61CF6FAAC001B063F /* AlertCustomBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016502A51CF6FAAC001B063F /* AlertCustomBaseView.xib */; };
+		01CCB0DD1CFC341900D06AD0 /* MKUICustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */; };
 		030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */; };
 		0343417F1CDC775A00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
 		034341801CDC775F00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
@@ -260,6 +263,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		016502A31CF6F88B001B063F /* AlertCustomBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCustomBaseView.swift; sourceTree = "<group>"; };
+		016502A51CF6FAAC001B063F /* AlertCustomBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertCustomBaseView.xib; sourceTree = "<group>"; };
+		01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUICustomAlertViewController.swift; sourceTree = "<group>"; };
 		030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardProtocol.swift; sourceTree = "<group>"; };
 		0343417E1CDC775A00249EE3 /* testhaha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testhaha.jpg; sourceTree = "<group>"; };
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
@@ -501,6 +507,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		016502A21CF6F84B001B063F /* AlertCustomView */ = {
+			isa = PBXGroup;
+			children = (
+				016502A31CF6F88B001B063F /* AlertCustomBaseView.swift */,
+				016502A51CF6FAAC001B063F /* AlertCustomBaseView.xib */,
+			);
+			path = AlertCustomView;
+			sourceTree = "<group>";
+		};
 		034FB88A1CD1EC2200E90738 /* Operation */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +641,7 @@
 			isa = PBXGroup;
 			children = (
 				FBE54A2E1CF3F2A3001C493A /* Password */,
+				016502A21CF6F84B001B063F /* AlertCustomView */,
 				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
 				270692CF1CE9F27D00CF211A /* GesturePassword */,
@@ -717,6 +733,7 @@
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
 				181164E91CF68C0800771597 /* MKUITreeViewController.swift */,
+				01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1252,6 +1269,7 @@
 				FBE54A3E1CF48F2D001C493A /* PasswordTextView.xib in Resources */,
 				181164F01CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
+				016502A61CF6FAAC001B063F /* AlertCustomBaseView.xib in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
 				034341801CDC775F00249EE3 /* testhaha.jpg in Resources */,
 				27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */,
@@ -1455,6 +1473,7 @@
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
 				27D1A9B01CEEA78300B511D7 /* GalaryLinearLayout.swift in Sources */,
+				01CCB0DD1CFC341900D06AD0 /* MKUICustomAlertViewController.swift in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
 				272F397F1CED51EC003C02F4 /* Action+Extension.swift in Sources */,
 				278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */,
@@ -1470,6 +1489,7 @@
 				3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */,
 				27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */,
 				274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */,
+				016502A41CF6F88B001B063F /* AlertCustomBaseView.swift in Sources */,
 				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,
 				270692CD1CE9F27100CF211A /* DocumentCache.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
