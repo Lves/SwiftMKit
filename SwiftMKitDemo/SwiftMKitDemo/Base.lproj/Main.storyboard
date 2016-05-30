@@ -789,13 +789,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xIF-3P-NXC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContainerTableViewCell" id="xIF-3P-NXC" customClass="ContainerTableViewCell" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xIF-3P-NXC" id="J0C-Jg-nm2">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="左边" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ht4-YG-hRg">
+                                            <rect key="frame" x="16" y="12" width="34" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="右边" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqH-1c-Z7f">
+                                            <rect key="frame" x="325" y="12" width="34" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ht4-YG-hRg" firstAttribute="leading" secondItem="J0C-Jg-nm2" secondAttribute="leading" constant="16" id="PGc-en-9kd"/>
+                                        <constraint firstAttribute="trailing" secondItem="qqH-1c-Z7f" secondAttribute="trailing" constant="16" id="aBE-JD-qgH"/>
+                                        <constraint firstItem="qqH-1c-Z7f" firstAttribute="centerY" secondItem="ht4-YG-hRg" secondAttribute="centerY" id="dxz-wo-aVW"/>
+                                        <constraint firstItem="ht4-YG-hRg" firstAttribute="centerY" secondItem="J0C-Jg-nm2" secondAttribute="centerY" id="xkN-qq-L3f"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lblLeft" destination="ht4-YG-hRg" id="6fq-Cj-0RW"/>
+                                    <outlet property="lblRight" destination="qqH-1c-Z7f" id="WH3-L6-Rcq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

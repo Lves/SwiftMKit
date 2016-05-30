@@ -12,6 +12,12 @@ import CocoaLumberjack
 class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
     @IBOutlet weak var tableView: TreeTableView!
     @IBOutlet weak var containerView: UIView!
+    private var containerVc: ContainerTableViewController? {
+        get {
+            return (self.childViewControllers.first) as? ContainerTableViewController
+        }
+    }
+
     var dataArray: [Node]?
     
     override func viewDidLoad() {
@@ -269,6 +275,7 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
 //    }
 }
 
+// MARK: - 模型：Node
 public class Node {
     var parentId: Int
     var nodeId: Int
@@ -288,7 +295,23 @@ public class Node {
 }
 
 
-// MARK: - ContainerViewController
+// MARK: - ContainerTableViewController
 class ContainerTableViewController: UITableViewController {
     
+    
+    var dataArray:[String: String]?
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataArray?.count ?? 0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ContainerTableViewCell")!
+        return cell
+    }
+}
+
+class ContainerTableViewCell: UITableViewCell {
+    @IBOutlet weak var lblLeft: UILabel!
+    @IBOutlet weak var lblRight: UILabel!
 }
