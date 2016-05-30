@@ -881,8 +881,7 @@ CGContextRestoreGState(context)
                         //lxingle
                         let userE = animateBack ? e : animationE
 
-                        let x = CGFloat(e.xIndex + (e.xIndex * (dataSetCount - 1)) + dataSetIndex) + groupSpace * CGFloat(e.xIndex) + groupSpace / 2.0
-//                        let y = userE.value
+                        
                         
 //                        let valuePoint = trans.getTransformedValueBarChart(
 //                            entry: userE,
@@ -894,6 +893,7 @@ CGContextRestoreGState(context)
 //                        )
 
                         // ............ start ..............
+                        let x = CGFloat(e.xIndex + (e.xIndex * (dataSetCount - 1)) + dataSetIndex) + groupSpace * CGFloat(e.xIndex) + groupSpace / 2.0
                         var yPoint:CGFloat = 0.0
                         if animateBack {
                             yPoint = CGFloat(animationE.value) + (CGFloat(e.value) - CGFloat(animationE.value)) * phaseY
