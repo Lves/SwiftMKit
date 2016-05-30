@@ -350,6 +350,7 @@
                         <segue destination="kWl-XK-QSQ" kind="show" identifier="routeToGesturePassword" id="U0f-4M-F26"/>
                         <segue destination="atU-Gq-X8U" kind="show" identifier="routeToIndicatorButton" id="uPy-5b-dVt"/>
                         <segue destination="z0g-R5-LbD" kind="show" identifier="routeToGalaryCollectionView" id="UWy-Wn-mzS"/>
+                        <segue destination="cLF-gu-AkB" kind="show" identifier="routeToTreeView" id="LnB-cV-NZc"/>
                         <segue destination="L2r-Dj-pu0" kind="show" identifier="routeToCustomAlertViewController" id="HFe-K1-DNk"/>
                     </connections>
                 </viewController>

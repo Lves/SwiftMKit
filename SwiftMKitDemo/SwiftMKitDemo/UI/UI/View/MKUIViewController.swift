@@ -21,6 +21,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         static let SegueToNextGesturePasswordView = "routeToGesturePassword"
         static let SegueToNextIndicatorButtonView = "routeToIndicatorButton"
         static let SegueToNextGalaryCollectionView = "routeToGalaryCollectionView"
+        static let SegueToNextTreeView = "routeToTreeView"
+        
         static let SegueToNextCustomAlertView = "routeToCustomAlertViewController"
         static let SegueToNextUrl = "http://www.baidu.com"
     }
@@ -68,7 +70,10 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.hidesBottomBarWhenPushed = true
             self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
         case 9:
-            self.routeToName(InnerConst.SegueToNextCustomAlertView)
+            self.hidesBottomBarWhenPushed = true
+            self.routeToName(InnerConst.SegueToNextTreeView)
+        case 10:
+        self.routeToName(InnerConst.SegueToNextCustomAlertView)
         default:
             break
         }

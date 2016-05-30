@@ -640,6 +640,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FBE54A2E1CF3F2A3001C493A /* Password */,
 				016502A21CF6F84B001B063F /* AlertCustomView */,
 				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
@@ -731,6 +732,7 @@
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
+				181164E91CF68C0800771597 /* MKUITreeViewController.swift */,
 				01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */,
 			);
 			path = View;
