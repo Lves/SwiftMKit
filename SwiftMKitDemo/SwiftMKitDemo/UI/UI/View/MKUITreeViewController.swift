@@ -169,7 +169,7 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
                 expand = false
                 startIndex = (tmpDataArray! as NSArray).indexOfObject(parentNode)
                 expandNodeCount += (startIndex + 1)
-                endPosition = removeAllNodesAtParentNode(parentNode)
+                endPosition = calcExpandNodesCountAtParentNode(parentNode)
                 // 删除被折叠的元素
                 for _ in startIndex + 1 ..< endPosition {
                     tmpDataArray?.removeAtIndex(startIndex + 1)
@@ -196,7 +196,6 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
         // 旋转箭头
         if expand {
             insertRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
-            DDLogInfo("展开：向下->向上")
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! MKUITreeViewCellTableViewCell
             guard let imgArrow = cell.imgArrow else {
                 return
@@ -206,7 +205,6 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
             }
         } else {
             deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
-            DDLogInfo("关闭：向上->向下")
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! MKUITreeViewCellTableViewCell
             guard let imgArrow = cell.imgArrow else {
                 return
@@ -217,17 +215,22 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    // MARK: - 删除当前节点下的所有子节点
-    func removeAllNodesAtParentNode(parentNode: Node) -> Int {
+    // MARK: - 计算某个节点下展开的所有子节点数量
+    func calcExpandNodesCountAtParentNode(parentNode: Node) -> Int {
         // 递归删除该节点下的所有子节点
         for node in parentNode.children! {
             expandNodeCount += 1
             node.expand = false
-            if let children = node.children {
-                if children.count > 0 && children.first!.expand {
-                    removeAllNodesAtParentNode(node)
-                }
+            guard let children = node.children where children.count > 0 && children.first!.expand else {
+                continue
             }
+            calcExpandNodesCountAtParentNode(node)
+            
+//            if let children = node.children {
+//                if children.count > 0 && children.first!.expand {
+//                    removeAllNodesAtParentNode(node)
+//                }
+//            }
         }
         return expandNodeCount
     }
