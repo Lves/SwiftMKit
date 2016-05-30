@@ -9,7 +9,7 @@
 import UIKit
 import CocoaLumberjack
 
-class MKUITreeViewController: UIViewController {
+class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
     @IBOutlet weak var tableView: TreeTableView!
     var dataArray: [Node]?
     
@@ -20,6 +20,8 @@ class MKUITreeViewController: UIViewController {
         tableView.dataArray = dataArray
         automaticallyAdjustsScrollViewInsets = false
         tableView.separatorStyle = .None
+        // 设置代理
+        tableView.tt_delegate = self
     }
     
     func setupData() {
@@ -55,9 +57,22 @@ class MKUITreeViewController: UIViewController {
     deinit {
         DDLogError("我走了 : \(NSStringFromClass(self.dynamicType))")
     }
+    
+    // MARK: - <TreeTableViewDelegate>
+    func tableView(treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: NSIndexPath, node: Node) {
+        DDLogInfo("选中了第 \(indexPath.row) 行，值是 \(node.name)")
+    }
 }
 
-class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+public protocol TreeTableViewDelegate: class {
+    func tableView(treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: NSIndexPath, node: Node);
+}
+
+public extension TreeTableViewDelegate {
+    public func tableView(treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: NSIndexPath, node: Node){}
+}
+
+public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     struct InnerConst {
         static let CellName = "MKUITreeViewCellTableViewCell"
         static let CellID = "MKUITreeViewCellTableViewCell"
@@ -82,12 +97,14 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     var startIndex = 0
     var expandNodeCount = 0
     
-    override init(frame: CGRect, style: UITableViewStyle) {
+    weak var tt_delegate: TreeTableViewDelegate?
+    
+    public override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: .Grouped)
         setup()
     }
     
-    required init?(coder decoder: NSCoder) {
+    public required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         setup()
     }
@@ -99,11 +116,11 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     // MARK: - <TableViewDelegate>
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tmpDataArray?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let node = tmpDataArray![indexPath.row]
         let isParentNode = node.parentId == -1
         let cell = MKUITreeViewCellTableViewCell.getCell(tableView, isParentNode: isParentNode)
@@ -123,9 +140,12 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: 代理，让调用方知道点击的是哪个
         let parentNode = tmpDataArray![indexPath.row]
+        if let handle = tt_delegate {
+            handle.tableView(self, didSelectRowAtIndexPath: indexPath, node: parentNode)
+        }
         let startPosition = indexPath.row + 1
         var endPosition = startPosition
         var expand = false
@@ -245,7 +265,7 @@ class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
 //    }
 }
 
-class Node {
+public class Node {
     var parentId: Int
     var nodeId: Int
     var name: String
@@ -253,7 +273,7 @@ class Node {
     var expand: Bool
     var children: [Node]?
     
-    init(parentId: Int, nodeId: Int, name: String, depth: Int, expand: Bool, children: [Node]?) {
+    public init(parentId: Int, nodeId: Int, name: String, depth: Int, expand: Bool, children: [Node]?) {
         self.parentId = parentId
         self.nodeId = nodeId
         self.name = name
