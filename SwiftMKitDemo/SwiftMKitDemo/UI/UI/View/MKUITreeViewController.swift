@@ -11,6 +11,7 @@ import CocoaLumberjack
 
 class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
     @IBOutlet weak var tableView: TreeTableView!
+    @IBOutlet weak var containerView: UIView!
     var dataArray: [Node]?
     
     override func viewDidLoad() {
@@ -284,4 +285,10 @@ public class Node {
         self.expand = expand
         self.children = children
     }
+}
+
+
+// MARK: - ContainerViewController
+class ContainerTableViewController: UITableViewController {
+    
 }

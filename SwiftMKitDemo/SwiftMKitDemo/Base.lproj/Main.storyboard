@@ -780,6 +780,34 @@
             </objects>
             <point key="canvasLocation" x="2571.5" y="2957.5"/>
         </scene>
+        <!--Container Table View Controller-->
+        <scene sceneID="rmc-cG-kq7">
+            <objects>
+                <tableViewController id="F3p-a3-sI6" customClass="ContainerTableViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BhS-4L-9W6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xIF-3P-NXC">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xIF-3P-NXC" id="J0C-Jg-nm2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="F3p-a3-sI6" id="jJY-IE-Ofl"/>
+                            <outlet property="delegate" destination="F3p-a3-sI6" id="e9b-eB-ERE"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NOM-ct-WlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1663.5" y="2677"/>
+        </scene>
         <!--Tree View Controller-->
         <scene sceneID="INP-qw-DcJ">
             <objects>
@@ -795,6 +823,13 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="agi-Xr-1pK" customClass="TreeTableView" customModule="SwiftMKitDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="WNO-X4-pGj">
+                                    <rect key="frame" x="0.0" y="64" width="375" height="126"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <connections>
+                                        <segue destination="F3p-a3-sI6" kind="embed" id="jIZ-0j-5GH"/>
+                                    </connections>
+                                </containerView>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -806,12 +841,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="WNO-X4-pGj" id="1vm-sy-Kmh"/>
                         <outlet property="tableView" destination="agi-Xr-1pK" id="qIl-6f-8C9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="doh-96-05y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="2132"/>
+            <point key="canvasLocation" x="1663.5" y="2131.5"/>
         </scene>
         <!--Side View Detail-->
         <scene sceneID="aRT-Ha-gtM">
