@@ -68,8 +68,11 @@ class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
             ["key左1" : "value右1"],
             ["key左2" : "value右2"],
             ["key左3" : "value右3"],
+            ["key左4" : "value右4"],
+            ["key左5" : "value右5"]
         ]
         containerVc?.dataArray = data
+        containerView.h = CGFloat(44 * data.count)
     }
     
     deinit {
@@ -142,13 +145,13 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
         let node = tmpDataArray![indexPath.row]
         let isParentNode = node.parentId == -1
         let cell = MKUITreeViewCellTableViewCell.getCell(tableView, isParentNode: isParentNode)
-        if !isParentNode {
+        if !isParentNode {  // 不是父节点
             // 找出 parentNode
             let filterArray = tmpDataArray?.filter({ obj -> Bool in
                 obj.nodeId == node.parentId
             })
             cell.parentNode = filterArray?.first
-        } else {
+        } else {    // 是父节点
             let lastParentNode = tmpDataArray?.filter({ (obj) -> Bool in
                 obj.parentId == -1
             }).last
@@ -322,9 +325,10 @@ class ContainerTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ContainerTableViewCell") as! ContainerTableViewCell
-        for data in dataArray! {
-            cell.lblLeft.text = "\(data.keys.first!)"
-            cell.lblLeft.text = "\(data.values.first!)"
+        let data = dataArray![indexPath.row]
+        for (key, value) in data {
+            cell.lblLeft.text = "\(key)"
+            cell.lblRight.text = "\(value)"
         }
         return cell
     }
