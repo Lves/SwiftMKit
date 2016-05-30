@@ -60,7 +60,10 @@ public class ChartViewBase: NSUIView, ChartDataProvider, ChartAnimatorDelegate
     //是否是返回动画 BarAnimation
     public var isCustomAnimateBack  = true
     //Add end
-
+    // ModifySourceCode Add By LiXingLe  绘制默认高亮点
+    public var indicesDefaultToHighlight = [ChartHighlight]()
+    //Add end
+    
     /// the default value formatter
     internal var _defaultValueFormatter: NSNumberFormatter = ChartUtils.defaultValueFormatter()
     

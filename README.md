@@ -455,7 +455,7 @@ public enum ChartDataForm: Int
                 
                 rect.size.width = circleDiameter
                 rect.size.height = circleDiameter
-                //李兴乐 ,绘制外环数据点
+                //lixingle ,绘制外环数据点
 //                CGContextFillEllipseInRect(context, rect)
                 if dataSet.form == .Circle {
                     CGContextFillEllipseInRect(context, rect)
@@ -500,7 +500,29 @@ renderer?.drawCircleIndex(context: context, indices: _indicesToHighlight)
 }
 ```
 
-###自定义BarChartView 数值变化动画
+#### 默认高亮点
+1. ChartViewBase.swift  ChartViewBase类中添加存储属性`indicesDefaultToHighlight`存储默认高亮点信息
+
+```
+ // ModifySourceCode Add By LiXingLe  绘制默认高亮点
+ public var indicesDefaultToHighlight = [ChartHighlight]()
+ //Add end
+```
+
+2. 在BarLineChartViewBase.swift（270行左右）添加else非高亮状态下绘制高亮点
+
+```
+else {
+	// ModifySourceCode Add By LiXingLe  绘制默认高亮点
+	if showAllHighlightCircles {
+	    renderer?.drawCircleIndex(context: context, indices: indicesDefaultToHighlight)
+	}
+}
+```
+3. 移动 `CGContextRestoreGState(context)` 位置，从277移到250行。为了解决高亮点在x、y轴之上
+
+
+####自定义BarChartView 数值变化动画
 1. ChartViewBase.swift 中的 ChartViewBase类中添加两个参数
 
 ```

@@ -748,6 +748,10 @@ public class LineChartRenderer: LineRadarChartRenderer
             animator = animator
             else { return }
         
+        if indices.count <= 0 {
+            return
+        }
+        
         let phaseX = animator.phaseX
         let phaseY = animator.phaseY
         
@@ -792,7 +796,7 @@ public class LineChartRenderer: LineRadarChartRenderer
             for j in minx ..< Int(ceil(CGFloat(maxx - minx) * phaseX + CGFloat(minx)))
             {
                 
-                if indices[0].xIndex != j {
+                if  indices[0].xIndex != j {
                     continue
                 }
                 
@@ -822,7 +826,7 @@ public class LineChartRenderer: LineRadarChartRenderer
                 
                 rect.size.width = circleDiameter
                 rect.size.height = circleDiameter
-                //李兴乐 ,绘制外环数据点
+                //lixingle ,绘制外环数据点
 //                CGContextFillEllipseInRect(context, rect)
                 if dataSet.form == .Circle {
                     CGContextFillEllipseInRect(context, rect)

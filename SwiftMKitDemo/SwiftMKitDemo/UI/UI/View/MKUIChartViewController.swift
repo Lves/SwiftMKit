@@ -2,7 +2,7 @@
 //  MKUIChartViewController.swift
 //  SwiftMKitDemo
 //
-//  Created by Mao on 5/10/16.
+//  Created by lixingle on 5/10/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Charts
 
 
 /*
-一.显示高亮圆点 
+一.显示高亮点
  1.设置图形是否开启高亮圆点功能： 
     lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
  2.设置数据源DataSet的圆点样式：
@@ -38,16 +38,36 @@ import Charts
 五、设置高亮点形状
     set0.form = .Square //数据点形状
  
+六、默认高亮点
+ 0. 前提是 lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
+ 1.controller中添加一个存储属性 defaultHighlight:ChartHighlight? 存储默认高亮点
+ 2.添加数据源时，设置默认高亮点
+     defaultHighlight = ChartHighlight(xIndex: (self.lineChart1Data?.xValCount)! - 1, dataSetIndex: 1)
+     self.lineChart.indicesDefaultToHighlight = [defaultHighlight!]
+ 3. 在代理中保存最新的默认高亮点
+     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        defaultHighlight = highlight
+     }
+     func chartValueNothingSelected(chartView: ChartViewBase) {
+         if defaultHighlight == nil {
+             let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
+             chartView.indicesDefaultToHighlight = [height]
+         }else {
+             chartView.indicesDefaultToHighlight = [defaultHighlight!]
+         }
+     }
 */
 
 
-class MKUIChartViewController: BaseViewController {
+class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     let screenSize = UIScreen.mainScreen().bounds.size
     let kBlackColor  = NSUIColor(red: 46/255.0, green: 52/255.0, blue: 72/255.0, alpha: 1.0)
     var lineChart:LineChartView!
     var lineChart2:LineChartView!
     var barChartView:BarChartView!
     var lineChart1Data:ChartData?
+    
+    var defaultHighlight:ChartHighlight?
     
     
     override func viewDidLoad() {
@@ -86,6 +106,7 @@ class MKUIChartViewController: BaseViewController {
         //获得数据
         self.buildLineData1()
         
+        
         lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 400))
         lineChart.backgroundColor = kBlackColor
         lineChart.alpha = 0.8
@@ -122,13 +143,14 @@ class MKUIChartViewController: BaseViewController {
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart.marker = marker
-
+        ///李兴乐 默认选中
+        defaultHighlight = ChartHighlight(xIndex: (self.lineChart1Data?.xValCount)! - 1, dataSetIndex: 1)
+        self.lineChart.indicesDefaultToHighlight = [defaultHighlight!]
         
         self.lineChart.delegate = self
         //设置数据
         self.lineChart.data = self.lineChart1Data
-        let height = ChartHighlight(xIndex: 107, dataSetIndex: 1)
-        self.lineChart.highlightValues([height])
+
 
         
     }
@@ -201,6 +223,21 @@ class MKUIChartViewController: BaseViewController {
         
         self.lineChart1Data = lineData
     }
+    //MARK: 代理
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        //李兴乐
+        defaultHighlight = highlight
+    }
+    func chartValueNothingSelected(chartView: ChartViewBase) {
+        //李兴乐
+        if defaultHighlight == nil {
+            let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
+            chartView.indicesDefaultToHighlight = [height]
+        }else {
+            chartView.indicesDefaultToHighlight = [defaultHighlight!]
+        }
+    }
+
     
     //MARK: 折线图2
     
@@ -239,7 +276,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.marker = marker
         
         
-        self.lineChart2.delegate = self
+//        self.lineChart2.delegate = self
         self.setLine2Data()
         
         
@@ -419,15 +456,6 @@ class MKUIChartViewController: BaseViewController {
     }
 }
 
-
-extension MKUIChartViewController:ChartViewDelegate  {
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-       
-    }
-    func chartValueNothingSelected(chartView: ChartViewBase) {
-         
-    }
-}
 
 
 

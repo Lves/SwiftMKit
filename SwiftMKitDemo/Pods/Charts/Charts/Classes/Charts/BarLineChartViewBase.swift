@@ -245,6 +245,9 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         }
         // update end
         
+        //ModifySourceCode udate by lixingle 移动位置，原来在绘制高亮点和线以后
+        // Removes clipping rectangle
+        CGContextRestoreGState(context)
         
         // if highlighting is enabled
         if (valuesToHighlight())
@@ -264,10 +267,14 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                  renderer?.drawCircleIndex(context: context, indices: _indicesToHighlight)
             }
            //Add end
+        }else {
+            // ModifySourceCode Add By LiXingLe  绘制默认高亮点
+            if showAllHighlightCircles {
+                renderer?.drawCircleIndex(context: context, indices: indicesDefaultToHighlight)
+            }
         }
 
-        // Removes clipping rectangle
-        CGContextRestoreGState(context)
+        
         
         renderer!.drawExtras(context: context)
         
