@@ -81,8 +81,9 @@ public class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRad
     public var drawRangeFilledEnabled = false
     //fillRange的较低值
     public var fillLowerYValues:[ChartDataEntry] = []
+    //实现高亮点类型
+    public var form: ChartDataForm = .Circle
     //Finish add
-    
     
     /// Returns true if filled drawing is enabled, false if not
     public var isDrawFilledEnabled: Bool

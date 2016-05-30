@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/Aspects.framework"
   install_framework "Pods/Charts.framework"
   install_framework "Pods/CocoaLumberjack.framework"
   install_framework "Pods/CryptoSwift.framework"
@@ -102,9 +103,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Result.framework"
   install_framework "Pods/SnapKit.framework"
   install_framework "Pods/WebViewJavascriptBridge.framework"
+  install_framework "Pods/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/Aspects.framework"
   install_framework "Pods/Charts.framework"
   install_framework "Pods/CocoaLumberjack.framework"
   install_framework "Pods/CryptoSwift.framework"
@@ -122,4 +125,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Result.framework"
   install_framework "Pods/SnapKit.framework"
   install_framework "Pods/WebViewJavascriptBridge.framework"
+  install_framework "Pods/pop.framework"
 fi

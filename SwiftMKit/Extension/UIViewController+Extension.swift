@@ -10,6 +10,25 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
+public extension UIViewController {
+    public static var topController: UIViewController? {
+        get {
+            if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                if let nav = topController as? UINavigationController {
+                    if let vc = nav.viewControllers.last {
+                        topController = vc
+                    }
+                }
+                return topController
+            }
+            return nil
+        }
+    }
+}
+
 //Alert
 public extension UIViewController {
     
@@ -20,18 +39,21 @@ public extension UIViewController {
 
 //Route
 public extension UIViewController {
-    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", pop: Bool = false) -> Bool {
         DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
-        if let vc = initialedViewController(name, params: nextParams) {
+        if let vc = initialedViewController(name, params: nextParams, storyboardName: storyboardName) {
             if pop {
                 self.presentViewController(vc, animated: true, completion: nil)
             } else {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            return true
         } else if canPerformSegueWithIdentifier(name){
-            self.performSegueWithIdentifier(name, sender: ["params":nextParams])
+            self.performSegueWithIdentifier(name, sender: ["params": nextParams])
+            return true
         } else {
             DDLogError("Can't route to: \(name), please check the name")
+            return false
         }
     }
     public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "") -> UIViewController? {
@@ -94,5 +116,36 @@ public extension UIViewController {
         } else {
             self.navigationController?.popViewControllerAnimated(animation)
         }
+    }
+    public func routeBack(name name: String, params: Dictionary<String, AnyObject> = [:], animation: Bool = true) -> Bool {
+        DDLogInfo("Route back to \(name)")
+        if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
+            return false
+        } else {
+            var vc: UIViewController?
+            let count = self.navigationController?.viewControllers.count ?? 0
+            for index in 0..<count {
+                if let viewController = self.navigationController?.viewControllers[count - 1 - index] {
+                    if viewController.className == name {
+                        vc = viewController
+                        break
+                    }
+                }
+            }
+            if vc != nil {
+                if vc is BaseKitViewController {
+                    let baseVC = vc as! BaseKitViewController
+                    baseVC.params = params
+                }
+                self.navigationController?.popToViewController(vc!, animated: animation)
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    public func routeToRoot(animation: Bool = true) {
+        DDLogInfo("Route to root")
+        self.navigationController?.popToRootViewControllerAnimated(animation)
     }
 }

@@ -16,6 +16,8 @@ struct HUDConstant {
 
 public protocol HUDProtocol : class {
     func showHUDAddedTo(view: UIView, animated: Bool, text:String?)
-    func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay:NSTimeInterval)
+    func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay: NSTimeInterval)
+    func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void))
     func hideHUDForView(view: UIView, animated: Bool) -> Bool
+    func hideIndicatorHUDForView(view: UIView, animated: Bool) -> Bool
 }

@@ -2,7 +2,7 @@
 //  MKUIChartViewController.swift
 //  SwiftMKitDemo
 //
-//  Created by Mao on 5/10/16.
+//  Created by lixingle on 5/10/16.
 //  Copyright © 2016 cdts. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Charts
 
 
 /*
-一.显示高亮圆点 
+一.显示高亮点
  1.设置图形是否开启高亮圆点功能： 
     lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
  2.设置数据源DataSet的圆点样式：
@@ -28,16 +28,46 @@ import Charts
     let marker =  MKMultipleChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
  2. 单条线的弹框使用 MKChartMarker
  
+四、 柱状图两种数值变化Animation
+ 1. 设置数据源DataSet属性，animationVals是动画后的数组
+    set1.animationVals = yResultValues
+ 2.点击按钮开始动画
+     self.barChartView.customAnimating = true
+     self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
+     self.barChartView.animate(yAxisDuration: 3.0)
+五、设置高亮点形状
+    set0.form = .Square //数据点形状
+ 
+六、默认高亮点
+ 0. 前提是 lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
+ 1.controller中添加一个存储属性 defaultHighlight:ChartHighlight? 存储默认高亮点
+ 2.添加数据源时，设置默认高亮点
+     defaultHighlight = ChartHighlight(xIndex: (self.lineChart1Data?.xValCount)! - 1, dataSetIndex: 1)
+     self.lineChart.indicesDefaultToHighlight = [defaultHighlight!]
+ 3. 在代理中保存最新的默认高亮点
+     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        defaultHighlight = highlight
+     }
+     func chartValueNothingSelected(chartView: ChartViewBase) {
+         if defaultHighlight == nil {
+             let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
+             chartView.indicesDefaultToHighlight = [height]
+         }else {
+             chartView.indicesDefaultToHighlight = [defaultHighlight!]
+         }
+     }
 */
 
 
-class MKUIChartViewController: BaseViewController {
+class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     let screenSize = UIScreen.mainScreen().bounds.size
     let kBlackColor  = NSUIColor(red: 46/255.0, green: 52/255.0, blue: 72/255.0, alpha: 1.0)
     var lineChart:LineChartView!
     var lineChart2:LineChartView!
     var barChartView:BarChartView!
     var lineChart1Data:ChartData?
+    
+    var defaultHighlight:ChartHighlight?
     
     
     override func viewDidLoad() {
@@ -48,6 +78,15 @@ class MKUIChartViewController: BaseViewController {
         //2.0 折线图2
         self.buildLineChart2UI()
         
+        let button = UIButton(frame: CGRectMake(100, 900, 100, 44))
+        button.setTitle("Animate", forState: .Normal)
+        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
+            self.barChartView.customAnimating = true
+            self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
+            self.barChartView.animate(yAxisDuration: 3.0)
+        }
+        
         //3.0 柱状图
         self.buildBarChartUI()
         //4.0 ScrollView
@@ -57,6 +96,7 @@ class MKUIChartViewController: BaseViewController {
         
         scrollView.addSubview(self.lineChart)
         scrollView.addSubview(self.lineChart2)
+        scrollView.addSubview(button)
         scrollView.addSubview(self.barChartView)
         
         
@@ -65,6 +105,7 @@ class MKUIChartViewController: BaseViewController {
     func buildLineChartUI() {
         //获得数据
         self.buildLineData1()
+        
         
         lineChart = LineChartView(frame: CGRectMake(0, 0,screenSize.width , 400))
         lineChart.backgroundColor = kBlackColor
@@ -102,13 +143,15 @@ class MKUIChartViewController: BaseViewController {
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
         lineChart.marker = marker
-
+        ///默认选中
+        defaultHighlight = ChartHighlight(xIndex: (self.lineChart1Data?.xValCount)! - 1, dataSetIndex: 1)
+        self.lineChart.indicesDefaultToHighlight = [defaultHighlight!]
         
         self.lineChart.delegate = self
         //设置数据
         self.lineChart.data = self.lineChart1Data
-        //动画
-//        self.lineChart.animate(xAxisDuration: 3.0)
+
+
         
     }
     
@@ -134,9 +177,10 @@ class MKUIChartViewController: BaseViewController {
         set0.fillColor = UIColor.purpleColor()
         set0.drawFilledEnabled = true
         set0.drawCirclesEnabled = false                       //是否显示圆点
-        set0.setCircleColor(UIColor.purpleColor())            //圆颜色
+        set0.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆环颜色
         set0.circleHoleColor = UIColor.purpleColor()          //圆点圆心颜色
-        set0.circleRadius = 6.0                               //圆半径
+        set0.form = .Square                                   //数据点形状
+        set0.circleRadius = 10.0                               //圆半径
         set0.lineWidth = 0
         set0.setColor(UIColor.purpleColor())
         set0.drawValuesEnabled = false  //是否显示数字
@@ -150,14 +194,24 @@ class MKUIChartViewController: BaseViewController {
         }
 
         let set2 = LineChartDataSet(yVals: anotherYValues, label: "璇玑组合")
-        set2.fillColor = UIColor.orangeColor()
+        
         set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
-        set2.setCircleColor(UIColor.orangeColor())            //圆点圆环颜色
+        set2.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆点圆环颜色
         set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
-        set2.circleRadius = 6.0                               //圆半径
+        set2.circleRadius = 10.0                               //圆半径
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
+//        set2.fillColor = UIColor.orangeColor()
+        
+        let gradientColors = [
+                              ChartColorTemplates.colorFromString("#00000000").CGColor,UIColor.orangeColor().CGColor]
+        let gradient = CGGradientCreateWithColors(nil, gradientColors, nil)
+        set2.fill = ChartFill(linearGradient: gradient!, angle: 100.0)
+        set2.fillAlpha = 0.8
+        
+
+        
         
         //格式化数据
         let percentFormatter = NSNumberFormatter()
@@ -169,6 +223,20 @@ class MKUIChartViewController: BaseViewController {
         
         self.lineChart1Data = lineData
     }
+    //MARK: 代理
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        defaultHighlight = highlight //更新最后高亮
+    }
+    func chartValueNothingSelected(chartView: ChartViewBase) {
+        //设置默认高亮
+        if defaultHighlight == nil {
+            let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
+            chartView.indicesDefaultToHighlight = [height]
+        }else {
+            chartView.indicesDefaultToHighlight = [defaultHighlight!]
+        }
+    }
+
     
     //MARK: 折线图2
     
@@ -207,7 +275,7 @@ class MKUIChartViewController: BaseViewController {
         lineChart2.marker = marker
         
         
-        self.lineChart2.delegate = self
+//        self.lineChart2.delegate = self
         self.setLine2Data()
         
         
@@ -317,7 +385,11 @@ class MKUIChartViewController: BaseViewController {
     
     //MARK: 柱状图
     func buildBarChartUI()  {
-        barChartView = BarChartView(frame: CGRectMake(0, 900,screenSize.width , 400))
+        
+       
+        
+        
+        barChartView = BarChartView(frame: CGRectMake(0, 944,screenSize.width , 400))
         self.barChartView.delegate = self
         self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
         self.barChartView.xAxis.drawGridLinesEnabled = false
@@ -349,12 +421,21 @@ class MKUIChartViewController: BaseViewController {
         var yVals1 = [BarChartDataEntry]()
         
         for yIndex in 1...10 {
-            let val = (Double) (arc4random()%100);
+            var val = (Double) (arc4random()%100);
+
             let dataEntity = BarChartDataEntry(value: val, xIndex: yIndex)
             yVals1.append(dataEntity)
         }
         
+        //底部填充线
+        var yResultValues = [ChartDataEntry]()
+        for yIndex in  1...10 {
+            var flotVa = (Double) (arc4random()%100);
+            yResultValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
+        }
+        
         let set1 = BarChartDataSet(yVals: yVals1, label: "Compnay A")
+        set1.animationVals = yResultValues
         set1.setColors([UIColor.redColor(),
             UIColor.blueColor(),
             UIColor.orangeColor(),
@@ -365,6 +446,7 @@ class MKUIChartViewController: BaseViewController {
             UIColor.yellowColor(),
             UIColor.greenColor(),
             UIColor.brownColor()], alpha: 1.0)
+
         let barChartData = BarChartData(xVals: xVals, dataSets: [set1])
         self.barChartView.data = barChartData
         
@@ -374,14 +456,262 @@ class MKUIChartViewController: BaseViewController {
 }
 
 
-extension MKUIChartViewController:ChartViewDelegate  {
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        print("Seleted");
+
+
+
+
+
+//MARK: 自定义Marker
+class MKChartMarker: ChartMarker {
+    
+    var font: UIFont?
+    private var labelns: NSString?
+    private var _labelSize: CGSize = CGSize()
+    private var _size: CGSize = CGSize()
+    private var _paragraphStyle: NSMutableParagraphStyle?
+    private var _drawAttributes = [String : AnyObject]()
+    
+    
+    
+    var data: ChartData?
+    
+    
+    var leftImage: NSUIImage?
+    
+    init(font: UIFont)
+    {
+        super.init()
+        
+        self.font = font
+        
+        _paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as? NSMutableParagraphStyle
+        _paragraphStyle?.alignment = .Center
     }
-    func chartValueNothingSelected(chartView: ChartViewBase) {
-         print("NothingSeleted");
+    
+    
+    override func draw(context context: CGContext, point: CGPoint)
+    {
+        
+        
+        let offset = self.offsetForDrawingAtPos(point)
+        var size = _labelSize
+        
+        size = CGSizeMake(size.width+20, 40.0)
+        
+        UIGraphicsPushContext(context)
+        var rect = CGRectZero
+        if point.x > UIScreen.mainScreen().bounds.size.width/2.0 {
+            rect = CGRect(x: point.x + offset.x - size.width, y: point.y - size.height/2.0, width: size.width, height: size.height)
+            leftImage!.drawInRect(rect)
+            rect.origin.x -= 2.0
+            
+        }else{
+            rect = CGRect(x: point.x + offset.x, y: point.y - size.height/2.0, width: size.width, height: size.height)
+            image!.drawInRect(rect)
+            rect.origin.x += 2.0
+        }
+        
+        
+        rect.origin.y += (size.height - self.font!.pointSize)/2.0
+        labelns?.drawInRect(rect, withAttributes: _drawAttributes)
+        
+        
+        UIGraphicsPopContext()
+        
+    }
+    
+    override func refreshContent(entry entry: ChartDataEntry, highlight: ChartHighlight)
+    {
+        let label = entry.value.description
+        labelns = label as NSString
+        labelns = labelns?.stringByAppendingString("%")
+        
+        
+        _drawAttributes.removeAll()
+        _drawAttributes[NSFontAttributeName] = self.font
+        _drawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
+        _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
+        
     }
 }
+
+class MKMultipleChartMarker: ChartMarker {
+    var font: UIFont?
+    
+    //圆的半径
+    let circleR:CGFloat = 4.0
+    let textMargin:CGFloat = 5.0
+    
+    //title
+    private var titleLabelns: NSString?
+    private var _titleLabelSize: CGSize = CGSize()
+    private var _titleDrawAttributes = [String : AnyObject]()
+    
+    //top
+    private var labelns: NSString?
+    private var _labelSize: CGSize = CGSize()
+    private var _drawAttributes = [String : AnyObject]()
+    
+    //bottom
+    private var _subDrawAttributes = [String : AnyObject]()
+    private var subLabelns: NSString?
+    private var _subLabelSize: CGSize = CGSize()
+    
+    
+    private var _size: CGSize = CGSize()
+    private var _paragraphStyle: NSMutableParagraphStyle?
+    
+    
+    var data: ChartData?
+    
+    
+    var leftImage: NSUIImage?
+    
+    init(font: UIFont , data: ChartData?)
+    {
+        super.init()
+        
+        self.font = font
+        self.data = data
+        
+        _paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as? NSMutableParagraphStyle
+        _paragraphStyle?.alignment = .Center
+    }
+    
+    
+    override func draw(context context: CGContext, point: CGPoint)
+    {
+        
+        
+        let offset = self.offsetForDrawingAtPos(point)
+        var size = _labelSize.width > _subLabelSize.width ?  _labelSize : _subLabelSize
+        
+        size = CGSizeMake(size.width+2*circleR + textMargin + 35, 60.0)
+        
+        
+        let offsetX = point.x > UIScreen.mainScreen().bounds.size.width/2.0 ? -size.width : 0.0
+        
+        //        CGContextSaveGState(context)
+        UIGraphicsPushContext(context)
+        var rect = CGRectZero
+        var isLeft = false
+        if point.x > UIScreen.mainScreen().bounds.size.width/2.0 {
+            rect = CGRect(x: point.x + offset.x - size.width, y: point.y - size.height/2.0, width: size.width, height: size.height)
+            leftImage!.drawInRect(rect)
+            rect.origin.x -= 2.0
+            
+        }else{
+            rect = CGRect(x: point.x + offset.x, y: point.y - size.height/2.0, width: size.width, height: size.height)
+            image!.drawInRect(rect)
+            rect.origin.x += 2.0
+            isLeft = true
+        }
+        
+        if data != nil{
+            
+            let circleX = point.x + offset.x + offsetX + ( isLeft ? 30 : 15)
+            let titleX  = circleX + circleR + textMargin
+            
+            //1.0 title
+            let titleRect  = CGRect(x: titleX, y: point.y - self.font!.pointSize*2 - 5.0 , width: _titleLabelSize.width, height: _titleLabelSize.height)
+            titleLabelns?.drawInRect(titleRect, withAttributes: _titleDrawAttributes)
+            
+            //2.0 绘制第一个圆
+            
+            CGContextSetFillColorWithColor(context, _drawAttributes[NSForegroundColorAttributeName]!.CGColor)
+            
+            CGContextAddArc(context, circleX, point.y - _labelSize.height + _labelSize.height/2.0, circleR, 0, (CGFloat)(2.0*M_PI), 0)
+            CGContextDrawPath(context, .Fill)
+            
+            //2.1 top
+            let topRect = CGRect(x: titleX, y: point.y - _labelSize.height, width: _labelSize.width, height: _labelSize.height)
+            labelns?.drawInRect(topRect, withAttributes: _drawAttributes)
+            
+            
+            //3.0 绘制第二个圆
+            CGContextSetFillColorWithColor(context, _subDrawAttributes[NSForegroundColorAttributeName]!.CGColor)
+            
+//            CGContextAddArc(context, circleX, point.y + 5.0 + _labelSize.height/2.0, circleR, 0, (CGFloat)(2.0*M_PI), 0)
+            CGContextFillRect(context, CGRectMake(circleX - circleR , point.y + 5.0 + (_subLabelSize.height/2.0 - circleR) , circleR*2, circleR*2))
+            CGContextDrawPath(context, .Fill)
+            
+            //3.1 bottom
+            let bottomRect = CGRect(x: titleX, y: point.y + 5.0  , width: _subLabelSize.width, height: _subLabelSize.height)
+            subLabelns?.drawInRect(bottomRect, withAttributes: _subDrawAttributes)
+            
+            
+        }else{
+            rect.origin.y += (size.height - self.font!.pointSize)/2.0
+            labelns?.drawInRect(rect, withAttributes: _drawAttributes)
+        }
+        
+        UIGraphicsPopContext()
+        
+        //        CGContextRestoreGState(context)
+        
+    }
+    
+    override func refreshContent(entry entry: ChartDataEntry, highlight: ChartHighlight)
+    {
+        
+        _titleDrawAttributes.removeAll()
+        _titleDrawAttributes[NSFontAttributeName] = self.font
+        _titleDrawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
+        
+        
+        
+        _drawAttributes.removeAll()
+        _drawAttributes[NSFontAttributeName] = self.font
+        _drawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
+        
+        
+        _subDrawAttributes.removeAll()
+        _subDrawAttributes[NSFontAttributeName] = self.font
+        _subDrawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
+        
+        
+        
+        
+        
+        
+        
+        let label = entry.value.description
+        labelns = label as NSString
+        labelns = labelns?.stringByAppendingString("%")
+        
+        if let sets = data?.dataSets {
+            
+            let xValues = data?.xVals[highlight.xIndex]
+            titleLabelns = xValues! as NSString
+            _titleLabelSize = titleLabelns?.sizeWithAttributes(_titleDrawAttributes) ?? CGSizeZero
+            
+            
+            for index in 0..<sets.count {
+                let set = sets[index]
+                
+                let nextEntry = set.entryForIndex(highlight.xIndex)
+                let value = nextEntry!.value.description
+                
+                if 1 == index {
+                    _drawAttributes[NSForegroundColorAttributeName] = set.colorAt(highlight.xIndex)
+                    labelns = "\(set.label! as NSString) \(value as NSString)%"
+                }else if 0 == index  {
+                    _subDrawAttributes[NSForegroundColorAttributeName] = set.colorAt(highlight.xIndex)
+                    subLabelns = "\(set.label! as NSString) \(value as NSString)%"
+                }
+            }
+            
+        }
+        
+        _labelSize = labelns?.sizeWithAttributes(_drawAttributes) ?? CGSizeZero
+        _subLabelSize = subLabelns?.sizeWithAttributes(_subDrawAttributes) ?? CGSizeZero
+        
+        
+        
+    }
+    
+}
+
 
 
 

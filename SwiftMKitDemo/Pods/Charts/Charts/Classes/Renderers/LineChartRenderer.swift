@@ -739,7 +739,7 @@ public class LineChartRenderer: LineRadarChartRenderer
         
         CGContextRestoreGState(context)
     }
-    //绘制高亮圆心
+    //绘制高亮数据点
     // ModifySourceCode Add By LiXingLe
     public override func drawCircleIndex(context context: CGContext , indices: [ChartHighlight]) {
         guard let
@@ -747,6 +747,10 @@ public class LineChartRenderer: LineRadarChartRenderer
             lineData = dataProvider.lineData,
             animator = animator
             else { return }
+        
+        if indices.count <= 0 {
+            return
+        }
         
         let phaseX = animator.phaseX
         let phaseY = animator.phaseY
@@ -773,7 +777,9 @@ public class LineChartRenderer: LineRadarChartRenderer
             let entryCount = dataSet.entryCount
             
             let circleRadius = dataSet.circleRadius
-            let circleDiameter = circleRadius * 2.0
+            //计算外环半径，lixingle
+            let circleDiameter = circleRadius + 3.0
+//            let circleDiameter = circleRadius * 2.0
             let circleHoleDiameter = circleRadius
             let circleHoleRadius = circleHoleDiameter / 2.0
             let isDrawCircleHoleEnabled = dataSet.isDrawCircleHoleEnabled
@@ -790,7 +796,7 @@ public class LineChartRenderer: LineRadarChartRenderer
             for j in minx ..< Int(ceil(CGFloat(maxx - minx) * phaseX + CGFloat(minx)))
             {
                 
-                if indices[0].xIndex != j {
+                if  indices[0].xIndex != j {
                     continue
                 }
                 
@@ -812,12 +818,23 @@ public class LineChartRenderer: LineRadarChartRenderer
                 }
                 
                 CGContextSetFillColorWithColor(context, dataSet.getCircleColor(j)!.CGColor)
+                //计算外环圆心位置，lixingle
+                rect.origin.x = pt.x - circleDiameter/2.0
+                rect.origin.y = pt.y - circleDiameter/2.0
+//                rect.origin.x = pt.x - circleRadius
+//                rect.origin.y = pt.y - circleRadius
                 
-                rect.origin.x = pt.x - circleRadius
-                rect.origin.y = pt.y - circleRadius
                 rect.size.width = circleDiameter
                 rect.size.height = circleDiameter
-                CGContextFillEllipseInRect(context, rect)
+                //lixingle ,绘制外环数据点
+//                CGContextFillEllipseInRect(context, rect)
+                if dataSet.form == .Circle {
+                    CGContextFillEllipseInRect(context, rect)
+                }else{
+                    CGContextFillRect(context, rect)
+                }
+
+                
                 
                 if (isDrawCircleHoleEnabled)
                 {
@@ -827,7 +844,13 @@ public class LineChartRenderer: LineRadarChartRenderer
                     rect.origin.y = pt.y - circleHoleRadius
                     rect.size.width = circleHoleDiameter
                     rect.size.height = circleHoleDiameter
-                    CGContextFillEllipseInRect(context, rect)
+                    //绘制内环数据点
+//                    CGContextFillEllipseInRect(context, rect)
+                    if dataSet.form == .Circle {
+                        CGContextFillEllipseInRect(context, rect)
+                    }else{
+                        CGContextFillRect(context, rect)
+                    }
                 }
             }
         }

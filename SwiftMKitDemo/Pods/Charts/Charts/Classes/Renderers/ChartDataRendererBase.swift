@@ -29,6 +29,22 @@ public class ChartDataRendererBase: ChartRendererBase
     {
         fatalError("drawData() cannot be called on ChartDataRendererBase")
     }
+    // ModifySourceCode Add By LiXingLe
+    //绘制动画数据
+    public func drawAnimationData(context context: CGContext,animateBack: Bool){
+        fatalError("drawData() cannot be called on ChartDataRendererBase")
+    }
+    //绘制数值
+    public func drawAnimationValues(context context: CGContext,animateBack: Bool)
+    {
+        fatalError("drawValues() cannot be called on ChartDataRendererBase")
+    }
+    //绘制高亮
+    public func drawAnimationHighlighted(context context: CGContext, indices: [ChartHighlight],animateBack: Bool)
+    {
+        fatalError("drawHighlighted() cannot be called on ChartDataRendererBase")
+    }
+    //Add end
     
     public func drawValues(context context: CGContext)
     {

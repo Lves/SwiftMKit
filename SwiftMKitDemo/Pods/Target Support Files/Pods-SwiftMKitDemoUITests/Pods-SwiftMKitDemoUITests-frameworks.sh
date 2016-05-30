@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoUITests/Alamofire.framework"
+  install_framework "Pods-SwiftMKitDemoUITests/Aspects.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Charts.framework"
   install_framework "Pods-SwiftMKitDemoUITests/CocoaLumberjack.framework"
   install_framework "Pods-SwiftMKitDemoUITests/CryptoSwift.framework"
@@ -102,11 +103,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftMKitDemoUITests/Result.framework"
   install_framework "Pods-SwiftMKitDemoUITests/SnapKit.framework"
   install_framework "Pods-SwiftMKitDemoUITests/WebViewJavascriptBridge.framework"
+  install_framework "Pods-SwiftMKitDemoUITests/pop.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Nimble.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Quick.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoUITests/Alamofire.framework"
+  install_framework "Pods-SwiftMKitDemoUITests/Aspects.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Charts.framework"
   install_framework "Pods-SwiftMKitDemoUITests/CocoaLumberjack.framework"
   install_framework "Pods-SwiftMKitDemoUITests/CryptoSwift.framework"
@@ -124,6 +127,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftMKitDemoUITests/Result.framework"
   install_framework "Pods-SwiftMKitDemoUITests/SnapKit.framework"
   install_framework "Pods-SwiftMKitDemoUITests/WebViewJavascriptBridge.framework"
+  install_framework "Pods-SwiftMKitDemoUITests/pop.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Nimble.framework"
   install_framework "Pods-SwiftMKitDemoUITests/Quick.framework"
 fi

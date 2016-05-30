@@ -235,22 +235,51 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         {
             _rightYAxisRenderer?.renderLimitLines(context: context)
         }
+        //绘制图形
+        // ModifySourceCode Update By LiXingLe
+//        renderer?.drawData(context: context)
+        if (_data is BarChartData) && customAnimating {
+            renderer?.drawAnimationData(context: context,animateBack: isCustomAnimateBack)
+        }else{
+            renderer?.drawData(context: context)
+        }
+        // update end
         
-        renderer?.drawData(context: context)
-
+    
         // if highlighting is enabled
         if (valuesToHighlight())
         {
-            renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
+            //绘制高亮
+            // ModifySourceCode Update By LiXingLe
+//            renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
+            if (_data is BarChartData) && customAnimating {
+                renderer?.drawAnimationHighlighted(context: context, indices: _indicesToHighlight,animateBack: isCustomAnimateBack)
+            }else{
+                renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
+            }
+            //Update end
+            
+            //ModifySourceCode udate by lixingle 移动位置，原来在绘制高亮点和线以后
+            // Removes clipping rectangle
+            CGContextRestoreGState(context)
+            
             // ModifySourceCode Add By LiXingLe
             if showAllHighlightCircles {
                  renderer?.drawCircleIndex(context: context, indices: _indicesToHighlight)
             }
-           
+           //Add end
+        }else {
+            //ModifySourceCode udate by lixingle 移动位置，原来在绘制高亮点和线以后
+            // Removes clipping rectangle
+            CGContextRestoreGState(context)
+            
+            // ModifySourceCode Add By LiXingLe  绘制默认高亮点
+            if showAllHighlightCircles {
+                renderer?.drawCircleIndex(context: context, indices: indicesDefaultToHighlight)
+            }
         }
 
-        // Removes clipping rectangle
-        CGContextRestoreGState(context)
+        
         
         renderer!.drawExtras(context: context)
         
@@ -271,7 +300,15 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         _leftYAxisRenderer.renderAxisLabels(context: context)
         _rightYAxisRenderer.renderAxisLabels(context: context)
 
-        renderer!.drawValues(context: context)
+        //绘制数值
+        // ModifySourceCode Update By LiXingLe
+//        renderer!.drawValues(context: context)
+        if (_data is BarChartData) && customAnimating {
+            renderer?.drawAnimationValues(context: context,animateBack: isCustomAnimateBack)
+        }else{
+            renderer!.drawValues(context: context)
+        }
+        //Update end
 
         _legendRenderer.renderLegend(context: context)
         // drawLegend()
