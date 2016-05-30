@@ -29,6 +29,8 @@ class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
         tableView.separatorStyle = .None
         // 设置代理
         tableView.tt_delegate = self
+        
+        setupContainerViewData()
     }
     
     func setupData() {
@@ -59,6 +61,15 @@ class MKUITreeViewController: UIViewController, TreeTableViewDelegate {
         
         let sanpang = Node(parentId: -1, nodeId: 9, name: "San Pang", depth: 0, expand: true, children: nil)
         dataArray = [tianchao, shiyan, beijing, shanghai, usa, luoshanji, dezhou, japan, dongjing, sanpang, dongjing2, dongjing3, dongjing4, dongjing5, dongjing6, dongjing7, dongjing8, dongjing9, dongjing10]
+    }
+    
+    func setupContainerViewData() {
+        let data = [
+            ["key左1" : "value右1"],
+            ["key左2" : "value右2"],
+            ["key左3" : "value右3"],
+        ]
+        containerVc?.dataArray = data
     }
     
     deinit {
@@ -297,16 +308,24 @@ public class Node {
 
 // MARK: - ContainerTableViewController
 class ContainerTableViewController: UITableViewController {
-    
-    
-    var dataArray:[String: String]?
+    // 数据源
+    var dataArray:[[String: String]]? {
+        didSet {
+            // 刷新表格
+            tableView.reloadData()
+        }
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ContainerTableViewCell")!
+        let cell = tableView.dequeueReusableCellWithIdentifier("ContainerTableViewCell") as! ContainerTableViewCell
+        for data in dataArray! {
+            cell.lblLeft.text = "\(data.keys.first!)"
+            cell.lblLeft.text = "\(data.values.first!)"
+        }
         return cell
     }
 }
