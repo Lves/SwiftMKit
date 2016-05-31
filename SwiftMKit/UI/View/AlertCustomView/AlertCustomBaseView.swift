@@ -18,11 +18,21 @@ public class AlertCustomBaseView: UIView {
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var lblbottomTitle: UILabel!
     @IBOutlet weak var btnClose: UIButton!
+    @IBOutlet weak var lsToMainTitleSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var lsToImageViewSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var lsToViceTitleSpaceConstraint: NSLayoutConstraint!
     
     weak var currentViewController: UIViewController?
-
+    
+    
     @IBAction func click_CloseButton(sender: UIButton) {
-        removeFromSuperview()
+        
+        UIView.animateWithDuration(0.25, animations: {
+            self.alpha = 0
+        }) { completed in
+            self.removeFromSuperview()
+        }
+        
     }
     
     @IBAction func click_NextButton(sender: UIButton) {
@@ -32,11 +42,21 @@ public class AlertCustomBaseView: UIView {
     private struct InnerConst {
         static let NibName = "AlertCustomBaseView"
     }
+    //Controller
+    //CGSize size = [self.headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    //[self.headerView setHeight:size.height];
     
-    public static func alertCustomView(currentViewController: UIViewController) -> AlertCustomBaseView? {
+    public static func alertCustomView(currentViewController: UIViewController! , withMainTitle mainTitle: String? , withImage img: UIImage? , withViceTitle viceTitle: String? , withContent content: String? , withNextBtnName btnName: String? , withNextBtnRouteTo path:String! , withBottomTitle bottomTitle: String!) -> AlertCustomBaseView? {
         let view = NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: self, options: nil).first as? AlertCustomBaseView
         view?.currentViewController = currentViewController
         view?.frame = UIScreen.mainScreen().bounds
+        view?.lblMainTitle.text = mainTitle
+        view?.imageView.image = img
+        view?.lblViceTitle.text = viceTitle
+        view?.lblContent.text = content
+        view?.btnNext.setTitle(btnName, forState: UIControlState.Normal)
+        view?.lblbottomTitle.text = bottomTitle
+
         return view
     }
     
@@ -51,6 +71,7 @@ public class AlertCustomBaseView: UIView {
         UIView.animateWithDuration(0.25) {
             self.alpha = 1
         }
+
     }
     
 }

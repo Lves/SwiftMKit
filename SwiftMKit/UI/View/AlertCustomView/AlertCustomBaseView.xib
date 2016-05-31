@@ -48,12 +48,6 @@
                                 <action selector="click_NextButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="mne-B7-kZl"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bottomTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2i-xW-ZbS">
-                            <rect key="frame" x="108" y="396" width="65" height="15"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MainTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eZ-H4-I38">
                             <rect key="frame" x="106" y="50" width="69" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -63,6 +57,12 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViceTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5k-Yd-aUC">
                             <rect key="frame" x="111" y="236" width="59" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bottomTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2i-xW-ZbS">
+                            <rect key="frame" x="108" y="396" width="65" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -105,6 +105,9 @@
                 <outlet property="lblMainTitle" destination="9eZ-H4-I38" id="hce-3t-Kzp"/>
                 <outlet property="lblViceTitle" destination="x5k-Yd-aUC" id="YXN-G4-F3C"/>
                 <outlet property="lblbottomTitle" destination="L2i-xW-ZbS" id="cPs-dO-RIs"/>
+                <outlet property="lsToImageViewSpaceConstraint" destination="AYw-mi-IPl" id="8Py-3G-52L"/>
+                <outlet property="lsToMainTitleSpaceConstraint" destination="Yl9-lQ-fR6" id="70f-sE-N8i"/>
+                <outlet property="lsToViceTitleSpaceConstraint" destination="G3T-iD-dKe" id="35C-0d-vZL"/>
                 <outlet property="viewContent" destination="vUC-6L-9s5" id="i81-R5-r8l"/>
             </connections>
             <point key="canvasLocation" x="646.5" y="478.5"/>
