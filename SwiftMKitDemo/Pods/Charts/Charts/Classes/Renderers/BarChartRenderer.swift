@@ -568,18 +568,32 @@ public class BarChartRenderer: ChartDataRendererBase
                         guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
                         let animationE = dataSet.animationVals![j]
                         //lxingle
-                        var userE = animateBack ? e : animationE
-                    
-                        let valuePoint = trans.getTransformedValueBarChart(
-                            entry: userE,
-                            xIndex: e.xIndex,
-                            dataSetIndex: dataSetIndex,
-                            phaseY: phaseY,
-                            dataSetCount: dataSetCount,
-                            groupSpace: groupSpace
+                        let userE = animateBack ? e : animationE
+                        
+//                        let valuePoint = trans.getTransformedValueBarChart(
+//                            entry: userE,
+//                            xIndex: e.xIndex,
+//                            dataSetIndex: dataSetIndex,
+//                            phaseY: phaseY,
+//                            dataSetCount: dataSetCount,
+//                            groupSpace: groupSpace
+//                        )
+
+                        // ............ start ..............
+                        let x = CGFloat(e.xIndex + (e.xIndex * (dataSetCount - 1)) + dataSetIndex) + groupSpace * CGFloat(e.xIndex) + groupSpace / 2.0
+                        var yPoint:CGFloat = 0.0
+                        if animateBack {
+                            yPoint = CGFloat(animationE.value) + (CGFloat(e.value) - CGFloat(animationE.value)) * phaseY
+                        }else {
+                            yPoint = CGFloat(e.value) + (CGFloat(animationE.value) - CGFloat(e.value)) * phaseY
+                        }
+                        var valuePoint = CGPoint(
+                            x: x,
+                            y: yPoint
                         )
+                        trans.pointValueToPixel(&valuePoint)
                         
-                        
+                        // .......... end .............
                         
                         if (!viewPortHandler.isInBoundsRight(valuePoint.x))
                         {

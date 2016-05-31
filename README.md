@@ -821,195 +821,210 @@ CGContextFillRect(context, barRect)
 CGContextRestoreGState(context)
 }
 
-// ModifySourceCode Add By LiXingLe
-public override func drawAnimationValues(context context: CGContext,animateBack: Bool){
-// if values are drawn
-if (passesCheck())
-{
-guard let
-dataProvider = dataProvider,
-barData = dataProvider.barData,
-animator = animator
-else { return }
+    // ModifySourceCode Add By LiXingLe
+    public override func drawAnimationValues(context context: CGContext,animateBack: Bool){
+        // if values are drawn
+        if (passesCheck())
+        {
+            guard let
+                dataProvider = dataProvider,
+                barData = dataProvider.barData,
+                animator = animator
+                else { return }
+            
+            var dataSets = barData.dataSets
+            
+            let drawValueAboveBar = dataProvider.isDrawValueAboveBarEnabled
+            
+            var posOffset: CGFloat
+            var negOffset: CGFloat
+            
+            for dataSetIndex in 0 ..< barData.dataSetCount
+            {
+                guard let dataSet = dataSets[dataSetIndex] as? IBarChartDataSet else { continue }
+                
+                if !dataSet.isDrawValuesEnabled || dataSet.entryCount == 0
+                {
+                    continue
+                }
+                
+                let isInverted = dataProvider.isInverted(dataSet.axisDependency)
+                
+                // calculate the correct offset depending on the draw position of the value
+                let valueOffsetPlus: CGFloat = 4.5
+                let valueFont = dataSet.valueFont
+                let valueTextHeight = valueFont.lineHeight
+                posOffset = (drawValueAboveBar ? -(valueTextHeight + valueOffsetPlus) : valueOffsetPlus)
+                negOffset = (drawValueAboveBar ? valueOffsetPlus : -(valueTextHeight + valueOffsetPlus))
+                
+                if (isInverted)
+                {
+                    posOffset = -posOffset - valueTextHeight
+                    negOffset = -negOffset - valueTextHeight
+                }
+                
+                guard let formatter = dataSet.valueFormatter else { continue }
+                
+                let trans = dataProvider.getTransformer(dataSet.axisDependency)
+                
+                let phaseY = animator.phaseY
+                let dataSetCount = barData.dataSetCount
+                let groupSpace = barData.groupSpace
+                
+                // if only single values are drawn (sum)
+                if (!dataSet.isStacked)
+                {
+                    for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
+                    {
+                        guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
+                        let animationE = dataSet.animationVals![j]
+                        //lxingle
+                        let userE = animateBack ? e : animationE
 
-var dataSets = barData.dataSets
+                        
+                        
+//                        let valuePoint = trans.getTransformedValueBarChart(
+//                            entry: userE,
+//                            xIndex: e.xIndex,
+//                            dataSetIndex: dataSetIndex,
+//                            phaseY: phaseY,
+//                            dataSetCount: dataSetCount,
+//                            groupSpace: groupSpace
+//                        )
 
-let drawValueAboveBar = dataProvider.isDrawValueAboveBarEnabled
+                        // ............ start ..............
+                        let x = CGFloat(e.xIndex + (e.xIndex * (dataSetCount - 1)) + dataSetIndex) + groupSpace * CGFloat(e.xIndex) + groupSpace / 2.0
+                        var yPoint:CGFloat = 0.0
+                        if animateBack {
+                            yPoint = CGFloat(animationE.value) + (CGFloat(e.value) - CGFloat(animationE.value)) * phaseY
+                        }else {
+                            yPoint = CGFloat(e.value) + (CGFloat(animationE.value) - CGFloat(e.value)) * phaseY
+                        }
+                        var valuePoint = CGPoint(
+                            x: x,
+                            y: yPoint
+                        )
+                        trans.pointValueToPixel(&valuePoint)
+                        
+                        // .......... end .............
+                        
+                        if (!viewPortHandler.isInBoundsRight(valuePoint.x))
+                        {
+                            break
+                        }
+                        
+                        if (!viewPortHandler.isInBoundsY(valuePoint.y)
+                            || !viewPortHandler.isInBoundsLeft(valuePoint.x))
+                        {
+                            continue
+                        }
+                        //lxingle
+                        let val = userE.value
+                        
+                        drawValue(context: context,
+                                  value: formatter.stringFromNumber(val)!,
+                                  xPos: valuePoint.x,
+                                  yPos: valuePoint.y + (val >= 0.0 ? posOffset : negOffset),
+                                  font: valueFont,
+                                  align: .Center,
+                                  color: dataSet.valueTextColorAt(j))
+                    }
+                }
+                else
+                {
+                    // if we have stacks
+                    
+                    for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
+                    {
+                        guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
+                        
+                        let values = e.values
+                        
+                        let valuePoint = trans.getTransformedValueBarChart(entry: e, xIndex: e.xIndex, dataSetIndex: dataSetIndex, phaseY: phaseY, dataSetCount: dataSetCount, groupSpace: groupSpace)
+                        
+                        // we still draw stacked bars, but there is one non-stacked in between
+                        if (values == nil)
+                        {
+                            if (!viewPortHandler.isInBoundsRight(valuePoint.x))
+                            {
+                                break
+                            }
+                            
+                            if (!viewPortHandler.isInBoundsY(valuePoint.y)
+                                || !viewPortHandler.isInBoundsLeft(valuePoint.x))
+                            {
+                                continue
+                            }
+                            
+                            drawValue(context: context,
+                                      value: formatter.stringFromNumber(e.value)!,
+                                      xPos: valuePoint.x,
+                                      yPos: valuePoint.y + (e.value >= 0.0 ? posOffset : negOffset),
+                                      font: valueFont,
+                                      align: .Center,
+                                      color: dataSet.valueTextColorAt(j))
+                        }
+                        else
+                        {
+                            // draw stack values
+                            
+                            let vals = values!
+                            var transformed = [CGPoint]()
+                            
+                            var posY = 0.0
+                            var negY = -e.negativeSum
+                            
+                            for k in 0 ..< vals.count
+                            {
+                                let value = vals[k]
+                                var y: Double
+                                
+                                if value >= 0.0
+                                {
+                                    posY += value
+                                    y = posY
+                                }
+                                else
+                                {
+                                    y = negY
+                                    negY -= value
+                                }
+                                
+                                transformed.append(CGPoint(x: 0.0, y: CGFloat(y) * animator.phaseY))
+                            }
+                            
+                            trans.pointValuesToPixel(&transformed)
+                            
+                            for k in 0 ..< transformed.count
+                            {
+                                let x = valuePoint.x
+                                let y = transformed[k].y + (vals[k] >= 0 ? posOffset : negOffset)
+                                
+                                if (!viewPortHandler.isInBoundsRight(x))
+                                {
+                                    break
+                                }
+                                
+                                if (!viewPortHandler.isInBoundsY(y) || !viewPortHandler.isInBoundsLeft(x))
+                                {
+                                    continue
+                                }
+                                
+                                drawValue(context: context,
+                                          value: formatter.stringFromNumber(vals[k])!,
+                                          xPos: x,
+                                          yPos: y,
+                                          font: valueFont,
+                                          align: .Center,
+                                          color: dataSet.valueTextColorAt(j))
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-var posOffset: CGFloat
-var negOffset: CGFloat
-
-for dataSetIndex in 0 ..< barData.dataSetCount
-{
-guard let dataSet = dataSets[dataSetIndex] as? IBarChartDataSet else { continue }
-
-if !dataSet.isDrawValuesEnabled || dataSet.entryCount == 0
-{
-continue
-}
-
-let isInverted = dataProvider.isInverted(dataSet.axisDependency)
-
-// calculate the correct offset depending on the draw position of the value
-let valueOffsetPlus: CGFloat = 4.5
-let valueFont = dataSet.valueFont
-let valueTextHeight = valueFont.lineHeight
-posOffset = (drawValueAboveBar ? -(valueTextHeight + valueOffsetPlus) : valueOffsetPlus)
-negOffset = (drawValueAboveBar ? valueOffsetPlus : -(valueTextHeight + valueOffsetPlus))
-
-if (isInverted)
-{
-posOffset = -posOffset - valueTextHeight
-negOffset = -negOffset - valueTextHeight
-}
-
-guard let formatter = dataSet.valueFormatter else { continue }
-
-let trans = dataProvider.getTransformer(dataSet.axisDependency)
-
-let phaseY = animator.phaseY
-let dataSetCount = barData.dataSetCount
-let groupSpace = barData.groupSpace
-
-// if only single values are drawn (sum)
-if (!dataSet.isStacked)
-{
-for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
-{
-guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
-let animationE = dataSet.animationVals![j]
-//lxingle
-var userE = animateBack ? e : animationE
-
-let valuePoint = trans.getTransformedValueBarChart(
-entry: userE,
-xIndex: e.xIndex,
-dataSetIndex: dataSetIndex,
-phaseY: phaseY,
-dataSetCount: dataSetCount,
-groupSpace: groupSpace
-)
-
-
-
-if (!viewPortHandler.isInBoundsRight(valuePoint.x))
-{
-break
-}
-
-if (!viewPortHandler.isInBoundsY(valuePoint.y)
-|| !viewPortHandler.isInBoundsLeft(valuePoint.x))
-{
-continue
-}
-//lxingle
-let val = userE.value
-
-drawValue(context: context,
-value: formatter.stringFromNumber(val)!,
-xPos: valuePoint.x,
-yPos: valuePoint.y + (val >= 0.0 ? posOffset : negOffset),
-font: valueFont,
-align: .Center,
-color: dataSet.valueTextColorAt(j))
-}
-}
-else
-{
-// if we have stacks
-
-for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
-{
-guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
-
-let values = e.values
-
-let valuePoint = trans.getTransformedValueBarChart(entry: e, xIndex: e.xIndex, dataSetIndex: dataSetIndex, phaseY: phaseY, dataSetCount: dataSetCount, groupSpace: groupSpace)
-
-// we still draw stacked bars, but there is one non-stacked in between
-if (values == nil)
-{
-if (!viewPortHandler.isInBoundsRight(valuePoint.x))
-{
-break
-}
-
-if (!viewPortHandler.isInBoundsY(valuePoint.y)
-|| !viewPortHandler.isInBoundsLeft(valuePoint.x))
-{
-continue
-}
-
-drawValue(context: context,
-value: formatter.stringFromNumber(e.value)!,
-xPos: valuePoint.x,
-yPos: valuePoint.y + (e.value >= 0.0 ? posOffset : negOffset),
-font: valueFont,
-align: .Center,
-color: dataSet.valueTextColorAt(j))
-}
-else
-{
-// draw stack values
-
-let vals = values!
-var transformed = [CGPoint]()
-
-var posY = 0.0
-var negY = -e.negativeSum
-
-for k in 0 ..< vals.count
-{
-let value = vals[k]
-var y: Double
-
-if value >= 0.0
-{
-posY += value
-y = posY
-}
-else
-{
-y = negY
-negY -= value
-}
-
-transformed.append(CGPoint(x: 0.0, y: CGFloat(y) * animator.phaseY))
-}
-
-trans.pointValuesToPixel(&transformed)
-
-for k in 0 ..< transformed.count
-{
-let x = valuePoint.x
-let y = transformed[k].y + (vals[k] >= 0 ? posOffset : negOffset)
-
-if (!viewPortHandler.isInBoundsRight(x))
-{
-break
-}
-
-if (!viewPortHandler.isInBoundsY(y) || !viewPortHandler.isInBoundsLeft(x))
-{
-continue
-}
-
-drawValue(context: context,
-value: formatter.stringFromNumber(vals[k])!,
-xPos: x,
-yPos: y,
-font: valueFont,
-align: .Center,
-color: dataSet.valueTextColorAt(j))
-}
-}
-}
-}
-}
-}
-
-}
-
+    }
 // ModifySourceCode Add By LiXingLe
 public override func drawAnimationHighlighted(context context: CGContext, indices: [ChartHighlight], animateBack: Bool) {
 guard let
