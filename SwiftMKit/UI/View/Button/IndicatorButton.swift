@@ -146,11 +146,11 @@ public class IndicatorButton: UIButton {
             backView.transform = CGAffineTransformMakeTranslation(0, transformY)
         }
         fastEnabled = false
-        Async.main(after: 0.5) {
+        Async.main(after: 0.2) {
             if self.fastEnabled {
                 return
             }
-            UIView.animateWithDuration(0.5) {
+            UIView.animateWithDuration(0.4) {
                 self.titleLabel!.alpha = 0
                 self.backView.alpha = 1
                 self.backView.transform = CGAffineTransformIdentity
@@ -160,7 +160,7 @@ public class IndicatorButton: UIButton {
     
     private func ib_resetToNormalState() {
         fastEnabled = true
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animateWithDuration(0.4, animations: {
             self.titleLabel!.alpha = 1
             self.backView.alpha = 0
             if self.currentTitle == self.disabledTitle {
