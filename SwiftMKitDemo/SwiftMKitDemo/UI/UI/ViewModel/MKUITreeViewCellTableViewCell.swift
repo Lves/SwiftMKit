@@ -77,6 +77,7 @@ class MKUITreeViewCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .None
+        contentView.backgroundColor = UIColor(colorLiteralRed: 240/255.0, green: 243/255.0, blue: 252/255.0, alpha: 1.0)
     }
     
     class func getCell(tableView: UITableView, isParentNode: Bool) -> MKUITreeViewCellTableViewCell {
