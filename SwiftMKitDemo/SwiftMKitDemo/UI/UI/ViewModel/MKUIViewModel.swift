@@ -24,6 +24,7 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "Tree View", detail: "Tree View"))
         
         self.dataArray.append(MKDataListModel(title: "AlertView", detail: "Show Alert View"))
+        self.dataArray.append(MKDataListModel(title: "CoverFlowView", detail: "Show CoverFlow View"))
 
     }
 

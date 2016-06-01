@@ -20,7 +20,7 @@ class MKUICustomAlertViewController: BaseViewController {
     override func setupUI() {
         super.setupUI()
         
-        self.alertview = AlertCustomBaseView.alertCustomView(self)
+//        self.alertview = AlertCustomBaseView.alertCustomView(self)
     }
     
 }

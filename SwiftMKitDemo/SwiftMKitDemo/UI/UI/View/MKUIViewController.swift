@@ -24,6 +24,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         static let SegueToNextTreeView = "routeToTreeView"
         
         static let SegueToNextCustomAlertView = "routeToCustomAlertViewController"
+        static let SegueToNextCoverFlowView = "routeToCoverFlowView"
+
         static let SegueToNextUrl = "http://www.baidu.com"
     }
     
@@ -73,7 +75,9 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.hidesBottomBarWhenPushed = true
             self.routeToName(InnerConst.SegueToNextTreeView)
         case 10:
-        self.routeToName(InnerConst.SegueToNextCustomAlertView)
+            self.routeToName(InnerConst.SegueToNextCustomAlertView)
+        case 11:
+            self.routeToName(InnerConst.SegueToNextCoverFlowView)
         default:
             break
         }

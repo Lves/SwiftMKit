@@ -10,6 +10,8 @@
 		016502A41CF6F88B001B063F /* AlertCustomBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016502A31CF6F88B001B063F /* AlertCustomBaseView.swift */; };
 		016502A61CF6FAAC001B063F /* AlertCustomBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016502A51CF6FAAC001B063F /* AlertCustomBaseView.xib */; };
 		01CCB0DD1CFC341900D06AD0 /* MKUICustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */; };
+		01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0DE1CFD659F00D06AD0 /* CoverFlowLayout.swift */; };
+		01CCB0E31CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */; };
 		030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */; };
 		0343417F1CDC775A00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
 		034341801CDC775F00249EE3 /* testhaha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0343417E1CDC775A00249EE3 /* testhaha.jpg */; };
@@ -266,6 +268,8 @@
 		016502A31CF6F88B001B063F /* AlertCustomBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCustomBaseView.swift; sourceTree = "<group>"; };
 		016502A51CF6FAAC001B063F /* AlertCustomBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertCustomBaseView.xib; sourceTree = "<group>"; };
 		01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUICustomAlertViewController.swift; sourceTree = "<group>"; };
+		01CCB0DE1CFD659F00D06AD0 /* CoverFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayout.swift; sourceTree = "<group>"; };
+		01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUICoverFlowViewController.swift; sourceTree = "<group>"; };
 		030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardProtocol.swift; sourceTree = "<group>"; };
 		0343417E1CDC775A00249EE3 /* testhaha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testhaha.jpg; sourceTree = "<group>"; };
 		034FB8881CD1B1B900E90738 /* NSTimeIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeIntervalTests.swift; sourceTree = "<group>"; };
@@ -734,6 +738,7 @@
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
 				181164E91CF68C0800771597 /* MKUITreeViewController.swift */,
 				01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */,
+				01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				27D1A9AF1CEEA78300B511D7 /* GalaryLinearLayout.swift */,
+				01CCB0DE1CFD659F00D06AD0 /* CoverFlowLayout.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -1441,6 +1447,7 @@
 				27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */,
 				27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
+				01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
@@ -1463,6 +1470,7 @@
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				27A1C5EF1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift in Sources */,
+				01CCB0E31CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
 				27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
