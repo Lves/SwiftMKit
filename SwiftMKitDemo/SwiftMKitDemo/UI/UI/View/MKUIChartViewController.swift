@@ -188,7 +188,8 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set0.setColor(UIColor.purpleColor())
         set0.drawValuesEnabled = false  //是否显示数字
         set0.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
-        
+       
+        set0.highlightEnabled = false
         //Line2
         var anotherYValues = [ChartDataEntry]()
         for yIndex in  0...108 {
@@ -228,9 +229,16 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     }
     //MARK: 代理
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        let dataset = chartView.data?.dataSets[0]
+        dataset?.highlightEnabled = true
+        
         defaultHighlight = highlight //更新最后高亮
+        
     }
     func chartValueNothingSelected(chartView: ChartViewBase) {
+        let dataset = chartView.data?.dataSets[0]
+        dataset?.highlightEnabled = false
+        
         //设置默认高亮
         if defaultHighlight == nil {
             let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)

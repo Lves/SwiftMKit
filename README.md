@@ -394,8 +394,8 @@ public enum ChartDataForm: Int
         for i in 0 ..< dataSets.count
         {
             guard let dataSet = lineData.getDataSetByIndex(i) as? ILineChartDataSet else { continue }
-            
-            if !dataSet.isVisible || dataSet.entryCount == 0
+            //lixingle 添加是否可以高亮条件
+            if !dataSet.isVisible || dataSet.entryCount == 0 || !dataSet.highlightEnabled
             {
                 continue
             }
