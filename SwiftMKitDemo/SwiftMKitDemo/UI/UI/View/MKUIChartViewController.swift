@@ -81,13 +81,21 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         let button = UIButton(frame: CGRectMake(100, 900, 100, 44))
         button.setTitle("Animate", forState: .Normal)
         button.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        
+        button.rac_signalForControlEvents(.TouchDown).toSignalProducer().startWithNext { [unowned self] _ in
+            self.barChartView.customAnimating = true
+            self.barChartView.isCustomAnimateBack = false
+            self.barChartView.animate(yAxisDuration: 10.0)
+        }
+        
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
             self.barChartView.customAnimating = true
-            self.barChartView.isCustomAnimateBack = !self.barChartView.isCustomAnimateBack
-//            self.barChartView.leftAxis.axisMaxValue =  self.barChartView.isCustomAnimateBack ? 100 : 50
-//            self.barChartView.leftAxis.resetCustomAxisMax()
-            self.barChartView.animate(yAxisDuration: 3.0)
+            self.barChartView.isCustomAnimateBack = true
+            self.barChartView.animate(yAxisDuration: 10.0)
         }
+
+        
+        
         
         //3.0 柱状图
         self.buildBarChartUI()
@@ -455,6 +463,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
         let set1 = BarChartDataSet(yVals: yVals1, label: "Compnay A")
         set1.animationVals = yResultValues
+        set1.drawValuesEnabled = false
         set1.setColors([UIColor.redColor(),
             UIColor.blueColor(),
             UIColor.orangeColor(),

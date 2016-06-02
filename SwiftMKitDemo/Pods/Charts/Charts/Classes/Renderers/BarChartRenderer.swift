@@ -21,6 +21,8 @@ import CoreGraphics
 public class BarChartRenderer: ChartDataRendererBase
 {
     public weak var dataProvider: BarChartDataProvider?
+    // ModifySourceCode Add By LiXingLe 记录动画top数组
+    private var barAnimationCurrentValus:[CGFloat]?
     
     public init(dataProvider: BarChartDataProvider?, animator: ChartAnimator?, viewPortHandler: ChartViewPortHandler)
     {
@@ -74,6 +76,10 @@ public class BarChartRenderer: ChartDataRendererBase
         var barRect = CGRect()
         var barShadow = CGRect()
         var y: Double
+        // ModifySourceCode Add By LiXingLe 初始化数组
+        if barAnimationCurrentValus == nil {
+            barAnimationCurrentValus = [CGFloat](count: dataSet.entryCount, repeatedValue:0.0)
+        }
         
         // do the drawing
         for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
@@ -93,6 +99,9 @@ public class BarChartRenderer: ChartDataRendererBase
                 let right = x + barWidth - barSpaceHalf
                 var top = isInverted ? (y <= 0.0 ? CGFloat(y) : 0) : (y >= 0.0 ? CGFloat(y) : 0)
                 var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
+                //ModifySourceCode Add By LiXingLe 添加默认值
+                barAnimationCurrentValus![j] = top
+
                 
                 // multiply the height of the rect with the phase
                 if (top > 0)
@@ -294,6 +303,7 @@ public class BarChartRenderer: ChartDataRendererBase
         
         var newY: Double
         
+        
         // do the drawing
         for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
         {
@@ -319,12 +329,12 @@ public class BarChartRenderer: ChartDataRendererBase
                 var newBottom = isInverted ? (newY >= 0.0 ? CGFloat(newY) : 0) : (newY <= 0.0 ? CGFloat(newY) : 0)
                 // multiply the height of the rect with the phase
                 
-
                 if animateBack {
-                    if (top > 0)
+
+                    if (top >= 0)
                     {
-                        //                    top *= phaseY
-                        newTop += (top - newTop)*phaseY
+                       // newTop += (top - newTop)*phaseY
+                        barAnimationCurrentValus![j] += (top - barAnimationCurrentValus![j])*phaseY
                         newBottom = 0.0
                     }
                     else
@@ -334,22 +344,23 @@ public class BarChartRenderer: ChartDataRendererBase
                         newTop = 0.0
                     }
                 }else {
-                    if (newTop > 0)
+                   
+                    if (newTop >= 0)
                     {
-                        //       top *= phaseY
-                        top += (newTop - top)*phaseY
+                        
+                        barAnimationCurrentValus![j] += (newTop - barAnimationCurrentValus![j])*phaseY
                         bottom = 0.0
                     }
                     else
                     {
-//                            bottom *= phaseY
                         bottom += (newBottom - bottom)*phaseY
                         top = 0.0
                     }
                 }
-                //s
-                let useTop  = animateBack ? newTop : top
+                //李兴乐
+                let useTop  = barAnimationCurrentValus![j]// animateBack ? newTop : top
                 let useBottom = animateBack ? newBottom : bottom
+
 
                 
                 barRect.origin.x = left

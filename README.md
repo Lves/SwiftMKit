@@ -573,253 +573,259 @@ fatalError("drawHighlighted() cannot be called on ChartDataRendererBase")
 ```
 4. 在BarChartRenderer.swift中 实现高亮、图形、数值绘制
 
+4.1 给BarChartRenderer 添加存储属性 `barAnimationCurrentValus:[CGFloat]?`,用于记录动画top当前位置
+
 ```
-// ModifySourceCode Add By LiXingLe
-public override func drawAnimationData(context context: CGContext,animateBack: Bool)
-{
-guard let dataProvider = dataProvider, barData = dataProvider.barData else { return }
+ // ModifySourceCode Add By LiXingLe 记录动画top数组
+ private var barAnimationCurrentValus:[CGFloat]?
+```
+4.2 在`drawDataSet`函数中实例化
 
-for i in 0 ..< barData.dataSetCount
-{
-guard let set = barData.getDataSetByIndex(i) else { continue }
-
-if set.isVisible && set.entryCount > 0
-{
-if !(set is IBarChartDataSet)
-{
-fatalError("Datasets for BarChartRenderer must conform to IBarChartDataset")
+```
+// ModifySourceCode Add By LiXingLe 初始化数组
+if barAnimationCurrentValus == nil {
+    barAnimationCurrentValus = [CGFloat](count: dataSet.entryCount, repeatedValue:0.0)
 }
+```
+4.3 循环中添加初始值
 
-drawAnimeDataSet(context: context, dataSet: set as! IBarChartDataSet, index: i ,animateBack: animateBack)
-}
-}
-}
-// ModifySourceCode Add By LiXingLe
-public func drawAnimeDataSet(context context: CGContext, dataSet: IBarChartDataSet, index: Int , animateBack: Bool)
-{
-guard let
-dataProvider = dataProvider,
-barData = dataProvider.barData,
-animator = animator
-else { return }
+```
+ //ModifySourceCode Add By LiXingLe 添加默认值
+ barAnimationCurrentValus![j] = top
+```
 
-CGContextSaveGState(context)
+绘制动画
 
-let trans = dataProvider.getTransformer(dataSet.axisDependency)
+```
+ //MARK: ModifySourceCode Add By LiXingLe
+    public func drawAnimeDataSet(context context: CGContext, dataSet: IBarChartDataSet, index: Int , animateBack: Bool)
+    {
+        guard let
+            dataProvider = dataProvider,
+            barData = dataProvider.barData,
+            animator = animator
+            else { return }
+        
+        CGContextSaveGState(context)
+        
+        let trans = dataProvider.getTransformer(dataSet.axisDependency)
+        
+        let drawBarShadowEnabled: Bool = dataProvider.isDrawBarShadowEnabled
+        let dataSetOffset = (barData.dataSetCount - 1)
+        let groupSpace = barData.groupSpace
+        let groupSpaceHalf = groupSpace / 2.0
+        let barSpace = dataSet.barSpace
+        let barSpaceHalf = barSpace / 2.0
+        let containsStacks = dataSet.isStacked
+        let isInverted = dataProvider.isInverted(dataSet.axisDependency)
+        let barWidth: CGFloat = 0.5
+        let phaseY = animator.phaseY
+        var barRect = CGRect()
+        var barShadow = CGRect()
+        var y: Double
+        
+        var newY: Double
+        
+        
+        // do the drawing
+        for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
+        {
+            guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
+            let animationE = dataSet.animationVals![j]
+            
+            // calculate the x-position, depending on datasetcount
+            let x = CGFloat(e.xIndex + e.xIndex * dataSetOffset) + CGFloat(index)
+                + groupSpace * CGFloat(e.xIndex) + groupSpaceHalf
+            var vals = e.values
+            
+            if (!containsStacks || vals == nil)
+            {
+                y = e.value
+                newY = animationE.value
+                
+                let left = x - barWidth + barSpaceHalf
+                let right = x + barWidth - barSpaceHalf
+                var top = isInverted ? (y <= 0.0 ? CGFloat(y) : 0) : (y >= 0.0 ? CGFloat(y) : 0)
+                var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
+                
+                var newTop = isInverted ? (newY <= 0.0 ? CGFloat(newY) : 0) : (newY >= 0.0 ? CGFloat(newY) : 0)
+                var newBottom = isInverted ? (newY >= 0.0 ? CGFloat(newY) : 0) : (newY <= 0.0 ? CGFloat(newY) : 0)
+                // multiply the height of the rect with the phase
+                
+                if animateBack {
 
-let drawBarShadowEnabled: Bool = dataProvider.isDrawBarShadowEnabled
-let dataSetOffset = (barData.dataSetCount - 1)
-let groupSpace = barData.groupSpace
-let groupSpaceHalf = groupSpace / 2.0
-let barSpace = dataSet.barSpace
-let barSpaceHalf = barSpace / 2.0
-let containsStacks = dataSet.isStacked
-let isInverted = dataProvider.isInverted(dataSet.axisDependency)
-let barWidth: CGFloat = 0.5
-let phaseY = animator.phaseY
-var barRect = CGRect()
-var barShadow = CGRect()
-var y: Double
-
-var newY: Double
-
-// do the drawing
-for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
-{
-guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
-let animationE = dataSet.animationVals![j]
-
-// calculate the x-position, depending on datasetcount
-let x = CGFloat(e.xIndex + e.xIndex * dataSetOffset) + CGFloat(index)
-+ groupSpace * CGFloat(e.xIndex) + groupSpaceHalf
-var vals = e.values
-
-if (!containsStacks || vals == nil)
-{
-y = e.value
-newY = animationE.value
-
-let left = x - barWidth + barSpaceHalf
-let right = x + barWidth - barSpaceHalf
-var top = isInverted ? (y <= 0.0 ? CGFloat(y) : 0) : (y >= 0.0 ? CGFloat(y) : 0)
-var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
-
-var newTop = isInverted ? (newY <= 0.0 ? CGFloat(newY) : 0) : (newY >= 0.0 ? CGFloat(newY) : 0)
-var newBottom = isInverted ? (newY >= 0.0 ? CGFloat(newY) : 0) : (newY <= 0.0 ? CGFloat(newY) : 0)
-// multiply the height of the rect with the phase
-
-
-if animateBack {
-if (top > 0)
-{
-//                    top *= phaseY
-newTop += (top - newTop)*phaseY
-newBottom = 0.0
-}
-else
-{
+                    if (top >= 0)
+                    {
+                       // newTop += (top - newTop)*phaseY
+                        barAnimationCurrentValus![j] += (top - barAnimationCurrentValus![j])*phaseY
+                        newBottom = 0.0
+                    }
+                    else
+                    {
 //                            bottom *= phaseY
-newBottom += (bottom - newBottom)*phaseY
-newTop = 0.0
-}
-}else {
-if (newTop > 0)
-{
-//       top *= phaseY
-top += (newTop - top)*phaseY
-bottom = 0.0
-}
-else
-{
-//                            bottom *= phaseY
-bottom += (newBottom - bottom)*phaseY
-top = 0.0
-}
-}
-//s
-let useTop  = animateBack ? newTop : top
-let useBottom = animateBack ? newBottom : bottom
+                        newBottom += (bottom - newBottom)*phaseY
+                        newTop = 0.0
+                    }
+                }else {
+                   
+                    if (newTop >= 0)
+                    {
+                        
+                        barAnimationCurrentValus![j] += (newTop - barAnimationCurrentValus![j])*phaseY
+                        bottom = 0.0
+                    }
+                    else
+                    {
+                        bottom += (newBottom - bottom)*phaseY
+                        top = 0.0
+                    }
+                }
+                //李兴乐
+                let useTop  = barAnimationCurrentValus![j]// animateBack ? newTop : top
+                let useBottom = animateBack ? newBottom : bottom
 
 
-barRect.origin.x = left
-barRect.size.width = right - left
-barRect.origin.y = useTop
-barRect.size.height = useBottom - useTop
+                
+                barRect.origin.x = left
+                barRect.size.width = right - left
+                barRect.origin.y = useTop
+                barRect.size.height = useBottom - useTop
+                
+                trans.rectValueToPixel(&barRect)
+                
+                if (!viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width))
+                {
+                    continue
+                }
+                
+                if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
+                {
+                    break
+                }
+                
+                // if drawing the bar shadow is enabled
+                if (drawBarShadowEnabled)
+                {
+                    barShadow.origin.x = barRect.origin.x
+                    barShadow.origin.y = viewPortHandler.contentTop
+                    barShadow.size.width = barRect.size.width
+                    barShadow.size.height = viewPortHandler.contentHeight
+                    
+                    CGContextSetFillColorWithColor(context, dataSet.barShadowColor.CGColor)
+                    CGContextFillRect(context, barShadow)
+                }
+                
+                // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
+                CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
+                CGContextFillRect(context, barRect)
+            }
+            else
+            {
+                var posY = 0.0
+                var negY = -e.negativeSum
+                var yStart = 0.0
+                
+                // if drawing the bar shadow is enabled
+                if (drawBarShadowEnabled)
+                {
+                    y = e.value
+                    
+                    let left = x - barWidth + barSpaceHalf
+                    let right = x + barWidth - barSpaceHalf
+                    var top = isInverted ? (y <= 0.0 ? CGFloat(y) : 0) : (y >= 0.0 ? CGFloat(y) : 0)
+                    var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
+                    
+                    // multiply the height of the rect with the phase
+                    if (top > 0)
+                    {
+                        top *= phaseY
+                    }
+                    else
+                    {
+                        bottom *= phaseY
+                    }
+                    
+                    barRect.origin.x = left
+                    barRect.size.width = right - left
+                    barRect.origin.y = top
+                    barRect.size.height = bottom - top
+                    
+                    trans.rectValueToPixel(&barRect)
+                    
+                    barShadow.origin.x = barRect.origin.x
+                    barShadow.origin.y = viewPortHandler.contentTop
+                    barShadow.size.width = barRect.size.width
+                    barShadow.size.height = viewPortHandler.contentHeight
+                    
+                    CGContextSetFillColorWithColor(context, dataSet.barShadowColor.CGColor)
+                    CGContextFillRect(context, barShadow)
+                }
+                
+                // fill the stack
+                for k in 0 ..< vals!.count
+                {
+                    let value = vals![k]
+                    
+                    if value >= 0.0
+                    {
+                        y = posY
+                        yStart = posY + value
+                        posY = yStart
+                    }
+                    else
+                    {
+                        y = negY
+                        yStart = negY + abs(value)
+                        negY += abs(value)
+                    }
+                    
+                    let left = x - barWidth + barSpaceHalf
+                    let right = x + barWidth - barSpaceHalf
+                    var top: CGFloat, bottom: CGFloat
+                    if isInverted
+                    {
+                        bottom = y >= yStart ? CGFloat(y) : CGFloat(yStart)
+                        top = y <= yStart ? CGFloat(y) : CGFloat(yStart)
+                    }
+                    else
+                    {
+                        top = y >= yStart ? CGFloat(y) : CGFloat(yStart)
+                        bottom = y <= yStart ? CGFloat(y) : CGFloat(yStart)
+                    }
+                    
+                    // multiply the height of the rect with the phase
+                    top *= phaseY
+                    bottom *= phaseY
+                    
+                    barRect.origin.x = left
+                    barRect.size.width = right - left
+                    barRect.origin.y = top
+                    barRect.size.height = bottom - top
+                    
+                    trans.rectValueToPixel(&barRect)
+                    
+                    if (k == 0 && !viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width))
+                    {
+                        // Skip to next bar
+                        break
+                    }
+                    
+                    // avoid drawing outofbounds values
+                    if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
+                    {
+                        break
+                    }
+                    
+                    // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
+                    CGContextSetFillColorWithColor(context, dataSet.colorAt(k).CGColor)
+                    CGContextFillRect(context, barRect)
+                }
+            }
+        }
+        
+        CGContextRestoreGState(context)
+    }
 
-trans.rectValueToPixel(&barRect)
-
-if (!viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width))
-{
-continue
-}
-
-if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
-{
-break
-}
-
-// if drawing the bar shadow is enabled
-if (drawBarShadowEnabled)
-{
-barShadow.origin.x = barRect.origin.x
-barShadow.origin.y = viewPortHandler.contentTop
-barShadow.size.width = barRect.size.width
-barShadow.size.height = viewPortHandler.contentHeight
-
-CGContextSetFillColorWithColor(context, dataSet.barShadowColor.CGColor)
-CGContextFillRect(context, barShadow)
-}
-
-// Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
-CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
-CGContextFillRect(context, barRect)
-}
-else
-{
-var posY = 0.0
-var negY = -e.negativeSum
-var yStart = 0.0
-
-// if drawing the bar shadow is enabled
-if (drawBarShadowEnabled)
-{
-y = e.value
-
-let left = x - barWidth + barSpaceHalf
-let right = x + barWidth - barSpaceHalf
-var top = isInverted ? (y <= 0.0 ? CGFloat(y) : 0) : (y >= 0.0 ? CGFloat(y) : 0)
-var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
-
-// multiply the height of the rect with the phase
-if (top > 0)
-{
-top *= phaseY
-}
-else
-{
-bottom *= phaseY
-}
-
-barRect.origin.x = left
-barRect.size.width = right - left
-barRect.origin.y = top
-barRect.size.height = bottom - top
-
-trans.rectValueToPixel(&barRect)
-
-barShadow.origin.x = barRect.origin.x
-barShadow.origin.y = viewPortHandler.contentTop
-barShadow.size.width = barRect.size.width
-barShadow.size.height = viewPortHandler.contentHeight
-
-CGContextSetFillColorWithColor(context, dataSet.barShadowColor.CGColor)
-CGContextFillRect(context, barShadow)
-}
-
-// fill the stack
-for k in 0 ..< vals!.count
-{
-let value = vals![k]
-
-if value >= 0.0
-{
-y = posY
-yStart = posY + value
-posY = yStart
-}
-else
-{
-y = negY
-yStart = negY + abs(value)
-negY += abs(value)
-}
-
-let left = x - barWidth + barSpaceHalf
-let right = x + barWidth - barSpaceHalf
-var top: CGFloat, bottom: CGFloat
-if isInverted
-{
-bottom = y >= yStart ? CGFloat(y) : CGFloat(yStart)
-top = y <= yStart ? CGFloat(y) : CGFloat(yStart)
-}
-else
-{
-top = y >= yStart ? CGFloat(y) : CGFloat(yStart)
-bottom = y <= yStart ? CGFloat(y) : CGFloat(yStart)
-}
-
-// multiply the height of the rect with the phase
-top *= phaseY
-bottom *= phaseY
-
-barRect.origin.x = left
-barRect.size.width = right - left
-barRect.origin.y = top
-barRect.size.height = bottom - top
-
-trans.rectValueToPixel(&barRect)
-
-if (k == 0 && !viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width))
-{
-// Skip to next bar
-break
-}
-
-// avoid drawing outofbounds values
-if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
-{
-break
-}
-
-// Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
-CGContextSetFillColorWithColor(context, dataSet.colorAt(k).CGColor)
-CGContextFillRect(context, barRect)
-}
-}
-}
-
-CGContextRestoreGState(context)
-}
 
     // ModifySourceCode Add By LiXingLe
     public override func drawAnimationValues(context context: CGContext,animateBack: Bool){
