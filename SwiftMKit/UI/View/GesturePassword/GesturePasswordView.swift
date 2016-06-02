@@ -32,9 +32,19 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     @IBInspectable
     public var padding: CGFloat = 20 { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var lineSuccessColor: UIColor = InnerConstant.SuccessColor { didSet { setNeedsDisplay() } }
+    public var lineSuccessColor: UIColor = InnerConstant.SuccessColor {
+        didSet {
+            updateTentacleView()
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable
-    public var lineFailureColor: UIColor = InnerConstant.FailureColor { didSet { setNeedsDisplay() } }
+    public var lineFailureColor: UIColor = InnerConstant.FailureColor {
+        didSet {
+            updateTentacleView()
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable
     public var dotSuccessColor: UIColor = InnerConstant.SuccessColor { didSet { setNeedsDisplay() } }
     @IBInspectable
@@ -46,9 +56,19 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     @IBInspectable
     public var buttonBorderWidth: CGFloat = InnerConstant.ButtonBorderWidth { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var lineWidth: CGFloat = InnerConstant.LineWidth { didSet { setNeedsDisplay() } }
+    public var lineWidth: CGFloat = InnerConstant.LineWidth {
+        didSet {
+            updateTentacleView()
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable
-    public var colorLineAlpha: CGFloat = InnerConstant.ColorLineAlpha { didSet { setNeedsDisplay() } }
+    public var colorLineAlpha: CGFloat = InnerConstant.ColorLineAlpha {
+        didSet {
+            updateTentacleView()
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable
     public var buttonPanelLeading: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
     @IBInspectable
@@ -123,6 +143,12 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         tentacleView?.frame = buttonPannel.frame
         
     }
+    private func updateTentacleView() {
+        tentacleView?.lineWidth = lineWidth
+        tentacleView?.lineFailureColor = lineFailureColor
+        tentacleView?.lineSuccessColor = lineSuccessColor
+        tentacleView?.lineColorAlpha = colorLineAlpha
+    }
     
     // MARK: Delegate
     
@@ -164,7 +190,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         }
         if previousPassword.length == 0 {
             previousPassword = result
-            delegate?.gp_setPassword(true, message: "请再次绘制进行确认")
+            delegate?.gp_setPassword(true, message: "请确认手势密码")
             tentacleView?.enterArgin()
             return true
         } else {
@@ -174,12 +200,12 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             if previousPassword == result {
                 previousPassword = ""
                 let success = GesturePassword.change(result)
-                let message = success ? "设置手势密码成功" : "确认失败，请重新设置手势密码"
+                let message = success ? "手势密码设置成功" : "设置失败，请重新设置手势密码"
                 delegate?.gp_confirmSetPassword(success, message: message)
                 return success
             } else {
                 previousPassword = ""
-                delegate?.gp_confirmSetPassword(false, message: "确认失败，请重新设置手势密码")
+                delegate?.gp_confirmSetPassword(false, message: "设置失败，请重新设置手势密码")
                 return false
             }
         }

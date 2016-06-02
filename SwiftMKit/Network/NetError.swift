@@ -20,6 +20,9 @@ public class NetError : NSError {
     init(statusCode: Int, message: String) {
         self.statusCode = statusCode
         self.message = message
+        if message.length == 0 {
+            self.message = "未知错误"
+        }
         super.init(domain: "NetError", code: statusCode, userInfo: ["message":message])
     }
     convenience init(error: NSError){
