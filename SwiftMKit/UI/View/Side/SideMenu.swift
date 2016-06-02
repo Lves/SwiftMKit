@@ -237,7 +237,10 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     }
     
     public func routeToSideMaster(name: String, params nextParams: Dictionary<String, AnyObject> = [:]) {
-        if let viewController = masterViewController?.initialedViewController(name, params: nextParams) {
+        routeToSideMaster(name, stroyBoardName: nil, params: nextParams)
+    }
+    public func routeToSideMaster(name: String, stroyBoardName: String?, params nextParams: Dictionary<String, AnyObject> = [:]) {
+        if let viewController = masterViewController?.initialedViewController(name, params: nextParams, storyboardName: stroyBoardName ?? "") {
             let navigationController = UINavigationController(rootViewController: viewController)
             let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
             navigationController.transitioningDelegate = effect
