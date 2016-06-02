@@ -107,18 +107,20 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     public func setupUI() {
         self.backgroundColor = UIColor.clearColor()
         buttonPannel.frame = self.frame
+        buttonPannel.backgroundColor = UIColor.clearColor()
+        buttonPannel.userInteractionEnabled = false
         for index in 0..<9 {
             let button = GesturePasswordButton(frame: CGRectZero)
             button.tag = index + 1
             buttons.append(button)
             buttonPannel.addSubview(button)
         }
-        self.addSubview(buttonPannel)
         tentacleView = GestureTentacleView(frame: buttonPannel.frame)
         tentacleView?.buttonArray = buttons
         tentacleView?.delegate = self
         tentacleView?.style = style
         self.addSubview(tentacleView!)
+        self.addSubview(buttonPannel)
     }
     public override func drawRect(rect: CGRect) {
         let left = buttonPanelLeading
