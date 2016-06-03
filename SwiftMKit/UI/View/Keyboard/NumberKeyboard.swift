@@ -47,20 +47,6 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     
-    lazy var inputAction: CocoaAction = {
-        let action = Action<AnyObject, AnyObject, NSError> { [weak self] input in
-            return SignalProducer { [weak self] (sink, _) in
-                
-                sink.sendNext(input)
-                sink.sendCompleted()
-            }
-        }
-        action.errors.observe { error in
-            DDLogError("\(error)")
-        }
-        return CocoaAction(action, input:"")
-    }()
-    
     public static func keyboard(textField: UITextField, type:NumberKeyboardType = .Normal) -> NumberKeyboard {
         let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil).first as? NumberKeyboard
         view?.textField = textField
@@ -85,12 +71,17 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             self.text = text
         }
         for button in buttonNumbers {
+            button.exclusiveTouch = true
             bindNumberButtonAction(button)
         }
-        bindKeyButtonAction(self.btnKey)
-        bindKeyButtonAction(self.btnOk)
-        bindDelButtonAction(self.btnDel)
-        bindDotButtonAction(self.btnDot)
+        btnKey.exclusiveTouch = true
+        btnOk.exclusiveTouch = true
+        btnDel.exclusiveTouch = true
+        btnDot.exclusiveTouch = true
+        bindKeyButtonAction(btnKey)
+        bindKeyButtonAction(btnOk)
+        bindDelButtonAction(btnDel)
+        bindDotButtonAction(btnDot)
         if self.type == .NoDot {
             self.btnDot.hidden = true
         }
