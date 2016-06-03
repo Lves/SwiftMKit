@@ -21,7 +21,7 @@ public class FingerPrint {
                 sink.sendNext(context)
                 sink.sendCompleted()
             } else {
-                DDLogError("[FingerPrint] UnSupported: \(error)")
+                DDLogWarn("[FingerPrint] UnSupported")
                 sink.sendFailed(error ?? NSError(domain: "", code: -1, userInfo: nil))
             }
         }

@@ -12,9 +12,7 @@ import EZSwiftExtensions
 
 @IBDesignable
 public class GesturePasswordButton: UIView {
-    @IBInspectable
     public var selected: Bool = false { didSet { setNeedsDisplay() } }
-    @IBInspectable
     public var success: Bool = true { didSet { setNeedsDisplay() } }
     @IBInspectable
     public var lineSuccessColor: UIColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1) { didSet { setNeedsDisplay() } }
