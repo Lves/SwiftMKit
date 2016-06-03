@@ -144,6 +144,21 @@ public extension UIViewController {
             }
         }
     }
+    public func routeBack(pageNumber: Int, animation: Bool = true) {
+        DDLogInfo("Route back: \(pageNumber)")
+        if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
+            self.dismissViewControllerAnimated(animation, completion: nil)
+        } else {
+            let count = self.navigationController?.viewControllers.count ?? 0
+            if count > pageNumber {
+                if let vc = self.navigationController?.viewControllers[count - 1 - pageNumber] {
+                    self.navigationController?.popToViewController(vc, animated: animation)
+                    return
+                }
+            }
+            self.navigationController?.popViewControllerAnimated(animation)
+        }
+    }
     public func routeToRoot(animation: Bool = true) {
         DDLogInfo("Route to root")
         self.navigationController?.popToRootViewControllerAnimated(animation)
