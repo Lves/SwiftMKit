@@ -31,6 +31,7 @@ pod 'Aspects'
 pod 'HanekeSwift'
 pod 'MBProgressHUD'
 pod 'Charts'
+pod "PulsingHalo"
 
 target 'SwiftMKitDemoTests' do
     testing_pods

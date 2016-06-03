@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import PulsingHalo
 
 
 /*
@@ -80,19 +81,33 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
         let button = UIButton(frame: CGRectMake(100, 900, 100, 44))
         button.setTitle("Animate", forState: .Normal)
+        
         button.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        
+        
+        let halo = PulsingHaloLayer()
+        halo.position = button.center
+        halo.radius = 140.0
+        halo.backgroundColor = UIColor.blueColor().CGColor
+       
         
         button.rac_signalForControlEvents(.TouchDown).toSignalProducer().startWithNext { [unowned self] _ in
             self.barChartView.customAnimating = true
             self.barChartView.isCustomAnimateBack = false
             self.barChartView.animate(yAxisDuration: 10.0)
+            
+            
         }
         
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
             self.barChartView.customAnimating = true
             self.barChartView.isCustomAnimateBack = true
             self.barChartView.animate(yAxisDuration: 10.0)
+//             halo.removeFromSuperlayer()
         }
+        
+        
+       
 
         
         
@@ -109,6 +124,8 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         scrollView.addSubview(button)
         scrollView.addSubview(self.barChartView)
         
+         button.superview?.layer.insertSublayer(halo, above: button.layer)
+         halo.start()
         
     }
     //MARK: 折线图
