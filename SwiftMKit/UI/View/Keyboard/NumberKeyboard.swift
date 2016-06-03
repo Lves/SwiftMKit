@@ -47,20 +47,6 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     
-    lazy var inputAction: CocoaAction = {
-        let action = Action<AnyObject, AnyObject, NSError> { [weak self] input in
-            return SignalProducer { [weak self] (sink, _) in
-                
-                sink.sendNext(input)
-                sink.sendCompleted()
-            }
-        }
-        action.errors.observe { error in
-            DDLogError("\(error)")
-        }
-        return CocoaAction(action, input:"")
-    }()
-    
     public static func keyboard(textField: UITextField, type:NumberKeyboardType = .Normal) -> NumberKeyboard {
         let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil).first as? NumberKeyboard
         view?.textField = textField
