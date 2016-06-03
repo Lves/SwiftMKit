@@ -12,9 +12,7 @@ import EZSwiftExtensions
 
 @IBDesignable
 public class GesturePasswordButton: UIView {
-    @IBInspectable
     public var selected: Bool = false { didSet { setNeedsDisplay() } }
-    @IBInspectable
     public var success: Bool = true { didSet { setNeedsDisplay() } }
     @IBInspectable
     public var lineSuccessColor: UIColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1) { didSet { setNeedsDisplay() } }
@@ -72,8 +70,14 @@ public class GesturePasswordButton: UIView {
             CGContextFillPath(context);
             
         }else{
+            CGContextSetLineWidth(context, buttonBorderWidth)
             let (r,g,b,a) = dotNormalColor.colorComponents()
             CGContextSetRGBStrokeColor(context, r,g,b,a);//线条颜色
+            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width/8+1, bounds.size.height/2-bounds.size.height/8, bounds.size.width/4, bounds.size.height/4);
+            CGContextAddEllipseInRect(context, frame)
+            
+            CGContextStrokePath(context)
+            
         }
         
         CGContextSetLineWidth(context, buttonBorderWidth)

@@ -86,7 +86,7 @@ public class GestureTentacleView: UIView {
                 buttonTemp.selected = false
                 if (CGRectContainsPoint(buttonTemp.frame, touchPoint)) {
                     let frameTemp = buttonTemp.frame
-                    let point = CGPointMake(frameTemp.origin.x + frameTemp.size.width/2, frameTemp.origin.y + frameTemp.size.height/2)
+                    let point = CGPointMake(frameTemp.origin.x + frameTemp.size.width/2 + 1, frameTemp.origin.y + frameTemp.size.height/2)
                     var dict: Dictionary<String,Float> = [:]
                     dict["x"] = Float(point.x)
                     dict["y"] = Float(point.y)
@@ -121,7 +121,7 @@ public class GestureTentacleView: UIView {
                     buttonTemp.setNeedsDisplay()
                     
                     let frameTemp = buttonTemp.frame
-                    let point = CGPointMake(frameTemp.origin.x + frameTemp.size.width/2, frameTemp.origin.y + frameTemp.size.height/2)
+                    let point = CGPointMake(frameTemp.origin.x + frameTemp.size.width/2 + 1, frameTemp.origin.y + frameTemp.size.height/2)
                     var dict: Dictionary<String,Float> = [:]
                     dict["x"] = Float(point.x)
                     dict["y"] = Float(point.y)
