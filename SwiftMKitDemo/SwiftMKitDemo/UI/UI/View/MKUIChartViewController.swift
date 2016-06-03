@@ -13,7 +13,7 @@ import Charts
 /*
 一.显示高亮点
  1.设置图形是否开启高亮圆点功能： 
-    lineChart.showAllHighlightCircles = true   //是否显示高亮Circle
+    lineChart.showAllHighlightCircles = true              //是否显示高亮Circle
  2.设置数据源DataSet的圆点样式：
     set2.setCircleColor(UIColor.orangeColor())            //圆点圆环颜色
     set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
@@ -263,6 +263,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         lineChart2 = LineChartView(frame: CGRectMake(0, 420,screenSize.width , 400))
         lineChart2.backgroundColor = kBlackColor
         lineChart2.alpha = 0.8
+        lineChart2.showAllHighlightCircles = true   //是否显示高亮Circle
         
         let percentFormatter = NSNumberFormatter()
         percentFormatter.positiveSuffix = "%"
@@ -279,6 +280,10 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         xAxis.drawGridLinesEnabled = false       //是否显示有网格线
         
         lineChart2.leftAxis.axisLineWidth = 0          //左侧线宽度
+        lineChart2.leftAxis.drawGridLinesEnabled = false
+        
+       
+        
         lineChart2.rightAxis.enabled = false           //是否显示右侧轴线
         lineChart2.dragEnabled = true                  //是否可以滑动
         lineChart2.drawGridBackgroundEnabled = false   //背景色
@@ -294,7 +299,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         lineChart2.marker = marker
         
         
-//        self.lineChart2.delegate = self
+        self.lineChart2.delegate = self
         self.setLine2Data()
         
         
@@ -319,7 +324,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         //Line1
         var yValues1 = [ChartDataEntry]()
         for yIndex in  0...10 {
-            let flotVa = Double(Float(yIndex) * 100) - (Double) (arc4random()%20)
+            let flotVa = Double(Float(yIndex) * 30)  + (Double) (arc4random()%50)
             yValues1.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
@@ -336,12 +341,20 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
         set1.fillColor = UIColor.orangeColor()
         set1.setColor(UIColor.orangeColor())
+        
         set1.drawCirclesEnabled = false
+        set1.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆点圆环颜色
+        set1.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
+        set1.circleRadius = 10.0                               //圆半径
+        set1.highlightEnabled = true   //是否可以高亮
+        
+        
         set1.lineWidth = 0
         set1.drawValuesEnabled = false  //是否显示数字
-        set1.highlightEnabled = false   //是否可以高亮
-        set1.drawRangeFilledEnabled = true    //是否区域填充
+        
+        set1.drawRangeFilledEnabled = false    //是否区域填充
         set1.fillLowerYValues = yValues1Lower ///设置底部fill线
+        
         set1.drawCubicEnabled = true          //是否显示曲线形式
         set1.valueFormatter = percentFormatter
         
@@ -349,30 +362,27 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         //Line 2
         var yValues2 = [ChartDataEntry]()
         for yIndex in  0...10 {
-            let flotVa = Double(Float(yIndex) * 75) - (Double) (arc4random()%50)
+            let flotVa = Double(Float(yIndex) * 10) + (Double) (arc4random()%5)
             yValues2.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
-        //底部填充线
-        var yValues2Lower = [ChartDataEntry]()
-        for yIndex in  0...10 {
-            
-            let flotVa = Double(Float(yIndex) * 25) - (Double) (arc4random()%50)
-            yValues2Lower.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
-        }
         
         let set2 = LineChartDataSet(yVals: yValues2, label: "DataSet 2")
-        set2.fillColor = UIColor.purpleColor()
-        set2.setColor(UIColor.purpleColor())
+        set2.fillColor = kBlackColor
+        set2.fillAlpha = 1.0
+        set2.setColor(UIColor.clearColor())
         set2.drawFilledEnabled = true
+        
         set2.drawCirclesEnabled = false
+        set2.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆点圆环颜色
+        set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
+        set2.circleRadius = 10.0                               //圆半径
+        set2.highlightEnabled = true   //是否可以高亮
+        
+        
         set2.lineWidth = 0
         set2.drawValuesEnabled = false  //是否显示数字
-        set2.highlightEnabled = false   //是否可以高亮
         set2.drawCubicEnabled = true  //是否显示曲线形式
-        set2.drawRangeFilledEnabled = true //部分填充
-        ///设置底部fill线
-        set2.fillLowerYValues = yValues2Lower
         set2.valueFormatter = percentFormatter
        
 
@@ -380,18 +390,25 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
         var yValuesMiddle = [ChartDataEntry]()
         for yIndex in  0...10 {
-            let flotVa = Double(Float(yIndex) * 50)
+            let flotVa = Double(Float(yIndex) * 20)
             yValuesMiddle.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         let setMiddle = LineChartDataSet(yVals: yValuesMiddle, label: "DataSet Middle")
         setMiddle.drawFilledEnabled = false
-        setMiddle.drawCirclesEnabled = true
+        setMiddle.drawCirclesEnabled = false
         setMiddle.setColor(UIColor.orangeColor())
         setMiddle.lineWidth = 1
-        setMiddle.circleRadius = 3
+        
+
+        setMiddle.setCircleColor(ChartColorTemplates.colorFromString("#affff000"))            //圆点圆环颜色
+        setMiddle.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
+        setMiddle.circleRadius = 10.0                               //圆半径
+
+        
         setMiddle.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
         setMiddle.drawCubicEnabled = true  //是否显示曲线形式
         setMiddle.valueFormatter = percentFormatter
+        setMiddle.drawValuesEnabled = false
         
 
         
@@ -427,10 +444,6 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         self.barChartView.leftAxis.labelPosition = .InsideChart
         self.barChartView.leftAxis.drawGridLinesEnabled = false
         self.barChartView.leftAxis.axisLineWidth = 0
-        
-
-        
-        
         
         self.setChartData()
     }
