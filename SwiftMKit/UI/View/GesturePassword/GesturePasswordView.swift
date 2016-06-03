@@ -141,6 +141,8 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             button.colorFillAlpha = colorFillAlpha
             button.dotNormalColor = dotNormalColor
             button.buttonBorderWidth = buttonBorderWidth
+            button.success = true
+            button.selected = false
         }
         tentacleView?.frame = buttonPannel.frame
         
