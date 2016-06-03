@@ -69,6 +69,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     var lineChart1Data:ChartData?
     
     var defaultHighlight:ChartHighlight?
+    var halo:PulsingHaloLayer?
     
     
     override func viewDidLoad() {
@@ -85,17 +86,21 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         button.setTitleColor(UIColor.blueColor(), forState: .Normal)
         
         
-        let halo = PulsingHaloLayer()
-        halo.position = button.center
-        halo.radius = 140.0
-        halo.backgroundColor = UIColor.blueColor().CGColor
-       
+
         
         button.rac_signalForControlEvents(.TouchDown).toSignalProducer().startWithNext { [unowned self] _ in
             self.barChartView.customAnimating = true
             self.barChartView.isCustomAnimateBack = false
             self.barChartView.animate(yAxisDuration: 10.0)
             
+            self.halo = PulsingHaloLayer()
+            self.halo!.position = button.center
+            self.halo!.radius = 80.0
+            self.halo!.haloLayerNumber = 4
+            self.halo!.backgroundColor = UIColor.blueColor().CGColor
+            button.superview?.layer.insertSublayer(self.halo!, above: button.layer)
+        
+            self.halo!.start()
             
         }
         
@@ -103,14 +108,9 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
             self.barChartView.customAnimating = true
             self.barChartView.isCustomAnimateBack = true
             self.barChartView.animate(yAxisDuration: 10.0)
-//             halo.removeFromSuperlayer()
+            self.halo!.removeFromSuperlayer()
         }
-        
-        
-       
 
-        
-        
         
         //3.0 柱状图
         self.buildBarChartUI()
@@ -124,8 +124,8 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         scrollView.addSubview(button)
         scrollView.addSubview(self.barChartView)
         
-         button.superview?.layer.insertSublayer(halo, above: button.layer)
-         halo.start()
+       
+        
         
     }
     //MARK: 折线图

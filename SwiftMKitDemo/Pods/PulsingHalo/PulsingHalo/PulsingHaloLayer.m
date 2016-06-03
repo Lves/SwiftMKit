@@ -44,6 +44,10 @@
     [self.effect addAnimation:self.animationGroup forKey:@"pulse"];
 }
 
+- (void)stop{
+    [self.effect removeAllAnimations];
+}
+
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.effect.frame = frame;
