@@ -71,12 +71,17 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             self.text = text
         }
         for button in buttonNumbers {
+            button.exclusiveTouch = true
             bindNumberButtonAction(button)
         }
-        bindKeyButtonAction(self.btnKey)
-        bindKeyButtonAction(self.btnOk)
-        bindDelButtonAction(self.btnDel)
-        bindDotButtonAction(self.btnDot)
+        btnKey.exclusiveTouch = true
+        btnOk.exclusiveTouch = true
+        btnDel.exclusiveTouch = true
+        btnDot.exclusiveTouch = true
+        bindKeyButtonAction(btnKey)
+        bindKeyButtonAction(btnOk)
+        bindDelButtonAction(btnDel)
+        bindDotButtonAction(btnDot)
         if self.type == .NoDot {
             self.btnDot.hidden = true
         }
