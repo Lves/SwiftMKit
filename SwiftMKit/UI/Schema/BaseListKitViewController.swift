@@ -58,6 +58,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
     }
     public override func setupUI() {
         super.setupUI()
+        let _ = listIndicator
         if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
             self.listView.mj_header = nil
         }
