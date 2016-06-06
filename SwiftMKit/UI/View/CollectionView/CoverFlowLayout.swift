@@ -14,10 +14,10 @@ public class CoverFlowLayout: UICollectionViewFlowLayout {
     private struct InnerConstant {
         static let kDistanceToProjectionPlane : CGFloat = 500.0
         
-        static let MaxCoverDegree: CGFloat = 45.0
-        static let CoverDensity: CGFloat = 0.25
+        static let MaxCoverDegree: CGFloat = 20.0
+        static let CoverDensity: CGFloat = 0.00
+        static let minCoverScale: CGFloat = 0.85
         static let MinCoverOpacity: CGFloat = 0.9
-        static let minCoverScale: CGFloat = 0.7
     }
     
     public var maxCoverDegree = InnerConstant.MaxCoverDegree
