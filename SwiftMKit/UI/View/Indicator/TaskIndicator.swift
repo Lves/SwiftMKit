@@ -46,8 +46,10 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
             self.runningTasks.append(task)
-            Async.main {
-                self.hud?.showHUDAddedTo(task.indicatorView, animated: true, text: task.indicatorText)
+            if let view = task.indicatorView {
+                Async.main {
+                    self.hud?.showHUDAddedTo(view, animated: true, text: task.indicatorText)
+                }
             }
         }
     }
@@ -55,8 +57,10 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         DDLogVerbose("Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            Async.main {
-                self.hud?.hideHUDForView(task.indicatorView, animated: true)
+            if let view = task.indicatorView {
+                Async.main {
+                    self.hud?.hideHUDForView(view, animated: true)
+                }
             }
         }
     }
@@ -64,8 +68,10 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         DDLogVerbose("Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            Async.main {
-                self.hud?.hideHUDForView(task.indicatorView, animated: true)
+            if let view = task.indicatorView {
+                Async.main {
+                    self.hud?.hideHUDForView(view, animated: true)
+                }
             }
         }
     }
@@ -76,8 +82,10 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
             if let index = self.runningTasks.indexOf(task) {
                 self.runningTasks.removeAtIndex(index)
             }
-            Async.main {
-                self.hud?.hideIndicatorHUDForView(task.indicatorView, animated: true)
+            if let view = task.indicatorView {
+                Async.main {
+                    self.hud?.hideIndicatorHUDForView(view, animated: true)
+                }
             }
         }
     }
