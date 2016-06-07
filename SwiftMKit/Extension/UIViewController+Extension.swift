@@ -39,13 +39,13 @@ public extension UIViewController {
 
 //Route
 public extension UIViewController {
-    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", pop: Bool = false) -> Bool {
+    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", animation: Bool = true, pop: Bool = false) -> Bool {
         DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
         if let vc = initialedViewController(name, params: nextParams, storyboardName: storyboardName) {
             if pop {
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.presentViewController(vc, animated: animation, completion: nil)
             } else {
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: animation)
             }
             return true
         } else if canPerformSegueWithIdentifier(name){
