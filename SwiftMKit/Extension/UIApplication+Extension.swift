@@ -46,6 +46,15 @@ public extension UIApplication {
         static let CFBundleShortVersionString = "CFBundleShortVersionString"
     }
     
+    var remoteNotificationEnabled: Bool {
+        get {
+            if let status = currentUserNotificationSettings() {
+                return status.types != .None
+            }
+            return false
+        }
+    }
+    
     var bundleIdentifier: String {
         get {
             if let identifier = PINMemoryCache.sharedCache().objectForKey(Constant.BundleIdentifier) as? String {
