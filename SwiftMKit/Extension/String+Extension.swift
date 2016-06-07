@@ -19,7 +19,10 @@ extension String {
     
     // MARK: Format
     func formatCurrency(locale: String = "en_US") -> String {
-        return NSString(string: self).doubleValue.formatCurrency()
+        return NSString(string: self).doubleValue.formatCurrency(locale)
+    }
+    func formatCurrencyWithoutDot(locale: String = "en_US") -> String {
+        return NSString(string: self).doubleValue.formatCurrencyWithoutDot(locale)
     }
     
     func jsonStringToDictionary() -> [String: AnyObject]? {

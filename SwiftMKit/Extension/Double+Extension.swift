@@ -18,4 +18,11 @@ public extension Double {
         formatter.currencySymbol = ""
         return formatter.stringFromNumber(self) ?? "\(self)"
     }
+    func formatCurrencyWithoutDot(locale: String = "en_US") -> String {
+        var value = self.formatCurrency(locale)
+        if value.contains(".") {
+            value = value.componentsSeparatedByString(".").first ?? value
+        }
+        return value
+    }
 }
