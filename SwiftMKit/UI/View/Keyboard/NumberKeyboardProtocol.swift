@@ -8,6 +8,12 @@
 
 import UIKit
 
+public enum NumberKeyboardType: Int {
+    case Normal, NoDot, Money
+}
+public enum NumberKeyboardStyle: Int {
+    case Default
+}
 public protocol NumberKeyboardProtocol {
     var type: NumberKeyboardType { get set }
     func clear()
@@ -21,5 +27,6 @@ public protocol NumberKeyboardProtocol {
     func matchDeleteNumber(old : String, new : String) -> (String, NSRange)
     //确定---匹配
     func matchConfirm(input : String) -> String
-    static func keyboard(textField: UITextField, type:NumberKeyboardType) -> NumberKeyboard
+    static func keyboard(textField: UITextField, type: NumberKeyboardType) -> NumberKeyboard
+    static func keyboard(textField: UITextField, type: NumberKeyboardType, style: NumberKeyboardStyle) -> NumberKeyboard
 }

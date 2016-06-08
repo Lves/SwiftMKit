@@ -11,11 +11,34 @@ import ReactiveCocoa
 import CocoaLumberjack
 import IQKeyboardManager
 
-public enum NumberKeyboardType: Int {
-    case Normal, NoDot, Money
+struct NumberKeyboardUITheme {
+    var viewBackgroundColor: UIColor
+    var viewLineColor: UIColor
+    var viewEnterColor: UIColor
+    var viewDelColor: UIColor
+    var viewNumberColor: UIColor
+    var viewEnterHiglightColor: UIColor
+    var viewDelHiglightColor: UIColor
+    var viewNumberHiglightColor: UIColor
+    var viewDelImage: String = ""
+    var viewScreenImage: String = ""
 }
 
 public class NumberKeyboard: UIView, NumberKeyboardProtocol {
+    
+    struct Theme {
+        static let DefaultTheme: NumberKeyboardUITheme = NumberKeyboardUITheme(
+            viewBackgroundColor: UIColor(hex6: 0xd8d8d8),
+            viewLineColor: UIColor(hex6: 0xd8d8d8),
+            viewEnterColor: UIColor(hex6: 0xfd734c),
+            viewDelColor: UIColor(hex6: 0xd8d8d8),
+            viewNumberColor: UIColor(hex6: 0xd8d8d8),
+            viewEnterHiglightColor: UIColor(hex6: 0xfd734c),
+            viewDelHiglightColor: UIColor(hex6: 0xd8d8d8),
+            viewNumberHiglightColor: UIColor(hex6: 0xd8d8d8),
+            viewDelImage: "",
+            viewScreenImage: "")
+    }
 
     @IBOutlet weak var btn1: UIButton!
     @IBOutlet weak var btn2: UIButton!
@@ -32,6 +55,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     @IBOutlet weak var btnDel: UIButton!
     @IBOutlet weak var btnOk: UIButton!
     
+    @IBOutlet var lines: [UIView]!
     var buttonNumbers: [UIButton] {
         get {
             return [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9]
@@ -47,11 +71,14 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     
-    public static func keyboard(textField: UITextField, type:NumberKeyboardType = .Normal) -> NumberKeyboard {
+    public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal) -> NumberKeyboard {
+        return keyboard(textField, type: type, style: .Default)
+    }
+    public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal, style: NumberKeyboardStyle) -> NumberKeyboard {
         let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil).first as? NumberKeyboard
         view?.textField = textField
         view?.type = type
-        view?.initUI()
+        view?.setupUI(style)
         return view!
     }
     public override init(frame: CGRect) {
@@ -65,7 +92,24 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         text = ""
     }
     
-    private func initUI() {
+    private func setupUI(style: NumberKeyboardStyle) {
+        var theme = Theme.DefaultTheme
+        switch style {
+        case .Default:
+            theme = Theme.DefaultTheme
+        }
+        btnDel.setBackgroundImage(UIImage(color: theme.viewDelColor), forState: .Normal)
+        btnOk.setBackgroundImage(UIImage(color: theme.viewEnterColor), forState: .Normal)
+        btnKey.setBackgroundImage(UIImage(color: theme.viewNumberColor), forState: .Normal)
+        btnDel.setBackgroundImage(UIImage(color: theme.viewDelHiglightColor), forState: .Highlighted)
+        btnOk.setBackgroundImage(UIImage(color: theme.viewEnterHiglightColor), forState: .Highlighted)
+        btnKey.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), forState: .Highlighted)
+        btnKey.setImage(UIImage(named: theme.viewScreenImage), forState: .Normal)
+        btnDel.setImage(UIImage(named: theme.viewDelImage), forState: .Normal)
+        for button in buttonNumbers {
+            button.setBackgroundImage(UIImage(color: theme.viewNumberColor), forState: .Normal)
+            button.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), forState: .Highlighted)
+        }
         //监听TextField的text
         self.textField?.rac_textSignalProducer().startWithNext { text in
             self.text = text
