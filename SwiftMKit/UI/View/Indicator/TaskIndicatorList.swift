@@ -18,7 +18,7 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
     private weak var viewModel: BaseListKitViewModel?
     lazy public var runningTasks = [NSURLSessionTask]()
     
-    init(listView: UIScrollView, viewModel: BaseListKitViewModel){
+    init(listView: UIScrollView?, viewModel: BaseListKitViewModel){
         self.listView = listView
         self.viewModel = viewModel
         super.init()

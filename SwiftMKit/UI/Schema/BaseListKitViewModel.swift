@@ -47,21 +47,21 @@ public class BaseListKitViewModel: BaseKitViewModel {
             let count: UInt = UInt(dataSource.count)
             if count == 0 {
                 self.viewController.showEmptyView()
-                self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
+                self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
                 return
             }
             if oldValue.count == 0 {
                 self.viewController.hideEmptyView()
-                self.listViewController.listView.mj_footer.resetNoMoreData()
+                self.listViewController.listView?.mj_footer.resetNoMoreData()
             }
             if count < listLoadNumber {
-                self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
+                self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
             }else if count % listLoadNumber > 0 || count >= listMaxNumber {
-                self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
+                self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
             }
-            if let footer = self.listViewController.listView.mj_footer as? MJRefreshAutoStateFooter {
+            if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
                 footer.setTitle(noMoreDataTip, forState: .NoMoreData)
             }
         }

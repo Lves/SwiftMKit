@@ -22,7 +22,7 @@ public enum ListViewType {
 
 public protocol ListViewProtocol {
     var listViewType: ListViewType { get }
-    var listView: UIScrollView! { get }
+    var listView: UIScrollView? { get }
     func listViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader
     func listViewFooterWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshFooter
 }
@@ -33,7 +33,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
             return viewModel as! BaseListKitViewModel
         }
     }
-    public var listView: UIScrollView! {
+    public var listView: UIScrollView? {
         get {
             return nil
         }
@@ -60,26 +60,26 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
         super.setupUI()
         let _ = listIndicator
         if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
-            self.listView.mj_header = nil
+            self.listView?.mj_header = nil
         }
         if self.listViewType == .None || self.listViewType == .RefreshOnly {
-            self.listView.mj_footer = nil
+            self.listView?.mj_footer = nil
         }
         if self.listViewType == .Both || self.listViewType == .RefreshOnly {
-            self.listView.mj_header = self.listViewHeaderWithRefreshingBlock {
+            self.listView?.mj_header = self.listViewHeaderWithRefreshingBlock {
                 [weak self] in
                 self?.listViewModel?.dataIndex = 0
                 self?.listViewModel?.fetchData()
                 }
         }
         if self.listViewType == .Both || self.listViewType == .LoadMoreOnly {
-            self.listView.mj_footer = self.listViewFooterWithRefreshingBlock {
+            self.listView?.mj_footer = self.listViewFooterWithRefreshingBlock {
                 [weak self] in
                 self?.listViewModel?.dataIndex += 1
                 self?.listViewModel?.fetchData()
                 }
-            self.listView.mj_footer.endRefreshingWithNoMoreData()
-            if let footer = self.listView.mj_footer as? MJRefreshAutoStateFooter {
+            self.listView?.mj_footer.endRefreshingWithNoMoreData()
+            if let footer = self.listView?.mj_footer as? MJRefreshAutoStateFooter {
                 footer.setTitle("", forState: .NoMoreData)
             }
         }
