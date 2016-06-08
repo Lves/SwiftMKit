@@ -141,7 +141,7 @@ public class NetApiData: NSObject {
         mutableURLRequest.timeoutInterval = api.timeout ?? NetApiDataConst.DefaultTimeoutInterval
         let parameterString = parameters.stringFromHttpParameters()
         DDLogInfo("[NetApi] Request Url: \(method.rawValue) \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
-        let encoding = Alamofire.ParameterEncoding.URL
+        let encoding = api.transferParameterEncoding()
         mutableURLRequest = encoding.encode(mutableURLRequest, parameters: parameters).0
         mutableURLRequest = api.transferURLRequest(mutableURLRequest)
         return mutableURLRequest

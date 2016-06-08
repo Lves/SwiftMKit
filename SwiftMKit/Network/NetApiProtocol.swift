@@ -35,6 +35,7 @@ public protocol NetApiProtocol: NetApiIndicatorProtocol {
     func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>
     func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>
     func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>
+    func transferParameterEncoding() -> ParameterEncoding
 }
 
 public class NetApiAbstract: NetApiProtocol{
@@ -62,6 +63,7 @@ public class NetApiAbstract: NetApiProtocol{
     public func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError> { return response }
     public func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError> { return response }
     public func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError> { return response }
+    public func transferParameterEncoding() -> ParameterEncoding { return Alamofire.ParameterEncoding.URL }
     
 }
 
