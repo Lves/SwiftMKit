@@ -62,7 +62,7 @@ public extension UITextField {
                 range.location += 1
             }
             range.location = (range.location >= result.length ? result.length : range.location)
-            self.selectedTextRange = NSRange(location: range.location, length: 0).toTextRange(textInput: self)
+//            self.selectedTextRange = NSMakeRange(range.location, 0)
         }
         return false
     }
