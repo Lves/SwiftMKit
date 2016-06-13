@@ -24,44 +24,46 @@ public extension UITextField {
     }
     
     public func reformatCardNumber(range: NSRange, replaceString string: String) -> Bool {
-        //Range.Lenth will greater than 0 if user is deleting text - Allow it to replce
-        if range.length > 0
-        {
-            return true
-        }
-        
-        //Dont allow empty strings
-        if string == " "
-        {
+        var text = self.text?.toNSString ?? ""
+        var range = range
+        let characterSet = NSCharacterSet(charactersInString: "0123456789")
+        let string = string.stringByReplacingOccurrencesOfString(" ", withString: "").toNSString ?? ""
+        if string.rangeOfCharacterFromSet(characterSet.invertedSet).location != NSNotFound {
             return false
         }
+        let oldString = text.stringByReplacingOccurrencesOfString(" ", withString: "").toNSString
+        text = text.stringByReplacingCharactersInRange(range, withString: string as String).toNSString
+        let newString = text.stringByReplacingOccurrencesOfString(" ", withString: "")
         
-        //Check for max length including the spacers we added
-        if range.location == 20
-        {
-            return false
+        if oldString == newString && string == "" {
+            range.location -= 1
+            text = text.stringByReplacingCharactersInRange(range, withString: string as String)
         }
+        text = text.stringByReplacingOccurrencesOfString(" ", withString: "")
         
-        var originalText = self.text
-        let replacementText = string.stringByReplacingOccurrencesOfString(" ", withString: "")
-        
-        //Verify entered text is a numeric value
-        let digits = NSCharacterSet.decimalDigitCharacterSet()
-        for char in replacementText.unicodeScalars
-        {
-            if !digits.longCharacterIsMember(char.value)
-            {
-                return false
+        var result = ""
+        let i = 4
+        while text.length > 0 {
+            let subString = text.substringToIndex(min(text.length, i))
+            result = result.stringByAppendingString(subString)
+            if subString.length == i {
+                result = result.stringByAppendingString(" ")
             }
+            text = text.substringFromIndex(min(text.length, i))
         }
-        
-        //Put an empty space after every 4 places
-        if originalText!.length % 5 == 0
-        {
-            originalText?.appendContentsOf(" ")
-            self.text = originalText
+        result = result.stringByTrimmingCharactersInSet(characterSet.invertedSet)
+        self.text = result
+        if string == "" {
+            range.location = (range.location >= result.length ? result.length : range.location)
+            self.selectedTextRange = NSRange(location: range.location, length: 0).toTextRange(textInput: self)
+        } else if range.location < result.length - 1 {
+            range.location += 1
+            if result.hasSuffix(" " + (string as String)) {
+                range.location += 1
+            }
+            range.location = (range.location >= result.length ? result.length : range.location)
+            self.selectedTextRange = NSRange(location: range.location, length: 0).toTextRange(textInput: self)
         }
-        return true
-
+        return false
     }
 }
