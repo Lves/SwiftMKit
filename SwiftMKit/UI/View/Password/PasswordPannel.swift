@@ -19,7 +19,7 @@ public extension PasswordPannelDelegate {
     func pp_didFinished(pannel: PasswordPannel?, success: Bool) {}
 }
 
-public class PasswordPannel: UIView, UITextFieldDelegate{
+public class PasswordPannel: UIView, PasswordTextViewDelegate{
     private struct InnerConstant {
         static let AnimationDuration = 0.25
         static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
@@ -31,27 +31,10 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var btnForget: UIButton!
-    @IBOutlet weak var passwordInputView: UIView! {
-        didSet {
-            passwordInputView.addSubview(passwordTextView)
-        }
-    }
-    @IBOutlet weak var txtPassword: UITextField! {
-        didSet {
-            keyboard = NumberKeyboard.keyboard(self.txtPassword, type: .NoDot)
-            txtPassword.inputView = keyboard
-            txtPassword.delegate = self
-        }
-    }
-    public var passwordTextView = PasswordTextView.passwordTextView()
+    @IBOutlet weak var passwordInputView: PasswordTextView!
     public var coverView : UIControl = UIControl()
     
     public var loadingText = ""
-    public var password : String = "" {
-        didSet {
-            passwordTextView.passwordLength = password.length
-        }
-    }
     private var keyboard: NumberKeyboard?
     private var originEnableAutoToolbar: Bool?
     
@@ -68,9 +51,9 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
     }
     private func setupUI() {
         self.btnClose.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
-            self?.txtPassword.resignFirstResponder()
+            self?.passwordInputView.inputTextField.resignFirstResponder()
             self?.hide()
-            self?.password = ""
+            self?.passwordInputView.password = ""
             self?.delegate?.pp_didCancel(self)
         }
         self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
@@ -78,8 +61,8 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
         }
         imgRotation.hidden = true
         lblMessage.text = ""
+        passwordInputView.delegate = self
         passwordInputView.addTapGesture(target: self, action: #selector(tapGestureRecognized(_:)))
-        
     }
     func tapGestureRecognized(recognizer : UITapGestureRecognizer) {
         showKeyboard()
@@ -87,11 +70,11 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
     private func showKeyboard() {
         originEnableAutoToolbar = keyboard?.enableAutoToolbar
         keyboard?.enableAutoToolbar = false
-        txtPassword.becomeFirstResponder()
+        passwordInputView.inputTextField.becomeFirstResponder()
     }
     private func hideKeyboard() {
         keyboard?.enableAutoToolbar = originEnableAutoToolbar ?? true
-        txtPassword.resignFirstResponder()
+        passwordInputView.inputTextField.resignFirstResponder()
     }
     /** 弹出 */
     public func show(viewController : UIViewController) {
@@ -104,7 +87,7 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
         coverView.backgroundColor = UIColor.clearColor()
         view.addSubview(coverView)
         view.addSubview(self)
-        password = ""
+        passwordInputView.password = ""
         showKeyboard()
         Async.main {
             self.y = self.coverView.h
@@ -159,33 +142,17 @@ public class PasswordPannel: UIView, UITextFieldDelegate{
             self.imgRotation.image = UIImage.init(named: "password_error")
         }
     }
-    /** 输入删除 TextField 监听的代理方法 */
-    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if string.length == 0 {
-            if password.length == 0 {
-                return false
-            } else {
-                password = password.toNSString.substringToIndex(password.length - 1)
-                return true
+    /** 输入六位密码完成时调用的代理方法 */
+    public func pt_didInputSixNumber(textView: PasswordTextView?, password: String) {
+        hideKeyboard()
+        startLoading()
+        lblMessage.text = loadingText
+        delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message) in
+            self?.stopLoading(success, message: message)
+            Async.main(after: 1) { [weak self] in
+                self?.hide()
+                self?.delegate?.pp_didFinished(self, success: success)
             }
-        } else if password.length < 6 {
-            password += string
-            if password.length == 6 {
-                hideKeyboard()
-                startLoading()
-                lblMessage.text = loadingText
-                delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message) in
-                    self?.stopLoading(success, message: message)
-                    Async.main(after: 1) { [weak self] in
-                        self?.hide()
-                        self?.delegate?.pp_didFinished(self, success: success)
-                    }
-                }
-            }
-            return true
-        } else {
-            return false
         }
     }
-    
 }
