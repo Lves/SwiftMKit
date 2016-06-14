@@ -11,7 +11,7 @@ import UIKit
 public protocol PasswordPannelDelegate: class {
     func pp_didCancel(pannel: PasswordPannel?) 
     func pp_forgetPassword(pannel: PasswordPannel?)
-    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String) -> Void))
+    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String, Bool) -> Void))
     func pp_didFinished(pannel: PasswordPannel?, success: Bool)
 }
 public extension PasswordPannelDelegate {
@@ -62,7 +62,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             self?.delegate?.pp_forgetPassword(self)
         }
         imgRotation.hidden = true
-        lblMessage.text = ""
+        lblMessage.hidden = true
         passwordInputView.delegate = self
         passwordInputView.addTapGesture(target: self, action: #selector(tapGestureRecognized(_:)))
     }
@@ -122,6 +122,8 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         freezePanel(true)
         imgRotation.hidden = false
         lblMessage.hidden = false
+        imgRotation.image = UIImage.init(named: "password_loading_b")
+        lblMessage.text = ""
         var rotationAnimation = CABasicAnimation()
         rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.toValue = NSNumber.init(double: M_PI * 2.0)
@@ -149,9 +151,23 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         hideKeyboard()
         startLoading()
         lblMessage.text = loadingText
-        delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message) in
+        delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message, passwordWrong) in
+            if passwordWrong {
+                let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
+                    self?.delegate?.pp_forgetPassword(self)
+                    })
+                alert.addAction(UIAlertAction(title: "重新输入", style: .Default, handler:  { [weak self] _ in
+                    //还原界面
+                    self?.passwordInputView.password = ""
+                    self?.lblMessage.hidden = true
+                    self?.imgRotation.hidden = true
+                    }))
+                UIViewController.topController?.showAlert(alert, completion: nil)
+                return
+            }
             self?.stopLoading(success, message: message)
-            Async.main(after: 1) { [weak self] in
+            Async.main(after: 0.5) { [weak self] in
                 self?.hide()
                 self?.delegate?.pp_didFinished(self, success: success)
             }

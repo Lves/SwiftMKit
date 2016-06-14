@@ -19,7 +19,7 @@ public extension PasswordTextViewDelegate {
 public class PasswordTextView : UIView, UITextFieldDelegate {
     private struct InnerConstant {
         static let MaxCount = 6
-        static let InputViewBackGroundColor: UInt32 = 0xF3F6FC
+        static let InputViewBackGroundColor = UIColor(hex6: 0xF3F6FC)
     }
     
     var isShow: Bool = false {
@@ -27,11 +27,14 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
             setNeedsLayout()
         }
     }
-    var inputNumArray = NSMutableArray()
     var inputTextField = UITextField()
     
     public weak var delegate: PasswordTextViewDelegate?
-    public var password: String = ""
+    public var password: String = "" {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     public var inputViewColor = InnerConstant.InputViewBackGroundColor
     
     public override init(frame: CGRect) {
@@ -43,7 +46,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         setupUI()
     }
     func setupUI() {
-        backgroundColor = UIColor(hex6: inputViewColor)
+        backgroundColor = inputViewColor
         inputTextField.delegate = self
         inputTextField.inputView = NumberKeyboard.keyboard(inputTextField, type: .NoDot)
         addSubview(inputTextField)
@@ -65,7 +68,8 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
             path.stroke()
             path.fill()
         }
-        inputNumArray.enumerateObjectsUsingBlock { (string, index, stop) in
+        for index in 0..<password.length {
+            let string = "\(password[index])"
             let floatIndex = CGFloat(index)
             let centerX = floatIndex + floatIndex * rectangleWidth + rectangleWidth/2
             let centerY = rectangleHeight/2
@@ -84,18 +88,14 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
     }
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string == "" {
-            inputNumArray.removeLastObject()
             password = password.toNSString.substringToIndex(password.length - 1)
         } else {
-            inputNumArray.addObject(string)
             password += string
         }
-        if inputNumArray.count >= 6 {
+        if password.length >= 6 {
             self.delegate?.pt_didInputSixNumber(self, password: password)
-            setNeedsDisplay()
             return false
         } else {
-            setNeedsDisplay()
             return true
         }
     }
