@@ -83,9 +83,6 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         }
     }
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if inputNumArray.count > 6 {
-            return false
-        }
         if string == "" {
             inputNumArray.removeLastObject()
             password = password.toNSString.substringToIndex(password.length - 1)
@@ -93,11 +90,14 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
             inputNumArray.addObject(string)
             password += string
         }
-        if inputNumArray.count == 6 {
+        if inputNumArray.count >= 6 {
             self.delegate?.pt_didInputSixNumber(self, password: password)
+            setNeedsDisplay()
+            return false
+        } else {
+            setNeedsDisplay()
+            return true
         }
-        setNeedsDisplay()
-        return true
     }
 }
 
