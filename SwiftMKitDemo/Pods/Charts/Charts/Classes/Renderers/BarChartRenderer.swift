@@ -357,7 +357,7 @@ public class BarChartRenderer: ChartDataRendererBase
                         top = 0.0
                     }
                 }
-                //李兴乐
+                
                 let useTop  = barAnimationCurrentValus![j]// animateBack ? newTop : top
                 let useBottom = animateBack ? newBottom : bottom
 

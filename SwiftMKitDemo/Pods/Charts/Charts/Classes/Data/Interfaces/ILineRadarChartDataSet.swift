@@ -60,7 +60,7 @@ public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
     var fillLowerYValues:[ChartDataEntry]{ get set }
     //高亮点类型
     var form:ChartDataForm {get set}
-    //李兴乐 高亮点Image
+    //高亮点Image
     var highlightImage:NSUIImage {get set}
     var lowerHighlightImage:NSUIImage {get set}
     //Finish add

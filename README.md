@@ -286,7 +286,10 @@ CGFloat(prev.xIndex) + prevDx,(CGFloat(prev.value) + prevDy) * phaseY,
 CGFloat(cur.xIndex) - curDx,(CGFloat(cur.value) - curDy) * phaseY,
 CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
 }
-
+ //最低线的第一个lixingle
+var firstE:ChartDataEntry! = dataSet.fillLowerYValues[0]
+CGPathAddLineToPoint(spline, &valueToPixelMatrix, CGFloat(firstE.xIndex), CGFloat(firstE.value) * phaseY)
+            
 }
 CGPathCloseSubpath(spline)
 }
@@ -360,12 +363,18 @@ public enum ChartDataForm: Int
 ```
  //高亮点类型
  var form:ChartDataForm {get set}
+  //高亮点Image
+ var highlightImage:NSUIImage {get set}
+ var lowerHighlightImage:NSUIImage {get set}
 ```
 4. 在LineRadarChartDataSet中实现属性
 
 ```
  //实现高亮点类型
  public var form: ChartDataForm = .Circle
+  //高亮点图片初始化
+ public var highlightImage: NSUIImage = NSUIImage()
+ public var lowerHighlightImage: NSUIImage = NSUIImage()
 ```
 
 
@@ -446,6 +455,20 @@ public enum ChartDataForm: Int
                     continue
                 }
                 
+                var hImage = dataSet.highlightImage
+                hImage.drawInRect(CGRectMake(pt.x - circleRadius, pt.y - circleRadius, circleRadius*2, circleRadius*2))
+                
+                if dataSet.drawRangeFilledEnabled {
+                    var lowPt = CGPoint()
+                    let lowE:ChartDataEntry? = dataSet.fillLowerYValues[j]
+                    lowPt.x = CGFloat(e.xIndex)
+                    lowPt.y = CGFloat(lowE?.value ?? 0.0) * phaseY
+                    lowPt = CGPointApplyAffineTransform(lowPt, valueToPixelMatrix)
+                    var lowImage = dataSet.lowerHighlightImage
+                    lowImage.drawInRect(CGRectMake(lowPt.x - circleRadius, lowPt.y - circleRadius, circleRadius*2, circleRadius*2))
+                    
+                }
+                /*
                 CGContextSetFillColorWithColor(context, dataSet.getCircleColor(j)!.CGColor)
                 //计算外环圆心位置，lixingle
                 rect.origin.x = pt.x - circleDiameter/2.0
@@ -481,6 +504,7 @@ public enum ChartDataForm: Int
                         CGContextFillRect(context, rect)
                     }
                 }
+                */
             }
         }
         
@@ -680,7 +704,7 @@ if barAnimationCurrentValus == nil {
                         top = 0.0
                     }
                 }
-                //李兴乐
+                
                 let useTop  = barAnimationCurrentValus![j]// animateBack ? newTop : top
                 let useBottom = animateBack ? newBottom : bottom
 

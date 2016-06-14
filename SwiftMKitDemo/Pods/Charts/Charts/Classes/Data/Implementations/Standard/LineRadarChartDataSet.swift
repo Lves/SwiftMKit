@@ -83,7 +83,7 @@ public class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRad
     public var fillLowerYValues:[ChartDataEntry] = []
     //实现高亮点类型
     public var form: ChartDataForm = .Circle
-    //李兴乐 初始化
+    //高亮点图片初始化
     public var highlightImage: NSUIImage = NSUIImage()
     public var lowerHighlightImage: NSUIImage = NSUIImage()
     //Finish add

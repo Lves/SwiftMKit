@@ -297,7 +297,7 @@ public class LineChartRenderer: LineRadarChartRenderer
                                       CGFloat(cur.xIndex) - curDx,(CGFloat(cur.value) - curDy) * phaseY,
                                       CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
             }
-            //李兴乐 最低线的第一个
+            //最低线的第一个lixingle
             var firstE:ChartDataEntry! = dataSet.fillLowerYValues[0]
             CGPathAddLineToPoint(spline, &valueToPixelMatrix, CGFloat(firstE.xIndex), CGFloat(firstE.value) * phaseY)
             
@@ -764,7 +764,7 @@ public class LineChartRenderer: LineRadarChartRenderer
         
         var pt = CGPoint()
         var rect = CGRect()
-        var lowPt = CGPoint()
+        
         
         
         CGContextSaveGState(context)
@@ -829,8 +829,9 @@ public class LineChartRenderer: LineRadarChartRenderer
                 
                 var hImage = dataSet.highlightImage
                 hImage.drawInRect(CGRectMake(pt.x - circleRadius, pt.y - circleRadius, circleRadius*2, circleRadius*2))
-                //李兴乐
+                //lower 高亮点
                 if dataSet.drawRangeFilledEnabled {
+                    var lowPt = CGPoint()
                     let lowE:ChartDataEntry? = dataSet.fillLowerYValues[j]
                     lowPt.x = CGFloat(e.xIndex)
                     lowPt.y = CGFloat(lowE?.value ?? 0.0) * phaseY
