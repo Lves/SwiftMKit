@@ -23,10 +23,12 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     private struct InnerConstant {
         static let AnimationDuration = 0.25
         static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
+        static let LimitedCount = 3
     }
     public weak var delegate: PasswordPannelDelegate?
     public var animationDuration = InnerConstant.AnimationDuration
     public var maskColor = InnerConstant.MaskColor
+    public var LimitedCount = InnerConstant.LimitedCount
     @IBOutlet weak var imgRotation: UIImageView!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var btnClose: UIButton!
