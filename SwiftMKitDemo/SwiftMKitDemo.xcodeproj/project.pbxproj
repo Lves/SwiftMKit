@@ -212,7 +212,6 @@
 		FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A331CF3F983001C493A /* PasswordPannel.swift */; };
 		FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A391CF42983001C493A /* PasswordTextView.swift */; };
 		FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE54A3B1CF434C0001C493A /* PasswordPannel.xib */; };
-		FBE54A3E1CF48F2D001C493A /* PasswordTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE54A3D1CF48F2D001C493A /* PasswordTextView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -460,7 +459,6 @@
 		FBE54A331CF3F983001C493A /* PasswordPannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordPannel.swift; sourceTree = "<group>"; };
 		FBE54A391CF42983001C493A /* PasswordTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextView.swift; sourceTree = "<group>"; };
 		FBE54A3B1CF434C0001C493A /* PasswordPannel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordPannel.xib; sourceTree = "<group>"; };
-		FBE54A3D1CF48F2D001C493A /* PasswordTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordTextView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1156,7 +1154,6 @@
 			isa = PBXGroup;
 			children = (
 				FBE54A391CF42983001C493A /* PasswordTextView.swift */,
-				FBE54A3D1CF48F2D001C493A /* PasswordTextView.xib */,
 				FBE54A331CF3F983001C493A /* PasswordPannel.swift */,
 				FBE54A3B1CF434C0001C493A /* PasswordPannel.xib */,
 			);
@@ -1275,7 +1272,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */,
-				FBE54A3E1CF48F2D001C493A /* PasswordTextView.xib in Resources */,
 				181164F01CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
