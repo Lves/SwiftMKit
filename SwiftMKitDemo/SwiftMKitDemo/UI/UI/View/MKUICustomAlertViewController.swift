@@ -10,10 +10,10 @@ import UIKit
 
 class MKUICustomAlertViewController: BaseViewController {
 
-    var alertview : AlertCustomBaseView?
+//    var alertview : AlertCustomBaseView?
 
     @IBAction func click_show(sender: UIButton) {
-        self.alertview?.showAlertCustomView()
+//        self.alertview?.showAlertCustomView()
 
     }
 
