@@ -28,16 +28,16 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     
     struct Theme {
         static let DefaultTheme: NumberKeyboardUITheme = NumberKeyboardUITheme(
-            viewBackgroundColor: UIColor(hex6: 0xd8d8d8),
-            viewLineColor: UIColor(hex6: 0xd8d8d8),
-            viewEnterColor: UIColor(hex6: 0xfd734c),
-            viewDelColor: UIColor(hex6: 0xd8d8d8),
-            viewNumberColor: UIColor(hex6: 0xd8d8d8),
-            viewEnterHiglightColor: UIColor(hex6: 0xfd734c),
-            viewDelHiglightColor: UIColor(hex6: 0xd8d8d8),
-            viewNumberHiglightColor: UIColor(hex6: 0xd8d8d8),
-            viewDelImage: "",
-            viewScreenImage: "")
+            viewBackgroundColor: UIColor(hex6: 0x8C8C8C),
+            viewLineColor: UIColor(hex6: 0x8C8C8C),
+            viewEnterColor: UIColor(hex6: 0xFD734C),
+            viewDelColor: UIColor(hex6: 0xFFFFFF),
+            viewNumberColor: UIColor(hex6: 0xFFFFFF),
+            viewEnterHiglightColor: UIColor(hex6: 0xFD734C),
+            viewDelHiglightColor: UIColor(hex6: 0xC0C7D4),
+            viewNumberHiglightColor: UIColor(hex6: 0xC0C7D4),
+            viewDelImage: "keyboard_view_del",
+            viewScreenImage: "keyboard_view_screen")
     }
 
     @IBOutlet weak var btn1: UIButton!
@@ -109,6 +109,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         for button in buttonNumbers {
             button.setBackgroundImage(UIImage(color: theme.viewNumberColor), forState: .Normal)
             button.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), forState: .Highlighted)
+        }
+        for line in lines {
+            line.backgroundColor = theme.viewLineColor
         }
         //监听TextField的text
         self.textField?.rac_textSignalProducer().startWithNext { text in
