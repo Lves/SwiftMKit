@@ -205,6 +205,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set0.fillColor = UIColor.purpleColor()
         set0.drawFilledEnabled = true
         set0.drawCirclesEnabled = false                       //是否显示圆点
+        set0.highlightImage = NSUIImage(named: "firstInvest_otherprofit_dot")!
         set0.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆环颜色
         set0.circleHoleColor = UIColor.purpleColor()          //圆点圆心颜色
         set0.form = .Square                                   //数据点形状
@@ -227,6 +228,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set2.drawFilledEnabled = true
         set2.setColor(UIColor.orangeColor())
         set2.drawCirclesEnabled = false
+        set2.highlightImage = NSUIImage(named: "firstInvest_otherprofit_dot")!
         set2.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆点圆环颜色
         set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
         set2.circleRadius = 10.0                               //圆半径
@@ -369,7 +371,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set1.lineWidth = 0
         set1.drawValuesEnabled = false  //是否显示数字
         
-        set1.drawRangeFilledEnabled = false    //是否区域填充
+        set1.drawRangeFilledEnabled = true    //是否区域填充
         set1.fillLowerYValues = yValues1Lower ///设置底部fill线
         
         set1.drawCubicEnabled = true          //是否显示曲线形式
@@ -379,13 +381,21 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         //Line 2
         var yValues2 = [ChartDataEntry]()
         for yIndex in  0...10 {
-            let flotVa = Double(Float(yIndex) * 10) + (Double) (arc4random()%5)
+            let flotVa = Double(Float(yIndex) * 35) + (Double) (arc4random()%20)
             yValues2.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
+        }
+        
+        //底部填充线
+        var yValues2Lower = [ChartDataEntry]()
+        for yIndex in  0...10 {
+            
+            let flotVa = Double(Float(yIndex) * 5) - (Double) (arc4random()%10)
+            yValues2Lower.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
         
         let set2 = LineChartDataSet(yVals: yValues2, label: "DataSet 2")
-        set2.fillColor = kBlackColor
+        set2.fillColor = UIColor.purpleColor()
         set2.fillAlpha = 1.0
         set2.setColor(UIColor.clearColor())
         set2.drawFilledEnabled = true
@@ -394,10 +404,14 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set2.setCircleColor(ChartColorTemplates.colorFromString("#afff0000"))            //圆点圆环颜色
         set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
         set2.circleRadius = 10.0                               //圆半径
+        set2.highlightImage = NSUIImage(named: "firstInvest_xjProfit_dot")!
+        set2.lowerHighlightImage = NSUIImage(named: "firstInvest_xiongProfit_dot")!
+        
         set2.highlightEnabled = true   //是否可以高亮
+        set2.drawRangeFilledEnabled = true
+        set2.fillLowerYValues = yValues2Lower
         
-        
-        set2.lineWidth = 0
+        set2.lineWidth = 0.2
         set2.drawValuesEnabled = false  //是否显示数字
         set2.drawCubicEnabled = true  //是否显示曲线形式
         set2.valueFormatter = percentFormatter
@@ -416,7 +430,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         setMiddle.setColor(UIColor.orangeColor())
         setMiddle.lineWidth = 1
         
-
+        setMiddle.highlightImage = NSUIImage(named: "firstInvest_otherprofit_dot")!
         setMiddle.setCircleColor(ChartColorTemplates.colorFromString("#affff000"))            //圆点圆环颜色
         setMiddle.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
         setMiddle.circleRadius = 10.0                               //圆半径
@@ -429,7 +443,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
 
         
-        let lineData =  LineChartData(xVals: xValues, dataSets: [set1,set2,setMiddle])
+        let lineData =  LineChartData(xVals: xValues, dataSets: [set2,setMiddle])
         lineData.setValueFormatter(percentFormatter);
 
         self.lineChart2!.data = lineData
