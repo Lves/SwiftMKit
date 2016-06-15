@@ -175,7 +175,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                 return
             }
             self?.stopLoading(success, message: message)
-            Async.main(after: 0.5) { [weak self] in
+            Async.main(after: 1) { [weak self] in
                 self?.hide()
                 self?.delegate?.pp_didFinished(self, success: success)
             }
