@@ -158,13 +158,13 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
             //获取光标位置
             var range = self.selectedRange()
-            if range.location == 0 {
-                return
-            }
             if let tempDeleget = self.textField?.delegate {
                 if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
                     return
                 }
+            }
+            if range.location == 0 {
+                return
             }
             //删除
             range.location -= 1

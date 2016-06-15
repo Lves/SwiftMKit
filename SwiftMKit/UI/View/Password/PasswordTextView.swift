@@ -13,18 +13,21 @@ public protocol PasswordTextViewDelegate: class {
     func pt_didInputSixNumber(textView: PasswordTextView?, password : String)
 }
 public extension PasswordTextViewDelegate {
-    func pt_didInputSixNumber(textView: PasswordTextView?){}
+    func pt_didInputSixNumber(textView: PasswordTextView?, password : String){}
 }
 
 public class PasswordTextView : UIView, UITextFieldDelegate {
     private struct InnerConstant {
         static let MaxCount = 6
         static let InputViewBackGroundColor = UIColor(hex6: 0xF3F6FC)
+        static let dotColor = UIColor(hex6: 0xA1AcBA)
+        static let textColor = UIColor.blackColor()
+        static let textFont = UIFont.systemFontOfSize(20)
     }
     
     var isShow: Bool = false {
         didSet {
-            setNeedsLayout()
+            setNeedsDisplay()
         }
     }
     var inputTextField = UITextField()
@@ -36,6 +39,9 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         }
     }
     public var inputViewColor = InnerConstant.InputViewBackGroundColor
+    public var dotColor = InnerConstant.dotColor
+    public var textColor = InnerConstant.textColor
+    public var textFont = InnerConstant.textFont
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,10 +56,13 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         inputTextField.delegate = self
         inputTextField.inputView = NumberKeyboard.keyboard(inputTextField, type: .NoDot)
         addSubview(inputTextField)
-        addTapGesture(target: self, action: #selector(tapGestureRecognized(_:)))
+        addTapGesture(target: self, action: #selector(active))
     }
-    func tapGestureRecognized(recognizer : UITapGestureRecognizer) {
+    func active() {
         inputTextField.becomeFirstResponder()
+    }
+    func inactive() {
+        inputTextField.resignFirstResponder()
     }
     
     public override func drawRect(rect: CGRect) {
@@ -74,19 +83,24 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
             let centerX = floatIndex + floatIndex * rectangleWidth + rectangleWidth/2
             let centerY = rectangleHeight/2
             if self.isShow {
-                let strSize = string.sizeWithAttributes(nil)
+                let textAttribute = [NSForegroundColorAttributeName: dotColor,
+                                            NSFontAttributeName: textFont]
+                let strSize = string.sizeWithAttributes(textAttribute)
                 let center = CGPointMake(centerX - strSize.width/2, centerY - strSize.height/2)
-                string.drawAtPoint(center, withAttributes: nil)
+                string.drawAtPoint(center, withAttributes: textAttribute)
             } else {
                 let path = UIBezierPath()
                 let center = CGPointMake(centerX, centerY)
                 path.addArcWithCenter(center, radius: 8, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
-                UIColor.blackColor().setFill()
+                dotColor.setFill()
                 path.fill()
             }
         }
     }
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if password.length >= 6 && string != "" {
+            return false
+        }
         if string == "" {
             password = password.toNSString.substringToIndex(password.length - 1)
         } else {
