@@ -12,12 +12,16 @@ import IQKeyboardManager
 public protocol PasswordPannelDelegate: class {
     func pp_didCancel(pannel: PasswordPannel?) 
     func pp_forgetPassword(pannel: PasswordPannel?)
-    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String, Bool) -> Void))
+    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String, PasswordPannelStatus) -> Void))
     func pp_didFinished(pannel: PasswordPannel?, success: Bool)
 }
 public extension PasswordPannelDelegate {
     func pp_didCancel(pannel: PasswordPannel?) {}
     func pp_didFinished(pannel: PasswordPannel?, success: Bool) {}
+}
+
+public enum PasswordPannelStatus: Int {
+    case Normal, PasswordWrong, PasswordLocked
 }
 
 public class PasswordPannel: UIView, PasswordTextViewDelegate{
@@ -143,12 +147,9 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         hideKeyboard()
         startLoading()
         lblMessage.text = loadingText
-        delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message, passwordWrong) in
-            if passwordWrong {
+        delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message, status) in
+            if status == .PasswordWrong {
                 let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
-                    self?.delegate?.pp_forgetPassword(self)
-                    })
                 alert.addAction(UIAlertAction(title: "重新输入", style: .Default, handler:  { [weak self] _ in
                     //还原界面
                     self?.passwordInputView.password = ""
@@ -157,6 +158,19 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                     self?.stopLoading(success, message: message)
                     self?.showKeyboard()
                     }))
+                alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
+                    self?.delegate?.pp_forgetPassword(self)
+                    })
+                UIViewController.topController?.showAlert(alert, completion: nil)
+                return
+            } else if status == .PasswordLocked {
+                let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "取消", style: .Default, handler:  { [weak self] _ in
+                    self?.hide()
+                    }))
+                alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
+                    self?.delegate?.pp_forgetPassword(self)
+                    })
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
             }
