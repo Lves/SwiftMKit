@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManager
 
-class MKUIKeyboardViewController: BaseViewController, PasswordPannelDelegate {
+class MKUIKeyboardViewController: BaseViewController {
 
     @IBOutlet weak var txtNormal: UITextField!
     @IBOutlet weak var txtNoDot: UITextField!
@@ -34,7 +34,7 @@ class MKUIKeyboardViewController: BaseViewController, PasswordPannelDelegate {
         
         btnCommit.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
-            pannel.delegate = self
+//            pannel.delegate = self
             pannel.show(self)
         }
         

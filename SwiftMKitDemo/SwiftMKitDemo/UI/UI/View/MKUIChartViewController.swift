@@ -279,7 +279,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     //MARK: 折线图2
     
     func buildLineChart2UI() {
-        lineChart2 = LineChartView(frame: CGRectMake(0, 420,screenSize.width , 400))
+        lineChart2 = LineChartView(frame: CGRectMake(0, 420,screenSize.width , 200))
         lineChart2.backgroundColor = kBlackColor
         lineChart2.alpha = 0.8
         lineChart2.showAllHighlightCircles = true   //是否显示高亮Circle
@@ -339,7 +339,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         percentFormatter.negativeSuffix = "%"
         
         
-        
+        /*
         //Line1
         var yValues1 = [ChartDataEntry]()
         for yIndex in  0...10 {
@@ -377,7 +377,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set1.drawCubicEnabled = true          //是否显示曲线形式
         set1.valueFormatter = percentFormatter
         
-        
+        */
         //Line 2
         var yValues2 = [ChartDataEntry]()
         for yIndex in  0...10 {
@@ -415,6 +415,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set2.drawValuesEnabled = false  //是否显示数字
         set2.drawCubicEnabled = true  //是否显示曲线形式
         set2.valueFormatter = percentFormatter
+        set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
        
 
         //Line3 

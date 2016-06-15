@@ -40,10 +40,14 @@ public class LineScatterCandleRadarChartRenderer: ChartDataRendererBase
             
             //方案一
             CGContextSaveGState(context);
-            UIColor.whiteColor().setFill()
-            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: viewPortHandler.contentTop, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop))
-            path.lineWidth = 0.1
-            path.fill()
+//            UIColor.whiteColor().setFill()
+//            let path = UIBezierPath(ovalInRect: CGRect(x: point.x-1.5/2.0, y: viewPortHandler.contentTop, width: 1.5, height: viewPortHandler.contentBottom - viewPortHandler.contentTop))
+//            path.lineWidth = 0.1
+//            path.fill()
+            
+            let lineImage = NSUIImage(named: "firstInvest_highlight_line")
+            lineImage?.drawInRect(CGRectMake(point.x-5.0/2.0, viewPortHandler.contentTop, 5, viewPortHandler.contentBottom - viewPortHandler.contentTop))
+            
             CGContextRestoreGState( context );
         }
         
