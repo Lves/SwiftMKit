@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import IQKeyboardManager
 
 public protocol PasswordTextViewDelegate: class {
     func pt_didInputSixNumber(textView: PasswordTextView?, password : String)
@@ -23,6 +24,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         static let dotColor = UIColor(hex6: 0xA1AcBA)
         static let textColor = UIColor.blackColor()
         static let textFont = UIFont.systemFontOfSize(20)
+        static let originEnableAutoToolbar = false
     }
     
     var isShow: Bool = false {
@@ -42,6 +44,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
     public var dotColor = InnerConstant.dotColor
     public var textColor = InnerConstant.textColor
     public var textFont = InnerConstant.textFont
+    public var originEnableAutoToolbar = InnerConstant.originEnableAutoToolbar
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,6 +62,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         addTapGesture(target: self, action: #selector(active))
     }
     func active() {
+        
         inputTextField.becomeFirstResponder()
     }
     func inactive() {
@@ -112,6 +116,13 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         } else {
             return true
         }
+    }
+    public func textFieldDidBeginEditing(textField: UITextField) {
+        originEnableAutoToolbar = IQKeyboardManager.sharedManager().enableAutoToolbar
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+    }
+    public func textFieldDidEndEditing(textField: UITextField) {
+        IQKeyboardManager.sharedManager().enableAutoToolbar = originEnableAutoToolbar
     }
 }
 

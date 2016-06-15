@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 public protocol PasswordPannelDelegate: class {
     func pp_didCancel(pannel: PasswordPannel?) 
@@ -37,8 +38,6 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     public var coverView : UIControl = UIControl()
     
     public var loadingText = ""
-    private var keyboard: NumberKeyboard?
-    private var originEnableAutoToolbar: Bool?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,7 +52,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     }
     private func setupUI() {
         self.btnClose.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
-            self?.passwordInputView.inputTextField.resignFirstResponder()
+            self?.passwordInputView.inactive()
             self?.hide()
             self?.passwordInputView.password = ""
             self?.delegate?.pp_didCancel(self)
@@ -64,19 +63,12 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         imgRotation.hidden = true
         lblMessage.hidden = true
         passwordInputView.delegate = self
-        passwordInputView.addTapGesture(target: self, action: #selector(tapGestureRecognized(_:)))
-    }
-    func tapGestureRecognized(recognizer : UITapGestureRecognizer) {
-        showKeyboard()
     }
     private func showKeyboard() {
-        originEnableAutoToolbar = keyboard?.enableAutoToolbar
-        keyboard?.enableAutoToolbar = false
-        passwordInputView.inputTextField.becomeFirstResponder()
+        passwordInputView.active()
     }
     private func hideKeyboard() {
-        keyboard?.enableAutoToolbar = originEnableAutoToolbar ?? true
-        passwordInputView.inputTextField.resignFirstResponder()
+        passwordInputView.inactive()
     }
     /** 弹出 */
     public func show(viewController : UIViewController) {
@@ -162,6 +154,8 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                     self?.passwordInputView.password = ""
                     self?.lblMessage.hidden = true
                     self?.imgRotation.hidden = true
+                    self?.stopLoading(success, message: message)
+                    self?.showKeyboard()
                     }))
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
