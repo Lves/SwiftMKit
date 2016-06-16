@@ -36,6 +36,24 @@ extension String {
         return nil
     }
     
+    func formatMask(range : NSRange) -> String {
+        
+        var mask: String = ""
+        
+        for _ in 0..<range.length {
+            mask += "*"
+        }
+        let result: NSMutableString = NSMutableString(string: self)
+        if self.length >= range.location + range.length {
+            result.replaceCharactersInRange(range, withString: mask)
+            return result as String
+        } else if self.length >= range.location {
+            return result.substringToIndex(range.location) + mask
+        } else {
+            return mask
+        }
+    }
+    
     // MARK: Encrypt
     
     var md5: String! {
