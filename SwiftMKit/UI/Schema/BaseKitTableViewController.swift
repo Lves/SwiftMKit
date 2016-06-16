@@ -14,7 +14,7 @@ import MBProgressHUD
 import ObjectiveC
 import MJRefresh
 
-public class BaseKitTableViewController: UITableViewController {
+public class BaseKitTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     public var params = Dictionary<String, AnyObject>() {
         didSet {
             for (key,value) in params {
@@ -91,6 +91,7 @@ public class BaseKitTableViewController: UITableViewController {
     public func setupNotification() {
     }
     public func setupNavigation() {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     public func bindingData() {
     }
@@ -98,6 +99,14 @@ public class BaseKitTableViewController: UITableViewController {
     }
     public func showEmptyView() {}
     public func hideEmptyView() {}
+    
+    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer) {
+            //只有二级以及以下的页面允许手势返回
+            return self.navigationController?.viewControllers.count > 1
+        }
+        return true
+    }
     
     public var listView: UIScrollView! {
         get {

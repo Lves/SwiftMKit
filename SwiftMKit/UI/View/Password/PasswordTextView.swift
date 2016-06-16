@@ -21,7 +21,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
     private struct InnerConstant {
         static let MaxCount = 6
         static let InputViewBackGroundColor = UIColor(hex6: 0xF3F6FC)
-        static let dotColor = UIColor(hex6: 0xA1AcBA)
+        static let dotColor = UIColor.blackColor()
         static let textColor = UIColor.blackColor()
         static let textFont = UIFont.systemFontOfSize(20)
         static let originEnableAutoToolbar = false
