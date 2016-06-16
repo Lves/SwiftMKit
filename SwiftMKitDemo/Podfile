@@ -1,42 +1,41 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-link_with 'SwiftMKitDemoTests', 'SwiftMKitDemoUITests'  
-
 platform :ios, '8.0'
 
 use_frameworks!
 
-def testing_pods
-    pod 'Quick'
-    pod 'Nimble'
+def pods
+    pod 'CocoaLumberjack/Swift'
+    pod 'ReactiveCocoa'
+    pod 'Alamofire'
+    pod 'ReachabilitySwift'
+    pod 'MagicalRecord'
+    pod 'MagicalRecord/CocoaLumberjack'
+    pod 'MJExtension'
+    pod 'MJRefresh'
+    pod 'EZSwiftExtensions'
+    pod 'JSPatch'
+    pod 'CryptoSwift'
+    pod 'IQKeyboardManager'
+    pod 'WebViewJavascriptBridge'
+    pod 'PINCache'
+    pod 'SnapKit'
+    pod 'pop'
+    pod 'Aspects'
+    pod 'HanekeSwift'
+    pod 'MBProgressHUD'
+    pod 'Charts'
+    pod 'PulsingHalo'
 end
 
-pod 'CocoaLumberjack/Swift'
-pod 'ReactiveCocoa'
-pod 'Alamofire'
-pod 'ReachabilitySwift'
-pod 'MagicalRecord'
-pod 'MagicalRecord/CocoaLumberjack'
-pod 'MJExtension'
-pod 'MJRefresh'
-pod 'EZSwiftExtensions'
-pod 'JSPatch'
-pod 'CryptoSwift'
-pod 'IQKeyboardManager'
-pod 'WebViewJavascriptBridge'
-pod 'PINCache'
-pod 'SnapKit'
-pod 'pop'
-pod 'Aspects'
-pod 'HanekeSwift'
-pod 'MBProgressHUD'
-pod 'Charts'
-pod "PulsingHalo"
+target 'SwiftMKitDemo' do
+    pods
+end
 
 target 'SwiftMKitDemoTests' do
-    testing_pods
+    pods
 end
 
 target 'SwiftMKitDemoUITests' do
-    testing_pods
+    pods
 end
