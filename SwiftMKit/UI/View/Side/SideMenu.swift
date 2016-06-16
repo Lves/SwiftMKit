@@ -39,7 +39,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
     }
     lazy private var coverView: UIControl = UIControl()
-    lazy private var shadowView: UIImageView = UIImageView(image: UIImage(named: "menu_shadow_left"))
+    lazy private var shadowView: UIImageView = UIImageView(image: UIImage(named: "sideMenu_shadow"))
     public var animationDuration = InnerConstant.AnimationDuration
     public var menuWidthPercent = InnerConstant.MenuWidthPercent
     public var maskColor = InnerConstant.MaskColor
@@ -216,19 +216,21 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             }
             menuViewController?.view.frame = CGRectMake(0, 0, menuWidth, screenSize.height)
             menuViewController!.view.addSubview(shadowView)
-            shadowView.left = menuWidth
             
             view.addSubview(menuViewController!.view)
             view.insertSubview(coverView, belowSubview: menuViewController!.view)
             
             switch direction {
             case .Left:
+                shadowView.left = menuWidth
                 menuViewController?.view.x = -menuWidth
                 UIView.animateWithDuration(animationDuration) {
                     self.coverView.backgroundColor = self.maskColor
                     self.menuViewController?.view.x = 0
                 }
             case .Right:
+                shadowView.right = 0
+                shadowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI));
                 menuViewController?.view.x = screenSize.width
                 UIView.animateWithDuration(animationDuration) {
                     self.coverView.backgroundColor = self.maskColor
