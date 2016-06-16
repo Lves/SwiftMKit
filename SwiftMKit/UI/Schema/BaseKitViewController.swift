@@ -59,6 +59,9 @@ public class BaseKitViewController : UIViewController {
         setupNotification()
         bindingData()
     }
+    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        view.endEditing(true)
+    }
     public func setupNotification() {
     }
     public func setupNavigation() {

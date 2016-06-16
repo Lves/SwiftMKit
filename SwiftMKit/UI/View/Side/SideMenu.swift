@@ -177,7 +177,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     private func hideStatusBar() {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
     }
-    private func hideMenu() {
+    public func hideMenu() {
         menuShowed.value = false
         UIView.animateWithDuration(animationDuration, animations: {
             self.coverView.backgroundColor = UIColor.clearColor()
