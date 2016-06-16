@@ -39,7 +39,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
     }
     lazy private var coverView: UIControl = UIControl()
-    lazy private var shadowView: UIImageView = UIImageView(image: UIImage(named: "setting_shadow"))
+    lazy private var shadowView: UIImageView = UIImageView(image: UIImage(named: "menu_shadow_left"))
     public var animationDuration = InnerConstant.AnimationDuration
     public var menuWidthPercent = InnerConstant.MenuWidthPercent
     public var maskColor = InnerConstant.MaskColor
