@@ -77,9 +77,9 @@ public class BarChartRenderer: ChartDataRendererBase
         var barShadow = CGRect()
         var y: Double
         // ModifySourceCode Add By LiXingLe 初始化数组
-        if barAnimationCurrentValus == nil {
-            barAnimationCurrentValus = [CGFloat](count: dataSet.entryCount, repeatedValue:0.0)
-        }
+        
+        barAnimationCurrentValus = [CGFloat](count: dataSet.entryCount, repeatedValue:0.0)
+       
         
         // do the drawing
         for j in 0 ..< Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX))
@@ -100,7 +100,7 @@ public class BarChartRenderer: ChartDataRendererBase
                 var top = isInverted ? (y <= 0.0 ? CGFloat(y) : 0) : (y >= 0.0 ? CGFloat(y) : 0)
                 var bottom = isInverted ? (y >= 0.0 ? CGFloat(y) : 0) : (y <= 0.0 ? CGFloat(y) : 0)
                 //ModifySourceCode Add By LiXingLe 添加默认值
-                barAnimationCurrentValus![j] = top
+                barAnimationCurrentValus?[j] = top
 
                 
                 // multiply the height of the rect with the phase
