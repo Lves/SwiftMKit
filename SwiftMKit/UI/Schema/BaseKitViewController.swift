@@ -13,7 +13,7 @@ import Alamofire
 import MBProgressHUD
 import ObjectiveC
 
-public class BaseKitViewController : UIViewController {
+public class BaseKitViewController : UIViewController, UIGestureRecognizerDelegate {
     public var params = Dictionary<String, AnyObject>() {
         didSet {
             for (key,value) in params {
@@ -65,6 +65,7 @@ public class BaseKitViewController : UIViewController {
     public func setupNotification() {
     }
     public func setupNavigation() {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     public func bindingData() {
     }
@@ -72,6 +73,14 @@ public class BaseKitViewController : UIViewController {
     }
     public func showEmptyView() {}
     public func hideEmptyView() {}
+    
+    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer) {
+            //只有二级以及以下的页面允许手势返回
+            return self.navigationController?.viewControllers.count > 1
+        }
+        return true
+    }
     
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
