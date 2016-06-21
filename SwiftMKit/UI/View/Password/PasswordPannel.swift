@@ -28,12 +28,13 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     private struct InnerConstant {
         static let AnimationDuration = 0.25
         static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
-        static let LimitedCount = 3
+        static let Title = "输入交易密码"
     }
     public weak var delegate: PasswordPannelDelegate?
     public var animationDuration = InnerConstant.AnimationDuration
     public var maskColor = InnerConstant.MaskColor
-    public var LimitedCount = InnerConstant.LimitedCount
+    public var title = InnerConstant.Title
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgRotation: UIImageView!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var btnClose: UIButton!
@@ -64,9 +65,11 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             self?.delegate?.pp_forgetPassword(self)
         }
+//        lblTitle.text = title
         imgRotation.hidden = true
         lblMessage.hidden = true
         passwordInputView.delegate = self
+        passwordInputView.inputViewColor = UIColor(hex6: 0xD8E0EB)
     }
     private func showKeyboard() {
         passwordInputView.active()
