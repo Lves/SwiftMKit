@@ -21,7 +21,7 @@ public class NetError : NSError {
         self.statusCode = statusCode
         self.message = message
         if message.length == 0 {
-            self.message = "未知错误"
+            self.message = "网络异常"
         }
         super.init(domain: "NetError", code: statusCode, userInfo: ["message":message])
     }
