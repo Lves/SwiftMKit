@@ -109,11 +109,22 @@ public extension UIViewController {
         routeToName(name, params: params, pop: pop)
     }
     
-    public func routeBack(animation: Bool = true, completeion: (() -> Void)? = nil) {
+    public func routeBack(params: Dictionary<String, AnyObject> = [:], animation: Bool = true, completeion: (() -> Void)? = nil) {
         DDLogInfo("Route back")
         if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
             self.dismissViewControllerAnimated(animation, completion: completeion)
         } else {
+            let count = self.navigationController?.viewControllers.count ?? 0
+            if count > 1 {
+                if let vc = self.navigationController?.viewControllers[count - 2] {
+                    if vc is BaseKitViewController {
+                        let baseVC = vc as! BaseKitViewController
+                        baseVC.params = params
+                    }
+                    self.navigationController?.popToViewController(vc, animated: animation)
+                    return
+                }
+            }
             self.navigationController?.popViewControllerAnimated(animation)
         }
     }

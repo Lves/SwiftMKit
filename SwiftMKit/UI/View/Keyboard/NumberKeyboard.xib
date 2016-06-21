@@ -182,7 +182,7 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhR-3k-2ZU">
-                            <rect key="frame" x="0.0" y="99" width="240" height="1"/>
+                            <rect key="frame" x="0.0" y="99" width="320" height="1"/>
                             <color key="backgroundColor" red="0.63529411759999999" green="0.6588235294" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="bEy-H3-Nwm"/>
@@ -242,6 +242,7 @@
                         <constraint firstAttribute="bottom" secondItem="Gbd-cC-70Z" secondAttribute="bottom" id="WQr-yV-U60"/>
                         <constraint firstItem="gXe-pT-9Ni" firstAttribute="top" secondItem="q4f-ty-VC1" secondAttribute="bottom" id="Xej-rg-S38"/>
                         <constraint firstItem="gBV-In-nSI" firstAttribute="leading" secondItem="vg2-zU-P4V" secondAttribute="leading" id="ZB1-t7-U1j"/>
+                        <constraint firstItem="WhR-3k-2ZU" firstAttribute="trailing" secondItem="2dJ-d0-4lt" secondAttribute="trailing" id="Zty-IG-EJ8"/>
                         <constraint firstItem="BJ5-P9-HoH" firstAttribute="leading" secondItem="tzb-xB-lK8" secondAttribute="leading" id="a7A-GR-GYQ"/>
                         <constraint firstAttribute="bottom" secondItem="OTd-pn-VNI" secondAttribute="bottom" id="bD7-4L-Slu"/>
                         <constraint firstItem="OTd-pn-VNI" firstAttribute="top" secondItem="66r-2A-1OR" secondAttribute="top" id="bbB-fs-fzS"/>
@@ -285,6 +286,7 @@
                             <exclude reference="nTi-Zm-EwD"/>
                             <exclude reference="Ph5-eg-QBm"/>
                             <exclude reference="BIT-bl-NmD"/>
+                            <exclude reference="IUh-a5-Qyy"/>
                             <exclude reference="j0X-54-NwF"/>
                         </mask>
                     </variation>

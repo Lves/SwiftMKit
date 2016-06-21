@@ -44,14 +44,21 @@ public class BaseListKitViewModel: BaseKitViewModel {
                 return
             }
             var noMoreDataTip = InnerConstant.StringNoMoreDataTip
-            let count: UInt = UInt(dataSource.count)
+            var count: UInt = UInt(dataSource.count)
+            if count == 1 && (dataSource.first?.count ?? 0) == 0 {
+                count = 0
+            }
+            var oldCount: UInt = UInt(oldValue.count)
+            if oldCount == 1 && (oldValue.first?.count ?? 0) == 0 {
+                oldCount = 0
+            }
             if count == 0 {
                 self.viewController.showEmptyView()
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
                 return
             }
-            if oldValue.count == 0 {
+            if oldCount == 0 {
                 self.viewController.hideEmptyView()
                 self.listViewController.listView?.mj_footer.resetNoMoreData()
             }
