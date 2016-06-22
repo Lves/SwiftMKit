@@ -33,7 +33,14 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     public weak var delegate: PasswordPannelDelegate?
     public var animationDuration = InnerConstant.AnimationDuration
     public var maskColor = InnerConstant.MaskColor
-    public var title = InnerConstant.Title
+    public var title: String? {
+        get {
+            return lblTitle.text
+        }
+        set {
+            lblTitle.text = newValue
+        }
+    }
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgRotation: UIImageView!
     @IBOutlet weak var lblMessage: UILabel!
@@ -63,9 +70,10 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             self?.delegate?.pp_didCancel(self)
         }
         self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+            self?.hide()
             self?.delegate?.pp_forgetPassword(self)
         }
-//        lblTitle.text = title
+        lblTitle.text = InnerConstant.Title
         imgRotation.hidden = true
         lblMessage.hidden = true
         passwordInputView.delegate = self
