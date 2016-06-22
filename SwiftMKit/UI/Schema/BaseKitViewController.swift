@@ -12,6 +12,7 @@ import CocoaLumberjack
 import Alamofire
 import MBProgressHUD
 import ObjectiveC
+import SnapKit
 
 public class BaseKitViewController : UIViewController, UIGestureRecognizerDelegate {
     public var params = Dictionary<String, AnyObject>() {
@@ -32,8 +33,23 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
         get { return nil }
     }
     
-
     
+    public let screenW: CGFloat = UIScreen.mainScreen().bounds.w
+    public let screenH: CGFloat = UIScreen.mainScreen().bounds.h
+    
+    
+    public var emptyViewYOffset: CGFloat {
+        get { return 0 }
+    }
+    public var emptyTitle: String { get { return "暂无数据" } }
+    
+    public var emptyView: UIView? {
+        get { return nil }
+    }
+    
+    public var emptySuperView: UIView? {
+        return view
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +71,16 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
     
     public func setupUI() {
         viewModel?.viewController = self
+        if let emptySuperView = emptySuperView {
+            if let emptyView = emptyView {
+                emptySuperView.addSubview(emptyView)
+                emptyView.hidden = true
+                emptyView.snp_makeConstraints { (make) in
+                    make.centerX.equalTo(emptySuperView)
+                    make.centerY.equalTo(emptySuperView).offset(emptyViewYOffset)
+                }
+            }
+        }
         setupNavigation()
         setupNotification()
         bindingData()
@@ -71,8 +97,14 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
     }
     public func loadData() {
     }
-    public func showEmptyView() {}
-    public func hideEmptyView() {}
+    public func showEmptyView() {
+        guard let emptyView = emptyView else { return }
+        emptyView.hidden = false
+    }
+    public func hideEmptyView() {
+        guard let emptyView = emptyView else { return }
+        emptyView.hidden = true
+    }
     
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if (gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer) {
