@@ -197,7 +197,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         //Line 0
         var yValues0 = [ChartDataEntry]()
         for yIndex in  0...108 {
-            let flotVa =  (Double) (arc4random()%20)
+            let flotVa =  -(Double(arc4random()%20))
             yValues0.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
         
@@ -214,12 +214,12 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set0.setColor(UIColor.purpleColor())
         set0.drawValuesEnabled = false  //是否显示数字
         set0.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
-       
+        set0.fillFormatter = ChartLvesFillFormatter()   //李兴乐
         set0.highlightEnabled = false
         //Line2
         var anotherYValues = [ChartDataEntry]()
         for yIndex in  0...108 {
-            let flotVa = (Double) (arc4random()%20) + 20.0
+            let flotVa = Double(arc4random()%20) + 20.0
             anotherYValues.append(ChartDataEntry(value: flotVa, xIndex: yIndex))
         }
 
@@ -233,13 +233,14 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         set2.circleHoleColor = UIColor.orangeColor()          //圆点圆心颜色
         set2.circleRadius = 10.0                               //圆半径
         set2.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
-//        set2.fillColor = UIColor.orangeColor()
+        set2.fillColor = UIColor.orangeColor()
+        set2.fillFormatter = ChartLvesFillFormatter()   //李兴乐
         
-        let gradientColors = [
-                              ChartColorTemplates.colorFromString("#00000000").CGColor,UIColor.orangeColor().CGColor]
-        let gradient = CGGradientCreateWithColors(nil, gradientColors, nil)
-        set2.fill = ChartFill(linearGradient: gradient!, angle: 100.0)
-        set2.fillAlpha = 0.8
+//        let gradientColors = [
+//                              ChartColorTemplates.colorFromString("#00000000").CGColor,UIColor.orangeColor().CGColor]
+//        let gradient = CGGradientCreateWithColors(nil, gradientColors, nil)
+//        set2.fill = ChartFill(linearGradient: gradient!, angle: 100.0)
+        set2.fillAlpha = 0.7
         
 
         
@@ -249,21 +250,21 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         percentFormatter.positiveSuffix = "%"
         percentFormatter.negativeSuffix = "%"
         
-        let lineData =  LineChartData(xVals: xValues, dataSets: [set0,set2])
+        let lineData =  LineChartData(xVals: xValues, dataSets: [set2,set0])
         lineData.setValueFormatter(percentFormatter);
         
         self.lineChart1Data = lineData
     }
     //MARK: 代理
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        let dataset = chartView.data?.dataSets[0]
+        let dataset = chartView.data?.dataSets[1]
         dataset?.highlightEnabled = true
         
         defaultHighlight = highlight //更新最后高亮
         
     }
     func chartValueNothingSelected(chartView: ChartViewBase) {
-        let dataset = chartView.data?.dataSets[0]
+        let dataset = chartView.data?.dataSets[1]
         dataset?.highlightEnabled = false
         
         //设置默认高亮
@@ -785,6 +786,18 @@ class MKMultipleChartMarker: ChartMarker {
     
 }
 
+//MARK:
+public class ChartLvesFillFormatter: NSObject, ChartFillFormatter
+{
+    public override init()
+    {
+    }
+    public func getFillLinePosition(dataSet dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat
+    {
+        // 李兴乐
+        return CGFloat(dataProvider.chartYMin)
+    }
+}
 
 
 
