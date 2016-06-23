@@ -193,6 +193,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         }) { _ in
             self.menuViewController?.view.removeFromSuperview()
             self.coverView.removeFromSuperview()
+            self.shadowView.hidden = true
         }
     }
     
@@ -217,6 +218,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             menuViewController?.view.frame = CGRectMake(0, 0, menuWidth, screenSize.height)
             menuViewController!.view.addSubview(shadowView)
             shadowView.h = self.view.h
+            self.shadowView.hidden = false
 
             view.addSubview(menuViewController!.view)
             view.insertSubview(coverView, belowSubview: menuViewController!.view)
