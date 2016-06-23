@@ -80,7 +80,9 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         if self.viewModel?.dataIndex == 0 {
             self.listView?.mj_header.endRefreshing()
         }else{
-            self.listView?.mj_footer.endRefreshing()
+            if self.listView?.mj_footer.state == .Refreshing {
+                self.listView?.mj_footer.endRefreshing()
+            }
         }
     }
     

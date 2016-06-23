@@ -45,12 +45,12 @@ public class BaseListKitViewModel: BaseKitViewModel {
             }
             var noMoreDataTip = InnerConstant.StringNoMoreDataTip
             var count: UInt = UInt(dataSource.count)
-            if count == 1 && (dataSource.first?.count ?? 0) == 0 {
-                count = 0
+            if count == 1 {
+                count = UInt(dataSource.first?.count ?? 0)
             }
             var oldCount: UInt = UInt(oldValue.count)
-            if oldCount == 1 && (oldValue.first?.count ?? 0) == 0 {
-                oldCount = 0
+            if oldCount == 1 {
+                oldCount = UInt(oldValue.first?.count ?? 0)
             }
             if count == 0 {
                 self.viewController.showEmptyView()
@@ -65,7 +65,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
             if count < listLoadNumber {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
-            }else if count % listLoadNumber > 0 || count >= listMaxNumber {
+            }else if count % listLoadNumber > 0 || count >= listMaxNumber || count == oldCount {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
             }
             if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
@@ -74,8 +74,8 @@ public class BaseListKitViewModel: BaseKitViewModel {
         }
     }
     var dataIndex: UInt = 0
-    let listLoadNumber: UInt = 20
-    let listMaxNumber: UInt = UInt.max
+    var listLoadNumber: UInt { get { return 20 } }
+    var listMaxNumber: UInt { get { return UInt.max } }
     
     public func updateDataArray(newData: [AnyObject]?) {
         if let data = newData {
