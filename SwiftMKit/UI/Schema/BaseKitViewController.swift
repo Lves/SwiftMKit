@@ -101,6 +101,15 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
         guard let emptyView = emptyView else { return }
         emptyView.hidden = false
     }
+    public func showEmptyView(offset: CGFloat) {
+        guard let emptyView = emptyView else { return }
+        guard let emptySuperView = emptySuperView else { return }
+        emptyView.snp_remakeConstraints { (make) in
+            make.centerX.equalTo(emptySuperView)
+            make.centerY.equalTo(emptySuperView).offset(offset)
+        }
+        emptyView.hidden = false
+    }
     public func hideEmptyView() {
         guard let emptyView = emptyView else { return }
         emptyView.hidden = true
