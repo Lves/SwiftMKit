@@ -216,7 +216,8 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             }
             menuViewController?.view.frame = CGRectMake(0, 0, menuWidth, screenSize.height)
             menuViewController!.view.addSubview(shadowView)
-            
+            shadowView.h = self.view.h
+
             view.addSubview(menuViewController!.view)
             view.insertSubview(coverView, belowSubview: menuViewController!.view)
             
