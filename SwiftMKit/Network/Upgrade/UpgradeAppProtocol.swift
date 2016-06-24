@@ -10,5 +10,5 @@ import Foundation
 
 public protocol UpgradeAppProtocol {
     var appId: String { get }
-    func checkUpgrade(appId: String, version: String, channelId: String)
+    func checkUpgrade(appId: String, version: String, channelId: String, deviceId: String, completion:(needUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) -> Void)
 }
