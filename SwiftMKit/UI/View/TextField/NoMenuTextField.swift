@@ -11,7 +11,7 @@ import UIKit
 
 public class NoMenuTextField: UITextField {
     override public func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == #selector(NSObject.paste(_:)) {
+        if action == #selector(NSObject.paste(_:)) || action == #selector(NSObject.copy(_:)) || action == #selector(NSObject.selectAll(_:)) || action == #selector(NSObject.select(_:)) {
             return false
         }
         
