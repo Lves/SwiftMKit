@@ -66,7 +66,9 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     var lineChart:LineChartView!
     var lineChart2:LineChartView!
     var barChartView:BarChartView!
+    var lineProfit:MerakProfitLineChart!
     var lineChart1Data:ChartData?
+    
     
     var defaultHighlight:ChartHighlight?
     var halo:PulsingHaloLayer?
@@ -114,6 +116,9 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         
         //3.0 柱状图
         self.buildBarChartUI()
+        
+        self.buildProfitLine()
+        
         //4.0 ScrollView
         let scrollView = UIScrollView(frame: CGRectMake(0, 64, screenSize.width, screenSize.height-64))
         scrollView.contentSize = CGSizeMake(screenSize.width, 500*3.0)
@@ -123,6 +128,8 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         scrollView.addSubview(self.lineChart2)
         scrollView.addSubview(button)
         scrollView.addSubview(self.barChartView)
+        
+        scrollView.addSubview(self.lineProfit)
         
        
         
@@ -257,22 +264,27 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
     }
     //MARK: 代理
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        let dataset = chartView.data?.dataSets[1]
-        dataset?.highlightEnabled = true
-        
-        defaultHighlight = highlight //更新最后高亮
+        if chartView == lineChart {
+            let dataset = chartView.data?.dataSets[1]
+            dataset?.highlightEnabled = true
+            
+            defaultHighlight = highlight //更新最后高亮
+        }
         
     }
     func chartValueNothingSelected(chartView: ChartViewBase) {
-        let dataset = chartView.data?.dataSets[1]
-        dataset?.highlightEnabled = false
         
-        //设置默认高亮
-        if defaultHighlight == nil {
-            let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
-            chartView.indicesDefaultToHighlight = [height]
-        }else {
-            chartView.indicesDefaultToHighlight = [defaultHighlight!]
+        if chartView == lineChart {
+            let dataset = chartView.data?.dataSets[1]
+            dataset?.highlightEnabled = false
+            
+            //设置默认高亮
+            if defaultHighlight == nil {
+                let height = ChartHighlight(xIndex: (chartView.data?.xValCount)!-1, dataSetIndex: 1)
+                chartView.indicesDefaultToHighlight = [height]
+            }else {
+                chartView.indicesDefaultToHighlight = [defaultHighlight!]
+            }
         }
     }
 
@@ -458,7 +470,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
        
         
         
-        barChartView = BarChartView(frame: CGRectMake(0, 944,screenSize.width , 400))
+        barChartView = BarChartView(frame: CGRectMake(0, 624,screenSize.width , 200))
         self.barChartView.delegate = self
         self.barChartView.doubleTapToZoomEnabled = false      //双击缩放
         self.barChartView.xAxis.drawGridLinesEnabled = false
@@ -527,7 +539,34 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         self.barChartView.animate(yAxisDuration: 3.0)
         
     }
+    
+    func buildProfitLine()  {
+        lineProfit = MerakProfitLineChart(frame: CGRectMake(0, 854, screenSize.width, 300))
+        lineProfit.backgroundColor = kBlackColor
+        
+        var xValues = [String]()
+        var yValues = [ChartDataEntry]()
+        
+        
+        for index in 0...2 {
+            
+            xValues.append("\(2007+index/12).\(index%12).12")
+        }
+        for yIndex in  0...2 {
+            yValues.append(ChartDataEntry(value: 0.00, xIndex: yIndex))
+        }
+        lineProfit!.leftAxis.axisMinValue = -100
+        lineProfit!.leftAxis.axisMaxValue = 200
+            //            lineChartProfit.xAxis.setLabelsToSkip(11)
+        
+        //设置默认高亮
+        let highlight = ChartHighlight(xIndex: xValues.count - 1, dataSetIndex: 1)
+        defaultHighlight = highlight
+        lineProfit?.indicesDefaultToHighlight = [highlight]
+        lineProfit?.setLineData(xValues, yValues: yValues, label: "")
+    }
 }
+
 
 
 
@@ -786,7 +825,7 @@ class MKMultipleChartMarker: ChartMarker {
     
 }
 
-//MARK:
+//MARK: - 自定义fill format
 public class ChartLvesFillFormatter: NSObject, ChartFillFormatter
 {
     public override init()
@@ -798,6 +837,74 @@ public class ChartLvesFillFormatter: NSObject, ChartFillFormatter
         return CGFloat(dataProvider.chartYMin)
     }
 }
+
+//MARK: 投资组合收益走势图
+class MerakProfitLineChart: LineChartView {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        configProfitLineChart()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configProfitLineChart()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    //折线图属性设置
+    func configProfitLineChart() {
+        self.pinchZoomEnabled = false
+        self.descriptionText = ""
+        noDataText = "暂无数据"
+        self.showAllHighlightCircles = true   //是否显示高亮Circle
+        
+        
+        let xAxis = self.xAxis
+        xAxis.labelPosition = .Bottom;                  //x轴线位置
+        xAxis.labelFont = UIFont.systemFontOfSize(10);
+        xAxis.drawGridLinesEnabled = false              //是否显示x轴网格线
+        xAxis.labelTextColor = UIColor(hex6: 0x626776)     //label颜色
+        xAxis.axisLineWidth = 0                         //线宽度
+        xAxis.avoidFirstLastClippingEnabled = true
+//        xAxis.setLabelsToSkip(1)
+        
+        
+        //        self.leftAxis.axisMinValue = -100.0            //最低值
+        self.leftAxis.axisLineWidth = 0                //左侧线宽度
+        self.leftAxis.labelTextColor = UIColor(hex6: 0x626776)  //label颜色
+        self.leftAxis.gridColor = UIColor(hex6: 0x262B3B)       //网格线颜色
+        
+        
+        
+        self.rightAxis.enabled = false                 //是否显示右侧轴线
+        self.dragEnabled = true                        //是否可以滑动
+        self.drawGridBackgroundEnabled = false         //背景色
+        self.doubleTapToZoomEnabled = false            //双击缩放
+        self.legend.enabled = false                     //是否显示说明
+        
+    }
+    //数据源
+    //MARK:数据
+    func setLineData(xValues:[String],yValues:[ChartDataEntry],label: String?){
+        let set = LineChartDataSet(yVals: yValues, label: label)
+        set.drawFilledEnabled = true
+        set.fillColor = UIColor(hex6: 0xFD734C)
+        
+        set.setColor(UIColor.orangeColor())
+        set.drawValuesEnabled = false
+        
+        set.drawCirclesEnabled = false
+        set.circleRadius = 10.0                                    //圆半径
+        set.highlightImage = NSUIImage(named: "firstInvest_otherprofit_dot")!
+        
+        set.drawHorizontalHighlightIndicatorEnabled = false  //是否显示水平高亮线
+        let lineData =  LineChartData(xVals: xValues, dataSets: [set])
+        //设置数据
+        self.data = lineData
+    }
+}
+
 
 
 
