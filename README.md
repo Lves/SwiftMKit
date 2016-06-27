@@ -1210,5 +1210,93 @@ renderer!.drawValues(context: context)
 //Update end
 ```
 
+### LineChart的_panGestureRecognizer换成 _longPressGestureRecognizer，TapGestureRecognizer去掉
+
+* BarLineChartViewBase swift
+
+```
+ //ModifySourceCode add By LiXingLe 是否支持点击高亮手势 start
+ public var tapToHightlightEnabled = false
+ private var _longPressGestureRecognizer: UILongPressGestureRecognizer!
+ //add end
+ 
+ _longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action:  #selector(BarLineChartViewBase.longPressGestureRecognized(_:)))
+ self.addGestureRecognizer(_longPressGestureRecognizer)
+ 
+```
+
+```
+//ModifySourceCode add By LiXingLe 长按手势
+    func longPressGestureRecognized(recognizer: NSUITapGestureRecognizer) {
+        if _data === nil
+        {
+            return
+        }
+        if (recognizer.state == NSUIGestureRecognizerState.Began)
+        {
+            if self.isHighlightPerDragEnabled
+            {
+                _isDragging = false
+            }
+        }
+        if (recognizer.state == NSUIGestureRecognizerState.Changed)
+        {
+            if (_isDragging)
+            {
+                let originalTranslation = recognizer.locationInView(self)
+                let translation = CGPoint(x: originalTranslation.x - _lastPanPoint.x, y: originalTranslation.y - _lastPanPoint.y)
+                
+                performPanChange(translation: translation)
+                
+                _lastPanPoint = originalTranslation
+            }
+            else if (isHighlightPerDragEnabled)
+            {
+                let h = getHighlightByTouchPoint(recognizer.locationInView(self))
+
+                let lastHighlighted = self.lastHighlighted
+
+                if ((h === nil && lastHighlighted !== nil) ||
+                    (h !== nil && lastHighlighted === nil) ||
+                    (h !== nil && lastHighlighted !== nil && !h!.isEqual(lastHighlighted)))
+                {
+                    self.lastHighlighted = h
+                    self.highlightValue(highlight: h, callDelegate: true)
+                }
+            }
+        }
+        else if (recognizer.state == NSUIGestureRecognizerState.Ended || recognizer.state == NSUIGestureRecognizerState.Cancelled)
+        {
+            if (_isDragging)
+            {
+                if (recognizer.state == NSUIGestureRecognizerState.Ended && isDragDecelerationEnabled)
+                {
+                    stopDeceleration()
+                    
+                    _decelerationLastTime = CACurrentMediaTime()
+                    //未设置速率 lixingle
+//                    _decelerationVelocity = recognizer.velocityInView(self)
+                    
+                    _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
+                    _decelerationDisplayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+                }
+                
+                _isDragging = false
+            }
+            //ModifySourceCode add By LiXingLe
+            self.highlightValue(highlight: nil, callDelegate: true)
+            self.lastHighlighted = nil
+            
+            if (_outerScrollView !== nil)
+            {
+                _outerScrollView?.scrollEnabled = true
+                _outerScrollView = nil
+            }
+        }
+        
+    }
+``` 
+
+
 
 ---

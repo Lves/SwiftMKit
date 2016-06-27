@@ -177,7 +177,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         let marker =  MKMultipleChartMarker(font: UIFont.systemFontOfSize(12),data: self.lineChart1Data!)
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
-        lineChart.marker = marker
+//        lineChart.marker = marker
         ///默认选中
         defaultHighlight = ChartHighlight(xIndex: (self.lineChart1Data?.xValCount)! - 1, dataSetIndex: 1)
         self.lineChart.indicesDefaultToHighlight = [defaultHighlight!]
@@ -328,7 +328,7 @@ class MKUIChartViewController: BaseViewController,ChartViewDelegate {
         let marker =  MKChartMarker( font: UIFont.systemFontOfSize(12))
         marker.image = UIImage(named: "BubblePopRight")
         marker.leftImage = UIImage(named: "BubblePopLeft")
-        lineChart2.marker = marker
+//        lineChart2.marker = marker
         
         
         self.lineChart2.delegate = self
