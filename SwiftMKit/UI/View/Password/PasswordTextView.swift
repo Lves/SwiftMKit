@@ -106,6 +106,9 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
             return false
         }
         if string == "" {
+            if password.length == 0 {
+                return false
+            }
             password = password.toNSString.substringToIndex(password.length - 1)
         } else {
             password += string
