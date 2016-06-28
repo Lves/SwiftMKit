@@ -21,6 +21,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
     private struct InnerConstant {
         static let MaxCount = 6
         static let InputViewBackGroundColor = UIColor(hex6: 0xF3F6FC)
+        static let borderWidth = 1
         static let dotColor = UIColor.blackColor()
         static let textColor = UIColor.blackColor()
         static let textFont = UIFont.systemFontOfSize(20)
@@ -41,6 +42,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
         }
     }
     public var inputViewColor = InnerConstant.InputViewBackGroundColor
+    public var borderWidth = InnerConstant.borderWidth
     public var dotColor = InnerConstant.dotColor
     public var textColor = InnerConstant.textColor
     public var textFont = InnerConstant.textFont
@@ -71,11 +73,12 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
     
     public override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        let rectangleWidth = rect.width / CGFloat(InnerConstant.MaxCount)
-        let rectangleHeight = rect.height
+        let times = CGFloat(borderWidth)
+        let rectangleWidth = (rect.width - 7*times) / CGFloat(InnerConstant.MaxCount)
+        let rectangleHeight = rect.height - times * 2
         for index in 0...InnerConstant.MaxCount {
-            let rectangleX = CGFloat(index) + CGFloat(index) * rectangleWidth
-            let path = UIBezierPath(rect: CGRect(x:rectangleX, y:0, width:rectangleWidth, height:rectangleHeight))
+            let rectangleX = CGFloat(index) + CGFloat(index) * rectangleWidth + times
+            let path = UIBezierPath(rect: CGRect(x:rectangleX, y:times, width:rectangleWidth, height:rectangleHeight))
             UIColor.whiteColor().setFill()
             UIColor.clearColor().setStroke()
             path.stroke()
