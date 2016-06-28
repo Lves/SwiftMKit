@@ -103,7 +103,7 @@ extension PersentAnimator: UIViewControllerAnimatedTransitioning {
         toVC.view.layer.shadowRadius = 5.0
         presentingVC = toVC
         if isPersent {
-            prepareGestureRecognizerInView(toVC.view)
+//            prepareGestureRecognizerInView(toVC.view)
         }
         // 2. Set init frame for toVC
         let screenBounds = UIScreen.mainScreen().bounds

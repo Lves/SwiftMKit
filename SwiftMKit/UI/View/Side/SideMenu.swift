@@ -117,6 +117,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         recognizer.setTranslation(CGPointZero, inView: recognizer.view)
         let velocity = recognizer.velocityInView(recognizer.view)
         let newX = draggingPoint.x + translation.x
+
         var offsetX: CGFloat = 0
         switch direction {
         case .Left:
@@ -132,8 +133,10 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         }
         switch recognizer.state {
         case .Began:
-            draggingPoint = translation
-            recognizer.view?.x = draggingPoint.x + offsetX
+//            draggingPoint = translation
+//            recognizer.view?.x = draggingPoint.x + offsetX
+            draggingPoint = CGPointZero
+            recognizer.view?.x = 0
         case .Changed:
             draggingPoint.x += translation.x
             recognizer.view?.x = draggingPoint.x + offsetX
@@ -161,6 +164,8 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         default:
             break
         }
+        
+        DDLogInfo("panGestureRecognized \(recognizer.state.rawValue) \(direction) \(recognizer.view?.x)")
     }
     
     // 解决手势冲突问题
@@ -252,7 +257,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     }
     public func routeToSideMaster(name: String, stroyBoardName: String?, params nextParams: Dictionary<String, AnyObject> = [:]) {
         if let viewController = masterViewController?.initialedViewController(name, params: nextParams, storyboardName: stroyBoardName ?? "") {
-            let navigationController = UINavigationController(rootViewController: viewController)
+            let navigationController = UINavigationController(rootViewController: viewController)        
             let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
             navigationController.transitioningDelegate = effect
             masterViewController?.presentViewController(navigationController, animated: true, completion: nil)
