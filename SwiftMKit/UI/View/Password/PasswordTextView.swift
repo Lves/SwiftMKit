@@ -90,7 +90,7 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
             let centerX = floatIndex + floatIndex * rectangleWidth + rectangleWidth/2
             let centerY = rectangleHeight/2
             if self.isShow {
-                let textAttribute = [NSForegroundColorAttributeName: dotColor,
+                let textAttribute = [NSForegroundColorAttributeName: textColor,
                                             NSFontAttributeName: textFont]
                 let strSize = string.sizeWithAttributes(textAttribute)
                 let center = CGPointMake(centerX - strSize.width/2, centerY - strSize.height/2)
