@@ -641,6 +641,19 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
             if self.isHighlightPerDragEnabled
             {
                 _isDragging = false
+                if (isHighlightPerDragEnabled)
+                {
+                    let h = getHighlightByTouchPoint(recognizer.locationInView(self))
+                    let lastHighlighted = self.lastHighlighted
+                    
+                    if ((h === nil && lastHighlighted !== nil) ||
+                        (h !== nil && lastHighlighted === nil) ||
+                        (h !== nil && lastHighlighted !== nil && !h!.isEqual(lastHighlighted)))
+                    {
+                        self.lastHighlighted = h
+                        self.highlightValue(highlight: h, callDelegate: true)
+                    }
+                }
             }
         }
         if (recognizer.state == NSUIGestureRecognizerState.Changed)
