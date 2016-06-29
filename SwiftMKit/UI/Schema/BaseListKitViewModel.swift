@@ -60,13 +60,14 @@ public class BaseListKitViewModel: BaseKitViewModel {
             }
             if oldCount == 0 {
                 self.viewController.hideEmptyView()
-                self.listViewController.listView?.mj_footer.resetNoMoreData()
             }
             if count < listLoadNumber {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
-            }else if count % listLoadNumber > 0 || count >= listMaxNumber || count == oldCount {
+            }else if count % listLoadNumber > 0 || count >= listMaxNumber || (count == oldCount && dataIndex > 0) {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
+            } else {
+                self.listViewController.listView?.mj_footer.resetNoMoreData()
             }
             if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
                 footer.setTitle(noMoreDataTip, forState: .NoMoreData)

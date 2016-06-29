@@ -142,8 +142,10 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             //获取光标位置
             let range = self.selectedRange()
             if let tempDeleget = self.textField?.delegate {
-                if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: ".") {
-                    return
+                if tempDeleget.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) {
+                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: ".") {
+                        return
+                    }
                 }
             }
             let forward = self.getForwardString(self.text, range: range)
@@ -159,8 +161,10 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             //获取光标位置
             var range = self.selectedRange()
             if let tempDeleget = self.textField?.delegate {
-                if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
-                    return
+                if tempDeleget.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) {
+                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
+                        return
+                    }
                 }
             }
             if range.location == 0 {
@@ -185,8 +189,10 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 //获取光标位置
                 let range = self.selectedRange()
                 if let tempDeleget = self.textField?.delegate {
-                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
-                        return
+                    if tempDeleget.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) {
+                        if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
+                            return
+                        }
                     }
                 }
                 let forward = self.getForwardString(self.text, range: range)
