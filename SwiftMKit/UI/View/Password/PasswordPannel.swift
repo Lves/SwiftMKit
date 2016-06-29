@@ -65,13 +65,15 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     private func setupUI() {
         self.btnClose.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             self?.passwordInputView.inactive()
-            self?.hide()
-            self?.passwordInputView.password = ""
-            self?.delegate?.pp_didCancel(self)
+            self?.hide() {
+                self?.passwordInputView.password = ""
+                self?.delegate?.pp_didCancel(self)
+            }
         }
         self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
-            self?.hide()
-            self?.delegate?.pp_forgetPassword(self)
+            self?.hide() {
+                self?.delegate?.pp_forgetPassword(self)
+            }
         }
         lblTitle.text = InnerConstant.Title
         imgRotation.hidden = true
@@ -107,7 +109,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         }
     }
     /** 隐藏 */
-    public func hide() {
+    public func hide(completion: () -> Void = {}) {
         Async.main {
             self.hideKeyboard()
             UIView.animateWithDuration(self.animationDuration, animations: {
@@ -116,6 +118,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             }) { _ in
                 self.removeFromSuperview()
                 self.coverView.removeFromSuperview()
+                completion()
             }
         }
     }
@@ -187,8 +190,9 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             }
             self?.stopLoading(success, message: message)
             Async.main(after: 1) { [weak self] in
-                self?.hide()
-                self?.delegate?.pp_didFinished(self, success: success)
+                self?.hide() {
+                    self?.delegate?.pp_didFinished(self, success: success)
+                }
             }
         }
     }

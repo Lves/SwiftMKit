@@ -168,6 +168,19 @@
                                 <constraint firstAttribute="width" constant="1" id="P7z-bs-8Vh"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgZ-kP-Dtw">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.63529411759999999" green="0.6588235294" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="u1k-Nd-qkF"/>
+                                <constraint firstAttribute="width" constant="240" id="uqI-EE-ox3"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="uqI-EE-ox3"/>
+                                </mask>
+                            </variation>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Smz-I3-mjg">
                             <rect key="frame" x="0.0" y="49" width="240" height="1"/>
                             <color key="backgroundColor" red="0.63529411759999999" green="0.6588235294" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,6 +218,7 @@
                         <constraint firstItem="CtV-mQ-LHe" firstAttribute="width" secondItem="xc6-dw-TTQ" secondAttribute="width" id="4K4-hC-thP"/>
                         <constraint firstItem="CtV-mQ-LHe" firstAttribute="leading" secondItem="vg2-zU-P4V" secondAttribute="leading" id="4UK-a6-XhM"/>
                         <constraint firstItem="2dJ-d0-4lt" firstAttribute="leading" secondItem="vg2-zU-P4V" secondAttribute="trailing" id="7EW-LM-mGe"/>
+                        <constraint firstItem="JgZ-kP-Dtw" firstAttribute="top" secondItem="66r-2A-1OR" secondAttribute="top" id="83h-jA-S6u"/>
                         <constraint firstItem="Wtg-Bu-cVm" firstAttribute="leading" secondItem="xc6-dw-TTQ" secondAttribute="leading" id="980-f8-phr"/>
                         <constraint firstItem="q4f-ty-VC1" firstAttribute="height" secondItem="xc6-dw-TTQ" secondAttribute="height" id="9Ts-CJ-hwC"/>
                         <constraint firstItem="BJ5-P9-HoH" firstAttribute="top" secondItem="Wtg-Bu-cVm" secondAttribute="top" id="AKt-Am-kXW"/>
@@ -219,6 +233,8 @@
                         <constraint firstItem="2dJ-d0-4lt" firstAttribute="leading" secondItem="WhR-3k-2ZU" secondAttribute="trailing" id="IUh-a5-Qyy"/>
                         <constraint firstItem="Z1M-MJ-NH5" firstAttribute="width" secondItem="xc6-dw-TTQ" secondAttribute="width" id="Idt-EH-HVk"/>
                         <constraint firstItem="7yK-Ji-zBW" firstAttribute="leading" secondItem="tzb-xB-lK8" secondAttribute="leading" id="Ina-Y4-pwt"/>
+                        <constraint firstAttribute="trailing" secondItem="JgZ-kP-Dtw" secondAttribute="trailing" id="JaN-Ty-xV4"/>
+                        <constraint firstItem="JgZ-kP-Dtw" firstAttribute="leading" secondItem="66r-2A-1OR" secondAttribute="leading" id="Jij-Im-U7V"/>
                         <constraint firstItem="00x-YR-5It" firstAttribute="trailing" secondItem="tzb-xB-lK8" secondAttribute="trailing" id="LGX-ap-vNf"/>
                         <constraint firstItem="Smz-I3-mjg" firstAttribute="bottom" secondItem="xc6-dw-TTQ" secondAttribute="bottom" id="LZz-g6-l0E"/>
                         <constraint firstItem="q4f-ty-VC1" firstAttribute="top" secondItem="Wtg-Bu-cVm" secondAttribute="bottom" id="LnB-HQ-ZXe"/>
@@ -322,6 +338,7 @@
                 <outletCollection property="lines" destination="Smz-I3-mjg" collectionClass="NSMutableArray" id="Plv-wn-L3U"/>
                 <outletCollection property="lines" destination="WhR-3k-2ZU" collectionClass="NSMutableArray" id="zOo-w3-ip1"/>
                 <outletCollection property="lines" destination="Rsc-hL-S9n" collectionClass="NSMutableArray" id="Jbw-JD-iDo"/>
+                <outletCollection property="lines" destination="JgZ-kP-Dtw" collectionClass="NSMutableArray" id="EDC-qT-okc"/>
             </connections>
             <point key="canvasLocation" x="356" y="333"/>
         </view>
