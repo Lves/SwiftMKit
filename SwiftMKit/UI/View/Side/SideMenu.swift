@@ -186,7 +186,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     }
     public func hideMenu() {
         menuShowed.value = false
-        self.shadowView.hidden = true
+        
         UIView.animateWithDuration(animationDuration, animations: {
             self.coverView.backgroundColor = UIColor.clearColor()
             switch self.direction {
@@ -199,6 +199,7 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         }) { _ in
             self.menuViewController?.view.removeFromSuperview()
             self.coverView.removeFromSuperview()
+            self.shadowView.hidden = true
         }
     }
     
