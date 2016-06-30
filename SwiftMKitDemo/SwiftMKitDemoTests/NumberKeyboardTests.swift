@@ -236,6 +236,12 @@ class NumberKeyboardTests: XCTestCase {
         (final, _) = numberKeyboard.matchInputNumber(old, new: new)
         XCTAssertNotNil(final)
         XCTAssertEqual(final, "10.10")
+        
+        old = "10.10"
+        new = "10.120"
+        (final, _) = numberKeyboard.matchInputNumber(old, new: new)
+        XCTAssertNotNil(final)
+        XCTAssertEqual(final, "10.10")
     }
     func testInputNoDotType() {
         numberKeyboard.type = .NoDot

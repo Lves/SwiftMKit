@@ -300,6 +300,13 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         //获取光标位置
         var range = self.selectedRange()
         var result = old
+        let oldArray = old.componentsSeparatedByString(".")
+        let newArray = new.componentsSeparatedByString(".")
+        if oldArray.last == newArray.last {
+            range.location += 1
+            result = new
+            return (result, range)
+        }
         //判断是否需要处理限制两位小数逻辑
         if !self.limitWithTwoPoint(old) {
             range.location += 1
