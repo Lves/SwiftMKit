@@ -173,18 +173,22 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                     self?.showKeyboard()
                     }))
                 alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
-                    self?.delegate?.pp_forgetPassword(self)
-                    })
+                    self?.hide() {
+                        self?.delegate?.pp_forgetPassword(self)
+                    }
+                })
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
             } else if status == .PasswordLocked {
                 let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "取消", style: .Default, handler:  { [weak self] _ in
                     self?.hide()
-                    }))
+                }))
                 alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
-                    self?.delegate?.pp_forgetPassword(self)
-                    })
+                    self?.hide() {
+                        self?.delegate?.pp_forgetPassword(self)
+                    }
+                })
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
             }
