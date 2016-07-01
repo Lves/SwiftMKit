@@ -44,6 +44,7 @@ public extension UIApplication {
         static let CFBundleInfoDictionaryVersion = "CFBundleInfoDictionaryVersion"
         static let CFBundleVersion = "CFBundleVersion"
         static let CFBundleShortVersionString = "CFBundleShortVersionString"
+        static let BuildDateString = "BuildDateString"
     }
     
     var remoteNotificationEnabled: Bool {
@@ -102,6 +103,17 @@ public extension UIApplication {
     var bundleShortVersionNumber: Int {
         get {
             return bundleShortVersionString.stringByReplacingOccurrencesOfString(".", withString: "").toInt() ?? 0
+        }
+    }
+    var bundleBuildDateString: String {
+        get {
+            if let dateString = PINMemoryCache.sharedCache().objectForKey(Constant.BuildDateString) as? String {
+                return dateString
+            }
+            let dateString = NSBundle.mainBundle().infoDictionary?[Constant.BuildDateString] as? String ?? ""
+            PINMemoryCache.sharedCache().setObject(dateString, forKey: Constant.BuildDateString)
+            DDLogInfo("BuildDateString: \(dateString)")
+            return dateString
         }
     }
 }
