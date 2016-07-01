@@ -29,7 +29,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     struct Theme {
         static let DefaultTheme: NumberKeyboardUITheme = NumberKeyboardUITheme(
             viewBackgroundColor: UIColor(hex6: 0x8C8C8C),
-            viewLineColor: UIColor(hex6: 0x8C8C8C),
+            viewLineColor: UIColor(hex6: 0xDCDCDC),
             viewEnterColor: UIColor(hex6: 0xFD734C),
             viewDelColor: UIColor(hex6: 0xFFFFFF),
             viewNumberColor: UIColor(hex6: 0xFFFFFF),
