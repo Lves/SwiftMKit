@@ -15,7 +15,7 @@ protocol WebViewToolsPannelViewDelegate: class {
     func webViewToolsPannelViewButtonAction(webViewToolsPannelView: WebViewToolsPannelView, model: ToolsModel)
 }
 
-protocol ToolsPannelScrollViewDelegate: class {
+private protocol ToolsPannelScrollViewDelegate: class {
     func toolsPannelScrollViewButtonAction(toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel)
 }
 
@@ -72,20 +72,20 @@ class WebViewToolsPannelView: UIView ,ToolsPannelScrollViewDelegate{
     
     weak var delegate : WebViewToolsPannelViewDelegate?
     
-    dynamic var firstCount : Int = 0 //第一排多少按钮
-    
-    dynamic var toolsArray : NSArray? {
+    var toolsArray : [[ToolsModel]]? {
         didSet{
             
             if let array = toolsArray {
-                if firstCount > array.count || firstCount == 0 {
-                    firstCount = array.count
+                var array1 = [ToolsModel]()
+                var array2 = [ToolsModel]()
+                if array.count > 2 {
+                    return
+                } else if array.count == 2 {
+                    array1 = toolsArray?.first ?? []
+                    array2 = toolsArray?.last ?? []
+                } else {
+                    array1 = toolsArray?.first ?? []
                 }
-                
-                //分割数组
-                let array1 = array.subarrayWithRange(NSMakeRange(0, firstCount))
-                let array2 = array.subarrayWithRange(NSMakeRange(firstCount, array.count - firstCount))
-                
                 //第一行
                 let toolsPannelScrollView1 : ToolsPannelScrollView = ToolsPannelScrollView(frame: CGRectMake(0, 0, self.w, CGFloat(ToolsPannelScrollView.getToolsScrollViewHeight())))
                 toolsPannelScrollView1.toolsArray = array1
@@ -94,7 +94,7 @@ class WebViewToolsPannelView: UIView ,ToolsPannelScrollViewDelegate{
                 boderView.frame = CGRectMake(0, 0, self.w, toolsPannelScrollView1.h)
                 
                 //第二行
-                if firstCount < array.count {
+                if array2.count > 0 {
                     lineView.frame = CGRectMake(0, toolsPannelScrollView1.h, self.w, 0.5)
                     
                     let toolsPannelScrollView2 : ToolsPannelScrollView = ToolsPannelScrollView(frame: CGRectMake(0, toolsPannelScrollView1.h+1, self.w, CGFloat(ToolsPannelScrollView.getToolsScrollViewHeight())))
@@ -151,7 +151,7 @@ class WebViewToolsPannelView: UIView ,ToolsPannelScrollViewDelegate{
         backgroundView.addGestureRecognizer(tap)
         self.addSubview(backgroundView)
         
-        pannelView.frame = CGRectMake(0, self.h, self.w, 100)
+        pannelView.frame = CGRectMake(0, self.h, self.w, 0)
         pannelView.backgroundColor = InnerConstant.PannelViewColor
         pannelView.userInteractionEnabled = true
         self.addSubview(pannelView)
@@ -260,9 +260,9 @@ class ToolsPannelScrollView: UIScrollView {
         static let HorizontalSpace : CGFloat = 15.0 //横向间距
     }
     
-    weak var toolsDelegate : ToolsPannelScrollViewDelegate?
+    private weak var toolsDelegate : ToolsPannelScrollViewDelegate?
     
-    dynamic var toolsArray : NSArray? {
+    var toolsArray : [ToolsModel]? {
         didSet{
             if let toolsArray_t = toolsArray {
                 
@@ -275,13 +275,13 @@ class ToolsPannelScrollView: UIScrollView {
                 self.contentSize = CGSizeMake(InnerConstant.OriginX + CGFloat(toolsArray_t.count) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),self.h)
                 
                 //遍历标签数组,将标签显示在界面上,并给每个标签打上tag加以区分
-                for model in toolsArray_t {
-                    if let toolModel : ToolsModel = model as? ToolsModel {
-                        let i : Int = (toolsArray?.indexOfObject(toolModel)) ?? 0
-                        let itemView = self.getToolItme(CGRectMake(InnerConstant.OriginX + CGFloat(i) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),
+                for index in 0..<toolsArray_t.count {
+                    let model = toolsArray_t[safe: index]
+                    if let toolModel = model {
+                        let itemView = self.getToolItme(CGRectMake(InnerConstant.OriginX + CGFloat(index) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),
                             InnerConstant.OriginY,
                             InnerConstant.IcoWidth,
-                            InnerConstant.IcoWidth + InnerConstant.IcoAndTitleSpace + InnerConstant.TitleLabelHeight), model: toolModel, btnTag: i)
+                            InnerConstant.IcoWidth + InnerConstant.IcoAndTitleSpace + InnerConstant.TitleLabelHeight), model: toolModel, btnTag: index + 1)
                         self.addSubview(itemView)
                     }
                 }
@@ -318,7 +318,7 @@ class ToolsPannelScrollView: UIScrollView {
         let btn : UIButton = UIButton(type: .Custom)
         btn.tag = btnTag
         btn.frame = CGRectMake((toolItme.w - InnerConstant.IcoWidth)/2, 0, InnerConstant.IcoWidth, InnerConstant.IcoWidth)
-        btn.backgroundColor = UIColor.grayColor()
+        btn.backgroundColor = UIColor.clearColor()
         
         if let imageStr = model.image {
             if let image = UIImage(named: imageStr) {
@@ -335,7 +335,7 @@ class ToolsPannelScrollView: UIScrollView {
         
         btn.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext{ _ in
             
-            if let model : ToolsModel = self.toolsArray?.objectAtIndex(btn.tag) as? ToolsModel {
+            if let model = self.toolsArray?[btn.tag - 1] {
                 if self.toolsDelegate != nil {
                     self.toolsDelegate?.toolsPannelScrollViewButtonAction(self, model: model)
                 }

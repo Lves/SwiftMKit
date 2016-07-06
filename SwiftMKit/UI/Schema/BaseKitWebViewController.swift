@@ -18,6 +18,9 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public var shouldAllowRirectToUrlInView: Bool = true
     
     public var url: String?
+    public var moreUrlTitle: String? {
+        get { return nil }
+    }
     
     var webViewToolsPannelView :WebViewToolsPannelView?
     
@@ -39,8 +42,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if let btnBack = navBtnBack() {
             self.navigationItem.leftBarButtonItems = [btnBack]
         }
-        
-        //MARK - Edit By Wangzhanshi 误删
         if let btnMore : UIBarButtonItem = navBtnMore() {
             self.navigationItem.rightBarButtonItem = btnMore
         }
@@ -107,6 +108,19 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public func navBtnMore() -> UIBarButtonItem {
         return UIBarButtonItem(title: "•••", style: .Plain, target: self, action: #selector(BaseKitWebViewController.click_nav_more(_:)))
     }
+    public func getToolMoreHeaderView() -> UIView {
+        let labHeaderView : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.w, 30))
+        labHeaderView.clipsToBounds = true
+        if let urlTitle = moreUrlTitle {
+            labHeaderView.font = UIFont.systemFontOfSize(10)
+            labHeaderView.text = "网页由 \(urlTitle) 提供"
+            labHeaderView.textColor = UIColor.grayColor()
+            labHeaderView.textAlignment = NSTextAlignment.Center
+        } else {
+            labHeaderView.h = 0
+        }
+        return labHeaderView
+    }
     
     public func click_nav_back(sender: UIBarButtonItem) {
         if webView?.canGoBack ?? false {
@@ -120,27 +134,15 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     }
     public func click_nav_more(sender: UIBarButtonItem) {
         
-        let labHeaderView : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.w, 30))
-        labHeaderView.font = UIFont.systemFontOfSize(10)
-        labHeaderView.text = "网页由 www.jimubox.com 提供"
-        labHeaderView.textColor = UIColor.grayColor()
-        labHeaderView.textAlignment = NSTextAlignment.Center
         
         webViewToolsPannelView = WebViewToolsPannelView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64))
         webViewToolsPannelView?.delegate = self
-        webViewToolsPannelView!.headerView = labHeaderView
-        webViewToolsPannelView!.firstCount = 6
+        webViewToolsPannelView!.headerView = getToolMoreHeaderView()
         webViewToolsPannelView!.toolsArray =
-            [ToolsModel(image: "more_weixin", highlightedImage: "more_weixin_highlighted", title: "发送给朋友", used: .ShareToWeixin)
-            ,ToolsModel(image: "more_circlefriends", highlightedImage: "more_circlefriends_highlighted", title: "分享到朋友圈", used: .ShareToTimeLine)
-            ,ToolsModel(image: "Action_MyFavAdd", highlightedImage: "Action_MyFavAdd", title: "收藏", used: .Collection)
-            ,ToolsModel(image: "Action_Safari", highlightedImage: "Action_Safari", title: "在Safari中\n打开", used: .OpenBySafari)
-            ,ToolsModel(image: "more_icon_qq", highlightedImage: "more_icon_qq_highlighted", title: "分享到\n手机QQ", used: .ShareToQQ)
-            ,ToolsModel(image: "more_icon_qzone", highlightedImage: "more_icon_qzone_highlighted", title: "分享到\nQQ空间", used: .ShareToQZone)
-            ,ToolsModel(image: "more_icon_link", highlightedImage: "more_icon_link", title: "复制链接", used: .CopyLink)
-            ,ToolsModel(image: "Action_Font", highlightedImage: "Action_Font", title: "调整字体", used: .SetTextFont)
-            ,ToolsModel(image: "Action_Refresh", highlightedImage: "Action_Refresh", title: "刷新", used: .WebRefresh)
-            ,ToolsModel(image: "Action_Expose", highlightedImage: "Action_Expose", title: "投诉", used: .Default)]
+            [[
+                ToolsModel(image: "Action_Safari", highlightedImage: "Action_Safari", title: "在Safari中\n打开", used: .OpenBySafari),
+                ToolsModel(image: "more_icon_link", highlightedImage: "more_icon_link", title: "复制链接", used: .CopyLink),
+                ToolsModel(image: "Action_Refresh", highlightedImage: "Action_Refresh", title: "刷新", used: .WebRefresh)]]
         
         self.navigationController?.view.addSubview(webViewToolsPannelView!)
     }
@@ -149,37 +151,14 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     //MARK : - WebViewToolsPannelViewDelegate
     func webViewToolsPannelViewButtonAction(webViewToolsPannelView: WebViewToolsPannelView, model: ToolsModel) {
-        
-        DDLogInfo(model.title!)
-        
         switch model.used {
-        case .ShareToWeixin:
-            break
-            
-        case .ShareToTimeLine:
-            break
-            
-        case .Collection:
-            break
-            
         case .OpenBySafari:
             UIApplication.sharedApplication().openURL((webView?.request?.URL)!)
             break
-            
-        case .ShareToQQ:
-            break
-            
-        case .ShareToQZone:
-            break
-            
         case .CopyLink:
             UIPasteboard.generalPasteboard().string = url
             self.showTip("已复制链接到剪切版")
             break
-            
-        case .SetTextFont:
-            break
-            
         case .WebRefresh:
             webView?.reload()
             break
