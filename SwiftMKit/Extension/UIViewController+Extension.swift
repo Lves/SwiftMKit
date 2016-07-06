@@ -57,9 +57,9 @@ public extension UIViewController {
         }
     }
     public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "") -> UIViewController? {
-        var vc = instanceViewControllerInXibWithName(name)
+        var vc = instanceViewControllerInStoryboardWithName(name, storyboardName: storyboardName)
         if (vc == nil) {
-            vc = instanceViewControllerInStoryboardWithName(name, storyboardName: storyboardName)
+            vc = instanceViewControllerInXibWithName(name)
         }
         if vc != nil {
             if vc is BaseKitViewController {
