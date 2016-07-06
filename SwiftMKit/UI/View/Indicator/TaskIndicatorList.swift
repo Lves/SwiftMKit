@@ -54,14 +54,18 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         DDLogVerbose("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
-            self.endRefresh()
+            if self.viewModel != nil {
+                self.endRefresh()
+            }
         }
     }
     @objc func task_list_cancel(notify:NSNotification) {
         DDLogVerbose("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
-            self.endRefresh()
+            if self.viewModel != nil {
+                self.endRefresh()
+            }
         }
     }
     @objc func task_list_end(notify:NSNotification) {
@@ -73,7 +77,9 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
             }
         }
         Async.main {
-            self.endRefresh()
+            if self.viewModel != nil {
+                self.endRefresh()
+            }
         }
     }
     func endRefresh() {
@@ -94,7 +100,9 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
             task.cancel()
             let info = ["task": task] as NSDictionary
             let notify = NSNotification(name: "", object: info)
-            self.task_list_cancel(notify)
+            if self.viewModel != nil {
+                self.task_list_cancel(notify)
+            }
         }
     }
     
