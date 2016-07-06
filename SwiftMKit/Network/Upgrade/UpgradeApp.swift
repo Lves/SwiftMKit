@@ -10,18 +10,14 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
-public class UpgradeApp : NSObject {
-    public var appProtocol: UpgradeAppProtocol
-    
-    init(appProtocol: UpgradeAppProtocol) {
-        self.appProtocol = appProtocol
-        super.init()
-    }
-    
-    public func checkUpgrade() {
-        let version = appProtocol.version
+public class UpgradeApp : UpgradeAppProtocol {
+    public static var appId: String { get { return "" } }
+    public static var channelId: String { get { return "" } }
+    public static var version: String { get { return "" } }
+    public static func requestUpgrade(appId: String, version: String, channelId: String, deviceId: String, completion: (needUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) -> Void) { }
+    public static func checkUpgrade() {
         DDLogInfo("[UpgradeApp] 开始检测新版本: 当前版本-\(version)")
-        appProtocol.checkUpgrade(appProtocol.appId, version: version, channelId: appProtocol.channelId, deviceId: UIDevice.currentDevice().uuid, completion: { (needUpgrade, newVersion, upgradeMessage, downloadUrl) in
+        requestUpgrade(appId, version: version, channelId: channelId, deviceId: UIDevice.currentDevice().uuid, completion: { (needUpgrade, newVersion, upgradeMessage, downloadUrl) in
             if needUpgrade {
                 DDLogInfo("[UpgradeApp] 检测到新版本: \(newVersion)")
                 let alert = UIAlertController(title: "提示", message: upgradeMessage, preferredStyle: .Alert)

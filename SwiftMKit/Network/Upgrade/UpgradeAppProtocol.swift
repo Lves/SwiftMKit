@@ -9,8 +9,8 @@
 import Foundation
 
 public protocol UpgradeAppProtocol {
-    var appId: String { get }
-    var channelId: String { get }
-    var version: String { get }
-    func checkUpgrade(appId: String, version: String, channelId: String, deviceId: String, completion:(needUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) -> Void)
+    static var appId: String { get }
+    static var channelId: String { get }
+    static var version: String { get }
+    static func requestUpgrade(appId: String, version: String, channelId: String, deviceId: String, completion:(needUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) -> Void)
 }
