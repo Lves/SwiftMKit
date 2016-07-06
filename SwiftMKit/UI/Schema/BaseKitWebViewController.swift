@@ -41,9 +41,9 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
         
         //MARK - Edit By Wangzhanshi 误删
-//        if let btnMore : UIBarButtonItem = navBtnMore() {
-//            self.navigationItem.rightBarButtonItem = btnMore
-//        }
+        if let btnMore : UIBarButtonItem = navBtnMore() {
+            self.navigationItem.rightBarButtonItem = btnMore
+        }
     }
     public override func loadData() {
         super.loadData()
@@ -130,17 +130,17 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         webViewToolsPannelView?.delegate = self
         webViewToolsPannelView!.headerView = labHeaderView
         webViewToolsPannelView!.firstCount = 6
-        webViewToolsPannelView!.toolsArray = [ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "发送给朋友", used: .ShareToWeixin)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "分享到朋友圈", used: .ShareToTimeLine)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "收藏", used: .Collection)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "在Safari中\n打开", used: .OpenBySafari)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "分享到\n手机QQ", used: .ShareToQQ)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "分享到\nQQ空间", used: .ShareToQZone)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "查看公众号", used: .Default)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "复制链接", used: .CopyLink)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "调整字体", used: .SetTextFont)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "刷新", used: .WebRefresh)
-            ,ToolsModel(image: "login_view_logo_text", highlightedImage: "setting_icon_helper", title: "投诉", used: .Default)]
+        webViewToolsPannelView!.toolsArray =
+            [ToolsModel(image: "more_weixin", highlightedImage: "more_weixin_highlighted", title: "发送给朋友", used: .ShareToWeixin)
+            ,ToolsModel(image: "more_circlefriends", highlightedImage: "more_circlefriends_highlighted", title: "分享到朋友圈", used: .ShareToTimeLine)
+            ,ToolsModel(image: "Action_MyFavAdd", highlightedImage: "Action_MyFavAdd", title: "收藏", used: .Collection)
+            ,ToolsModel(image: "Action_Safari", highlightedImage: "Action_Safari", title: "在Safari中\n打开", used: .OpenBySafari)
+            ,ToolsModel(image: "more_icon_qq", highlightedImage: "more_icon_qq_highlighted", title: "分享到\n手机QQ", used: .ShareToQQ)
+            ,ToolsModel(image: "more_icon_qzone", highlightedImage: "more_icon_qzone_highlighted", title: "分享到\nQQ空间", used: .ShareToQZone)
+            ,ToolsModel(image: "more_icon_link", highlightedImage: "more_icon_link", title: "复制链接", used: .CopyLink)
+            ,ToolsModel(image: "Action_Font", highlightedImage: "Action_Font", title: "调整字体", used: .SetTextFont)
+            ,ToolsModel(image: "Action_Refresh", highlightedImage: "Action_Refresh", title: "刷新", used: .WebRefresh)
+            ,ToolsModel(image: "Action_Expose", highlightedImage: "Action_Expose", title: "投诉", used: .Default)]
         
         self.navigationController?.view.addSubview(webViewToolsPannelView!)
     }
