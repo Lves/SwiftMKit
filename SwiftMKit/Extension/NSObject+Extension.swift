@@ -59,16 +59,16 @@ public extension NSObject {
         return nil
     }
     
-    class func fromClassName(className : String) -> NSObject {
-        let className = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String + "." + className
-        let aClass = NSClassFromString(className) as! NSObject.Type
-        return aClass.init()
+    class func fromClassName(className : String) -> NSObject? {
+        let className = (NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? "") + "." + className
+        let aClass = NSClassFromString(className) as? NSObject.Type
+        return aClass?.init()
     }
     
     ///  获取完整的类名
-    class func fullClassName(className : String) -> NSObject.Type {
-        let className = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String + "." + className
-        let fullName = NSClassFromString(className) as! NSObject.Type
+    class func fullClassName(className : String) -> NSObject.Type? {
+        let className = (NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? "") + "." + className
+        let fullName = NSClassFromString(className) as? NSObject.Type
         return fullName
     }
 

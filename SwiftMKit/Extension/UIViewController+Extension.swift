@@ -74,9 +74,10 @@ public extension UIViewController {
         return vc
     }
     public func instanceViewControllerInXibWithName(name: String) -> UIViewController? {
-//        let type = UIViewController.fullClassName(name) as? UIViewController.Type
-//        let vc = type?.init(nibName: name, bundle: nil)
-//        return vc
+        let type = UIViewController.fullClassName(name) as? UIViewController.Type
+        if let vc = type?.init(nibName: name, bundle: nil) {
+            return vc
+        }
         let nibPath = NSBundle.mainBundle().pathForResource(name, ofType: "nib")
         if (nibPath != nil) {
             return NSObject.fromClassName(name) as? UIViewController
