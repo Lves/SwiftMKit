@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import CocoaLumberjack
 
-public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , WebViewToolsPannelViewDelegate{
+public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate{
     public var webView: UIWebView?
     public var webViewBridge: WebViewBridge?
     
@@ -22,7 +22,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         get { return nil }
     }
     
-    var webViewToolsPannelView :WebViewToolsPannelView?
+    var webViewToolsPannelView :SharePannelView?
     
     public override func setupUI() {
         super.setupUI()
@@ -135,14 +135,14 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public func click_nav_more(sender: UIBarButtonItem) {
         
         
-        webViewToolsPannelView = WebViewToolsPannelView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64))
+        webViewToolsPannelView = SharePannelView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64))
         webViewToolsPannelView?.delegate = self
         webViewToolsPannelView!.headerView = getToolMoreHeaderView()
         webViewToolsPannelView!.toolsArray =
             [[
-                ToolsModel(image: "Action_Safari", highlightedImage: "Action_Safari", title: "在Safari中\n打开", used: .OpenBySafari),
-                ToolsModel(image: "more_icon_link", highlightedImage: "more_icon_link", title: "复制链接", used: .CopyLink),
-                ToolsModel(image: "Action_Refresh", highlightedImage: "Action_Refresh", title: "刷新", used: .WebRefresh)]]
+                ToolsModel(image: "pannel_icon_safari", highlightedImage: "pannel_icon_safari", title: "在Safari中\n打开", used: .OpenBySafari),
+                ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接", used: .CopyLink),
+                ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新", used: .WebRefresh)]]
         
         self.navigationController?.view.addSubview(webViewToolsPannelView!)
     }
@@ -150,7 +150,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     
     //MARK : - WebViewToolsPannelViewDelegate
-    func webViewToolsPannelViewButtonAction(webViewToolsPannelView: WebViewToolsPannelView, model: ToolsModel) {
+    func sharePannelViewButtonAction(webViewToolsPannelView: SharePannelView, model: ToolsModel) {
         switch model.used {
         case .OpenBySafari:
             UIApplication.sharedApplication().openURL((webView?.request?.URL)!)
