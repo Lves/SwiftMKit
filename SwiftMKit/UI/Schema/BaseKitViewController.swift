@@ -32,6 +32,22 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
     public var viewModel: BaseKitViewModel? {
         get { return nil }
     }
+    private var _forbiddenSwipBackGesture: Bool?
+    /// 禁用滑动返回
+    var forbiddenSwipBackGesture: Bool {
+        get {
+            if _forbiddenSwipBackGesture == nil {
+                if let enable = navigationController?.interactivePopGestureRecognizer?.enabled {
+                    _forbiddenSwipBackGesture = !enable
+                }
+            }
+            return _forbiddenSwipBackGesture ?? false
+        }
+        set {
+            _forbiddenSwipBackGesture = newValue
+            navigationController?.interactivePopGestureRecognizer?.enabled = !newValue
+        }
+    }
     
     
     public let screenW: CGFloat = UIScreen.mainScreen().bounds.w
@@ -118,7 +134,7 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if (gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer) {
             //只有二级以及以下的页面允许手势返回
-            return self.navigationController?.viewControllers.count > 1
+            return self.navigationController?.viewControllers.count > 1 && !forbiddenSwipBackGesture
         }
         return true
     }
@@ -135,18 +151,6 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
 }
 
 public extension UIViewController {
-        /// 禁用滑动返回
-    var forbiddenSwipBackGesture: Bool {
-        get {
-            if let enable = navigationController?.interactivePopGestureRecognizer?.enabled {
-                return !enable
-            }
-            return false
-        }
-        set {
-            navigationController?.interactivePopGestureRecognizer?.enabled = !newValue
-        }
-    }
 }
 
 //HUD
