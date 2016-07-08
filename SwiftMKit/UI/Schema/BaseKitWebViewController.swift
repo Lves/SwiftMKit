@@ -21,6 +21,9 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public var moreUrlTitle: String? {
         get { return nil }
     }
+    public var showNavRightToolPannelItem: Bool {
+        return true
+    }
     
     var webViewToolsPannelView :SharePannelView?
     
@@ -42,8 +45,12 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if let btnBack = navBtnBack() {
             self.navigationItem.leftBarButtonItems = [btnBack]
         }
-        if let btnMore : UIBarButtonItem = navBtnMore() {
-            self.navigationItem.rightBarButtonItem = btnMore
+        if showNavRightToolPannelItem {
+            if let btnMore : UIBarButtonItem = navBtnMore() {
+                self.navigationItem.rightBarButtonItem = btnMore
+            }
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
     public override func loadData() {
