@@ -23,6 +23,9 @@ public class NetError : NSError {
         if message.length == 0 {
             self.message = "网络异常"
         }
+        if message.contains("<html") {
+            self.message = "网络异常"
+        }
         super.init(domain: "NetError", code: statusCode, userInfo: ["message":message])
     }
     convenience init(error: NSError){
