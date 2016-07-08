@@ -20,7 +20,7 @@ public class PushManager: NSObject {
             DDLogInfo("[PushManager] 收到推送消息")
             DDLogInfo("[PushManager] \(pushUserInfo)")
             let title = "消息推送"
-            let message : String? = userInfo["aps"]["alert"]
+            let message : String? = userInfo["aps"]?["alert"] as? String
             if let message = message {
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "我知道了", style: .Cancel, handler: nil))
