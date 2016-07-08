@@ -10,11 +10,13 @@ import Foundation
 import UIKit
 import PINCache
 import CocoaLumberjack
+import AdSupport
 
 public extension UIDevice {
     
     private struct Constant {
         static let UUIDString = "UUIDString"
+        static let IDFAString = "IDFAString"
         static let DeviceName = "DeviceName"
     }
     
@@ -26,9 +28,23 @@ public extension UIDevice {
                 DDLogInfo("UUID: \(id)")
                 return id
             }
-            let id = UIDevice.currentDevice().identifierForVendor!.UUIDString
-            DocumentCache.sharedCache().setObject(id, forKey: Constant.UUIDString)
+            let id = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? ""
+            if id.length > 0 {
+                DocumentCache.sharedCache().setObject(id, forKey: Constant.UUIDString)
+            }
             DDLogInfo("UUID: \(id)")
+            return id
+        }
+    }
+    var idfa: String {
+        get {
+            if let id = DocumentCache.sharedCache().objectForKey(Constant.IDFAString) as? String {
+                DDLogInfo("IDFA: \(id)")
+                return id
+            }
+            let id = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString
+            DocumentCache.sharedCache().setObject(id, forKey: Constant.IDFAString)
+            DDLogInfo("IDFA: \(id)")
             return id
         }
     }
