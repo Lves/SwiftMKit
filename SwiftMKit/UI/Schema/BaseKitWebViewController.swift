@@ -13,6 +13,11 @@ import CocoaLumberjack
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate{
     public var webView: UIWebView?
     public var webViewBridge: WebViewBridge?
+    public var webViewUserAgent: [String: AnyObject]? {
+        didSet {
+            webViewBridge?.userAgent = webViewUserAgent
+        }
+    }
     
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
