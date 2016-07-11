@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import CocoaLumberjack
 
 public class BaseListKitViewModel: BaseKitViewModel {
     private struct InnerConstant {
@@ -22,7 +23,18 @@ public class BaseListKitViewModel: BaseKitViewModel {
     public var listIndicator: IndicatorListProtocol {
         get { return self.listViewController.listIndicator }
     }
-    var dataSource:Array<AnyObject> = Array<AnyObject>() {
+    var dataArray:[AnyObject] {
+        get {
+            if dataSource.first == nil {
+                dataSource.append([AnyObject]())
+            }
+            return dataSource.first!
+        }
+        set {
+            dataSource = [newValue]
+        }
+    }
+    var dataSource:[[AnyObject]] = [[AnyObject]]() {
         didSet {
             if self.viewController == nil {
                 return
@@ -32,45 +44,64 @@ public class BaseListKitViewModel: BaseKitViewModel {
                 return
             }
             var noMoreDataTip = InnerConstant.StringNoMoreDataTip
-            let count: UInt = UInt(dataSource.count)
+            var count: UInt = UInt(dataSource.count)
+            if count == 1 {
+                count = UInt(dataSource.first?.count ?? 0)
+            }
+            var oldCount: UInt = UInt(oldValue.count)
+            if oldCount == 1 {
+                oldCount = UInt(oldValue.first?.count ?? 0)
+            }
             if count == 0 {
                 self.viewController.showEmptyView()
-                self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
+                self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
                 return
             }
-            if oldValue.count == 0 {
+            if oldCount == 0 {
                 self.viewController.hideEmptyView()
-                self.listViewController.listView.mj_footer.resetNoMoreData()
             }
             if count < listLoadNumber {
-                self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
+                self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
-            }else if count % listLoadNumber > 0 || count >= listMaxNumber {
-                self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
+            }else if count % listLoadNumber > 0 || count >= listMaxNumber || (count == oldCount && dataIndex > 0) {
+                self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
+            } else {
+                self.listViewController.listView?.mj_footer.resetNoMoreData()
             }
-            if let footer = self.listViewController.listView.mj_footer as? MJRefreshAutoStateFooter {
+            if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
                 footer.setTitle(noMoreDataTip, forState: .NoMoreData)
             }
         }
     }
     var dataIndex: UInt = 0
-    let listLoadNumber: UInt = 20
-    let listMaxNumber: UInt = UInt.max
+    var listLoadNumber: UInt { get { return 20 } }
+    var listMaxNumber: UInt { get { return UInt.max } }
     
-    public func updateDataSource(newData: Array<AnyObject>?) {
+    public func updateDataArray(newData: [AnyObject]?) {
         if let data = newData {
             if dataIndex == 0 {
-                dataSource = data
+                dataArray = data
             } else {
-                dataSource += data
+                dataArray += data
             }
         } else {
             if dataIndex == 0 {
-                dataSource = []
+                dataArray = []
             }
         }
-        let tableView = self.listViewController?.listView as? UITableView
-        tableView?.reloadData()
+        if let table = self.listViewController.listView as? UITableView {
+            table.reloadData()
+        } else if let collect = self.listViewController.listView as? UICollectionView {
+            collect.reloadData()
+        }
+    }
+    public func updateDataSource(newData: [[AnyObject]]?) {
+        dataSource = newData ?? [[AnyObject]]()
+        if let table = self.listViewController.listView as? UITableView {
+            table.reloadData()
+        } else if let collect = self.listViewController.listView as? UICollectionView {
+            collect.reloadData()
+        }
     }
 }

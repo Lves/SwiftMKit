@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import WebViewJavascriptBridge
 import SnapKit
+import EZSwiftExtensions
 import CocoaLumberjack
 
 public class WebViewBridge : NSObject {

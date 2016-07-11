@@ -38,39 +38,30 @@ public class BaseListFetchKitViewController: BaseListKitViewController {
         listFetchViewModel.fetchCachedData()
     }
     
-    public func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        DDLogError("Need to implement the function of 'getCellWithTableView'")
-        return nil
-    }
-    public func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-        DDLogError("Need to implement the function of 'configureCell'")
-    }
-    public func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-    }
-    public func objectByIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+    override public func objectByIndexPath(indexPath: NSIndexPath) -> AnyObject? {
         let object = fetchedResultsController?.sections?[indexPath.section].objects?[safe: indexPath.row]
         return object
     }
     
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let sections = fetchedResultsController?.sections?.count
         return sections ?? 0
     }
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
         if fetchedResultsController?.sections?.count > 0 {
             rows = fetchedResultsController?.sections?[section].numberOfObjects ?? 0
         }
         return rows
     }
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = getCellWithTableView(tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             configureCell(cell, object: object, indexPath: indexPath)
         }
         return cell
     }
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let cell = getCellWithTableView(tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {

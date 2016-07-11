@@ -16,7 +16,7 @@ class MKDataNetworkRequestViewModel: BaseListViewModel {
             return PX500PopularPhotosApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listIndicator).signal().on(
                 next: { [weak self] data in
                     if let photos = data.photos {
-                        self?.updateDataSource(photos)
+                        self?.updateDataArray(photos)
                     }
                 },
                 failed: { [weak self] error in

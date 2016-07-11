@@ -43,18 +43,20 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         super.loadData()
         self.listView.mj_header.beginRefreshing()
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _viewModel.dataSource.count
+    
+    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
+        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKDataNetworkRequestTableViewCell
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKDataNetworkRequestTableViewCell
-        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
-        cell?.photoModel = model
-        return cell!
+    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        if let cell = tableViewCell as? MKDataNetworkRequestTableViewCell {
+            if let model = object as? MKDataNetworkRequestPhotoModel {
+                cell.photoModel = model
+            }
+        }
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model = _viewModel.dataSource[indexPath.row] as? MKDataNetworkRequestPhotoModel
-        self.routeToName(InnerConst.SegueToNext, params: ["photoId":model!.photoId!])
+    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+        if let model = object as? MKDataNetworkRequestPhotoModel {
+            self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId!])
+        }
     }
 }
