@@ -16,7 +16,7 @@
 #import "NSString+MJExtension.h"
 #import "NSObject+MJClass.h"
 
-//Add by Cdts
+// ModifySourceCode Add by Cdts
 @interface NSManagedObject (PrimaryKey)
 + (NSString *)primaryKeyPropertyName;
 @end
@@ -140,10 +140,10 @@ static NSNumberFormatter *numberFormatter_;
                 value = [NSMutableData dataWithData:value];
             }
             
-            /* remove by Cdts
+            /* ModifySourceCode remove by Cdts
             if (!type.isFromFoundation && propertyClass) { // 模型属性
              */
-            //Add by Cdts
+            // ModifySourceCode Add by Cdts
             if (!type.isFromFoundation && propertyClass && propertyClass != [NSOrderedSet class]) {
                 //Finish add
                 value = [propertyClass mj_objectWithKeyValues:value context:context];
@@ -159,7 +159,7 @@ static NSNumberFormatter *numberFormatter_;
                 } else { // 字典数组-->模型数组
                     value = [objectClass mj_objectArrayWithKeyValuesArray:value context:context];
                     
-                    //Add by Cdts
+                    // ModifySourceCode Add by Cdts
                     if ((propertyClass == [NSOrderedSet class] || propertyClass == [NSSet class]) && [self isKindOfClass:[NSManagedObject class]]) {
                         if (propertyClass == [NSOrderedSet class]) {
                             
@@ -263,10 +263,10 @@ static NSNumberFormatter *numberFormatter_;
     MJExtensionAssertError([keyValues isKindOfClass:[NSDictionary class]], nil, [self class], @"keyValues参数不是一个字典");
     
     if ([self isSubclassOfClass:[NSManagedObject class]] && context) {
-        /* Remove by Cdts
+        /* ModifySourceCode Remove by Cdts
          return [[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context] mj_setKeyValues:keyValues context:context];
          */
-        //Add by Cdts
+        // ModifySourceCode Add by Cdts
         NSManagedObject *obj = nil;
         NSString *pkProperyName = [NSManagedObject primaryKeyPropertyName];
         NSString *key = [[[self class] mj_replacedKeyFromPropertyName] objectForKey:pkProperyName];

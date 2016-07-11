@@ -37,12 +37,7 @@ public class BaseListFetchKitViewModel: BaseListKitViewModel {
             do {
                 try fetchedController.performFetch()
                 DDLogInfo("FetchedResultsController found \(fetchedController.fetchedObjects?.count) objects")
-                self.updateDataSource(fetchedController.fetchedObjects)
-                if let table = listFetchViewController.listView as? UITableView {
-                    table.reloadData()
-                } else if let collect = listFetchViewController.listView as? UICollectionView {
-                    collect.reloadData()
-                }
+                self.updateDataArray(fetchedController.fetchedObjects)
             } catch let error as NSError{
                 DDLogError("\(logPrefix) perform fetch: failed. reason: \(error.localizedDescription) (\(error.localizedFailureReason))")
             } catch {

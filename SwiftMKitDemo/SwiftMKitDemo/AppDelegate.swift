@@ -21,10 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         setenv("XcodeColors", "YES", 0);
+        DemoNetworkConfig.Release = false
+        DemoNetworkConfig.Evn = .Product
         DDLog.setup(.Debug)
         MagicalRecord.setupCoreDataStack()
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        NetApiClient.shared.startNotifyNetworkStatus()
         return true
     }
 

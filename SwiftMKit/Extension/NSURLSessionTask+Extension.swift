@@ -14,7 +14,7 @@ private var indicatorViewAssociationKey: UInt8 = 0
 private var indicatorTextAssociationKey: UInt8 = 0
 
 extension NSURLSessionTask {
-    var indicatorView: UIView! {
+    var indicatorView: UIView? {
         get {
             return objc_getAssociatedObject(self, &indicatorViewAssociationKey) as? UIView
         }
@@ -22,7 +22,7 @@ extension NSURLSessionTask {
             objc_setAssociatedObject(self, &indicatorViewAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
-    var indicatorText: String! {
+    var indicatorText: String? {
         get {
             return objc_getAssociatedObject(self, &indicatorTextAssociationKey) as? String
         }

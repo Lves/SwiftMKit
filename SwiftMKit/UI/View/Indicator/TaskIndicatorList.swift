@@ -16,9 +16,9 @@ import MJRefresh
 public class TaskIndicatorList: NSObject, IndicatorListProtocol {
     private weak var listView: UIScrollView?
     private weak var viewModel: BaseListKitViewModel?
-    lazy private var runningTasks = [NSURLSessionTask]()
+    lazy public var runningTasks = [NSURLSessionTask]()
     
-    init(listView: UIScrollView, viewModel: BaseListKitViewModel){
+    init(listView: UIScrollView?, viewModel: BaseListKitViewModel){
         self.listView = listView
         self.viewModel = viewModel
         super.init()
@@ -54,10 +54,8 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         DDLogVerbose("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
-            if self.viewModel?.dataIndex == 0 {
-                self.listView?.mj_header.endRefreshing()
-            }else{
-                self.listView?.mj_footer.endRefreshing()
+            if self.viewModel != nil {
+                self.endRefresh()
             }
         }
     }
@@ -65,10 +63,8 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         DDLogVerbose("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         Async.main {
-            if self.viewModel?.dataIndex == 0 {
-                self.listView?.mj_header.endRefreshing()
-            }else{
-                self.listView?.mj_footer.endRefreshing()
+            if self.viewModel != nil {
+                self.endRefresh()
             }
         }
     }
@@ -81,9 +77,16 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
             }
         }
         Async.main {
-            if self.viewModel?.dataIndex == 0 {
-                self.listView?.mj_header.endRefreshing()
-            }else{
+            if self.viewModel != nil {
+                self.endRefresh()
+            }
+        }
+    }
+    func endRefresh() {
+        if self.viewModel?.dataIndex == 0 {
+            self.listView?.mj_header.endRefreshing()
+        }else{
+            if self.listView?.mj_footer.state == .Refreshing {
                 self.listView?.mj_footer.endRefreshing()
             }
         }
@@ -97,7 +100,9 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
             task.cancel()
             let info = ["task": task] as NSDictionary
             let notify = NSNotification(name: "", object: info)
-            self.task_list_cancel(notify)
+            if self.viewModel != nil {
+                self.task_list_cancel(notify)
+            }
         }
     }
     

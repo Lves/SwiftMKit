@@ -40,13 +40,13 @@ public class NetApiData: NSObject {
     }
     class public func addApi(api: NetApiData) {
         sharedInstance.runningApis.append(api)
-        DDLogDebug("[Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
+        DDLogDebug("[NetApi] [Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     class public func removeApi(api: NetApiData) {
         if let index = sharedInstance.runningApis.indexOf(api) {
             sharedInstance.runningApis.removeAtIndex(index)
         }
-        DDLogDebug("[Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
+        DDLogDebug("[NetApi] [Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     
     // MARK: Request
@@ -65,7 +65,7 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
-                    let err = NetError(error: error)
+                    let err = error is NetError ? error as! NetError : NetError(error: error)
                     if let statusCode =  StatusCode(rawValue:err.statusCode) {
                         switch(statusCode) {
                         case .Canceled:
@@ -75,7 +75,6 @@ public class NetApiData: NSObject {
                             break
                         }
                     }
-                    DDLogError("\(error)")
                     sink.sendFailed(err)
                 }
                 NetApiData.removeApi(self)
@@ -98,7 +97,7 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
-                    let err = NetError(error: error)
+                    let err = error is NetError ? error as! NetError : NetError(error: error)
                     DDLogError("\(error)")
                     sink.sendFailed(err)
                 }
@@ -122,7 +121,7 @@ public class NetApiData: NSObject {
                         sink.sendCompleted()
                     }
                 case .Failure(let error):
-                    let err = NetError(error: error)
+                    let err = error is NetError ? error as! NetError : NetError(error: error)
                     DDLogError("\(error)")
                     sink.sendFailed(err)
                 }
@@ -140,11 +139,12 @@ public class NetApiData: NSObject {
         var mutableURLRequest = NSMutableURLRequest(URL: url)
         mutableURLRequest.HTTPMethod = method.rawValue
         mutableURLRequest.timeoutInterval = api.timeout ?? NetApiDataConst.DefaultTimeoutInterval
-        mutableURLRequest = api.transferURLRequest(mutableURLRequest)
         let parameterString = parameters.stringFromHttpParameters()
-        DDLogInfo("Request Url: \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
-        let encoding = Alamofire.ParameterEncoding.URL
-        return encoding.encode(mutableURLRequest, parameters: parameters).0
+        DDLogInfo("[NetApi] Request Url: \(method.rawValue) \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
+        let encoding = api.transferParameterEncoding()
+        mutableURLRequest = encoding.encode(mutableURLRequest, parameters: parameters).0
+        mutableURLRequest = api.transferURLRequest(mutableURLRequest)
+        return mutableURLRequest
     }
     
     class public func combineQuery(base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {
