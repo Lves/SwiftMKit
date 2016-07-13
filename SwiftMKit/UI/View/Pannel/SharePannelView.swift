@@ -53,7 +53,7 @@ public class ToolsModel{
 }
 
 // MARK: -
-class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
+public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     
     struct InnerConstant {
         static let BackgroundViewAlpha : CGFloat = 0.6
