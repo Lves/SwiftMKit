@@ -155,13 +155,8 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
                 ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接", used: .CopyLink),
                 ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新", used: .WebRefresh)]]
         
-//        self.navigationController?.view.addSubview(webViewToolsPannelView!)
-
-        let shareView : ShareView = ShareView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64))
-        shareView.setShareView(viewController: self, shareTitle: "标题", shareText: "文本", shareImg: "icon", shareUrl: "url", resourceUrl: "", resourceType: UMSocialUrlResourceTypeDefault, wxMessageType: UMSocialWXMessageTypeNone)
-        self.navigationController?.view.addSubview(shareView)
+        self.navigationController?.view.addSubview(webViewToolsPannelView!)
     }
-    
     
     //MARK : - WebViewToolsPannelViewDelegate
     func sharePannelViewButtonAction(webViewToolsPannelView: SharePannelView, model: ToolsModel) {
