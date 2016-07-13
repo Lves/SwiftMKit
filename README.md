@@ -11,9 +11,6 @@ array[safe: index]
 ---
 
 ####升级Pod的时候需要注意的问题
-#####MBProgressHUD
-
-+ 从Git上下载最新的代码覆盖
 
 #####MJExtension 
 + 在NSObject+MJKeyValue文件的顶部增加如下代码：

@@ -13,6 +13,11 @@ import CocoaLumberjack
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate{
     public var webView: UIWebView?
     public var webViewBridge: WebViewBridge?
+    public var webViewUserAgent: [String: AnyObject]? {
+        didSet {
+            webViewBridge?.userAgent = webViewUserAgent
+        }
+    }
     
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
@@ -26,6 +31,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     }
     
     var webViewToolsPannelView :SharePannelView?
+//    var shareView : ShareView?
     
     public override func setupUI() {
         super.setupUI()
@@ -141,7 +147,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     }
     public func click_nav_more(sender: UIBarButtonItem) {
         
-        
         webViewToolsPannelView = SharePannelView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64))
         webViewToolsPannelView?.delegate = self
         webViewToolsPannelView!.headerView = getToolMoreHeaderView()
@@ -151,7 +156,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
                 ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接", used: .CopyLink),
                 ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新", used: .WebRefresh)]]
         
-        self.navigationController?.view.addSubview(webViewToolsPannelView!)
+//        self.navigationController?.view.addSubview(webViewToolsPannelView!)
+        
+//        shareView = ShareView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64), shareTitle: "标题", shareText: "文本", shareImg: "pannel_icon_safari", shareUrl: moreUrlTitle ?? "URL")
+//        
+//        self.navigationController?.view.addSubview(shareView!)
     }
     
     
