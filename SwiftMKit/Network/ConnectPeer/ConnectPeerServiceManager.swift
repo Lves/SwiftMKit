@@ -51,7 +51,7 @@ class ConnectPeerServiceManager : NSObject {
         return session
     }()
     
-    func sendData(data : String) {
+    func sendDataString(data : String) {
         if let dataString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             sendData(dataString)
         }
