@@ -13,7 +13,7 @@ import CocoaLumberjack
 protocol ConnectPeerServiceManagerDelegate {
     
     func connectedDevicesChanged(manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID])
-    func dataReceived(manager : ConnectPeerServiceManager, data: String)
+    func dataReceived(manager : ConnectPeerServiceManager, data: NSData, dataString: String)
     
 }
 class ConnectPeerServiceManager : NSObject {
@@ -52,14 +52,16 @@ class ConnectPeerServiceManager : NSObject {
     }()
     
     func sendData(data : String) {
+        if let dataString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+            sendData(dataString)
+        }
+    }
+    func sendData(data : NSData) {
         DDLogVerbose("%@", "sendData: \(data)")
         
         if session.connectedPeers.count > 0 {
-            if let data = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-                let _ = try? self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            }
+            let _ = try? self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
         }
-        
     }
     
 }
@@ -116,7 +118,7 @@ extension ConnectPeerServiceManager : MCSessionDelegate {
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         DDLogVerbose("%@", "didReceiveData: \(data.length) bytes")
         let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-        self.delegate?.dataReceived(self, data: str)
+        self.delegate?.dataReceived(self, data: data, dataString: str)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
