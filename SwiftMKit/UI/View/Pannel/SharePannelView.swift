@@ -15,11 +15,11 @@ protocol SharePannelViewDelegate: class {
     func sharePannelViewButtonAction(SharePannelView: SharePannelView, model: ToolsModel)
 }
 
-private protocol ToolsPannelScrollViewDelegate: class {
+public protocol ToolsPannelScrollViewDelegate: class {
     func toolsPannelScrollViewButtonAction(toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel)
 }
 
-enum ToolUsed : Int {
+public enum ToolUsed : Int {
     case Default
     case ShareToSina
     case ShareToQQ
@@ -27,7 +27,7 @@ enum ToolUsed : Int {
     case ShareToWeixin
     case ShareToTimeLine
     case ShareToZhifubao
-    case ShareToMms
+    case ShareToSms
     case ShareToEmail
     case Collection
     case CopyLink
@@ -235,7 +235,7 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     }
     
     //MARK: Delegate
-    func toolsPannelScrollViewButtonAction(toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel) {
+    public func toolsPannelScrollViewButtonAction(toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel) {
         
         self.tappedCancel()
         
@@ -246,7 +246,7 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
 }
 
 
-class ToolsPannelScrollView: UIScrollView {
+public class ToolsPannelScrollView: UIScrollView {
     
     struct InnerConstant {
         static let OriginX : CGFloat = 15.0 //ico起点X坐标
@@ -294,7 +294,7 @@ class ToolsPannelScrollView: UIScrollView {
         setupUI()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }
