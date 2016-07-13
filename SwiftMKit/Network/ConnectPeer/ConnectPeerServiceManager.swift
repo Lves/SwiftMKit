@@ -57,7 +57,7 @@ class ConnectPeerServiceManager : NSObject {
         }
     }
     func sendData(data : NSData) {
-        DDLogVerbose("%@", "sendData: \(data)")
+        DDLogVerbose("[ConnectPeerServiceManager] SendData: \(data)")
         
         if session.connectedPeers.count > 0 {
             let _ = try? self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
@@ -70,10 +70,10 @@ class ConnectPeerServiceManager : NSObject {
 extension ConnectPeerServiceManager : MCNearbyServiceAdvertiserDelegate {
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
-        DDLogError("%@", "didNotStartAdvertisingPeer: \(error)")
+        DDLogError("[ConnectPeerServiceManager] DidNotStartAdvertisingPeer: \(error)")
     }
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
-        DDLogInfo("%@", "didReceiveInvitationFromPeer \(peerID)")
+        DDLogInfo("[ConnectPeerServiceManager] DidReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
     }
     
@@ -82,16 +82,16 @@ extension ConnectPeerServiceManager : MCNearbyServiceAdvertiserDelegate {
 extension ConnectPeerServiceManager : MCNearbyServiceBrowserDelegate {
     
     func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError) {
-        DDLogError("%@", "didNotStartBrowsingForPeers: \(error)")
+        DDLogError("[ConnectPeerServiceManager] DidNotStartBrowsingForPeers: \(error)")
     }
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        DDLogInfo("%@", "foundPeer: \(peerID)")
-        DDLogInfo("%@", "invitePeer: \(peerID)")
+        DDLogInfo("[ConnectPeerServiceManager] FoundPeer: \(peerID)")
+        DDLogInfo("[ConnectPeerServiceManager] InvitePeer: \(peerID)")
         browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 10)
     }
     
     func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        DDLogWarn("%@", "lostPeer: \(peerID)")
+        DDLogWarn("[ConnectPeerServiceManager] LostPeer: \(peerID)")
     }
     
 }
@@ -111,26 +111,26 @@ extension MCSessionState {
 extension ConnectPeerServiceManager : MCSessionDelegate {
     
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
-        DDLogInfo("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
+        DDLogInfo("[ConnectPeerServiceManager] Peer \(peerID) didChangeState: \(state.stringValue())")
         self.delegate?.connectedDevicesChanged(self, connectedDevices: session.connectedPeers)
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
-        DDLogVerbose("%@", "didReceiveData: \(data.length) bytes")
+        DDLogVerbose("[ConnectPeerServiceManager] DidReceiveData: \(data.length) bytes")
         let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
         self.delegate?.dataReceived(self, data: data, dataString: str)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        DDLogVerbose("%@", "didReceiveStream")
+        DDLogVerbose("[ConnectPeerServiceManager] DidReceiveStream")
     }
     
     func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {
-        DDLogVerbose("%@", "didFinishReceivingResourceWithName")
+        DDLogVerbose("[ConnectPeerServiceManager] DidFinishReceivingResourceWithName")
     }
     
     func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {
-        DDLogVerbose("%@", "didStartReceivingResourceWithName")
+        DDLogVerbose("[ConnectPeerServiceManager] DidStartReceivingResourceWithName")
     }
     
 }
