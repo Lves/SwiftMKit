@@ -22,6 +22,18 @@ public class WebViewBridge : NSObject {
     }
     public weak var viewController: UIViewController?
     lazy public var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    public var userAgent: [String: AnyObject]? {
+        didSet {
+            if var userAgent = userAgent {
+                let view = UIWebView()
+                let ua = view.stringByEvaluatingJavaScriptFromString("navigator.userAgent") ?? ""
+                if !ua.contains("WebViewBridgeInjected") {
+                    userAgent["WebViewBridgeInjected"] = true
+                    NSUserDefaults.standardUserDefaults().registerDefaults(userAgent)
+                }
+            }
+        }
+    }
     private var bridge: WebViewJavascriptBridge
     
     init(webView: UIWebView, viewController: UIViewController) {

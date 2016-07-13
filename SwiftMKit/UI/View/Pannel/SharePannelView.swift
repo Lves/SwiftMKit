@@ -53,7 +53,7 @@ public class ToolsModel{
 }
 
 // MARK: -
-class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
+public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     
     struct InnerConstant {
         static let BackgroundViewAlpha : CGFloat = 0.6
@@ -135,7 +135,7 @@ class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
         setupUI(frame)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI(frame)
     }
@@ -179,12 +179,12 @@ class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override public func drawRect(rect: CGRect) {
         // Drawing code
         
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         var height : CGFloat = 0
