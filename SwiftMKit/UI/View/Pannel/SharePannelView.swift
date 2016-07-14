@@ -24,7 +24,7 @@ public enum ToolUsed : Int {
     case ShareToSina
     case ShareToQQ
     case ShareToQZone
-    case ShareToWeixin
+    case ShareToWeChat
     case ShareToTimeLine
     case ShareToZhifubao
     case ShareToSms
