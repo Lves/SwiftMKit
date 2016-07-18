@@ -202,6 +202,7 @@
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
 		43CC82F5C77782D0B2A6DC45 /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A25C9D30F5D5F1B21DE02C20 /* Pods_SwiftMKitDemoUITests.framework */; };
+		6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51A9E51D3C853C006EF254 /* SharePannelView.swift */; };
 		6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */; };
 		6C724B3C1D0FCF0100CD5608 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */; };
 		6C724B3D1D0FCF0100CD5608 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B3A1D0FCF0100CD5608 /* UILabel+Extension.swift */; };
@@ -236,7 +237,6 @@
 		6CEFCB7F1D3485F3008B3382 /* pannel_icon_zhifubao_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB5F1D3485F3008B3382 /* pannel_icon_zhifubao_friend@2x.png */; };
 		6CEFCB801D3485F3008B3382 /* pannel_icon_zhifubao_friend_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB601D3485F3008B3382 /* pannel_icon_zhifubao_friend_h@2x.png */; };
 		6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB611D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png */; };
-		6CEFCB821D3485F3008B3382 /* SharePannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEFCB621D3485F3008B3382 /* SharePannel.swift */; };
 		FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445D921CF2E47400A391E6 /* Double+Extension.swift */; };
 		FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A331CF3F983001C493A /* PasswordPannel.swift */; };
 		FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A391CF42983001C493A /* PasswordTextView.swift */; };
@@ -478,6 +478,7 @@
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		64B2F8BF5DF36706305FE527 /* Pods-SwiftMKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		6C51A9E51D3C853C006EF254 /* SharePannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharePannelView.swift; path = icons/SharePannelView.swift; sourceTree = "<group>"; };
 		6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+Extension.swift"; sourceTree = "<group>"; };
 		6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		6C724B3A1D0FCF0100CD5608 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -512,7 +513,6 @@
 		6CEFCB5F1D3485F3008B3382 /* pannel_icon_zhifubao_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pannel_icon_zhifubao_friend@2x.png"; sourceTree = "<group>"; };
 		6CEFCB601D3485F3008B3382 /* pannel_icon_zhifubao_friend_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pannel_icon_zhifubao_friend_h@2x.png"; sourceTree = "<group>"; };
 		6CEFCB611D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pannel_icon_zhifubao_h@2x.png"; sourceTree = "<group>"; };
-		6CEFCB621D3485F3008B3382 /* SharePannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePannel.swift; sourceTree = "<group>"; };
 		7C7723D27494CB74DD4A035C /* Pods-SwiftMKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A25C9D30F5D5F1B21DE02C20 /* Pods_SwiftMKitDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2EACE261625DB5B8216DBC /* Pods-SwiftMKitDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1179,8 +1179,8 @@
 		6CEFCB411D3485F3008B3382 /* Pannel */ = {
 			isa = PBXGroup;
 			children = (
+				6C51A9E51D3C853C006EF254 /* SharePannelView.swift */,
 				6CEFCB421D3485F3008B3382 /* icons */,
-				6CEFCB621D3485F3008B3382 /* SharePannel.swift */,
 			);
 			path = Pannel;
 			sourceTree = "<group>";
@@ -1584,7 +1584,6 @@
 				270692CB1CE9F27100CF211A /* CachePool.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
-				6CEFCB821D3485F3008B3382 /* SharePannel.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
@@ -1645,6 +1644,7 @@
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
+				6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */,
 				27959A4E1CD3447100546424 /* MKUIViewModel.swift in Sources */,
 				18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
