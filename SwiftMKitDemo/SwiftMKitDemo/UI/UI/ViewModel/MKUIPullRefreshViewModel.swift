@@ -7,7 +7,28 @@
 //
 
 import UIKit
+import ReactiveCocoa
+class MKUIPullRefreshViewModel: BaseListViewModel {
+    
+    
+    private var signalRequest: SignalProducer<PX500PopularPhotosApiData, NetError> {
+        get {
+            return PX500PopularPhotosApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listIndicator).signal().on(
+                next: { [weak self] data in
+                    if let photos = data.photos {
+                        self?.updateDataArray(photos)
+                    }
+                },
+                failed: { [weak self] error in
+                    self?.showTip(error.message)
+                })
+        }
+    }
+    
+    override func fetchData() {
 
-class MKUIPullRefreshViewModel: BaseViewModel {
+        self.signalRequest.start()
+  
+    }
 
 }

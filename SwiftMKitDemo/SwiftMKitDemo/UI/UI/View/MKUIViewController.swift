@@ -16,6 +16,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         static let SegueToNextIQKeyboardManager = "routeToIQKeyboardManager"
         static let SegueToNextSideView = "routeToSideView"
         static let SegueToNextChartView = "routeToChartView"
+        static let SegueToPullRefresh = "PullToRefresh"
         static let SegueToNextKeyboardView = "routeToKeyboardView"
         static let SegueToNextSegmentViewController = "routeToSegmentViewController"
         static let SegueToNextGesturePasswordView = "routeToGesturePassword"
@@ -78,6 +79,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.routeToName(InnerConst.SegueToNextCustomAlertView)
         case 11:
             self.routeToName(InnerConst.SegueToNextCoverFlowView)
+        case 12:
+            self.routeToName(InnerConst.SegueToPullRefresh)
         default:
             break
         }

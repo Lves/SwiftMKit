@@ -25,6 +25,7 @@ class MKUIViewModel: BaseListViewModel {
         
         self.dataArray.append(MKDataListModel(title: "AlertView", detail: "Show Alert View"))
         self.dataArray.append(MKDataListModel(title: "CoverFlowView", detail: "Show CoverFlow View"))
+        self.dataArray.append(MKDataListModel(title: "Pull Refresh", detail: "Custom Refresh Header"))
 
     }
 
