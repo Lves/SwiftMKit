@@ -12,8 +12,8 @@ import CocoaLumberjack
 
 protocol ConnectPeerServiceManagerDelegate {
     
-    func connectedDevicesChanged(manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID])
-    func dataReceived(manager : ConnectPeerServiceManager, data: NSData, dataString: String)
+    func connectedDeviceChanged(manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID], changedDevice: MCPeerID, changedState: MCSessionState)
+    func dataReceived(manager : ConnectPeerServiceManager, fromDevice: MCPeerID, data: NSData, dataString: String)
     
 }
 class ConnectPeerServiceManager : NSObject {
@@ -112,13 +112,13 @@ extension ConnectPeerServiceManager : MCSessionDelegate {
     
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
         DDLogInfo("[ConnectPeerServiceManager] Peer \(peerID) didChangeState: \(state.stringValue())")
-        self.delegate?.connectedDevicesChanged(self, connectedDevices: session.connectedPeers)
+        self.delegate?.connectedDeviceChanged(self, connectedDevices: session.connectedPeers, changedDevice: peerID, changedState: state)
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         DDLogVerbose("[ConnectPeerServiceManager] DidReceiveData: \(data.length) bytes")
         let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-        self.delegate?.dataReceived(self, data: data, dataString: str)
+        self.delegate?.dataReceived(self, fromDevice: peerID, data: data, dataString: str)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
