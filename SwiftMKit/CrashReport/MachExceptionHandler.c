@@ -13,7 +13,9 @@
 #include <stdbool.h>
 #include <mach/mach.h>
 #include <mach/exc.h>
+#include <sys/sysctl.h>
 #include <pthread.h>
+#include <unistd.h>
 
 // lldb also use mach exception port for debugging, therefore this implementation may affect debugging.
 // the crash handler installation will not continue if debugger being presented.
@@ -148,8 +150,19 @@ static void *machExceptionHandlerEntry(void *_) {
 
 #pragma mark - private functions
 
-bool debuggerPresent() {
-    return false;
+static bool debuggerPresent() {
+    struct kinfo_proc procInfo;
+    size_t pInfoSize = sizeof(procInfo);
+    int mib[] = { CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid() };
+    
+    int ret = sysctl(mib, sizeof(mib) / sizeof(*mib), &procInfo, &pInfoSize, NULL, 0);
+    if(ret != 0)
+    {
+        _MEDebugLog("sysctl: %s", strerror(errno));
+        return false;
+    }
+    
+    return (procInfo.kp_proc.p_flag & P_TRACED) != 0;
 }
 
 #pragma mark - export functions
