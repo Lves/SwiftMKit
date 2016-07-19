@@ -45,7 +45,9 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         DDLogVerbose("Task resume")
         UIApplication.sharedApplication().showNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
-            self.runningTasks.append(task)
+            if !self.runningTasks.contains(task) {
+                self.runningTasks.append(task)
+            }
             if let view = task.indicatorView {
                 Async.main {
                     self.hud?.showHUDAddedTo(view, animated: true, text: task.indicatorText)
@@ -57,6 +59,9 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         DDLogVerbose("Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
+            if let index = self.runningTasks.indexOf(task) {
+                self.runningTasks.removeAtIndex(index)
+            }
             if let view = task.indicatorView {
                 Async.main {
                     self.hud?.hideHUDForView(view, animated: true)
@@ -68,6 +73,9 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         DDLogVerbose("Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
         if let task = notify.object as? NSURLSessionTask {
+            if let index = self.runningTasks.indexOf(task) {
+                self.runningTasks.removeAtIndex(index)
+            }
             if let view = task.indicatorView {
                 Async.main {
                     self.hud?.hideHUDForView(view, animated: true)
