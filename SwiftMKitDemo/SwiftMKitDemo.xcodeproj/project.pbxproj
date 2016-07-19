@@ -499,6 +499,7 @@
 		576E13CB1D3DC70A00A948CE /* SwiftCrashReportProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReportProtocol.h; sourceTree = "<group>"; };
 		576E13CC1D3DC70A00A948CE /* SwiftCrashUmengReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashUmengReporter.h; sourceTree = "<group>"; };
 		576E13CD1D3DC70A00A948CE /* SwiftCrashUmengReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashUmengReporter.m; sourceTree = "<group>"; };
+		576E13D71D3DD51600A948CE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		64B2F8BF5DF36706305FE527 /* Pods-SwiftMKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6C51A9E51D3C853C006EF254 /* SharePannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePannelView.swift; sourceTree = "<group>"; };
 		6C51A9E71D3C8ABC006EF254 /* MKUIPullRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIPullRefresh.swift; sourceTree = "<group>"; };
@@ -983,6 +984,7 @@
 				3FC9DEF71CBFD35900C2D938 /* SwiftMKitDemo */,
 				3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */,
 				3FC9DF171CBFD35A00C2D938 /* SwiftMKitDemoUITests */,
+				576E13D51D3DD4D200A948CE /* Supporting Files */,
 				3FC9DEF61CBFD35900C2D938 /* Products */,
 				92606744023F345A76BD07D7 /* Frameworks */,
 				1475AF750074A357DCE423FD /* Pods */,
@@ -1221,6 +1223,23 @@
 				576E13CD1D3DC70A00A948CE /* SwiftCrashUmengReporter.m */,
 			);
 			path = CrashReport;
+			sourceTree = "<group>";
+		};
+		576E13D51D3DD4D200A948CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				576E13D61D3DD4E500A948CE /* ImportedModules */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		576E13D61D3DD4E500A948CE /* ImportedModules */ = {
+			isa = PBXGroup;
+			children = (
+				576E13D71D3DD51600A948CE /* module.modulemap */,
+			);
+			name = ImportedModules;
+			path = ../SwiftMKit/ImportedModules;
 			sourceTree = "<group>";
 		};
 		6CEFCB411D3485F3008B3382 /* Pannel */ = {
@@ -1931,6 +1950,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wildcat.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b681028-8e77-4acd-bd92-7b42f8cdd672";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1951,6 +1971,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wildcat.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b681028-8e77-4acd-bd92-7b42f8cdd672";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 			};
 			name = Release;

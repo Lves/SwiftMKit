@@ -1,3 +1,4 @@
+# coding: utf-8
 Pod::Spec.new do |s|  
   s.name             = "SwiftMKit"  
   s.version          = "1.0.4"  
@@ -14,8 +15,11 @@ Pod::Spec.new do |s|
   # s.ios.deployment_target = '5.0'  
   # s.osx.deployment_target = '10.7'  
   s.requires_arc = true  
-  
-  s.source_files = 'SwiftMKit/**/*.{swift}'  
+
+  s.module_name = 'SwiftMKit'
+  s.source_files = 'SwiftMKit/**/*.{swift,h,c,m}'
+  s.preserve_paths = 'SwiftMKit/ImportedModules/**'
+  s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/SwiftMKit/ImportedModules' }
   # s.resources = 'SwiftMKit/**/*.{png,jpeg,jpg,storyboard,xib}'
   # s.resources = 'Assets'  
   
@@ -29,5 +33,15 @@ Pod::Spec.new do |s|
   s.dependency 'ReactiveCocoa'
   s.dependency 'SwiftyJSON'
   s.dependency 'MJRefresh'
+  s.dependency 'MBProgressHUD'
+  s.dependency 'SnapKit'
+  s.dependency 'PINCache'
+  s.dependency 'EZSwiftExtensions'
+  s.dependency 'ReachabilitySwift'
+  s.dependency 'MJExtension'
+  s.dependency 'MagicalRecord'
+  s.dependency 'IQKeyboardManager'
+  s.dependency 'Aspects'
+  s.dependency 'WebViewJavascriptBridge'
 
 end
