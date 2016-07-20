@@ -9,8 +9,9 @@
 import UIKit
 import SnapKit
 import CocoaLumberjack
+import WebKit
 
-public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate{
+public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate{
     public var webView: UIWebView?
     public var webViewBridge: WebViewBridge?
     public var webViewUserAgent: [String: AnyObject]? {
@@ -19,12 +20,22 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
+    public var progress : UIProgressView? //进度条
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
     
     public var url: String?
     public var moreUrlTitle: String? {
-        get { return nil }
+        get {
+            if let url_t : NSString = url?.toNSString{
+                let urlArr = url_t.componentsSeparatedByString("/")
+                if urlArr.count > 2 {
+                    let ret = urlArr[2]
+                    return ret
+                }
+            }
+            return url
+        }
     }
     public var showNavRightToolPannelItem: Bool {
         return true
@@ -34,9 +45,13 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     public override func setupUI() {
         super.setupUI()
+        self.view.addSubview(self.getBackgroundLab())
+        DDLogInfo("\(self.view.frame)")
         webView = UIWebView(frame: CGRectZero)
+        webView?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(webView!)
         webView!.delegate = self
+        webView?.scrollView.delegate = self
         webView!.snp_makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
@@ -44,6 +59,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if url != nil {
             self.loadData()
         }
+        
+        progress = UIProgressView(frame: CGRectMake(0, 0, self.screenW, 0))
+        progress?.hidden = true
+        self.view.addSubview(progress!)
+        
     }
     public override func setupNavigation() {
         super.setupNavigation()
@@ -83,6 +103,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if self.title == nil {
             self.title = webView.stringByEvaluatingJavaScriptFromString("document.title")
         }
+
         refreshNavigationBarTopLeftCloseButton()
     }
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
@@ -120,6 +141,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public func navBtnMore() -> UIBarButtonItem {
         return UIBarButtonItem(title: "•••", style: .Plain, target: self, action: #selector(BaseKitWebViewController.click_nav_more(_:)))
     }
+    
     public func getToolMoreHeaderView() -> UIView {
         let labHeaderView : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.w, 30))
         labHeaderView.clipsToBounds = true
@@ -132,6 +154,20 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             labHeaderView.h = 0
         }
         return labHeaderView
+    }
+    
+    public func getBackgroundLab() -> UIView {
+        let labBackground : UILabel = UILabel(frame: CGRectMake(0, 10, self.screenW, 30))
+        labBackground.clipsToBounds = true
+        if let urlTitle = moreUrlTitle {
+            labBackground.font = UIFont.systemFontOfSize(10)
+            labBackground.text = "网页由 \(urlTitle) 提供"
+            labBackground.textColor = UIColor.grayColor()
+            labBackground.textAlignment = NSTextAlignment.Center
+        } else {
+            labBackground.h = 0
+        }
+        return labBackground
     }
     
     public func click_nav_back(sender: UIBarButtonItem) {
@@ -176,6 +212,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             break
             
         }
+    }
+    
+    //MARK : - ScrollViewDelegate
+    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
     }
     
     deinit {
