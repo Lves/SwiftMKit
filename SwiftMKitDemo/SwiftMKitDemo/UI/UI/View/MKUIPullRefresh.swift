@@ -38,23 +38,12 @@ class MKUIPullRefresh: BaseListViewController{
         tableView.tableFooterView = UIView()
         
         
-       
-        
         self.listView.mj_header = self.llListViewHeaderWithRefreshingBlock {
             [weak self] in
             self?.listViewModel?.dataIndex = 0
             self?.listViewModel?.fetchData()
         }
         
-        //下拉刷新添加时间
-        if let refreshHeader = listView.mj_header as? LLRefreshHeader {
-            refreshHeader.lastUpdatedTimeText = { data in
-                let format = NSDateFormatter()
-                format.dateFormat = "MM-dd HH:mm"
-                let str = format.stringFromDate(data)
-                return "数据已于\(str) 更新"
-            }
-        }
         
         
     
@@ -68,8 +57,9 @@ class MKUIPullRefresh: BaseListViewController{
         
     }
     func llListViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
-        let header = LLRefreshHeader(refreshingBlock: refreshingBlock)
-        header.activityIndicatorViewStyle = .Gray
+        let header = LLGifHeader(refreshingBlock: refreshingBlock)
+        header.lastUpdatedTimeLabel.hidden = true
+        header.stateLabel.hidden = true
         return header
     }
     
@@ -95,23 +85,24 @@ class MKUIPullRefresh: BaseListViewController{
 
 
 
-
-class LLRefreshHeader: MJRefreshNormalHeader {
-    var tipLabel:UILabel?
-    
-    
-    override func placeSubviews() {
-        super.placeSubviews()
+class LLGifHeader: MJRefreshGifHeader
+{
+    override func prepare() {
+        super.prepare()
+        //普通状态动画
+        var IdleImages = [AnyObject]()
+        for index in 0..<8 {
+            let str = index%2==0 ? "a" : "b"
+            if let nextImage = UIImage(named: "password_loading_\(str)"){
+                IdleImages.append(nextImage)
+            }
+        }
+        self.setImages(IdleImages, forState: .Idle)
         
-        self.lastUpdatedTimeLabel.mj_h = self.arrowView.mj_h
-        self.lastUpdatedTimeLabel.mj_y = self.arrowView.mj_y
-        self.stateLabel.textColor = UIColor.clearColor()
-        
+        //正在刷新状态动画
+        self.setImages(IdleImages, forState: .Refreshing)
     }
-    
-    
 }
-
 
 
 
