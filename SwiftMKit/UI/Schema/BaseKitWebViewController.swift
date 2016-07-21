@@ -14,7 +14,6 @@ import WebKit
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate{
     
     struct InnerConst {
-        static let K_WebOffsets = "webOffsets"
     }
     
     public var webView: UIWebView?
@@ -28,15 +27,12 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
     
+    public static var webOffsets: [String: CGFloat] = [:]
     public var url: String?
     public var moreUrlTitle: String? {
         get {
-            if let url_t : NSString = url?.toNSString{
-                let urlArr = url_t.componentsSeparatedByString("/")
-                if urlArr.count > 2 {
-                    let ret = urlArr[2]
-                    return ret
-                }
+            if let host = NSURL(string:url ?? "")?.host {
+                return host
             }
             return url
         }
@@ -104,10 +100,8 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
 
         refreshNavigationBarTopLeftCloseButton()
         
-        if let webOffsets = NSUserDefaults.standardUserDefaults().objectForKey(InnerConst.K_WebOffsets){
-            if let offset = webOffsets.objectForKey(url!){
-                webView.scrollView.setContentOffset(CGPointMake(0, CGFloat(String(offset).toFloat()!)), animated: false)
-            }
+        if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
+            webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
         }
     }
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
@@ -220,24 +214,8 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     private func saveWebOffsetY (scrollView : UIScrollView){
         
         if let key_url = url {
-            if let webOffsets = NSUserDefaults.standardUserDefaults().objectForKey(InnerConst.K_WebOffsets){
-                let m_webOffsets = NSMutableDictionary(dictionary: webOffsets as! [NSObject : AnyObject])
-                m_webOffsets.setObject(String(scrollView.contentOffset.y), forKey: key_url)
-                NSUserDefaults.standardUserDefaults().setObject(m_webOffsets, forKey: InnerConst.K_WebOffsets)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }else{
-                let webOffsets : NSMutableDictionary = NSMutableDictionary()
-                webOffsets.setObject(String(scrollView.contentOffset.y), forKey: key_url)
-                NSUserDefaults.standardUserDefaults().setObject(webOffsets, forKey: InnerConst.K_WebOffsets)
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
+            BaseKitWebViewController.webOffsets[key_url] = scrollView.contentOffset.y
         }
-    }
-    
-    public func cleanOffsets(){
-        let webOffsets : NSMutableDictionary = NSMutableDictionary()
-        NSUserDefaults.standardUserDefaults().setObject(webOffsets, forKey: InnerConst.K_WebOffsets)
-        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     //MARK : - ScrollViewDelegate
