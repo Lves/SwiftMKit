@@ -217,25 +217,39 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             
         default:
             break
-            
         }
     }
     
-    //MARK : - ScrollViewDelegate
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        DDLogInfo("\(scrollView.contentOffset.y)")
+    private func saveWebOffsetY (scrollView : UIScrollView){
         
-        if let webOffsets = NSUserDefaults.standardUserDefaults().objectForKey(InnerConst.K_WebOffsets){
-            let m_webOffsets = NSMutableDictionary(dictionary: webOffsets as! [NSObject : AnyObject])
-            m_webOffsets.setObject(String(scrollView.contentOffset.y), forKey: url!)
-            NSUserDefaults.standardUserDefaults().setObject(m_webOffsets, forKey: InnerConst.K_WebOffsets)
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }else{
-            let webOffsets : NSMutableDictionary = NSMutableDictionary()
-            webOffsets.setObject(String(scrollView.contentOffset.y), forKey: url!)
-            NSUserDefaults.standardUserDefaults().setObject(webOffsets, forKey: InnerConst.K_WebOffsets)
-            NSUserDefaults.standardUserDefaults().synchronize()
+        if let key_url = url {
+            if let webOffsets = NSUserDefaults.standardUserDefaults().objectForKey(InnerConst.K_WebOffsets){
+                let m_webOffsets = NSMutableDictionary(dictionary: webOffsets as! [NSObject : AnyObject])
+                m_webOffsets.setObject(String(scrollView.contentOffset.y), forKey: key_url)
+                NSUserDefaults.standardUserDefaults().setObject(m_webOffsets, forKey: InnerConst.K_WebOffsets)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }else{
+                let webOffsets : NSMutableDictionary = NSMutableDictionary()
+                webOffsets.setObject(String(scrollView.contentOffset.y), forKey: key_url)
+                NSUserDefaults.standardUserDefaults().setObject(webOffsets, forKey: InnerConst.K_WebOffsets)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
         }
+    }
+    
+    public func cleanOffsets(){
+        let webOffsets : NSMutableDictionary = NSMutableDictionary()
+        NSUserDefaults.standardUserDefaults().setObject(webOffsets, forKey: InnerConst.K_WebOffsets)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    //MARK : - ScrollViewDelegate
+    public func scrollViewDidEndDragging(scrollView: UIScrollView) {
+        self.saveWebOffsetY(scrollView)
+    }
+    
+    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        self.saveWebOffsetY(scrollView)
     }
     
     deinit {
