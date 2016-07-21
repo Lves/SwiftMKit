@@ -11,7 +11,14 @@ import SnapKit
 import CocoaLumberjack
 import WebKit
 
+
+
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate{
+    
+    struct InnerConst {
+        static let K_WebOffsets = "webOffsets"
+    }
+    
     public var webView: UIWebView?
     public var webViewBridge: WebViewBridge?
     public var webViewUserAgent: [String: AnyObject]? {
@@ -20,7 +27,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
-    public var progress : UIProgressView? //进度条
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
     
@@ -59,11 +65,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if url != nil {
             self.loadData()
         }
-        
-        progress = UIProgressView(frame: CGRectMake(0, 0, self.screenW, 0))
-        progress?.hidden = true
-        self.view.addSubview(progress!)
-        
     }
     public override func setupNavigation() {
         super.setupNavigation()
@@ -105,6 +106,12 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
 
         refreshNavigationBarTopLeftCloseButton()
+        
+        if let webOffsets = NSUserDefaults.standardUserDefaults().objectForKey(InnerConst.K_WebOffsets){
+            if let offset = webOffsets.objectForKey(url!){
+                webView.scrollView.setContentOffset(CGPointMake(0, CGFloat(String(offset).toFloat()!)), animated: false)
+            }
+        }
     }
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         webViewBridge?.indicator.stopAnimating()
@@ -216,7 +223,19 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     //MARK : - ScrollViewDelegate
     public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        DDLogInfo("\(scrollView.contentOffset.y)")
         
+        if let webOffsets = NSUserDefaults.standardUserDefaults().objectForKey(InnerConst.K_WebOffsets){
+            let m_webOffsets = NSMutableDictionary(dictionary: webOffsets as! [NSObject : AnyObject])
+            m_webOffsets.setObject(String(scrollView.contentOffset.y), forKey: url!)
+            NSUserDefaults.standardUserDefaults().setObject(m_webOffsets, forKey: InnerConst.K_WebOffsets)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }else{
+            let webOffsets : NSMutableDictionary = NSMutableDictionary()
+            webOffsets.setObject(String(scrollView.contentOffset.y), forKey: url!)
+            NSUserDefaults.standardUserDefaults().setObject(webOffsets, forKey: InnerConst.K_WebOffsets)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
     }
     
     deinit {
