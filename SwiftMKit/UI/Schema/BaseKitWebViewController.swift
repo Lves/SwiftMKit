@@ -11,8 +11,6 @@ import SnapKit
 import CocoaLumberjack
 import WebKit
 
-
-
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate{
     
     struct InnerConst {
@@ -52,7 +50,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public override func setupUI() {
         super.setupUI()
         self.view.addSubview(self.getBackgroundLab())
-        DDLogInfo("\(self.view.frame)")
         webView = UIWebView(frame: CGRectZero)
         webView?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(webView!)
