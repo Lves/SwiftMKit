@@ -11,7 +11,7 @@ import SnapKit
 import CocoaLumberjack
 import WebKit
 
-public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate{
+public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate ,WebViewProgressDelegate{
     
     struct InnerConst {
     }
@@ -23,6 +23,9 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             webViewBridge?.userAgent = webViewUserAgent
         }
     }
+    
+    public var progressView : UIProgressView?
+    public var webViewProgress: WebViewProgress = WebViewProgress()
     
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
@@ -55,7 +58,12 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             make.edges.equalTo(self.view)
         }
         webViewBridge = WebViewBridge(webView: webView!, viewController: self)
+        webViewProgress.progressDelegate = self
+        progressView = UIProgressView(frame: CGRectMake(0, 0, self.screenW, 0))
+        self.view.addSubview(progressView!)
+        
         if url != nil {
+//            url = "https://www.baidu.com/"
             self.loadData()
         }
     }
@@ -79,20 +87,51 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
+    //WebViewProgressDelegate
+    func webViewProgress(webViewProgress: WebViewProgress, updateProgress progress: Float) {
+    
+        if progress > 0.0 && progress < 1.0 {
+            self.progressView?.alpha = 1.0
+            self.progressView?.setProgress(progress, animated: true)
+        }
+        else if progress == 0.0 {
+            self.progressView?.alpha = 0.0
+            self.progressView?.setProgress(progress, animated: false)
+        }
+        else if progress == 1.0 {
+            self.progressView?.setProgress(progress, animated: true)
+            UIView.animateWithDuration(2.5, animations: {
+                self.progressView?.alpha = 0.0
+            })
+        }
+    }
+    
+    //WebViewDelegate
+    public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+
+        var ret = true
+        
+        if shouldAllowRirectToUrlInView {
+            DDLogInfo("Web view direct to url: \(request.URLRequest.URLString)")
+            ret = true
+        } else {
+            DDLogWarn("Web view direct to url forbidden: \(request.URLRequest.URLString)")
+            ret = false
+        }
+        
+        ret = webViewProgress.progressWebView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType ,delegatRet: ret)
+        
+        return ret
+    }
+    
     public func webViewDidStartLoad(webView: UIWebView) {
+        webViewProgress.progressWebViewDidStartLoad(webView)
         webViewBridge?.indicator.startAnimating()
         webView.bringSubviewToFront(webViewBridge!.indicator)
     }
-    public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if shouldAllowRirectToUrlInView {
-            DDLogInfo("Web view direct to url: \(request.URLRequest.URLString)")
-            return true
-        } else {
-            DDLogWarn("Web view direct to url forbidden: \(request.URLRequest.URLString)")
-            return false
-        }
-    }
+    
     public func webViewDidFinishLoad(webView: UIWebView) {
+        webViewProgress.progressWebViewDidFinishLoad(webView)
         webViewBridge?.indicator.stopAnimating()
         if self.title == nil {
             self.title = webView.stringByEvaluatingJavaScriptFromString("document.title")
@@ -105,6 +144,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
         if let tip = error?.localizedDescription {
             self.showTip(tip)
@@ -212,7 +252,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     }
     
     private func saveWebOffsetY (scrollView : UIScrollView){
-        
         if let key_url = url {
             BaseKitWebViewController.webOffsets[key_url] = scrollView.contentOffset.y
         }
