@@ -14,6 +14,10 @@ import WebKit
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate ,WebViewProgressDelegate{
     
     struct InnerConst {
+        static let RootViewBackgroundColor : UIColor = UIColor(hex6: 0x2F3549)
+        static let WebViewBackgroundColor : UIColor = UIColor.clearColor()
+        static let PannelTitleColor : UIColor = UIColor.grayColor()
+        static let BackGroundTitleColor : UIColor = UIColor.lightTextColor()
     }
     
     public var webView: UIWebView?
@@ -48,9 +52,10 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     public override func setupUI() {
         super.setupUI()
+        self.view.backgroundColor = InnerConst.RootViewBackgroundColor
         self.view.addSubview(self.getBackgroundLab())
         webView = UIWebView(frame: CGRectZero)
-        webView?.backgroundColor = UIColor.clearColor()
+        webView?.backgroundColor = InnerConst.WebViewBackgroundColor
         self.view.addSubview(webView!)
         webView!.delegate = self
         webView?.scrollView.delegate = self
@@ -186,7 +191,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if let urlTitle = moreUrlTitle {
             labHeaderView.font = UIFont.systemFontOfSize(10)
             labHeaderView.text = "网页由 \(urlTitle) 提供"
-            labHeaderView.textColor = UIColor.grayColor()
+            labHeaderView.textColor = InnerConst.PannelTitleColor
             labHeaderView.textAlignment = NSTextAlignment.Center
         } else {
             labHeaderView.h = 0
@@ -200,7 +205,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if let urlTitle = moreUrlTitle {
             labBackground.font = UIFont.systemFontOfSize(10)
             labBackground.text = "网页由 \(urlTitle) 提供"
-            labBackground.textColor = UIColor.grayColor()
+            labBackground.textColor = InnerConst.BackGroundTitleColor
             labBackground.textAlignment = NSTextAlignment.Center
         } else {
             labBackground.h = 0
