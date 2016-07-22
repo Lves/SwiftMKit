@@ -29,7 +29,7 @@ public class UpgradeApp : NSObject {
         })
     }
     public static func showUpgradeAlert(forceUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) {
-        let alert = UIAlertController(title: "提示", message: upgradeMessage, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "发现新版本", message: upgradeMessage, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "立即下载", style: .Default) { _ in
             if let url = NSURL(string: downloadUrl) {
                 if UIApplication.sharedApplication().canOpenURL(url) {
