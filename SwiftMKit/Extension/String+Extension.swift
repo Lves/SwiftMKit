@@ -8,7 +8,7 @@
 
 import Foundation
 import CocoaLumberjack
-import CommonCrypto
+//import CommonCrypto
 
 extension String {
     
