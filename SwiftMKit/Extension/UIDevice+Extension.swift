@@ -11,6 +11,7 @@ import UIKit
 import PINCache
 import CocoaLumberjack
 import AdSupport
+import AudioToolbox
 
 public extension UIDevice {
     
@@ -121,5 +122,9 @@ public extension UIDevice {
             let usedSpace = totalDiskSpaceInBytes - freeDiskSpaceInBytes
             return usedSpace
         }
+    }
+    
+    public func vibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }
