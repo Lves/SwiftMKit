@@ -34,6 +34,7 @@ public class WebViewBridge : NSObject {
             }
         }
     }
+    public var requestHeader: [String: String]?
     private var bridge: WebViewJavascriptBridge
     
     init(webView: UIWebView, viewController: UIViewController) {
@@ -61,14 +62,23 @@ public class WebViewBridge : NSObject {
         //清除旧数据
         webView?.stringByEvaluatingJavaScriptFromString("document.body.innerHTML='';")
         willRequestUrl(url!)
-        let request = NSURLRequest(URL: NSURL(string:url!)!)
-        willLoadRequest(request)
+        var request = NSURLRequest(URL: NSURL(string:url!)!)
+        request = willLoadRequest(request)
         Async.background {
             self.webView?.loadRequest(request)
         }
     }
     public func willRequestUrl(url: String) {
     }
-    public func willLoadRequest(request: NSURLRequest) {
+    public func willLoadRequest(request: NSURLRequest) -> NSURLRequest {
+        if let header = requestHeader {
+            if let newRequest = request.copy() as? NSMutableURLRequest {
+                for (key, value) in header {
+                    newRequest.setValue(value, forHTTPHeaderField: key)
+                }
+                return newRequest
+            }
+        }
+        return request
     }
 }
