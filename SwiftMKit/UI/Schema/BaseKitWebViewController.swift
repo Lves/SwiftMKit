@@ -27,6 +27,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             webViewBridge?.userAgent = webViewUserAgent
         }
     }
+    public var webViewRequestHeader: [String: String]? {
+        didSet {
+            webViewBridge?.requestHeader = webViewRequestHeader
+        }
+    }
     
     public var progressView : UIProgressView?
     public var webViewProgress: WebViewProgress = WebViewProgress()

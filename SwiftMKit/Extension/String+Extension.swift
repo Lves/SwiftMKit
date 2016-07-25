@@ -55,6 +55,10 @@ extension String {
         }
     }
     
+    func urlEncode() -> String? {
+        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+    }
+    
     // MARK: Encrypt
     
     var md5: String! {
