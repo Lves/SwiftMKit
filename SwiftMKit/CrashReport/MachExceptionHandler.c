@@ -168,7 +168,7 @@ static bool debuggerPresent() {
 #pragma mark - export functions
 
 void machExceptionHandlerInstall(MachExceptionMessageHandler handler) {
-#ifdef __MACH_EXCEPTION_CONTINUE_WITH_DEBUGGER__
+#ifndef __MACH_EXCEPTION_CONTINUE_WITH_DEBUGGER__
     if (debuggerPresent()) {
         printf("Process is being debugged. Exception handler will not be installed.\n");
         return;
@@ -187,6 +187,11 @@ void machExceptionHandlerInstall(MachExceptionMessageHandler handler) {
     exception_mask_t exceptionToCatch = EXC_MASK_BAD_ACCESS
                                       | EXC_MASK_BAD_INSTRUCTION
                                       | EXC_MASK_ARITHMETIC
+#ifndef __MACH_EXCEPTION_CONTINUE_WITH_DEBUGGER__
+                                      // 真机（ARM64）是靠 `brk #1` 指令断下的
+                                      // 如果在调试模式中拦下这个异常，断点就会失效
+                                      | EXC_MASK_BREAKPOINT
+#endif
                                       | EXC_MASK_SOFTWARE;
     
     kern_return_t kret;
