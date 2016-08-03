@@ -265,4 +265,13 @@ public class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             showStatusBar()
         }
     }
+    public func routeToSideMaster(controller: UIViewController?) {
+        if let viewController = controller {
+            let navigationController = UINavigationController(rootViewController: viewController)
+            let effect = PersentAnimator.sharedPersentAnimation.then { $0.presentStlye = .CoverVertical }
+            navigationController.transitioningDelegate = effect
+            masterViewController?.presentViewController(navigationController, animated: true, completion: nil)
+            showStatusBar()
+        }
+    }
 }
