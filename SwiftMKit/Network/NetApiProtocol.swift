@@ -30,6 +30,8 @@ public protocol NetApiProtocol: NetApiIndicatorProtocol {
     var request: Request? { get set }
     var responseData: AnyObject? { get set }
     
+    func getNetApiData() -> NetApiData
+    
     func fillJSON(json: AnyObject)
     func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest
     func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>
@@ -58,6 +60,9 @@ public class NetApiAbstract: NetApiProtocol{
     }
     public init() {
     }
+    public func getNetApiData() -> NetApiData {
+        return NetApiData(api: self)
+    }
     public func fillJSON(json: AnyObject) {}
     public func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest { return request }
     public func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError> { return response }
@@ -77,15 +82,15 @@ public extension NetApiProtocol {
         }
         switch format {
         case .JSON:
-            return NetApiData(api: self).requestJSON().map { _ in
+            return getNetApiData().requestJSON().map { _ in
                 return self
             }
         case .Data:
-            return NetApiData(api: self).requestData().map { _ in
+            return getNetApiData().requestData().map { _ in
                 return self
             }
         case .String:
-            return NetApiData(api: self).requestString().map { _ in
+            return getNetApiData().requestString().map { _ in
                 return self
             }
         }
