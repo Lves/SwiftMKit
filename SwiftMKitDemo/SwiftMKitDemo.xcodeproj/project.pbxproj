@@ -101,6 +101,11 @@
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
+		27678DE91D62A78800EB7C23 /* MStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DE81D62A78800EB7C23 /* MStack.swift */; };
+		27678DEB1D62AFC700EB7C23 /* MLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEA1D62AFC700EB7C23 /* MLinkList.swift */; };
+		27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEC1D62C0AE00EB7C23 /* MQueue.swift */; };
+		27678DEF1D62C31F00EB7C23 /* MTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */; };
+		27678DF11D63050700EB7C23 /* MSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DF01D63050700EB7C23 /* MSearch.swift */; };
 		27784AA91CF686C500960071 /* Aspects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27784AA81CF686C500960071 /* Aspects.framework */; };
 		27784AAA1CF686C500960071 /* Aspects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27784AA81CF686C500960071 /* Aspects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27784AAE1CF6E25200960071 /* SendCodeButton.swift */; };
@@ -363,6 +368,11 @@
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
+		27678DE81D62A78800EB7C23 /* MStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MStack.swift; sourceTree = "<group>"; };
+		27678DEA1D62AFC700EB7C23 /* MLinkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLinkList.swift; sourceTree = "<group>"; };
+		27678DEC1D62C0AE00EB7C23 /* MQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQueue.swift; sourceTree = "<group>"; };
+		27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTreeNode.swift; sourceTree = "<group>"; };
+		27678DF01D63050700EB7C23 /* MSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSearch.swift; sourceTree = "<group>"; };
 		27784AA81CF686C500960071 /* Aspects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Aspects.framework; path = "../Debug-iphonesimulator/Aspects.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27784AAE1CF6E25200960071 /* SendCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCodeButton.swift; sourceTree = "<group>"; };
 		277C49C01CE40FBF00295259 /* RegexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
@@ -647,6 +657,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				27678DE71D62A62700EB7C23 /* DataStructure */,
 				27D1A9B51CEEADCD00B511D7 /* FingerPrint */,
 				27D1A9A91CEEA00400B511D7 /* Location */,
 				270692C41CE9F27100CF211A /* Local */,
@@ -768,6 +779,18 @@
 				273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */,
 			);
 			path = Indicator;
+			sourceTree = "<group>";
+		};
+		27678DE71D62A62700EB7C23 /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				27678DE81D62A78800EB7C23 /* MStack.swift */,
+				27678DEC1D62C0AE00EB7C23 /* MQueue.swift */,
+				27678DEA1D62AFC700EB7C23 /* MLinkList.swift */,
+				27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */,
+				27678DF01D63050700EB7C23 /* MSearch.swift */,
+			);
+			path = DataStructure;
 			sourceTree = "<group>";
 		};
 		277C49C41CE4108D00295259 /* Opertaion */ = {
@@ -1659,6 +1682,7 @@
 				27A1C5ED1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift in Sources */,
 				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
+				27678DF11D63050700EB7C23 /* MSearch.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
@@ -1714,6 +1738,7 @@
 				01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
+				27678DE91D62A78800EB7C23 /* MStack.swift in Sources */,
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
 				6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */,
 				576E13CF1D3DC70A00A948CE /* MachThreadBacktrace.c in Sources */,
@@ -1735,6 +1760,8 @@
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
+				27678DEF1D62C31F00EB7C23 /* MTreeNode.swift in Sources */,
+				27678DEB1D62AFC700EB7C23 /* MLinkList.swift in Sources */,
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				27A1C5EF1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift in Sources */,
@@ -1784,6 +1811,7 @@
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
 				278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
+				27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */,
 				27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
 				3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */,
