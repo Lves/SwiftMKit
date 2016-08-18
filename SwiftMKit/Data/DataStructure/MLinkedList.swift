@@ -60,7 +60,7 @@ public class MLinkedList<T: Comparable> {
             while node != nil {
                 if i == 0 { return node }
                 i -= 1
-                node = node.next
+                node = node!.next
             }
         }
     }
@@ -142,7 +142,7 @@ public class MLinkedList<T: Comparable> {
         var node = head
         while let currentNode = node {
             node = currentNode.next
-            swap(&&currentNode.next, &currentNode.previous)
+            swap(&currentNode.next, &currentNode.previous)
             head = currentNode
         }
     }
@@ -192,14 +192,14 @@ public class MLinkedList<T: Comparable> {
     }
 }
 
-public extension MLinkedList: CustomStringConvertible {
+extension MLinkedList: CustomStringConvertible {
     public var description: String {
         var s = "["
         var node = head
         while node != nil {
             s += "\(node!.value)"
             node = node!.next
-            if node != nil { s+= "," }
+            if node != nil { s += "," }
         }
         return s + "]"
     }

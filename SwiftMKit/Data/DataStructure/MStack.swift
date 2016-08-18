@@ -8,34 +8,36 @@
 
 import Foundation
 
-public class MStack<T> {
-    var stack: [T]
+public struct MStack<T> {
+    private var array = [T]()
     
-    public init() {
-        stack = [T]()
+    public mutating func push(element: T) {
+        array.append(element)
     }
     
-    public func push(object: T) {
-        stack.append(object)
+    public mutating func pop() -> T? {
+        return array.popLast()
     }
     
-    public func pop() -> T? {
-        if !isEmpty() {
-            return stack.removeLast()
-        } else {
-            return nil
-        }
+    public var isEmpty: Bool {
+        return array.isEmpty
     }
     
-    public func isEmpty() -> Bool {
-        return stack.isEmpty
+    public var count: Int {
+        return array.count
     }
     
     public func peek() -> T? {
-        return stack.last
+        return array.last
     }
-    
-    public func size() -> Int {
-        return stack.count
+}
+
+extension MStack: SequenceType {
+    public func generate() -> AnyGenerator<T> {
+        var curr = self
+        return AnyGenerator {
+            _ -> T? in
+            return curr.pop()
+        }
     }
 }

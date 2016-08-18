@@ -18,23 +18,21 @@ public class MSearch {
      
      - returns: 是否找到
      */
-    public class func binarySearch<T: Comparable>(nums: [T], target: T) -> Bool {
-        var left = 0
-        var right = nums.count - 1
-        var mid = 0
+    public class func binarySearch<T: Comparable>(nums: [T], target: T) -> Int? {
+        var range = 0..<nums.count
         
-        while left <= right {
-            mid = (right - left) / 2 + left
+        while range.startIndex < range.endIndex {
+            let midIndex = range.startIndex + (range.endIndex - range.startIndex) / 2
             
-            if nums[mid] == target {
-                return true
-            } else if nums[mid] < target {
-                left = mid + 1
+            if nums[midIndex] == target {
+                return midIndex
+            } else if nums[midIndex] < target {
+                range.startIndex = midIndex + 1
             } else {
-                right = mid - 1
+                range.endIndex = midIndex
             }
         }
-        return false
+        return nil
     }
     
     /**

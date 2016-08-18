@@ -8,34 +8,39 @@
 
 import Foundation
 
-public class MQueue<T> {
-    var queue: [T]
+public struct MQueue<T> {
+    private var array = [T?]()
+    private var head = 0
     
-    public init() {
-        queue = [T]()
+    public mutating func enqueue(element: T) {
+        array.append(element)
     }
     
-    public func enqueue(object: T) {
-        queue.append(object)
-    }
-    
-    public func dequeue() -> T? {
-        if !isEmpty() {
-            return queue.removeFirst()
-        } else {
-            return nil
+    public mutating func dequeue() -> T? {
+        guard head < array.count, let element = array[head] else { return nil }
+        array[head] = nil
+        head += 1
+        
+        let percentage = Double(head) / Double(array.count)
+        if array.count > 50 && percentage > 0.25 {
+            array.removeFirst(head)
+            head = 0
         }
+        return element
     }
     
-    public func isEmpty() -> Bool {
-        return queue.isEmpty
+    public var isEmpty: Bool {
+        return count == 0
+    }
+    public var count: Int {
+        return array.count - head
     }
     
     public func peek() -> T? {
-        return queue.first
-    }
-    
-    func size() -> Int {
-        return queue.count
+        if isEmpty {
+            return nil
+        } else {
+            return array[head]
+        }
     }
 }
