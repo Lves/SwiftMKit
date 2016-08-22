@@ -22,6 +22,14 @@ public extension UITextField {
             self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
         }
     }
+    @IBInspectable public var placeHolderFont: UIFont? {
+        get {
+            return self.placeHolderFont
+        }
+        set {
+            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSFontAttributeName: newValue!])
+        }
+    }
     
     public func reformatCardNumber(range: NSRange, replaceString string: String) -> Bool {
         var text = self.text?.toNSString ?? ""
