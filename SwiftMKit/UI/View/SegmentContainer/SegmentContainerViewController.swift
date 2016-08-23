@@ -77,6 +77,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             let vc = viewControllers[index]
             vc.view.frame.x = CGFloat(index) * screenW
             scrollView.addSubview(vc.view)
+            self.addChildViewController(vc)
         }
     }
     
