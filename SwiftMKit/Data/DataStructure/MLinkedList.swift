@@ -62,7 +62,9 @@ public class MLinkedList<T: Comparable> {
                 i -= 1
                 node = node!.next
             }
+            return node
         }
+        return nil
     }
     
     public subscript(index: Int) -> T {
