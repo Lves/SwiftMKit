@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+@IBDesignable
 public extension UIView {
     struct InnerConstant {
         static let BlurViewTag = 1001
@@ -37,6 +39,36 @@ public extension UIView {
     func removeBlur() {
         let view = self.viewWithTag(InnerConstant.BlurViewTag)
         view?.removeFromSuperview()
+    }
+    /*UIView 在sb中设置圆角*/
+    @IBInspectable var mCornerRadius:CGFloat{
+        set{
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+        get {
+            return layer.cornerRadius
+        }
+    }
+    /// borderColor
+    @IBInspectable
+    public var mBorderColor: UIColor {
+        get {
+            return UIColor(CGColor: layer.borderColor ?? UIColor.clearColor().CGColor)
+        }
+        set {
+            layer.borderColor = newValue.CGColor
+        }
+    }
+    /// borderWidth
+    @IBInspectable
+    public var mBorderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
     }
 
 }
