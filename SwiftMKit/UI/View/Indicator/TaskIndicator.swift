@@ -16,7 +16,6 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
     private weak var hud: HUDProtocol?
     lazy public var runningTasks = [NSURLSessionTask]()
     
-    private var isShowing : Bool = false
     private var waitForHide : Bool = false
     
     init(hud: HUDProtocol){
