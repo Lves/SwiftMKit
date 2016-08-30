@@ -16,6 +16,9 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
     private weak var hud: HUDProtocol?
     lazy public var runningTasks = [NSURLSessionTask]()
     
+    private var isShowing : Bool = false
+    private var waitForHide : Bool = false
+    
     init(hud: HUDProtocol){
         self.hud = hud
         super.init()
@@ -49,9 +52,14 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
                 self.runningTasks.append(task)
             }
             if let view = task.indicatorView {
-                Async.main {
-                    self.hud?.showHUDAddedTo(view, animated: true, text: task.indicatorText)
+                if !waitForHide {
+                    Async.main {
+                        self.hud?.showHUDAddedTo(view, animated: false, text: task.indicatorText)
+                    }
+                } else {
+                    self.hud?.changeHUDText(task.indicatorText)
                 }
+                waitForHide = false
             }
         }
     }
@@ -63,8 +71,13 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
                 self.runningTasks.removeAtIndex(index)
             }
             if let view = task.indicatorView {
-                Async.main {
-                    self.hud?.hideHUDForView(view, animated: true)
+                waitForHide = true
+                
+                Async.main (after: 0.5){
+                    if self.waitForHide {
+                        self.hud?.hideIndicatorHUDForView(view, animated: false)
+                    }
+                    self.waitForHide = false
                 }
             }
         }
@@ -77,8 +90,13 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
                 self.runningTasks.removeAtIndex(index)
             }
             if let view = task.indicatorView {
-                Async.main {
-                    self.hud?.hideHUDForView(view, animated: true)
+                waitForHide = true
+                
+                Async.main (after: 0.5){
+                    if self.waitForHide {
+                        self.hud?.hideIndicatorHUDForView(view, animated: false)
+                    }
+                    self.waitForHide = false
                 }
             }
         }
@@ -91,8 +109,13 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
                 self.runningTasks.removeAtIndex(index)
             }
             if let view = task.indicatorView {
-                Async.main {
-                    self.hud?.hideIndicatorHUDForView(view, animated: true)
+                waitForHide = true
+                
+                Async.main (after: 0.5){
+                    if self.waitForHide {
+                        self.hud?.hideIndicatorHUDForView(view, animated: false)
+                    }
+                    self.waitForHide = false
                 }
             }
         }
