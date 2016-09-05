@@ -191,4 +191,70 @@ public class NetApiClient : NSObject {
                 }
             }
     }
+    class func requestUpload(request: NSURLRequest, api: UploadNetApiProtocol,
+                           completionHandler: (Response<AnyObject, NSError> -> Void)?)
+        -> Request {
+            let uploadData = NetApiClient.createBodyWithParameters(api.query, filePathKey: api.uploadDataName, mimetype: api.uploadDataMimeType ?? "", uploadData: api.uploadData!)
+            let request = Alamofire.upload(request, data: uploadData)
+            api.request = request
+            self.bindIndicator(api: api, task: request.task)
+            let timeBegin = NSDate()
+            return request.responseJSON { response in
+                DDLogWarn("[NetApi] Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                let transferedResponse = api.transferResponseJSON(response)
+                switch transferedResponse.result {
+                case .Success:
+                    DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
+                    if let value = transferedResponse.result.value {
+                        DDLogVerbose("[NetApi] JSON: \(value)")
+                    }
+                case .Failure(let error):
+                    if let statusCode = StatusCode(rawValue:error.code) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            DDLogWarn("[NetApi] Request Url Canceled: \(api.url!)")
+                            return
+                        default:
+                            break
+                        }
+                    }
+                    DDLogError("[NetApi] Request Url Failed: \(api.url!)")
+                    DDLogError("[NetApi] \(error)")
+                }
+                if completionHandler != nil {
+                    completionHandler!(transferedResponse)
+                }
+            }
+    }
+    
+    
+    class func createBodyWithParameters(parameters: [String: AnyObject]?, filePathKey: String?, mimetype: String, uploadData: NSData) -> NSData {
+        let body = NSMutableData()
+        let boundary = generateBoundaryString()
+        
+        if parameters != nil {
+            for (key, value) in parameters! {
+                body.appendString("--\(boundary)\r\n")
+                body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.appendString("\(value)\r\n")
+            }
+        }
+        
+        body.appendString("--\(boundary)\r\n")
+        body.appendString("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\r\n")
+        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+        body.appendData(uploadData)
+        body.appendString("\r\n")
+        
+        body.appendString("--\(boundary)--\r\n")
+        return body
+    }
+    
+    /// Create boundary string for multipart/form-data request
+    ///
+    /// - returns:            The boundary string that consists of "Boundary-" followed by a UUID string.
+    
+    class func generateBoundaryString() -> String {
+        return "******"
+    }
 }

@@ -132,6 +132,39 @@ public class NetApiData: NSObject {
             }
         }
     }
+    public func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> {
+        NetApiData.addApi(self)
+        return SignalProducer { [unowned self] sink,disposable in
+            let urlRequest = NetApiData.getURLRequest(self.api!)
+            NetApiClient.requestUpload(urlRequest, api:(self.api as! UploadNetApiProtocol)) { response in
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        self.api!.responseData = value
+                        self.api!.fillJSON(value)
+                        sink.sendNext((self.api as! UploadNetApiProtocol))
+                        sink.sendCompleted()
+                    }
+                case .Failure(let error):
+                    let err = error is NetError ? error as! NetError : NetError(error: error)
+                    if let statusCode =  StatusCode(rawValue:err.statusCode) {
+                        switch(statusCode) {
+                        case .Canceled:
+                            sink.sendInterrupted()
+                            return
+                        default:
+                            break
+                        }
+                    }
+                    sink.sendFailed(err)
+                }
+                NetApiData.removeApi(self)
+            }
+            disposable.addDisposable { [weak self] in
+                self?.api?.request?.task.cancel()
+            }
+        }
+    }
     
     class private func getURLRequest(api: NetApiProtocol) -> NSURLRequest {
         let (method, path, parameters) = (api.method ?? .GET, api.url ?? "", api.query ?? [:])

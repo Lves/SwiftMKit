@@ -11,7 +11,7 @@ import Alamofire
 import ReactiveCocoa
 
 public enum ApiFormatType {
-    case JSON, Data, String
+    case JSON, Data, String, Upload
 }
 
 public protocol NetApiIndicatorProtocol : class {
@@ -38,6 +38,11 @@ public protocol NetApiProtocol: NetApiIndicatorProtocol {
     func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>
     func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>
     func transferParameterEncoding() -> ParameterEncoding
+}
+public protocol UploadNetApiProtocol: NetApiProtocol {
+    var uploadData: NSData? { get set }
+    var uploadDataName: String? { get }
+    var uploadDataMimeType: String? { get }
 }
 
 public class NetApiAbstract: NetApiProtocol{
@@ -91,6 +96,10 @@ public extension NetApiProtocol {
             }
         case .String:
             return getNetApiData().requestString().map { _ in
+                return self
+            }
+        case .Upload:
+            return getNetApiData().requestUpload().map { _ in
                 return self
             }
         }
