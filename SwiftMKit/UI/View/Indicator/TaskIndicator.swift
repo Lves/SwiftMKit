@@ -45,9 +45,10 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
     
     @objc func task_resume(notify:NSNotification) {
         DDLogVerbose("Task resume")
-        UIApplication.sharedApplication().showNetworkActivityIndicator()
+        
         if let task = notify.object as? NSURLSessionTask {
             if !self.runningTasks.contains(task) {
+                UIApplication.sharedApplication().showNetworkActivityIndicator()
                 self.runningTasks.append(task)
             }
             if let view = task.indicatorView {
