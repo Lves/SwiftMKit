@@ -57,6 +57,7 @@ extension String {
     
     func urlEncode() -> String? {
         return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        
     }
     
     // MARK: Encrypt
@@ -91,5 +92,20 @@ extension String {
     func toBase64() -> String {
         let data = self.dataUsingEncoding(NSUTF8StringEncoding)
         return data!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+    }
+    
+    func transformToPinyin() -> String? {
+        let str = NSMutableString(string: self) as CFMutableString
+        if CFStringTransform(str, nil, kCFStringTransformMandarinLatin, false) == true {
+            if CFStringTransform(str, nil, kCFStringTransformStripDiacritics, false) == true {
+                return str as String
+            }
+        }
+        return nil
+    }
+    
+    // MARK: Reverse
+    func reverse() -> String {
+        return String(self.characters.reverse())
     }
 }

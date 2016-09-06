@@ -88,4 +88,21 @@ public extension UIView {
         }
         return vc
     }
+    
+    /**
+     查找一个视图的所有子视图
+     
+     - returns: 一个视图的所有子视图
+     */
+    func recursiveAllSubViews() -> [UIView] {
+        var array = [UIView]()
+        for subview in self.subviews {
+            array.append(subview)
+            let views = subview.recursiveAllSubViews()
+            for innerSubView in views {
+                array.append(innerSubView)
+            }
+        }
+        return array
+    }
 }
