@@ -70,5 +70,22 @@ public extension UIView {
             layer.borderWidth = newValue
         }
     }
-
+    
+    /**
+     获取view所在的控制器
+     
+     - returns: view所在的控制器
+     */
+    func getViewController() -> UIViewController? {
+        var vc: UIViewController?
+        var next = self.nextResponder()
+        while next != nil {
+            if (next?.isKindOfClass(UIViewController.self) ?? false) == true {
+                vc = next as? UIViewController
+                break
+            }
+            next = next?.nextResponder()
+        }
+        return vc
+    }
 }

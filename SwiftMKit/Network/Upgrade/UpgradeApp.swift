@@ -11,6 +11,7 @@ import UIKit
 import CocoaLumberjack
 
 public class UpgradeApp : NSObject {
+    public static var alertController: UIAlertController?
     public static var appProtocol: UpgradeAppProtocol?
     public static func checkUpgrade() {
         let version = appProtocol?.version ?? "0"
@@ -33,6 +34,7 @@ public class UpgradeApp : NSObject {
         alert.addAction(UIAlertAction(title: "立即下载", style: .Default) { _ in
             if let url = NSURL(string: downloadUrl) {
                 if UIApplication.sharedApplication().canOpenURL(url) {
+                    alertController = nil
                     DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
                     UIApplication.sharedApplication().openURL(url)
                     return
@@ -41,20 +43,31 @@ public class UpgradeApp : NSObject {
             DDLogError("[UpgradeApp] 下载地址错误: \(downloadUrl)")
             let errorAlert = UIAlertController(title: "抱歉", message: "下载地址不正确，请稍后再试", preferredStyle: .Alert)
             errorAlert.addAction(UIAlertAction(title: "我知道了", style: .Cancel, handler: { _ in
+                alertController = nil
                 if forceUpgrade {
                     exit(0)
                 }
             }))
             if let vc = UIViewController.topController {
+                alertController = errorAlert
                 vc.showAlert(errorAlert, completion: nil)
             }
             })
         alert.addAction(UIAlertAction(title: "我知道了", style: .Cancel, handler: { _ in
+            alertController = nil
             if forceUpgrade {
                 exit(0)
             }
         }))
         if let vc = UIViewController.topController {
+            if alertController != nil {
+                if forceUpgrade {
+                    alertController?.dismissVC(completion: nil)
+                } else {
+                    return
+                }
+            }
+            alertController = alert
             vc.showAlert(alert, completion: nil)
         }
     }
