@@ -38,6 +38,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
+    public var showNavRightToolPannelItem: Bool = true {
+        didSet {
+            self.refreshNavigationBarTopRightMoreButton()
+        }
+    }
     
     public static var webOffsets: [String: CGFloat] = [:]
     public var url: String?
@@ -48,9 +53,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             }
             return url
         }
-    }
-    public var showNavRightToolPannelItem: Bool {
-        return true
     }
     
     var webViewToolsPannelView :SharePannelView?
@@ -73,7 +75,6 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         self.view.addSubview(progressView!)
         
         if url != nil {
-//            url = "https://www.baidu.com/"
             self.loadData()
         }
     }
@@ -82,13 +83,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if let btnBack = navBtnBack() {
             self.navigationItem.leftBarButtonItems = [btnBack]
         }
-        if showNavRightToolPannelItem {
-            if let btnMore : UIBarButtonItem = navBtnMore() {
-                self.navigationItem.rightBarButtonItem = btnMore
-            }
-        } else {
-            self.navigationItem.rightBarButtonItem = nil
-        }
+        self.refreshNavigationBarTopRightMoreButton()
     }
     public override func loadData() {
         super.loadData()
@@ -174,6 +169,16 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
                     self.navigationItem.leftBarButtonItems = [btnBack]
                 }
             }
+        }
+    }
+    
+    public func refreshNavigationBarTopRightMoreButton() {
+        if showNavRightToolPannelItem {
+            if let btnMore : UIBarButtonItem = navBtnMore() {
+                self.navigationItem.rightBarButtonItem = btnMore
+            }
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
     
