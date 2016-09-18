@@ -66,6 +66,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.pagingEnabled = true
         scrollView.bounces = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         self.view.addSubview(scrollView)
     }
     
@@ -76,6 +77,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
             vc.view.frame.x = CGFloat(index) * screenW
+            vc.view.frame.h = self.view.h
             scrollView.addSubview(vc.view)
             self.addChildViewController(vc)
         }
