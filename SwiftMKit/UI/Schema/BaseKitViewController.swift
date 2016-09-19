@@ -107,7 +107,9 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
     public func setupNotification() {
     }
     public func setupNavigation() {
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        if self.navigationController?.viewControllers.first == self {
+            self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        }
     }
     public func bindingData() {
     }
