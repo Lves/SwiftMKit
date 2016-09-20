@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6AD6D5EE148779ADC4ADCB2B5898736E"
+               BuildableName = "Pods_SwiftMKitDemo.framework"
+               BlueprintName = "Pods-SwiftMKitDemo"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "3FC9DEF41CBFD35900C2D938"
                BuildableName = "SwiftMKitDemo.app"
                BlueprintName = "SwiftMKitDemo"
