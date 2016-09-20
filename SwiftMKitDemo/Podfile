@@ -6,7 +6,7 @@ use_frameworks!
 
 def pods
     pod 'CocoaLumberjack/Swift'
-    pod 'ReactiveCocoa'
+    pod 'ReactiveCocoa', '~> 4.1.0'
     pod 'Alamofire'
     pod 'ReachabilitySwift'
     pod 'MagicalRecord'
@@ -24,7 +24,7 @@ def pods
     pod 'Aspects'
     pod 'HanekeSwift'
     pod 'MBProgressHUD'
-    pod 'Charts'
+    pod 'Charts', "2.2.4"
     pod 'PulsingHalo'
 end
 
