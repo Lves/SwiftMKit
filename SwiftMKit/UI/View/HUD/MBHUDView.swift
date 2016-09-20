@@ -31,6 +31,7 @@ public class MBHUDView: HUDProtocol{
     }
     public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void)) {
         indicatorShowed = false
+        showingHUD?.hide(false)
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
         hud.mode = .Text
