@@ -1,5 +1,5 @@
 //
-//  UITextField+Extension.swift
+//  UIself+Extension.swift
 //  SwiftMKitDemo
 //
 //  Created by Mao on 4/29/16.
@@ -73,5 +73,97 @@ public extension UITextField {
 //            self.selectedTextRange = NSMakeRange(range.location, 0)
         }
         return false
+    }
+    public func reformatMobile(range: NSRange, replaceString string: String) -> Bool {
+        
+        func noneSpaseString(string: String?) -> String {
+            return (string ?? "").stringByReplacingOccurrencesOfString(" ", withString: "")
+        }
+        func parseString(string: String?) -> String? {
+            guard let str = string else { return nil }
+            let mStr = NSMutableString(string: str.stringByReplacingOccurrencesOfString(" ", withString: ""))
+            if  mStr.length > 3 {
+                mStr.insertString(" ", atIndex: 3)
+            }
+            if mStr.length > 8 {
+                mStr .insertString(" ", atIndex: 8)
+            }
+            return mStr as String
+        }
+        
+        let RegStr4Number = "^\\d+$"
+        // 判断用户输入的是否都是数字
+        let predicate = NSPredicate(format: "SELF MATCHES %@", RegStr4Number)
+        let xxx = "\(self.text ?? "")\(string)"
+        let match = predicate.evaluateWithObject(noneSpaseString(xxx));
+        if match == false {
+            // 如果有非整数的字符，就当做用户输入的是用户名，不做任何处理
+            return true
+        } else {
+            let text = self.text ?? ""
+            let nsText = NSString(string: text)
+            // 删除
+            if string == "" {
+                let ch = unichar(" ")
+                // 删除一位
+                if range.length == 1 {
+                    // 最后一位,遇到空格则多删除一
+                    if range.location == text.length-1 {
+                        if  nsText.characterAtIndex(text.length-1) == ch {
+                            self.deleteBackward()
+                        }
+                        return true
+                    } else { //从中间删除
+                        var offset = range.location
+                        if range.location < text.length && nsText.characterAtIndex(range.location) == ch && self.selectedTextRange?.empty == true {
+                            self.deleteBackward()
+                            offset -= 1
+                        }
+                        self.deleteBackward()
+                        self.text = parseString(self.text)
+                        let newPos = self.positionFromPosition(self.beginningOfDocument, offset: offset) ?? UITextPosition()
+                        self.selectedTextRange = self.textRangeFromPosition(newPos, toPosition: newPos)
+                        return false
+                    }
+                } else if range.length > 1 {
+                    var isLast = false
+                    if  range.location + range.length == self.text?.length {
+                        isLast = true
+                    }
+                    self.deleteBackward()
+                    self.text = parseString(self.text)
+                    var offset = range.location
+                    if range.location == 3 || range.location == 8 {
+                        offset += 1
+                    }
+                    if isLast {
+                        
+                    } else {
+                        let newPos = self.positionFromPosition(self.beginningOfDocument, offset: offset) ?? UITextPosition()
+                        self.selectedTextRange = self.textRangeFromPosition(newPos, toPosition: newPos)
+                    }
+                    return false
+                } else {
+                    return true
+                }
+            } else if  string.length > 0 {
+                if noneSpaseString(self.text).length + string.length - range.length > 11 {
+                    return false
+                }
+                self.insertText(string)
+                self.text = parseString(self.text)
+                var offset = range.location + string.length
+                if range.location == 3 || range.location == 8 {
+                    offset += 1
+                }
+                let newPos = self.positionFromPosition(self.beginningOfDocument, offset: offset) ?? UITextPosition()
+                self.selectedTextRange = self.textRangeFromPosition(newPos, toPosition: newPos)
+                return false
+            } else {
+                return true
+            }
+        }
+        
+        
     }
 }
