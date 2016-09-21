@@ -24,7 +24,7 @@ def pods
     pod 'Aspects'
     pod 'HanekeSwift'
     pod 'MBProgressHUD'
-    pod 'Charts', "2.2.4"
+    pod 'Charts', '2.2.4'
     pod 'PulsingHalo'
 end
 
