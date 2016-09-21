@@ -108,4 +108,17 @@ extension String {
     func reverse() -> String {
         return String(self.characters.reverse())
     }
+    
+    ///  加密手机号（186****6789）
+    func encryPhoneNo() -> String {
+        if self.length == 11 {
+            let startIndex = self.startIndex.advancedBy(3)
+            let endIndex = startIndex.advancedBy(4)
+            let range = Range(start: startIndex, end: endIndex)
+            let newPhone = self.stringByReplacingCharactersInRange(range, withString: "****")
+            return newPhone
+        } else {
+            return self
+        }
+    }
 }
