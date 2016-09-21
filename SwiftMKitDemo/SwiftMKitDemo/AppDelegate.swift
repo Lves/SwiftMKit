@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DemoNetworkConfig.Release = false
         DemoNetworkConfig.Evn = .Product
         DDLog.setup(.Debug)
+        MagicalRecord.setShouldDeleteStoreOnModelMismatch(true)
         MagicalRecord.setupCoreDataStack()
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true

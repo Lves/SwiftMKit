@@ -2017,7 +2017,7 @@
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wildcat.swiftdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b681028-8e77-4acd-bd92-7b42f8cdd672";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
@@ -2038,7 +2038,7 @@
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wildcat.swiftdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b681028-8e77-4acd-bd92-7b42f8cdd672";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";

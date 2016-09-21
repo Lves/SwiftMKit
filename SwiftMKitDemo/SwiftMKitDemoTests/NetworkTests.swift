@@ -125,22 +125,22 @@ class NetworkTests: XCTestCase {
     }
 
     func testApiSuccessfully() {
-        let expectation = self.expectationWithDescription("should get json")
-        
-        let signal = TestPX500PhotosApiData(page:1, number:5).signal().on(
-            next: { data in
-                if let photos = data.photos {
-                    XCTAssertGreaterThan(photos.count, 0)
-                    XCTAssertGreaterThan(photos.first?.photoId?.length ?? 0, 0)
-                }
-                expectation.fulfill()
-            },
-            failed: { error in
-                XCTAssertNotNil(error)
-                expectation.fulfill()
-        })
-        signal.start()
-        self.waitForExpectationsWithTimeout(100, handler: nil)
+//        let expectation = self.expectationWithDescription("should get json")
+//        
+//        let signal = TestPX500PhotosApiData(page:1, number:5).signal().on(
+//            next: { data in
+//                if let photos = data.photos {
+//                    XCTAssertGreaterThan(photos.count, 0)
+//                    XCTAssertGreaterThan(photos.first?.photoId?.length ?? 0, 0)
+//                }
+//                expectation.fulfill()
+//            },
+//            failed: { error in
+//                XCTAssertNotNil(error)
+//                expectation.fulfill()
+//        })
+//        signal.start()
+//        self.waitForExpectationsWithTimeout(100, handler: nil)
     }
     
     func testApiTimout() {
