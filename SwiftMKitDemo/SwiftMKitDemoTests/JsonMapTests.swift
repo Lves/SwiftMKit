@@ -135,39 +135,39 @@ class JsonMapTests: XCTestCase {
     }
     
     
-    func testMJExtension() {
-        let student:TestStudent? = TestStudent.objectFromJson(studentJSON)
-        let teacher:TestTeacher? = TestTeacher.objectFromJson(teacherJSON)
-        let students:[TestStudent]? = TestStudent.arrayFromJson(teacherJSON["students"] as? Array<AnyObject>)
-        validateStudent(student)
-        validateTeacher(teacher)
-        validateStudents(students)
-        let studentEntity:TestStudentEntity? = TestStudentEntity.objectFromJson(studentJSON, context: NSManagedObjectContext.MR_defaultContext())
-        let teacherEntity:TestTeacherEntity? = TestTeacherEntity.objectFromJson(teacherJSON, context: NSManagedObjectContext.MR_defaultContext())
-        let studentsEntity:[TestStudentEntity]? = TestStudentEntity.arrayFromJson(teacherJSON["students"] as? Array<AnyObject>, context: NSManagedObjectContext.MR_defaultContext())
-        let studentInTeacher:TestStudentEntity? = teacherEntity?.students!.objectAtIndex(0) as? TestStudentEntity
-        validateStudentEntity(studentEntity)
-        validateTeacherEntity(teacherEntity)
-        validateStudentsEntity(studentsEntity)
-        XCTAssertEqual(studentEntity, studentInTeacher)
-        var studentEntityUpdated:TestStudentEntity? = TestStudentEntity.objectFromJson(studentJSON, context: NSManagedObjectContext.MR_defaultContext())
-        validateStudentEntity(studentEntityUpdated)
-        XCTAssertEqual(studentEntity, studentEntityUpdated)
-        studentEntityUpdated = TestStudentEntity.objectFromJson(studentJSONUpdated, context: NSManagedObjectContext.MR_defaultContext())
-        validateStudentEntity(studentEntityUpdated, updated: true)
-        validateStudentEntity(studentEntity, updated: true)
-        XCTAssertEqual(studentEntity, studentInTeacher)
-        XCTAssertEqual(studentEntity, studentEntityUpdated)
-        validateTeacherEntity(teacherEntity, updated: true)
-        let teacherEntityUpdated:TestTeacherEntity? = TestTeacherEntity.objectFromJson(teacherJSONNew, context: NSManagedObjectContext.MR_defaultContext())
-        validateTeacherEntityNew(teacherEntityUpdated)
-        validateTeacherEntityNew(studentEntity?.teacher)
-        XCTAssertEqual(0, teacherEntity?.students?.count)
-        XCTAssertEqual(teacherEntityUpdated, studentEntity?.teacher)
-        let studentMR = TestStudentEntity.MR_findAllWithPredicate(NSPredicate(format: "entityId = %@", "1"))?.first
-        XCTAssertEqual(studentMR, studentEntity)
-        
-    }
+//    func testMJExtension() {
+//        let student:TestStudent? = TestStudent.objectFromJson(studentJSON)
+//        let teacher:TestTeacher? = TestTeacher.objectFromJson(teacherJSON)
+//        let students:[TestStudent]? = TestStudent.arrayFromJson(teacherJSON["students"] as? Array<AnyObject>)
+//        validateStudent(student)
+//        validateTeacher(teacher)
+//        validateStudents(students)
+//        let studentEntity:TestStudentEntity? = TestStudentEntity.objectFromJson(studentJSON, context: NSManagedObjectContext.MR_defaultContext())
+//        let teacherEntity:TestTeacherEntity? = TestTeacherEntity.objectFromJson(teacherJSON, context: NSManagedObjectContext.MR_defaultContext())
+//        let studentsEntity:[TestStudentEntity]? = TestStudentEntity.arrayFromJson(teacherJSON["students"] as? Array<AnyObject>, context: NSManagedObjectContext.MR_defaultContext())
+//        let studentInTeacher:TestStudentEntity? = teacherEntity?.students!.objectAtIndex(0) as? TestStudentEntity
+//        validateStudentEntity(studentEntity)
+//        validateTeacherEntity(teacherEntity)
+//        validateStudentsEntity(studentsEntity)
+//        XCTAssertEqual(studentEntity, studentInTeacher)
+//        var studentEntityUpdated:TestStudentEntity? = TestStudentEntity.objectFromJson(studentJSON, context: NSManagedObjectContext.MR_defaultContext())
+//        validateStudentEntity(studentEntityUpdated)
+//        XCTAssertEqual(studentEntity, studentEntityUpdated)
+//        studentEntityUpdated = TestStudentEntity.objectFromJson(studentJSONUpdated, context: NSManagedObjectContext.MR_defaultContext())
+//        validateStudentEntity(studentEntityUpdated, updated: true)
+//        validateStudentEntity(studentEntity, updated: true)
+//        XCTAssertEqual(studentEntity, studentInTeacher)
+//        XCTAssertEqual(studentEntity, studentEntityUpdated)
+//        validateTeacherEntity(teacherEntity, updated: true)
+//        let teacherEntityUpdated:TestTeacherEntity? = TestTeacherEntity.objectFromJson(teacherJSONNew, context: NSManagedObjectContext.MR_defaultContext())
+//        validateTeacherEntityNew(teacherEntityUpdated)
+//        validateTeacherEntityNew(studentEntity?.teacher)
+//        XCTAssertEqual(0, teacherEntity?.students?.count)
+//        XCTAssertEqual(teacherEntityUpdated, studentEntity?.teacher)
+//        let studentMR = TestStudentEntity.MR_findAllWithPredicate(NSPredicate(format: "entityId = %@", "1"))?.first
+//        XCTAssertEqual(studentMR, studentEntity)
+//        
+//    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
