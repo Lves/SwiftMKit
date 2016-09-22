@@ -31,6 +31,17 @@ public extension UITextField {
         }
     }
     
+    private struct AssociatedKeys {
+        static var isFirstNan = 0
+    }
+    var isFirstNan: Bool {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.isFirstNan) as? Bool) ?? false
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &AssociatedKeys.isFirstNan, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
     public func reformatCardNumber(range: NSRange, replaceString string: String) -> Bool {
         var text = self.text?.toNSString ?? ""
         var range = range
@@ -74,6 +85,14 @@ public extension UITextField {
         }
         return false
     }
+//    private var isFirstNan: NSNumber? {
+//        get {
+//            return
+//        }
+//        set {
+//            self.isFirstNan = newValue
+//        }
+//    }
     public func reformatMobile(range: NSRange, replaceString string: String) -> Bool {
         
         func noneSpaseString(string: String?) -> String {
@@ -90,16 +109,64 @@ public extension UITextField {
             }
             return mStr as String
         }
+        func selectedRange() -> NSRange {
+            let beginning = self.beginningOfDocument;
+            //光标选择区域
+            if let selectedRange = self.selectedTextRange {
+                //选择的开始位置
+                let selectionStart = selectedRange.start;
+                //选择的结束位置
+                let selectionEnd = selectedRange.end;
+                //选择的实际位置
+                var location = self.offsetFromPosition(beginning, toPosition: selectionStart)
+                //选择的长度
+                let length = self.offsetFromPosition(selectionStart, toPosition: selectionEnd)
+                let txt = self.text ?? ""
+                let index = txt.startIndex.advancedBy(location)
+                let splitTxt = txt.substringToIndex(index)
+                let list = splitTxt.split(" ")
+                let count = list.count - 1
+                if count == 1 {
+                    
+                } else if count == 2 {
+                    location = location - 1
+                } else if count == 0 {
+                    location = location + 1
+                }
+                return NSMakeRange(location, length)
+            }
+            return NSMakeRange(0, 0)
+        }
+        func setSelectedRange(range : NSRange) {
+            let beginning = self.beginningOfDocument;
+            let startPosition = self.positionFromPosition(beginning, offset: range.location) ?? UITextPosition()
+            let endPosition = self.positionFromPosition(beginning, offset: range.location + range.length) ??  UITextPosition()
+            let selectionRange = self.textRangeFromPosition(startPosition, toPosition: endPosition)
+            self.selectedTextRange = selectionRange
+            self.sendActionsForControlEvents(.EditingChanged)
+        }
         
         let RegStr4Number = "^\\d+$"
         // 判断用户输入的是否都是数字
         let predicate = NSPredicate(format: "SELF MATCHES %@", RegStr4Number)
         let xxx = "\(self.text ?? "")\(string)"
-        let match = predicate.evaluateWithObject(noneSpaseString(xxx));
+        let match = predicate.evaluateWithObject(noneSpaseString(xxx))
         if match == false {
-            // 如果有非整数的字符，就当做用户输入的是用户名，不做任何处理
+            // 如果有非整数的字符，就当做用户输入的是用户名
+            // 清空之前自动产生的空格
+            if isFirstNan == false {
+                let range = selectedRange()
+                self.insertText(string)
+                self.text = noneSpaseString(self.text)
+                print("=================================== 第一次不都是整数  \(self.text)")
+                isFirstNan = true
+                //获取光标位置
+                setSelectedRange(range)
+                return false
+            }
             return true
         } else {
+            isFirstNan = false
             let text = self.text ?? ""
             let nsText = NSString(string: text)
             // 删除
