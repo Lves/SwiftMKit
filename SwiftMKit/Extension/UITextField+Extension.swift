@@ -151,7 +151,7 @@ public extension UITextField {
         let predicate = NSPredicate(format: "SELF MATCHES %@", RegStr4Number)
         let xxx = "\(self.text ?? "")\(string)"
         let match = predicate.evaluateWithObject(noneSpaseString(xxx))
-        if match == false {
+        if match == false && (self.text ?? "").length > 0 {
             // 如果有非整数的字符，就当做用户输入的是用户名
             // 清空之前自动产生的空格
             if isFirstNan == false {
