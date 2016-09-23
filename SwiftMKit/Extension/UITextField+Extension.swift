@@ -86,14 +86,6 @@ public extension UITextField {
         }
         return false
     }
-//    private var isFirstNan: NSNumber? {
-//        get {
-//            return
-//        }
-//        set {
-//            self.isFirstNan = newValue
-//        }
-//    }
     public func reformatMobile(range: NSRange, replaceString string: String) -> Bool {
         
         func noneSpaseString(string: String?) -> String {
@@ -153,18 +145,18 @@ public extension UITextField {
         let xxx = "\(self.text ?? "")\(string)"
         let match = predicate.evaluateWithObject(noneSpaseString(xxx))
         if match == false && (self.text ?? "").length > 0 {
-            // 如果有非整数的字符，就当做用户输入的是用户名
-            // 清空之前自动产生的空格
-            if isFirstNan == false {
-                let range = selectedRange()
-                self.insertText(string)
-                self.text = noneSpaseString(self.text)
-                print("=================================== 第一次不都是整数  \(self.text)")
-                isFirstNan = true
-                //获取光标位置
-                setSelectedRange(range)
-                return false
-            }
+//            // 如果有非整数的字符，就当做用户输入的是用户名
+//            // 清空之前自动产生的空格
+//            if isFirstNan == false {
+//                let range = selectedRange()
+//                self.insertText(string)
+//                self.text = noneSpaseString(self.text)
+//                print("=================================== 第一次不都是整数  \(self.text)")
+//                isFirstNan = true
+//                //获取光标位置
+//                setSelectedRange(range)
+//                return false
+//            }
             return true
         } else {
             isFirstNan = false
