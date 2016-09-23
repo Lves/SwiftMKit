@@ -9,6 +9,7 @@
 import Foundation
 import ReactiveCocoa
 import Result
+import EZSwiftExtensions
 
 public extension UITextField {
     public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
