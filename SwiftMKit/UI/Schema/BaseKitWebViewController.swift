@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import CocoaLumberjack
 import WebKit
+import WebViewJavascriptBridge
 
 public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate ,WebViewProgressDelegate{
     
@@ -73,6 +74,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         webViewProgress.progressDelegate = self
         progressView = UIProgressView(frame: CGRectMake(0, 0, self.screenW, 0))
         self.view.addSubview(progressView!)
+        bindEvents()
         
         if url != nil {
             self.loadData()
@@ -90,6 +92,10 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         if url != nil {
             self.webViewBridge?.requestUrl(self.url)
         }
+    }
+    public func bindEvents() {}
+    public func bindEvent(eventName: String, handler: WVJBHandler) {
+        webViewBridge?.addEvent(eventName, handler: handler)
     }
     
     //WebViewProgressDelegate

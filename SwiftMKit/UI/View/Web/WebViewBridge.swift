@@ -52,6 +52,9 @@ public class WebViewBridge : NSObject {
             make.center.equalTo(_webView!)
         }
     }
+    public func addEvent(eventName: String, handler: WVJBHandler) {
+        bridge.registerHandler(eventName, handler: handler)
+    }
     
     public func requestUrl(url: String?) {
         if url == nil || url!.length <= 0 || !UIApplication.sharedApplication().canOpenURL(NSURL(string: url!)!) {
