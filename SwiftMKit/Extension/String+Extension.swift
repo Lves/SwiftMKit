@@ -121,4 +121,14 @@ extension String {
             return self
         }
     }
+    func formatTimestampToDateString(format: String = "yyyy-MM-dd") -> String {
+        guard self.length > 0 else { return "" }
+        let tmp = self.toDouble() ?? 0
+        // NSTimeInterval
+        let timestamp = self.length >= 13 ? tmp / 1000.0 : tmp
+        let date = NSDate(timeIntervalSince1970: timestamp)
+        let fmt = NSDateFormatter()
+        fmt.dateFormat = format
+        return fmt.stringFromDate(date)
+    }
 }
