@@ -131,4 +131,27 @@ extension String {
         fmt.dateFormat = format
         return fmt.stringFromDate(date)
     }
+//    ///  字符串 -> N为小数
+//    ///
+//    ///  :param: digit N
+//    ///
+//    ///  :returns: 指定格式的字符串
+//    func formatFloatString(digit: UInt = 2) -> String {
+//        let fmt = "%.\(digit)f"
+//        return String(format: fmt, self.toDouble() ?? 0)
+//    }
+    
+    ///  字符串 -> N为小数
+    ///
+    ///  :param: digit   N
+    ///  :param: percent 标识是否显示成百分比字符串
+    ///
+    ///  :returns: 指定格式的字符串
+    func formatFloatString(digit: UInt = 2, percent: Bool = false) -> String {
+        var fmt = "%.\(digit)f"
+        if percent {
+            fmt = "%.\(digit)f%%"
+        }
+        return String(format: fmt, self.toDouble() ?? 0)
+    }
 }
