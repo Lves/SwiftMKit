@@ -20,6 +20,7 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
     private struct Constant {
         static let Longitude = "LocationLongitude"
         static let Latitude = "LocationLatitude"
+        static let CurCityName = "LocationCurCityName"
     }
     
     lazy public var manager = CLLocationManager()
@@ -57,6 +58,19 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             DDLogInfo("[LocationManager]:（\(long), \(lat))")
             self.longitude = long
             self.latitude = lat
+            
+            //获取城市信息
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location, completionHandler: { array , error in
+                if array?.count > 0 {
+                    let placemark = array?.first
+                    self.curCityName = placemark?.locality
+                    if (placemark?.locality == nil) {
+                        self.curCityName = placemark?.administrativeArea
+                    }
+                }
+            })
+            
             NSNotificationCenter.defaultCenter().postNotificationName(LocationManager.NotificationLocationUpdatedName, object: nil)
         }
         if autoStop {
@@ -86,6 +100,20 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
                 cache.setObject(value, forKey: Constant.Latitude)
             }else {
                 cache.removeObjectForKey(Constant.Latitude)
+            }
+        }
+    }
+    
+    public var curCityName:String? {
+        get{
+            return cache.objectForKey(Constant.CurCityName) as? String
+        }
+        set {
+            DDLogInfo("[LocationManager]:(curCityName) =（\(curCityName)")
+            if let value = newValue {
+                cache.setObject(value, forKey: Constant.CurCityName)
+            }else {
+                cache.removeObjectForKey(Constant.CurCityName)
             }
         }
     }
