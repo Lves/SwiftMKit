@@ -34,16 +34,12 @@ public class BaseListKitViewModel: BaseKitViewModel {
             dataSource = [newValue]
         }
     }
+    private var isDataSourceChanged: Bool = false
     var dataSource:[[AnyObject]] = [[AnyObject]]() {
         didSet {
             if self.viewController == nil {
                 return
             }
-            if self.listViewController.listViewType == .RefreshOnly ||
-               self.listViewController.listViewType == .None {
-                return
-            }
-            var noMoreDataTip = InnerConstant.StringNoMoreDataTip
             var count: UInt = UInt(dataSource.count)
             if count == 1 {
                 count = UInt(dataSource.first?.count ?? 0)
@@ -52,14 +48,26 @@ public class BaseListKitViewModel: BaseKitViewModel {
             if oldCount == 1 {
                 oldCount = UInt(oldValue.first?.count ?? 0)
             }
+            //是否是第一次赋默认值
+            if !isDataSourceChanged && count == 0 {
+                isDataSourceChanged = true
+                return
+            }
+            isDataSourceChanged = true
             if count == 0 {
                 self.viewController.showEmptyView()
+            } else if oldCount == 0 {
+                self.viewController.hideEmptyView()
+            }
+            if self.listViewController.listViewType == .RefreshOnly ||
+               self.listViewController.listViewType == .None {
+                return
+            }
+            var noMoreDataTip = InnerConstant.StringNoMoreDataTip
+            if count == 0 {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
                 return
-            }
-            if oldCount == 0 {
-                self.viewController.hideEmptyView()
             }
             if count < listLoadNumber {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
