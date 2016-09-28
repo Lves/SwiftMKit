@@ -18,6 +18,10 @@ extension String {
         return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
     }
     
+    func withoutSeparator() -> String {
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).joinWithSeparator("")
+    }
+    
     // MARK: Format
     func formatCurrency(locale: String = "en_US") -> String {
         return NSString(string: self).doubleValue.formatCurrency(locale)
