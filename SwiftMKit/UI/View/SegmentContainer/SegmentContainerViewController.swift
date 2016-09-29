@@ -72,6 +72,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.scrollEnabled = true
         scrollView.pagingEnabled = true
         scrollView.bounces = false
+        scrollView.scrollsToTop = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         self.view.addSubview(scrollView)
@@ -91,6 +92,9 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             scrollView.addSubview(vc.view)
             if !(self.childViewControllers.contains(vc)) {
                 self.addChildViewController(vc)
+                if let listVC = vc as? BaseListViewController {
+                    listVC.listView?.scrollsToTop = (index == 0)
+                }
             }
         }
         self.resetSubUIFrame()
@@ -126,6 +130,15 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         if index == selectedSegment {
             DDLogDebug("Segment Index is same to old one, do nothing")
             return true
+        }
+        for vc in viewControllers {
+            if let listVC = vc as? BaseListViewController {
+                if index == viewControllers.indexOf(vc) {
+                    listVC.listView?.scrollsToTop = true
+                } else {
+                    listVC.listView?.scrollsToTop = false
+                }
+            }
         }
         _selectedSegment = index
         scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: true)
