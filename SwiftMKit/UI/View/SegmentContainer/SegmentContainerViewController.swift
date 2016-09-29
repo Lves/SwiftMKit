@@ -85,9 +85,13 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
     private func resetChildControllerView(){
         scrollView.contentSize = CGSizeMake((self.screenW * CGFloat(viewControllers.count)), 0)
         scrollView.removeSubviews()
+        
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
             scrollView.addSubview(vc.view)
+            if !(self.childViewControllers.contains(vc)) {
+                self.addChildViewController(vc)
+            }
         }
         self.resetSubUIFrame()
     }
