@@ -51,19 +51,23 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         // Do any additional setup after loading the view.
     }
     
+    override public func viewDidLayoutSubviews() {
+        
+        if scrollView == nil {
+            self.setUI()
+        }else{
+            self.resetSubUIFrame()
+        }
+    }
+    
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override public func viewDidLayoutSubviews() {
-        self.setUI()
-    }
-    
     public func setUI() {
         scrollView = UIScrollView(frame: self.view.bounds)
         scrollView.backgroundColor = UIColor.clearColor()
-        scrollView.backgroundColor = UIColor.redColor()
         scrollView.delegate = self
         scrollView.scrollEnabled = true
         scrollView.pagingEnabled = true
@@ -78,16 +82,24 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         _viewControllers = childController
     }
     
-    public func resetChildControllerView(){
+    private func resetChildControllerView(){
         scrollView.contentSize = CGSizeMake((self.screenW * CGFloat(viewControllers.count)), 0)
         scrollView.removeSubviews()
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
-            vc.view.frame.x = CGFloat(index) * screenW
-            vc.view.frame.h = scrollView.h
-            vc.view.backgroundColor = UIColor.greenColor()
             scrollView.addSubview(vc.view)
-            self.addChildViewController(vc)
+        }
+        self.resetSubUIFrame()
+    }
+    
+    private func resetSubUIFrame() {
+        if scrollView != nil{
+            scrollView.frame = self.view.bounds
+            for index in 0..<viewControllers.count {
+                let vc = viewControllers[index]
+                vc.view.frame.x = CGFloat(index) * screenW
+                vc.view.frame.h = scrollView.h
+            }
         }
     }
     
@@ -113,6 +125,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
         _selectedSegment = index
         scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: true)
+        DDLogInfo("self.screenW \(self.screenW)")
         return true
     }
 }
