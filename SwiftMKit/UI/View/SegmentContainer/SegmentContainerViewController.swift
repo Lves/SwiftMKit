@@ -48,9 +48,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        self.setUI()
     }
     
     override public func didReceiveMemoryWarning() {
@@ -58,9 +56,14 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    override public func viewDidLayoutSubviews() {
+        self.setUI()
+    }
+    
     public func setUI() {
         scrollView = UIScrollView(frame: self.view.bounds)
         scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.redColor()
         scrollView.delegate = self
         scrollView.scrollEnabled = true
         scrollView.pagingEnabled = true
@@ -68,16 +71,21 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         self.view.addSubview(scrollView)
+        self.resetChildControllerView()
     }
     
     public func addSegmentViewControllers(childController: [UIViewController]) {
         _viewControllers = childController
+    }
+    
+    public func resetChildControllerView(){
         scrollView.contentSize = CGSizeMake((self.screenW * CGFloat(viewControllers.count)), 0)
         scrollView.removeSubviews()
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
             vc.view.frame.x = CGFloat(index) * screenW
-            vc.view.frame.h = self.view.h
+            vc.view.frame.h = scrollView.h
+            vc.view.backgroundColor = UIColor.greenColor()
             scrollView.addSubview(vc.view)
             self.addChildViewController(vc)
         }
