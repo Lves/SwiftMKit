@@ -48,9 +48,16 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        self.setUI()
+    }
+    
+    override public func viewDidLayoutSubviews() {
+        
+        if scrollView == nil {
+            self.setUI()
+        }else{
+            self.resetSubUIFrame()
+        }
     }
     
     override public func didReceiveMemoryWarning() {
@@ -65,21 +72,42 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.scrollEnabled = true
         scrollView.pagingEnabled = true
         scrollView.bounces = false
+        scrollView.scrollsToTop = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         self.view.addSubview(scrollView)
+        self.resetChildControllerView()
     }
     
     public func addSegmentViewControllers(childController: [UIViewController]) {
         _viewControllers = childController
+    }
+    
+    private func resetChildControllerView(){
         scrollView.contentSize = CGSizeMake((self.screenW * CGFloat(viewControllers.count)), 0)
         scrollView.removeSubviews()
+        
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
-            vc.view.frame.x = CGFloat(index) * screenW
-            vc.view.frame.h = self.view.h
             scrollView.addSubview(vc.view)
-            self.addChildViewController(vc)
+            if !(self.childViewControllers.contains(vc)) {
+                self.addChildViewController(vc)
+                if let listVC = vc as? BaseListViewController {
+                    listVC.listView?.scrollsToTop = (index == 0)
+                }
+            }
+        }
+        self.resetSubUIFrame()
+    }
+    
+    private func resetSubUIFrame() {
+        if scrollView != nil{
+            scrollView.frame = self.view.bounds
+            for index in 0..<viewControllers.count {
+                let vc = viewControllers[index]
+                vc.view.frame.x = CGFloat(index) * screenW
+                vc.view.frame.h = scrollView.h
+            }
         }
     }
     
@@ -103,8 +131,18 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             DDLogDebug("Segment Index is same to old one, do nothing")
             return true
         }
+        for vc in viewControllers {
+            if let listVC = vc as? BaseListViewController {
+                if index == viewControllers.indexOf(vc) {
+                    listVC.listView?.scrollsToTop = true
+                } else {
+                    listVC.listView?.scrollsToTop = false
+                }
+            }
+        }
         _selectedSegment = index
         scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: true)
+        DDLogInfo("self.screenW \(self.screenW)")
         return true
     }
 }

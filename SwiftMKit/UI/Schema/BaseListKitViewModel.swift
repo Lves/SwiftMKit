@@ -14,7 +14,9 @@ public class BaseListKitViewModel: BaseKitViewModel {
     private struct InnerConstant {
         static let StringNoMoreDataTip = "数据已全部加载完毕"
     }
-    
+    override init() {
+        super.init()
+    }
     public var listViewController: BaseListKitViewController! {
         get {
             return viewController as! BaseListKitViewController
@@ -50,10 +52,8 @@ public class BaseListKitViewModel: BaseKitViewModel {
             }
             //是否是第一次赋默认值
             if !isDataSourceChanged && count == 0 {
-                isDataSourceChanged = true
                 return
             }
-            isDataSourceChanged = true
             if count == 0 {
                 self.viewController.showEmptyView()
             } else if oldCount == 0 {
@@ -87,6 +87,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
     var listMaxNumber: UInt { get { return UInt.max } }
     
     public func updateDataArray(newData: [AnyObject]?) {
+        isDataSourceChanged = true
         if let data = newData {
             if dataIndex == 0 {
                 dataArray = data
@@ -105,6 +106,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
         }
     }
     public func updateDataSource(newData: [[AnyObject]]?) {
+        isDataSourceChanged = true
         dataSource = newData ?? [[AnyObject]]()
         if let table = self.listViewController.listView as? UITableView {
             table.reloadData()

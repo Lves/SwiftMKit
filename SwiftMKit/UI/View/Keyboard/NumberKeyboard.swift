@@ -11,7 +11,7 @@ import ReactiveCocoa
 import CocoaLumberjack
 import IQKeyboardManager
 
-struct NumberKeyboardUITheme {
+public struct NumberKeyboardUITheme {
     var viewBackgroundColor: UIColor
     var viewLineColor: UIColor
     var viewEnterColor: UIColor
@@ -75,10 +75,13 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return keyboard(textField, type: type, style: .Default)
     }
     public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal, style: NumberKeyboardStyle) -> NumberKeyboard {
+        return keyboard(textField, type: type, theme: Theme.DefaultTheme)
+    }
+    public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal, theme: NumberKeyboardUITheme) -> NumberKeyboard {
         let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil).first as? NumberKeyboard
         view?.textField = textField
         view?.type = type
-        view?.setupUI(style)
+        view?.setupUI(theme)
         return view!
     }
     public override init(frame: CGRect) {
@@ -91,13 +94,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     public func clear() {
         text = ""
     }
-    
-    private func setupUI(style: NumberKeyboardStyle) {
-        var theme = Theme.DefaultTheme
-        switch style {
-        case .Default:
-            theme = Theme.DefaultTheme
-        }
+    private func setupUI(theme: NumberKeyboardUITheme) {
         btnDel.setBackgroundImage(UIImage(color: theme.viewDelColor), forState: .Normal)
         btnOk.setBackgroundImage(UIImage(color: theme.viewEnterColor), forState: .Normal)
         btnKey.setBackgroundImage(UIImage(color: theme.viewNumberColor), forState: .Normal)
@@ -206,10 +203,10 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     //键盘回收
     private func bindKeyButtonAction(button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
-            self?.textField?.resignFirstResponder()
             if let temp = self?.text {
                 self?.textField?.text = self?.matchConfirm(temp)
             }
+            self?.textField?.resignFirstResponder()
         }
     }
     //删除
