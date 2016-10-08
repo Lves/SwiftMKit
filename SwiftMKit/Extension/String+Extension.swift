@@ -131,6 +131,14 @@ extension String {
         fmt.dateFormat = format
         return fmt.stringFromDate(date)
     }
+    func formatDateStringToOther(oFormat:String = "yyyyMMdd",toFormat:String = "yyyy-MM-dd") -> String {
+        guard self.length > 0 else { return "" }
+        let date = NSDate(fromString: self, format: oFormat)
+        let fmt = NSDateFormatter()
+        fmt.dateFormat = toFormat
+        return fmt.stringFromDate(date!)
+    }
+
 //    ///  字符串 -> N为小数
 //    ///
 //    ///  :param: digit N
