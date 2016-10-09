@@ -10,8 +10,11 @@
 
 #import "PulsingHaloLayer.h"
 
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+@interface PulsingHaloLayer () <CAAnimationDelegate>
+#else
 @interface PulsingHaloLayer ()
+#endif
 @property (nonatomic, strong) CALayer *effect;
 @property (nonatomic, strong) CAAnimationGroup *animationGroup;
 @end
@@ -42,10 +45,6 @@
 - (void)start {
     [self _setupAnimationGroup];
     [self.effect addAnimation:self.animationGroup forKey:@"pulse"];
-}
-
-- (void)stop{
-    [self.effect removeAllAnimations];
 }
 
 - (void)setFrame:(CGRect)frame {
@@ -97,13 +96,17 @@
     self.instanceDelay = (self.animationDuration + self.pulseInterval) / self.haloLayerNumber;
 }
 
+- (void)setRepeatCount:(float)repeatCount {
+    [super setRepeatCount:repeatCount];
+    self.animationGroup.repeatCount = repeatCount;
+}
+
 
 // =============================================================================
 #pragma mark - Private
 
 - (void)_setupDefaults {
     _fromValueForRadius = 0.0;
-    _fromValueForAlpha = 0.45;
     _keyTimeForHalfOpacity = 0.2;
     _animationDuration = 3;
     _pulseInterval = 0;
@@ -113,7 +116,7 @@
     self.radius = 60;
     self.haloLayerNumber = 1;
     self.startInterval = 1;
-    self.backgroundColor = [[UIColor colorWithRed:0.000 green:0.455 blue:0.756 alpha:1] CGColor];
+    self.backgroundColor = [[UIColor colorWithRed:0.000 green:0.455 blue:0.756 alpha:0.45] CGColor];
 }
 
 - (void)_setupAnimationGroup {
@@ -133,7 +136,8 @@
     
     CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
     opacityAnimation.duration = self.animationDuration;
-    opacityAnimation.values = @[@(self.fromValueForAlpha), @0.45, @0];
+    CGFloat fromValueForAlpha = CGColorGetAlpha(self.backgroundColor);
+    opacityAnimation.values = @[@(fromValueForAlpha), @(fromValueForAlpha * 0.5), @0];
     opacityAnimation.keyTimes = @[@0, @(self.keyTimeForHalfOpacity), @1];
     
     NSArray *animations = @[scaleAnimation, opacityAnimation];

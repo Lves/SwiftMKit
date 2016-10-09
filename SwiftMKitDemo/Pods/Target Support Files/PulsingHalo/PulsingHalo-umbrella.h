@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+#import "PulsingHalo.h"
 #import "PulsingHaloLayer.h"
 
 FOUNDATION_EXPORT double PulsingHaloVersionNumber;

@@ -15,8 +15,27 @@ extension NSDate {
         if let date = formatter.dateFromString(string) {
             self.init(timeInterval: 0, sinceDate: date)
         } else {
+            self.init()
             return nil
         }
+    }
+
+    /// EZSE: Initializes NSDate from string returned from an http response, according to several RFCs
+    public convenience init? (httpDateString: String) {
+        if let rfc1123 = NSDate(fromString: httpDateString, format: "EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz") {
+            self.init(timeInterval: 0, sinceDate: rfc1123)
+            return
+        }
+        if let rfc850 = NSDate(fromString: httpDateString, format: "EEEE',' dd'-'MMM'-'yy HH':'mm':'ss z") {
+            self.init(timeInterval: 0, sinceDate: rfc850)
+            return
+        }
+        if let asctime =  NSDate(fromString: httpDateString, format: "EEE MMM d HH':'mm':'ss yyyy") {
+            self.init(timeInterval: 0, sinceDate: asctime)
+            return
+        }
+        //self.init()
+        return nil
     }
 
     /// EZSE: Converts NSDate to String

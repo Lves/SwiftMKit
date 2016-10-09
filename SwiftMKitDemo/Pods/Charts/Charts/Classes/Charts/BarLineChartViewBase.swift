@@ -71,10 +71,6 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     internal var _xAxisRenderer: ChartXAxisRenderer!
     
     internal var _tapGestureRecognizer: NSUITapGestureRecognizer!
-    //ModifySourceCode add By LiXingLe 是否支持点击高亮手势 start
-    public var tapToHightlightEnabled = false
-    private var _longPressGestureRecognizer: UILongPressGestureRecognizer!
-    //add end
     internal var _doubleTapGestureRecognizer: NSUITapGestureRecognizer!
     #if !os(tvOS)
     internal var _pinchGestureRecognizer: NSUIPinchGestureRecognizer!
@@ -83,8 +79,6 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     
     /// flag that indicates if a custom viewport offset has been set
     private var _customViewPortEnabled = false
-    
-
     
     public override init(frame: CGRect)
     {
@@ -119,22 +113,18 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         self.highlighter = ChartHighlighter(chart: self)
         
         _tapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.tapGestureRecognized(_:)))
-        //ModifySourceCode add By LiXingLe 添长安手势触发事件和_panGestureRecognizer 一样，把_panGestureRecognizer手势去掉（因为_panGestureRecognizer会和super滚动冲突）
-        _longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action:  #selector(BarLineChartViewBase.longPressGestureRecognized(_:)))
         _doubleTapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.doubleTapGestureRecognized(_:)))
         _doubleTapGestureRecognizer.nsuiNumberOfTapsRequired = 2
         _panGestureRecognizer = NSUIPanGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.panGestureRecognized(_:)))
         
         _panGestureRecognizer.delegate = self
         
-        self.addGestureRecognizer(_longPressGestureRecognizer)
         self.addGestureRecognizer(_tapGestureRecognizer)
         self.addGestureRecognizer(_doubleTapGestureRecognizer)
-//        self.addGestureRecognizer(_panGestureRecognizer)
+        self.addGestureRecognizer(_panGestureRecognizer)
         
         _doubleTapGestureRecognizer.enabled = _doubleTapToZoomEnabled
         _panGestureRecognizer.enabled = _dragEnabled
-        _tapGestureRecognizer.enabled = tapToHightlightEnabled
 
         #if !os(tvOS)
             _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.pinchGestureRecognized(_:)))
@@ -245,51 +235,17 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         {
             _rightYAxisRenderer?.renderLimitLines(context: context)
         }
-        //绘制图形
-        // ModifySourceCode Update By LiXingLe
-//        renderer?.drawData(context: context)
-        if (_data is BarChartData) && customAnimating {
-            renderer?.drawAnimationData(context: context,animateBack: isCustomAnimateBack)
-        }else{
-            renderer?.drawData(context: context)
-        }
-        // update end
         
-    
+        renderer?.drawData(context: context)
+
         // if highlighting is enabled
         if (valuesToHighlight())
         {
-            //绘制高亮
-            // ModifySourceCode Update By LiXingLe
-//            renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
-            if (_data is BarChartData) && customAnimating {
-                renderer?.drawAnimationHighlighted(context: context, indices: _indicesToHighlight,animateBack: isCustomAnimateBack)
-            }else{
-                renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
-            }
-            //Update end
-            
-            //ModifySourceCode udate by lixingle 移动位置，原来在绘制高亮点和线以后
-            // Removes clipping rectangle
-            CGContextRestoreGState(context)
-            
-            // ModifySourceCode Add By LiXingLe
-            if showAllHighlightCircles {
-                 renderer?.drawCircleIndex(context: context, indices: _indicesToHighlight)
-            }
-           //Add end
-        }else {
-            //ModifySourceCode udate by lixingle 移动位置，原来在绘制高亮点和线以后
-            // Removes clipping rectangle
-            CGContextRestoreGState(context)
-            
-            // ModifySourceCode Add By LiXingLe  绘制默认高亮点
-            if showAllHighlightCircles {
-                renderer?.drawCircleIndex(context: context, indices: indicesDefaultToHighlight)
-            }
+            renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
         }
 
-        
+        // Removes clipping rectangle
+        CGContextRestoreGState(context)
         
         renderer!.drawExtras(context: context)
         
@@ -310,15 +266,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         _leftYAxisRenderer.renderAxisLabels(context: context)
         _rightYAxisRenderer.renderAxisLabels(context: context)
 
-        //绘制数值
-        // ModifySourceCode Update By LiXingLe
-//        renderer!.drawValues(context: context)
-        if (_data is BarChartData) && customAnimating {
-            renderer?.drawAnimationValues(context: context,animateBack: isCustomAnimateBack)
-        }else{
-            renderer!.drawValues(context: context)
-        }
-        //Update end
+        renderer!.drawValues(context: context)
 
         _legendRenderer.renderLegend(context: context)
         // drawLegend()
@@ -612,6 +560,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         {
             return
         }
+        
         if (recognizer.state == NSUIGestureRecognizerState.Ended)
         {
             if !self.isHighLightPerTapEnabled { return }
@@ -629,88 +578,6 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                 self.highlightValue(highlight: h, callDelegate: true)
             }
         }
-    }
-    //ModifySourceCode add By LiXingLe 长按手势
-    func longPressGestureRecognized(recognizer: NSUITapGestureRecognizer) {
-        if _data === nil
-        {
-            return
-        }
-        if (recognizer.state == NSUIGestureRecognizerState.Began)
-        {
-            if self.isHighlightPerDragEnabled
-            {
-                _isDragging = false
-                if (isHighlightPerDragEnabled)
-                {
-                    let h = getHighlightByTouchPoint(recognizer.locationInView(self))
-                    let lastHighlighted = self.lastHighlighted
-                    
-                    if ((h === nil && lastHighlighted !== nil) ||
-                        (h !== nil && lastHighlighted === nil) ||
-                        (h !== nil && lastHighlighted !== nil && !h!.isEqual(lastHighlighted)))
-                    {
-                        self.lastHighlighted = h
-                        self.highlightValue(highlight: h, callDelegate: true)
-                    }
-                }
-            }
-        }
-        if (recognizer.state == NSUIGestureRecognizerState.Changed)
-        {
-            if (_isDragging)
-            {
-                let originalTranslation = recognizer.locationInView(self)
-                let translation = CGPoint(x: originalTranslation.x - _lastPanPoint.x, y: originalTranslation.y - _lastPanPoint.y)
-                
-                performPanChange(translation: translation)
-                
-                _lastPanPoint = originalTranslation
-            }
-            else if (isHighlightPerDragEnabled)
-            {
-                let h = getHighlightByTouchPoint(recognizer.locationInView(self))
-
-                let lastHighlighted = self.lastHighlighted
-
-                if ((h === nil && lastHighlighted !== nil) ||
-                    (h !== nil && lastHighlighted === nil) ||
-                    (h !== nil && lastHighlighted !== nil && !h!.isEqual(lastHighlighted)))
-                {
-                    self.lastHighlighted = h
-                    self.highlightValue(highlight: h, callDelegate: true)
-                }
-            }
-        }
-        else if (recognizer.state == NSUIGestureRecognizerState.Ended || recognizer.state == NSUIGestureRecognizerState.Cancelled)
-        {
-            if (_isDragging)
-            {
-                if (recognizer.state == NSUIGestureRecognizerState.Ended && isDragDecelerationEnabled)
-                {
-                    stopDeceleration()
-                    
-                    _decelerationLastTime = CACurrentMediaTime()
-                    //未设置速率 lixingle
-//                    _decelerationVelocity = recognizer.velocityInView(self)
-                    
-                    _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
-                    _decelerationDisplayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
-                }
-                
-                _isDragging = false
-            }
-            //ModifySourceCode add By LiXingLe
-            self.highlightValue(highlight: nil, callDelegate: true)
-            self.lastHighlighted = nil
-            
-            if (_outerScrollView !== nil)
-            {
-                _outerScrollView?.scrollEnabled = true
-                _outerScrollView = nil
-            }
-        }
-        
     }
     
     @objc private func doubleTapGestureRecognized(recognizer: NSUITapGestureRecognizer)
@@ -879,6 +746,8 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
             }
             else if self.isHighlightPerDragEnabled
             {
+                // We will only handle highlights on NSUIGestureRecognizerState.Changed
+                
                 _isDragging = false
             }
         }
@@ -917,7 +786,6 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                     stopDeceleration()
                     
                     _decelerationLastTime = CACurrentMediaTime()
-                    
                     _decelerationVelocity = recognizer.velocityInView(self)
                     
                     _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
@@ -926,9 +794,6 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                 
                 _isDragging = false
             }
-            
-            self.highlightValue(highlight: nil, callDelegate: true)
-            self.lastHighlighted = nil
             
             if (_outerScrollView !== nil)
             {

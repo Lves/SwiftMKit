@@ -22,13 +22,20 @@ extension UIView {
 
     /// EZSwiftExtensions - Copies size of superview
     public convenience init(superView: UIView) {
-        self.init(frame: CGRect(origin: CGPointZero, size: superView.size))
+        self.init(frame: CGRect(origin: CGPoint.zero, size: superView.size))
     }
 }
 
 // MARK: Frame Extensions
 extension UIView {
-    //TODO: Multipe addsubview
+
+    /// EZSwiftExtensions, add multiple subviews
+    public func addSubviews(views: [UIView]) {
+        views.forEach { eachView in
+            self.addSubview(eachView)
+        }
+    }
+
     //TODO: Add pics to readme
     /// EZSwiftExtensions, resizes this view so it fits the largest subview
     public func resizeToFitSubviews() {
@@ -435,6 +442,14 @@ extension UIView {
             self.setScale(x: 1, y: 1)
             })
     }
+
+    //EZSE: Reverse pop, good for button animations
+    public func reversePop() {
+        setScale(x: 0.9, y: 0.9)
+        UIView.animateWithDuration(0.05, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { [weak self] Void in
+            self?.setScale(x: 1, y: 1)
+        }) { (bool) in }
+    }
 }
 
 //TODO: add this to readme
@@ -472,7 +487,13 @@ extension UIView {
     public func addSwipeGesture(direction direction: UISwipeGestureRecognizerDirection, numberOfTouches: Int = 1, target: AnyObject, action: Selector) {
         let swipe = UISwipeGestureRecognizer(target: target, action: action)
         swipe.direction = direction
+
+        #if os(iOS)
+
         swipe.numberOfTouchesRequired = numberOfTouches
+
+        #endif
+
         addGestureRecognizer(swipe)
         userInteractionEnabled = true
     }
@@ -498,6 +519,8 @@ extension UIView {
         userInteractionEnabled = true
     }
 
+    #if os(iOS)
+
     /// EZSwiftExtensions
     public func addPinchGesture(target target: AnyObject, action: Selector) {
         let pinch = UIPinchGestureRecognizer(target: target, action: action)
@@ -505,12 +528,18 @@ extension UIView {
         userInteractionEnabled = true
     }
 
+    #endif
+
+    #if os(iOS)
+
     /// EZSwiftExtensions - Make sure you use  "[weak self] (gesture) in" if you are using the keyword self inside the closure or there might be a memory leak
     public func addPinchGesture(action action: ((UIPinchGestureRecognizer) -> ())?) {
         let pinch = BlockPinch(action: action)
         addGestureRecognizer(pinch)
         userInteractionEnabled = true
     }
+
+    #endif
 
     /// EZSwiftExtensions
     public func addLongPressGesture(target target: AnyObject, action: Selector) {
@@ -544,10 +573,7 @@ extension UIView {
 }
 
 extension UIView {
-    /// EZSwiftExtensions
-    /**
-     Shakes the view for as many number of times as given in the argument
-     */
+    ///EZSE: Shakes the view for as many number of times as given in the argument.
     public func shakeViewForTimes(times: Int) {
         let anim = CAKeyframeAnimation(keyPath: "transform")
         anim.values = [
