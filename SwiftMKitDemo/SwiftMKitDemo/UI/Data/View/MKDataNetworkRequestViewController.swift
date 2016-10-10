@@ -20,7 +20,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
         static let SegueToNext = "routeToNetworkRequestDetail"
     }
     lazy private var _viewModel = MKDataNetworkRequestViewModel()
-    override var viewModel: BaseKitViewModel!{
+    override var viewModel: MKDataNetworkRequestViewModel!{
         get { return _viewModel }
     }
     override var listView: UIScrollView! {

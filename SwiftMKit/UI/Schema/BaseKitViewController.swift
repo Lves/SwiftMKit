@@ -33,7 +33,7 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
         get { return nil }
     }
     private var _forbiddenSwipBackGesture: Bool?
-    /// 禁用滑动返回
+    /// 禁用手势滑动返回
     var forbiddenSwipBackGesture: Bool {
         get {
             if _forbiddenSwipBackGesture == nil {
@@ -154,6 +154,7 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
 
 public extension UIViewController {
 }
+
 
 //HUD
 
