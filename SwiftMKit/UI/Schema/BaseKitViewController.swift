@@ -15,14 +15,14 @@ import ObjectiveC
 import SnapKit
 
 public class BaseKitViewController : UIViewController, UIGestureRecognizerDelegate {
-    public var params = Dictionary<String, AnyObject>() {
+    /// 页面参数（大部分用于初始化使用）
+    public var params = [String: AnyObject]() {
         didSet {
             for (key,value) in params {
                 self.setValue(value, forKey: key)
             }
         }
     }
-    public var completion: () -> Void = {}
     
     public var hud: HUDProtocol = MBHUDView()
     lazy public var indicator: IndicatorProtocol = {
