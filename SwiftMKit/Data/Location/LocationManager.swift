@@ -38,24 +38,24 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             shared.manager.delegate = shared
             shared.manager.desiredAccuracy = accuracy
             shared.manager.startUpdatingLocation()
-            DDLogInfo("[LocationManager] Started");
+            DDLogInfo("Started");
             return true
         }
         else{
-            DDLogError("[LocationManager] Disabled");
+            DDLogError("Disabled");
             return false
         }
     }
     public class func stop() {
         shared.manager.stopUpdatingLocation()
-        DDLogInfo("[LocationManager] Stopped");
+        DDLogInfo("Stopped");
     }
     
     @objc public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             let long = location.coordinate.longitude
             let lat = location.coordinate.latitude
-            DDLogInfo("[LocationManager]:（\(long), \(lat))")
+            DDLogInfo("当前坐标: (\(long), \(lat))")
             self.longitude = long
             self.latitude = lat
             
@@ -109,7 +109,7 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             return cache.objectForKey(Constant.CurCityName) as? String
         }
         set {
-            DDLogInfo("[LocationManager]:(curCityName) =（\(curCityName)")
+            DDLogInfo("当前城市: (\(curCityName)")
             if let value = newValue {
                 cache.setObject(value, forKey: Constant.CurCityName)
             }else {

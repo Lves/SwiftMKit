@@ -43,7 +43,7 @@ public class NetApiClient : NSObject {
         do {
             reachability = try Reachability.reachabilityForInternetConnection()
         } catch {
-            DDLogError("[NetApi] Unable to create Reachability")
+            DDLogError("Unable to create Reachability")
             return
         }
         reachability?.whenReachable = { reachability in
@@ -51,10 +51,10 @@ public class NetApiClient : NSObject {
             // be on the main thread, like this:
             dispatch_async(dispatch_get_main_queue()) {
                 if reachability.isReachableViaWiFi() {
-                    DDLogInfo("[NetApi] Network Status Change: Reachable via WiFi")
+                    DDLogInfo("当前网络: WiFi")
                     self.networkStatus.value = .ReachableViaWiFi
                 } else {
-                    DDLogInfo("[NetApi] Network Status Change: Reachable via Cellular")
+                    DDLogInfo("当前网络: Cellular")
                     self.networkStatus.value = .ReachableViaWWAN
                 }
             }
@@ -63,7 +63,7 @@ public class NetApiClient : NSObject {
             // this is called on a background thread, but UI updates must
             // be on the main thread, like this:
             dispatch_async(dispatch_get_main_queue()) {
-                DDLogInfo("[NetApi] Network Status Change: Not reachable")
+                DDLogInfo("网络无法连接")
                 self.networkStatus.value = .NotReachable
             }
         }
@@ -71,7 +71,7 @@ public class NetApiClient : NSObject {
         do {
             try self.reachability?.startNotifier()
         } catch {
-            DDLogError("[NetApi] Unable to start notifier")
+            DDLogError("Unable to start notifier")
         }
     }
     
@@ -85,7 +85,7 @@ public class NetApiClient : NSObject {
     }
     
     class func clearCookie() {
-        DDLogInfo("[NetApi] 清除Cookie")
+        DDLogInfo("清除Cookie")
         let cookieJar = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         
         for cookie in cookieJar.cookies! {
@@ -101,26 +101,26 @@ public class NetApiClient : NSObject {
             self.bindIndicator(api: api, task: request.task)
             let timeBegin = NSDate()
             return request.responseJSON { response in
-                DDLogWarn("[NetApi] Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                DDLogWarn("请求耗时: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
+                    DDLogInfo("请求成功: \(api.url!)")
                     if let value = transferedResponse.result.value {
-                        DDLogVerbose("[NetApi] JSON: \(value)")
+                        DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
                     if let statusCode = StatusCode(rawValue:error.code) {
                         switch(statusCode) {
                         case .Canceled:
-                            DDLogWarn("[NetApi] Request Url Canceled: \(api.url!)")
+                            DDLogWarn("请求取消: \(api.url!)")
                             return
                         default:
                             break
                         }
                     }
-                    DDLogError("[NetApi] Request Url Failed: \(api.url!)")
-                    DDLogError("[NetApi] \(error)")
+                    DDLogError("请求失败: \(api.url!)")
+                    DDLogError("\(error)")
                 }
                 if completionHandler != nil {
                     completionHandler!(transferedResponse)
@@ -135,24 +135,24 @@ public class NetApiClient : NSObject {
             self.bindIndicator(api: api, task: request.task)
             let timeBegin = NSDate()
             return request.responseData { response in
-                DDLogWarn("[NetApi] Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                DDLogWarn("请求耗时: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseData(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
-                    DDLogVerbose("[NetApi] Data: \(transferedResponse.result.value?.length) bytes")
+                    DDLogInfo("请求成功: \(api.url!)")
+                    DDLogVerbose("Data: \(transferedResponse.result.value?.length) bytes")
                 case .Failure(let error):
                     if let statusCode =  StatusCode(rawValue:error.code) {
                         switch(statusCode) {
                         case .Canceled:
-                            DDLogWarn("[NetApi] Request Url Canceled: \(api.url!)")
+                            DDLogWarn("请求取消: \(api.url!)")
                             return
                         default:
                             break
                         }
                     }
-                    DDLogError("[NetApi] Request Url Failed: \(api.url!)")
-                    DDLogError("[NetApi] \(error)")
+                    DDLogError("请求失败: \(api.url!)")
+                    DDLogError("\(error)")
                 }
                 if completionHandler != nil {
                     completionHandler!(transferedResponse)
@@ -167,24 +167,24 @@ public class NetApiClient : NSObject {
             self.bindIndicator(api: api, task: request.task)
             let timeBegin = NSDate()
             return request.responseString { response in
-                DDLogWarn("[NetApi] Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                DDLogWarn("请求耗时: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseString(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
-                    DDLogVerbose("[NetApi] String: \(transferedResponse.result.value)")
+                    DDLogInfo("请求成功: \(api.url!)")
+                    DDLogVerbose("String: \(transferedResponse.result.value)")
                 case .Failure(let error):
                     if let statusCode =  StatusCode(rawValue:error.code) {
                         switch(statusCode) {
                         case .Canceled:
-                            DDLogWarn("[NetApi] Request Url Canceled: \(api.url!)")
+                            DDLogWarn("请求取消: \(api.url!)")
                             return
                         default:
                             break
                         }
                     }
-                    DDLogError("[NetApi] Request Url Failed: \(api.url!)")
-                    DDLogError("[NetApi] \(error)")
+                    DDLogError("请求失败: \(api.url!)")
+                    DDLogError("\(error)")
                 }
                 if completionHandler != nil {
                     completionHandler!(transferedResponse)
@@ -200,26 +200,26 @@ public class NetApiClient : NSObject {
             self.bindIndicator(api: api, task: request.task)
             let timeBegin = NSDate()
             return request.responseJSON { response in
-                DDLogWarn("[NetApi] Expend Time: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                DDLogWarn("请求耗时: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = api.transferResponseJSON(response)
                 switch transferedResponse.result {
                 case .Success:
-                    DDLogInfo("[NetApi] Request Url Success: \(api.url!)")
+                    DDLogInfo("请求成功: \(api.url!)")
                     if let value = transferedResponse.result.value {
-                        DDLogVerbose("[NetApi] JSON: \(value)")
+                        DDLogVerbose("JSON: \(value)")
                     }
                 case .Failure(let error):
                     if let statusCode = StatusCode(rawValue:error.code) {
                         switch(statusCode) {
                         case .Canceled:
-                            DDLogWarn("[NetApi] Request Url Canceled: \(api.url!)")
+                            DDLogWarn("请求取消: \(api.url!)")
                             return
                         default:
                             break
                         }
                     }
-                    DDLogError("[NetApi] Request Url Failed: \(api.url!)")
-                    DDLogError("[NetApi] \(error)")
+                    DDLogError("请求失败: \(api.url!)")
+                    DDLogError("\(error)")
                 }
                 if completionHandler != nil {
                     completionHandler!(transferedResponse)

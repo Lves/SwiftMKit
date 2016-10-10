@@ -85,6 +85,7 @@
 		276183A71DAA40A200C3AC77 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183921DAA40A200C3AC77 /* Result.framework */; };
 		276183A81DAA40A200C3AC77 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183931DAA40A200C3AC77 /* SnapKit.framework */; };
 		276183A91DAA40A200C3AC77 /* WebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183941DAA40A200C3AC77 /* WebViewJavascriptBridge.framework */; };
+		276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */; };
 		27678DE91D62A78800EB7C23 /* MStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DE81D62A78800EB7C23 /* MStack.swift */; };
 		27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEC1D62C0AE00EB7C23 /* MQueue.swift */; };
 		27678DEF1D62C31F00EB7C23 /* MTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */; };
@@ -345,6 +346,7 @@
 		276183921DAA40A200C3AC77 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "Pods/../build/Debug-iphoneos/Result/Result.framework"; sourceTree = "<group>"; };
 		276183931DAA40A200C3AC77 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "Pods/../build/Debug-iphoneos/SnapKit/SnapKit.framework"; sourceTree = "<group>"; };
 		276183941DAA40A200C3AC77 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebViewJavascriptBridge.framework; path = "Pods/../build/Debug-iphoneos/WebViewJavascriptBridge/WebViewJavascriptBridge.framework"; sourceTree = "<group>"; };
+		276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLogMKitFormatter.swift; sourceTree = "<group>"; };
 		27678DE81D62A78800EB7C23 /* MStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MStack.swift; sourceTree = "<group>"; };
 		27678DEC1D62C0AE00EB7C23 /* MQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQueue.swift; sourceTree = "<group>"; };
 		27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTreeNode.swift; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 				270692C41CE9F27100CF211A /* Local */,
 				27276C051CC748D60028E938 /* Image */,
 				18E184E21CC48B1600F14923 /* Model */,
+				276183AB1DAA678D00C3AC77 /* Log */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -771,6 +774,14 @@
 				273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */,
 			);
 			path = Indicator;
+			sourceTree = "<group>";
+		};
+		276183AB1DAA678D00C3AC77 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 		27678DE71D62A62700EB7C23 /* DataStructure */ = {
@@ -1750,6 +1761,7 @@
 				27A4CA261CE3512000516802 /* MKUISegmentViewController.swift in Sources */,
 				270692D41CE9F27D00CF211A /* GesturePassword.swift in Sources */,
 				27A1C5ED1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift in Sources */,
+				276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */,
 				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27678DF11D63050700EB7C23 /* MSearch.swift in Sources */,
