@@ -19,9 +19,6 @@ extension NSDate {
             var dates:[String] = dateString.componentsSeparatedByString("/")
             return dates[0].toInt() ?? 0
         }
-        set{
-            self.currentYear = newValue
-        }
     }
     
     public var currentMonth : Int{
@@ -32,9 +29,6 @@ extension NSDate {
             var dates:[String] = dateString.componentsSeparatedByString("/")
             return dates[1].toInt() ?? 0
         }
-        set{
-            self.currentMonth = newValue
-        }
     }
     
     public var currentDay : Int{
@@ -44,9 +38,6 @@ extension NSDate {
             let dateString:String = dateFormatter.stringFromDate(self);
             var dates:[String] = dateString.componentsSeparatedByString("/")
             return dates[2].toInt() ?? 0
-        }
-        set{
-            self.currentDay = newValue
         }
     }
     
