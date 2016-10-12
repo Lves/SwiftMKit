@@ -166,4 +166,36 @@ extension String {
         }
         return String(format: fmt, self.toDouble() ?? 0)
     }
+    
+    
+    
+    static func getAttributedStringHeight(width width:CGFloat,attributedString:NSAttributedString?)->CGFloat{
+        let options: NSStringDrawingOptions = [NSStringDrawingOptions.UsesLineFragmentOrigin,NSStringDrawingOptions.UsesFontLeading]
+
+        let size = attributedString?.boundingRectWithSize(CGSizeMake(width, CGFloat.max),
+                                                   options: options,
+                                                   context: nil)
+        return size?.height ?? 0
+    }
+
+    func getAttributedString(font:UIFont,lineSpacing:CGFloat)->NSAttributedString{
+        guard self.length > 0 else { return NSAttributedString() }
+        let attributedString = NSMutableAttributedString(string: self,
+                                                         attributes: [NSFontAttributeName:font])
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = lineSpacing
+        
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedString.length))
+        return attributedString
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
