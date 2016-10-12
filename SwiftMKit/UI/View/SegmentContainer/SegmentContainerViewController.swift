@@ -22,7 +22,6 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
     public let screenW: CGFloat = UIScreen.mainScreen().bounds.w
     public let screenH: CGFloat = UIScreen.mainScreen().bounds.h
     
-    private var loadedViewControllers = [UIViewController]()
     private var _viewControllers = [UIViewController]()
     
     public var viewControllers:[UIViewController] {
@@ -31,7 +30,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
     }
     
-    private var _selectedSegment: Int = -1
+    private var _selectedSegment: Int = 0
     
     public var selectedSegment: Int {
         get {
@@ -76,6 +75,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.scrollsToTop = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+        self.view.backgroundColor = UIColor.clearColor()
         self.view.addSubview(scrollView)
         self.resetChildControllerView()
     }
@@ -90,12 +90,12 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
-            scrollView.addSubview(vc.view)
-            if !(self.childViewControllers.contains(vc)) {
-                self.addChildViewController(vc)
-                if let listVC = vc as? BaseListViewController {
-                    listVC.listView?.scrollsToTop = (index == 0)
-                }
+            self.addChildViewController(vc)
+            if let listVC = vc as? BaseListViewController {
+                listVC.listView?.scrollsToTop = (index == 0)
+            }
+            if index == selectedSegment && !(scrollView.subviews.contains(vc.view)) {
+                scrollView.addSubview(vc.view)
             }
         }
         self.resetSubUIFrame()
@@ -119,9 +119,9 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         let index = (offsetX + width / 2) / width
         _selectedSegment = Int(index)
         if let vc = viewControllers[safe: Int(index)] {
-            if !loadedViewControllers.contains(vc) {
-                loadedViewControllers.append(vc)
-                (vc as? BaseKitViewController)?.loadData()
+            if !(scrollView.subviews.contains(vc.view)) {
+                scrollView.addSubview(vc.view)
+                self.resetSubUIFrame()
             }
         }
         if (delegate != nil) {
@@ -135,9 +135,9 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             return false
         }
         if let vc = viewControllers[safe: index] {
-            if !loadedViewControllers.contains(vc) {
-                loadedViewControllers.append(vc)
-                (vc as? BaseKitViewController)?.loadData()
+            if !(self.childViewControllers.contains(vc)) {
+                self.addChildViewController(vc)
+                self.resetSubUIFrame()
             }
         }
         if index == selectedSegment {
