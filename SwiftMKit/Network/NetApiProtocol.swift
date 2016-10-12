@@ -22,8 +22,8 @@ public protocol NetApiIndicatorProtocol {
     var text: String? { get set }
 }
 public class NetApiIndicator : NetApiIndicatorProtocol {
-    public var indicator: IndicatorProtocol?
-    public var view: UIView?
+    public weak var indicator: IndicatorProtocol?
+    public weak var view: UIView?
     public var text: String?
     init(indicator: IndicatorProtocol, view: UIView?, text: String? = nil) {
         self.indicator = indicator
