@@ -35,7 +35,7 @@ public class BlockButton: UIButton {
     }
 
     public init(action: BlockButtonAction) {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.action = action
         defaultInit()
     }
@@ -53,6 +53,7 @@ public class BlockButton: UIButton {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        defaultInit()
     }
 
     private func defaultInit() {

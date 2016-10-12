@@ -14,14 +14,6 @@
 import Foundation
 import CoreGraphics
 
-// ModifySourceCode Add By LiXingLe 高亮点形状枚举
-@objc
-public enum ChartDataForm: Int
-{
-    case Square
-    case Circle
-}
-//add end
 @objc
 public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
 {
@@ -52,16 +44,4 @@ public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
     
     /// Returns true if filled drawing is enabled, false if not
     var isDrawFilledEnabled: Bool { get }
-    
-    // ModifySourceCode Add By LiXingLe
-    //是否RangeFill
-    var drawRangeFilledEnabled:Bool { get set }
-    //fillRange的较低值
-    var fillLowerYValues:[ChartDataEntry]{ get set }
-    //高亮点类型
-    var form:ChartDataForm {get set}
-    //高亮点Image
-    var highlightImage:NSUIImage {get set}
-    var lowerHighlightImage:NSUIImage {get set}
-    //Finish add
 }

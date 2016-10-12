@@ -200,28 +200,23 @@ public class LineChartRenderer: LineRadarChartRenderer
         {
             return
         }
-        // ModifySourceCode Add By LiXingLe
-        if dataSet.drawRangeFilledEnabled {
-            //调用绘制路径
-            drawCubicFillPath(context: context, dataSet: dataSet, spline: spline, matrix: matrix)
- 
-        }else{
-            let fillMin = dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, dataProvider: dataProvider) ?? 0.0
-            // Take the from/to xIndex from the entries themselves,
-            // so missing entries won't screw up the filling.
-            // What we need to draw is line from points of the xIndexes - not arbitrary entry indexes!
-            let xTo = dataSet.entryForIndex(to - 1)?.xIndex ?? 0
-            let xFrom = dataSet.entryForIndex(from)?.xIndex ?? 0
-            
-            var pt1 = CGPoint(x: CGFloat(xTo), y: fillMin)
-            var pt2 = CGPoint(x: CGFloat(xFrom), y: fillMin)
-            pt1 = CGPointApplyAffineTransform(pt1, matrix)
-            pt2 = CGPointApplyAffineTransform(pt2, matrix)
-            
-            CGPathAddLineToPoint(spline, nil, pt1.x, pt1.y)
-            CGPathAddLineToPoint(spline, nil, pt2.x, pt2.y)
-            CGPathCloseSubpath(spline)
-        }
+        
+        let fillMin = dataSet.fillFormatter?.getFillLinePosition(dataSet: dataSet, dataProvider: dataProvider) ?? 0.0
+        
+        // Take the from/to xIndex from the entries themselves,
+        // so missing entries won't screw up the filling.
+        // What we need to draw is line from points of the xIndexes - not arbitrary entry indexes!
+        let xTo = dataSet.entryForIndex(to - 1)?.xIndex ?? 0
+        let xFrom = dataSet.entryForIndex(from)?.xIndex ?? 0
+
+        var pt1 = CGPoint(x: CGFloat(xTo), y: fillMin)
+        var pt2 = CGPoint(x: CGFloat(xFrom), y: fillMin)
+        pt1 = CGPointApplyAffineTransform(pt1, matrix)
+        pt2 = CGPointApplyAffineTransform(pt2, matrix)
+        
+        CGPathAddLineToPoint(spline, nil, pt1.x, pt1.y)
+        CGPathAddLineToPoint(spline, nil, pt2.x, pt2.y)
+        CGPathCloseSubpath(spline)
         
         if dataSet.fill != nil
         {
@@ -232,81 +227,6 @@ public class LineChartRenderer: LineRadarChartRenderer
             drawFilledPath(context: context, path: spline, fillColor: dataSet.fillColor, fillAlpha: dataSet.fillAlpha)
         }
     }
-    
-    //MARK: 填充曲线rangefill
-    // ModifySourceCode Add By LiXingLe
-    func drawCubicFillPath(context context: CGContext, dataSet: ILineChartDataSet, spline: CGMutablePath, matrix: CGAffineTransform){
-        guard let
-            trans = dataProvider?.getTransformer(dataSet.axisDependency),
-            animator = animator
-            else { return }
-        
-        let phaseX = animator.phaseX
-        let phaseY = animator.phaseY
-        
-        let entryCount = dataSet.fillLowerYValues.count
-        let intensity = dataSet.cubicIntensity
-      
-        guard let
-            entryFrom:ChartDataEntry! = dataSet.fillLowerYValues[self.maxX],
-            entryTo:ChartDataEntry! =  dataSet.fillLowerYValues[self.minX < 0 ? self.minX : 0]
-            else { return }
-        
-        let diff = (entryFrom == entryTo) ? 1 : 0
-        let minx = 0
-        let maxx = entryCount-1
-
-        var valueToPixelMatrix = trans.valueToPixelMatrix
-        
-        let size = Int(ceil(CGFloat(maxx - minx) * phaseX + CGFloat(minx)))
-        
-        if (size - minx >= 2)
-        {
-            var prevDx: CGFloat = 0.0
-            var prevDy: CGFloat = 0.0
-            var curDx: CGFloat = 0.0
-            var curDy: CGFloat = 0.0
-            
-            var prevPrev: ChartDataEntry! = dataSet.fillLowerYValues[maxx]
-            var prev: ChartDataEntry! = prevPrev
-            var cur: ChartDataEntry! = prev
-            var next: ChartDataEntry! = dataSet.fillLowerYValues[maxx - 1]
-            
-            if cur == nil || next == nil { return }
-            
-            // 最低线的最后一个
-            CGPathAddLineToPoint(spline, &valueToPixelMatrix, CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
-            
-            for (var j = min(size, entryCount - 1); j >= 1 ; j-- )
-            {
-                prevPrev = prev  //前一个的前一个
-                prev = cur       //前一个
-                cur = next       //当前
-                next = dataSet.fillLowerYValues[j - 1] //下一个
-                
-                if next == nil { break }
-                
-                prevDx = CGFloat(cur.xIndex - prevPrev.xIndex) * intensity
-                prevDy = CGFloat(cur.value - prevPrev.value) * intensity
-                curDx = CGFloat(next.xIndex - prev.xIndex) * intensity
-                curDy = CGFloat(next.value - prev.value) * intensity
-                
-                // the last cubic
-                CGPathAddCurveToPoint(spline, &valueToPixelMatrix,
-                                      CGFloat(prev.xIndex) + prevDx,(CGFloat(prev.value) + prevDy) * phaseY,
-                                      CGFloat(cur.xIndex) - curDx,(CGFloat(cur.value) - curDy) * phaseY,
-                                      CGFloat(cur.xIndex), CGFloat(cur.value) * phaseY)
-            }
-            //最低线的第一个lixingle
-            var firstE:ChartDataEntry! = dataSet.fillLowerYValues[0]
-            CGPathAddLineToPoint(spline, &valueToPixelMatrix, CGFloat(firstE.xIndex), CGFloat(firstE.value) * phaseY)
-            
-            
-        }
-        
-        CGPathCloseSubpath(spline)
-    }
-    
     
     private var _lineSegments = [CGPoint](count: 2, repeatedValue: CGPoint())
     
@@ -535,34 +455,10 @@ public class LineChartRenderer: LineRadarChartRenderer
         
         // close up
         e = dataSet.entryForIndex(max(min(Int(ceil(CGFloat(to - from) * phaseX + CGFloat(from))) - 1, dataSet.entryCount - 1), 0))
-        /* ModifySourceCode Remove By LiXingLe
         if e != nil
         {
             CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
         }
-        */
-        // ModifySourceCode Add By LiXingLe
-        if dataSet.drawRangeFilledEnabled {
-            if e != nil
-            {
-                let eLower: ChartDataEntry! = dataSet.fillLowerYValues[e.xIndex]
-                CGPathAddLineToPoint(filled, &matrix, CGFloat(eLower.xIndex), CGFloat(eLower.value)) // 第二条线的右上角
-            }
-            
-            // create a Second path
-            for x in (to - 1).stride(to: Int(from-1), by: -1)
-            {
-                let eLower = dataSet.fillLowerYValues[x]
-                CGPathAddLineToPoint(filled, &matrix, CGFloat(eLower.xIndex), CGFloat(eLower.value) * phaseY)
-            }
-
-        }else{
-            if e != nil
-            {
-                CGPathAddLineToPoint(filled, &matrix, CGFloat(e.xIndex), fillMin)
-            }
-        }
-        //Finish add
         CGPathCloseSubpath(filled)
         
         return filled
@@ -744,148 +640,6 @@ public class LineChartRenderer: LineRadarChartRenderer
         
         CGContextRestoreGState(context)
     }
-    //绘制高亮数据点
-    // ModifySourceCode Add By LiXingLe
-    public override func drawCircleIndex(context context: CGContext , indices: [ChartHighlight]) {
-        guard let
-            dataProvider = dataProvider,
-            lineData = dataProvider.lineData,
-            animator = animator
-            else { return }
-        
-        if indices.count <= 0 {
-            return
-        }
-        
-        let phaseX = animator.phaseX
-        let phaseY = animator.phaseY
-        
-        let dataSets = lineData.dataSets
-        
-        var pt = CGPoint()
-        var rect = CGRect()
-        
-        
-        
-        CGContextSaveGState(context)
-        
-        for i in 0 ..< dataSets.count
-        {
-            guard let dataSet = lineData.getDataSetByIndex(i) as? ILineChartDataSet else { continue }
-            //lixingle 添加是否可以高亮条件
-            if !dataSet.isVisible || dataSet.entryCount == 0 || !dataSet.highlightEnabled
-            {
-                continue
-            }
-            
-            let trans = dataProvider.getTransformer(dataSet.axisDependency)
-            let valueToPixelMatrix = trans.valueToPixelMatrix
-            
-            let entryCount = dataSet.entryCount
-            
-            let circleRadius = dataSet.circleRadius
-            //计算外环半径，lixingle
-            let circleDiameter = circleRadius + 3.0
-//            let circleDiameter = circleRadius * 2.0
-            let circleHoleDiameter = circleRadius
-            let circleHoleRadius = circleHoleDiameter / 2.0
-            let isDrawCircleHoleEnabled = dataSet.isDrawCircleHoleEnabled
-            
-            guard let
-                entryFrom = dataSet.entryForXIndex(self.minX < 0 ? self.minX : 0, rounding: .Down),
-                entryTo = dataSet.entryForXIndex(self.maxX, rounding: .Up)
-                else { continue }
-            
-            let diff = (entryFrom == entryTo) ? 1 : 0
-            let minx = max(dataSet.entryIndex(entry: entryFrom) - diff, 0)
-            let maxx = min(max(minx + 2, dataSet.entryIndex(entry: entryTo) + 1), entryCount)
-            
-            for j in minx ..< Int(ceil(CGFloat(maxx - minx) * phaseX + CGFloat(minx)))
-            {
-                
-                if  indices[0].xIndex != j {
-                    continue
-                }
-                
-                guard let e = dataSet.entryForIndex(j) else { break }
-                
-                
-                pt.x = CGFloat(e.xIndex)
-                pt.y = CGFloat(e.value) * phaseY
-                pt = CGPointApplyAffineTransform(pt, valueToPixelMatrix)
-                
-                
-                
-                if (!viewPortHandler.isInBoundsRight(pt.x))
-                {
-                    break
-                }
-                
-                // make sure the circles don't do shitty things outside bounds
-                if (!viewPortHandler.isInBoundsLeft(pt.x) || !viewPortHandler.isInBoundsY(pt.y))
-                {
-                    continue
-                }
-                
-                var hImage = dataSet.highlightImage
-                hImage.drawInRect(CGRectMake(pt.x - circleRadius, pt.y - circleRadius, circleRadius*2, circleRadius*2))
-                //lower 高亮点
-                if dataSet.drawRangeFilledEnabled {
-                    var lowPt = CGPoint()
-                    let lowE:ChartDataEntry? = dataSet.fillLowerYValues[j]
-                    lowPt.x = CGFloat(e.xIndex)
-                    lowPt.y = CGFloat(lowE?.value ?? 0.0) * phaseY
-                    lowPt = CGPointApplyAffineTransform(lowPt, valueToPixelMatrix)
-                    var lowImage = dataSet.lowerHighlightImage
-                    lowImage.drawInRect(CGRectMake(lowPt.x - circleRadius, lowPt.y - circleRadius, circleRadius*2, circleRadius*2))
-                    
-                }
-                /*
-                CGContextSetFillColorWithColor(context, dataSet.getCircleColor(j)!.CGColor)
-                //计算外环圆心位置，lixingle
-                rect.origin.x = pt.x - circleDiameter/2.0
-                rect.origin.y = pt.y - circleDiameter/2.0
-//                rect.origin.x = pt.x - circleRadius
-//                rect.origin.y = pt.y - circleRadius
-                
-                rect.size.width = circleDiameter
-                rect.size.height = circleDiameter
-                //lixingle ,绘制外环数据点
-//                CGContextFillEllipseInRect(context, rect)
-                if dataSet.form == .Circle {
-                    CGContextFillEllipseInRect(context, rect)
-                }else{
-                    CGContextFillRect(context, rect)
-                }
-
-                
-                
-                if (isDrawCircleHoleEnabled)
-                {
-                    CGContextSetFillColorWithColor(context, dataSet.circleHoleColor.CGColor)
-                    
-                    rect.origin.x = pt.x - circleHoleRadius
-                    rect.origin.y = pt.y - circleHoleRadius
-                    rect.size.width = circleHoleDiameter
-                    rect.size.height = circleHoleDiameter
-                    //绘制内环数据点
-//                    CGContextFillEllipseInRect(context, rect)
-                    if dataSet.form == .Circle {
-                        CGContextFillEllipseInRect(context, rect)
-                    }else{
-                        CGContextFillRect(context, rect)
-                    }
-                }
-                */
-                
-            }
-        }
-        
-        CGContextRestoreGState(context)
-    
-    
-    }
-    
     
     private var _highlightPointBuffer = CGPoint()
     

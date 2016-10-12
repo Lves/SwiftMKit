@@ -16,19 +16,6 @@
 #import "NSString+MJExtension.h"
 #import "NSObject+MJClass.h"
 
-// ModifySourceCode Add by Cdts
-@interface NSManagedObject (PrimaryKey)
-+ (NSString *)primaryKeyPropertyName;
-@end
-@implementation NSManagedObject (PrimaryKey)
-
-+ (NSString *)primaryKeyPropertyName {
-    return @"entityId";
-}
-
-@end
-//Finish add
-
 @implementation NSObject (MJKeyValue)
 
 #pragma mark - 错误
@@ -140,12 +127,7 @@ static NSNumberFormatter *numberFormatter_;
                 value = [NSMutableData dataWithData:value];
             }
             
-            /* ModifySourceCode remove by Cdts
             if (!type.isFromFoundation && propertyClass) { // 模型属性
-             */
-            // ModifySourceCode Add by Cdts
-            if (!type.isFromFoundation && propertyClass && propertyClass != [NSOrderedSet class]) {
-                //Finish add
                 value = [propertyClass mj_objectWithKeyValues:value context:context];
             } else if (objectClass) {
                 if (objectClass == [NSURL class] && [value isKindOfClass:[NSArray class]]) {
@@ -158,39 +140,6 @@ static NSNumberFormatter *numberFormatter_;
                     value = urlArray;
                 } else { // 字典数组-->模型数组
                     value = [objectClass mj_objectArrayWithKeyValuesArray:value context:context];
-                    
-                    // ModifySourceCode Add by Cdts
-                    if ((propertyClass == [NSOrderedSet class] || propertyClass == [NSSet class]) && [self isKindOfClass:[NSManagedObject class]]) {
-                        if (propertyClass == [NSOrderedSet class]) {
-                            
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                            NSMutableOrderedSet *set = [self performSelector:NSSelectorFromString(property.name) withObject:nil];
-                            [set removeAllObjects];
-                            for (id x in value) {
-                                [set addObject:x];
-                            }
-                            NSString *selector = [NSString stringWithFormat:@"set%@:", [property.name firstCharUpper]];
-                            [self performSelector:NSSelectorFromString(selector) withObject:set];
-                            
-#pragma clang diagnostic pop
-                            return;
-                        }else if (propertyClass == [NSSet class]) {
-                            
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                            NSMutableSet *set = [self performSelector:NSSelectorFromString(property.name) withObject:nil];
-                            for (id x in value) {
-                                [set addObject:x];
-                            }
-                            NSString *selector = [NSString stringWithFormat:@"set%@:", [property.name firstCharUpper]];
-                            [self performSelector:NSSelectorFromString(selector) withObject:nil];
-                            
-#pragma clang diagnostic pop
-                            return;
-                        }
-                    }
-                    //Finish add
                 }
             } else {
                 if (propertyClass == [NSString class]) {
@@ -263,32 +212,8 @@ static NSNumberFormatter *numberFormatter_;
     MJExtensionAssertError([keyValues isKindOfClass:[NSDictionary class]], nil, [self class], @"keyValues参数不是一个字典");
     
     if ([self isSubclassOfClass:[NSManagedObject class]] && context) {
-        /* ModifySourceCode Remove by Cdts
-         return [[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context] mj_setKeyValues:keyValues context:context];
-         */
-        // ModifySourceCode Add by Cdts
-        NSManagedObject *obj = nil;
-        NSString *pkProperyName = [NSManagedObject primaryKeyPropertyName];
-        NSString *key = [[[self class] mj_replacedKeyFromPropertyName] objectForKey:pkProperyName];
-        if (key.length>0 && keyValues[key]) {
-            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([self class])];
-            NSString *format = [[NSString stringWithFormat:@"%@ = ",pkProperyName] stringByAppendingString:@"%@"];
-            id value = keyValues[key];
-            NSString *entityId = @"";
-            if ([value isKindOfClass:[NSString class]]) {
-                entityId = value;
-            }else{
-                entityId = [keyValues[key] stringValue];
-            }
-            request.predicate = [NSPredicate predicateWithFormat:format,entityId];
-            NSArray *result = [context executeFetchRequest:request error:NULL];
-            obj = result.firstObject;
-        }
-        if (!obj) {
-            obj = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
-        }
-        return [obj mj_setKeyValues:keyValues context:context];
-        //Finish add
+        NSString *entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
+        return [[NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context] mj_setKeyValues:keyValues context:context];
     }
     return [[[self alloc] init] mj_setKeyValues:keyValues];
 }
@@ -546,7 +471,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_setKeyValues:keyValues];
     if (error != NULL) {
-        *error = [self.class mj_error];
+    *error = [self.class mj_error];
     }
     return value;
     
@@ -561,7 +486,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_setKeyValues:keyValues context:context];
     if (error != NULL) {
-        *error = [self.class mj_error];
+    *error = [self.class mj_error];
     }
     return value;
 }
@@ -580,7 +505,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_keyValues];
     if (error != NULL) {
-        *error = [self.class mj_error];
+    *error = [self.class mj_error];
     }
     return value;
 }
@@ -594,7 +519,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_keyValuesWithKeys:keys];
     if (error != NULL) {
-        *error = [self.class mj_error];
+    *error = [self.class mj_error];
     }
     return value;
 }
@@ -608,7 +533,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_keyValuesWithIgnoredKeys:ignoredKeys];
     if (error != NULL) {
-        *error = [self.class mj_error];
+    *error = [self.class mj_error];
     }
     return value;
 }
@@ -622,7 +547,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_keyValuesArrayWithObjectArray:objectArray];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -636,7 +561,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_keyValuesArrayWithObjectArray:objectArray keys:keys];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -650,7 +575,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_keyValuesArrayWithObjectArray:objectArray ignoredKeys:ignoredKeys];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -664,7 +589,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectWithKeyValues:keyValues];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -678,7 +603,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectWithKeyValues:keyValues context:context];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -692,7 +617,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectWithFilename:filename];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -706,7 +631,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectWithFile:file];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -720,7 +645,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectArrayWithKeyValuesArray:keyValuesArray];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -734,7 +659,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectArrayWithKeyValuesArray:keyValuesArray context:context];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -748,7 +673,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectArrayWithFilename:filename];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }
@@ -762,7 +687,7 @@ static NSNumberFormatter *numberFormatter_;
 {
     id value = [self mj_objectArrayWithFile:file];
     if (error != NULL) {
-        *error = [self mj_error];
+    *error = [self mj_error];
     }
     return value;
 }

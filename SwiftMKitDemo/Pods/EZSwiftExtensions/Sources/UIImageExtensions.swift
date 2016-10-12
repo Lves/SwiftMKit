@@ -40,7 +40,7 @@ extension UIImage {
         let aspectSize = CGSize (width: width, height: aspectHeightForWidth(width))
 
         UIGraphicsBeginImageContext(aspectSize)
-        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        self.drawInRect(CGRect(origin: CGPoint.zero, size: aspectSize))
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
@@ -52,7 +52,7 @@ extension UIImage {
         let aspectSize = CGSize (width: aspectWidthForHeight(height), height: height)
 
         UIGraphicsBeginImageContext(aspectSize)
-        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        self.drawInRect(CGRect(origin: CGPoint.zero, size: aspectSize))
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
@@ -83,6 +83,26 @@ extension UIImage {
         let imageRef = CGImageCreateWithImageInRect(self.CGImage, scaledBounds)
         let croppedImage: UIImage = UIImage(CGImage: imageRef!, scale: self.scale, orientation: UIImageOrientation.Up)
         return croppedImage
+    }
+
+    /// EZSE: Use current image for pattern of color
+    public func withColor(tintColor: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+
+        let context = UIGraphicsGetCurrentContext()
+        CGContextTranslateCTM(context, 0, self.size.height)
+        CGContextScaleCTM(context, 1.0, -1.0)
+        CGContextSetBlendMode(context, CGBlendMode.Normal)
+
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height) as CGRect
+        CGContextClipToMask(context, rect, self.CGImage)
+        tintColor.setFill()
+        CGContextFillRect(context, rect)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext() as UIImage
+        UIGraphicsEndImageContext()
+
+        return newImage
     }
 
     ///EZSE: Returns the image associated with the URL

@@ -1,6 +1,13 @@
 PulsingHalo
 ===========
 
+**PulsingHalo has been discontinued, and is no longer being maintained.** Please check out **[Pulsator](https://github.com/shu223/Pulsator)** which is the new version of this written with Swift.
+
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Badge w/ Version](http://cocoapod-badges.herokuapp.com/v/PulsingHalo/badge.png)](http://cocoadocs.org/docsets/PulsingHalo)
+[![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat
+)](http://mit-license.org)
+
 iOS component for creating a pulsing animation. It allows you to create halos.
 
 ![](demo_.gif)
@@ -14,13 +21,24 @@ Great For:
 
 ###CocoaPods
 
-Edit your Podfile.
+Add into your Podfile.
 
 ````
 pod "PulsingHalo"
 ````
 
-And `$ pod install`
+Then `$ pod install`
+
+###Carthage
+
+Add into your Cartfile.
+
+```
+github "shu223/PulsingHalo"
+```
+
+Then `$ carthage update`
+
 
 ###Manual
 
@@ -32,7 +50,7 @@ Just **initiate and add** to your view layer.
 
 ###Swift
 
-```swift.SomeViewController.swift
+```swift:SomeViewController.swift
 let halo = PulsingHaloLayer()
 halo.position = view.center
 view.layer.addSublayer(halo)
@@ -57,7 +75,7 @@ halo.position = self.view.center;
 
 Use `haloLayerNumber` property.
 
-```
+```objc
 halo.haloLayerNumber = 3;
 ```
 
@@ -65,7 +83,7 @@ halo.haloLayerNumber = 3;
 
 Use `radius` property.
 
-````
+````objc
 self.halo.radius = 240.0;
 ````
 
@@ -73,7 +91,7 @@ self.halo.radius = 240.0;
 
 Use `backgroundColor` property.
 
-````
+````objc
 UIColor *color = [UIColor colorWithRed:0.7
                                  green:0.9
                                   blue:0.3
@@ -94,9 +112,10 @@ Initialize using `initWithRepeatCount:` method, or set `repeatCount` property. T
 
 ###animation key values and times
 
-Use properties `fromValueForRadius`, `fromValueForAlpha` and `keyTimeForHalfOpacity`.
+Use properties `fromValueForRadius` or `keyTimeForHalfOpacity`.
 
 ###enable/disable timing function for animation
+
 Use property `useTimingFunction`
 
 ##Demo
@@ -108,3 +127,15 @@ You can try to change the radius and color properties with demo app.
 
 Inspired by [SVPulsingAnnotationView](https://github.com/samvermette/SVPulsingAnnotationView).
 
+##Author
+
+**Shuichi Tsutsumi**
+
+iOS freelancer in Japan. Welcome works from abroad!
+
+- PAST WORKS:  [My Profile Summary](https://medium.com/@shu223/my-profile-summary-f14bfc1e7099#.vdh0i7clr)
+- PROFILES: [LinkedIn](https://www.linkedin.com/profile/view?id=214896557)
+- BLOG: [English](https://medium.com/@shu223/) / [Japanese](http://d.hatena.ne.jp/shu223/)
+- CONTACTS:
+  - [Twitter](https://twitter.com/shu223)
+  - [Facebook](https://www.facebook.com/shuichi.tsutsumi)

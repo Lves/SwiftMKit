@@ -194,9 +194,4 @@ public class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartD
         copy.highlightAlpha = highlightAlpha
         return copy
     }
-    
-    // ModifySourceCode Add By LiXingLe
-    //动画数据源 BarAnimation
-    public var animationVals: [ChartDataEntry]?
-    // Add end
 }

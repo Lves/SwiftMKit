@@ -1,2 +1,0 @@
-# SwiftMKit
-Swift MKit

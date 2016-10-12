@@ -40,13 +40,13 @@ public class NetApiData: NSObject {
     }
     class public func addApi(api: NetApiData) {
         sharedInstance.runningApis.append(api)
-        DDLogDebug("[NetApi] [Api++ \(api)]:Running api count is \(sharedInstance.runningApis.count)")
+        DDLogDebug("[Api++ \(sharedInstance.runningApis.count)] \(unsafeAddressOf(api))")
     }
     class public func removeApi(api: NetApiData) {
         if let index = sharedInstance.runningApis.indexOf(api) {
             sharedInstance.runningApis.removeAtIndex(index)
+            DDLogDebug("[Api-- \(sharedInstance.runningApis.count)] \(unsafeAddressOf(api))")
         }
-        DDLogDebug("[NetApi] [Api-- \(api)]:Running api count is \(sharedInstance.runningApis.count)")
     }
     
     // MARK: Request
@@ -173,7 +173,7 @@ public class NetApiData: NSObject {
         mutableURLRequest.HTTPMethod = method.rawValue
         mutableURLRequest.timeoutInterval = api.timeout ?? NetApiDataConst.DefaultTimeoutInterval
         let parameterString = parameters.stringFromHttpParameters()
-        DDLogInfo("[NetApi] Request Url: \(method.rawValue) \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
+        DDLogInfo("Request Url: \(method.rawValue) \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
         let encoding = api.transferParameterEncoding()
         mutableURLRequest = encoding.encode(mutableURLRequest, parameters: parameters).0
         mutableURLRequest = api.transferURLRequest(mutableURLRequest)

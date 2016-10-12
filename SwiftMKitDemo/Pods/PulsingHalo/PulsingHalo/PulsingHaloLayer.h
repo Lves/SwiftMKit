@@ -27,7 +27,7 @@
 /**
  *	The default value of this property is @c 0.45.
  */
-@property (nonatomic, assign) CGFloat fromValueForAlpha;
+@property (nonatomic, assign) CGFloat fromValueForAlpha __attribute__ ((unavailable("Now the alpha channel of the backgroundColor is used.")));
 
 /**
  *	The value of this property should be ranging from @c 0 to @c 1 (exclusive).
@@ -51,11 +51,6 @@
 @property (nonatomic, assign) NSTimeInterval pulseInterval;
 
 /**
- *	The default value of this property is @c INFINITY.
- */
-@property (nonatomic, assign) float repeatCount;
-
-/**
  *	The default value of this property is @c YES.
  */
 @property (nonatomic, assign) BOOL useTimingFunction;
@@ -74,6 +69,5 @@
 
 
 - (void)start;
-- (void)stop;
 
 @end
