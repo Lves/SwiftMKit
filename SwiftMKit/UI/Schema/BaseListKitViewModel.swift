@@ -22,7 +22,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
             return viewController as! BaseListKitViewController
         }
     }
-    public var listIndicator: IndicatorListProtocol {
+    public var listIndicator: IndicatorProtocol {
         get { return self.listViewController.listIndicator }
     }
     var dataArray:[AnyObject] {

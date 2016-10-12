@@ -13,17 +13,17 @@ import ObjectiveC
 import CocoaLumberjack
 import MJRefresh
 
-public class TaskIndicatorList: NSObject, IndicatorListProtocol {
+public class TaskIndicatorList: NSObject, IndicatorProtocol {
     private weak var listView: UIScrollView?
     private weak var viewModel: BaseListKitViewModel?
     lazy public var runningTasks = [NSURLSessionTask]()
     
-    init(listView: UIScrollView?, viewModel: BaseListKitViewModel){
+    public init(listView: UIScrollView?, viewModel: BaseListKitViewModel){
         self.listView = listView
         self.viewModel = viewModel
         super.init()
     }
-    public func bindTaskForList(task: NSURLSessionTask){
+    public func bindTask(task: NSURLSessionTask, view: UIView?, text: String?) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(self, name: Notifications.Task.DidResume, object: nil)
         notificationCenter.removeObserver(self, name: Notifications.Task.DidSuspend, object: nil)
@@ -100,12 +100,12 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
         DDLogVerbose("Running list tasks: \(runningTasks.count)")
         for task in runningTasks {
             DDLogVerbose("Cancel list task: \(task)")
-            task.cancel()
             let info = ["task": task] as NSDictionary
             let notify = NSNotification(name: "", object: info)
             if self.viewModel != nil {
                 self.task_list_cancel(notify)
             }
+            task.cancel()
         }
     }
     

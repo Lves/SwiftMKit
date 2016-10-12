@@ -46,7 +46,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
     public override var emptySuperView: UIView? {
         get { return listView }
     }
-    lazy public var listIndicator: IndicatorListProtocol = {
+    lazy public var listIndicator: IndicatorProtocol = {
         return TaskIndicatorList(listView: self.listView, viewModel: self.listViewModel)
     }()
     

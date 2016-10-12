@@ -37,6 +37,7 @@
 		270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D31CE9F27D00CF211A /* GesturePasswordView.swift */; };
 		270692D91CE9F28800CF211A /* MKUIGesturePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */; };
 		270692DB1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692DA1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift */; };
+		27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */; };
 		2713CFB61D12A08E003C643E /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB51D12A08E003C643E /* StringTests.swift */; };
 		2713CFB81D12A162003C643E /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB71D12A162003C643E /* DictionaryTests.swift */; };
 		2713CFBA1D12A5B6003C643E /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB91D12A5B6003C643E /* RegexTests.swift */; };
@@ -298,6 +299,7 @@
 		270692D31CE9F27D00CF211A /* GesturePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordView.swift; sourceTree = "<group>"; };
 		270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGesturePasswordViewController.swift; sourceTree = "<group>"; };
 		270692DA1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGesturePasswordViewModel.swift; sourceTree = "<group>"; };
+		27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireNetApiData.swift; sourceTree = "<group>"; };
 		2713CFB51D12A08E003C643E /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		2713CFB71D12A162003C643E /* DictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
 		2713CFB91D12A5B6003C643E /* RegexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
 				273ACFAC1CC9D60600EB341D /* NetError.swift */,
 				27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */,
+				27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1810,6 +1813,7 @@
 				FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */,
 				27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */,
 				278937FA1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */,
+				27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */,
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,

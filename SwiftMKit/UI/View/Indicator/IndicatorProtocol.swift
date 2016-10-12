@@ -11,9 +11,5 @@ import UIKit
 
 public protocol IndicatorProtocol : class {
     var runningTasks: [NSURLSessionTask] { get set }
-    func bindTask(task: NSURLSessionTask, view: UIView, text: String?)
-}
-public protocol IndicatorListProtocol: class {
-    var runningTasks: [NSURLSessionTask] { get set }
-    func bindTaskForList(task: NSURLSessionTask)
+    func bindTask(task: NSURLSessionTask, view: UIView?, text: String?)
 }

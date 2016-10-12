@@ -14,7 +14,7 @@ class MKDataStoreViewModel: BaseListFetchViewModel {
     
     private var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NetError> {
         get {
-            return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicatorList(self.listIndicator).signal().on(
+            return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicator(self.listIndicator).signal().on(
                 next: { [weak self] data in
                     self?.fetchCachedData()
                 },

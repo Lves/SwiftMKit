@@ -22,7 +22,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         self.hud = hud
         super.init()
     }
-    public func bindTask(task: NSURLSessionTask, view: UIView, text: String?){
+    public func bindTask(task: NSURLSessionTask, view: UIView?, text: String?){
         task.indicatorView = view
         task.indicatorText = text ?? ""
         let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -126,9 +126,9 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         DDLogVerbose("Running tasks: \(runningTasks.count)")
         for task in runningTasks {
             DDLogVerbose("Cancel task: \(task)")
-            task.cancel()
             let notify = NSNotification(name: "", object: task)
             self.task_cancel(notify)
+            task.cancel()
         }
     }
 

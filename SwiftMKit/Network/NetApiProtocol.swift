@@ -7,83 +7,120 @@
 //
 
 import UIKit
-import Alamofire
 import ReactiveCocoa
 
 public enum ApiFormatType {
     case JSON, Data, String, Upload
 }
+public enum ApiMethod: String {
+    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+}
 
-public protocol NetApiIndicatorProtocol : class {
+public protocol NetApiIndicatorProtocol {
     var indicator: IndicatorProtocol? { get set }
-    var indicatorInView: UIView! { get set }
-    var indicatorText: String? { get set }
-    var indicatorList: IndicatorListProtocol? { get set }
+    var view: UIView? { get set }
+    var text: String? { get set }
 }
-public protocol RequestProtocol {
-    var task: NSURLSessionTask { get }
-    
+public class NetApiIndicator : NetApiIndicatorProtocol {
+    public var indicator: IndicatorProtocol?
+    public var view: UIView?
+    public var text: String?
+    init(indicator: IndicatorProtocol, view: UIView?, text: String? = nil) {
+        self.indicator = indicator
+        self.view = view
+        self.text = text
+    }
+    func bindTask(task: NSURLSessionTask) {
+        indicator?.bindTask(task, view: view, text: text)
+    }
 }
 
-extension Request: RequestProtocol {
+public enum NetApiResult<Value, Error: ErrorType> {
+    case Success(Value)
+    case Failure(Error)
     
+    /// Returns `true` if the result is a success, `false` otherwise.
+    public var isSuccess: Bool {
+        switch self {
+        case .Success:
+            return true
+        case .Failure:
+            return false
+        }
+    }
+    
+    /// Returns `true` if the result is a failure, `false` otherwise.
+    public var isFailure: Bool {
+        return !isSuccess
+    }
+    
+    /// Returns the associated value if the result is a success, `nil` otherwise.
+    public var value: Value? {
+        switch self {
+        case .Success(let value):
+            return value
+        case .Failure:
+            return nil
+        }
+    }
+    
+    /// Returns the associated error value if the result is a failure, `nil` otherwise.
+    public var error: Error? {
+        switch self {
+        case .Success:
+            return nil
+        case .Failure(let error):
+            return error
+        }
+    }
 }
 
-public protocol NetApiProtocol: NetApiIndicatorProtocol {
+public struct NetApiResponse<Value, Error: ErrorType> {
+    public let request: NSURLRequest?
+    public let response: NSHTTPURLResponse?
+    public let data: NSData?
+    public let result: NetApiResult<Value, Error>
+    
+    public init(
+        request: NSURLRequest?,
+        response: NSHTTPURLResponse?,
+        data: NSData?,
+        result: NetApiResult<Value, Error>)
+    {
+        self.request = request
+        self.response = response
+        self.data = data
+        self.result = result
+    }
+}
+
+public protocol NetApiProtocol: class {
     var error: NetError? { get }
-    var query: [String: AnyObject]? { get }
-    var method: Alamofire.Method? { get }
-    var url: String? { get }
-    var timeout: NSTimeInterval? { get set }
-    var request: RequestProtocol? { get set }
-    var responseData: AnyObject? { get set }
-    
-    func getNetApiData() -> NetApiData
+    var query: [String: AnyObject] { get }
+    var method: ApiMethod { get }
+    var url: String { get }
+    var timeout: NSTimeInterval { get set }
+    var request: AnyObject? { get set }
+    var response: AnyObject? { get set }
+    var indicator: NetApiIndicator? { get set }
     
     func fillJSON(json: AnyObject)
     func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest
-    func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError>
-    func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError>
-    func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError>
-    func transferParameterEncoding() -> ParameterEncoding
+    func transferResponseJSON(response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError>
+    func transferResponseData(response: NetApiResponse<NSData, NSError>) -> NetApiResponse<NSData, NSError>
+    func transferResponseString(response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError>
+    func requestJSON() -> SignalProducer<NetApiProtocol, NetError>
+    func requestData() -> SignalProducer<NetApiProtocol, NetError>
+    func requestString() -> SignalProducer<NetApiProtocol, NetError>
+    func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError>
 }
+
 public protocol UploadNetApiProtocol: NetApiProtocol {
     var uploadData: NSData? { get set }
     var uploadDataName: String? { get }
     var uploadDataMimeType: String? { get }
 }
 
-public class NetApiAbstract: NetApiProtocol{
-    public var error: NetError?
-    public var query: [String: AnyObject]?
-    public var method: Alamofire.Method?
-    public var url: String?
-    public var timeout: NSTimeInterval?
-    public var request: RequestProtocol?
-    public var responseData: AnyObject?
-    
-    public var indicator: IndicatorProtocol?
-    public var indicatorInView: UIView!
-    public var indicatorText: String?
-    public var indicatorList: IndicatorListProtocol?
-    
-    public convenience init(error: NetError) {
-        self.init()
-        self.error = error
-    }
-    public init() {
-    }
-    public func getNetApiData() -> NetApiData {
-        return NetApiData(api: self)
-    }
-    public func fillJSON(json: AnyObject) {}
-    public func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest { return request }
-    public func transferResponseJSON(response: Response<AnyObject, NSError>) -> Response<AnyObject, NSError> { return response }
-    public func transferResponseData(response: Response<NSData, NSError>) -> Response<NSData, NSError> { return response }
-    public func transferResponseString(response: Response<String, NSError>) -> Response<String, NSError> { return response }
-    public func transferParameterEncoding() -> ParameterEncoding { return Alamofire.ParameterEncoding.URL }
-    
-}
 
 public extension NetApiProtocol {
     
@@ -95,32 +132,26 @@ public extension NetApiProtocol {
         }
         switch format {
         case .JSON:
-            return getNetApiData().requestJSON().map { _ in
+            return self.requestJSON().map { _ in
                 return self
             }
         case .Data:
-            return getNetApiData().requestData().map { _ in
+            return self.requestData().map { _ in
                 return self
             }
         case .String:
-            return getNetApiData().requestString().map { _ in
+            return self.requestString().map { _ in
                 return self
             }
         case .Upload:
-            return getNetApiData().requestUpload().map { _ in
+            return self.requestUpload().map { _ in
                 return self
             }
         }
     }
     
-    func setIndicator(indicator: IndicatorProtocol, view: UIView, text: String? = nil) -> Self {
-        self.indicator = indicator
-        self.indicatorInView = view
-        self.indicatorText = text
-        return self
-    }
-    func setIndicatorList(indicator: IndicatorListProtocol) -> Self {
-        self.indicatorList = indicator
+    func setIndicator(indicator: IndicatorProtocol, view: UIView? = nil, text: String? = nil) -> Self {
+        self.indicator = NetApiIndicator(indicator: indicator, view: view, text: text)
         return self
     }
 }

@@ -17,16 +17,18 @@ public enum StatusCode: Int {
 public class NetError : NSError {
     public var statusCode: Int = 0
     public var message: String = ""
+    public static var defaultMessage = "网络异常"
+    
     init(statusCode: Int, message: String) {
         self.statusCode = statusCode
         self.message = message
+        super.init(domain: "NetError", code: statusCode, userInfo: ["message":message])
         if message.length == 0 {
-            self.message = "网络异常"
+            self.message = NetError.defaultMessage
         }
         if message.contains("<html") {
-            self.message = "网络异常"
+            self.message = NetError.defaultMessage
         }
-        super.init(domain: "NetError", code: statusCode, userInfo: ["message":message])
     }
     convenience init(error: NSError){
         self.init(statusCode: error.code, message: error.description)
@@ -35,7 +37,7 @@ public class NetError : NSError {
         super.init(coder: aDecoder)
     }
     public override var description: String {
-        return "[NetError] StatusCode: \(statusCode) Message:\(message)"
+        return "StatusCode: \(statusCode) Message:\(message)"
     }
     
 }

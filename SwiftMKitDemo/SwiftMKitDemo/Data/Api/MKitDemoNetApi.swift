@@ -9,46 +9,46 @@
 import UIKit
 import Alamofire
 
-class PX500NetApi: NetApiAbstract {
+class PX500NetApi: AlamofireNetApiData {
     static let baseQuery = ["consumer_key": PX500Config.consumerKey]
-    private var _query: [String: AnyObject]?
-    override var query: [String: AnyObject]? {
+    private var _query: [String: AnyObject] = [:]
+    override var query: [String: AnyObject] {
         get {
             let result = NetApiData.combineQuery(PX500NetApi.baseQuery, append: _query)
-            return result
+            return result ?? [:]
         }
         set {
             _query = newValue
         }
     }
     static let baseUrl = PX500Config.urlHost + "/v1"
-    private var _url: String?
-    override var url: String? {
+    private var _url: String = ""
+    override var url: String {
         get {
             return _url
         }
         set {
-            if newValue != nil && newValue!.hasPrefix("http") {
-                _url = NSURL(string: newValue!)?.absoluteString
+            if newValue.hasPrefix("http") {
+                _url = NSURL(string: newValue)?.absoluteString ?? ""
             }else{
-                _url =  NSURL(string: PX500NetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString
+                _url =  NSURL(string: PX500NetApi.baseUrl)?.URLByAppendingPathComponent(newValue).absoluteString ?? ""
             }
         }
     }
 }
 
-class BuDeJieNetApi: NetApiAbstract {
+class BuDeJieNetApi: AlamofireNetApiData {
     static let baseUrl = BuDeJieConfig.urlHost + "/api"
-    private var _url: String?
-    override var url: String? {
+    private var _url: String = ""
+    override var url: String {
         get {
             return _url
         }
         set {
-            if newValue != nil && newValue!.hasPrefix("http") {
-                _url = NSURL(string: newValue!)?.absoluteString
+            if newValue.hasPrefix("http") {
+                _url = NSURL(string: newValue)?.absoluteString ?? ""
             }else{
-                _url =  NSURL(string: BuDeJieNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString
+                _url =  NSURL(string: BuDeJieNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString ?? ""
             }
         }
     }
