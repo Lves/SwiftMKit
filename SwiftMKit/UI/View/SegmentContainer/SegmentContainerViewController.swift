@@ -22,6 +22,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
     public let screenW: CGFloat = UIScreen.mainScreen().bounds.w
     public let screenH: CGFloat = UIScreen.mainScreen().bounds.h
     
+    private var loadedViewControllers = [UIViewController]()
     private var _viewControllers = [UIViewController]()
     
     public var viewControllers:[UIViewController] {
@@ -126,6 +127,12 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         if index < 0 || index >= viewControllers.count {
             DDLogError("Segment Index out of bounds")
             return false
+        }
+        if let vc = viewControllers[safe: index] {
+            if !loadedViewControllers.contains(vc) {
+                loadedViewControllers.append(vc)
+                (vc as? BaseKitViewController)?.loadData()
+            }
         }
         if index == selectedSegment {
             DDLogDebug("Segment Index is same to old one, do nothing")
