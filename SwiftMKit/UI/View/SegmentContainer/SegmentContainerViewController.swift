@@ -118,6 +118,12 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         let percentX : CGFloat = offsetX / scrollView.contentSize.width
         let index = (offsetX + width / 2) / width
         _selectedSegment = Int(index)
+        if let vc = viewControllers[safe: Int(index)] {
+            if !loadedViewControllers.contains(vc) {
+                loadedViewControllers.append(vc)
+                (vc as? BaseKitViewController)?.loadData()
+            }
+        }
         if (delegate != nil) {
             delegate?.didSelectSegment(self, index: selectedSegment, viewController: viewControllers[selectedSegment] ,percentX: percentX)
         }
