@@ -21,6 +21,14 @@ public extension UIViewController {
                     if let vc = nav.viewControllers.last {
                         topController = vc
                     }
+                } else if let tab = topController as? UITabBarController {
+                    if let nav = tab.selectedViewController as? UINavigationController {
+                        if let vc = nav.viewControllers.last {
+                            topController = vc
+                        }
+                    } else {
+                        topController = tab
+                    }
                 }
                 return topController
             }

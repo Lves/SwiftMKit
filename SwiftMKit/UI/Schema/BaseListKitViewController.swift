@@ -127,6 +127,20 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
         }
     }
 
+    public override func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval, completion: () -> Void) {
+        if self.listViewModel?.dataIndex == 0 {
+            if self.listView?.mj_header != nil {
+                self.listView?.mj_header.endRefreshing()
+            }
+        }else{
+            if self.listView?.mj_footer != nil {
+                if self.listView?.mj_footer.state == .Refreshing {
+                    self.listView?.mj_footer.endRefreshing()
+                }
+            }
+        }
+        super.showTip(tip, view: view, hideAfterDelay: hideAfterDelay, completion: completion)
+    }
    
     deinit {
     }

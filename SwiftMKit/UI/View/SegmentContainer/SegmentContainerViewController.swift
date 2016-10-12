@@ -30,7 +30,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
     }
     
-    private var _selectedSegment: Int = -1
+    private var _selectedSegment: Int = 0
     
     public var selectedSegment: Int {
         get {
@@ -75,6 +75,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.scrollsToTop = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+        self.view.backgroundColor = UIColor.clearColor()
         self.view.addSubview(scrollView)
         self.resetChildControllerView()
     }
@@ -89,12 +90,12 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
-            scrollView.addSubview(vc.view)
-            if !(self.childViewControllers.contains(vc)) {
-                self.addChildViewController(vc)
-                if let listVC = vc as? BaseListViewController {
-                    listVC.listView?.scrollsToTop = (index == 0)
-                }
+            self.addChildViewController(vc)
+            if let listVC = vc as? BaseListViewController {
+                listVC.listView?.scrollsToTop = (index == 0)
+            }
+            if index == selectedSegment && !(scrollView.subviews.contains(vc.view)) {
+                scrollView.addSubview(vc.view)
             }
         }
         self.resetSubUIFrame()
@@ -117,6 +118,12 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         let percentX : CGFloat = offsetX / scrollView.contentSize.width
         let index = (offsetX + width / 2) / width
         _selectedSegment = Int(index)
+        if let vc = viewControllers[safe: Int(index)] {
+            if !(scrollView.subviews.contains(vc.view)) {
+                scrollView.addSubview(vc.view)
+                self.resetSubUIFrame()
+            }
+        }
         if (delegate != nil) {
             delegate?.didSelectSegment(self, index: selectedSegment, viewController: viewControllers[selectedSegment] ,percentX: percentX)
         }
@@ -126,6 +133,12 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         if index < 0 || index >= viewControllers.count {
             DDLogError("Segment Index out of bounds")
             return false
+        }
+        if let vc = viewControllers[safe: index] {
+            if !(self.childViewControllers.contains(vc)) {
+                self.addChildViewController(vc)
+                self.resetSubUIFrame()
+            }
         }
         if index == selectedSegment {
             DDLogDebug("Segment Index is same to old one, do nothing")
