@@ -48,6 +48,11 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     @IBOutlet weak var btnForget: UIButton!
     @IBOutlet weak var passwordInputView: PasswordTextView!
     public var coverView : UIControl = UIControl()
+    public var eventCancel: ((PasswordPannel?) -> ()) = { _ in }
+    public var eventForgetPassword: ((PasswordPannel?) -> ()) = { _ in }
+    public var eventInputPassword: ((PasswordPannel?, password: String, completion: ((Bool, String, PasswordPannelStatus) -> Void)) -> ()) = { _,_,_ in }
+    public var eventFinish: ((PasswordPannel?, success: Bool) -> ()) = { _,_ in }
+    
     
     public var loadingText = ""
     
@@ -68,11 +73,13 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             self?.hide() {
                 self?.passwordInputView.password = ""
                 self?.delegate?.pp_didCancel(self)
+                self?.eventCancel(self)
             }
         }
         self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             self?.hide() {
                 self?.delegate?.pp_forgetPassword(self)
+                self?.eventForgetPassword(self)
             }
         }
         lblTitle.text = InnerConstant.Title
@@ -80,11 +87,24 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         lblMessage.hidden = true
         passwordInputView.delegate = self
         passwordInputView.inputViewColor = UIColor(hex6: 0xD8E0EB)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: Notification.LockGesturePassword, object: nil)
+        
+        // 作用：禁止全屏手势滑动返回
+        coverView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan)))
     }
+    
+    func pan() {}
+    
+    func removePanel() {
+        self.removeFromSuperview()
+        self.coverView.removeFromSuperview()
+    }
+    
     private func showKeyboard() {
         passwordInputView.active()
     }
-    private func hideKeyboard() {
+    public func hideKeyboard() {
         passwordInputView.inactive()
     }
     /** 弹出 */
@@ -93,6 +113,9 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         if let nav = viewController.navigationController {
             view = nav.view
         }
+        showInView(view)
+    }
+    public func showInView(view : UIView) {
         self.size.width = view.size.width
         coverView.frame = view.bounds
         coverView.backgroundColor = UIColor.clearColor()
@@ -128,7 +151,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         self.btnForget.userInteractionEnabled = !freeze;
     }
     /** 开始加载 */
-    private func startLoading() {
+    public func startLoading() {
         freezePanel(true)
         imgRotation.hidden = false
         lblMessage.hidden = false
@@ -161,7 +184,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         hideKeyboard()
         startLoading()
         lblMessage.text = loadingText
-        delegate?.pp_didInputPassword(self, password: password) { [weak self] (success, message, status) in
+        let complete = { [weak self] (success: Bool, message: String, status: PasswordPannelStatus) in
             if status == .PasswordWrong {
                 let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "重新输入", style: .Default, handler:  { [weak self] _ in
@@ -175,20 +198,22 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                 alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
                     self?.hide() {
                         self?.delegate?.pp_forgetPassword(self)
+                        self?.eventForgetPassword(self)
                     }
-                })
+                    })
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
             } else if status == .PasswordLocked {
                 let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "取消", style: .Default, handler:  { [weak self] _ in
                     self?.hide()
-                }))
+                    }))
                 alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
                     self?.hide() {
                         self?.delegate?.pp_forgetPassword(self)
+                        self?.eventForgetPassword(self)
                     }
-                })
+                    })
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
             }
@@ -196,8 +221,25 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             Async.main(after: 1) { [weak self] in
                 self?.hide() {
                     self?.delegate?.pp_didFinished(self, success: success)
+                    self?.eventFinish(self, success: success)
                 }
             }
         }
+        delegate?.pp_didInputPassword(self, password: password, completion: complete)
+        self.eventInputPassword(self,  password: password, completion: complete)
+    }
+    
+    public func requestComplete(success: Bool, message: String, status: PasswordPannelStatus) {
+        self.stopLoading(success, message: message)
+        Async.main(after: 1) { [weak self] in
+            self?.hide() {
+                self?.delegate?.pp_didFinished(self, success: success)
+                self?.eventFinish(self, success: success)
+            }
+        }
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
