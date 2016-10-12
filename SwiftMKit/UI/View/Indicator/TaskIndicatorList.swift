@@ -87,10 +87,14 @@ public class TaskIndicatorList: NSObject, IndicatorListProtocol {
     }
     func endRefresh() {
         if self.viewModel?.dataIndex == 0 {
-            self.listView?.mj_header.endRefreshing()
+            if self.listView?.mj_header != nil {
+                self.listView?.mj_header.endRefreshing()
+            }
         }else{
-            if self.listView?.mj_footer.state == .Refreshing {
-                self.listView?.mj_footer.endRefreshing()
+            if self.listView?.mj_footer != nil {
+                if self.listView?.mj_footer.state == .Refreshing {
+                    self.listView?.mj_footer.endRefreshing()
+                }
             }
         }
     }
