@@ -95,7 +95,7 @@ public class NetApiClient : NSObject {
     
     class func requestJSON(request: NSURLRequest, api: NetApiProtocol,
                  completionHandler: (Response<AnyObject, NSError> -> Void)?)
-        -> Request {
+        -> RequestProtocol {
             let request = Alamofire.request(request)
             api.request = request
             self.bindIndicator(api: api, task: request.task)
@@ -129,7 +129,7 @@ public class NetApiClient : NSObject {
     }
     class func requestData(request: NSURLRequest, api: NetApiProtocol,
                            completionHandler: (Response<NSData, NSError> -> Void)?)
-        -> Request {
+        -> RequestProtocol {
             let request = Alamofire.request(request)
             api.request = request
             self.bindIndicator(api: api, task: request.task)
@@ -161,7 +161,7 @@ public class NetApiClient : NSObject {
     }
     class func requestString(request: NSURLRequest, api: NetApiProtocol,
                              completionHandler: (Response<String, NSError> -> Void)?)
-        -> Request {
+        -> RequestProtocol {
             let request = Alamofire.request(request)
             api.request = request
             self.bindIndicator(api: api, task: request.task)
@@ -193,7 +193,7 @@ public class NetApiClient : NSObject {
     }
     class func requestUpload(request: NSURLRequest, api: UploadNetApiProtocol,
                            completionHandler: (Response<AnyObject, NSError> -> Void)?)
-        -> Request {
+        -> RequestProtocol {
             let uploadData = NetApiClient.createBodyWithParameters(api.query, filePathKey: api.uploadDataName, mimetype: api.uploadDataMimeType ?? "", uploadData: api.uploadData!)
             let request = Alamofire.upload(request, data: uploadData)
             api.request = request

@@ -50,8 +50,8 @@ public class BaseKitViewController : UIViewController, UIGestureRecognizerDelega
     }
     
     
-    public let screenW: CGFloat = UIScreen.mainScreen().bounds.w
-    public let screenH: CGFloat = UIScreen.mainScreen().bounds.h
+    public var screenW: CGFloat { get { return UIScreen.mainScreen().bounds.w } }
+    public var screenH: CGFloat { get { return UIScreen.mainScreen().bounds.h } }
     
     
     public var emptyViewYOffset: CGFloat {

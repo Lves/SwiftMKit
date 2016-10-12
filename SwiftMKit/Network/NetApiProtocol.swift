@@ -20,6 +20,14 @@ public protocol NetApiIndicatorProtocol : class {
     var indicatorText: String? { get set }
     var indicatorList: IndicatorListProtocol? { get set }
 }
+public protocol RequestProtocol {
+    var task: NSURLSessionTask { get }
+    
+}
+
+extension Request: RequestProtocol {
+    
+}
 
 public protocol NetApiProtocol: NetApiIndicatorProtocol {
     var error: NetError? { get }
@@ -27,7 +35,7 @@ public protocol NetApiProtocol: NetApiIndicatorProtocol {
     var method: Alamofire.Method? { get }
     var url: String? { get }
     var timeout: NSTimeInterval? { get set }
-    var request: Request? { get set }
+    var request: RequestProtocol? { get set }
     var responseData: AnyObject? { get set }
     
     func getNetApiData() -> NetApiData
@@ -51,7 +59,7 @@ public class NetApiAbstract: NetApiProtocol{
     public var method: Alamofire.Method?
     public var url: String?
     public var timeout: NSTimeInterval?
-    public var request: Request?
+    public var request: RequestProtocol?
     public var responseData: AnyObject?
     
     public var indicator: IndicatorProtocol?
