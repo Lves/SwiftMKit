@@ -73,6 +73,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogError("\(error)")
                     
                     let err = error is NetError ? error as! NetError : NetError(error: error)
+                    err.response = transferedResponse.response
                     sink.sendFailed(err)
                 }
             }
@@ -121,6 +122,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogError("\(error)")
                     
                     let err = error is NetError ? error as! NetError : NetError(error: error)
+                    err.response = transferedResponse.response
                     sink.sendFailed(err)
                 }
             }
@@ -171,6 +173,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogError("\(error)")
                     
                     let err = error is NetError ? error as! NetError : NetError(error: error)
+                    err.response = transferedResponse.response
                     sink.sendFailed(err)
                 }
             }
@@ -220,6 +223,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogError("\(error)")
                     
                     let err = error is NetError ? error as! NetError : NetError(error: error)
+                    err.response = transferedResponse.response
                     sink.sendFailed(err)
                 }
             }

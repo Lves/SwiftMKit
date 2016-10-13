@@ -26,6 +26,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         
         static let SegueToNextCustomAlertView = "routeToCustomAlertViewController"
         static let SegueToNextCoverFlowView = "routeToCoverFlowView"
+        static let SegueToNextOrderTableView = "MKUIOrderTableViewController"
 
         static let SegueToNextUrl = "http://www.baidu.com"
     }
@@ -81,6 +82,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             self.routeToName(InnerConst.SegueToNextCoverFlowView)
         case 12:
             self.routeToName(InnerConst.SegueToPullRefresh)
+        case 13:
+            self.routeToName(InnerConst.SegueToNextOrderTableView)
         default:
             break
         }

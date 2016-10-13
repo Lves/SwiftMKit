@@ -88,7 +88,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         passwordInputView.delegate = self
         passwordInputView.inputViewColor = UIColor(hex6: 0xD8E0EB)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: Notification.LockGesturePassword, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         // 作用：禁止全屏手势滑动返回
         coverView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan)))

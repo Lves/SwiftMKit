@@ -65,8 +65,8 @@ public class TaskIndicatorList: NSObject, IndicatorProtocol {
     @objc func task_list_cancel(notify:NSNotification) {
         DDLogVerbose("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        Async.main {
-            if self.viewModel != nil {
+        if self.viewModel != nil {
+            Async.main {
                 self.endRefresh()
             }
         }
@@ -106,9 +106,7 @@ public class TaskIndicatorList: NSObject, IndicatorProtocol {
             DDLogVerbose("Cancel list task: \(task)")
             let info = ["task": task] as NSDictionary
             let notify = NSNotification(name: "", object: info)
-            if self.viewModel != nil {
-                self.task_list_cancel(notify)
-            }
+            self.task_list_cancel(notify)
             task.cancel()
         }
     }

@@ -15,6 +15,7 @@ public enum StatusCode: Int {
 }
 
 public class NetError : NSError {
+    public var response: NSHTTPURLResponse?
     public var statusCode: Int = 0
     public var message: String = ""
     public static var defaultMessage = "网络异常"
