@@ -74,6 +74,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                 self?.passwordInputView.password = ""
                 self?.delegate?.pp_didCancel(self)
                 self?.eventCancel(self)
+                self?.eventCancel = { _ in }
             }
         }
         self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
@@ -88,7 +89,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         passwordInputView.delegate = self
         passwordInputView.inputViewColor = UIColor(hex6: 0xD8E0EB)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: Notification.LockGesturePassword, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         // 作用：禁止全屏手势滑动返回
         coverView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan)))
@@ -212,6 +213,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                     self?.hide() {
                         self?.delegate?.pp_forgetPassword(self)
                         self?.eventForgetPassword(self)
+                        self?.eventForgetPassword = { _ in }
                     }
                     })
                 UIViewController.topController?.showAlert(alert, completion: nil)
@@ -227,6 +229,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         }
         delegate?.pp_didInputPassword(self, password: password, completion: complete)
         self.eventInputPassword(self,  password: password, completion: complete)
+        self.eventInputPassword = { _,_,_ in }
     }
     
     public func requestComplete(success: Bool, message: String, status: PasswordPannelStatus) {
@@ -235,11 +238,13 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             self?.hide() {
                 self?.delegate?.pp_didFinished(self, success: success)
                 self?.eventFinish(self, success: success)
+                self?.eventFinish = { _,_ in }
             }
         }
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        print("PasswordPannel  deinit")
     }
 }

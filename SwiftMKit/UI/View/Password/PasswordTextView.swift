@@ -130,6 +130,10 @@ public class PasswordTextView : UIView, UITextFieldDelegate {
     public func textFieldDidEndEditing(textField: UITextField) {
         IQKeyboardManager.sharedManager().enableAutoToolbar = originEnableAutoToolbar
     }
+    
+    deinit {
+        print("PasswordTextView deinit")
+    }
 }
 
 
