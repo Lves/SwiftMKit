@@ -28,7 +28,6 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         static let SegueToNextCoverFlowView = "routeToCoverFlowView"
         static let SegueToNextOrderTableView = "MKUIOrderTableViewController"
 
-        static let SegueToNextUrl = "http://www.baidu.com"
     }
     
     private var _viewModel = MKUIViewModel()
@@ -37,6 +36,11 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
     }
     override var listView: UIScrollView! {
         get { return tableView }
+    }
+    
+    override func setupNavigation() {
+        super.setupNavigation()
+        self.navigationController?.navigationBar.translucent = false
     }
     
     override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
@@ -54,11 +58,13 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
     }
     override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
         if let model = object as? MKDataListModel {
+            if model.route?.hasPrefix("http") == true {
+                self.routeToUrl(model.route ?? "")
+                return
+            }
             switch indexPath.row {
             case 0:
                 self.routeToName(model.route ?? "", storyboardName: model.routeSB)
-            case 14:
-                self.routeToUrl(InnerConst.SegueToNextUrl)
             case 1:
                 self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
             case 2:

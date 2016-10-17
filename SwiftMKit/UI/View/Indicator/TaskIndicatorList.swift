@@ -82,7 +82,9 @@ public class TaskIndicatorList: NSObject, IndicatorProtocol {
     
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        DDLogVerbose("Running list tasks: \(runningTasks.count)")
+        if runningTasks.count > 0 {
+            DDLogVerbose("Running list tasks: \(runningTasks.count)")
+        }
         for task in runningTasks {
             DDLogVerbose("Cancel list task: \(task)")
             let info = ["task": task] as NSDictionary

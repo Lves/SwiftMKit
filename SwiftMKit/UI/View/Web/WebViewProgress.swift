@@ -37,8 +37,6 @@ public class WebViewProgress : NSObject {
             if progressDelegate != nil {
                 progressDelegate?.webViewProgress(self, updateProgress: progress)
             }
-            
-            DDLogInfo("progress is \(progress)")
         }
     }
     var loadingCount : Int = 0
@@ -62,7 +60,6 @@ public class WebViewProgress : NSObject {
         tempProgress = max(tempProgress, 0)
         progress = tempProgress
         
-        DDLogInfo("increment \(increment)")
     }
     
     func completeProgress() {
