@@ -61,20 +61,15 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             if model.route?.hasPrefix("http") == true {
                 self.routeToUrl(model.route ?? "")
                 return
+            } else {
+                self.routeToName(model.route ?? "", storyboardName: model.routeSB)
+                return
             }
             switch indexPath.row {
-            case 0:
-                self.routeToName(model.route ?? "", storyboardName: model.routeSB)
             case 1:
                 self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
-            case 2:
-                self.routeToName(InnerConst.SegueToNextSideView)
-            case 3:
-                self.routeToName(InnerConst.SegueToNextChartView)
             case 4:
                 self.routeToName(InnerConst.SegueToNextKeyboardView)
-            case 5:
-                self.routeToName(InnerConst.SegueToNextSegmentViewController)
             case 6:
                 self.routeToName(InnerConst.SegueToNextGesturePasswordView)
             case 7:
@@ -82,11 +77,6 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
             case 8:
                 self.hidesBottomBarWhenPushed = true
                 self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
-            case 9:
-                self.hidesBottomBarWhenPushed = true
-                self.routeToName(InnerConst.SegueToNextTreeView)
-            case 10:
-                self.routeToName(InnerConst.SegueToNextCustomAlertView)
             case 11:
                 self.routeToName(InnerConst.SegueToNextCoverFlowView)
             case 12:

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DCg-8y-Y0k">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Chart View-->
+        <scene sceneID="ibj-Dv-ZXL">
+            <objects>
+                <viewController storyboardIdentifier="MKChartViewController" automaticallyAdjustsScrollViewInsets="NO" id="1tS-A4-LgD" customClass="MKChartViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wog-5M-PBS"/>
+                        <viewControllerLayoutGuide type="bottom" id="o7w-K5-I5L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sIN-5M-OxW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chart View" id="FYq-Qg-ek9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Zp-xT-nYv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1537" y="515"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xKN-Pu-sd7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DCg-8y-Y0k" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uoW-Lf-DvZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1tS-A4-LgD" kind="relationship" relationship="rootViewController" id="yMz-9f-Pa0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ngB-O2-CAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725" y="515"/>
+        </scene>
+    </scenes>
+</document>

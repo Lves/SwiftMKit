@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 
-class MKUISegmentViewController: BaseViewController {
+class MKSegmentViewController: BaseViewController, SegmentContainerViewControllerDelegate {
 
     @IBOutlet weak var segment: UISegmentedControl!
     var segmentContainer: SegmentContainerViewController {
@@ -27,17 +27,19 @@ class MKUISegmentViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController, percentX: CGFloat) {
+        segment.selectedSegmentIndex = index
+    }
+    
     override func setupUI() {
         super.setupUI()
-        let vc1 = self.instanceViewControllerInStoryboardWithName("MKUISegmentAViewController")!
-        let vc2 = self.instanceViewControllerInStoryboardWithName("MKUISegmentBViewController")!
+        let vc1 = self.instanceViewControllerInStoryboardWithName("MKSegmentAViewController")!
+        let vc2 = self.instanceViewControllerInStoryboardWithName("MKSegmentBViewController")!
+        segmentContainer.delegate = self
         segmentContainer.addSegmentViewControllers([vc1,vc2])
     }
     override func bindingData() {
         super.bindingData()
-//        segmentContainer.animating.producer.startWithNext { [weak self] animating in
-//            self?.segment.enabled = !animating
-//        }
         segment.rac_signalForControlEvents(.ValueChanged).toSignalProducer().startWithNext { [weak self] _ in
             let index = self?.segment.selectedSegmentIndex ?? 0
             DDLogInfo("Segment index: \(index)")

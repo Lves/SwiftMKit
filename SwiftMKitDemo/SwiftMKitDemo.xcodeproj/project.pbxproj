@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01CCB0DD1CFC341900D06AD0 /* MKUICustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */; };
 		01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0DE1CFD659F00D06AD0 /* CoverFlowLayout.swift */; };
 		01CCB0E31CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */; };
 		030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */; };
@@ -17,10 +16,7 @@
 		034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FB88B1CD1EC2F00E90738 /* EquatableTuples.swift */; };
 		03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC0D751CD204EE00D234FF /* DDLog+Extension.swift */; };
 		03CC0D781CD211F300D234FF /* CollectionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC0D771CD211F300D234FF /* CollectionTypeTests.swift */; };
-		181164EA1CF68C0800771597 /* MKUITreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181164E91CF68C0800771597 /* MKUITreeViewController.swift */; };
 		181164EC1CF68C2500771597 /* MKUITreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181164EB1CF68C2500771597 /* MKUITreeViewModel.swift */; };
-		181164EF1CF68D6600771597 /* MKUITreeViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181164ED1CF68D6600771597 /* MKUITreeViewCellTableViewCell.swift */; };
-		181164F01CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181164EE1CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib */; };
 		181C72EB1CE5821F0072FB7A /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C72EA1CE5821F0072FB7A /* SideMenu.swift */; };
 		181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C72ED1CE582AD0072FB7A /* PersentAnimator.swift */; };
 		18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C208581CC862D800569F42 /* SingleReqViewController.swift */; };
@@ -65,6 +61,8 @@
 		274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */; };
 		274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */; };
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
+		274C4C621DB4CFF900310C11 /* MKChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C4C611DB4CFF900310C11 /* MKChartViewController.swift */; };
+		274C4C641DB4D04200310C11 /* MKChartView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C631DB4D04200310C11 /* MKChartView.storyboard */; };
 		276183951DAA40A200C3AC77 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183801DAA40A200C3AC77 /* Alamofire.framework */; };
 		276183961DAA40A200C3AC77 /* Aspects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183811DAA40A200C3AC77 /* Aspects.framework */; };
 		276183971DAA40A200C3AC77 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183821DAA40A200C3AC77 /* Charts.framework */; };
@@ -98,6 +96,21 @@
 		277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */; };
 		277EA9FB1CE9AA0C00AA62A0 /* NumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */; };
 		2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0061CC89E74007247F6 /* NSObject+Extension.swift */; };
+		278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */; };
+		278725741DB4C82600C1F19A /* MKCustomEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725671DB4C82600C1F19A /* MKCustomEmptyView.swift */; };
+		278725751DB4C82600C1F19A /* MKCustomEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278725681DB4C82600C1F19A /* MKCustomEmptyView.xib */; };
+		278725761DB4C82600C1F19A /* MKEmptyCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725691DB4C82600C1F19A /* MKEmptyCustomViewController.swift */; };
+		278725771DB4C82600C1F19A /* MKEmptyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787256A1DB4C82600C1F19A /* MKEmptyListViewController.swift */; };
+		278725781DB4C82600C1F19A /* MKEmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2787256B1DB4C82600C1F19A /* MKEmptyView.storyboard */; };
+		278725791DB4C82600C1F19A /* MKNormalEmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787256C1DB4C82600C1F19A /* MKNormalEmptyViewController.swift */; };
+		2787257A1DB4C82600C1F19A /* MKSegmentView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2787256E1DB4C82600C1F19A /* MKSegmentView.storyboard */; };
+		2787257B1DB4C82600C1F19A /* MKSegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787256F1DB4C82600C1F19A /* MKSegmentViewController.swift */; };
+		2787257C1DB4C82600C1F19A /* MKSideView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 278725711DB4C82600C1F19A /* MKSideView.storyboard */; };
+		2787257D1DB4C82600C1F19A /* MKSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725721DB4C82600C1F19A /* MKSideViewController.swift */; };
+		278725801DB4C84E00C1F19A /* MKTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787257F1DB4C84E00C1F19A /* MKTreeViewController.swift */; };
+		278725821DB4C9B600C1F19A /* MKTreeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 278725811DB4C9B600C1F19A /* MKTreeView.storyboard */; };
+		278725851DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725831DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.swift */; };
+		278725861DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278725841DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.xib */; };
 		278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937EC1CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift */; };
 		278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937ED1CD0A5CC00F43699 /* PX500PhotoEntity.swift */; };
 		278937FA1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937EE1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift */; };
@@ -136,7 +149,6 @@
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
 		27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */; };
 		27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */; };
-		27A4CA261CE3512000516802 /* MKUISegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */; };
 		27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
@@ -149,17 +161,9 @@
 		27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989721DB46EB7004E79A0 /* MKitEmptyView.swift */; };
 		27D989751DB471F5004E79A0 /* BaseKitEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989741DB471F5004E79A0 /* BaseKitEmptyView.swift */; };
 		27D989771DB47209004E79A0 /* BaseKitEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */; };
-		27D9897B1DB47BF3004E79A0 /* MKNormalEmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989791DB47BF3004E79A0 /* MKNormalEmptyViewController.swift */; };
-		27D9897E1DB47C78004E79A0 /* MKEmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27D9897D1DB47C78004E79A0 /* MKEmptyView.storyboard */; };
-		27D989801DB47C9F004E79A0 /* MKEmptyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D9897F1DB47C9F004E79A0 /* MKEmptyListViewController.swift */; };
-		27D989821DB47CBD004E79A0 /* MKEmptyCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989811DB47CBD004E79A0 /* MKEmptyCustomViewController.swift */; };
-		27D989841DB47D5D004E79A0 /* MKCustomEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989831DB47D5D004E79A0 /* MKCustomEmptyView.swift */; };
-		27D989861DB47D6B004E79A0 /* MKCustomEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27D989851DB47D6B004E79A0 /* MKCustomEmptyView.xib */; };
 		27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */; };
 		27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */; };
-		27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */; };
 		27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */; };
-		27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */; };
 		27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */; };
 		27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
@@ -278,7 +282,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUICustomAlertViewController.swift; sourceTree = "<group>"; };
 		01CCB0DE1CFD659F00D06AD0 /* CoverFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayout.swift; sourceTree = "<group>"; };
 		01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUICoverFlowViewController.swift; sourceTree = "<group>"; };
 		030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboardProtocol.swift; sourceTree = "<group>"; };
@@ -289,10 +292,7 @@
 		03CC0D771CD211F300D234FF /* CollectionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTypeTests.swift; sourceTree = "<group>"; };
 		06B36301B29CDB7F77B5A559 /* Pods_SwiftMKitDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1054F8DADC2350EB4A7A137D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		181164E91CF68C0800771597 /* MKUITreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUITreeViewController.swift; sourceTree = "<group>"; };
 		181164EB1CF68C2500771597 /* MKUITreeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUITreeViewModel.swift; sourceTree = "<group>"; };
-		181164ED1CF68D6600771597 /* MKUITreeViewCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MKUITreeViewCellTableViewCell.swift; path = SwiftMKitDemo/UI/UI/ViewModel/MKUITreeViewCellTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		181164EE1CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MKUITreeViewCellTableViewCell.xib; path = SwiftMKitDemo/UI/UI/ViewModel/MKUITreeViewCellTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		181C72EA1CE5821F0072FB7A /* SideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		181C72ED1CE582AD0072FB7A /* PersentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersentAnimator.swift; sourceTree = "<group>"; };
 		189D7C3D1CE5DBCA0044E6EC /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,6 +339,8 @@
 		274316BE1CC8A38000E560EE /* MKDataStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewController.swift; sourceTree = "<group>"; };
 		274316C01CC8A3BA00E560EE /* MKDataStoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataStoreViewModel.swift; sourceTree = "<group>"; };
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
+		274C4C611DB4CFF900310C11 /* MKChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartViewController.swift; sourceTree = "<group>"; };
+		274C4C631DB4D04200310C11 /* MKChartView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKChartView.storyboard; sourceTree = "<group>"; };
 		276183801DAA40A200C3AC77 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		276183811DAA40A200C3AC77 /* Aspects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Aspects.framework; path = "Pods/../build/Debug-iphoneos/Aspects/Aspects.framework"; sourceTree = "<group>"; };
 		276183821DAA40A200C3AC77 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "Pods/../build/Debug-iphoneos/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -373,6 +375,21 @@
 		277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboard.swift; sourceTree = "<group>"; };
 		277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberKeyboard.xib; sourceTree = "<group>"; };
 		2783E0061CC89E74007247F6 /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYCustomAlertView.swift; sourceTree = "<group>"; };
+		278725671DB4C82600C1F19A /* MKCustomEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCustomEmptyView.swift; sourceTree = "<group>"; };
+		278725681DB4C82600C1F19A /* MKCustomEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKCustomEmptyView.xib; sourceTree = "<group>"; };
+		278725691DB4C82600C1F19A /* MKEmptyCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKEmptyCustomViewController.swift; sourceTree = "<group>"; };
+		2787256A1DB4C82600C1F19A /* MKEmptyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKEmptyListViewController.swift; sourceTree = "<group>"; };
+		2787256B1DB4C82600C1F19A /* MKEmptyView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKEmptyView.storyboard; sourceTree = "<group>"; };
+		2787256C1DB4C82600C1F19A /* MKNormalEmptyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNormalEmptyViewController.swift; sourceTree = "<group>"; };
+		2787256E1DB4C82600C1F19A /* MKSegmentView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKSegmentView.storyboard; sourceTree = "<group>"; };
+		2787256F1DB4C82600C1F19A /* MKSegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKSegmentViewController.swift; sourceTree = "<group>"; };
+		278725711DB4C82600C1F19A /* MKSideView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKSideView.storyboard; sourceTree = "<group>"; };
+		278725721DB4C82600C1F19A /* MKSideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKSideViewController.swift; sourceTree = "<group>"; };
+		2787257F1DB4C84E00C1F19A /* MKTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKTreeViewController.swift; sourceTree = "<group>"; };
+		278725811DB4C9B600C1F19A /* MKTreeView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKTreeView.storyboard; sourceTree = "<group>"; };
+		278725831DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUITreeViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		278725841DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKUITreeViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		278937EC1CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500PhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		278937ED1CD0A5CC00F43699 /* PX500PhotoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500PhotoEntity.swift; sourceTree = "<group>"; };
 		278937EE1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500PhotosEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -430,7 +447,6 @@
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewController.swift; sourceTree = "<group>"; };
 		27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewModel.swift; sourceTree = "<group>"; };
-		27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentViewController.swift; sourceTree = "<group>"; };
 		27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentViewModel.swift; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -464,17 +480,9 @@
 		27D989721DB46EB7004E79A0 /* MKitEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitEmptyView.swift; sourceTree = "<group>"; };
 		27D989741DB471F5004E79A0 /* BaseKitEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEmptyView.swift; sourceTree = "<group>"; };
 		27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitEmptyView.xib; sourceTree = "<group>"; };
-		27D989791DB47BF3004E79A0 /* MKNormalEmptyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNormalEmptyViewController.swift; sourceTree = "<group>"; };
-		27D9897D1DB47C78004E79A0 /* MKEmptyView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKEmptyView.storyboard; sourceTree = "<group>"; };
-		27D9897F1DB47C9F004E79A0 /* MKEmptyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKEmptyListViewController.swift; sourceTree = "<group>"; };
-		27D989811DB47CBD004E79A0 /* MKEmptyCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKEmptyCustomViewController.swift; sourceTree = "<group>"; };
-		27D989831DB47D5D004E79A0 /* MKCustomEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCustomEmptyView.swift; sourceTree = "<group>"; };
-		27D989851DB47D6B004E79A0 /* MKCustomEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKCustomEmptyView.xib; sourceTree = "<group>"; };
 		27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewController.swift; sourceTree = "<group>"; };
 		27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewModel.swift; sourceTree = "<group>"; };
-		27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewController.swift; sourceTree = "<group>"; };
 		27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewModel.swift; sourceTree = "<group>"; };
-		27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewController.swift; sourceTree = "<group>"; };
 		27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewModel.swift; sourceTree = "<group>"; };
 		27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		2BA84B8C839A38DF70639431 /* Pods-SwiftMKitDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -642,13 +650,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		016502A21CF6F84B001B063F /* AlertCustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AlertCustomView;
-			sourceTree = "<group>";
-		};
 		034FB88A1CD1EC2200E90738 /* Operation */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,9 +767,9 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				278725621DB4C73C00C1F19A /* AlertView */,
 				6CEFCB411D3485F3008B3382 /* Pannel */,
 				FBE54A2E1CF3F2A3001C493A /* Password */,
-				016502A21CF6F84B001B063F /* AlertCustomView */,
 				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
 				27D989711DB46EA4004E79A0 /* EmptyView */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
@@ -801,6 +802,15 @@
 				273F51B11CC8CD4E003ABE4A /* TaskIndicator.swift */,
 			);
 			path = Indicator;
+			sourceTree = "<group>";
+		};
+		274C4C601DB4CFF900310C11 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				274C4C611DB4CFF900310C11 /* MKChartViewController.swift */,
+				274C4C631DB4D04200310C11 /* MKChartView.storyboard */,
+			);
+			path = ChartView;
 			sourceTree = "<group>";
 		};
 		276183AB1DAA678D00C3AC77 /* Log */ = {
@@ -843,6 +853,72 @@
 			path = Keyboard;
 			sourceTree = "<group>";
 		};
+		278725621DB4C73C00C1F19A /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				278725631DB4C73C00C1F19A /* YYCustomAlertView */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
+		278725631DB4C73C00C1F19A /* YYCustomAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */,
+			);
+			path = YYCustomAlertView;
+			sourceTree = "<group>";
+		};
+		278725661DB4C82600C1F19A /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				2787257E1DB4C83300C1F19A /* EmptyView */,
+				278725691DB4C82600C1F19A /* MKEmptyCustomViewController.swift */,
+				2787256A1DB4C82600C1F19A /* MKEmptyListViewController.swift */,
+				2787256B1DB4C82600C1F19A /* MKEmptyView.storyboard */,
+				2787256C1DB4C82600C1F19A /* MKNormalEmptyViewController.swift */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
+		2787256D1DB4C82600C1F19A /* SegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				2787256E1DB4C82600C1F19A /* MKSegmentView.storyboard */,
+				2787256F1DB4C82600C1F19A /* MKSegmentViewController.swift */,
+			);
+			path = SegmentView;
+			sourceTree = "<group>";
+		};
+		278725701DB4C82600C1F19A /* SideView */ = {
+			isa = PBXGroup;
+			children = (
+				278725711DB4C82600C1F19A /* MKSideView.storyboard */,
+				278725721DB4C82600C1F19A /* MKSideViewController.swift */,
+			);
+			path = SideView;
+			sourceTree = "<group>";
+		};
+		278725731DB4C82600C1F19A /* TreeView */ = {
+			isa = PBXGroup;
+			children = (
+				2787257F1DB4C84E00C1F19A /* MKTreeViewController.swift */,
+				278725811DB4C9B600C1F19A /* MKTreeView.storyboard */,
+				278725831DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.swift */,
+				278725841DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.xib */,
+			);
+			path = TreeView;
+			sourceTree = "<group>";
+		};
+		2787257E1DB4C83300C1F19A /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				278725671DB4C82600C1F19A /* MKCustomEmptyView.swift */,
+				278725681DB4C82600C1F19A /* MKCustomEmptyView.xib */,
+			);
+			name = EmptyView;
+			sourceTree = "<group>";
+		};
 		278CAA4B1CD1DFD8008AC629 /* Web */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,8 +941,6 @@
 		27959A481CD3444500546424 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				181164ED1CF68D6600771597 /* MKUITreeViewCellTableViewCell.swift */,
-				181164EE1CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib */,
 				276D04EE1DAF8E9A00881248 /* MKUIOrderTableViewCell.swift */,
 			);
 			path = Cell;
@@ -875,18 +949,17 @@
 		27959A491CD3444500546424 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				27D989781DB47BDB004E79A0 /* EmptyViewController */,
+				278725661DB4C82600C1F19A /* EmptyView */,
+				2787256D1DB4C82600C1F19A /* SegmentView */,
+				278725701DB4C82600C1F19A /* SideView */,
+				278725731DB4C82600C1F19A /* TreeView */,
+				274C4C601DB4CFF900310C11 /* ChartView */,
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
-				27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */,
-				27F7ADCB1CE1B73C00C24706 /* MKUIChartViewController.swift */,
 				27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */,
-				27A4CA231CE3512000516802 /* MKUISegmentViewController.swift */,
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
-				181164E91CF68C0800771597 /* MKUITreeViewController.swift */,
-				01CCB0DC1CFC341900D06AD0 /* MKUICustomAlertViewController.swift */,
 				01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */,
 				6C51A9E71D3C8ABC006EF254 /* MKUIPullRefresh.swift */,
 				276D04EC1DAF8CE200881248 /* MKUIOrderTableViewController.swift */,
@@ -980,27 +1053,6 @@
 				27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */,
 			);
 			path = EmptyView;
-			sourceTree = "<group>";
-		};
-		27D989781DB47BDB004E79A0 /* EmptyViewController */ = {
-			isa = PBXGroup;
-			children = (
-				27D9897D1DB47C78004E79A0 /* MKEmptyView.storyboard */,
-				27D989791DB47BF3004E79A0 /* MKNormalEmptyViewController.swift */,
-				27D9897F1DB47C9F004E79A0 /* MKEmptyListViewController.swift */,
-				27D989811DB47CBD004E79A0 /* MKEmptyCustomViewController.swift */,
-				27D989891DB49EF3004E79A0 /* EmptyView */,
-			);
-			path = EmptyViewController;
-			sourceTree = "<group>";
-		};
-		27D989891DB49EF3004E79A0 /* EmptyView */ = {
-			isa = PBXGroup;
-			children = (
-				27D989831DB47D5D004E79A0 /* MKCustomEmptyView.swift */,
-				27D989851DB47D6B004E79A0 /* MKCustomEmptyView.xib */,
-			);
-			name = EmptyView;
 			sourceTree = "<group>";
 		};
 		27F7ADD71CE1D46E00C24706 /* Resources */ = {
@@ -1622,18 +1674,17 @@
 			files = (
 				27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */,
 				6CEFCB7F1D3485F3008B3382 /* pannel_icon_zhifubao_friend@2x.png in Resources */,
-				181164F01CF68D6600771597 /* MKUITreeViewCellTableViewCell.xib in Resources */,
 				6CEFCB671D3485F3008B3382 /* pannel_icon_circlefriends@2x.png in Resources */,
 				6CEFCB661D3485F3008B3382 /* pannel_icon_chat_h@2x.png in Resources */,
 				6CEFCB7D1D3485F3008B3382 /* pannel_icon_weixin_h@2x.png in Resources */,
 				6CEFCB7E1D3485F3008B3382 /* pannel_icon_zhifubao@2x.png in Resources */,
-				27D989861DB47D6B004E79A0 /* MKCustomEmptyView.xib in Resources */,
 				6CEFCB631D3485F3008B3382 /* pannel_icon_cardbackground@2x.png in Resources */,
+				278725821DB4C9B600C1F19A /* MKTreeView.storyboard in Resources */,
 				6CEFCB7A1D3485F3008B3382 /* pannel_icon_share@2x.png in Resources */,
 				6CEFCB741D3485F3008B3382 /* pannel_icon_qq@2x.png in Resources */,
 				6CEFCB731D3485F3008B3382 /* pannel_icon_myFavAdd@2x.png in Resources */,
-				27D9897E1DB47C78004E79A0 /* MKEmptyView.storyboard in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
+				278725751DB4C82600C1F19A /* MKCustomEmptyView.xib in Resources */,
 				6CEFCB721D3485F3008B3382 /* pannel_icon_mms_h@2x.png in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
 				034341801CDC775F00249EE3 /* testhaha.jpg in Resources */,
@@ -1650,13 +1701,18 @@
 				6CEFCB691D3485F3008B3382 /* pannel_icon_collection@2x.png in Resources */,
 				27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */,
 				6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */,
+				278725781DB4C82600C1F19A /* MKEmptyView.storyboard in Resources */,
 				6CEFCB711D3485F3008B3382 /* pannel_icon_mms@2x.png in Resources */,
+				2787257A1DB4C82600C1F19A /* MKSegmentView.storyboard in Resources */,
 				6CEFCB7B1D3485F3008B3382 /* pannel_icon_verified@2x.png in Resources */,
+				278725861DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.xib in Resources */,
+				274C4C641DB4D04200310C11 /* MKChartView.storyboard in Resources */,
 				277EA9FB1CE9AA0C00AA62A0 /* NumberKeyboard.xib in Resources */,
 				6CEFCB751D3485F3008B3382 /* pannel_icon_qq_h@2x.png in Resources */,
 				6CEFCB7C1D3485F3008B3382 /* pannel_icon_weixin@2x.png in Resources */,
 				6CEFCB6B1D3485F3008B3382 /* pannel_icon_copy@2x.png in Resources */,
 				FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */,
+				2787257C1DB4C82600C1F19A /* MKSideView.storyboard in Resources */,
 				274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */,
 				27D989771DB47209004E79A0 /* BaseKitEmptyView.xib in Resources */,
 				3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */,
@@ -1819,21 +1875,19 @@
 				270692CB1CE9F27100CF211A /* CachePool.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
-				27D989821DB47CBD004E79A0 /* MKEmptyCustomViewController.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
 				576E13D01D3DC70A00A948CE /* SwiftCrashConsoleReporter.swift in Sources */,
-				27A4CA261CE3512000516802 /* MKUISegmentViewController.swift in Sources */,
 				270692D41CE9F27D00CF211A /* GesturePassword.swift in Sources */,
 				27A1C5ED1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift in Sources */,
 				276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */,
-				27F7ADCC1CE1B73C00C24706 /* MKUIChartViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27678DF11D63050700EB7C23 /* MSearch.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5C1CBFD6D400C2D938 /* MKDataNetworkRequestViewController.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* MKDataNetworkRequestModel.swift in Sources */,
+				278725791DB4C82600C1F19A /* MKNormalEmptyViewController.swift in Sources */,
 				576E13D31D3DC70A00A948CE /* SwiftCrashReport.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
 				FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */,
@@ -1841,7 +1895,6 @@
 				181164EC1CF68C2500771597 /* MKUITreeViewModel.swift in Sources */,
 				273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */,
 				270692CE1CE9F27100CF211A /* KeychainWrapper.swift in Sources */,
-				181164EA1CF68C0800771597 /* MKUITreeViewController.swift in Sources */,
 				6CD0E2621D87D5EA00B2FC40 /* MLinkedList.swift in Sources */,
 				3FC9DF351CBFD53A00C2D938 /* BaseKitViewModel.swift in Sources */,
 				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
@@ -1849,6 +1902,7 @@
 				03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */,
 				278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
+				2787257D1DB4C82600C1F19A /* MKSideViewController.swift in Sources */,
 				27D1A9B41CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				6C51A9EA1D3C8AD6006EF254 /* MKUIPullRefreshViewModel.swift in Sources */,
@@ -1859,20 +1913,20 @@
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
 				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
 				270692D91CE9F28800CF211A /* MKUIGesturePasswordViewController.swift in Sources */,
+				278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				270692DB1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift in Sources */,
 				6C51A9E81D3C8ABC006EF254 /* MKUIPullRefresh.swift in Sources */,
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */,
 				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
-				27D9897B1DB47BF3004E79A0 /* MKNormalEmptyViewController.swift in Sources */,
 				181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */,
 				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
-				181164EF1CF68D6600771597 /* MKUITreeViewCellTableViewCell.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
 				3FC77C471CC36AAE002F964B /* String+Extension.swift in Sources */,
+				274C4C621DB4CFF900310C11 /* MKChartViewController.swift in Sources */,
 				3FC9DF311CBFD53A00C2D938 /* NetApiClient.swift in Sources */,
 				FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */,
 				27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */,
@@ -1881,6 +1935,7 @@
 				27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */,
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
+				2787257B1DB4C82600C1F19A /* MKSegmentViewController.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
 				27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */,
 				576E13D11D3DC70A00A948CE /* SwiftCrashDefaultFormatter.m in Sources */,
@@ -1892,7 +1947,6 @@
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
 				27678DE91D62A78800EB7C23 /* MStack.swift in Sources */,
 				6CD0E26F1D87D67600B2FC40 /* NSMutableData+Extension.swift in Sources */,
-				27D989841DB47D5D004E79A0 /* MKCustomEmptyView.swift in Sources */,
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
 				6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */,
 				576E13CF1D3DC70A00A948CE /* MachThreadBacktrace.c in Sources */,
@@ -1907,6 +1961,7 @@
 				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,
 				FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */,
 				6CD0E2601D87D5EA00B2FC40 /* MBinarySearchTree.swift in Sources */,
+				278725771DB4C82600C1F19A /* MKEmptyListViewController.swift in Sources */,
 				2724D2191CE4201700F4CE03 /* SegmentContainerViewController.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
@@ -1938,7 +1993,6 @@
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
 				2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */,
 				27D1A9B01CEEA78300B511D7 /* GalaryLinearLayout.swift in Sources */,
-				01CCB0DD1CFC341900D06AD0 /* MKUICustomAlertViewController.swift in Sources */,
 				27276C0C1CC748D60028E938 /* ImageScout.swift in Sources */,
 				272F397F1CED51EC003C02F4 /* Action+Extension.swift in Sources */,
 				278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */,
@@ -1958,12 +2012,14 @@
 				576E13CE1D3DC70A00A948CE /* MachExceptionHandler.c in Sources */,
 				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,
 				6CD0E2701D87D67600B2FC40 /* NSUserDefault+Extension.swift in Sources */,
+				278725801DB4C84E00C1F19A /* MKTreeViewController.swift in Sources */,
 				270692CD1CE9F27100CF211A /* DocumentCache.swift in Sources */,
 				3FC9DF601CBFD6D400C2D938 /* MKDataNetworkRequestViewModel.swift in Sources */,
 				6CD0E26A1D87D65100B2FC40 /* UpgradeAppProtocol.swift in Sources */,
 				270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */,
 				27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */,
 				030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */,
+				278725851DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
 				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
@@ -1971,16 +2027,16 @@
 				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				270692CC1CE9F27100CF211A /* CacheProtocol.swift in Sources */,
+				278725761DB4C82600C1F19A /* MKEmptyCustomViewController.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
-				27D989801DB47C9F004E79A0 /* MKEmptyListViewController.swift in Sources */,
 				278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
 				27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */,
 				6CD0E2681D87D65100B2FC40 /* ConnectPeerServiceManager.swift in Sources */,
-				27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
 				3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */,
+				278725741DB4C82600C1F19A /* MKCustomEmptyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

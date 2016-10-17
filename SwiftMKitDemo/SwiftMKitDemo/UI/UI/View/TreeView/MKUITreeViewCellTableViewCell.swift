@@ -10,8 +10,8 @@ import UIKit
 import CocoaLumberjack
 
 class MKUITreeViewCellTableViewCell: UITableViewCell {
-    var parentNode: Node?
-    var node: Node? {
+    var parentNode: MKTreeViewNode?
+    var node: MKTreeViewNode? {
         willSet {
             if lblName != nil {
                 lblName.text = newValue!.name
@@ -46,7 +46,6 @@ class MKUITreeViewCellTableViewCell: UITableViewCell {
                     }
                 } else {
                     guard let children = newValue!.children where children.count > 0 else {
-                        DDLogError("\(newValue!.name) 没有子节点")
                         imgArrow.hidden = true
                         return
                     }

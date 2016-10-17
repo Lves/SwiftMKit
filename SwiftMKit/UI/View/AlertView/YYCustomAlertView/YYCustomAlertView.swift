@@ -128,9 +128,9 @@ class YYCustomAlertView: UIView {
     
     // Observe orientation and keyboard changes
     private func setObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceOrientationDidChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name:UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deviceOrientationDidChange(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
     }
     
     // Create the containerView
@@ -230,7 +230,7 @@ class YYCustomAlertView: UIView {
             )
             
             button.tag = buttonIndex
-            button.addTarget(self, action: "buttonTouchUpInside:", forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: #selector(buttonTouchUpInside(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             let colorNormal = buttonColor != nil ? buttonColor : button.tintColor
             let colorHighlighted = buttonColorHighlighted != nil ? buttonColorHighlighted : colorNormal!.colorWithAlphaComponent(0.5)

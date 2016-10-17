@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjack
 import FDFullscreenPopGesture
 
-class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
+class MKSideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
     @IBOutlet weak var btnTopMenu: UIBarButtonItem!
     var sideMenu: SideMenu?
     var menuViewController: UIViewController?
@@ -23,12 +23,17 @@ class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProt
     override func setupUI() {
         super.setupUI()
         self.fd_interactivePopDisabled = false
-        menuViewController = self.initialedViewController("MKUISideMenuViewController")
+        menuViewController = self.initialedViewController("MKSideMenuViewController")
         sideMenu = SideMenu(masterViewController: self, menuViewController: menuViewController!)
         sideMenu?.delegate = self
     }
     
-    @IBAction func click_menu(sender: UIBarButtonItem) {
+    @IBAction func click_left(sender: UIBarButtonItem) {
+        sideMenu?.direction = .Left
+        sideMenu?.routeToSideMenu()
+    }
+    @IBAction func click_right(sender: UIBarButtonItem) {
+        sideMenu?.direction = .Right
         sideMenu?.routeToSideMenu()
     }
     func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {
@@ -39,11 +44,11 @@ class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProt
     }
 }
 
-class MKUISideMenuViewController: BaseListViewController, SideMenuProtocol {
+class MKSideMenuViewController: BaseListViewController, SideMenuProtocol {
     
     struct InnerConst {
-        static let CellIdentifier = "MKUISideMenuTableViewCell"
-        static let SegueToNextSideViewDetail = "MKUISideDetailViewController"
+        static let CellIdentifier = "MKSideMenuTableViewCell"
+        static let SegueToNextSideViewDetail = "MKSideDetailViewController"
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,7 +91,7 @@ class MKUISideMenuViewController: BaseListViewController, SideMenuProtocol {
     }
 }
 
-class MKUISideDetailViewController: BaseViewController {
+class MKSideDetailViewController: BaseViewController {
     private var _viewModel = BaseViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
