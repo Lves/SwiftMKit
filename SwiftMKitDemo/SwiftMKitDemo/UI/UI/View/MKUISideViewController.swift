@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import FDFullscreenPopGesture
 
 class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
     @IBOutlet weak var btnTopMenu: UIBarButtonItem!
@@ -21,10 +22,10 @@ class MKUISideViewController: BaseViewController, SideMenuDelegate, SideMenuProt
     
     override func setupUI() {
         super.setupUI()
+        self.fd_interactivePopDisabled = false
         menuViewController = self.initialedViewController("MKUISideMenuViewController")
         sideMenu = SideMenu(masterViewController: self, menuViewController: menuViewController!)
         sideMenu?.delegate = self
-        self.forbiddenSwipBackGesture = true
     }
     
     @IBAction func click_menu(sender: UIBarButtonItem) {

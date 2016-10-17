@@ -150,8 +150,10 @@ public extension NetApiProtocol {
         }
     }
     
-    func setIndicator(indicator: IndicatorProtocol, view: UIView? = nil, text: String? = nil) -> Self {
-        self.indicator = NetApiIndicator(indicator: indicator, view: view, text: text)
+    func setIndicator(indicator: IndicatorProtocol?, view: UIView? = nil, text: String? = nil) -> Self {
+        if let indicator = indicator {
+            self.indicator = NetApiIndicator(indicator: indicator, view: view, text: text)
+        }
         return self
     }
 }

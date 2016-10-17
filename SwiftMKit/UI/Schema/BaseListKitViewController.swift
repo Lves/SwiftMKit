@@ -43,11 +43,9 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
             return .None
         }
     }
-    public override var emptySuperView: UIView? {
-        get { return listView }
-    }
+    
     lazy public var listIndicator: IndicatorProtocol = {
-        return TaskIndicatorList(listView: self.listView, viewModel: self.listViewModel)
+        return TaskIndicatorList(listView: self.listView, viewController: self)
     }()
     
     public func listViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
@@ -61,6 +59,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
     }
     public override func setupUI() {
         super.setupUI()
+        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty")!, yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.listView!)
         let _ = listIndicator
         if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
             self.listView?.mj_header = nil
@@ -126,9 +125,9 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
             didSelectCell(cell, object: object, indexPath: indexPath)
         }
     }
-
-    public override func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval, completion: () -> Void) {
-        if self.listViewModel?.dataIndex == 0 {
+    
+    public func endListRefresh() {
+        if self.listViewModel.dataIndex == 0 {
             if self.listView?.mj_header != nil {
                 self.listView?.mj_header.endRefreshing()
             }
@@ -139,6 +138,10 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
                 }
             }
         }
+    }
+
+    public override func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval, completion: () -> Void) {
+        endListRefresh()
         super.showTip(tip, view: view, hideAfterDelay: hideAfterDelay, completion: completion)
     }
    

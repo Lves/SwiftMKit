@@ -11,6 +11,7 @@ import Alamofire
 import CocoaLumberjack
 import ReactiveCocoa
 import Haneke
+import FDFullscreenPopGesture
 
 class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -33,6 +34,7 @@ class MKDataNetworkRequestViewController: BaseListViewController, UITableViewDat
     override func setupUI() {
         super.setupUI()
         self.title = "Photos"
+        self.fd_interactivePopDisabled = true
         self.tableView.registerNib(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = self.tableView.rowHeight;

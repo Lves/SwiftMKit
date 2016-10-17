@@ -146,6 +146,15 @@
 		27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */; };
 		27D1A9B41CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9B31CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift */; };
 		27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9B61CEEADCD00B511D7 /* FingerPrint.swift */; };
+		27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989721DB46EB7004E79A0 /* MKitEmptyView.swift */; };
+		27D989751DB471F5004E79A0 /* BaseKitEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989741DB471F5004E79A0 /* BaseKitEmptyView.swift */; };
+		27D989771DB47209004E79A0 /* BaseKitEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */; };
+		27D9897B1DB47BF3004E79A0 /* MKNormalEmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989791DB47BF3004E79A0 /* MKNormalEmptyViewController.swift */; };
+		27D9897E1DB47C78004E79A0 /* MKEmptyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27D9897D1DB47C78004E79A0 /* MKEmptyView.storyboard */; };
+		27D989801DB47C9F004E79A0 /* MKEmptyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D9897F1DB47C9F004E79A0 /* MKEmptyListViewController.swift */; };
+		27D989821DB47CBD004E79A0 /* MKEmptyCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989811DB47CBD004E79A0 /* MKEmptyCustomViewController.swift */; };
+		27D989841DB47D5D004E79A0 /* MKCustomEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D989831DB47D5D004E79A0 /* MKCustomEmptyView.swift */; };
+		27D989861DB47D6B004E79A0 /* MKCustomEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27D989851DB47D6B004E79A0 /* MKCustomEmptyView.xib */; };
 		27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */; };
 		27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */; };
 		27F7ADC81CE1B6CB00C24706 /* MKUISideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */; };
@@ -452,6 +461,15 @@
 		27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGalaryCollectionViewController.swift; sourceTree = "<group>"; };
 		27D1A9B31CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGalaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		27D1A9B61CEEADCD00B511D7 /* FingerPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FingerPrint.swift; sourceTree = "<group>"; };
+		27D989721DB46EB7004E79A0 /* MKitEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKitEmptyView.swift; sourceTree = "<group>"; };
+		27D989741DB471F5004E79A0 /* BaseKitEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEmptyView.swift; sourceTree = "<group>"; };
+		27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitEmptyView.xib; sourceTree = "<group>"; };
+		27D989791DB47BF3004E79A0 /* MKNormalEmptyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNormalEmptyViewController.swift; sourceTree = "<group>"; };
+		27D9897D1DB47C78004E79A0 /* MKEmptyView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKEmptyView.storyboard; sourceTree = "<group>"; };
+		27D9897F1DB47C9F004E79A0 /* MKEmptyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKEmptyListViewController.swift; sourceTree = "<group>"; };
+		27D989811DB47CBD004E79A0 /* MKEmptyCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKEmptyCustomViewController.swift; sourceTree = "<group>"; };
+		27D989831DB47D5D004E79A0 /* MKCustomEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCustomEmptyView.swift; sourceTree = "<group>"; };
+		27D989851DB47D6B004E79A0 /* MKCustomEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKCustomEmptyView.xib; sourceTree = "<group>"; };
 		27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewController.swift; sourceTree = "<group>"; };
 		27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewModel.swift; sourceTree = "<group>"; };
 		27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewController.swift; sourceTree = "<group>"; };
@@ -752,6 +770,7 @@
 				FBE54A2E1CF3F2A3001C493A /* Password */,
 				016502A21CF6F84B001B063F /* AlertCustomView */,
 				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
+				27D989711DB46EA4004E79A0 /* EmptyView */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
 				270692CF1CE9F27D00CF211A /* GesturePassword */,
 				277EA9F71CE9A9D200AA62A0 /* Keyboard */,
@@ -856,6 +875,7 @@
 		27959A491CD3444500546424 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				27D989781DB47BDB004E79A0 /* EmptyViewController */,
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
 				27F7ADC71CE1B6CB00C24706 /* MKUISideViewController.swift */,
@@ -950,6 +970,37 @@
 				27D1A9B61CEEADCD00B511D7 /* FingerPrint.swift */,
 			);
 			path = FingerPrint;
+			sourceTree = "<group>";
+		};
+		27D989711DB46EA4004E79A0 /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				27D989721DB46EB7004E79A0 /* MKitEmptyView.swift */,
+				27D989741DB471F5004E79A0 /* BaseKitEmptyView.swift */,
+				27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
+		27D989781DB47BDB004E79A0 /* EmptyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				27D9897D1DB47C78004E79A0 /* MKEmptyView.storyboard */,
+				27D989791DB47BF3004E79A0 /* MKNormalEmptyViewController.swift */,
+				27D9897F1DB47C9F004E79A0 /* MKEmptyListViewController.swift */,
+				27D989811DB47CBD004E79A0 /* MKEmptyCustomViewController.swift */,
+				27D989891DB49EF3004E79A0 /* EmptyView */,
+			);
+			path = EmptyViewController;
+			sourceTree = "<group>";
+		};
+		27D989891DB49EF3004E79A0 /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				27D989831DB47D5D004E79A0 /* MKCustomEmptyView.swift */,
+				27D989851DB47D6B004E79A0 /* MKCustomEmptyView.xib */,
+			);
+			name = EmptyView;
 			sourceTree = "<group>";
 		};
 		27F7ADD71CE1D46E00C24706 /* Resources */ = {
@@ -1576,10 +1627,12 @@
 				6CEFCB661D3485F3008B3382 /* pannel_icon_chat_h@2x.png in Resources */,
 				6CEFCB7D1D3485F3008B3382 /* pannel_icon_weixin_h@2x.png in Resources */,
 				6CEFCB7E1D3485F3008B3382 /* pannel_icon_zhifubao@2x.png in Resources */,
+				27D989861DB47D6B004E79A0 /* MKCustomEmptyView.xib in Resources */,
 				6CEFCB631D3485F3008B3382 /* pannel_icon_cardbackground@2x.png in Resources */,
 				6CEFCB7A1D3485F3008B3382 /* pannel_icon_share@2x.png in Resources */,
 				6CEFCB741D3485F3008B3382 /* pannel_icon_qq@2x.png in Resources */,
 				6CEFCB731D3485F3008B3382 /* pannel_icon_myFavAdd@2x.png in Resources */,
+				27D9897E1DB47C78004E79A0 /* MKEmptyView.storyboard in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
 				6CEFCB721D3485F3008B3382 /* pannel_icon_mms_h@2x.png in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
@@ -1605,6 +1658,7 @@
 				6CEFCB6B1D3485F3008B3382 /* pannel_icon_copy@2x.png in Resources */,
 				FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */,
 				274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */,
+				27D989771DB47209004E79A0 /* BaseKitEmptyView.xib in Resources */,
 				3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */,
 				6CEFCB6E1D3485F3008B3382 /* pannel_icon_expose@2x.png in Resources */,
 				6CEFCB791D3485F3008B3382 /* pannel_icon_safari@2x.png in Resources */,
@@ -1765,6 +1819,7 @@
 				270692CB1CE9F27100CF211A /* CachePool.swift in Sources */,
 				3FC9DF5B1CBFD6D400C2D938 /* MKDataNetworkImagesTableViewCell.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
+				27D989821DB47CBD004E79A0 /* MKEmptyCustomViewController.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
 				6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
@@ -1810,6 +1865,7 @@
 				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */,
 				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
+				27D9897B1DB47BF3004E79A0 /* MKNormalEmptyViewController.swift in Sources */,
 				181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */,
 				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
@@ -1836,6 +1892,7 @@
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
 				27678DE91D62A78800EB7C23 /* MStack.swift in Sources */,
 				6CD0E26F1D87D67600B2FC40 /* NSMutableData+Extension.swift in Sources */,
+				27D989841DB47D5D004E79A0 /* MKCustomEmptyView.swift in Sources */,
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
 				6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */,
 				576E13CF1D3DC70A00A948CE /* MachThreadBacktrace.c in Sources */,
@@ -1853,6 +1910,7 @@
 				2724D2191CE4201700F4CE03 /* SegmentContainerViewController.swift in Sources */,
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
+				27D989751DB471F5004E79A0 /* BaseKitEmptyView.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
@@ -1866,6 +1924,7 @@
 				27A1C5EF1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift in Sources */,
 				01CCB0E31CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift in Sources */,
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
+				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,
 				27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */,
 				276D04ED1DAF8CE200881248 /* MKUIOrderTableViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
@@ -1914,6 +1973,7 @@
 				270692CC1CE9F27100CF211A /* CacheProtocol.swift in Sources */,
 				3FC9DF331CBFD53A00C2D938 /* SwiftMKit.swift in Sources */,
 				18E184E41CC48B2500F14923 /* BaseKitModel.swift in Sources */,
+				27D989801DB47C9F004E79A0 /* MKEmptyListViewController.swift in Sources */,
 				278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */,
 				3FC9DF631CBFD6D400C2D938 /* BaseListViewModel.swift in Sources */,
 				27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */,

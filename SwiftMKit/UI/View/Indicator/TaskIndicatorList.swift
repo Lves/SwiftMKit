@@ -15,12 +15,12 @@ import MJRefresh
 
 public class TaskIndicatorList: NSObject, IndicatorProtocol {
     private weak var listView: UIScrollView?
-    private weak var viewModel: BaseListKitViewModel?
+    private weak var viewController: BaseListKitViewController?
     lazy public var runningTasks = [NSURLSessionTask]()
     
-    public init(listView: UIScrollView?, viewModel: BaseListKitViewModel){
+    public init(listView: UIScrollView?, viewController: BaseListKitViewController){
         self.listView = listView
-        self.viewModel = viewModel
+        self.viewController = viewController
         super.init()
     }
     public func bindTask(task: NSURLSessionTask, view: UIView?, text: String?) {
@@ -56,19 +56,15 @@ public class TaskIndicatorList: NSObject, IndicatorProtocol {
     @objc func task_list_suspend(notify:NSNotification) {
         DDLogVerbose("List Task suspend")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        Async.main {
-            if self.viewModel != nil {
-                self.endRefresh()
-            }
+        Async.main { [weak self] in
+            self?.viewController?.endListRefresh()
         }
     }
     @objc func task_list_cancel(notify:NSNotification) {
         DDLogVerbose("List Task cancel")
         UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        if self.viewModel != nil {
-            Async.main {
-                self.endRefresh()
-            }
+        Async.main { [weak self] in
+            self?.viewController?.endListRefresh()
         }
     }
     @objc func task_list_end(notify:NSNotification) {
@@ -79,23 +75,8 @@ public class TaskIndicatorList: NSObject, IndicatorProtocol {
                 self.runningTasks.removeAtIndex(index)
             }
         }
-        Async.main {
-            if self.viewModel != nil {
-                self.endRefresh()
-            }
-        }
-    }
-    func endRefresh() {
-        if self.viewModel?.dataIndex == 0 {
-            if self.listView?.mj_header != nil {
-                self.listView?.mj_header.endRefreshing()
-            }
-        }else{
-            if self.listView?.mj_footer != nil {
-                if self.listView?.mj_footer.state == .Refreshing {
-                    self.listView?.mj_footer.endRefreshing()
-                }
-            }
+        Async.main { [weak self] in
+            self?.viewController?.endListRefresh()
         }
     }
     

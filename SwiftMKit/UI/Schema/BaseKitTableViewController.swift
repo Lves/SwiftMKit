@@ -37,6 +37,10 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
         }
     }
     
+    public var screenW: CGFloat { get { return UIScreen.mainScreen().bounds.w } }
+    public var screenH: CGFloat { get { return UIScreen.mainScreen().bounds.h } }
+    public var autoHidesBottomBarWhenPushed: Bool { get { return true } }
+    
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +114,7 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
     
     public var listView: UIScrollView! {
         get {
-            return nil
+            return tableView
         }
     }
     public var listViewType: ListViewType {

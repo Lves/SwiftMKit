@@ -70,12 +70,21 @@ public extension UIViewController {
             vc = instanceViewControllerInXibWithName(name)
         }
         if vc != nil {
-            if vc is BaseKitViewController {
+            if let baseVC = vc as? BaseKitViewController {
                 var params = nextParams
-                if params["hidesBottomBarWhenPushed"] == nil {
-                    params["hidesBottomBarWhenPushed"] = true
+                if baseVC.autoHidesBottomBarWhenPushed {
+                    if params["hidesBottomBarWhenPushed"] == nil {
+                        params["hidesBottomBarWhenPushed"] = true
+                    }
                 }
-                let baseVC = vc as! BaseKitViewController
+                baseVC.params = params
+            } else if let baseVC = vc as? BaseKitTableViewController {
+                var params = nextParams
+                if baseVC.autoHidesBottomBarWhenPushed {
+                    if params["hidesBottomBarWhenPushed"] == nil {
+                        params["hidesBottomBarWhenPushed"] = true
+                    }
+                }
                 baseVC.params = params
             }
         }

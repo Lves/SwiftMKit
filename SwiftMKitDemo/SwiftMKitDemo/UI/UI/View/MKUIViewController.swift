@@ -53,39 +53,43 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         }
     }
     override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-        switch indexPath.row {
-        case 0:
-            self.routeToUrl(InnerConst.SegueToNextUrl)
-        case 1:
-            self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
-        case 2:
-            self.routeToName(InnerConst.SegueToNextSideView)
-        case 3:
-            self.routeToName(InnerConst.SegueToNextChartView)
-        case 4:
-            self.routeToName(InnerConst.SegueToNextKeyboardView)
-        case 5:
-            self.routeToName(InnerConst.SegueToNextSegmentViewController)
-        case 6:
-            self.routeToName(InnerConst.SegueToNextGesturePasswordView)
-        case 7:
-            self.routeToName(InnerConst.SegueToNextIndicatorButtonView)
-        case 8:
-            self.hidesBottomBarWhenPushed = true
-            self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
-        case 9:
-            self.hidesBottomBarWhenPushed = true
-            self.routeToName(InnerConst.SegueToNextTreeView)
-        case 10:
-            self.routeToName(InnerConst.SegueToNextCustomAlertView)
-        case 11:
-            self.routeToName(InnerConst.SegueToNextCoverFlowView)
-        case 12:
-            self.routeToName(InnerConst.SegueToPullRefresh)
-        case 13:
-            self.routeToName(InnerConst.SegueToNextOrderTableView)
-        default:
-            break
+        if let model = object as? MKDataListModel {
+            switch indexPath.row {
+            case 0:
+                self.routeToName(model.route ?? "", storyboardName: model.routeSB)
+            case 14:
+                self.routeToUrl(InnerConst.SegueToNextUrl)
+            case 1:
+                self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
+            case 2:
+                self.routeToName(InnerConst.SegueToNextSideView)
+            case 3:
+                self.routeToName(InnerConst.SegueToNextChartView)
+            case 4:
+                self.routeToName(InnerConst.SegueToNextKeyboardView)
+            case 5:
+                self.routeToName(InnerConst.SegueToNextSegmentViewController)
+            case 6:
+                self.routeToName(InnerConst.SegueToNextGesturePasswordView)
+            case 7:
+                self.routeToName(InnerConst.SegueToNextIndicatorButtonView)
+            case 8:
+                self.hidesBottomBarWhenPushed = true
+                self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
+            case 9:
+                self.hidesBottomBarWhenPushed = true
+                self.routeToName(InnerConst.SegueToNextTreeView)
+            case 10:
+                self.routeToName(InnerConst.SegueToNextCustomAlertView)
+            case 11:
+                self.routeToName(InnerConst.SegueToNextCoverFlowView)
+            case 12:
+                self.routeToName(InnerConst.SegueToPullRefresh)
+            case 13:
+                self.routeToName(InnerConst.SegueToNextOrderTableView)
+            default:
+                break
+            }
         }
     }
     
