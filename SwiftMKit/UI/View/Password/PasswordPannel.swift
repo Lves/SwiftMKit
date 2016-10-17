@@ -108,13 +108,6 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         passwordInputView.inactive()
     }
     /** 弹出 */
-    public func show(viewController : UIViewController) {
-        var view = viewController.view
-        if let nav = viewController.navigationController {
-            view = nav.view
-        }
-        showInView(view)
-    }
     public func showInView(view : UIView) {
         self.size.width = view.size.width
         coverView.frame = view.bounds

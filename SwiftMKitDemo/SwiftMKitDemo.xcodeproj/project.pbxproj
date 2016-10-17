@@ -63,6 +63,10 @@
 		274316C31CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */; };
 		274C4C621DB4CFF900310C11 /* MKChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C4C611DB4CFF900310C11 /* MKChartViewController.swift */; };
 		274C4C641DB4D04200310C11 /* MKChartView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C631DB4D04200310C11 /* MKChartView.storyboard */; };
+		274C4C671DB4DA7C00310C11 /* MKKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C4C661DB4DA7C00310C11 /* MKKeyboardViewController.swift */; };
+		274C4C691DB4DAB000310C11 /* MKKeyboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C681DB4DAB000310C11 /* MKKeyboardViewController.xib */; };
+		274C4C881DB4EF8600310C11 /* kb_keyboard_view_del@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */; };
+		274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */; };
 		276183951DAA40A200C3AC77 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183801DAA40A200C3AC77 /* Alamofire.framework */; };
 		276183961DAA40A200C3AC77 /* Aspects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183811DAA40A200C3AC77 /* Aspects.framework */; };
 		276183971DAA40A200C3AC77 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276183821DAA40A200C3AC77 /* Charts.framework */; };
@@ -147,7 +151,6 @@
 		27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */; };
 		27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F51CEB3E22004FEA63 /* UIView+Extension.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
-		27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */; };
 		27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */; };
 		27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
@@ -341,6 +344,10 @@
 		274316C21CC8A6F300E560EE /* MKDataNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKDataNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
 		274C4C611DB4CFF900310C11 /* MKChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartViewController.swift; sourceTree = "<group>"; };
 		274C4C631DB4D04200310C11 /* MKChartView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKChartView.storyboard; sourceTree = "<group>"; };
+		274C4C661DB4DA7C00310C11 /* MKKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKKeyboardViewController.swift; sourceTree = "<group>"; };
+		274C4C681DB4DAB000310C11 /* MKKeyboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKKeyboardViewController.xib; sourceTree = "<group>"; };
+		274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_del@2x.png"; sourceTree = "<group>"; };
+		274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_screen@2x.png"; sourceTree = "<group>"; };
 		276183801DAA40A200C3AC77 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		276183811DAA40A200C3AC77 /* Aspects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Aspects.framework; path = "Pods/../build/Debug-iphoneos/Aspects/Aspects.framework"; sourceTree = "<group>"; };
 		276183821DAA40A200C3AC77 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "Pods/../build/Debug-iphoneos/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -445,7 +452,6 @@
 		27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorButton.swift; sourceTree = "<group>"; };
 		27A1C5F51CEB3E22004FEA63 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewController.swift; sourceTree = "<group>"; };
 		27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewModel.swift; sourceTree = "<group>"; };
 		27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentViewModel.swift; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
@@ -813,6 +819,24 @@
 			path = ChartView;
 			sourceTree = "<group>";
 		};
+		274C4C651DB4DA7C00310C11 /* KeyboardView */ = {
+			isa = PBXGroup;
+			children = (
+				274C4C661DB4DA7C00310C11 /* MKKeyboardViewController.swift */,
+				274C4C681DB4DAB000310C11 /* MKKeyboardViewController.xib */,
+			);
+			path = KeyboardView;
+			sourceTree = "<group>";
+		};
+		274C4C7B1DB4EF8600310C11 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */,
+				274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		276183AB1DAA678D00C3AC77 /* Log */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +870,7 @@
 		277EA9F71CE9A9D200AA62A0 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				274C4C7B1DB4EF8600310C11 /* Images */,
 				030C1D4B1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift */,
 				277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */,
 				277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */,
@@ -954,9 +979,9 @@
 				278725701DB4C82600C1F19A /* SideView */,
 				278725731DB4C82600C1F19A /* TreeView */,
 				274C4C601DB4CFF900310C11 /* ChartView */,
+				274C4C651DB4DA7C00310C11 /* KeyboardView */,
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
 				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
-				27A4CA151CE2FA8500516802 /* MKUIKeyboardViewController.swift */,
 				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
@@ -1698,6 +1723,7 @@
 				6CEFCB771D3485F3008B3382 /* pannel_icon_qzone_h@2x.png in Resources */,
 				6CEFCB6F1D3485F3008B3382 /* pannel_icon_font@2x.png in Resources */,
 				6CEFCB641D3485F3008B3382 /* pannel_icon_cardbackground_h@2x.png in Resources */,
+				274C4C691DB4DAB000310C11 /* MKKeyboardViewController.xib in Resources */,
 				6CEFCB691D3485F3008B3382 /* pannel_icon_collection@2x.png in Resources */,
 				27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */,
 				6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */,
@@ -1705,11 +1731,13 @@
 				6CEFCB711D3485F3008B3382 /* pannel_icon_mms@2x.png in Resources */,
 				2787257A1DB4C82600C1F19A /* MKSegmentView.storyboard in Resources */,
 				6CEFCB7B1D3485F3008B3382 /* pannel_icon_verified@2x.png in Resources */,
+				274C4C881DB4EF8600310C11 /* kb_keyboard_view_del@2x.png in Resources */,
 				278725861DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.xib in Resources */,
 				274C4C641DB4D04200310C11 /* MKChartView.storyboard in Resources */,
 				277EA9FB1CE9AA0C00AA62A0 /* NumberKeyboard.xib in Resources */,
 				6CEFCB751D3485F3008B3382 /* pannel_icon_qq_h@2x.png in Resources */,
 				6CEFCB7C1D3485F3008B3382 /* pannel_icon_weixin@2x.png in Resources */,
+				274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */,
 				6CEFCB6B1D3485F3008B3382 /* pannel_icon_copy@2x.png in Resources */,
 				FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */,
 				2787257C1DB4C82600C1F19A /* MKSideView.storyboard in Resources */,
@@ -1895,6 +1923,7 @@
 				181164EC1CF68C2500771597 /* MKUITreeViewModel.swift in Sources */,
 				273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */,
 				270692CE1CE9F27100CF211A /* KeychainWrapper.swift in Sources */,
+				274C4C671DB4DA7C00310C11 /* MKKeyboardViewController.swift in Sources */,
 				6CD0E2621D87D5EA00B2FC40 /* MLinkedList.swift in Sources */,
 				3FC9DF351CBFD53A00C2D938 /* BaseKitViewModel.swift in Sources */,
 				27BA394D1CC74E2400436D23 /* Async.swift in Sources */,
@@ -1985,7 +2014,6 @@
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				6CD0E2711D87D67600B2FC40 /* UIFont+Extension.swift in Sources */,
-				27A4CA161CE2FA8500516802 /* MKUIKeyboardViewController.swift in Sources */,
 				27959A4C1CD3446000546424 /* MKUIViewController.swift in Sources */,
 				6C724B3C1D0FCF0100CD5608 /* UIImage+Extension.swift in Sources */,
 				274316C11CC8A3BA00E560EE /* MKDataStoreViewModel.swift in Sources */,
