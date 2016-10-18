@@ -16,6 +16,7 @@ public class MBHUDView: HUDProtocol{
     
     private var indicatorShowed: Bool = false
     private weak var showingHUD: MBProgressHUD?
+    public static var shared: MBHUDView = MBHUDView()
     
     public func showHUDAddedTo(view: UIView, animated: Bool, text:String?) {
         indicatorShowed = true

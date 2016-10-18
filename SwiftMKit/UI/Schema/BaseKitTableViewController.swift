@@ -123,12 +123,12 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
         }
     }
     
-    public func listViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
+    public func listViewHeaderWithRefreshingBlock(refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshHeader {
         let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
         header.activityIndicatorViewStyle = .Gray
         return header
     }
-    public func listViewFooterWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshFooter{
+    public func listViewFooterWithRefreshingBlock(refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshFooter {
         let footer = MJRefreshAutoStateFooter(refreshingBlock:refreshingBlock);
         return footer
     }
@@ -155,28 +155,4 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
 //        return 0
 //    }
 
-}
-
-//HUD
-
-extension BaseKitTableViewController {
-    
-    public func showTip(tip: String, completion : () -> Void = {}) {
-        showTip(tip, view: self.view, hideAfterDelay: HUDConstant.HideTipAfterDelay, completion: completion)
-    }
-    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
-        self.hud.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay, completion: completion)
-    }
-    public func showLoading(text: String = "") {
-        showLoading(text, view: self.view)
-    }
-    public func showLoading(text: String, view: UIView) {
-        self.hud.showHUDAddedTo(view, animated: true, text: text)
-    }
-    public func hideLoading() {
-        hideLoading(self.view)
-    }
-    public func hideLoading(view: UIView) {
-        self.hud.hideHUDForView(view, animated: true)
-    }
 }
