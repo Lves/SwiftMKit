@@ -65,14 +65,6 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
                 self.routeToName(model.route ?? "", storyboardName: model.routeSB)
                 return
             }
-            switch indexPath.row {
-            case 7:
-                self.routeToName(InnerConst.SegueToNextIndicatorButtonView)
-            case 12:
-                self.routeToName(InnerConst.SegueToPullRefresh)
-            default:
-                break
-            }
         }
     }
     

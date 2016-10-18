@@ -238,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Fg-jg-elO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3492.5" y="-289.5"/>
+            <point key="canvasLocation" x="3704.5" y="-449.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lIZ-jw-Cc5">
@@ -257,7 +257,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xTd-Dr-6ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777.5" y="206.5"/>
+            <point key="canvasLocation" x="-581.5" y="-1509.5"/>
         </scene>
         <!--Data-->
         <scene sceneID="lCG-vC-d3K">
@@ -340,13 +340,12 @@
                     <navigationItem key="navigationItem" title="UI" id="PQ4-Mo-w9e"/>
                     <connections>
                         <outlet property="tableView" destination="rMD-7k-01V" id="nUH-EQ-GXk"/>
-                        <segue destination="atU-Gq-X8U" kind="show" identifier="routeToIndicatorButton" id="uPy-5b-dVt"/>
                         <segue destination="ocl-da-du7" kind="push" identifier="PullToRefresh" id="ofm-7T-HLi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1743.5" y="601.5"/>
+            <point key="canvasLocation" x="815.5" y="-1802.5"/>
         </scene>
         <!--Pull Refresh-->
         <scene sceneID="5JO-0j-MPU">
@@ -384,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7W-uy-ldV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3432.5" y="122.5"/>
+            <point key="canvasLocation" x="1992.5" y="-1697.5"/>
         </scene>
         <!--Data Store View Controller-->
         <scene sceneID="7AD-ZQ-Oj3">
@@ -446,95 +445,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UL-eT-2fr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1274.5" y="601.5"/>
-        </scene>
-        <!--Indicator Button View Controller-->
-        <scene sceneID="uUX-Ul-Wbs">
-            <objects>
-                <viewController id="atU-Gq-X8U" customClass="MKUIIndicatorButtonViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="GYZ-6D-G1q"/>
-                        <viewControllerLayoutGuide type="bottom" id="zJ4-r0-gKH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PWw-aZ-fNj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJA-Fe-LQi" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="166" width="335" height="42"/>
-                                <state key="normal" title="开始" backgroundImage="btn_blue">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" backgroundImage="btn_blue"/>
-                                <state key="highlighted" backgroundImage="btn_blue_h"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eP-hx-gTw" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="238" width="335" height="42"/>
-                                <state key="normal" title="开始" backgroundImage="btn_blue">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" title="进行中" backgroundImage="btn_blue"/>
-                                <state key="highlighted" backgroundImage="btn_blue_h"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ae-r7-ibH" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="310" width="165" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="165" id="RHz-eF-WvC"/>
-                                </constraints>
-                                <state key="normal" title="开始" backgroundImage="btn_blue">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" title="这是一段很长的文字" backgroundImage="btn_blue"/>
-                                <state key="highlighted" backgroundImage="btn_blue_h"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzY-5l-H7w" customClass="IndicatorButton" customModule="SwiftMKitDemo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="382" width="120" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="JMt-3K-uSO"/>
-                                </constraints>
-                                <state key="normal" title="开始" backgroundImage="btn_blue">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" title="这是一段很长的文字"/>
-                                <state key="highlighted" backgroundImage="btn_blue_h"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="tzY-5l-H7w" firstAttribute="leading" secondItem="6ae-r7-ibH" secondAttribute="leading" id="5MZ-Gm-zjC"/>
-                            <constraint firstItem="GJA-Fe-LQi" firstAttribute="top" secondItem="GYZ-6D-G1q" secondAttribute="bottom" constant="102" id="NX0-eB-aEr"/>
-                            <constraint firstItem="GJA-Fe-LQi" firstAttribute="leading" secondItem="PWw-aZ-fNj" secondAttribute="leadingMargin" constant="92" id="QiS-uh-ize"/>
-                            <constraint firstItem="6ae-r7-ibH" firstAttribute="top" secondItem="5eP-hx-gTw" secondAttribute="bottom" constant="30" id="Rsh-kK-Joa"/>
-                            <constraint firstItem="GJA-Fe-LQi" firstAttribute="centerX" secondItem="PWw-aZ-fNj" secondAttribute="centerX" id="V5U-2G-GcK"/>
-                            <constraint firstItem="zJ4-r0-gKH" firstAttribute="top" secondItem="GJA-Fe-LQi" secondAttribute="bottom" constant="422" id="VsC-Cl-skr"/>
-                            <constraint firstItem="5eP-hx-gTw" firstAttribute="top" secondItem="GJA-Fe-LQi" secondAttribute="bottom" constant="30" id="lSz-j5-KRr"/>
-                            <constraint firstItem="6ae-r7-ibH" firstAttribute="leading" secondItem="5eP-hx-gTw" secondAttribute="leading" id="oM0-qL-f20"/>
-                            <constraint firstItem="5eP-hx-gTw" firstAttribute="centerX" secondItem="GJA-Fe-LQi" secondAttribute="centerX" id="ogK-wz-ipw"/>
-                            <constraint firstItem="tzY-5l-H7w" firstAttribute="top" secondItem="6ae-r7-ibH" secondAttribute="bottom" constant="30" id="xa0-40-0lE"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="QiS-uh-ize"/>
-                                <exclude reference="VsC-Cl-skr"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outletCollection property="buttons" destination="GJA-Fe-LQi" collectionClass="NSMutableArray" id="K8G-cG-BYD"/>
-                        <outletCollection property="buttons" destination="5eP-hx-gTw" collectionClass="NSMutableArray" id="vtu-n6-ly0"/>
-                        <outletCollection property="buttons" destination="6ae-r7-ibH" collectionClass="NSMutableArray" id="EL3-cf-HRe"/>
-                        <outletCollection property="buttons" destination="tzY-5l-H7w" collectionClass="NSMutableArray" id="H1p-OE-Eja"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sir-aT-5R0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3825.5" y="2210.5"/>
+            <point key="canvasLocation" x="222.5" y="-1802.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="btn_blue" width="335" height="42"/>
-        <image name="btn_blue_h" width="335" height="42"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fp8-J5-IUa"/>
     </inferredMetricsTieBreakers>

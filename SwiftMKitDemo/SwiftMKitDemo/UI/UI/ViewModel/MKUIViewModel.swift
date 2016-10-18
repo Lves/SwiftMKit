@@ -24,10 +24,9 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "Gesture Password View", detail: "Gesture Password View", route: "MKGesturePasswordViewController", routeSB: "MKGesturePasswordView"))
         self.dataArray.append(MKDataListModel(title: "Galary Collection View", detail: "Collection View", route: "MKGalaryCollectionViewController", routeSB: "MKGalaryCollectionView"))
         self.dataArray.append(MKDataListModel(title: "CoverFlow View", detail: "CoverFlow View", route: "MKCoverFlowViewController", routeSB: "MKCoverFlowView"))
-        self.dataArray.append(MKDataListModel(title: "Indicator Button", detail: "Button"))
+        self.dataArray.append(MKDataListModel(title: "Pull Refresh View", detail: "Custom Refresh Header", route: "MKCustomPullRefreshViewController"))
+        self.dataArray.append(MKDataListModel(title: "Indicator Button", detail: "Indicator Button", route: "MKIndicatorButtonViewController"))
         
-        self.dataArray.append(MKDataListModel(title: "AlertView", detail: "Show Alert View"))
-        self.dataArray.append(MKDataListModel(title: "Pull Refresh", detail: "Custom Refresh Header"))
 
     }
 

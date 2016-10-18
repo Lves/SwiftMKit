@@ -9,16 +9,16 @@
 import UIKit
 import MJRefresh
 
-class MKUIPullRefresh: BaseListViewController{
+class MKCustomPullRefreshViewController: BaseListViewController{
     
     
     struct InnerConst {
-        static let CellIdentifier = "Cell"
+        static let CellIdentifier = "MKCustomPullRefreshTableViewCell"
     }
 
     @IBOutlet weak var tableView: UITableView!
-    private var _viewModel = MKUIPullRefreshViewModel()
-    override var viewModel: BaseKitViewModel!{
+    private var _viewModel = MKCustomPullRefreshViewModel()
+    override var viewModel: MKCustomPullRefreshViewModel!{
         get { return _viewModel }
     }
     override var listView: UIScrollView! {
@@ -29,38 +29,22 @@ class MKUIPullRefresh: BaseListViewController{
     }
     override func setupUI() {
         super.setupUI()
-        
-    
-        
-        tableView.snp_remakeConstraints { (make) in
-            make.top.bottom.left.right.equalTo(0)
-        }
+        self.title = "Pull Refresh View"
         tableView.tableFooterView = UIView()
         
-        
-        self.listView.mj_header = self.llListViewHeaderWithRefreshingBlock {
-            [weak self] in
+        let header = LLGifHeader(refreshingBlock: { [weak self] in
             self?.listViewModel?.dataIndex = 0
             self?.listViewModel?.fetchData()
-        }
-        
-        
-        
+        })
+        header.lastUpdatedTimeLabel.hidden = true
+        header.stateLabel.hidden = true
+        self.listView.mj_header = header
     
         loadData()
     }
     override func loadData() {
         super.loadData()
-        
         self.tableView.mj_header.beginRefreshing()
-        
-        
-    }
-    func llListViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
-        let header = LLGifHeader(refreshingBlock: refreshingBlock)
-        header.lastUpdatedTimeLabel.hidden = true
-        header.stateLabel.hidden = true
-        return header
     }
     
     override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
@@ -71,18 +55,24 @@ class MKUIPullRefresh: BaseListViewController{
         return cell
     }
     override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-        tableViewCell.textLabel?.text = "Menu - \(indexPath.row)"
+        tableViewCell.textLabel?.text = "Cell - \(indexPath.row)"
     }
     override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
         
     }
 
-
 }
 
 
-
-
+class MKCustomPullRefreshViewModel: BaseListViewModel {
+    
+    override func fetchData() {
+        Async.main(after: 1) { [weak self] in
+            self?.updateDataArray(["Cell","Cell","Cell"])
+            self?.listViewController.endListRefresh()
+        }
+    }
+}
 
 
 class LLGifHeader: MJRefreshGifHeader
