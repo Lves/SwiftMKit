@@ -9,9 +9,9 @@
 import UIKit
 import CocoaLumberjack
 
-class MKUIGalaryCollectionViewController: UIViewController, GalaryCollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class MKGalaryCollectionViewController: BaseViewController, GalaryCollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     struct InnerConst {
-        static let CellIdentifier = "MKUIGalaryCollectionViewCell"
+        static let CellIdentifier = "MKGalaryCollectionViewCell"
     }
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var containerView: UIView!
@@ -25,16 +25,8 @@ class MKUIGalaryCollectionViewController: UIViewController, GalaryCollectionView
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-    }
-    
-    deinit {
-        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
-    }
-    
-    func setupUI() {
+    override func setupUI() {
+        super.setupUI()
         tableView.delegate = self
         tableView.dataSource = self
         

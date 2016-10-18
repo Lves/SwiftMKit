@@ -22,11 +22,11 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "Keyboard View", detail: "Custom Keyboard", route: "MKKeyboardViewController"))
         self.dataArray.append(MKDataListModel(title: "IQKeyboard Manager", detail: "Keyboard Auto Scroll", route: "MKIQKeyboardManagerViewController"))
         self.dataArray.append(MKDataListModel(title: "Gesture Password View", detail: "Gesture Password View", route: "MKGesturePasswordViewController", routeSB: "MKGesturePasswordView"))
+        self.dataArray.append(MKDataListModel(title: "Galary Collection View", detail: "Collection View", route: "MKGalaryCollectionViewController", routeSB: "MKGalaryCollectionView"))
+        self.dataArray.append(MKDataListModel(title: "CoverFlow View", detail: "CoverFlow View", route: "MKCoverFlowViewController", routeSB: "MKCoverFlowView"))
         self.dataArray.append(MKDataListModel(title: "Indicator Button", detail: "Button"))
-        self.dataArray.append(MKDataListModel(title: "Galary Collection View", detail: "Collection View"))
         
         self.dataArray.append(MKDataListModel(title: "AlertView", detail: "Show Alert View"))
-        self.dataArray.append(MKDataListModel(title: "CoverFlowView", detail: "Show CoverFlow View"))
         self.dataArray.append(MKDataListModel(title: "Pull Refresh", detail: "Custom Refresh Header"))
 
     }

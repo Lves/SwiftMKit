@@ -66,15 +66,8 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
                 return
             }
             switch indexPath.row {
-            case 6:
-                self.routeToName(InnerConst.SegueToNextGesturePasswordView)
             case 7:
                 self.routeToName(InnerConst.SegueToNextIndicatorButtonView)
-            case 8:
-                self.hidesBottomBarWhenPushed = true
-                self.routeToName(InnerConst.SegueToNextGalaryCollectionView)
-            case 11:
-                self.routeToName(InnerConst.SegueToNextCoverFlowView)
             case 12:
                 self.routeToName(InnerConst.SegueToPullRefresh)
             default:
