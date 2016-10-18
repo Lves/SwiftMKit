@@ -8,18 +8,13 @@
 
 import UIKit
 
-class MKUIOrderTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MKOrderTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     private struct InnerConst {
-        static let CellID = "MKUIOrderTableViewCell"
+        static let CellID = "MKOrderTableViewCell"
     }
     
-    private var _viewModel = BaseKitViewModel()
-    override var viewModel: BaseKitViewModel!{
-        get { return _viewModel }
-    }
-    
-    var data: [MKUIOrderTableViewModel]?
+    var data: [MKOrderViewModel]?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,7 +29,7 @@ class MKUIOrderTableViewController: BaseViewController, UITableViewDelegate, UIT
         super.loadData()
         data = []
         for index in 0..<10 {
-            let model = MKUIOrderTableViewModel()
+            let model = MKOrderViewModel()
             model.name = "Cell" + index.toString
             model.code = String(index + 1000)
             model.value = 10000.toString
@@ -52,14 +47,14 @@ class MKUIOrderTableViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellID) as? MKUIOrderTableViewCell else { return UITableViewCell() }
-        cell.model = self.data?[indexPath.row] ?? MKUIOrderTableViewModel()
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellID) as? MKOrderTableViewCell else { return UITableViewCell() }
+        cell.model = self.data?[indexPath.row] ?? MKOrderViewModel()
         cell.backgroundColor = indexPath.row % 2 == 0 ? UIColor.whiteColor() : UIColor(hex6: 0xF8F8F8)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let model = self.data?[indexPath.row] ?? MKUIOrderTableViewModel()
+        let model = self.data?[indexPath.row] ?? MKOrderViewModel()
         model.isSelect = !model.isSelect
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
     }

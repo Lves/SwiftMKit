@@ -10,14 +10,14 @@
 
 import UIKit
 
-class MKUIOrderTableViewModel: NSObject {
+class MKOrderViewModel: NSObject {
     var name: String?
     var code: String?
     var value: String?
     var isSelect: Bool = false
 }
 
-class MKUIOrderTableViewCell: UITableViewCell {
+class MKOrderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblCode: UILabel!
@@ -25,7 +25,7 @@ class MKUIOrderTableViewCell: UITableViewCell {
     
     var imgEdit = UIImageView(image: UIImage(named: "order_cell_unselected"))
     
-    var model = MKUIOrderTableViewModel() {
+    var model = MKOrderViewModel() {
         didSet {
             lblName.text = model.name
             lblCode.text = model.code

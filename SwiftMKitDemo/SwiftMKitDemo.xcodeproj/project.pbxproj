@@ -31,7 +31,6 @@
 		270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D11CE9F27D00CF211A /* GesturePasswordButton.swift */; };
 		270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D21CE9F27D00CF211A /* GesturePasswordProtocol.swift */; };
 		270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D31CE9F27D00CF211A /* GesturePasswordView.swift */; };
-		270692D91CE9F28800CF211A /* MKUIGesturePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */; };
 		270692DB1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692DA1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift */; };
 		27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */; };
 		2713CFB61D12A08E003C643E /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB51D12A08E003C643E /* StringTests.swift */; };
@@ -93,12 +92,17 @@
 		27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEC1D62C0AE00EB7C23 /* MQueue.swift */; };
 		27678DEF1D62C31F00EB7C23 /* MTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */; };
 		27678DF11D63050700EB7C23 /* MSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DF01D63050700EB7C23 /* MSearch.swift */; };
-		276D04ED1DAF8CE200881248 /* MKUIOrderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D04EC1DAF8CE200881248 /* MKUIOrderTableViewController.swift */; };
-		276D04F01DAF8E9A00881248 /* MKUIOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D04EE1DAF8E9A00881248 /* MKUIOrderTableViewCell.swift */; };
 		27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27784AAE1CF6E25200960071 /* SendCodeButton.swift */; };
 		277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C01CE40FBF00295259 /* RegexHelper.swift */; };
 		277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */; };
 		277EA9FB1CE9AA0C00AA62A0 /* NumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */; };
+		2783DF8F1DB5B2D7005E087C /* MKOrderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783DF8E1DB5B2D7005E087C /* MKOrderTableViewController.swift */; };
+		2783DF931DB5B342005E087C /* MKOrderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2783DF921DB5B342005E087C /* MKOrderView.storyboard */; };
+		2783DF951DB5B39E005E087C /* MKOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783DF941DB5B39E005E087C /* MKOrderTableViewCell.swift */; };
+		2783DF971DB5B8FE005E087C /* MKIQKeyboardManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2783DF961DB5B8FE005E087C /* MKIQKeyboardManagerViewController.xib */; };
+		2783DF991DB5B942005E087C /* MKIQKeyboardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783DF981DB5B942005E087C /* MKIQKeyboardManagerViewController.swift */; };
+		2783DF9C1DB5BB11005E087C /* MKGesturePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783DF9B1DB5BB11005E087C /* MKGesturePasswordViewController.swift */; };
+		2783DF9E1DB5BB34005E087C /* MKGesturePasswordView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2783DF9D1DB5BB34005E087C /* MKGesturePasswordView.storyboard */; };
 		2783E0071CC89E74007247F6 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0061CC89E74007247F6 /* NSObject+Extension.swift */; };
 		278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */; };
 		278725741DB4C82600C1F19A /* MKCustomEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725671DB4C82600C1F19A /* MKCustomEmptyView.swift */; };
@@ -141,8 +145,6 @@
 		27959A431CD3331900546424 /* PINCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A421CD3331900546424 /* PINCacheTests.swift */; };
 		27959A4C1CD3446000546424 /* MKUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A4B1CD3446000546424 /* MKUIViewController.swift */; };
 		27959A4E1CD3447100546424 /* MKUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A4D1CD3447100546424 /* MKUIViewModel.swift */; };
-		27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */; };
-		27959A521CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */; };
 		27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A531CD3531900546424 /* BaseKitWebViewController.xib */; };
 		279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */; };
 		27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5EA1CEAC5F0004FEA63 /* GestureTentacleView.swift */; };
@@ -151,8 +153,6 @@
 		27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */; };
 		27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F51CEB3E22004FEA63 /* UIView+Extension.swift */; };
 		27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */; };
-		27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */; };
-		27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */; };
@@ -166,8 +166,6 @@
 		27D989771DB47209004E79A0 /* BaseKitEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */; };
 		27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */; };
 		27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */; };
-		27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */; };
-		27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */; };
 		27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
@@ -312,7 +310,6 @@
 		270692D11CE9F27D00CF211A /* GesturePasswordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordButton.swift; sourceTree = "<group>"; };
 		270692D21CE9F27D00CF211A /* GesturePasswordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordProtocol.swift; sourceTree = "<group>"; };
 		270692D31CE9F27D00CF211A /* GesturePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordView.swift; sourceTree = "<group>"; };
-		270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGesturePasswordViewController.swift; sourceTree = "<group>"; };
 		270692DA1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIGesturePasswordViewModel.swift; sourceTree = "<group>"; };
 		27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireNetApiData.swift; sourceTree = "<group>"; };
 		2713CFB51D12A08E003C643E /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
@@ -374,13 +371,18 @@
 		27678DEC1D62C0AE00EB7C23 /* MQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQueue.swift; sourceTree = "<group>"; };
 		27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTreeNode.swift; sourceTree = "<group>"; };
 		27678DF01D63050700EB7C23 /* MSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSearch.swift; sourceTree = "<group>"; };
-		276D04EC1DAF8CE200881248 /* MKUIOrderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIOrderTableViewController.swift; sourceTree = "<group>"; };
-		276D04EE1DAF8E9A00881248 /* MKUIOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIOrderTableViewCell.swift; sourceTree = "<group>"; };
 		27784AA81CF686C500960071 /* Aspects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Aspects.framework; path = "../Debug-iphonesimulator/Aspects.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27784AAE1CF6E25200960071 /* SendCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCodeButton.swift; sourceTree = "<group>"; };
 		277C49C01CE40FBF00295259 /* RegexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
 		277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberKeyboard.swift; sourceTree = "<group>"; };
 		277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberKeyboard.xib; sourceTree = "<group>"; };
+		2783DF8E1DB5B2D7005E087C /* MKOrderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKOrderTableViewController.swift; sourceTree = "<group>"; };
+		2783DF921DB5B342005E087C /* MKOrderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKOrderView.storyboard; sourceTree = "<group>"; };
+		2783DF941DB5B39E005E087C /* MKOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKOrderTableViewCell.swift; sourceTree = "<group>"; };
+		2783DF961DB5B8FE005E087C /* MKIQKeyboardManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKIQKeyboardManagerViewController.xib; sourceTree = "<group>"; };
+		2783DF981DB5B942005E087C /* MKIQKeyboardManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKIQKeyboardManagerViewController.swift; sourceTree = "<group>"; };
+		2783DF9B1DB5BB11005E087C /* MKGesturePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKGesturePasswordViewController.swift; sourceTree = "<group>"; };
+		2783DF9D1DB5BB34005E087C /* MKGesturePasswordView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKGesturePasswordView.storyboard; sourceTree = "<group>"; };
 		2783E0061CC89E74007247F6 /* NSObject+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYCustomAlertView.swift; sourceTree = "<group>"; };
 		278725671DB4C82600C1F19A /* MKCustomEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCustomEmptyView.swift; sourceTree = "<group>"; };
@@ -425,8 +427,6 @@
 		27959A421CD3331900546424 /* PINCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINCacheTests.swift; sourceTree = "<group>"; };
 		27959A4B1CD3446000546424 /* MKUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIViewController.swift; sourceTree = "<group>"; };
 		27959A4D1CD3447100546424 /* MKUIViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIViewModel.swift; sourceTree = "<group>"; };
-		27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIIQKeyboardManagerViewController.swift; sourceTree = "<group>"; };
-		27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIIQKeyboardManagerViewModel.swift; sourceTree = "<group>"; };
 		27959A531CD3531900546424 /* BaseKitWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitWebViewController.xib; sourceTree = "<group>"; };
 		279A59B81CF592A100C6C5EB /* RATreeView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = RATreeView.framework; path = "../Debug-iphonesimulator/RATreeView.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		279D24FB1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -452,8 +452,6 @@
 		27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorButton.swift; sourceTree = "<group>"; };
 		27A1C5F51CEB3E22004FEA63 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		27A40F6C1CC5DE890012AF12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIKeyboardViewModel.swift; sourceTree = "<group>"; };
-		27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISegmentViewModel.swift; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -488,8 +486,6 @@
 		27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitEmptyView.xib; sourceTree = "<group>"; };
 		27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewController.swift; sourceTree = "<group>"; };
 		27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewModel.swift; sourceTree = "<group>"; };
-		27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUISideViewModel.swift; sourceTree = "<group>"; };
-		27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKUIChartViewModel.swift; sourceTree = "<group>"; };
 		27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		2BA84B8C839A38DF70639431 /* Pods-SwiftMKitDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
@@ -824,6 +820,8 @@
 			children = (
 				274C4C661DB4DA7C00310C11 /* MKKeyboardViewController.swift */,
 				274C4C681DB4DAB000310C11 /* MKKeyboardViewController.xib */,
+				2783DF981DB5B942005E087C /* MKIQKeyboardManagerViewController.swift */,
+				2783DF961DB5B8FE005E087C /* MKIQKeyboardManagerViewController.xib */,
 			);
 			path = KeyboardView;
 			sourceTree = "<group>";
@@ -876,6 +874,25 @@
 				277EA9FA1CE9AA0C00AA62A0 /* NumberKeyboard.xib */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		2783DF8D1DB5B2D7005E087C /* OrderView */ = {
+			isa = PBXGroup;
+			children = (
+				2783DF8E1DB5B2D7005E087C /* MKOrderTableViewController.swift */,
+				2783DF941DB5B39E005E087C /* MKOrderTableViewCell.swift */,
+				2783DF921DB5B342005E087C /* MKOrderView.storyboard */,
+			);
+			path = OrderView;
+			sourceTree = "<group>";
+		};
+		2783DF9A1DB5BB11005E087C /* GesturePasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				2783DF9B1DB5BB11005E087C /* MKGesturePasswordViewController.swift */,
+				2783DF9D1DB5BB34005E087C /* MKGesturePasswordView.storyboard */,
+			);
+			path = GesturePasswordView;
 			sourceTree = "<group>";
 		};
 		278725621DB4C73C00C1F19A /* AlertView */ = {
@@ -956,19 +973,10 @@
 		27959A471CD3444500546424 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				27959A481CD3444500546424 /* Cell */,
 				27959A491CD3444500546424 /* View */,
 				27959A4A1CD3444500546424 /* ViewModel */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		27959A481CD3444500546424 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				276D04EE1DAF8E9A00881248 /* MKUIOrderTableViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		27959A491CD3444500546424 /* View */ = {
@@ -978,16 +986,15 @@
 				2787256D1DB4C82600C1F19A /* SegmentView */,
 				278725701DB4C82600C1F19A /* SideView */,
 				278725731DB4C82600C1F19A /* TreeView */,
+				2783DF8D1DB5B2D7005E087C /* OrderView */,
 				274C4C601DB4CFF900310C11 /* ChartView */,
 				274C4C651DB4DA7C00310C11 /* KeyboardView */,
+				2783DF9A1DB5BB11005E087C /* GesturePasswordView */,
 				27959A4B1CD3446000546424 /* MKUIViewController.swift */,
-				27959A4F1CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift */,
-				270692D81CE9F28800CF211A /* MKUIGesturePasswordViewController.swift */,
 				27A1C5EC1CEACB16004FEA63 /* MKUIIndicatorButtonViewController.swift */,
 				27D1A9B11CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift */,
 				01CCB0E21CFD9A1B00D06AD0 /* MKUICoverFlowViewController.swift */,
 				6C51A9E71D3C8ABC006EF254 /* MKUIPullRefresh.swift */,
-				276D04EC1DAF8CE200881248 /* MKUIOrderTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -996,11 +1003,6 @@
 			isa = PBXGroup;
 			children = (
 				27959A4D1CD3447100546424 /* MKUIViewModel.swift */,
-				27959A511CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift */,
-				27F7ADC91CE1B6E000C24706 /* MKUISideViewModel.swift */,
-				27F7ADCD1CE1B74F00C24706 /* MKUIChartViewModel.swift */,
-				27A4CA171CE2FAAB00516802 /* MKUIKeyboardViewModel.swift */,
-				27A4CA271CE3512E00516802 /* MKUISegmentViewModel.swift */,
 				270692DA1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift */,
 				27A1C5EE1CEACB26004FEA63 /* MKUIIndicatorButtonViewModel.swift */,
 				27D1A9B31CEEA7C200B511D7 /* MKUIGalaryCollectionViewModel.swift */,
@@ -1709,6 +1711,7 @@
 				6CEFCB741D3485F3008B3382 /* pannel_icon_qq@2x.png in Resources */,
 				6CEFCB731D3485F3008B3382 /* pannel_icon_myFavAdd@2x.png in Resources */,
 				3FC9DF031CBFD35900C2D938 /* LaunchScreen.storyboard in Resources */,
+				2783DF931DB5B342005E087C /* MKOrderView.storyboard in Resources */,
 				278725751DB4C82600C1F19A /* MKCustomEmptyView.xib in Resources */,
 				6CEFCB721D3485F3008B3382 /* pannel_icon_mms_h@2x.png in Resources */,
 				3FC9DF001CBFD35900C2D938 /* Assets.xcassets in Resources */,
@@ -1724,6 +1727,7 @@
 				6CEFCB6F1D3485F3008B3382 /* pannel_icon_font@2x.png in Resources */,
 				6CEFCB641D3485F3008B3382 /* pannel_icon_cardbackground_h@2x.png in Resources */,
 				274C4C691DB4DAB000310C11 /* MKKeyboardViewController.xib in Resources */,
+				2783DF9E1DB5BB34005E087C /* MKGesturePasswordView.storyboard in Resources */,
 				6CEFCB691D3485F3008B3382 /* pannel_icon_collection@2x.png in Resources */,
 				27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */,
 				6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */,
@@ -1736,6 +1740,7 @@
 				274C4C641DB4D04200310C11 /* MKChartView.storyboard in Resources */,
 				277EA9FB1CE9AA0C00AA62A0 /* NumberKeyboard.xib in Resources */,
 				6CEFCB751D3485F3008B3382 /* pannel_icon_qq_h@2x.png in Resources */,
+				2783DF971DB5B8FE005E087C /* MKIQKeyboardManagerViewController.xib in Resources */,
 				6CEFCB7C1D3485F3008B3382 /* pannel_icon_weixin@2x.png in Resources */,
 				274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */,
 				6CEFCB6B1D3485F3008B3382 /* pannel_icon_copy@2x.png in Resources */,
@@ -1897,6 +1902,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				273F51A11CC8BF20003ABE4A /* UIViewController+Extension.swift in Sources */,
+				2783DF991DB5B942005E087C /* MKIQKeyboardManagerViewController.swift in Sources */,
 				273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */,
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
 				181C72EB1CE5821F0072FB7A /* SideMenu.swift in Sources */,
@@ -1936,19 +1942,17 @@
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				6C51A9EA1D3C8AD6006EF254 /* MKUIPullRefreshViewModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
+				2783DF951DB5B39E005E087C /* MKOrderTableViewCell.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
 				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
-				270692D91CE9F28800CF211A /* MKUIGesturePasswordViewController.swift in Sources */,
 				278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				270692DB1CE9F29100CF211A /* MKUIGesturePasswordViewModel.swift in Sources */,
 				6C51A9E81D3C8ABC006EF254 /* MKUIPullRefresh.swift in Sources */,
-				27959A501CD344EB00546424 /* MKUIIQKeyboardManagerViewController.swift in Sources */,
 				27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */,
-				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
 				181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */,
 				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
@@ -1960,7 +1964,6 @@
 				FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */,
 				27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */,
 				278937FA1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */,
-				276D04F01DAF8E9A00881248 /* MKUIOrderTableViewCell.swift in Sources */,
 				27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */,
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
@@ -1968,8 +1971,8 @@
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
 				27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */,
 				576E13D11D3DC70A00A948CE /* SwiftCrashDefaultFormatter.m in Sources */,
+				2783DF8F1DB5B2D7005E087C /* MKOrderTableViewController.swift in Sources */,
 				6C724B3D1D0FCF0100CD5608 /* UILabel+Extension.swift in Sources */,
-				27A4CA281CE3512E00516802 /* MKUISegmentViewModel.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
@@ -1979,10 +1982,10 @@
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
 				6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */,
 				576E13CF1D3DC70A00A948CE /* MachThreadBacktrace.c in Sources */,
+				2783DF9C1DB5BB11005E087C /* MKGesturePasswordViewController.swift in Sources */,
 				27959A4E1CD3447100546424 /* MKUIViewModel.swift in Sources */,
 				18C208631CC8636400569F42 /* SingleReqViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
-				27F7ADCE1CE1B74F00C24706 /* MKUIChartViewModel.swift in Sources */,
 				27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */,
 				576E13D21D3DC70A00A948CE /* SwiftCrashHandler.swift in Sources */,
 				3FC9DF5E1CBFD6D400C2D938 /* MKDataViewController.swift in Sources */,
@@ -2010,7 +2013,6 @@
 				18C208591CC862D800569F42 /* SingleReqViewController.swift in Sources */,
 				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,
 				27D1A9B21CEEA7AA00B511D7 /* MKUIGalaryCollectionViewController.swift in Sources */,
-				276D04ED1DAF8CE200881248 /* MKUIOrderTableViewController.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				279D24FC1CC4D2AB002DD28F /* MKDataNetworkRequestTableViewCell.swift in Sources */,
 				6CD0E2711D87D67600B2FC40 /* UIFont+Extension.swift in Sources */,
@@ -2033,7 +2035,6 @@
 				3FC9DF5D1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewController.swift in Sources */,
 				6CD0E2691D87D65100B2FC40 /* UpgradeApp.swift in Sources */,
 				3FC9DF611CBFD6D400C2D938 /* MKDataViewModel.swift in Sources */,
-				27959A521CD344FE00546424 /* MKUIIQKeyboardManagerViewModel.swift in Sources */,
 				3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */,
 				27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */,
 				274316BF1CC8A38000E560EE /* MKDataStoreViewController.swift in Sources */,
@@ -2049,7 +2050,6 @@
 				030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */,
 				278725851DB4CBD500C1F19A /* MKUITreeViewCellTableViewCell.swift in Sources */,
 				3FC9DF5F1CBFD6D400C2D938 /* MKDataNetworkRequestDetailViewModel.swift in Sources */,
-				27A4CA181CE2FAAB00516802 /* MKUIKeyboardViewModel.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */,
 				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,

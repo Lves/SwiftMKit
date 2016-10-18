@@ -112,14 +112,14 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="NbD-fB-rhi"/>
-                                <exclude reference="B5w-WW-WYk"/>
-                                <exclude reference="fu7-H2-9xa"/>
-                                <exclude reference="YFs-w5-iH7"/>
-                                <exclude reference="Je9-tw-2gL"/>
                                 <exclude reference="2qx-Fy-Sbn"/>
-                                <exclude reference="PVF-Ua-wSu"/>
+                                <exclude reference="B5w-WW-WYk"/>
+                                <exclude reference="Je9-tw-2gL"/>
+                                <exclude reference="NbD-fB-rhi"/>
+                                <exclude reference="YFs-w5-iH7"/>
+                                <exclude reference="fu7-H2-9xa"/>
                                 <exclude reference="PSY-dU-7jY"/>
+                                <exclude reference="PVF-Ua-wSu"/>
                             </mask>
                         </variation>
                     </view>

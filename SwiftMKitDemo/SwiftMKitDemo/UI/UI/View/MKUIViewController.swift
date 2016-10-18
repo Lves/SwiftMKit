@@ -66,10 +66,6 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
                 return
             }
             switch indexPath.row {
-            case 1:
-                self.routeToName(InnerConst.SegueToNextIQKeyboardManager)
-            case 4:
-                self.routeToName(InnerConst.SegueToNextKeyboardView)
             case 6:
                 self.routeToName(InnerConst.SegueToNextGesturePasswordView)
             case 7:
@@ -81,8 +77,6 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
                 self.routeToName(InnerConst.SegueToNextCoverFlowView)
             case 12:
                 self.routeToName(InnerConst.SegueToPullRefresh)
-            case 13:
-                self.routeToName(InnerConst.SegueToNextOrderTableView)
             default:
                 break
             }

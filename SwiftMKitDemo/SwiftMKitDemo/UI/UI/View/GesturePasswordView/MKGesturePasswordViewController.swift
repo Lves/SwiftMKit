@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 
-class MKUIGesturePasswordViewController: BaseViewController {
+class MKGesturePasswordViewController: BaseViewController {
 
     @IBAction func click_setPassword(sender: UIButton) {
         GesturePasswordViewController.lockScreen(.Reset)
@@ -51,7 +51,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         }
     }
     
-    private static let sharedViewController: GesturePasswordViewController = UIViewController.instanceViewControllerInStoryboardWithName("GesturePasswordViewController", storyboardName: "Main") as! GesturePasswordViewController
+    private static let sharedViewController: GesturePasswordViewController = UIViewController.instanceViewControllerInStoryboardWithName("GesturePasswordViewController", storyboardName: "MKGesturePasswordView") as! GesturePasswordViewController
     class func shared() -> GesturePasswordViewController {
         return GesturePasswordViewController.sharedViewController
     }

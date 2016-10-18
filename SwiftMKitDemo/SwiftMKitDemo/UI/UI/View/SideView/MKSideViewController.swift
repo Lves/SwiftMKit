@@ -15,7 +15,7 @@ class MKSideViewController: BaseViewController, SideMenuDelegate, SideMenuProtoc
     var sideMenu: SideMenu?
     var menuViewController: UIViewController?
     
-    private var _viewModel = MKUISideViewModel()
+    private var _viewModel = BaseKitViewModel()
     override var viewModel: BaseKitViewModel! {
         get { return _viewModel }
     }
