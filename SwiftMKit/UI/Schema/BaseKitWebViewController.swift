@@ -103,6 +103,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     //WebViewProgressDelegate
     func webViewProgress(webViewProgress: WebViewProgress, updateProgress progress: Float) {
+        DDLogInfo("WebView Progress: \(progress)")
         if progress > 0.0 && progress < 1.0 {
             self.progressView?.alpha = 1.0
             self.progressView?.setProgress(progress, animated: true)
