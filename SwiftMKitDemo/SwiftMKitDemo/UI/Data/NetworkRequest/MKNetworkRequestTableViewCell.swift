@@ -9,7 +9,7 @@
 import UIKit
 import Haneke
 
-class MKDataNetworkRequestTableViewCell: UITableViewCell {
+class MKNetworkRequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgHead: UIImageView!
     @IBOutlet weak var imgPic: UIImageView!
@@ -49,7 +49,7 @@ class MKDataNetworkRequestTableViewCell: UITableViewCell {
         imgPic.image = image
     }
 
-    var photoModel: MKDataNetworkRequestPhotoModel? {
+    var photoModel: PX500PopularPhotoModel? {
         didSet {
             self.lblTitle?.text = photoModel?.name
             self.lblContent?.text = photoModel?.descriptionString

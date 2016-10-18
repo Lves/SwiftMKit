@@ -25,6 +25,7 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
     
     lazy public var manager = CLLocationManager()
     public static var shared = LocationManager()
+    private var locatieCompletion: ((CLLocation?, NSError?) -> ())?
     private var autoStop: Bool = false
     
     public class func start(autoStop autoStop: Bool = false, accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
@@ -50,14 +51,23 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
         shared.manager.stopUpdatingLocation()
         DDLogInfo("Stopped");
     }
+    public func getlocation(complete: (CLLocation?, NSError?) -> ()) {
+        locatieCompletion = { location, error in
+            complete(location, error)
+            LocationManager.stop()
+        }
+        LocationManager.start()
+    }
     
     @objc public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             let long = location.coordinate.longitude
             let lat = location.coordinate.latitude
-            DDLogInfo("当前坐标: (\(long), \(lat))")
+            DDLogInfo("当前坐标: (\(lat), \(long))")
             self.longitude = long
             self.latitude = lat
+            self.locatieCompletion?(location, nil)
+            self.locatieCompletion = nil
             
             //获取城市信息
             let geocoder = CLGeocoder()
@@ -76,6 +86,10 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
         if autoStop {
             LocationManager.stop()
         }
+    }
+    @objc public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        self.locatieCompletion?(nil, error)
+        self.locatieCompletion = nil
     }
     
     var cache = PINDiskCache.sharedCache()

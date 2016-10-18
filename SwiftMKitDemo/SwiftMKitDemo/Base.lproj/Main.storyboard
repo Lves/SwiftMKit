@@ -3,13 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Data-->
         <scene sceneID="Twf-hU-b5O">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7TA-rG-57D" sceneMemberID="firstResponder"/>
                 <viewController title="Data" automaticallyAdjustsScrollViewInsets="NO" id="8lI-nI-Uhx" customClass="MKDataViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kYn-Yh-M64"/>
@@ -66,179 +66,10 @@
                     <navigationItem key="navigationItem" title="Data" id="cRL-xO-ZJ5"/>
                     <connections>
                         <outlet property="tableView" destination="Hc5-Ib-Lcq" id="toA-Yi-Da8"/>
-                        <segue destination="CUP-DE-Aoe" kind="show" identifier="routeToDataNetworkRequest" id="TT6-Eo-f5U">
-                            <nil key="action"/>
-                        </segue>
-                        <segue destination="WXb-cC-hfs" kind="show" identifier="routeToDataStore" id="INg-kf-bA6"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7TA-rG-57D" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1928.5" y="-265.5"/>
-        </scene>
-        <!--Data Network Request View Controller-->
-        <scene sceneID="GYG-Gv-WXO">
-            <objects>
-                <viewController storyboardIdentifier="MKDataNetworkRequestViewController" automaticallyAdjustsScrollViewInsets="NO" id="CUP-DE-Aoe" customClass="MKDataNetworkRequestViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VUt-OO-Uz9"/>
-                        <viewControllerLayoutGuide type="bottom" id="VDO-vU-uOD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SL4-eG-nnh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="221" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jqG-oK-0k5">
-                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="CUP-DE-Aoe" id="U4k-e7-e5J"/>
-                                    <outlet property="delegate" destination="CUP-DE-Aoe" id="Uer-nH-n0T"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="jqG-oK-0k5" firstAttribute="leading" secondItem="SL4-eG-nnh" secondAttribute="leadingMargin" constant="-20" id="4Yr-2V-eeZ"/>
-                            <constraint firstItem="jqG-oK-0k5" firstAttribute="top" secondItem="VUt-OO-Uz9" secondAttribute="bottom" id="F2k-ae-JCi"/>
-                            <constraint firstItem="VDO-vU-uOD" firstAttribute="top" secondItem="jqG-oK-0k5" secondAttribute="bottom" id="jDW-Dh-l7X"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jqG-oK-0k5" secondAttribute="trailing" constant="-20" id="zbS-P4-vUV"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="tableView" destination="jqG-oK-0k5" id="Ubm-eV-c2e"/>
-                        <segue destination="UNi-fn-7nO" kind="show" identifier="routeToNetworkRequestDetail" id="fp8-J5-IUa">
-                            <nil key="action"/>
-                        </segue>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TLq-dD-Jou" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2466.5" y="-739.5"/>
-        </scene>
-        <!--Data Network Request Detail View Controller-->
-        <scene sceneID="ZOb-uz-zn2">
-            <objects>
-                <viewController storyboardIdentifier="MKDataNetworkRequestDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="UNi-fn-7nO" customClass="MKDataNetworkRequestDetailViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ENo-oW-y9J"/>
-                        <viewControllerLayoutGuide type="bottom" id="Rdd-CC-04B"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="R3s-LN-EME">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ew5-Ws-EFz">
-                                <rect key="frame" x="-4" y="104" width="383" height="220"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Ew5-Ws-EFz" secondAttribute="height" multiplier="383:220" id="VV6-g6-fUi"/>
-                                    <constraint firstAttribute="height" constant="220" id="Wfj-Gj-Y9R"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Wfj-Gj-Y9R"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UvB-HZ-kFU">
-                                <rect key="frame" x="16" y="343" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="IFI-D3-dU1"/>
-                                    <constraint firstAttribute="width" constant="40" id="QQn-e7-sak"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFP-Gd-MWZ">
-                                <rect key="frame" x="64" y="353" width="43" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ej-P2-OGo">
-                                <rect key="frame" x="16" y="391" width="52" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jj5-90-Ty6">
-                                <rect key="frame" x="309" y="348" width="50" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="pfY-qe-cpw"/>
-                                </constraints>
-                                <state key="normal" title="喜欢"/>
-                                <state key="selected" title="已喜欢"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xld-8e-d7E">
-                                <rect key="frame" x="0.0" y="64" width="125" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="HVl-n9-gVh"/>
-                                </constraints>
-                                <state key="normal" title="SingleReq"/>
-                                <connections>
-                                    <segue destination="hfI-vu-hYc" kind="show" id="y5l-Il-qx0"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ew5-Ws-EFz" secondAttribute="trailing" constant="-20" id="2WF-87-amu"/>
-                            <constraint firstItem="Xld-8e-d7E" firstAttribute="top" secondItem="ENo-oW-y9J" secondAttribute="bottom" id="3qr-L4-WRF"/>
-                            <constraint firstItem="jj5-90-Ty6" firstAttribute="centerY" secondItem="UvB-HZ-kFU" secondAttribute="centerY" id="5zl-Bl-Fd0"/>
-                            <constraint firstItem="UvB-HZ-kFU" firstAttribute="top" secondItem="Ew5-Ws-EFz" secondAttribute="bottom" constant="19" id="6Xi-TT-VEz"/>
-                            <constraint firstItem="1Ej-P2-OGo" firstAttribute="leading" secondItem="UvB-HZ-kFU" secondAttribute="leading" id="9fF-hi-GpT"/>
-                            <constraint firstItem="GFP-Gd-MWZ" firstAttribute="centerY" secondItem="UvB-HZ-kFU" secondAttribute="centerY" id="AM2-BH-via"/>
-                            <constraint firstItem="jj5-90-Ty6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GFP-Gd-MWZ" secondAttribute="trailing" constant="8" id="IVF-Nf-0fP"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GFP-Gd-MWZ" secondAttribute="trailing" id="JTH-uq-bAr"/>
-                            <constraint firstItem="GFP-Gd-MWZ" firstAttribute="leading" secondItem="UvB-HZ-kFU" secondAttribute="trailing" constant="8" id="OaO-CE-rPo"/>
-                            <constraint firstItem="Ew5-Ws-EFz" firstAttribute="leading" secondItem="R3s-LN-EME" secondAttribute="leading" id="OpB-Mr-ekE"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="UvB-HZ-kFU" secondAttribute="leading" id="TbB-T5-lMO"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="1Ej-P2-OGo" secondAttribute="trailing" id="VOB-KI-gU7"/>
-                            <constraint firstItem="Ew5-Ws-EFz" firstAttribute="leading" secondItem="R3s-LN-EME" secondAttribute="leadingMargin" constant="-20" id="Xju-xm-cca"/>
-                            <constraint firstItem="Xld-8e-d7E" firstAttribute="leading" secondItem="R3s-LN-EME" secondAttribute="leading" id="YGE-O8-cUt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jj5-90-Ty6" secondAttribute="trailing" id="Yzo-bm-1g9"/>
-                            <constraint firstItem="Ew5-Ws-EFz" firstAttribute="top" secondItem="Xld-8e-d7E" secondAttribute="bottom" id="jXN-en-PjR"/>
-                            <constraint firstAttribute="trailing" secondItem="Ew5-Ws-EFz" secondAttribute="trailing" id="k7a-xm-JJ7"/>
-                            <constraint firstItem="1Ej-P2-OGo" firstAttribute="top" secondItem="UvB-HZ-kFU" secondAttribute="bottom" constant="8" id="lHy-vK-wN4"/>
-                            <constraint firstItem="Ew5-Ws-EFz" firstAttribute="top" secondItem="ENo-oW-y9J" secondAttribute="bottom" constant="40" id="lxB-ZT-JWQ"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="OpB-Mr-ekE"/>
-                                <exclude reference="k7a-xm-JJ7"/>
-                                <exclude reference="JTH-uq-bAr"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="btnLike" destination="jj5-90-Ty6" id="Np8-i4-j54"/>
-                        <outlet property="constraintImgPicAspect" destination="VV6-g6-fUi" id="4fs-JE-VW5"/>
-                        <outlet property="imgHead" destination="UvB-HZ-kFU" id="fev-x3-jEG"/>
-                        <outlet property="imgPic" destination="Ew5-Ws-EFz" id="rZI-zs-h0A"/>
-                        <outlet property="lblContent" destination="1Ej-P2-OGo" id="cbt-UA-rJf"/>
-                        <outlet property="lblName" destination="GFP-Gd-MWZ" id="SLS-2O-ihS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CwX-hU-hBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2975.5" y="-289.5"/>
-        </scene>
-        <!--Single Req View Controller-->
-        <scene sceneID="UiO-AR-41O">
-            <objects>
-                <viewController id="hfI-vu-hYc" customClass="SingleReqViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Knp-cr-cnm"/>
-                        <viewControllerLayoutGuide type="bottom" id="Sdn-UD-p6H"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JzN-Ji-ahl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Fg-jg-elO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3704.5" y="-449.5"/>
+            <point key="canvasLocation" x="815.5" y="-1017.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lIZ-jw-Cc5">
@@ -280,7 +111,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Um2-Rz-1BD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1274.5" y="-265.5"/>
+            <point key="canvasLocation" x="222.5" y="-1017.5"/>
         </scene>
         <!--UI-->
         <scene sceneID="HId-BN-bfF">
@@ -340,89 +171,11 @@
                     <navigationItem key="navigationItem" title="UI" id="PQ4-Mo-w9e"/>
                     <connections>
                         <outlet property="tableView" destination="rMD-7k-01V" id="nUH-EQ-GXk"/>
-                        <segue destination="ocl-da-du7" kind="push" identifier="PullToRefresh" id="ofm-7T-HLi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n43-Wv-Irm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="815.5" y="-1802.5"/>
-        </scene>
-        <!--Pull Refresh-->
-        <scene sceneID="5JO-0j-MPU">
-            <objects>
-                <viewController id="ocl-da-du7" customClass="MKUIPullRefresh" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L1m-nj-VdU"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZeZ-y5-vvH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VYo-2X-jBh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dcn-sD-45Q">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="ocl-da-du7" id="wFh-h7-1xO"/>
-                                    <outlet property="delegate" destination="ocl-da-du7" id="bpu-G0-Hk2"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Dcn-sD-45Q" firstAttribute="top" secondItem="L1m-nj-VdU" secondAttribute="bottom" id="941-f3-JmB"/>
-                            <constraint firstAttribute="trailing" secondItem="Dcn-sD-45Q" secondAttribute="trailing" id="NSc-ta-rbG"/>
-                            <constraint firstItem="Dcn-sD-45Q" firstAttribute="leading" secondItem="VYo-2X-jBh" secondAttribute="leading" id="Sn9-wD-8DD"/>
-                            <constraint firstItem="ZeZ-y5-vvH" firstAttribute="top" secondItem="Dcn-sD-45Q" secondAttribute="bottom" id="ll1-h5-RM6"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="vHD-pk-eE2"/>
-                    <connections>
-                        <outlet property="tableView" destination="Dcn-sD-45Q" id="GaK-W5-217"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o7W-uy-ldV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1992.5" y="-1697.5"/>
-        </scene>
-        <!--Data Store View Controller-->
-        <scene sceneID="7AD-ZQ-Oj3">
-            <objects>
-                <viewController storyboardIdentifier="MKDataStoreViewController" automaticallyAdjustsScrollViewInsets="NO" id="WXb-cC-hfs" customClass="MKDataStoreViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RsC-iI-Bfv"/>
-                        <viewControllerLayoutGuide type="bottom" id="Wrk-Em-Iad"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fpK-R4-jlt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="221" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T02-Zl-cuO">
-                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="WXb-cC-hfs" id="pOd-IN-mtT"/>
-                                    <outlet property="delegate" destination="WXb-cC-hfs" id="GI3-z3-sTg"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="T02-Zl-cuO" firstAttribute="leading" secondItem="fpK-R4-jlt" secondAttribute="leadingMargin" constant="-20" id="d7v-Mi-0T2"/>
-                            <constraint firstItem="T02-Zl-cuO" firstAttribute="top" secondItem="RsC-iI-Bfv" secondAttribute="bottom" id="jlD-SL-FaC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="T02-Zl-cuO" secondAttribute="trailing" constant="-20" id="sHb-WE-3oc"/>
-                            <constraint firstItem="Wrk-Em-Iad" firstAttribute="top" secondItem="T02-Zl-cuO" secondAttribute="bottom" id="wVE-QO-XUX"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="tableView" destination="T02-Zl-cuO" id="UHX-ag-v3c"/>
-                        <segue destination="UNi-fn-7nO" kind="show" identifier="routeToNetworkRequestDetail" id="IMc-9u-5tL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BEA-lD-VMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2466.5" y="-6.5"/>
         </scene>
         <!--UI-->
         <scene sceneID="Zsj-OE-7NW">
@@ -448,7 +201,4 @@
             <point key="canvasLocation" x="222.5" y="-1802.5"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="fp8-J5-IUa"/>
-    </inferredMetricsTieBreakers>
 </document>

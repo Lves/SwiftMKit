@@ -11,20 +11,17 @@ import Alamofire
 import CocoaLumberjack
 import ReactiveCocoa
 import Haneke
+import FDFullscreenPopGesture
 
-enum DataStoreType: Int {
-    case Memory, CoreData
-}
-
-class MKDataStoreViewController: BaseListFetchViewController, UITableViewDataSource, UITableViewDelegate {
+class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
-        static let CellIdentifier = "MKDataNetworkRequestTableViewCell"
+        static let CellIdentifier = "MKNetworkRequestTableViewCell"
         static let SegueToNext = "routeToNetworkRequestDetail"
     }
-    lazy private var _viewModel = MKDataStoreViewModel()
-    override var viewModel: BaseKitViewModel!{
+    lazy private var _viewModel = MKNetworkRequestViewModel()
+    override var viewModel: MKNetworkRequestViewModel!{
         get { return _viewModel }
     }
     override var listView: UIScrollView! {
@@ -36,7 +33,6 @@ class MKDataStoreViewController: BaseListFetchViewController, UITableViewDataSou
     
     override func setupUI() {
         super.setupUI()
-        self.title = "Photos"
         self.tableView.registerNib(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = self.tableView.rowHeight;
@@ -45,20 +41,21 @@ class MKDataStoreViewController: BaseListFetchViewController, UITableViewDataSou
     }
     override func loadData() {
         super.loadData()
-        self.tableView.mj_header.beginRefreshing()
+        self.listView.mj_header.beginRefreshing()
     }
+    
     override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKNetworkRequestTableViewCell
     }
     override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-        if let cell = tableViewCell as? MKDataNetworkRequestTableViewCell {
-            if let model = object as? PX500PhotoEntity {
-                cell.photoEntity = model
+        if let cell = tableViewCell as? MKNetworkRequestTableViewCell {
+            if let model = object as? PX500PopularPhotoModel {
+                cell.photoModel = model
             }
         }
     }
     override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-        if let model = object as? PX500PhotoEntity {
+        if let model = object as? PX500PopularPhotoModel {
             self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId!])
         }
     }

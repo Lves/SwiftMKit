@@ -128,8 +128,7 @@ public class TaskIndicator: NSObject, IndicatorProtocol {
         }
         for task in runningTasks {
             DDLogVerbose("Cancel task: \(task)")
-            let notify = NSNotification(name: "", object: task)
-            self.task_cancel(notify)
+            UIApplication.sharedApplication().hideNetworkActivityIndicator()
             task.cancel()
         }
     }

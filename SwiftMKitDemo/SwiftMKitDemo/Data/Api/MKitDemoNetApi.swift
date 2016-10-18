@@ -55,7 +55,7 @@ class BuDeJieNetApi: AlamofireNetApiData {
 }
 
 class PX500PopularPhotosApiData: PX500NetApi {
-    var photos: [MKDataNetworkRequestPhotoModel]?
+    var photos: [PX500PopularPhotoModel]?
     private var page: UInt = 0
     private var number: UInt = 0
     
@@ -90,7 +90,7 @@ class PX500PopularPhotosCoreDataApiData: PX500PopularPhotosApiData {
     }
 }
 class PX500PhotoDetailApiData: PX500NetApi {
-    var photo: MKDataNetworkRequestPhotoModel?
+    var photo: PX500PopularPhotoModel?
     init(photoId: String) {
         super.init()
         self.query = [:]

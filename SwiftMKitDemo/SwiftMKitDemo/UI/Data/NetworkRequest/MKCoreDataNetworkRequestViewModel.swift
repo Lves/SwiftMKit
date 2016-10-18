@@ -10,7 +10,7 @@ import UIKit
 import ReactiveCocoa
 import CoreData
 
-class MKDataStoreViewModel: BaseListFetchViewModel {
+class MKCoreDataNetworkRequestViewModel: BaseListFetchViewModel {
     
     private var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NetError> {
         get {

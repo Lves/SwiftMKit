@@ -12,7 +12,7 @@ import CocoaLumberjack
 import ReactiveCocoa
 import Haneke
 
-class MKDataNetworkRequestDetailViewController: BaseViewController {
+class MKNetworkRequestDetailViewController: BaseViewController {
     var photoId: String?
     
     @IBOutlet weak var imgHead: UIImageView!
@@ -22,14 +22,14 @@ class MKDataNetworkRequestDetailViewController: BaseViewController {
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var constraintImgPicAspect: NSLayoutConstraint!
     
-    private var _viewModel = MKDataNetworkRequestDetailViewModel()
+    private var _viewModel = MKNetworkRequestDetailViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
     
     override func setupUI() {
         super.setupUI()
-        self.title = "Photo Detail"
+        self.title = "Detail"
         self.lblName.text = ""
         self.lblContent.text = ""
         self.btnLike.hidden = true

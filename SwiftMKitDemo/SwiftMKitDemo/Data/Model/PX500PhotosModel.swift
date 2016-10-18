@@ -10,7 +10,7 @@ import UIKit
 import MagicalRecord
 import MJExtension
 
-class MKDataNetworkRequestPhotoModel: NSObject {
+class PX500PopularPhotoModel: NSObject {
     var photoId: String?
     var name: String?
     var username: String?

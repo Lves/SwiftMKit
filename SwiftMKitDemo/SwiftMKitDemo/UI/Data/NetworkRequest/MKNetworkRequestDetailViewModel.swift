@@ -10,15 +10,15 @@ import UIKit
 import ReactiveCocoa
 import CocoaLumberjack
 
-class MKDataNetworkRequestDetailViewModel: BaseViewModel {
+class MKNetworkRequestDetailViewModel: BaseViewModel {
     
-    var _viewController: MKDataNetworkRequestDetailViewController? {
-        get { return self.viewController as? MKDataNetworkRequestDetailViewController }
+    var _viewController: MKNetworkRequestDetailViewController? {
+        get { return self.viewController as? MKNetworkRequestDetailViewController }
     }
     var photoId: String? {
         get { return _viewController?.photoId }
     }
-    var photo = MutableProperty<MKDataNetworkRequestPhotoModel?>(nil)
+    var photo = MutableProperty<PX500PopularPhotoModel?>(nil)
     var isLike = MutableProperty<Bool>(false)
     lazy var actionLike: Action<AnyObject, AnyObject, NSError> = {
         let action = Action<AnyObject, AnyObject, NSError> { [weak self] input in
