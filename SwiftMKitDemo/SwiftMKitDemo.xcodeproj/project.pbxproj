@@ -133,6 +133,8 @@
 		2783E0361DB62BD4005E087C /* MKCoreDataNetworkRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0351DB62BD4005E087C /* MKCoreDataNetworkRequestViewController.swift */; };
 		2783E0391DB62E4D005E087C /* MKDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0371DB62E4D005E087C /* MKDataViewController.swift */; };
 		2783E03A1DB62E4D005E087C /* MKDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0381DB62E4D005E087C /* MKDataViewModel.swift */; };
+		2783E03E1DB645D5005E087C /* MKMBProgressHUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E03C1DB645D5005E087C /* MKMBProgressHUDViewController.swift */; };
+		2783E03F1DB645D5005E087C /* MKMBProgressHUDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2783E03D1DB645D5005E087C /* MKMBProgressHUDViewController.xib */; };
 		278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */; };
 		278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937EC1CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift */; };
 		278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937ED1CD0A5CC00F43699 /* PX500PhotoEntity.swift */; };
@@ -412,6 +414,8 @@
 		2783E0351DB62BD4005E087C /* MKCoreDataNetworkRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCoreDataNetworkRequestViewController.swift; sourceTree = "<group>"; };
 		2783E0371DB62E4D005E087C /* MKDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataViewController.swift; sourceTree = "<group>"; };
 		2783E0381DB62E4D005E087C /* MKDataViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataViewModel.swift; sourceTree = "<group>"; };
+		2783E03C1DB645D5005E087C /* MKMBProgressHUDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMBProgressHUDViewController.swift; sourceTree = "<group>"; };
+		2783E03D1DB645D5005E087C /* MKMBProgressHUDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKMBProgressHUDViewController.xib; sourceTree = "<group>"; };
 		278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYCustomAlertView.swift; sourceTree = "<group>"; };
 		278937EC1CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500PhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		278937ED1CD0A5CC00F43699 /* PX500PhotoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500PhotoEntity.swift; sourceTree = "<group>"; };
@@ -1005,6 +1009,15 @@
 			name = ViewModel;
 			sourceTree = "<group>";
 		};
+		2783E03B1DB6454A005E087C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				2783E03C1DB645D5005E087C /* MKMBProgressHUDViewController.swift */,
+				2783E03D1DB645D5005E087C /* MKMBProgressHUDViewController.xib */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		278725621DB4C73C00C1F19A /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1047,6 +1060,7 @@
 				2783DFF01DB626FD005E087C /* SegmentView */,
 				2783DFF31DB626FD005E087C /* SideView */,
 				2783DFF61DB626FD005E087C /* TreeView */,
+				2783E03B1DB6454A005E087C /* MBProgressHUD */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1730,6 +1744,7 @@
 				6CEFCB6C1D3485F3008B3382 /* pannel_icon_email@2x.png in Resources */,
 				6CEFCB801D3485F3008B3382 /* pannel_icon_zhifubao_friend_h@2x.png in Resources */,
 				6CEFCB651D3485F3008B3382 /* pannel_icon_chat@2x.png in Resources */,
+				2783E03F1DB645D5005E087C /* MKMBProgressHUDViewController.xib in Resources */,
 				6CEFCB771D3485F3008B3382 /* pannel_icon_qzone_h@2x.png in Resources */,
 				2783E00B1DB626FD005E087C /* MKGesturePasswordView.storyboard in Resources */,
 				6CEFCB6F1D3485F3008B3382 /* pannel_icon_font@2x.png in Resources */,
@@ -1926,6 +1941,7 @@
 				576E13D01D3DC70A00A948CE /* SwiftCrashConsoleReporter.swift in Sources */,
 				270692D41CE9F27D00CF211A /* GesturePassword.swift in Sources */,
 				276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */,
+				2783E03E1DB645D5005E087C /* MKMBProgressHUDViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27678DF11D63050700EB7C23 /* MSearch.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,

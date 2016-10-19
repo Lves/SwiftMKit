@@ -18,12 +18,18 @@ public class MBHUDView: HUDProtocol{
     private weak var showingHUD: MBProgressHUD?
     public static var shared: MBHUDView = MBHUDView()
     
-    public func showHUDAddedTo(view: UIView, animated: Bool, text:String?) {
+    public func showHUDAddedTo(view: UIView, animated: Bool, text: String?) {
+        showHUDAddedTo(view, animated: animated, text: text, detailText: nil)
+    }
+    public func showHUDAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?) {
         indicatorShowed = true
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
         if let indicateString = text {
             hud.label.text = indicateString
+        }
+        if let detailString = detailText {
+            hud.detailsLabel.text = detailString
         }
         showingHUD = hud
     }
@@ -40,6 +46,54 @@ public class MBHUDView: HUDProtocol{
         hud.hideAnimated(animated, afterDelay: hideAfterDelay)
         showingHUD = hud
         Async.main(after: hideAfterDelay, block: completion)
+    }
+    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void)) {
+        indicatorShowed = false
+        showingHUD?.hideAnimated(false)
+        MBProgressHUD.hideHUDForView(view, animated: animated)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        hud.mode = .Text
+        hud.label.text = text
+        hud.detailsLabel.text = detailText
+        hud.hideAnimated(animated, afterDelay: hideAfterDelay)
+        showingHUD = hud
+        Async.main(after: hideAfterDelay, block: completion)
+    }
+    public func showHUDProgressAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
+        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .Determinate)
+    }
+    public func showHUDProgressAnnularDeterminateAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
+        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .AnnularDeterminate)
+    }
+    public func showHUDProgressHorizontalBarAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
+        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .DeterminateHorizontalBar)
+    }
+    public func showHUDProgressAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil, mode: MBProgressHUDMode) {
+        showHUDAddedTo(view, animated: animated, text: text, detailText: detailText)
+        showingHUD?.mode = mode
+        if cancelEnable == true {
+            let progressObject = NSProgress(totalUnitCount: 100)
+            showingHUD?.progressObject = progressObject
+            if let title = cancelTitle {
+                showingHUD?.button.setTitle(title, forState: .Normal)
+                showingHUD?.button.addTarget(progressObject, action: #selector(NSProgress.cancel), forControlEvents: .TouchUpInside)
+            }
+        }
+    }
+    public func changeHUDProgress(progress: Float) {
+        if let progressObject = showingHUD?.progressObject {
+            if progressObject.cancelled {
+                showingHUD?.hideAnimated(true)
+                showingHUD = nil
+                indicatorShowed = false
+                return
+            }
+            let increase: Int64 = Int64((Double(progress) - progressObject.fractionCompleted) * 100)
+            progressObject.becomeCurrentWithPendingUnitCount(increase)
+            progressObject.resignCurrent()
+        } else {
+            showingHUD?.progress = progress
+        }
     }
     public func changeHUDText(text: String?) {
         if let hud = showingHUD {

@@ -96,11 +96,26 @@ public extension UIViewController {
     public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay, completion: completion)
     }
-    public func showLoading(text: String = "") {
-        showLoading(text, view: self.view)
+    public func showLoading(text: String = "", detailText: String = "") {
+        showLoading(text, detailText: detailText, view: self.view)
     }
-    public func showLoading(text: String, view: UIView) {
-        MBHUDView.shared.showHUDAddedTo(view, animated: true, text: text)
+    public func showLoading(text: String, detailText: String = "", view: UIView) {
+        MBHUDView.shared.showHUDAddedTo(view, animated: true, text: text, detailText: detailText)
+    }
+    public func showProgress(text: String = "", detailText: String = "") {
+        showProgress(text, detailText: detailText, view: self.view)
+    }
+    public func showProgress(text: String, detailText: String = "", view: UIView, cancelEnable: Bool = false, cancelButtonTitle: String? = nil) {
+        MBHUDView.shared.showHUDProgressAddedTo(view, animated: true, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelButtonTitle)
+    }
+    public func showProgressAnnularDeterminate(text: String, detailText: String = "", view: UIView, cancelEnable: Bool = false, cancelButtonTitle: String? = nil) {
+        MBHUDView.shared.showHUDProgressAnnularDeterminateAddedTo(view, animated: true, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelButtonTitle)
+    }
+    public func showProgressHorizontalBar(text: String, detailText: String = "", view: UIView, cancelEnable: Bool = false, cancelButtonTitle: String? = nil) {
+        MBHUDView.shared.showHUDProgressHorizontalBarAddedTo(view, animated: true, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelButtonTitle)
+    }
+    public func changeProgress(progress: Float) {
+        MBHUDView.shared.changeHUDProgress(progress)
     }
     public func hideLoading() {
         hideLoading(self.view)
