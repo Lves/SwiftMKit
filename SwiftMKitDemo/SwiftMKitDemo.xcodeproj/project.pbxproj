@@ -27,7 +27,6 @@
 		270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D11CE9F27D00CF211A /* GesturePasswordButton.swift */; };
 		270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D21CE9F27D00CF211A /* GesturePasswordProtocol.swift */; };
 		270692D71CE9F27D00CF211A /* GesturePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270692D31CE9F27D00CF211A /* GesturePasswordView.swift */; };
-		27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */; };
 		2713CFB61D12A08E003C643E /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB51D12A08E003C643E /* StringTests.swift */; };
 		2713CFB81D12A162003C643E /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB71D12A162003C643E /* DictionaryTests.swift */; };
 		2713CFBA1D12A5B6003C643E /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713CFB91D12A5B6003C643E /* RegexTests.swift */; };
@@ -161,6 +160,9 @@
 		27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A3D1CD30BE400546424 /* UITextField+Extension.swift */; };
 		27959A431CD3331900546424 /* PINCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A421CD3331900546424 /* PINCacheTests.swift */; };
 		27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A531CD3531900546424 /* BaseKitWebViewController.xib */; };
+		27A0E7361DB7453200E9C489 /* AlamofireEncryptNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0E7331DB7453200E9C489 /* AlamofireEncryptNetApiData.swift */; };
+		27A0E7381DB7453200E9C489 /* EncryptedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0E7351DB7453200E9C489 /* EncryptedRequest.swift */; };
+		27A0E73B1DB7456100E9C489 /* AlamofireNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0E73A1DB7456100E9C489 /* AlamofireNetApiData.swift */; };
 		27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5EA1CEAC5F0004FEA63 /* GestureTentacleView.swift */; };
 		27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */; };
 		27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F51CEB3E22004FEA63 /* UIView+Extension.swift */; };
@@ -259,8 +261,6 @@
 		6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB611D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png */; };
 		940103FDA8332BA75A4CC084 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DBD8FC39958E8C29EDABEF /* Pods_SwiftMKitDemoTests.framework */; };
 		C6665AF9FED00EB395EA826F /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B36301B29CDB7F77B5A559 /* Pods_SwiftMKitDemoUITests.framework */; };
-		F0284DF21DB733AA0010E79A /* AlamofireEncryptNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */; };
-		F0284DF51DB734230010E79A /* EncryptedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0284DF41DB734230010E79A /* EncryptedRequest.swift */; };
 		F0F1DC341DB73BA00004F578 /* NetworkEncrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0341C141DAF527700435765 /* NetworkEncrypt.framework */; };
 		F0F1DC351DB73BA00004F578 /* NetworkEncrypt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0341C141DAF527700435765 /* NetworkEncrypt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F90ED8ACB4523105C959D95E /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */; };
@@ -325,7 +325,6 @@
 		270692D11CE9F27D00CF211A /* GesturePasswordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordButton.swift; sourceTree = "<group>"; };
 		270692D21CE9F27D00CF211A /* GesturePasswordProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordProtocol.swift; sourceTree = "<group>"; };
 		270692D31CE9F27D00CF211A /* GesturePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordView.swift; sourceTree = "<group>"; };
-		27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireNetApiData.swift; sourceTree = "<group>"; };
 		2713CFB51D12A08E003C643E /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		2713CFB71D12A162003C643E /* DictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
 		2713CFB91D12A5B6003C643E /* RegexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
@@ -463,6 +462,9 @@
 		27959A421CD3331900546424 /* PINCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINCacheTests.swift; sourceTree = "<group>"; };
 		27959A531CD3531900546424 /* BaseKitWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseKitWebViewController.xib; sourceTree = "<group>"; };
 		279A59B81CF592A100C6C5EB /* RATreeView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = RATreeView.framework; path = "../Debug-iphonesimulator/RATreeView.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A0E7331DB7453200E9C489 /* AlamofireEncryptNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireEncryptNetApiData.swift; sourceTree = "<group>"; };
+		27A0E7351DB7453200E9C489 /* EncryptedRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedRequest.swift; sourceTree = "<group>"; };
+		27A0E73A1DB7456100E9C489 /* AlamofireNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireNetApiData.swift; sourceTree = "<group>"; };
 		27A18EBB1CDAF89700609C22 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A18EBE1CDAF89700609C22 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A18EC11CDAF89700609C22 /* EZSwiftExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EZSwiftExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -617,8 +619,6 @@
 		976D2F4D60A997459D1E40F8 /* Pods-SwiftMKitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireEncryptNetApiData.swift; sourceTree = "<group>"; };
-		F0284DF41DB734230010E79A /* EncryptedRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedRequest.swift; sourceTree = "<group>"; };
 		F0341C141DAF527700435765 /* NetworkEncrypt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NetworkEncrypt.framework; sourceTree = "<group>"; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FBE54A331CF3F983001C493A /* PasswordPannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordPannel.swift; sourceTree = "<group>"; };
@@ -1087,6 +1087,23 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		27A0E7321DB7453200E9C489 /* Encrypt */ = {
+			isa = PBXGroup;
+			children = (
+				27A0E7331DB7453200E9C489 /* AlamofireEncryptNetApiData.swift */,
+				27A0E7351DB7453200E9C489 /* EncryptedRequest.swift */,
+			);
+			path = Encrypt;
+			sourceTree = "<group>";
+		};
+		27A0E7391DB7456100E9C489 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				27A0E73A1DB7456100E9C489 /* AlamofireNetApiData.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
 		27A1C5F01CEACB6B004FEA63 /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -1311,17 +1328,16 @@
 		3FC9DF271CBFD53A00C2D938 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				27A0E7391DB7456100E9C489 /* Alamofire */,
+				27A0E7321DB7453200E9C489 /* Encrypt */,
 				6CD0E2631D87D65100B2FC40 /* ConnectPeer */,
 				6CD0E2651D87D65100B2FC40 /* Upgrade */,
 				27BA394B1CC74E2400436D23 /* Async */,
 				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
-				F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */,
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
-				F0284DF41DB734230010E79A /* EncryptedRequest.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
 				273ACFAC1CC9D60600EB341D /* NetError.swift */,
 				27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */,
-				27131B491DAE09E900F7C026 /* AlamofireNetApiData.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1993,6 +2009,7 @@
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */,
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
+				27A0E73B1DB7456100E9C489 /* AlamofireNetApiData.swift in Sources */,
 				2783E0391DB62E4D005E087C /* MKDataViewController.swift in Sources */,
 				2783E01D1DB626FD005E087C /* MKTreeViewController.swift in Sources */,
 				27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */,
@@ -2016,7 +2033,6 @@
 				FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */,
 				27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */,
 				278937FA1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */,
-				27131B4A1DAE09E900F7C026 /* AlamofireNetApiData.swift in Sources */,
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
@@ -2025,6 +2041,7 @@
 				6C724B3D1D0FCF0100CD5608 /* UILabel+Extension.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */,
+				27A0E7381DB7453200E9C489 /* EncryptedRequest.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
 				27678DE91D62A78800EB7C23 /* MStack.swift in Sources */,
@@ -2044,7 +2061,7 @@
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
 				27D989751DB471F5004E79A0 /* BaseKitEmptyView.swift in Sources */,
-				F0284DF21DB733AA0010E79A /* AlamofireEncryptNetApiData.swift in Sources */,
+				27A0E7361DB7453200E9C489 /* AlamofireEncryptNetApiData.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
@@ -2057,7 +2074,6 @@
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				2783E0301DB62716005E087C /* MKNetworkRequestViewModel.swift in Sources */,
-				F0284DF51DB734230010E79A /* EncryptedRequest.swift in Sources */,
 				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				2783DFFD1DB626FD005E087C /* MKCoverFlowSelectBtnsCollectionViewCell.swift in Sources */,
