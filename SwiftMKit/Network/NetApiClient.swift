@@ -65,25 +65,17 @@ public class NetApiClient : NSObject {
             return
         }
         reachability?.whenReachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
-            dispatch_async(dispatch_get_main_queue()) {
-                if reachability.isReachableViaWiFi() {
-                    DDLogInfo("当前网络: WiFi")
-                    self.networkStatus.value = .ReachableViaWiFi
-                } else {
-                    DDLogInfo("当前网络: Cellular")
-                    self.networkStatus.value = .ReachableViaWWAN
-                }
+            if reachability.isReachableViaWiFi() {
+                DDLogInfo("当前网络: WiFi")
+                self.networkStatus.value = .ReachableViaWiFi
+            } else {
+                DDLogInfo("当前网络: Cellular")
+                self.networkStatus.value = .ReachableViaWWAN
             }
         }
         reachability?.whenUnreachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
-            dispatch_async(dispatch_get_main_queue()) {
-                DDLogInfo("网络无法连接")
-                self.networkStatus.value = .NotReachable
-            }
+            DDLogInfo("网络无法连接")
+            self.networkStatus.value = .NotReachable
         }
         
         do {

@@ -73,6 +73,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         webViewBridge = WebViewBridge(webView: webView!, viewController: self)
         webViewProgress.progressDelegate = self
         progressView = UIProgressView(frame: CGRectMake(0, 0, self.screenW, 0))
+        progressView?.trackTintColor = UIColor.clearColor()
         self.view.addSubview(progressView!)
         bindEvents()
         
@@ -93,14 +94,16 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             self.webViewBridge?.requestUrl(self.url)
         }
     }
-    public func bindEvents() {}
+    public func bindEvents() {
+        DDLogWarn("Need to implement the function of 'bindEvents'")
+    }
     public func bindEvent(eventName: String, handler: WVJBHandler) {
         webViewBridge?.addEvent(eventName, handler: handler)
     }
     
     //WebViewProgressDelegate
     func webViewProgress(webViewProgress: WebViewProgress, updateProgress progress: Float) {
-    
+        DDLogInfo("WebView Progress: \(progress)")
         if progress > 0.0 && progress < 1.0 {
             self.progressView?.alpha = 1.0
             self.progressView?.setProgress(progress, animated: true)

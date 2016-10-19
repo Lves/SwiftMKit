@@ -36,8 +36,8 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             viewEnterHiglightColor: UIColor(hex6: 0xFD734C),
             viewDelHiglightColor: UIColor(hex6: 0xC0C7D4),
             viewNumberHiglightColor: UIColor(hex6: 0xC0C7D4),
-            viewDelImage: "keyboard_view_del",
-            viewScreenImage: "keyboard_view_screen")
+            viewDelImage: "kb_keyboard_view_del",
+            viewScreenImage: "kb_keyboard_view_screen")
     }
 
     @IBOutlet weak var btn1: UIButton!

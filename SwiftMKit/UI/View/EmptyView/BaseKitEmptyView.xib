@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BaseKitEmptyView" customModule="SwiftMKitDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="view_empty" translatesAutoresizingMaskIntoConstraints="NO" id="Gqp-bE-IFx">
+                    <rect key="frame" x="72" y="10" width="56" height="73"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Gqp-bE-IFx" secondAttribute="height" multiplier="56:73" id="1op-I4-HPf"/>
+                        <constraint firstAttribute="width" secondItem="Gqp-bE-IFx" secondAttribute="height" multiplier="56:73" id="6FG-dx-JBN"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="1op-I4-HPf"/>
+                            <exclude reference="6FG-dx-JBN"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="暂无数据" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rya-2U-bc2">
+                    <rect key="frame" x="10" y="99" width="180" height="11"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                    <color key="textColor" red="0.63137254899999995" green="0.67450980390000004" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Gqp-bE-IFx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="22r-9u-PpV"/>
+                <constraint firstItem="Gqp-bE-IFx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="F8p-qA-yMD"/>
+                <constraint firstItem="rya-2U-bc2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="GXQ-Br-UHT"/>
+                <constraint firstAttribute="trailing" secondItem="rya-2U-bc2" secondAttribute="trailing" constant="10" id="K9u-Y5-Qx7"/>
+                <constraint firstItem="Gqp-bE-IFx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="M3e-wC-Km9"/>
+                <constraint firstItem="Gqp-bE-IFx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-20" id="ih5-ln-1Cf"/>
+                <constraint firstItem="rya-2U-bc2" firstAttribute="top" secondItem="Gqp-bE-IFx" secondAttribute="bottom" constant="16" id="irF-A1-bgE"/>
+                <constraint firstAttribute="bottom" secondItem="rya-2U-bc2" secondAttribute="bottom" constant="10" id="leQ-3N-2Mt"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="22r-9u-PpV"/>
+                    <exclude reference="ih5-ln-1Cf"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="imgView" destination="Gqp-bE-IFx" id="HkY-xI-cWh"/>
+                <outlet property="lblTitle" destination="rya-2U-bc2" id="nAn-d0-5eO"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="view_empty" width="56" height="73"/>
+    </resources>
+</document>

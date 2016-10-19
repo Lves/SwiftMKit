@@ -25,6 +25,7 @@ def pods
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'Charts', '~> 2.2.4'
     pod 'PulsingHalo', '~> 0.2.0'
+    pod 'FDFullscreenPopGesture', '~> 1.1'
 end
 
 target 'SwiftMKitDemo' do

@@ -37,8 +37,6 @@ public class WebViewProgress : NSObject {
             if progressDelegate != nil {
                 progressDelegate?.webViewProgress(self, updateProgress: progress)
             }
-            
-            DDLogInfo("progress is \(progress)")
         }
     }
     var loadingCount : Int = 0
@@ -62,7 +60,6 @@ public class WebViewProgress : NSObject {
         tempProgress = max(tempProgress, 0)
         progress = tempProgress
         
-        DDLogInfo("increment \(increment)")
     }
     
     func completeProgress() {
@@ -102,6 +99,8 @@ public class WebViewProgress : NSObject {
             self.reset()
         }
         
+        currentURL = request.URL
+        
         return true
     }
     
@@ -135,10 +134,19 @@ public class WebViewProgress : NSObject {
         }
         
         let isNotRedirect : Bool = (currentURL?.isEqual(webView.request!.mainDocumentURL))!
+        
         let complete = readyState == "complete"
         
-        if (complete && isNotRedirect) || error != nil {
+//        if (complete && isNotRedirect) || error != nil {
+//            self.completeProgress()
+//        }
+        
+        if (complete) || error != nil {
             self.completeProgress()
         }
+        
+        DDLogInfo("[runFinishJS] \(complete) \(isNotRedirect)")
+        
+        DDLogInfo("[runFinishJS] \n\(currentURL) \n\(webView.request!.mainDocumentURL) \n\(webView.request!.URLString)")
     }
 }

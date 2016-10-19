@@ -13,6 +13,7 @@ PODS:
     - CocoaLumberjack/Extensions
   - CryptoSwift (0.5.1)
   - EZSwiftExtensions (1.6)
+  - FDFullscreenPopGesture (1.1)
   - HanekeSwift (0.10.1)
   - IQKeyboardManager (4.0.6)
   - JSPatch (1.1):
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift (~> 2.3.0)
   - CryptoSwift (~> 0.5.0)
   - EZSwiftExtensions (~> 1.6.0)
+  - FDFullscreenPopGesture (~> 1.1)
   - HanekeSwift (~> 0.10.0)
   - IQKeyboardManager (~> 4.0.0)
   - JSPatch (~> 1.1.0)
@@ -72,6 +74,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   CryptoSwift: df42dda18baf6c76347a94e227dbcc0a341304bd
   EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   IQKeyboardManager: c52debb1967799ae7addb98eab0cf328083a874f
   JSPatch: ade285ad1d8f06146ed6054a39cef87509453299
@@ -88,6 +91,6 @@ SPEC CHECKSUMS:
   SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
-PODFILE CHECKSUM: 141820e69ad13e75ac8a5f4e421ab5e796d2cff2
+PODFILE CHECKSUM: 28449beac5066bb43855bfdb84229a8d0627f3c7
 
 COCOAPODS: 1.0.1

@@ -55,9 +55,9 @@ public class BaseListKitViewModel: BaseKitViewModel {
                 return
             }
             if count == 0 {
-                self.viewController.showEmptyView()
+                self.viewController.emptyView?.show()
             } else if oldCount == 0 {
-                self.viewController.hideEmptyView()
+                self.viewController.emptyView?.hide()
             }
             if self.listViewController.listViewType == .RefreshOnly ||
                self.listViewController.listViewType == .None {
