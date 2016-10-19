@@ -120,10 +120,13 @@ public class BaseKitTableViewModel: NSObject {
 extension BaseKitTableViewModel {
     
     public func showTip(tip: String, completion : () -> Void = {}) {
-        viewController.showTip(tip, view: viewController.view, hideAfterDelay: HUDConstant.HideTipAfterDelay, completion: completion)
+        showTip(tip, view: self.view, completion: completion)
     }
-    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
-        viewController.showTip(tip, view: view, hideAfterDelay: hideAfterDelay, completion: completion)
+    public func showTip(tip: String, image: UIImage?, completion : () -> Void = {}) {
+        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
+    }
+    public func showTip(tip: String, view: UIView, offset: CGPoint = CGPointZero, completion : () -> Void = {}) {
+        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
     }
     public func showLoading(text: String = "") {
         viewController.showLoading(text)

@@ -140,9 +140,9 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
         }
     }
 
-    public override func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval, completion: () -> Void) {
+    public override func showTip(tip: String, view: UIView, offset: CGPoint, completion: () -> Void) {
         endListRefresh()
-        super.showTip(tip, view: view, hideAfterDelay: hideAfterDelay, completion: completion)
+        super.showTip(tip, view: view, offset: offset, completion: completion)
     }
    
     deinit {

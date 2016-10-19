@@ -164,6 +164,8 @@
 		27A0E7381DB7453200E9C489 /* EncryptedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0E7351DB7453200E9C489 /* EncryptedRequest.swift */; };
 		27A0E73B1DB7456100E9C489 /* AlamofireNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0E73A1DB7456100E9C489 /* AlamofireNetApiData.swift */; };
 		27A0E7401DB7492200E9C489 /* NetworkEncrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A0E73F1DB7492200E9C489 /* NetworkEncrypt.framework */; };
+		27A0E7411DB7588C00E9C489 /* NetworkEncrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A0E73F1DB7492200E9C489 /* NetworkEncrypt.framework */; };
+		27A0E7421DB7588C00E9C489 /* NetworkEncrypt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A0E73F1DB7492200E9C489 /* NetworkEncrypt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5EA1CEAC5F0004FEA63 /* GestureTentacleView.swift */; };
 		27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F11CEACB78004FEA63 /* IndicatorButton.swift */; };
 		27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A1C5F51CEB3E22004FEA63 /* UIView+Extension.swift */; };
@@ -293,6 +295,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				27A0E7421DB7588C00E9C489 /* NetworkEncrypt.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,6 +651,7 @@
 				276183A41DAA40A200C3AC77 /* PulsingHalo.framework in Frameworks */,
 				276183A51DAA40A200C3AC77 /* ReachabilitySwift.framework in Frameworks */,
 				276183A61DAA40A200C3AC77 /* ReactiveCocoa.framework in Frameworks */,
+				27A0E7411DB7588C00E9C489 /* NetworkEncrypt.framework in Frameworks */,
 				276183A71DAA40A200C3AC77 /* Result.framework in Frameworks */,
 				276183A81DAA40A200C3AC77 /* SnapKit.framework in Frameworks */,
 				276183A91DAA40A200C3AC77 /* WebViewJavascriptBridge.framework in Frameworks */,

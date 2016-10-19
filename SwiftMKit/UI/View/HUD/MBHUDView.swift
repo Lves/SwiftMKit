@@ -15,7 +15,7 @@ public class MBHUDView: HUDProtocol{
     }
     
     private var indicatorShowed: Bool = false
-    private weak var showingHUD: MBProgressHUD?
+    public weak var showingHUD: MBProgressHUD?
     public static var shared: MBHUDView = MBHUDView()
     
     public func showHUDAddedTo(view: UIView, animated: Bool, text: String?) {
@@ -33,28 +33,26 @@ public class MBHUDView: HUDProtocol{
         }
         showingHUD = hud
     }
-    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval) {
-        self.showHUDTextAddedTo(view, animated: animated, text: text, hideAfterDelay: hideAfterDelay, completion: {})
-    }
-    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void)) {
+    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void)) {
         indicatorShowed = false
         showingHUD?.hideAnimated(false)
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
         hud.mode = .Text
-        setHUDText(hud, text: text)
-        hud.hideAnimated(animated, afterDelay: hideAfterDelay)
-        showingHUD = hud
-        Async.main(after: hideAfterDelay, block: completion)
-    }
-    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void)) {
-        indicatorShowed = false
-        showingHUD?.hideAnimated(false)
-        MBProgressHUD.hideHUDForView(view, animated: animated)
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
-        hud.mode = .Text
-        hud.label.text = text
-        hud.detailsLabel.text = detailText
+        if let offset = offset {
+            hud.offset = offset
+        }
+        if let detailText = detailText {
+            hud.label.text = text
+            hud.detailsLabel.text = detailText
+        } else {
+            setHUDText(hud, text: text)
+        }
+        if let image = image {
+            hud.mode = .CustomView;
+            hud.customView = UIImageView(image: image)
+            hud.square = true
+        }
         hud.hideAnimated(animated, afterDelay: hideAfterDelay)
         showingHUD = hud
         Async.main(after: hideAfterDelay, block: completion)
