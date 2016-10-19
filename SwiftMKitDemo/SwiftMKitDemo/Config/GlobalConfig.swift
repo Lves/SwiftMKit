@@ -10,6 +10,8 @@ import UIKit
 import PINCache
 
 struct GlobalConfig {
+    static let AppId = "0"
+    
 }
 
 struct PX500Config {
