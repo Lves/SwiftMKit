@@ -262,6 +262,8 @@
 		6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB611D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png */; };
 		940103FDA8332BA75A4CC084 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DBD8FC39958E8C29EDABEF /* Pods_SwiftMKitDemoTests.framework */; };
 		C6665AF9FED00EB395EA826F /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B36301B29CDB7F77B5A559 /* Pods_SwiftMKitDemoUITests.framework */; };
+		F0F1DC371DB74AA50004F578 /* EncryptNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1DC361DB74AA50004F578 /* EncryptNetworkManager.swift */; };
+		F0F1DC391DB7515A0004F578 /* NetworkEncrypt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A0E73F1DB7492200E9C489 /* NetworkEncrypt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F90ED8ACB4523105C959D95E /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */; };
 		FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445D921CF2E47400A391E6 /* Double+Extension.swift */; };
 		FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A331CF3F983001C493A /* PasswordPannel.swift */; };
@@ -293,6 +295,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F0F1DC391DB7515A0004F578 /* NetworkEncrypt.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,6 +621,7 @@
 		976D2F4D60A997459D1E40F8 /* Pods-SwiftMKitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F0F1DC361DB74AA50004F578 /* EncryptNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptNetworkManager.swift; sourceTree = "<group>"; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FBE54A331CF3F983001C493A /* PasswordPannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordPannel.swift; sourceTree = "<group>"; };
 		FBE54A391CF42983001C493A /* PasswordTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextView.swift; sourceTree = "<group>"; };
@@ -1090,6 +1094,7 @@
 			children = (
 				27A0E7331DB7453200E9C489 /* AlamofireEncryptNetApiData.swift */,
 				27A0E7351DB7453200E9C489 /* EncryptedRequest.swift */,
+				F0F1DC361DB74AA50004F578 /* EncryptNetworkManager.swift */,
 			);
 			path = Encrypt;
 			sourceTree = "<group>";
@@ -2036,6 +2041,7 @@
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
 				27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */,
 				576E13D11D3DC70A00A948CE /* SwiftCrashDefaultFormatter.m in Sources */,
+				F0F1DC371DB74AA50004F578 /* EncryptNetworkManager.swift in Sources */,
 				6C724B3D1D0FCF0100CD5608 /* UILabel+Extension.swift in Sources */,
 				034FB88C1CD1EC2F00E90738 /* EquatableTuples.swift in Sources */,
 				01CCB0DF1CFD659F00D06AD0 /* CoverFlowLayout.swift in Sources */,

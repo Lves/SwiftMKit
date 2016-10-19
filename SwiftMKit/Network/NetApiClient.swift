@@ -51,7 +51,6 @@ public protocol NetApiClientProtocol {
 
 public class NetApiClient : NSObject {
     public var networkStatus = MutableProperty<NetworkStatus>(.Unknown)
-    private var encryptTimer: NSTimer?
     private var reachability: Reachability?
     
     private override init() {
@@ -123,22 +122,5 @@ public class NetApiClient : NSObject {
     
     class func generateBoundaryString() -> String {
         return "******"
-    }
-    
-    //MARK: encrypt disable && enable
-    
-    public func initEncryptFramework(appId: String, vId: String) {
-        EncryptedNetworkManager.sharedEncryptedNetworkManager().setAppId(appId, vId: vId)
-    }
-    
-    class func serverDisableEncrypt() {
-        EncryptedRequest.disableEncrypt = true
-        NetApiClient.shared.encryptTimer = NSTimer(timeInterval: DisableEncryptTime, target: NetApiClient.shared, selector: #selector(enableEncrypt), userInfo: nil, repeats: false)
-    }
-    
-    @objc private func enableEncrypt() {
-        EncryptedRequest.disableEncrypt = false
-        NetApiClient.shared.encryptTimer?.invalidate()
-        NetApiClient.shared.encryptTimer = nil
     }
 }
