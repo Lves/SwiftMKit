@@ -81,13 +81,7 @@
                             <constraint firstItem="zhJ-KA-RpZ" firstAttribute="top" secondItem="qZ1-3L-xGW" secondAttribute="bottom" id="nt8-JJ-3Tc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Network Request" id="tkR-OA-fxj">
-                        <barButtonItem key="rightBarButtonItem" title="Encrypt" id="sOq-1T-KNx">
-                            <connections>
-                                <action selector="click_encrypt:" destination="7Gu-4F-Tfe" id="NCU-TM-rqb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Network Request" id="tkR-OA-fxj"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="zhJ-KA-RpZ" id="lAy-4C-d7i"/>

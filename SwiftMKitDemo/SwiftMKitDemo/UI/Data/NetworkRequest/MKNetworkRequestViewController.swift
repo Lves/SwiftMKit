@@ -43,10 +43,6 @@ class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSou
         super.loadData()
         self.listView.mj_header.beginRefreshing()
     }
-    @IBAction func click_encrypt(sender: UIBarButtonItem) {
-        viewModel.encrypt = (sender.title == "Encrypt")
-        sender.title = ((sender.title == "Encrypt") ? "Encrypted" : "Encrypt")
-    }
     
     override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
         return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKNetworkRequestTableViewCell
