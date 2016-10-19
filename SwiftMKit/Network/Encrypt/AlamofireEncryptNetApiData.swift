@@ -27,8 +27,8 @@ public class AlamofireEncryptNetApiData: NetApiData {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
             //TODO: modify
-            let urlRequest = NSURLRequest(URL: NSURL.init(string: "https://api.guechi.com/categories")!)
-//            let urlRequest = NetApiData.getURLRequest(self)
+//            let urlRequest = NSURLRequest(URL: NSURL.init(string: "https://api.guechi.com/categories")!)
+            let urlRequest = NetApiData.getURLRequest(self)
             let request = EncryptedRequest(encrypt: self.encrypt, URLRequest: urlRequest)
             self.request = request
             self.indicator?.bindTask(request.task)

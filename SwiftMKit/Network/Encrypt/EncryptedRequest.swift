@@ -264,8 +264,8 @@ public class EncryptedRequest: NSObject {
             return
         }
         
-        if error!.code == StatusCodeDisableEncrypt || error!.code != StatusCodeNetworkUnsafe {            
-            NetApiClient.serverDisableEncrypt()
+        if error!.code == StatusCodeDisableEncrypt {
+            EncryptNetworkManager.shared.disableEncrypt();
         }
     }
     

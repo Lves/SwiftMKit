@@ -12,10 +12,6 @@ public enum StatusCode: Int {
     case Default = 0
     case Canceled = -999
     case ValidateFailed = -99999
-    
-    // use for alamofire encrypt
-    case UpgradeApp = 999
-    case NetworkUnsafe = 9999    
 }
 
 public class NetError : NSError {
