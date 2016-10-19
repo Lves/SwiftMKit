@@ -257,6 +257,10 @@
 		6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB611D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png */; };
 		940103FDA8332BA75A4CC084 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DBD8FC39958E8C29EDABEF /* Pods_SwiftMKitDemoTests.framework */; };
 		C6665AF9FED00EB395EA826F /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B36301B29CDB7F77B5A559 /* Pods_SwiftMKitDemoUITests.framework */; };
+		F0284DF21DB733AA0010E79A /* AlamofireEncryptNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */; };
+		F0284DF51DB734230010E79A /* EncryptedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0284DF41DB734230010E79A /* EncryptedRequest.swift */; };
+		F0F1DC341DB73BA00004F578 /* NetworkEncrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0341C141DAF527700435765 /* NetworkEncrypt.framework */; };
+		F0F1DC351DB73BA00004F578 /* NetworkEncrypt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0341C141DAF527700435765 /* NetworkEncrypt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F90ED8ACB4523105C959D95E /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */; };
 		FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445D921CF2E47400A391E6 /* Double+Extension.swift */; };
 		FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A331CF3F983001C493A /* PasswordPannel.swift */; };
@@ -288,7 +292,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F0341C171DAF528400435765 /* NetworkEncrypt.framework in Embed Frameworks */,
+				F0F1DC351DB73BA00004F578 /* NetworkEncrypt.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,8 +613,8 @@
 		976D2F4D60A997459D1E40F8 /* Pods-SwiftMKitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F0341C081DAF2EBC00435765 /* AlamofireEncryptNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlamofireEncryptNetApiData.swift; path = Encrypt/AlamofireEncryptNetApiData.swift; sourceTree = "<group>"; };
-		F0341C091DAF2EBC00435765 /* EncryptedRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EncryptedRequest.swift; path = Encrypt/EncryptedRequest.swift; sourceTree = "<group>"; };
+		F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireEncryptNetApiData.swift; sourceTree = "<group>"; };
+		F0284DF41DB734230010E79A /* EncryptedRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedRequest.swift; sourceTree = "<group>"; };
 		F0341C141DAF527700435765 /* NetworkEncrypt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NetworkEncrypt.framework; sourceTree = "<group>"; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FBE54A331CF3F983001C493A /* PasswordPannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordPannel.swift; sourceTree = "<group>"; };
@@ -625,7 +629,7 @@
 			files = (
 				276183951DAA40A200C3AC77 /* Alamofire.framework in Frameworks */,
 				276183961DAA40A200C3AC77 /* Aspects.framework in Frameworks */,
-				F0341C161DAF528400435765 /* NetworkEncrypt.framework in Frameworks */,
+				F0F1DC341DB73BA00004F578 /* NetworkEncrypt.framework in Frameworks */,
 				276183971DAA40A200C3AC77 /* Charts.framework in Frameworks */,
 				276183981DAA40A200C3AC77 /* CocoaLumberjack.framework in Frameworks */,
 				276183991DAA40A200C3AC77 /* CryptoSwift.framework in Frameworks */,
@@ -635,7 +639,6 @@
 				2761839D1DAA40A200C3AC77 /* JSPatch.framework in Frameworks */,
 				2761839E1DAA40A200C3AC77 /* MagicalRecord.framework in Frameworks */,
 				2761839F1DAA40A200C3AC77 /* MBProgressHUD.framework in Frameworks */,
-				F0341C151DAF527700435765 /* NetworkEncrypt.framework in Frameworks */,
 				276183A01DAA40A200C3AC77 /* MJExtension.framework in Frameworks */,
 				276183A11DAA40A200C3AC77 /* MJRefresh.framework in Frameworks */,
 				276183A21DAA40A200C3AC77 /* PINCache.framework in Frameworks */,
@@ -1294,12 +1297,13 @@
 		3FC9DF271CBFD53A00C2D938 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				F0341C071DAF2E8C00435765 /* Encrypt */,
 				6CD0E2631D87D65100B2FC40 /* ConnectPeer */,
 				6CD0E2651D87D65100B2FC40 /* Upgrade */,
 				27BA394B1CC74E2400436D23 /* Async */,
 				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
+				F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */,
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
+				F0284DF41DB734230010E79A /* EncryptedRequest.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
 				273ACFAC1CC9D60600EB341D /* NetError.swift */,
 				27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */,
@@ -1592,15 +1596,6 @@
 				ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		F0341C071DAF2E8C00435765 /* Encrypt */ = {
-			isa = PBXGroup;
-			children = (
-				F0341C081DAF2EBC00435765 /* AlamofireEncryptNetApiData.swift */,
-				F0341C091DAF2EBC00435765 /* EncryptedRequest.swift */,
-			);
-			name = Encrypt;
 			sourceTree = "<group>";
 		};
 		FB50BE5F1CEDB337007673F4 /* View */ = {
@@ -1979,7 +1974,6 @@
 				2783E0031DB626FD005E087C /* MKCustomEmptyView.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
-				F0341C0B1DAF2EBC00435765 /* EncryptedRequest.swift in Sources */,
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */,
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
@@ -1994,8 +1988,6 @@
 				2783E02A1DB62716005E087C /* MKNetworkRequestTableViewCell.swift in Sources */,
 				2783DFFF1DB626FD005E087C /* MKCoverFlowViewController.swift in Sources */,
 				27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */,
-				27F7ADCA1CE1B6E000C24706 /* MKUISideViewModel.swift in Sources */,
-				F0341C0A1DAF2EBC00435765 /* AlamofireEncryptNetApiData.swift in Sources */,
 				181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */,
 				2783E0081DB626FD005E087C /* MKNormalEmptyViewController.swift in Sources */,
 				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
@@ -2036,6 +2028,7 @@
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
 				27D989751DB471F5004E79A0 /* BaseKitEmptyView.swift in Sources */,
+				F0284DF21DB733AA0010E79A /* AlamofireEncryptNetApiData.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
@@ -2048,6 +2041,7 @@
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				2783E0301DB62716005E087C /* MKNetworkRequestViewModel.swift in Sources */,
+				F0284DF51DB734230010E79A /* EncryptedRequest.swift in Sources */,
 				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				2783DFFD1DB626FD005E087C /* MKCoverFlowSelectBtnsCollectionViewCell.swift in Sources */,
