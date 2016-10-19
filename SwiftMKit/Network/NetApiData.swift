@@ -40,6 +40,14 @@ public class NetApiData: NSObject, NetApiProtocol {
     
     private static let sharedInstance = NetApiData()
     
+    public override init() {
+        super.init()
+    }
+    public convenience init(error: NetError) {
+        self.init()
+        self.error = error
+    }
+    
     // MARK: RunningApi
     
     class public func requestingApis() -> [NetApiData] {
