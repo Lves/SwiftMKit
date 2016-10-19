@@ -259,6 +259,10 @@
 		6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CEFCB611D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png */; };
 		940103FDA8332BA75A4CC084 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DBD8FC39958E8C29EDABEF /* Pods_SwiftMKitDemoTests.framework */; };
 		C6665AF9FED00EB395EA826F /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B36301B29CDB7F77B5A559 /* Pods_SwiftMKitDemoUITests.framework */; };
+		F0284DF21DB733AA0010E79A /* AlamofireEncryptNetApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */; };
+		F0284DF51DB734230010E79A /* EncryptedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0284DF41DB734230010E79A /* EncryptedRequest.swift */; };
+		F0F1DC341DB73BA00004F578 /* NetworkEncrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0341C141DAF527700435765 /* NetworkEncrypt.framework */; };
+		F0F1DC351DB73BA00004F578 /* NetworkEncrypt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0341C141DAF527700435765 /* NetworkEncrypt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F90ED8ACB4523105C959D95E /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */; };
 		FB445D931CF2E47400A391E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445D921CF2E47400A391E6 /* Double+Extension.swift */; };
 		FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE54A331CF3F983001C493A /* PasswordPannel.swift */; };
@@ -282,6 +286,20 @@
 			remoteInfo = SwiftMKitDemo;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F0341C181DAF528400435765 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F0F1DC351DB73BA00004F578 /* NetworkEncrypt.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01CCB0DE1CFD659F00D06AD0 /* CoverFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayout.swift; sourceTree = "<group>"; };
@@ -599,6 +617,9 @@
 		976D2F4D60A997459D1E40F8 /* Pods-SwiftMKitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		98A5C27FB35A41E0F2C2254B /* Pods_SwiftMKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireEncryptNetApiData.swift; sourceTree = "<group>"; };
+		F0284DF41DB734230010E79A /* EncryptedRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedRequest.swift; sourceTree = "<group>"; };
+		F0341C141DAF527700435765 /* NetworkEncrypt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NetworkEncrypt.framework; sourceTree = "<group>"; };
 		FB445D921CF2E47400A391E6 /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FBE54A331CF3F983001C493A /* PasswordPannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordPannel.swift; sourceTree = "<group>"; };
 		FBE54A391CF42983001C493A /* PasswordTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextView.swift; sourceTree = "<group>"; };
@@ -612,6 +633,7 @@
 			files = (
 				276183951DAA40A200C3AC77 /* Alamofire.framework in Frameworks */,
 				276183961DAA40A200C3AC77 /* Aspects.framework in Frameworks */,
+				F0F1DC341DB73BA00004F578 /* NetworkEncrypt.framework in Frameworks */,
 				276183971DAA40A200C3AC77 /* Charts.framework in Frameworks */,
 				276183981DAA40A200C3AC77 /* CocoaLumberjack.framework in Frameworks */,
 				276183991DAA40A200C3AC77 /* CryptoSwift.framework in Frameworks */,
@@ -1235,6 +1257,7 @@
 				3FC9DF431CBFD6D400C2D938 /* UI */,
 				3FC9DEF81CBFD35900C2D938 /* AppDelegate.swift */,
 				27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */,
+				F0341C141DAF527700435765 /* NetworkEncrypt.framework */,
 				3FC9DEFC1CBFD35900C2D938 /* Main.storyboard */,
 				3FC9DEFF1CBFD35900C2D938 /* Assets.xcassets */,
 				3FC9DF011CBFD35900C2D938 /* LaunchScreen.storyboard */,
@@ -1292,7 +1315,9 @@
 				6CD0E2651D87D65100B2FC40 /* Upgrade */,
 				27BA394B1CC74E2400436D23 /* Async */,
 				3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */,
+				F0284DF01DB733AA0010E79A /* AlamofireEncryptNetApiData.swift */,
 				3FC9DF281CBFD53A00C2D938 /* NetApiClient.swift */,
+				F0284DF41DB734230010E79A /* EncryptedRequest.swift */,
 				3FC9DF291CBFD53A00C2D938 /* NetApiData.swift */,
 				273ACFAC1CC9D60600EB341D /* NetError.swift */,
 				27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */,
@@ -1618,6 +1643,7 @@
 				3FC9DEF31CBFD35900C2D938 /* Resources */,
 				F4F046577E613A2F253A3A17 /* [CP] Embed Pods Frameworks */,
 				EA2A84363EB6D9DC92389B35 /* [CP] Copy Pods Resources */,
+				F0341C181DAF528400435765 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2018,6 +2044,7 @@
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */,
 				27D989751DB471F5004E79A0 /* BaseKitEmptyView.swift in Sources */,
+				F0284DF21DB733AA0010E79A /* AlamofireEncryptNetApiData.swift in Sources */,
 				3F8FEAA41CC274DB00F7EAF3 /* UIApplication+Extension.swift in Sources */,
 				270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
@@ -2030,6 +2057,7 @@
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				2783E0301DB62716005E087C /* MKNetworkRequestViewModel.swift in Sources */,
+				F0284DF51DB734230010E79A /* EncryptedRequest.swift in Sources */,
 				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				2783DFFD1DB626FD005E087C /* MKCoverFlowSelectBtnsCollectionViewCell.swift in Sources */,
@@ -2265,6 +2293,8 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Result",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/SnapKit",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/WebViewJavascriptBridge",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SwiftMKitDemo",
 				);
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2310,6 +2340,8 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Result",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/SnapKit",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/WebViewJavascriptBridge",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SwiftMKitDemo",
 				);
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

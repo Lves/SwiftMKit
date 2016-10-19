@@ -6,3 +6,4 @@
 #include <sys/mount.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "SwiftCrashReport.h"
+#import <NetworkEncrypt/NetworkEncrypt.h>
