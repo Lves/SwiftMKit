@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         NetApiClient.shared.startNotifyNetworkStatus()
-        EncryptNetworkManager.shared.initEncryptFramework("appId", vId: "vId")
+        EncryptNetworkManager.shared.initEncryptFramework(GlobalConfig.AppId, vId: UIApplication.sharedApplication().bundleVersion)
         // debug时可显示加密库的log
 //        EncryptedNetworkManager.setShowLog(true)
         return true

@@ -104,6 +104,60 @@ class PX500PhotoDetailApiData: PX500NetApi {
     }
 }
 
+// MARK: Encrypt
+class PX500EncryptNetApi: AlamofireEncryptNetApiData {
+    static let baseQuery = ["consumer_key": PX500Config.consumerKey]
+    private var _query: [String: AnyObject] = [:]
+    override var query: [String: AnyObject] {
+        get {
+            let result = NetApiData.combineQuery(PX500NetApi.baseQuery, append: _query)
+            return result ?? [:]
+        }
+        set {
+            _query = newValue
+        }
+    }
+    static let baseUrl = PX500Config.urlHost + "/v1"
+    private var _url: String = ""
+    override var url: String {
+        get {
+            return _url
+        }
+        set {
+            if newValue.hasPrefix("http") {
+                _url = NSURL(string: newValue)?.absoluteString ?? ""
+            }else{
+                _url =  NSURL(string: PX500NetApi.baseUrl)?.URLByAppendingPathComponent(newValue).absoluteString ?? ""
+            }
+        }
+    }
+}
+class PX500PopularPhotosEncryptApiData: PX500EncryptNetApi {
+    var photos: [PX500PopularPhotoModel]?
+    private var page: UInt = 0
+    private var number: UInt = 0
+    
+    init(page: UInt, number: UInt) {
+        super.init()
+        self.page = page
+        self.number = number
+        self.query = ["page": "\(page)",
+                      "feature": "popular",
+                      "rpp": "\(number)",
+                      "include_store": "store_download",
+                      "include_states": "votes"]
+        self.url = "/photos"
+        self.method = .GET
+    }
+    override func fillJSON(json: AnyObject) {
+        if let dict = json as? [String: AnyObject] {
+            if let array = dict["photos"] as? [AnyObject] {
+                self.photos = NSObject.arrayFromJson(array)
+            }
+        }
+    }
+}
+
 
 class BuDeJieADApiData: BuDeJieNetApi {
     var ads: [BuDeJieADModel]?
