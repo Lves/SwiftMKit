@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MKMBProgressHUDViewController: BaseListViewController {
     
@@ -36,7 +37,10 @@ class MKMBProgressHUDViewController: BaseListViewController {
             "Determinate mode",
             "Determinate custom mode",
             "Annular determinate mode",
-            "Bar determinate mode",]
+            "Bar determinate mode",
+            "Text only",
+            "Text at bottom",
+            "Custom view",]
         tableView.reloadData()
     }
     
@@ -129,6 +133,12 @@ class MKMBProgressHUDViewController: BaseListViewController {
                     self?.hideLoading()
                 }
             }
+        case 7:
+            self.showTip("Message here!")
+        case 8:
+            self.showTip("Message here!", view: self.view, offset: CGPoint(x: 0, y: MBProgressMaxOffset), completion: {})
+        case 9:
+            self.showTip("Done", image: UIImage(named: "icon_hud_checkmark"))
         default:
             break
         }

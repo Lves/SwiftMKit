@@ -59,7 +59,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
     }
     public override func setupUI() {
         super.setupUI()
-        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty")!, yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.listView!)
+        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty"), yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.listView!)
         let _ = listIndicator
         if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
             self.listView?.mj_header = nil
@@ -140,9 +140,9 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
         }
     }
 
-    public override func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval, completion: () -> Void) {
+    public override func showTip(tip: String, view: UIView, offset: CGPoint, completion: () -> Void) {
         endListRefresh()
-        super.showTip(tip, view: view, hideAfterDelay: hideAfterDelay, completion: completion)
+        super.showTip(tip, view: view, offset: offset, completion: completion)
     }
    
     deinit {

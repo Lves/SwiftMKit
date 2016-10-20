@@ -1,6 +1,0 @@
-framework module NetworkEncrypt {
-  umbrella header "NetworkEncrypt.h"
-
-  export *
-  module * { export * }
-}

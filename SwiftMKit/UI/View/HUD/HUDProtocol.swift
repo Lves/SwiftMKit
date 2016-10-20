@@ -15,11 +15,8 @@ struct HUDConstant {
 }
 
 public protocol HUDProtocol : class {
-    func showHUDAddedTo(view: UIView, animated: Bool, text:String?)
-    func showHUDAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?)
-    func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay: NSTimeInterval)
-    func showHUDTextAddedTo(view: UIView, animated: Bool, text:String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void))
-    func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, hideAfterDelay: NSTimeInterval, completion: (() -> Void))
+    func showHUDAddedTo(view: UIView, animated: Bool, text: String?)
+    func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void))
     func showHUDProgressAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
     func showHUDProgressAnnularDeterminateAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
     func showHUDProgressHorizontalBarAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)

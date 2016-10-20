@@ -62,7 +62,7 @@ public class BaseKitViewController : UIViewController {
     
     public func setupUI() {
         viewModel?.viewController = self
-        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty")!, yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.view)
+        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty"), yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.view)
         setupNavigation()
         setupNotification()
         bindingData()
@@ -91,10 +91,13 @@ public class BaseKitViewController : UIViewController {
 public extension UIViewController {
     
     public func showTip(tip: String, completion : () -> Void = {}) {
-        showTip(tip, view: self.view, hideAfterDelay: HUDConstant.HideTipAfterDelay, completion: completion)
+        showTip(tip, view: self.view, completion: completion)
     }
-    public func showTip(tip: String, view: UIView, hideAfterDelay: NSTimeInterval = HUDConstant.HideTipAfterDelay, completion : () -> Void = {}) {
-        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, hideAfterDelay: hideAfterDelay, completion: completion)
+    public func showTip(tip: String, image: UIImage?, completion : () -> Void = {}) {
+        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
+    }
+    public func showTip(tip: String, view: UIView, offset: CGPoint = CGPointZero, completion : () -> Void = {}) {
+        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
     }
     public func showLoading(text: String = "", detailText: String = "") {
         showLoading(text, detailText: detailText, view: self.view)

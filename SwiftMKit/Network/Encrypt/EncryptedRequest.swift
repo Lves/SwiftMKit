@@ -24,7 +24,7 @@ public class EncryptedRequest: NSObject {
     private var encryptedProgress : NSProgress?
     private var totalBytesReceived: Int64 = 0
     var uploadProgress: ((Int64, Int64, Int64) -> Void)!
-    static var disableEncrypt = false;    
+    static var disableEncrypt = false
     public var progress : NSProgress? {
         get {
             if encrypt {

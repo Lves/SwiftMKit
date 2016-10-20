@@ -105,6 +105,7 @@ class PX500PhotoDetailApiData: PX500NetApi {
 }
 
 
+
 class BuDeJieADApiData: BuDeJieNetApi {
     var ads: [BuDeJieADModel]?
     override init() {
