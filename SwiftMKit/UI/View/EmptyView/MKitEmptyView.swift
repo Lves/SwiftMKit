@@ -15,7 +15,7 @@ public class MKitEmptyView: NSObject {
             self.view.lblTitle.text = title
         }
     }
-    public var image: UIImage {
+    public var image: UIImage? {
         didSet {
             self.view.imgView.image = image
         }
@@ -24,7 +24,7 @@ public class MKitEmptyView: NSObject {
     public var view: BaseKitEmptyView
     public var inView: UIView
     
-    public init(title: String, image: UIImage, yOffset: CGFloat, view: BaseKitEmptyView, inView: UIView) {
+    public init(title: String, image: UIImage?, yOffset: CGFloat, view: BaseKitEmptyView, inView: UIView) {
         self.title = title
         self.image = image
         self.yOffset = yOffset

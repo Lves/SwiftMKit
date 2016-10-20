@@ -9,6 +9,10 @@
 import Foundation
 import MBProgressHUD
 
+public enum MBHUDViewStyle: Int {
+    case Default, Black
+}
+
 public class MBHUDView: HUDProtocol{
     struct InnerConstant {
         static let TitleToDetailTextLenght: Int = 10
@@ -17,6 +21,8 @@ public class MBHUDView: HUDProtocol{
     private var indicatorShowed: Bool = false
     public weak var showingHUD: MBProgressHUD?
     public static var shared: MBHUDView = MBHUDView()
+    public var style: MBHUDViewStyle = .Default
+    
     
     public func showHUDAddedTo(view: UIView, animated: Bool, text: String?) {
         showHUDAddedTo(view, animated: animated, text: text, detailText: nil)
@@ -25,6 +31,7 @@ public class MBHUDView: HUDProtocol{
         indicatorShowed = true
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        setHUDStyle(hud, style: style)
         if let indicateString = text {
             hud.label.text = indicateString
         }
@@ -38,6 +45,8 @@ public class MBHUDView: HUDProtocol{
         showingHUD?.hideAnimated(false)
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        setHUDStyle(hud, style: style)
+        
         hud.mode = .Text
         if let offset = offset {
             hud.offset = offset
@@ -105,6 +114,16 @@ public class MBHUDView: HUDProtocol{
             } else {
                 hud.label.text = indicateString
             }
+        }
+    }
+    public func setHUDStyle(hud: MBProgressHUD, style: MBHUDViewStyle) {
+        switch style {
+        case .Default:
+            break
+        case .Black:
+            hud.bezelView.color = UIColor.blackColor().colorWithAlphaComponent(0.9)
+            hud.bezelView.style = .SolidColor
+            hud.contentColor = UIColor.whiteColor()
         }
     }
     public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
