@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetApiClient.shared.startNotifyNetworkStatus()
         EncryptNetworkManager.shared.initEncryptFramework(GlobalConfig.AppId, vId: UIApplication.sharedApplication().bundleVersion)
         // debug时可显示加密库的log
-        EncryptedNetworkManager.setShowLog(true)
+//        EncryptedNetworkManager.setShowLog(true)
         return true
     }
 
