@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import NetworkEncrypt
+//import NetworkEncrypt
 
 public class EncryptedRequest: NSObject {
     
@@ -78,7 +78,7 @@ public class EncryptedRequest: NSObject {
     
     @objc private func cancelRequest(task: NSURLSessionTask) {
         if task.isEqual(self.encryptedTask) {
-            EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask);
+//            EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask);
         }
     }
     
@@ -95,7 +95,7 @@ public class EncryptedRequest: NSObject {
                 if let newState = newStateNumber {
                     let enumState = NSURLSessionTaskState(rawValue: newState.integerValue)
                     if enumState == .Canceling {
-                        EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask)
+//                        EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask)
                     }
                 }
             }
@@ -119,13 +119,13 @@ public class EncryptedRequest: NSObject {
         -> Self
     {
         if encrypt {
-            EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
-                self.dealWithSpecialCode(error, data: data);
-                self.encryptedResponse = response
-                let reslult = self.getJSONResult(data, response: response, error: error, options: options);
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:reslult);
-                completionHandler(aResponse);
-            })
+//            EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
+//                self.dealWithSpecialCode(error, data: data);
+//                self.encryptedResponse = response
+//                let reslult = self.getJSONResult(data, response: response, error: error, options: options);
+//                let aResponse = Response.init(request: self.request, response: response, data: data, result:reslult);
+//                completionHandler(aResponse);
+//            })
             return self;
         } else {
             startMonitorInfo()
@@ -145,13 +145,13 @@ public class EncryptedRequest: NSObject {
         -> Self
     {
         if encrypt {
-            EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
-                self.dealWithSpecialCode(error, data: data);
-                self.encryptedResponse = response
-                let result = self.getStringResult(data, response: response, error: error, encoding: encoding);
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:result);
-                completionHandler(aResponse);
-            })
+//            EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
+//                self.dealWithSpecialCode(error, data: data);
+//                self.encryptedResponse = response
+//                let result = self.getStringResult(data, response: response, error: error, encoding: encoding);
+//                let aResponse = Response.init(request: self.request, response: response, data: data, result:result);
+//                completionHandler(aResponse);
+//            })
             return self
         } else {
             startMonitorInfo()
@@ -170,13 +170,13 @@ public class EncryptedRequest: NSObject {
         -> Self
     {
         if encrypt {
-            EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
-                self.dealWithSpecialCode(error, data: data);
-                self.encryptedResponse = response
-                let result = self.getDataResult(data, response: response, error: error);
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:result);
-                completionHandler(aResponse);
-            })
+//            EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
+//                self.dealWithSpecialCode(error, data: data);
+//                self.encryptedResponse = response
+//                let result = self.getDataResult(data, response: response, error: error);
+//                let aResponse = Response.init(request: self.request, response: response, data: data, result:result);
+//                completionHandler(aResponse);
+//            })
             return self
         } else {
             startMonitorInfo()
@@ -253,7 +253,7 @@ public class EncryptedRequest: NSObject {
     
     public func cancel() {
         if encrypt {
-            EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask)
+//            EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask)
         } else {
             self.aRequest?.task.cancel()
         }
@@ -264,9 +264,9 @@ public class EncryptedRequest: NSObject {
             return
         }
         
-        if error!.code == StatusCodeDisableEncrypt {
-            EncryptNetworkManager.shared.disableEncrypt();
-        }
+//        if error!.code == StatusCodeDisableEncrypt {
+//            EncryptNetworkManager.shared.disableEncrypt();
+//        }
     }
     
     // MARK:
@@ -285,11 +285,11 @@ public class EncryptedRequest: NSObject {
     // MARK: monitor
     
     private func startMonitorInfo() {
-        self.requestId = EncryptedNetworkManager.sharedEncryptedNetworkManager().requestId()
-        EncryptedNetworkManager.sharedEncryptedNetworkManager().setStartTime(NSDate(), forRequestId: self.requestId!)
+//        self.requestId = EncryptedNetworkManager.sharedEncryptedNetworkManager().requestId()
+//        EncryptedNetworkManager.sharedEncryptedNetworkManager().setStartTime(NSDate(), forRequestId: self.requestId!)
     }
     
     private func endMonitorInfo() {
-        EncryptedNetworkManager.sharedEncryptedNetworkManager().setEndTime(NSDate(), forRequestId: self.requestId!)
+//        EncryptedNetworkManager.sharedEncryptedNetworkManager().setEndTime(NSDate(), forRequestId: self.requestId!)
     }
 }

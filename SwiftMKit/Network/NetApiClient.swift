@@ -11,7 +11,7 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 import ReachabilitySwift
-import NetworkEncrypt
+//import NetworkEncrypt
 
 public enum NetworkStatus: CustomStringConvertible {
     

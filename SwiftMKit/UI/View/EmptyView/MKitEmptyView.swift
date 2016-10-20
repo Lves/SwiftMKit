@@ -18,6 +18,7 @@ public class MKitEmptyView: NSObject {
     public var image: UIImage? {
         didSet {
             self.view.imgView.image = image
+            self.view.imgView.size = image?.size ?? CGSizeZero
         }
     }
     public var yOffset: CGFloat

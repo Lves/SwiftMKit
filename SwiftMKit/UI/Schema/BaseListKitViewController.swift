@@ -59,7 +59,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
     }
     public override func setupUI() {
         super.setupUI()
-        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty"), yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.listView!)
+        emptyView?.inView = self.listView!
         let _ = listIndicator
         if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
             self.listView?.mj_header = nil
