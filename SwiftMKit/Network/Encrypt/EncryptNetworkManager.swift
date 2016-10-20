@@ -24,12 +24,12 @@ public class EncryptNetworkManager: NSObject {
         EncryptedNetworkManager.sharedEncryptedNetworkManager().setAppId(appId, vId: vId)
     }
     
-    public func disableEncrypt() {
+    func disableEncrypt() {
         EncryptedRequest.disableEncrypt = true;
-        self.encryptedTimer = NSTimer(timeInterval: DisableEncryptTime, target: self, selector: #selector(enableEncrypt), userInfo: nil, repeats: false);
+        self.encryptedTimer = NSTimer(timeInterval: DisableEncryptTime, target: self, selector: #selector(EncryptNetworkManager.enableEncrypt), userInfo: nil, repeats: false);
     }
     
-    @objc private func enableEncrypt() {
+    func enableEncrypt() {
         EncryptedRequest.disableEncrypt = false;
         self.encryptedTimer?.invalidate();
         self.encryptedTimer = nil;
