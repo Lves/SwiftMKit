@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import ReactiveCocoa
 
 public class MKitEmptyView: NSObject {
     public var title: String {
@@ -21,6 +22,7 @@ public class MKitEmptyView: NSObject {
             self.view.imgView.size = image?.size ?? CGSizeZero
         }
     }
+    public var showed = MutableProperty<Bool>(false)
     public var yOffset: CGFloat
     public var view: BaseKitEmptyView
     public var inView: UIView
@@ -45,9 +47,11 @@ public class MKitEmptyView: NSObject {
             make.centerY.equalTo(self.inView).offset(self.yOffset)
         }
         DDLogInfo("Show Empty View")
+        showed.value = true
     }
     public func hide() {
         view.removeFromSuperview()
         DDLogInfo("Hide Empty View")
+        showed.value = false
     }
 }
