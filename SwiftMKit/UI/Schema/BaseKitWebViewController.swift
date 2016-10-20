@@ -37,6 +37,8 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public var progressView : UIProgressView?
     public var webViewProgress: WebViewProgress = WebViewProgress()
     
+    public var disableUserSelect = false
+    public var disableLongTouch = false
     public var showNavigationBarTopLeftCloseButton: Bool = true
     public var shouldAllowRirectToUrlInView: Bool = true
     public var showNavRightToolPannelItem: Bool = true {
@@ -149,6 +151,12 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         webViewBridge?.indicator.stopAnimating()
         if self.title == nil {
             self.title = webView.stringByEvaluatingJavaScriptFromString("document.title")
+        }
+        if disableUserSelect {
+            webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitUserSelect='none';")
+        }
+        if disableLongTouch {
+            webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitTouchCallout='none';")
         }
 
         refreshNavigationBarTopLeftCloseButton()
