@@ -183,12 +183,12 @@ public class GestureTentacleView: UIView {
         }
         // println("drawRect\(touchedArray)")
         
-        for i in 0..<touchesArray.count {
+        for var i in 0..<touchesArray.count {
             let context: CGContextRef = UIGraphicsGetCurrentContext()!
             
             if(touchesArray[i]["num"] == nil){
                 touchesArray.removeAtIndex(i)
-                //i = i-1;
+                i = i-1
                 continue
             }
             
