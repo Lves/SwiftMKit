@@ -184,6 +184,7 @@ public class GestureTentacleView: UIView {
         // println("drawRect\(touchedArray)")
         
         for var i in 0..<touchesArray.count {
+            if i >= touchedArray.count { break }
             let context: CGContextRef = UIGraphicsGetCurrentContext()!
             
             if(touchesArray[i]["num"] == nil){
