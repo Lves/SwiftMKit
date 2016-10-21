@@ -28,6 +28,7 @@ public class MBHUDView: HUDProtocol{
         showHUDAddedTo(view, animated: animated, text: text, detailText: nil)
     }
     public func showHUDAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?) {
+        print("show: \(view)")
         indicatorShowed = true
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
@@ -42,6 +43,7 @@ public class MBHUDView: HUDProtocol{
         showingHUD = hud
     }
     public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void)) {
+        print("show: \(view)")
         indicatorShowed = false
         showingHUD?.hideAnimated(false)
         MBProgressHUD.hideHUDForView(view, animated: animated)
@@ -131,17 +133,15 @@ public class MBHUDView: HUDProtocol{
         }
     }
     public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
+        print("hide: \(view)")
         showingHUD = nil
         indicatorShowed = false
         return MBProgressHUD.hideHUDForView(view, animated: animated)
     }
     public func hideIndicatorHUDForView(view: UIView, animated: Bool) -> Bool {
+        print("hide: \(view)")
         showingHUD = nil
-        if indicatorShowed {
-            indicatorShowed = false
-            return MBProgressHUD.hideHUDForView(view, animated: animated)
-        } else {
-            return false
-        }
+        indicatorShowed = false
+        return MBProgressHUD.hideHUDForView(view, animated: animated)
     }
 }
