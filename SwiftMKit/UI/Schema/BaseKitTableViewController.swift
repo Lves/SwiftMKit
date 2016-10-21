@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 import Alamofire
-import MBProgressHUD
 import ObjectiveC
 import MJRefresh
 

@@ -38,6 +38,7 @@ public class MBHUDView: HUDProtocol{
         if let detailString = detailText {
             hud.detailsLabel.text = detailString
         }
+        hud.button.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         showingHUD = hud
     }
     public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void)) {
@@ -62,6 +63,7 @@ public class MBHUDView: HUDProtocol{
             hud.customView = UIImageView(image: image)
             hud.square = true
         }
+        hud.button.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         hud.hideAnimated(animated, afterDelay: hideAfterDelay)
         showingHUD = hud
         Async.main(after: hideAfterDelay, block: completion)
@@ -84,6 +86,8 @@ public class MBHUDView: HUDProtocol{
             if let title = cancelTitle {
                 showingHUD?.button.setTitle(title, forState: .Normal)
                 showingHUD?.button.addTarget(progressObject, action: #selector(NSProgress.cancel), forControlEvents: .TouchUpInside)
+            } else {
+                showingHUD?.button.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             }
         }
     }
