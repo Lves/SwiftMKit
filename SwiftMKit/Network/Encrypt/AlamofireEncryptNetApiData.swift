@@ -63,7 +63,7 @@ public class AlamofireEncryptNetApiData: NetApiData {
                     DDLogError("请求失败: \(wself.url)")
                     DDLogError("\(error)")
                     
-                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as! String)
+                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as? String ?? "网络错误")
                     sink.sendFailed(err)
                 }
             }
@@ -111,7 +111,7 @@ public class AlamofireEncryptNetApiData: NetApiData {
                     DDLogError("请求失败: \(wself.url)")
                     DDLogError("\(error)")
                     
-                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as! String)
+                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as? String ?? "网络错误")
                     sink.sendFailed(err)
                 }
             }
@@ -161,7 +161,7 @@ public class AlamofireEncryptNetApiData: NetApiData {
                     DDLogError("请求失败: \(wself.url)")
                     DDLogError("\(error)")
                     
-                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as! String)
+                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as? String ?? "网络错误")
                     sink.sendFailed(err)
                 }
             }
@@ -210,7 +210,7 @@ public class AlamofireEncryptNetApiData: NetApiData {
                     DDLogError("请求失败: \(wself.url)")
                     DDLogError("\(error)")
                     
-                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as! String)
+                    let err = error is NetError ? error as! NetError : NetError(statusCode: error.code, message: error.userInfo[NSLocalizedFailureReasonErrorKey] as? String ?? "网络错误")
                     sink.sendFailed(err)
                 }
             }

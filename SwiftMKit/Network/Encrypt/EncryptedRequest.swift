@@ -218,10 +218,18 @@ public class EncryptedRequest: NSObject {
     
     private func getJSONResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?, options: NSJSONReadingOptions = .AllowFragments) -> Result<AnyObject, NSError> {
         guard error == nil else {
-            
-            
-            
-            
+            if error?.code == StatusCodeForceUpgradeApp {
+                var sussessData:[String: AnyObject];
+                sussessData["statusCode"] = error?.code
+                sussessData["errorMessage"] = kNetworkMessage
+                var data = [String: AnyObject]()
+                data["versionCode"] = error?.userInfo["versionCode"] as? String ?? ""
+                data["downloadUrl"] = error?.userInfo["downloadUrl"] as? String ?? ""
+                data["updateMessage"] = error?.userInfo["updateMessage"] as? String ?? ""
+                data["forceUpgrade"] = error?.userInfo["forceUpgrade"] as? Bool ?? false
+                sussessData["data"] = data
+                return .Success(successData)
+            }
             return .Failure(self.error(error?.code, failureReason: kNetworkMessage))
         }
         
