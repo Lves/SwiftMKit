@@ -59,6 +59,7 @@ public class UpgradeApp : NSObject {
                 exit(0)
             }
         }))
+        
         if let vc = UIViewController.topController {
             if alertController != nil {
                 if forceUpgrade {
@@ -68,7 +69,30 @@ public class UpgradeApp : NSObject {
                 }
             }
             alertController = alert
+            if let navVC = vc as? UINavigationController {
+                navVC.topViewController?.showAlert(alert, completion: nil)
+            }
             vc.showAlert(alert, completion: nil)
         }
+    }
+    
+    private static func getViewController() -> UIViewController? {
+        var window = UIApplication.sharedApplication().keyWindow
+        if window?.windowLevel != UIWindowLevelNormal {
+            let windows = UIApplication.sharedApplication().windows
+            for tmpWin in windows {
+                if tmpWin.windowLevel == UIWindowLevelNormal {
+                    window = tmpWin
+                    break
+                }
+            }
+        }
+        
+        let frontView = window?.subviews.last
+        let nextResponder = frontView?.nextResponder()
+        if nextResponder?.isKindOfClass(UIViewController.self) ?? false {
+            return nextResponder as? UIViewController
+        }
+        return window?.rootViewController
     }
 }

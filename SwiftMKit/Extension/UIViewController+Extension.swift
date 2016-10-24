@@ -13,26 +13,38 @@ import CocoaLumberjack
 public extension UIViewController {
     public static var topController: UIViewController? {
         get {
-            if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-                if let nav = topController as? UINavigationController {
-                    if let vc = nav.viewControllers.last {
-                        topController = vc
-                    }
-                } else if let tab = topController as? UITabBarController {
-                    if let nav = tab.selectedViewController as? UINavigationController {
-                        if let vc = nav.viewControllers.last {
-                            topController = vc
-                        }
-                    } else {
-                        topController = tab
-                    }
-                }
-                return topController
+            var window = UIApplication.sharedApplication().keyWindow
+            if window?.windowLevel != UIWindowLevelNormal {
+                window = UIApplication.sharedApplication().windows.filter { $0.windowLevel == UIWindowLevelNormal }.first ?? window
             }
-            return nil
+            
+            let frontView = window?.subviews.last
+            let nextResponder = frontView?.nextResponder()
+            if let vc = nextResponder as? UIViewController {
+                return vc
+            }
+            return window?.rootViewController
+            
+//            if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+//                while let presentedViewController = topController.presentedViewController {
+//                    topController = presentedViewController
+//                }
+//                if let nav = topController as? UINavigationController {
+//                    if let vc = nav.viewControllers.last {
+//                        topController = vc
+//                    }
+//                } else if let tab = topController as? UITabBarController {
+//                    if let nav = tab.selectedViewController as? UINavigationController {
+//                        if let vc = nav.viewControllers.last {
+//                            topController = vc
+//                        }
+//                    } else {
+//                        topController = tab
+//                    }
+//                }
+//                return topController
+//            }
+//            return nil
         }
     }
 }
