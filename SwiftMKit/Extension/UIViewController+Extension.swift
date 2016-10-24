@@ -21,6 +21,15 @@ public extension UIViewController {
             let frontView = window?.subviews.last
             let nextResponder = frontView?.nextResponder()
             if let vc = nextResponder as? UIViewController {
+                if let nav = vc as? UINavigationController {
+                    return nav.topViewController
+                } else if let tab = vc as? UITabBarController {
+                    if let nav = tab.selectedViewController as? UINavigationController {
+                        return nav.topViewController
+                    } else {
+                        return tab.selectedViewController
+                    }
+                }
                 return vc
             }
             return window?.rootViewController

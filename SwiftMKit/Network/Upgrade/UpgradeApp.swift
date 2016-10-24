@@ -42,7 +42,7 @@ public class UpgradeApp : NSObject {
             }
             DDLogError("[UpgradeApp] 下载地址错误: \(downloadUrl)")
             let errorAlert = UIAlertController(title: "抱歉", message: "下载地址不正确，请稍后再试", preferredStyle: .Alert)
-            errorAlert.addAction(UIAlertAction(title: "我知道了", style: .Cancel, handler: { _ in
+            errorAlert.addAction(UIAlertAction(title: forceUpgrade ? "退出" : "我知道了", style: .Cancel, handler: { _ in
                 alertController = nil
                 if forceUpgrade {
                     exit(0)
@@ -53,7 +53,7 @@ public class UpgradeApp : NSObject {
                 vc.showAlert(errorAlert, completion: nil)
             }
             })
-        alert.addAction(UIAlertAction(title: "我知道了", style: .Cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: forceUpgrade ? "退出" : "我知道了", style: .Cancel, handler: { _ in
             alertController = nil
             if forceUpgrade {
                 exit(0)
@@ -69,9 +69,6 @@ public class UpgradeApp : NSObject {
                 }
             }
             alertController = alert
-            if let navVC = vc as? UINavigationController {
-                navVC.topViewController?.showAlert(alert, completion: nil)
-            }
             vc.showAlert(alert, completion: nil)
         }
     }
