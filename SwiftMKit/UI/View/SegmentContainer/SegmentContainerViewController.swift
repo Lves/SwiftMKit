@@ -80,8 +80,9 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         self.resetChildControllerView()
     }
     
-    public func addSegmentViewControllers(childController: [UIViewController]) {
+    public func addSegmentViewControllers(childController: [UIViewController], selectedSegment: Int = 0) {
         _viewControllers = childController
+        _selectedSegment = selectedSegment
     }
     
     private func resetChildControllerView(){
@@ -97,6 +98,8 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             if index == selectedSegment && !(scrollView.subviews.contains(vc.view)) {
                 scrollView.addSubview(vc.view)
             }
+            scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: false)
+
         }
         self.resetSubUIFrame()
     }
