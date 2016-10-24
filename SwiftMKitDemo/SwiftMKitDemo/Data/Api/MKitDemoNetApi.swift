@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class PX500NetApi: AlamofireNetApiData {
+class PX500NetApi: AlamofireEncryptNetApiData {
     static let baseQuery = ["consumer_key": PX500Config.consumerKey]
     private var _query: [String: AnyObject] = [:]
     override var query: [String: AnyObject] {
@@ -37,7 +37,7 @@ class PX500NetApi: AlamofireNetApiData {
     }
 }
 
-class BuDeJieNetApi: AlamofireNetApiData {
+class BuDeJieNetApi: AlamofireEncryptNetApiData {
     static let baseUrl = BuDeJieConfig.urlHost + "/api"
     private var _url: String = ""
     override var url: String {

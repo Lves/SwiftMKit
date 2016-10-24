@@ -60,19 +60,20 @@ public class EncryptedRequest: NSObject {
     
     init(encrypt : Bool, URLRequest: NSURLRequest) {
         if EncryptedRequest.disableEncrypt {
-            self.encrypt = false;
+            self.encrypt = false
         } else {
             self.encrypt = encrypt
         }
-        
+        self.encrypt = false
         if self.encrypt {
             self.request = URLRequest
+            let tempRequest = NSURLRequest(URL: NSURL.init(string: "test")!)
+            self.encryptedTask = NSURLSession.sharedSession().dataTaskWithRequest(tempRequest)
+            self.encryptedTask?.resume()
         } else {
             self.aRequest = Alamofire.request(URLRequest)
         }
         super.init()
-        self.encryptedTask = NSURLSession.sharedSession().dataTaskWithRequest(self.request);
-        self.encryptedTask?.resume()
         if self.encrypt {
             observerURLSessionTaskState()
         }
@@ -80,7 +81,7 @@ public class EncryptedRequest: NSObject {
     
     @objc private func cancelRequest(task: NSURLSessionTask) {
         if task.isEqual(self.encryptedTask) {
-            EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask);
+            EncryptedNetworkManager.sharedEncryptedNetworkManager().cancleReuqestWithTask(self.encryptedTask)
         }
     }
     
@@ -122,13 +123,13 @@ public class EncryptedRequest: NSObject {
     {
         if encrypt {
             EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
-                self.dealWithSpecialCode(error, data: data);
+                self.dealWithSpecialCode(error, data: data)
                 self.encryptedResponse = response
-                let reslult = self.getJSONResult(data, response: response, error: error, options: options);
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:reslult);
-                completionHandler(aResponse);
+                let reslult = self.getJSONResult(data, response: response, error: error, options: options)
+                let aResponse = Response.init(request: self.request, response: response, data: data, result:reslult)
+                completionHandler(aResponse)
             })
-            return self;
+            return self
         } else {
             startMonitorInfo()
             let completionWithTimeHandler: Response<AnyObject, NSError> -> Void = { tempResponse in
@@ -148,11 +149,11 @@ public class EncryptedRequest: NSObject {
     {
         if encrypt {
             EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
-                self.dealWithSpecialCode(error, data: data);
+                self.dealWithSpecialCode(error, data: data)
                 self.encryptedResponse = response
-                let result = self.getStringResult(data, response: response, error: error, encoding: encoding);
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:result);
-                completionHandler(aResponse);
+                let result = self.getStringResult(data, response: response, error: error, encoding: encoding)
+                let aResponse = Response.init(request: self.request, response: response, data: data, result:result)
+                completionHandler(aResponse)
             })
             return self
         } else {
@@ -173,11 +174,11 @@ public class EncryptedRequest: NSObject {
     {
         if encrypt {
             EncryptedNetworkManager.sharedEncryptedNetworkManager().handlerRequest(self.request, task: self.encryptedTask, complete: { (data, response, error) in
-                self.dealWithSpecialCode(error, data: data);
+                self.dealWithSpecialCode(error, data: data)
                 self.encryptedResponse = response
-                let result = self.getDataResult(data, response: response, error: error);
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:result);
-                completionHandler(aResponse);
+                let result = self.getDataResult(data, response: response, error: error)
+                let aResponse = Response.init(request: self.request, response: response, data: data, result:result)
+                completionHandler(aResponse)
             })
             return self
         } else {
@@ -192,7 +193,10 @@ public class EncryptedRequest: NSObject {
     }
     
     private func getStringResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?, encoding: NSStringEncoding?) -> Result<String, NSError> {
-        guard error == nil else { return .Failure(self.error(error?.code, failureReason: kNetworkMessage)) }
+        guard error == nil else {
+            let statusCode = error?.code ?? 0
+            return .Failure(self.error(statusCode, failureReason: kNetworkMessage))
+        }
         
         if let response = response where response.statusCode == 204 { return .Success("") }
         
@@ -219,7 +223,7 @@ public class EncryptedRequest: NSObject {
     private func getJSONResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?, options: NSJSONReadingOptions = .AllowFragments) -> Result<AnyObject, NSError> {
         guard error == nil else {
             if error?.code == StatusCodeForceUpgradeApp {
-                var sussessData:[String: AnyObject];
+                var sussessData = [String: AnyObject]()
                 sussessData["statusCode"] = error?.code
                 sussessData["errorMessage"] = kNetworkMessage
                 var data = [String: AnyObject]()
@@ -228,9 +232,10 @@ public class EncryptedRequest: NSObject {
                 data["updateMessage"] = error?.userInfo["updateMessage"] as? String ?? ""
                 data["forceUpgrade"] = error?.userInfo["forceUpgrade"] as? Bool ?? false
                 sussessData["data"] = data
-                return .Success(successData)
+                return .Success(sussessData)
             }
-            return .Failure(self.error(error?.code, failureReason: kNetworkMessage))
+            let statusCode = error?.code ?? 0
+            return .Failure(self.error(statusCode, failureReason: kNetworkMessage))
         }
         
         if let response = response where response.statusCode == 204 { return .Success(NSNull()) }
@@ -243,12 +248,15 @@ public class EncryptedRequest: NSObject {
             let JSON = try NSJSONSerialization.JSONObjectWithData(validData, options: options)
             return .Success(JSON)
         } catch {
-            return .Failure(self.error(error?.code, failureReason: kNetworkMessage))
+            return .Failure(self.error(Error.Code.JSONSerializationFailed.rawValue, failureReason: kNetworkMessage))
         }
     }
     
     private func getDataResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?) -> Result<NSData, NSError> {
-        guard error == nil else { return .Failure(self.error(error?.code, failureReason: kNetworkMessage)) }
+        guard error == nil else {
+            let statusCode = error?.code ?? 0
+            return .Failure(self.error(statusCode, failureReason: kNetworkMessage))
+        }
         
         if let response = response where response.statusCode == 204 { return .Success(NSData()) }
         
@@ -277,7 +285,7 @@ public class EncryptedRequest: NSObject {
         }
         
         if error!.code == StatusCodeDisableEncrypt {
-            EncryptNetworkManager.shared.disableEncrypt();
+            EncryptNetworkManager.shared.disableEncrypt()
         }
     }
     
