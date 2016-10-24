@@ -22,6 +22,12 @@ public class MKitEmptyView: NSObject {
             self.view.imgView.size = image?.size ?? CGSizeZero
         }
     }
+    public var titleLabel: UILabel {
+        return self.view.lblTitle
+    }
+    public var imageView: UIImageView {
+        return self.view.imgView
+    }
     public var showed = MutableProperty<Bool>(false)
     public var yOffset: CGFloat
     public var view: BaseKitEmptyView
