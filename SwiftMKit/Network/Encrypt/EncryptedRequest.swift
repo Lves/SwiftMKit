@@ -61,12 +61,12 @@ public class EncryptedRequest: NSObject {
             self.encrypt = false;
         } else {
             self.encrypt = encrypt
-            if encrypt {
-                self.request = URLRequest
-                self.aRequest = nil
-            } else {
-                self.aRequest = Alamofire.request(URLRequest)
-            }
+        }
+        
+        if self.encrypt {
+            self.request = URLRequest
+        } else {
+            self.aRequest = Alamofire.request(URLRequest)
         }
         super.init()
         self.encryptedTask = NSURLSession.sharedSession().dataTaskWithRequest(self.request);
