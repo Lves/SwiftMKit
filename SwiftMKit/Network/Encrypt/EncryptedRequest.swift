@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import NetworkEncrypt
 
+let kNetworkMessage = "网络错误"
+
 public class EncryptedRequest: NSObject {
     
     // MARK: property
@@ -190,13 +192,12 @@ public class EncryptedRequest: NSObject {
     }
     
     private func getStringResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?, encoding: NSStringEncoding?) -> Result<String, NSError> {
-        guard error == nil else { return .Failure(error!) }
+        guard error == nil else { return .Failure(self.error(error?.code, failureReason: kNetworkMessage)) }
         
         if let response = response where response.statusCode == 204 { return .Success("") }
         
         guard let validData = data else {
-            let failureReason = "String could not be serialized. Input data was nil."
-            return .Failure(self.error(Error.Code.StringSerializationFailed.rawValue, failureReason: failureReason))
+            return .Failure(self.error(Error.Code.StringSerializationFailed.rawValue, failureReason: kNetworkMessage))
         }
         
         var convertedEncoding = encoding
@@ -211,37 +212,40 @@ public class EncryptedRequest: NSObject {
         if let string = String(data: validData, encoding: actualEncoding) {
             return .Success(string)
         } else {
-            let failureReason = "String could not be serialized with encoding: \(actualEncoding)"
-            return .Failure(self.error(Error.Code.StringSerializationFailed.rawValue, failureReason: failureReason))
+            return .Failure(self.error(Error.Code.StringSerializationFailed.rawValue, failureReason: kNetworkMessage))
         }
     }
     
     private func getJSONResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?, options: NSJSONReadingOptions = .AllowFragments) -> Result<AnyObject, NSError> {
-        guard error == nil else { return .Failure(error!) }
+        guard error == nil else {
+            
+            
+            
+            
+            return .Failure(self.error(error?.code, failureReason: kNetworkMessage))
+        }
         
         if let response = response where response.statusCode == 204 { return .Success(NSNull()) }
         
         guard let validData = data where validData.length > 0 else {
-            let failureReason = "JSON could not be serialized. Input data was nil or zero length."
-            return .Failure(self.error(Error.Code.JSONSerializationFailed.rawValue, failureReason: failureReason))
+            return .Failure(self.error(Error.Code.JSONSerializationFailed.rawValue, failureReason: kNetworkMessage))
         }
         
         do {
             let JSON = try NSJSONSerialization.JSONObjectWithData(validData, options: options)
             return .Success(JSON)
         } catch {
-            return .Failure(error as NSError)
+            return .Failure(self.error(error?.code, failureReason: kNetworkMessage))
         }
     }
     
     private func getDataResult(data: NSData?, response: NSHTTPURLResponse?, error: NSError?) -> Result<NSData, NSError> {
-        guard error == nil else { return .Failure(error!) }
+        guard error == nil else { return .Failure(self.error(error?.code, failureReason: kNetworkMessage)) }
         
         if let response = response where response.statusCode == 204 { return .Success(NSData()) }
         
         guard let validData = data else {
-            let failureReason = "Data could not be serialized. Input data was nil."
-            return .Failure(self.error(Error.Code.DataSerializationFailed.rawValue, failureReason: failureReason))
+            return .Failure(self.error(Error.Code.DataSerializationFailed.rawValue, failureReason: kNetworkMessage))
         }
         
         return .Success(validData)
