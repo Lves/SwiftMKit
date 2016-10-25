@@ -64,7 +64,7 @@ public class EncryptedRequest: NSObject {
         } else {
             self.encrypt = encrypt
         }
-        self.encrypt = false
+        
         if self.encrypt {
             self.request = URLRequest
             let tempRequest = NSURLRequest(URL: NSURL.init(string: "test")!)
@@ -227,10 +227,10 @@ public class EncryptedRequest: NSObject {
                 sussessData["statusCode"] = error?.code
                 sussessData["errorMessage"] = kNetworkMessage
                 var data = [String: AnyObject]()
-                data["versionCode"] = error?.userInfo["versionCode"] as? String ?? ""
-                data["downloadUrl"] = error?.userInfo["downloadUrl"] as? String ?? ""
-                data["updateMessage"] = error?.userInfo["updateMessage"] as? String ?? ""
-                data["forceUpgrade"] = error?.userInfo["forceUpgrade"] as? Bool ?? false
+                data["versionCode"] = error?.userInfo["versionCode"]
+                data["downloadUrl"] = error?.userInfo["downloadUrl"]
+                data["updateMessage"] = error?.userInfo["updateMessage"]
+                data["forceUpgrade"] = error?.userInfo["forceUpgrade"]
                 sussessData["data"] = data
                 return .Success(sussessData)
             }
