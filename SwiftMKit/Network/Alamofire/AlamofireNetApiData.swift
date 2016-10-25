@@ -187,8 +187,10 @@ public class AlamofireNetApiData: NetApiData {
     public override func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in
+            let wself  = self as! UploadNetApiProtocol
+            let uploadData = NetApiClient.createBodyWithParameters(wself.query, filePathKey: wself.uploadDataName, mimetype: wself.uploadDataMimeType ?? "", uploadData: wself.uploadData!)
             let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.request(urlRequest)
+            let request = Alamofire.upload(urlRequest, data: uploadData)
             self.request = request
             self.indicator?.bindTask(request.task)
             let timeBegin = NSDate()
