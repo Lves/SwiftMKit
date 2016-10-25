@@ -74,4 +74,40 @@ public extension UIImage {
         return newImage
         
     }
+    
+    
+    /**
+     压缩图片
+     */
+    func restrict(maxWidth maxWidth: CGFloat, maxHeight: CGFloat, maxSize: Int) -> NSData? {
+        //先调整分辨率
+        var newSize = CGSize(width: self.size.width, height: self.size.height)
+        
+        let tempHeight = newSize.height / maxHeight
+        let tempWidth  = newSize.width / maxWidth
+        
+        if tempWidth > 1.0 && tempWidth > tempHeight {
+            newSize = CGSize(width: maxWidth, height: self.size.height / tempWidth)
+        }
+        else if tempHeight > 1.0 && tempWidth < tempHeight {
+            newSize = CGSize(width: self.size.width / tempHeight, height: maxHeight)
+        }
+        
+        UIGraphicsBeginImageContext(newSize)
+        self.drawAsPatternInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        
+        var quality: CGFloat = 1.0
+        //先判断当前质量是否满足要求，不满足再进行压缩
+        if let finallImageData = UIImageJPEGRepresentation(newImage, 1.0) {
+            let size = Int(Int64(finallImageData.length ?? 0))
+            if size <= maxSize {
+                return finallImageData
+            }
+            quality = CGFloat(maxSize) / CGFloat(size)
+        }
+        return UIImageJPEGRepresentation(newImage, quality)
+    }
 }
