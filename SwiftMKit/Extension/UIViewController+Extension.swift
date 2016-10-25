@@ -20,36 +20,32 @@ public extension UIViewController {
             
             let frontView = window?.subviews.last
             let nextResponder = frontView?.nextResponder()
-            if let vc = nextResponder as? UIViewController {
-                if let nav = vc as? UINavigationController {
-                    return nav.topViewController
-                } else if let tab = vc as? UITabBarController {
-                    if let nav = tab.selectedViewController as? UINavigationController {
-                        return nav.topViewController
-                    } else {
-                        return tab.selectedViewController
-                    }
+            
+            func getTopFromVC(vc: UIViewController) -> UIViewController {
+                var topController = vc
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
                 }
-                return vc
-            } else {
-                if var topController = window?.rootViewController {
-                    while let presentedViewController = topController.presentedViewController {
-                        topController = presentedViewController
+                if let nav = topController as? UINavigationController {
+                    if let vc = nav.viewControllers.last {
+                        topController = vc
                     }
-                    if let nav = topController as? UINavigationController {
+                } else if let tab = topController as? UITabBarController {
+                    if let nav = tab.selectedViewController as? UINavigationController {
                         if let vc = nav.viewControllers.last {
                             topController = vc
                         }
-                    } else if let tab = topController as? UITabBarController {
-                        if let nav = tab.selectedViewController as? UINavigationController {
-                            if let vc = nav.viewControllers.last {
-                                topController = vc
-                            }
-                        } else {
-                            topController = tab
-                        }
+                    } else {
+                        topController = tab
                     }
-                    return topController
+                }
+                return topController
+            }
+            if let vc = nextResponder as? UIViewController {
+                return getTopFromVC(vc)
+            } else {
+                if let vc = window?.rootViewController {
+                    return getTopFromVC(vc)
                 }
                 return nil
             }
