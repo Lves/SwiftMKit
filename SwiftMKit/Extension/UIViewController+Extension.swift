@@ -31,29 +31,28 @@ public extension UIViewController {
                     }
                 }
                 return vc
+            } else {
+                if var topController = window?.rootViewController {
+                    while let presentedViewController = topController.presentedViewController {
+                        topController = presentedViewController
+                    }
+                    if let nav = topController as? UINavigationController {
+                        if let vc = nav.viewControllers.last {
+                            topController = vc
+                        }
+                    } else if let tab = topController as? UITabBarController {
+                        if let nav = tab.selectedViewController as? UINavigationController {
+                            if let vc = nav.viewControllers.last {
+                                topController = vc
+                            }
+                        } else {
+                            topController = tab
+                        }
+                    }
+                    return topController
+                }
+                return nil
             }
-            return window?.rootViewController
-            
-//            if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-//                while let presentedViewController = topController.presentedViewController {
-//                    topController = presentedViewController
-//                }
-//                if let nav = topController as? UINavigationController {
-//                    if let vc = nav.viewControllers.last {
-//                        topController = vc
-//                    }
-//                } else if let tab = topController as? UITabBarController {
-//                    if let nav = tab.selectedViewController as? UINavigationController {
-//                        if let vc = nav.viewControllers.last {
-//                            topController = vc
-//                        }
-//                    } else {
-//                        topController = tab
-//                    }
-//                }
-//                return topController
-//            }
-//            return nil
         }
     }
 }
