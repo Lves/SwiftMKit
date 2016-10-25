@@ -126,7 +126,11 @@ public class EncryptedRequest: NSObject {
                 self.dealWithSpecialCode(error, data: data)
                 self.encryptedResponse = response
                 let reslult = self.getJSONResult(data, response: response, error: error, options: options)
-                let aResponse = Response.init(request: self.request, response: response, data: data, result:reslult)
+                var tempResponse = response;
+                if error.code == StatusCodeForceUpgradeApp {
+                    tempResponse = NSHTTPURLResponse(URL: self.request.URL!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: nil)
+                }
+                let aResponse = Response.init(request: self.request, response: tempResponse, data: data, result:reslult)
                 completionHandler(aResponse)
             })
             return self
