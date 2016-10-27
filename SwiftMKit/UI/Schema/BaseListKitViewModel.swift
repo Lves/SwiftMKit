@@ -67,6 +67,9 @@ public class BaseListKitViewModel: BaseKitViewModel {
             if count == 0 {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
+                if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
+                    footer.setTitle(noMoreDataTip, forState: .NoMoreData)
+                }
                 return
             }
             if count < listLoadNumber {
