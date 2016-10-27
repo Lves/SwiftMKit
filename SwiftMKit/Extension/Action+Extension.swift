@@ -13,6 +13,7 @@ public extension Action {
     public func bindEnabled(button: UIButton) {
         self.unsafeCocoaAction.rac_valuesForKeyPath("enabled", observer: nil).toSignalProducer().map{ $0! as! Bool }.startWithNext { enabled in
             button.enabled = enabled
+            button.viewController?.view.userInteractionEnabled = enabled
         }
     }
     public var toCocoaAction: CocoaAction {
