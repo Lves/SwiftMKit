@@ -98,16 +98,24 @@ public extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        return bSearch(newImage, count: 10, maxSize: maxSize)
+    }
+    
+    func bSearch(image: UIImage, count: Int, maxSize: Int) -> NSData? {
+        var low = CGFloat(0)
+        var high = CGFloat(count)
         
-        var quality: CGFloat = 1.0
-        //先判断当前质量是否满足要求，不满足再进行压缩
-        if let finallImageData = UIImageJPEGRepresentation(newImage, 1.0) {
-            let size = Int(Int64(finallImageData.length ?? 0))
-            if size <= maxSize {
-                return finallImageData
+        var mid = (low + high) / 2
+        while high > low {
+            if let imageData = UIImageJPEGRepresentation(image, mid/CGFloat(count)) {
+                if Int(Int64(imageData.length)) > maxSize {
+                    high = mid
+                } else {
+                    low = mid + 1
+                }
+                mid = (low + high) / 2
             }
-            quality = CGFloat(maxSize) / CGFloat(size)
         }
-        return UIImageJPEGRepresentation(newImage, quality)
+        return UIImageJPEGRepresentation(image, mid/CGFloat(count))
     }
 }
