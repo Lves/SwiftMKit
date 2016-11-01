@@ -144,19 +144,10 @@ public extension UIImage {
         print("原始大小: \(originalImgSize)")
         if originalImgSize > 3000 {
             zipImageData = UIImageJPEGRepresentation(image,0.2)!
-            if zipImageData.length/1024 > maxSize {
-                zipImageData = UIImageJPEGRepresentation(zipImageData, 0.99)!
-            }
         } else if originalImgSize>1500 {
             zipImageData = UIImageJPEGRepresentation(image,0.5)!
-            if zipImageData.length/1024 > maxSize {
-                zipImageData = UIImageJPEGRepresentation(zipImageData, 0.99)!
-            }
         } else {
             zipImageData = UIImageJPEGRepresentation(image,0.7)!
-            if zipImageData.length/1024 > maxSize {
-                zipImageData = UIImageJPEGRepresentation(zipImageData, 0.99)!
-            }
         }
         print("上传大小: \(zipImageData.length/1024)")
         return zipImageData
