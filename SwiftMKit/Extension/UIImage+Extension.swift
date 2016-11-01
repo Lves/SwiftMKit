@@ -143,7 +143,10 @@ public extension UIImage {
         let originalImgSize = zipImageData.length/1024 as Int  //获取图片大小
         print("原始大小: \(originalImgSize)")
         if originalImgSize > 3000 {
-            zipImageData = UIImageJPEGRepresentation(image,0.2)!
+            zipImageData = UIImageJPEGRepresentation(image,0.3)!
+            if zipImageData.length/1024 > maxSize {
+                zipImageData = UIImageJPEGRepresentation(image,0.1)!
+            }
         } else if originalImgSize>1500 {
             zipImageData = UIImageJPEGRepresentation(image,0.5)!
         } else {
