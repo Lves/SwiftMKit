@@ -58,6 +58,10 @@ public extension UIApplication {
         }
     }
     
+    var infoDictionary:[String : AnyObject]? {
+        return NSBundle.mainBundle().infoDictionary
+    }
+    
     var bundleIdentifier: String {
         get {
             if let identifier = PINMemoryCache.sharedCache().objectForKey(Constant.BundleIdentifier) as? String {
