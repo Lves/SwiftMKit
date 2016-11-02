@@ -28,6 +28,8 @@ public class GesturePasswordButton: UIView {
     public var dotNormalColor: UIColor = UIColor.whiteColor() { didSet { setNeedsDisplay() } }
     @IBInspectable
     public var buttonBorderWidth: CGFloat = 2 { didSet { setNeedsDisplay() } }
+    /// 标识是否画实心内圆
+    public var isDrawsolidCircle = false
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -75,9 +77,12 @@ public class GesturePasswordButton: UIView {
             CGContextSetRGBStrokeColor(context, r,g,b,a);//线条颜色
             let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width/8+1, bounds.size.height/2-bounds.size.height/8, bounds.size.width/4, bounds.size.height/4);
             CGContextAddEllipseInRect(context, frame)
-            
-            CGContextStrokePath(context)
-            
+            if isDrawsolidCircle {
+                CGContextSetRGBFillColor(context, r, g, b, a)
+                CGContextFillPath(context)
+            } else {
+                CGContextStrokePath(context)
+            }
         }
         
         CGContextSetLineWidth(context, buttonBorderWidth)

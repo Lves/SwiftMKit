@@ -91,6 +91,16 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     public weak var delegate: GesturePasswordViewDelegate?
     private var previousPassword: String = ""
     
+    /// 标识是否画实心内圆
+    public var isDrawsolidCircle = false {
+        didSet {
+            let _ = buttons.map {
+                $0.isDrawsolidCircle = isDrawsolidCircle
+                $0.layoutIfNeeded()
+            }
+        }
+    }
+    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
@@ -112,6 +122,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         for index in 0..<9 {
             let button = GesturePasswordButton(frame: CGRectZero)
             button.tag = index + 1
+            button.isDrawsolidCircle = isDrawsolidCircle
             buttons.append(button)
             buttonPannel.addSubview(button)
         }
