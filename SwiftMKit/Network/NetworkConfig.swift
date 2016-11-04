@@ -10,7 +10,7 @@ import Foundation
 import PINCache
 
 public enum Environment: Int {
-    case Local,Dev,Gray,PreProduct,Product,Custom
+    case Local,Dev,Gray,PreProduct,Product,Custom,LoanDev
 }
 
 public class NetworkConfig {
