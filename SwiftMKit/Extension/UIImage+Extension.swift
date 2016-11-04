@@ -18,7 +18,7 @@ public extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        guard let cgImage = image.CGImage else { return nil }
+        guard let cgImage = image?.CGImage else { return nil }
         self.init(CGImage: cgImage)
     }
     
@@ -28,7 +28,7 @@ public extension UIImage {
      - returns:占用内存大小
      */
     public func getImageSize() -> Int {
-        return CGImageGetHeight(self.CGImage) * CGImageGetBytesPerRow(self.CGImage)
+        return CGImageGetHeight(self.CGImage!) * CGImageGetBytesPerRow(self.CGImage!)
     }
     
     /**
@@ -71,7 +71,7 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         
         //Pass the image back up to the caller
-        return newImage
+        return newImage!
         
     }
     
@@ -132,7 +132,7 @@ public extension UIImage {
         let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         print("压缩后长: \(sizeChange.height), 压缩后宽: \(sizeChange.width)")
-        return resizedImg
+        return resizedImg!
     }
     
     //图片质量压缩

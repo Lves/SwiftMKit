@@ -78,7 +78,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return keyboard(textField, type: type, theme: Theme.DefaultTheme)
     }
     public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal, theme: NumberKeyboardUITheme) -> NumberKeyboard {
-        let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil).first as? NumberKeyboard
+        let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil)?.first as? NumberKeyboard
         view?.textField = textField
         view?.type = type
         view?.setupUI(theme)

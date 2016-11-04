@@ -84,7 +84,7 @@ class MKUITreeViewCellTableViewCell: UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(ID) as? MKUITreeViewCellTableViewCell
         if cell == nil {
             let index = isParentNode ? 0 : 1
-            cell = NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil)[index] as? MKUITreeViewCellTableViewCell
+            cell = NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil)![index] as? MKUITreeViewCellTableViewCell
         }
         return cell!
     }

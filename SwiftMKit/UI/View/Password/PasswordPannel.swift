@@ -63,7 +63,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         super.init(coder: aDecoder)
     }
     public static func pannel() -> PasswordPannel {
-        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil).first as! PasswordPannel
+        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil)!.first as! PasswordPannel
         view.setupUI()
         return view
     }

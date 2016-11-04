@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,13 +14,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="暂无数据" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV6-oi-yyI">
-                    <rect key="frame" x="10" y="184" width="180" height="16"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
-                    <color key="textColor" red="0.63137254899999995" green="0.67450980390000004" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.63137254899999995" green="0.67450980390000004" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="view_custom_empty" translatesAutoresizingMaskIntoConstraints="NO" id="3sK-pq-nO8">
-                    <rect key="frame" x="30" y="10" width="140" height="158"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="3sK-pq-nO8" secondAttribute="height" multiplier="56:73" id="YHO-bx-URe"/>
                         <constraint firstAttribute="width" secondItem="3sK-pq-nO8" secondAttribute="height" multiplier="281:277" id="bcs-eY-Fuy"/>
@@ -32,7 +31,7 @@
                     </variation>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="3sK-pq-nO8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ail-Pn-Aiw"/>
                 <constraint firstItem="PV6-oi-yyI" firstAttribute="top" secondItem="3sK-pq-nO8" secondAttribute="bottom" constant="16" id="EIr-Ew-M2q"/>
@@ -44,8 +43,8 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="imgView" destination="3sK-pq-nO8" id="Tof-1Y-c2s"/>
-                <outlet property="lblTitle" destination="PV6-oi-yyI" id="XM6-RK-srh"/>
+                <outlet property="imgView" destination="3sK-pq-nO8" id="4bt-Kh-qjP"/>
+                <outlet property="lblTitle" destination="PV6-oi-yyI" id="wON-XY-2sX"/>
             </connections>
             <point key="canvasLocation" x="140" y="153"/>
         </view>

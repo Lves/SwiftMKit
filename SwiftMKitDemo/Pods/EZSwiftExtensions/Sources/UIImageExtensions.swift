@@ -30,7 +30,7 @@ extension UIImage {
         let newSize = CGSize(width: w, height: h)
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         image.drawInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return newImage
     }
@@ -44,7 +44,7 @@ extension UIImage {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return img
+        return img!
     }
 
     /// EZSE Returns resized image with height. Might return low quality
@@ -56,7 +56,7 @@ extension UIImage {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return img
+        return img!
     }
 
     /// EZSE:
@@ -80,7 +80,7 @@ extension UIImage {
             return nil
         }
         let scaledBounds: CGRect = CGRect(x: bound.x * self.scale, y: bound.y * self.scale, width: bound.w * self.scale, height: bound.h * self.scale)
-        let imageRef = CGImageCreateWithImageInRect(self.CGImage, scaledBounds)
+        let imageRef = CGImageCreateWithImageInRect(self.CGImage!, scaledBounds)
         let croppedImage: UIImage = UIImage(CGImage: imageRef!, scale: self.scale, orientation: UIImageOrientation.Up)
         return croppedImage
     }
@@ -90,16 +90,16 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
 
         let context = UIGraphicsGetCurrentContext()
-        CGContextTranslateCTM(context, 0, self.size.height)
-        CGContextScaleCTM(context, 1.0, -1.0)
-        CGContextSetBlendMode(context, CGBlendMode.Normal)
+        CGContextTranslateCTM(context!, 0, self.size.height)
+        CGContextScaleCTM(context!, 1.0, -1.0)
+        CGContextSetBlendMode(context!, CGBlendMode.Normal)
 
         let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height) as CGRect
-        CGContextClipToMask(context, rect, self.CGImage)
+        CGContextClipToMask(context!, rect, self.CGImage!)
         tintColor.setFill()
-        CGContextFillRect(context, rect)
+        CGContextFillRect(context!, rect)
 
-        let newImage = UIGraphicsGetImageFromCurrentImageContext() as UIImage
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()! as UIImage
         UIGraphicsEndImageContext()
 
         return newImage
@@ -124,6 +124,6 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
 }

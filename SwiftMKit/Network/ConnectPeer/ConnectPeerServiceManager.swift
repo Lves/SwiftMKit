@@ -72,7 +72,7 @@ extension ConnectPeerServiceManager : MCNearbyServiceAdvertiserDelegate {
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
         DDLogError("[ConnectPeerServiceManager] DidNotStartAdvertisingPeer: \(error)")
     }
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
+    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession?) -> Void) {
         DDLogInfo("[ConnectPeerServiceManager] DidReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
     }

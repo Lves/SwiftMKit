@@ -8,17 +8,14 @@
 
 import UIKit
 
-class MKCustomEmptyView: UIView {
+class MKCustomEmptyView: BaseKitEmptyView {
     
     private struct InnerConst {
         static let NibName = "MKCustomEmptyView"
     }
     
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    
-    class func getView() -> MKCustomEmptyView {
-        return NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil).first as! MKCustomEmptyView
+    override class func getView() -> MKCustomEmptyView {
+        return NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! MKCustomEmptyView
     }
 
 }

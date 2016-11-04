@@ -21,7 +21,7 @@ def pods
     pod 'SnapKit', '~> 0.22.0'
     pod 'pop', '~> 1.0.0'
     pod 'Aspects', '~> 1.4.0'
-    pod 'HanekeSwift', '~> 0.10.0'
+    pod 'HanekeSwift', '~> 0.10.1'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'Charts', '~> 2.2.4'
     pod 'PulsingHalo', '~> 0.2.0'

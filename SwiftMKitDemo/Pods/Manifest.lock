@@ -1,9 +1,9 @@
 PODS:
   - Alamofire (3.5.1)
   - Aspects (1.4.1)
-  - Charts (2.2.4):
-    - Charts/Core (= 2.2.4)
-  - Charts/Core (2.2.4)
+  - Charts (2.2.5):
+    - Charts/Core (= 2.2.5)
+  - Charts/Core (2.2.5)
   - CocoaLumberjack/Core (2.3.0)
   - CocoaLumberjack/Default (2.3.0):
     - CocoaLumberjack/Core
@@ -11,11 +11,11 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.3.0):
     - CocoaLumberjack/Extensions
-  - CryptoSwift (0.5.1)
+  - CryptoSwift (0.5.2)
   - EZSwiftExtensions (1.6)
   - FDFullscreenPopGesture (1.1)
   - HanekeSwift (0.10.1)
-  - IQKeyboardManager (4.0.6)
+  - IQKeyboardManager (4.0.7)
   - JSPatch (1.1):
     - JSPatch/Core (= 1.1)
   - JSPatch/Core (1.1)
@@ -52,7 +52,7 @@ DEPENDENCIES:
   - CryptoSwift (~> 0.5.0)
   - EZSwiftExtensions (~> 1.6.0)
   - FDFullscreenPopGesture (~> 1.1)
-  - HanekeSwift (~> 0.10.0)
+  - HanekeSwift (~> 0.10.1)
   - IQKeyboardManager (~> 4.0.0)
   - JSPatch (~> 1.1.0)
   - MagicalRecord (~> 2.3.0)
@@ -70,13 +70,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  Charts: a9e735c83c6d376ade20f6612dcf0ba217394a49
+  Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  CryptoSwift: df42dda18baf6c76347a94e227dbcc0a341304bd
+  CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
-  IQKeyboardManager: c52debb1967799ae7addb98eab0cf328083a874f
+  IQKeyboardManager: 69002bb4fea60596b710e57d426abc00e5063630
   JSPatch: ade285ad1d8f06146ed6054a39cef87509453299
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -91,6 +91,6 @@ SPEC CHECKSUMS:
   SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
-PODFILE CHECKSUM: 28449beac5066bb43855bfdb84229a8d0627f3c7
+PODFILE CHECKSUM: ffb8c3d64b1fb51f5c699d8c6ead70eb9f9bc4d0
 
 COCOAPODS: 1.1.0

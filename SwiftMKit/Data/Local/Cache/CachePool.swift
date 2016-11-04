@@ -276,10 +276,10 @@ extension CachePool {
     ///  创建文件夹
     private func createFolder(name: String, baseUrl: NSURL) {
         let folder = baseUrl.URLByAppendingPathComponent(name, isDirectory: true)
-        let exist = fileManager.fileExistsAtPath(folder.path!)
+        let exist = fileManager.fileExistsAtPath(folder!.path!)
         if !exist {
-            try! fileManager.createDirectoryAtURL(folder, withIntermediateDirectories: true, attributes: nil)
-            DDLogVerbose("缓存文件夹：" + folder.path!)
+            try! fileManager.createDirectoryAtURL(folder!, withIntermediateDirectories: true, attributes: nil)
+            DDLogVerbose("缓存文件夹：" + folder!.path!)
         }
     }
     

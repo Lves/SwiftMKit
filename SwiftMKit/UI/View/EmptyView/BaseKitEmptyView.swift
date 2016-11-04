@@ -18,6 +18,6 @@ public class BaseKitEmptyView: UIView {
     @IBOutlet weak var lblTitle: UILabel!
     
     public class func getView() -> BaseKitEmptyView {
-        return NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil).first as! BaseKitEmptyView
+        return NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! BaseKitEmptyView
     }
 }

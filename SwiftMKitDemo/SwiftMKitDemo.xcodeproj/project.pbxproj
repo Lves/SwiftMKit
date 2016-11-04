@@ -51,6 +51,7 @@
 		273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */; };
 		273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */; };
 		274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274113CC1CCDC95600EECE5A /* JsonMapTests.swift */; };
+		274593C61DCB5908006D04D9 /* smkit_view_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274593C51DCB5908006D04D9 /* smkit_view_empty@2x.png */; };
 		274C4C881DB4EF8600310C11 /* kb_keyboard_view_del@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */; };
 		274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */; };
 		276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */; };
@@ -319,6 +320,7 @@
 		273F51B31CC8DCFB003ABE4A /* TaskIndicatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIndicatorList.swift; sourceTree = "<group>"; };
 		273F51B51CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionTask+Extension.swift"; sourceTree = "<group>"; };
 		274113CC1CCDC95600EECE5A /* JsonMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonMapTests.swift; sourceTree = "<group>"; };
+		274593C51DCB5908006D04D9 /* smkit_view_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smkit_view_empty@2x.png"; sourceTree = "<group>"; };
 		274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_del@2x.png"; sourceTree = "<group>"; };
 		274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_screen@2x.png"; sourceTree = "<group>"; };
 		276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLogMKitFormatter.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 		27D989711DB46EA4004E79A0 /* EmptyView */ = {
 			isa = PBXGroup;
 			children = (
+				274593C51DCB5908006D04D9 /* smkit_view_empty@2x.png */,
 				27D989721DB46EB7004E79A0 /* MKitEmptyView.swift */,
 				27D989741DB471F5004E79A0 /* BaseKitEmptyView.swift */,
 				27D989761DB47209004E79A0 /* BaseKitEmptyView.xib */,
@@ -1542,6 +1545,7 @@
 					};
 					3FC9DF081CBFD35900C2D938 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = 3FC9DEF41CBFD35900C2D938;
 					};
 					3FC9DF131CBFD35A00C2D938 = {
@@ -1634,6 +1638,7 @@
 				6CEFCB701D3485F3008B3382 /* pannel_icon_link@2x.png in Resources */,
 				2783E00E1DB626FD005E087C /* MKIndicatorButtonViewController.xib in Resources */,
 				2783E0091DB626FD005E087C /* MKGalaryCollectionView.storyboard in Resources */,
+				274593C61DCB5908006D04D9 /* smkit_view_empty@2x.png in Resources */,
 				6CEFCB761D3485F3008B3382 /* pannel_icon_qzone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2150,6 +2155,7 @@
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -2197,6 +2203,7 @@
 				PROVISIONING_PROFILE = "8b681028-8e77-4acd-bd92-7b42f8cdd672";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -2210,6 +2217,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftMKitDemo.app/SwiftMKitDemo";
 			};
 			name = Debug;
@@ -2224,6 +2232,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.SwiftMKitDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftMKitDemo.app/SwiftMKitDemo";
 			};
 			name = Release;

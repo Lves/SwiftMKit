@@ -31,7 +31,7 @@ class PX500NetApi: AlamofireNetApiData {
             if newValue.hasPrefix("http") {
                 _url = NSURL(string: newValue)?.absoluteString ?? ""
             }else{
-                _url =  NSURL(string: PX500NetApi.baseUrl)?.URLByAppendingPathComponent(newValue).absoluteString ?? ""
+                _url =  NSURL(string: PX500NetApi.baseUrl)?.URLByAppendingPathComponent(newValue)?.absoluteString ?? ""
             }
         }
     }
@@ -48,7 +48,7 @@ class BuDeJieNetApi: AlamofireNetApiData {
             if newValue.hasPrefix("http") {
                 _url = NSURL(string: newValue)?.absoluteString ?? ""
             }else{
-                _url =  NSURL(string: BuDeJieNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "").absoluteString ?? ""
+                _url =  NSURL(string: BuDeJieNetApi.baseUrl)?.URLByAppendingPathComponent(newValue ?? "")?.absoluteString ?? ""
             }
         }
     }

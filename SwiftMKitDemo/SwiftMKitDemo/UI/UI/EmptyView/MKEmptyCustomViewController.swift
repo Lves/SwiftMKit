@@ -10,10 +10,13 @@ import UIKit
 
 class MKEmptyCustomViewController: BaseViewController {
 
+    override func getEmptyView() -> BaseKitEmptyView {
+        return MKCustomEmptyView.getView()
+    }
     override func setupUI() {
         super.setupUI()
-        emptyView?.image = UIImage(named: "view_custom_empty")!
-        emptyView?.yOffset = -150
+//        emptyView?.image = UIImage(named: "view_custom_empty")!
+//        emptyView?.yOffset = -150
         emptyView?.titleLabel.textColor = UIColor.blueColor()
         loadData()
     }

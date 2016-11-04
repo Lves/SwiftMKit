@@ -59,9 +59,13 @@ public class BaseKitViewController : UIViewController {
         }
     }
     
+    public func getEmptyView() -> BaseKitEmptyView {
+        return BaseKitEmptyView.getView()
+    }
+    
     public func setupUI() {
         viewModel?.viewController = self
-        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty"), yOffset: 0, view: BaseKitEmptyView.getView(), inView: self.view)
+        emptyView = MKitEmptyView(title: "暂无数据", image: UIImage(named: "view_empty"), yOffset: 0, view: getEmptyView(), inView: self.view)
         setupNavigation()
         setupNotification()
         bindingData()

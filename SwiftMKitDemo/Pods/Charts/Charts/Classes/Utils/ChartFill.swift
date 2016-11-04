@@ -9,7 +9,7 @@
 //  A port of MPAndroidChart for iOS
 //  Licensed under Apache License 2.0
 //
-//  https://github.com/danielgindi/ios-charts
+//  https://github.com/danielgindi/Charts
 //
 
 import Foundation
@@ -17,8 +17,8 @@ import CoreGraphics
 
 public class ChartFill: NSObject
 {
-    @objc
-    public enum ChartFillType: Int
+    @objc(ChartFillType)
+    public enum Type: Int
     {
         case Empty
         case Color
@@ -29,7 +29,7 @@ public class ChartFill: NSObject
         case Layer
     }
     
-    private var _type: ChartFillType = ChartFillType.Empty
+    private var _type: Type = Type.Empty
     private var _color: CGColorRef?
     private var _gradient: CGGradientRef?
     private var _gradientAngle: CGFloat = 0.0
@@ -42,7 +42,7 @@ public class ChartFill: NSObject
     
     // MARK: Properties
     
-    public var type: ChartFillType
+    public var type: Type
     {
         return _type
     }
@@ -260,23 +260,23 @@ public class ChartFill: NSObject
         {
         case .Color:
             
-            CGContextSetFillColorWithColor(context, _color)
+            CGContextSetFillColorWithColor(context, _color!)
             CGContextFillPath(context)
             
         case .Image:
             
             CGContextClip(context)
-            CGContextDrawImage(context, rect, _image)
+            CGContextDrawImage(context, rect, _image!)
             
         case .TiledImage:
             
             CGContextClip(context)
-            CGContextDrawTiledImage(context, rect, _image)
+            CGContextDrawTiledImage(context, rect, _image!)
             
         case .Layer:
             
             CGContextClip(context)
-            CGContextDrawLayerInRect(context, rect, _layer)
+            CGContextDrawLayerInRect(context, rect, _layer!)
             
         case .LinearGradient:
             
@@ -296,7 +296,7 @@ public class ChartFill: NSObject
             CGContextClip(context)
             CGContextDrawLinearGradient(
                 context,
-                _gradient,
+                _gradient!,
                 startPoint,
                 endPoint,
                 [.DrawsAfterEndLocation, .DrawsBeforeStartLocation]
@@ -310,7 +310,7 @@ public class ChartFill: NSObject
             CGContextClip(context)
             CGContextDrawRadialGradient(
                 context,
-                _gradient,
+                _gradient!,
                 CGPointMake(
                     centerPoint.x + rect.width * _gradientStartOffsetPercent.x,
                     centerPoint.y + rect.height * _gradientStartOffsetPercent.y
