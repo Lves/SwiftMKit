@@ -8,6 +8,7 @@
 
 import Foundation
 import MBProgressHUD
+import CocoaLumberjack
 
 public enum MBHUDViewStyle: Int {
     case Default, Black
@@ -28,7 +29,7 @@ public class MBHUDView: HUDProtocol{
         showHUDAddedTo(view, animated: animated, text: text, detailText: nil)
     }
     public func showHUDAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?) {
-        print("show: \(view)")
+        DDLogInfo("show: \(view)")
         indicatorShowed = true
         MBProgressHUD.hideHUDForView(view, animated: animated)
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
@@ -43,7 +44,7 @@ public class MBHUDView: HUDProtocol{
         showingHUD = hud
     }
     public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void)) {
-        print("show: \(view)")
+        DDLogInfo("show: \(view)")
         indicatorShowed = false
         showingHUD?.hideAnimated(false)
         MBProgressHUD.hideHUDForView(view, animated: animated)
@@ -133,13 +134,16 @@ public class MBHUDView: HUDProtocol{
         }
     }
     public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
-        print("hide: \(view)")
+        DDLogInfo("hide: \(view)")
         showingHUD = nil
         indicatorShowed = false
         return MBProgressHUD.hideHUDForView(view, animated: animated)
     }
     public func hideIndicatorHUDForView(view: UIView, animated: Bool) -> Bool {
-        print("hide: \(view)")
+        DDLogInfo("hide: \(view)")
+        if showingHUD?.mode == .Text {
+            return false
+        }
         showingHUD = nil
         indicatorShowed = false
         return MBProgressHUD.hideHUDForView(view, animated: animated)
