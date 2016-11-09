@@ -40,16 +40,19 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Right" id="KfB-FX-ha4">
                                 <connections>
-                                    <action selector="click_right:" destination="jFd-AU-ami" id="rq2-U2-PZV"/>
+                                    <segue destination="9Ts-6i-Cgd" kind="presentation" identifier="Right" id="4pG-4X-r6w"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Left" id="pdw-f4-6Ui">
                                 <connections>
-                                    <action selector="click_left:" destination="jFd-AU-ami" id="1C5-83-Gmp"/>
+                                    <segue destination="9Ts-6i-Cgd" kind="presentation" identifier="Left" id="eRg-iz-cDP"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <segue destination="H4X-Ih-jcP" kind="show" identifier="routeToDetail" id="j3b-Vj-olH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbk-rD-NSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -98,17 +101,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="2Jr-vO-d7P" secondAttribute="trailing" constant="-20" id="2qx-Fy-Sbn"/>
-                            <constraint firstItem="2Jr-vO-d7P" firstAttribute="top" secondItem="ErW-dd-scC" secondAttribute="bottom" id="4dV-ge-Ile"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2Jr-vO-d7P" secondAttribute="trailing" constant="-20" id="B4U-Nj-SNA"/>
                             <constraint firstItem="2Jr-vO-d7P" firstAttribute="leading" secondItem="KP0-DL-s0Q" secondAttribute="leadingMargin" constant="-20" id="B5w-WW-WYk"/>
-                            <constraint firstItem="2Jr-vO-d7P" firstAttribute="leading" secondItem="KP0-DL-s0Q" secondAttribute="leadingMargin" constant="-20" id="JJa-Os-oPk"/>
+                            <constraint firstItem="2Jr-vO-d7P" firstAttribute="leading" secondItem="KP0-DL-s0Q" secondAttribute="leading" id="CXT-rK-3NA"/>
                             <constraint firstItem="2Jr-vO-d7P" firstAttribute="leading" secondItem="KP0-DL-s0Q" secondAttribute="leadingMargin" constant="-20" id="Je9-tw-2gL"/>
-                            <constraint firstItem="e3h-0M-66P" firstAttribute="top" secondItem="2Jr-vO-d7P" secondAttribute="bottom" id="M23-cB-Nz8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2Jr-vO-d7P" secondAttribute="trailing" constant="-20" id="NbD-fB-rhi"/>
+                            <constraint firstItem="2Jr-vO-d7P" firstAttribute="top" secondItem="ErW-dd-scC" secondAttribute="bottom" id="PPV-5C-W7V"/>
                             <constraint firstItem="e3h-0M-66P" firstAttribute="top" secondItem="2Jr-vO-d7P" secondAttribute="bottom" id="PSY-dU-7jY"/>
                             <constraint firstItem="e3h-0M-66P" firstAttribute="top" secondItem="2Jr-vO-d7P" secondAttribute="bottom" id="PVF-Ua-wSu"/>
+                            <constraint firstAttribute="trailing" secondItem="2Jr-vO-d7P" secondAttribute="trailing" id="UC9-st-0yB"/>
                             <constraint firstItem="2Jr-vO-d7P" firstAttribute="top" secondItem="ErW-dd-scC" secondAttribute="bottom" id="YFs-w5-iH7"/>
                             <constraint firstItem="2Jr-vO-d7P" firstAttribute="top" secondItem="ErW-dd-scC" secondAttribute="bottom" id="fu7-H2-9xa"/>
+                            <constraint firstItem="2Jr-vO-d7P" firstAttribute="bottom" secondItem="e3h-0M-66P" secondAttribute="top" id="x8D-qL-072"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -130,12 +133,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNs-AS-5Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="711" y="1063"/>
+            <point key="canvasLocation" x="711" y="1154"/>
         </scene>
         <!--Side View Detail-->
         <scene sceneID="tpv-6Q-zg1">
             <objects>
-                <viewController storyboardIdentifier="MKSideDetailViewController" id="H4X-Ih-jcP" customClass="MKSideDetailViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="H4X-Ih-jcP" customClass="BaseViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="whS-sH-JcV"/>
                         <viewControllerLayoutGuide type="bottom" id="ced-gE-vTq"/>
@@ -144,8 +147,8 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hello I'm Side View Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94x-Nf-SVK">
-                                <rect key="frame" x="202" y="257" width="194" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello I'm Side View Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94x-Nf-SVK">
+                                <rect key="frame" x="203" y="257" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -157,18 +160,15 @@
                             <constraint firstItem="94x-Nf-SVK" firstAttribute="centerX" secondItem="TI8-BI-vRR" secondAttribute="centerX" id="Vt6-ky-5qC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Side View Detail" id="HF8-32-91y">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="9yO-cI-TcG">
-                            <connections>
-                                <action selector="click_back:" destination="H4X-Ih-jcP" id="FGJ-F2-1Qy"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Side View Detail" id="HF8-32-91y"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZy-h9-8p4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="402"/>
+            <point key="canvasLocation" x="1425" y="402"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eRg-iz-cDP"/>
+    </inferredMetricsTieBreakers>
 </document>

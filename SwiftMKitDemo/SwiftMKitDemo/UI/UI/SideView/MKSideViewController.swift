@@ -10,10 +10,9 @@ import UIKit
 import CocoaLumberjack
 import FDFullscreenPopGesture
 
-class MKSideViewController: BaseViewController, SideMenuDelegate, SideMenuProtocol {
-    @IBOutlet weak var btnTopMenu: UIBarButtonItem!
-    var sideMenu: SideMenu?
-    var menuViewController: UIViewController?
+class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate {
+    
+    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
     private var _viewModel = BaseKitViewModel()
     override var viewModel: BaseKitViewModel! {
@@ -22,29 +21,34 @@ class MKSideViewController: BaseViewController, SideMenuDelegate, SideMenuProtoc
     
     override func setupUI() {
         super.setupUI()
-        self.fd_interactivePopDisabled = false
-        menuViewController = self.initialedViewController("MKSideMenuViewController")
-        sideMenu = SideMenu(masterViewController: self, menuViewController: menuViewController!)
-        sideMenu?.delegate = self
+        slideInTransitioningDelegate.statusBarHidden = true
     }
     
-    @IBAction func click_left(sender: UIBarButtonItem) {
-        sideMenu?.direction = .Left
-        sideMenu?.routeToSideMenu()
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let controller = segue.destinationViewController as? MKSideMenuViewController {
+            if segue.identifier == "Left" {
+                slideInTransitioningDelegate.direction = .left
+            } else if segue.identifier == "Right" {
+                slideInTransitioningDelegate.direction = .right
+            }
+            controller.transitioningDelegate = slideInTransitioningDelegate
+            controller.delegate = self
+            controller.modalPresentationStyle = .Custom
+        }
     }
-    @IBAction func click_right(sender: UIBarButtonItem) {
-        sideMenu?.direction = .Right
-        sideMenu?.routeToSideMenu()
-    }
-    func sideMenuDidHideMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {
-        DDLogVerbose("Side Menu Did Hide")
-    }
-    func sideMenuDidShowMenuViewController(sideMenu: SideMenu, menuViewController: UIViewController) {
-        DDLogVerbose("Side Menu Did Show")
+    
+    func sideMenuViewController(controller: MKSideMenuViewController, didSelectRow selectedRow: Int) {
+        self.dismissVC(completion: {_ in self.routeToName("routeToDetail") })
     }
 }
 
-class MKSideMenuViewController: BaseListViewController, SideMenuProtocol {
+
+
+protocol MKSideMenuViewControllerDelegate: class {
+    func sideMenuViewController(controller: MKSideMenuViewController, didSelectRow selectedRow: Int)
+}
+
+class MKSideMenuViewController: BaseListViewController {
     
     struct InnerConst {
         static let CellIdentifier = "MKSideMenuTableViewCell"
@@ -53,7 +57,7 @@ class MKSideMenuViewController: BaseListViewController, SideMenuProtocol {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
-    var sideMenu: SideMenu?
+    weak var delegate: MKSideMenuViewControllerDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     private var _viewModel = BaseListViewModel()
@@ -65,9 +69,6 @@ class MKSideMenuViewController: BaseListViewController, SideMenuProtocol {
     }
     override func setupUI() {
         super.setupUI()
-        tableView.snp_remakeConstraints { (make) in
-            make.top.bottom.left.right.equalTo(0)
-        }
         loadData()
     }
     override func loadData() {
@@ -87,16 +88,6 @@ class MKSideMenuViewController: BaseListViewController, SideMenuProtocol {
         tableViewCell.textLabel?.text = "Menu - \(indexPath.row)"
     }
     override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
-        sideMenu?.routeToSideMaster(InnerConst.SegueToNextSideViewDetail)
-    }
-}
-
-class MKSideDetailViewController: BaseViewController {
-    private var _viewModel = BaseViewModel()
-    override var viewModel: BaseKitViewModel!{
-        get { return _viewModel }
-    }
-    @IBAction func click_back(sender: UIBarButtonItem) {
-        self.routeBack()
+        delegate?.sideMenuViewController(self, didSelectRow: indexPath.row)
     }
 }

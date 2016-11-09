@@ -69,6 +69,7 @@ public class BaseKitViewController : UIViewController {
         setupNavigation()
         setupNotification()
         bindingData()
+        bindedData()
     }
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
@@ -78,6 +79,9 @@ public class BaseKitViewController : UIViewController {
     public func setupNavigation() {
     }
     public func bindingData() {
+    }
+    public func bindedData() {
+        viewModel?.dataBinded()
     }
     public func loadData() {
     }
