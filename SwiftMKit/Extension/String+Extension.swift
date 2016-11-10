@@ -140,7 +140,7 @@ extension String {
         let date = NSDate(fromString: self, format: oFormat)
         let fmt = NSDateFormatter()
         fmt.dateFormat = toFormat
-        return fmt.stringFromDate(date!)
+        return  date == nil ? self : fmt.stringFromDate(date!)
     }
 
 //    ///  字符串 -> N为小数

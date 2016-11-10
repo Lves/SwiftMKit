@@ -75,7 +75,7 @@ public class WebViewBridge : NSObject {
     }
     public func willLoadRequest(request: NSURLRequest) -> NSURLRequest {
         if let header = requestHeader {
-            if let newRequest = request.copy() as? NSMutableURLRequest {
+            if let newRequest = request.mutableCopy() as? NSMutableURLRequest {
                 for (key, value) in header {
                     newRequest.setValue(value, forHTTPHeaderField: key)
                 }
