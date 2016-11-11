@@ -14,9 +14,6 @@ import CocoaLumberjack
 public extension UIApplication {
     @nonobjc static var activityCount: Int = 0
     func showNetworkActivityIndicator() {
-//        if UIApplication.sharedApplication().statusBarHidden {
-//            return
-//        }
         let lockQueue = dispatch_queue_create("com.cdts.LockQueue", nil)
         dispatch_sync(lockQueue) {
             if UIApplication.activityCount == 0 {
@@ -26,11 +23,6 @@ public extension UIApplication {
         }
     }
     func hideNetworkActivityIndicator() {
-        
-//        if UIApplication.sharedApplication().statusBarHidden {
-//            return
-//        }
-        
         let lockQueue = dispatch_queue_create("com.cdts.LockQueue", nil)
         dispatch_sync(lockQueue) {
             UIApplication.activityCount -= 1

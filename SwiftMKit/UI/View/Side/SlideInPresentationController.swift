@@ -23,7 +23,7 @@ public class SlideInPresentationController: UIPresentationController {
 
     
     init(presentedViewController: UIViewController,
-         presenting presentingViewController: UIViewController,
+         presenting presentingViewController: UIViewController?,
                     direction: PresentationDirection) {
         self.direction = direction
         

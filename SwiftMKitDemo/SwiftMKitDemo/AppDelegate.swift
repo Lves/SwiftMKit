@@ -10,6 +10,7 @@ import UIKit
 import CocoaLumberjack
 import MagicalRecord
 import IQKeyboardManager
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,7 +33,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetApiClient.shared.startNotifyNetworkStatus()
         // debug时可显示加密库的log
 //        EncryptedNetworkManager.setShowLog(true)
+        
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.currentNotificationCenter().delegate = UserNotificationManager.sharedInstance
+            MKUserNotificationViewController.registerNotificationCategory()
+
+        } else {
+            // Fallback on earlier versions
+        }
+
         return true
+    }
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        DDLogError("Fail to get device token: \(error)")
+    }
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let token = deviceToken.hexString
+        if #available(iOS 10.0, *) {
+            UserNotificationManager.deviceToken = token
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -56,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
 
 }
 
