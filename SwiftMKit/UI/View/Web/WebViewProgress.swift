@@ -85,7 +85,11 @@ public class WebViewProgress : NSObject {
         if ((request.URL?.fragment) != nil) {
             let nonFragmentURL = request.URL?.absoluteString.stringByReplacingOccurrencesOfString("#\(request.URL!.fragment)", withString: "")
             
-            isFragmentJump = nonFragmentURL == webView.request!.URL!.absoluteString
+            if let url = webView.request?.URL{
+                if let absoluteString : String = url.absoluteString{
+                    isFragmentJump = nonFragmentURL == absoluteString
+                }
+            }
         }
         
         let isTopLevelNavigation : Bool = request.mainDocumentURL == request.URL
