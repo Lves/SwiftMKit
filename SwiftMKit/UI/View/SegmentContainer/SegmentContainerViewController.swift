@@ -92,7 +92,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         for index in 0..<viewControllers.count {
             let vc = viewControllers[index]
             self.addChildViewController(vc)
-            if let listVC = vc as? BaseListViewController {
+            if let listVC = vc as? BaseListKitViewController {
                 listVC.listView?.scrollsToTop = (index == 0)
             }
             if index == selectedSegment && !(scrollView.subviews.contains(vc.view)) {
@@ -148,7 +148,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             return true
         }
         for vc in viewControllers {
-            if let listVC = vc as? BaseListViewController {
+            if let listVC = vc as? BaseListKitViewController {
                 if index == viewControllers.indexOf(vc) {
                     listVC.listView?.scrollsToTop = true
                 } else {
