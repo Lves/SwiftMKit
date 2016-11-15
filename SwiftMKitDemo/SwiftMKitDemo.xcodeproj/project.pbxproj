@@ -59,6 +59,8 @@
 		2740B8201DD1754F00CF2F5B /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740B81F1DD1754F00CF2F5B /* SlideInPresentationAnimator.swift */; };
 		274113CD1CCDC95600EECE5A /* JsonMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274113CC1CCDC95600EECE5A /* JsonMapTests.swift */; };
 		274593C61DCB5908006D04D9 /* smkit_view_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274593C51DCB5908006D04D9 /* smkit_view_empty@2x.png */; };
+		2749CECA1DD95E4300D713B0 /* MKPHAssetVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749CEC91DD95E4300D713B0 /* MKPHAssetVideoViewController.swift */; };
+		2749CECE1DD9BA7100D713B0 /* MKiPodAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749CECD1DD9BA7100D713B0 /* MKiPodAssetViewController.swift */; };
 		274C4C881DB4EF8600310C11 /* kb_keyboard_view_del@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */; };
 		274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */; };
 		276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */; };
@@ -121,6 +123,7 @@
 		2783E03A1DB62E4D005E087C /* MKDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0381DB62E4D005E087C /* MKDataViewModel.swift */; };
 		2783E03E1DB645D5005E087C /* MKMBProgressHUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E03C1DB645D5005E087C /* MKMBProgressHUDViewController.swift */; };
 		2783E03F1DB645D5005E087C /* MKMBProgressHUDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2783E03D1DB645D5005E087C /* MKMBProgressHUDViewController.xib */; };
+		2786557A1DDA9DB7005BDDCC /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278655791DDA9DB7005BDDCC /* VideoPlayer.swift */; };
 		278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */; };
 		278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937EC1CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift */; };
 		278937F91CD0A5CC00F43699 /* PX500PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278937ED1CD0A5CC00F43699 /* PX500PhotoEntity.swift */; };
@@ -164,6 +167,9 @@
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27BA394D1CC74E2400436D23 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA394C1CC74E2400436D23 /* Async.swift */; };
 		27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */; };
+		27CA0CCC1DD949A900462BC6 /* MKPHAsset.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27CA0CCB1DD949A900462BC6 /* MKPHAsset.storyboard */; };
+		27CA0CCE1DD949E600462BC6 /* MKPHAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA0CCD1DD949E600462BC6 /* MKPHAssetViewController.swift */; };
+		27CA0CD01DD94B3300462BC6 /* MKPHAssetImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA0CCF1DD94B3300462BC6 /* MKPHAssetImageViewController.swift */; };
 		27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9AA1CEEA00400B511D7 /* LocationManager.swift */; };
 		27D1A9B01CEEA78300B511D7 /* GalaryLinearLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9AF1CEEA78300B511D7 /* GalaryLinearLayout.swift */; };
 		27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A9B61CEEADCD00B511D7 /* FingerPrint.swift */; };
@@ -370,6 +376,8 @@
 		2740B81F1DD1754F00CF2F5B /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
 		274113CC1CCDC95600EECE5A /* JsonMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonMapTests.swift; sourceTree = "<group>"; };
 		274593C51DCB5908006D04D9 /* smkit_view_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smkit_view_empty@2x.png"; sourceTree = "<group>"; };
+		2749CEC91DD95E4300D713B0 /* MKPHAssetVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKPHAssetVideoViewController.swift; sourceTree = "<group>"; };
+		2749CECD1DD9BA7100D713B0 /* MKiPodAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKiPodAssetViewController.swift; sourceTree = "<group>"; };
 		274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_del@2x.png"; sourceTree = "<group>"; };
 		274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_screen@2x.png"; sourceTree = "<group>"; };
 		276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLogMKitFormatter.swift; sourceTree = "<group>"; };
@@ -434,6 +442,7 @@
 		2783E0381DB62E4D005E087C /* MKDataViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDataViewModel.swift; sourceTree = "<group>"; };
 		2783E03C1DB645D5005E087C /* MKMBProgressHUDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMBProgressHUDViewController.swift; sourceTree = "<group>"; };
 		2783E03D1DB645D5005E087C /* MKMBProgressHUDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKMBProgressHUDViewController.xib; sourceTree = "<group>"; };
+		278655791DDA9DB7005BDDCC /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		278725641DB4C73C00C1F19A /* YYCustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYCustomAlertView.swift; sourceTree = "<group>"; };
 		278937EC1CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PX500PhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		278937ED1CD0A5CC00F43699 /* PX500PhotoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PX500PhotoEntity.swift; sourceTree = "<group>"; };
@@ -481,6 +490,9 @@
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27BA394C1CC74E2400436D23 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		27C5A3781CE060B7003C0562 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		27CA0CCB1DD949A900462BC6 /* MKPHAsset.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKPHAsset.storyboard; sourceTree = "<group>"; };
+		27CA0CCD1DD949E600462BC6 /* MKPHAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKPHAssetViewController.swift; sourceTree = "<group>"; };
+		27CA0CCF1DD94B3300462BC6 /* MKPHAssetImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKPHAssetImageViewController.swift; sourceTree = "<group>"; };
 		27D1A9AA1CEEA00400B511D7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		27D1A9AF1CEEA78300B511D7 /* GalaryLinearLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalaryLinearLayout.swift; sourceTree = "<group>"; };
@@ -793,6 +805,7 @@
 				181C72EC1CE582A30072FB7A /* Animation */,
 				181C72E91CE582000072FB7A /* Side */,
 				2724D2171CE41FF800F4CE03 /* SegmentContainer */,
+				278655781DDA9DA2005BDDCC /* VideoPlayer */,
 				278CAA4B1CD1DFD8008AC629 /* Web */,
 				273F51AE1CC8CB10003ABE4A /* Indicator */,
 				273F51A91CC8CAA1003ABE4A /* HUD */,
@@ -1029,6 +1042,14 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		278655781DDA9DA2005BDDCC /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				278655791DDA9DB7005BDDCC /* VideoPlayer.swift */,
+			);
+			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
 		278725621DB4C73C00C1F19A /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,6 +1158,18 @@
 				27BA394C1CC74E2400436D23 /* Async.swift */,
 			);
 			path = Async;
+			sourceTree = "<group>";
+		};
+		27CA0CCA1DD9497E00462BC6 /* PHAsset */ = {
+			isa = PBXGroup;
+			children = (
+				27CA0CCB1DD949A900462BC6 /* MKPHAsset.storyboard */,
+				27CA0CCD1DD949E600462BC6 /* MKPHAssetViewController.swift */,
+				27CA0CCF1DD94B3300462BC6 /* MKPHAssetImageViewController.swift */,
+				2749CEC91DD95E4300D713B0 /* MKPHAssetVideoViewController.swift */,
+				2749CECD1DD9BA7100D713B0 /* MKiPodAssetViewController.swift */,
+			);
+			path = PHAsset;
 			sourceTree = "<group>";
 		};
 		27D1A9A91CEEA00400B511D7 /* Location */ = {
@@ -1426,6 +1459,7 @@
 			children = (
 				2783E0371DB62E4D005E087C /* MKDataViewController.swift */,
 				2783E0381DB62E4D005E087C /* MKDataViewModel.swift */,
+				27CA0CCA1DD9497E00462BC6 /* PHAsset */,
 				273E41261DD2FE1900A09830 /* Notification */,
 				2783E0201DB62716005E087C /* NetworkRequest */,
 			);
@@ -1718,6 +1752,7 @@
 					};
 					279F038E1DD5A43C00543336 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = TE2BYM67AU;
 						ProvisioningStyle = Automatic;
 					};
 					3FC9DEF41CBFD35900C2D938 = {
@@ -1845,6 +1880,7 @@
 				6CEFCB6E1D3485F3008B3382 /* pannel_icon_expose@2x.png in Resources */,
 				6CEFCB791D3485F3008B3382 /* pannel_icon_safari@2x.png in Resources */,
 				6CEFCB701D3485F3008B3382 /* pannel_icon_link@2x.png in Resources */,
+				27CA0CCC1DD949A900462BC6 /* MKPHAsset.storyboard in Resources */,
 				2783E00E1DB626FD005E087C /* MKIndicatorButtonViewController.xib in Resources */,
 				2783E0091DB626FD005E087C /* MKGalaryCollectionView.storyboard in Resources */,
 				274593C61DCB5908006D04D9 /* smkit_view_empty@2x.png in Resources */,
@@ -1882,7 +1918,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4260885A49F4835289B44C55 /* [CP] Check Pods Manifest.lock */ = {
@@ -1897,7 +1933,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5A49EE33AF7D5E9EBD94C708 /* [CP] Embed Pods Frameworks */ = {
@@ -1942,7 +1978,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9784876EBA4A3CC342CCC8BB /* [CP] Embed Pods Frameworks */ = {
@@ -2054,6 +2090,7 @@
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
 				FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */,
 				3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */,
+				2749CECE1DD9BA7100D713B0 /* MKiPodAssetViewController.swift in Sources */,
 				273F51B21CC8CD4E003ABE4A /* TaskIndicator.swift in Sources */,
 				270692CE1CE9F27100CF211A /* KeychainWrapper.swift in Sources */,
 				6CD0E2621D87D5EA00B2FC40 /* MLinkedList.swift in Sources */,
@@ -2096,6 +2133,7 @@
 				FBE54A341CF3F983001C493A /* PasswordPannel.swift in Sources */,
 				27A1C5EB1CEAC5F0004FEA63 /* GestureTentacleView.swift in Sources */,
 				278937FA1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */,
+				27CA0CCE1DD949E600462BC6 /* MKPHAssetViewController.swift in Sources */,
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
@@ -2129,6 +2167,7 @@
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
 				2783E0131DB626FD005E087C /* MKUIViewController.swift in Sources */,
+				2749CECA1DD95E4300D713B0 /* MKPHAssetVideoViewController.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				27678DEF1D62C31F00EB7C23 /* MTreeNode.swift in Sources */,
 				6CD0E2611D87D5EA00B2FC40 /* MBinaryTree.swift in Sources */,
@@ -2177,11 +2216,13 @@
 				27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */,
 				27975EA71DD163DA006125D8 /* SlideInPresentationManager.swift in Sources */,
 				030C1D4C1CEDC42300BC16C0 /* NumberKeyboardProtocol.swift in Sources */,
+				2786557A1DDA9DB7005BDDCC /* VideoPlayer.swift in Sources */,
 				2783E0011DB626FD005E087C /* MKCustomPullRefreshViewController.swift in Sources */,
 				2783E0001DB626FD005E087C /* MKQuestionCollectionViewCell.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */,
 				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,
+				27CA0CD01DD94B3300462BC6 /* MKPHAssetImageViewController.swift in Sources */,
 				3FC77C451CC36A6D002F964B /* Dictionary+Extension.swift in Sources */,
 				270692CC1CE9F27100CF211A /* CacheProtocol.swift in Sources */,
 				2783E00A1DB626FD005E087C /* MKGalaryCollectionViewController.swift in Sources */,
@@ -2327,6 +2368,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TE2BYM67AU;
 				INFOPLIST_FILE = SwiftMKitDemoNotifyContentExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -2346,6 +2388,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TE2BYM67AU;
 				INFOPLIST_FILE = SwiftMKitDemoNotifyContentExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -2616,6 +2659,7 @@
 				279F039E1DD5A43C00543336 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FC9DEF01CBFD35900C2D938 /* Build configuration list for PBXProject "SwiftMKitDemo" */ = {
 			isa = XCConfigurationList;

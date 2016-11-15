@@ -29,10 +29,15 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>我们需要您的同意才能读取iPod资料库</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>我们需要获取您的地理位置信息</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>我们需要您的同意才能读取媒体资料库</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

@@ -17,5 +17,6 @@ class MKDataViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "User Notification", detail: "Notification", route: "MKUserNotificationViewController", routeSB: "MKUserNotification"))
         self.dataArray.append(MKDataListModel(title: "Network Request", detail: "Request a url", route: "MKNetworkRequestViewController", routeSB: "MKNetworkRequestView"))
         self.dataArray.append(MKDataListModel(title: "CoreData & Network Request", detail: "CoreData", route: "MKCoreDataNetworkRequestViewController", routeSB: "MKNetworkRequestView"))
+        self.dataArray.append(MKDataListModel(title: "Media Asset", detail: "Music Video", route: "MKPHAssetViewController", routeSB: "MKPHAsset"))
     }
 }

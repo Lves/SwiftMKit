@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetApiClient.shared.startNotifyNetworkStatus()
         // debug时可显示加密库的log
 //        EncryptedNetworkManager.setShowLog(true)
-        
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.currentNotificationCenter().delegate = UserNotificationManager.sharedInstance
             MKUserNotificationViewController.registerNotificationCategory()
@@ -55,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Fallback on earlier versions
         }
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
