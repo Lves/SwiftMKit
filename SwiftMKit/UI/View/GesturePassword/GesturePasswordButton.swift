@@ -68,7 +68,7 @@ public class GesturePasswordButton: UIView {
                 CGContextSetRGBFillColor(context, r, g, b, a)
             }
             
-            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width/8+1, bounds.size.height/2-bounds.size.height/8, bounds.size.width * innerCircleSizePercent, bounds.size.height * innerCircleSizePercent);
+            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width*innerCircleSizePercent/2+1, bounds.size.height/2-bounds.size.height*innerCircleSizePercent/2, bounds.size.width * innerCircleSizePercent, bounds.size.height * innerCircleSizePercent);
             
             CGContextAddEllipseInRect(context,frame);
             CGContextFillPath(context);
