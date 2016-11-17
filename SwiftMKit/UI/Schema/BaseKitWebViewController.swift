@@ -60,6 +60,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     var webViewToolsPannelView :SharePannelView?
     
+    override public func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        webViewToolsPannelView?.tappedCancel()
+    }
+    
     public override func setupUI() {
         super.setupUI()
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor

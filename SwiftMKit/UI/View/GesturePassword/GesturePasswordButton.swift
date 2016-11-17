@@ -28,8 +28,10 @@ public class GesturePasswordButton: UIView {
     public var dotNormalColor: UIColor = UIColor.whiteColor() { didSet { setNeedsDisplay() } }
     @IBInspectable
     public var buttonBorderWidth: CGFloat = 2 { didSet { setNeedsDisplay() } }
+    @IBInspectable
+    public var innerCircleSizePercent: CGFloat = 0.25 { didSet { setNeedsDisplay() } }
     /// 标识是否画实心内圆
-    public var isDrawsolidCircle = false
+    public var innerCircleSolid = false { didSet { setNeedsDisplay() } }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -66,7 +68,7 @@ public class GesturePasswordButton: UIView {
                 CGContextSetRGBFillColor(context, r, g, b, a)
             }
             
-            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width/8+1, bounds.size.height/2-bounds.size.height/8, bounds.size.width/4, bounds.size.height/4);
+            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width*innerCircleSizePercent/2+1, bounds.size.height/2-bounds.size.height*innerCircleSizePercent/2, bounds.size.width * innerCircleSizePercent, bounds.size.height * innerCircleSizePercent);
             
             CGContextAddEllipseInRect(context,frame);
             CGContextFillPath(context);
@@ -75,9 +77,10 @@ public class GesturePasswordButton: UIView {
             CGContextSetLineWidth(context, buttonBorderWidth)
             let (r,g,b,a) = dotNormalColor.colorComponents()
             CGContextSetRGBStrokeColor(context, r,g,b,a);//线条颜色
-            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width/8+1, bounds.size.height/2-bounds.size.height/8, bounds.size.width/4, bounds.size.height/4);
+            let frame: CGRect = CGRectMake(bounds.size.width/2-bounds.size.width*innerCircleSizePercent/2+1, bounds.size.height/2-bounds.size.height*innerCircleSizePercent/2, bounds.size.width * innerCircleSizePercent, bounds.size.height * innerCircleSizePercent);
+            frame.x
             CGContextAddEllipseInRect(context, frame)
-            if isDrawsolidCircle {
+            if innerCircleSolid {
                 CGContextSetRGBFillColor(context, r, g, b, a)
                 CGContextFillPath(context)
             } else {
