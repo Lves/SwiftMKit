@@ -23,7 +23,10 @@ public class BaseKitViewController : UIViewController {
         }
     }
     
-    public var hud: HUDProtocol = MBHUDView.shared
+    private var _hud: HUDProtocol = MBHUDView.shared
+    public var hud: HUDProtocol {
+        get { return _hud }
+    }
     lazy public var indicator: IndicatorProtocol = {
         return TaskIndicator(hud: self.hud)
     }()
