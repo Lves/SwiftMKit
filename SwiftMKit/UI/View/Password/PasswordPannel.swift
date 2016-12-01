@@ -9,6 +9,14 @@
 import UIKit
 import IQKeyboardManager
 
+///  Type
+///
+///  - Normal: 普通类型
+///  - Fund:   Only for HongdianFund
+enum PasswordPannelType: Int {
+    case Normal, Fund
+}
+
 public protocol PasswordPannelDelegate: class {
     func pp_didCancel(pannel: PasswordPannel?) 
     func pp_forgetPassword(pannel: PasswordPannel?)
@@ -41,6 +49,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             lblTitle.text = newValue
         }
     }
+    var passwordPannelType: PasswordPannelType = .Normal
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgRotation: UIImageView!
     @IBOutlet weak var lblMessage: UILabel!
@@ -62,8 +71,9 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public static func pannel() -> PasswordPannel {
-        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil).first as! PasswordPannel
+    public static func pannel(index: Int = 0) -> PasswordPannel {
+        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil)[index] as! PasswordPannel
+        view.passwordPannelType = PasswordPannelType(rawValue: index) ?? .Normal
         view.setupUI()
         return view
     }
@@ -88,6 +98,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         lblMessage.hidden = true
         passwordInputView.delegate = self
         passwordInputView.inputViewColor = UIColor(hex6: 0xD8E0EB)
+        passwordInputView.passwordPannelType = passwordPannelType
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
