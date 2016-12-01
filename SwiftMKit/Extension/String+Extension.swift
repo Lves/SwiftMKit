@@ -186,13 +186,13 @@ extension String {
         return size?.height ?? 0
     }
 
-    func getAttributedString(font:UIFont,lineSpacing:CGFloat)->NSAttributedString{
+    func getAttributedString(font:UIFont,lineSpacing:CGFloat,alignment: NSTextAlignment? = .Left)->NSAttributedString{
         guard self.length > 0 else { return NSAttributedString() }
         let attributedString = NSMutableAttributedString(string: self,
                                                          attributes: [NSFontAttributeName:font])
         let style = NSMutableParagraphStyle()
         style.lineSpacing = lineSpacing
-        
+        style.alignment = alignment ?? .Left
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedString.length))
         return attributedString
     }
