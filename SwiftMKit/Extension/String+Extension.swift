@@ -15,7 +15,13 @@ extension String {
     func stringByAddingPercentEncodingForURLQueryValue() -> String? {
         let allowedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
         
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
+        var str:String?
+        if #available(iOS 9, *){
+            str = self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
+        }else {
+            str = self
+        }
+        return str
     }
     
     func withoutSeparator() -> String {
