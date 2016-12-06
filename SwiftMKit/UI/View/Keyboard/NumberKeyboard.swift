@@ -223,7 +223,8 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         if input == "" {
             return ""
         }
-        let output =  NSDecimalNumber(string : input)
+        let noSpacesStr = input.stringByReplacingOccurrencesOfString(" ", withString: "")
+        let output =  NSDecimalNumber(string : noSpacesStr)
         return "\(output)"
 //        var output = input
 //        if let number = input.toFloat() {

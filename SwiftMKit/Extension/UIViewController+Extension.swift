@@ -102,6 +102,8 @@ public extension UIViewController {
                     }
                 }
                 baseVC.params = params
+            }else if let baseVC = vc as? LoanBaseKitViewController {
+                baseVC.params = nextParams
             }
         }
         return vc

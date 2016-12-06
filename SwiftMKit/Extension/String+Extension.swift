@@ -146,7 +146,7 @@ extension String {
         let date = NSDate(fromString: self, format: oFormat)
         let fmt = NSDateFormatter()
         fmt.dateFormat = toFormat
-        return fmt.stringFromDate(date!)
+        return  date == nil ? self : fmt.stringFromDate(date!)
     }
 
 //    ///  字符串 -> N为小数
@@ -184,12 +184,13 @@ extension String {
         return size?.height ?? 0
     }
 
-    func getAttributedString(font:UIFont,lineSpacing:CGFloat)->NSAttributedString{
+    func getAttributedString(font:UIFont,lineSpacing:CGFloat,alignment: NSTextAlignment? = .Left)->NSAttributedString{
         guard self.length > 0 else { return NSAttributedString() }
         let attributedString = NSMutableAttributedString(string: self,
                                                          attributes: [NSFontAttributeName:font])
         let style = NSMutableParagraphStyle()
         style.lineSpacing = lineSpacing
+        style.alignment = alignment ?? .Left
         
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedString.length))
         return attributedString

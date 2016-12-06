@@ -23,6 +23,8 @@ public class BaseKitViewModel: NSObject {
     }
     public func fetchData() {
     }
+    public func dataBinded() {
+    }
     
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")

@@ -47,6 +47,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
+    public var recordOffset: Bool = true
     public static var webOffsets: [String: CGFloat] = [:]
     public var url: String?
     public var moreUrlTitle: String? {
@@ -59,6 +60,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     }
     
     var webViewToolsPannelView :SharePannelView?
+    
+    override public func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        webViewToolsPannelView?.tappedCancel()
+    }
     
     public override func setupUI() {
         super.setupUI()
@@ -161,14 +167,24 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
 
         refreshNavigationBarTopLeftCloseButton()
         
-        if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
-            webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
+        url = webView.request?.URL?.URLString
+        
+        if recordOffset {
+            if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
+                webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
+            }
         }
     }
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
+    
         if let tip = error?.localizedDescription {
+            
+            if (error?.code == NSURLError.Cancelled.rawValue){
+                return
+            }
+            
             self.showTip(tip)
         }
     }

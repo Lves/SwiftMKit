@@ -23,7 +23,10 @@ public class BaseKitViewController : UIViewController {
         }
     }
     
-    public var hud: HUDProtocol = MBHUDView.shared
+    private var _hud: HUDProtocol = MBHUDView.shared
+    public var hud: HUDProtocol {
+        get { return _hud }
+    }
     lazy public var indicator: IndicatorProtocol = {
         return TaskIndicator(hud: self.hud)
     }()
@@ -65,6 +68,7 @@ public class BaseKitViewController : UIViewController {
         setupNavigation()
         setupNotification()
         bindingData()
+        bindedData()
     }
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
@@ -74,6 +78,9 @@ public class BaseKitViewController : UIViewController {
     public func setupNavigation() {
     }
     public func bindingData() {
+    }
+    public func bindedData() {
+        viewModel?.dataBinded()
     }
     public func loadData() {
     }
@@ -126,4 +133,18 @@ public extension UIViewController {
         MBHUDView.shared.hideHUDForView(view, animated: true)
     }
 }
+
+
+public class LoanBaseKitViewController : UIViewController {
+    /// 页面参数（大部分用于初始化使用）
+    public var params = [String: AnyObject]() {
+        didSet {
+            for (key,value) in params {
+                self.setValue(value, forKey: key)
+            }
+        }
+    }
+}
+
+
 
