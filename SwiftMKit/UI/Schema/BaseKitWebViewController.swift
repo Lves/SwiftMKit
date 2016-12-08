@@ -47,6 +47,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
+    public var recordOffset: Bool = true
     public static var webOffsets: [String: CGFloat] = [:]
     public var url: String?
     public var moreUrlTitle: String? {
@@ -161,10 +162,13 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
 
         refreshNavigationBarTopLeftCloseButton()
         
-        if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
-            webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
+        if recordOffset {
+            if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
+                webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
+            }
         }
     }
+    
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
