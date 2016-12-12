@@ -17,7 +17,7 @@ public class SendCodeButton: UIButton {
     public var countDownSeconds: Int = 60
     public var timeupTitle: String = "重新获取"
     
-    override init(frame: CGRect) {
+    required override public init(frame: CGRect) {
         super.init(frame: frame)
     }
     required public init?(coder aDecoder: NSCoder) {
