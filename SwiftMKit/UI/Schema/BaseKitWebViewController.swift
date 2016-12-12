@@ -61,6 +61,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     var webViewToolsPannelView :SharePannelView?
     
+    override public func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        webViewToolsPannelView?.tappedCancel()
+    }
+    
     public override func setupUI() {
         super.setupUI()
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
@@ -162,6 +167,8 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
 
         refreshNavigationBarTopLeftCloseButton()
         
+        url = webView.request?.URL?.URLString
+        
         if recordOffset {
             if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
                 webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
@@ -172,7 +179,13 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
+    
         if let tip = error?.localizedDescription {
+            
+            if (error?.code == NSURLError.Cancelled.rawValue){
+                return
+            }
+            
             self.showTip(tip)
         }
     }

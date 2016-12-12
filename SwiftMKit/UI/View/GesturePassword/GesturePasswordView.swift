@@ -92,10 +92,18 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     private var previousPassword: String = ""
     
     /// 标识是否画实心内圆
-    public var isDrawsolidCircle = false {
+    public var innerCircleSolid = false {
         didSet {
             let _ = buttons.map {
-                $0.isDrawsolidCircle = isDrawsolidCircle
+                $0.innerCircleSolid = innerCircleSolid
+                $0.layoutIfNeeded()
+            }
+        }
+    }
+    public var innerCircleSizePercent: CGFloat = 0.25 {
+        didSet {
+            let _ = buttons.map {
+                $0.innerCircleSizePercent = innerCircleSizePercent
                 $0.layoutIfNeeded()
             }
         }
@@ -122,7 +130,8 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         for index in 0..<9 {
             let button = GesturePasswordButton(frame: CGRectZero)
             button.tag = index + 1
-            button.isDrawsolidCircle = isDrawsolidCircle
+            button.innerCircleSolid = innerCircleSolid
+            button.innerCircleSizePercent = innerCircleSizePercent
             buttons.append(button)
             buttonPannel.addSubview(button)
         }
