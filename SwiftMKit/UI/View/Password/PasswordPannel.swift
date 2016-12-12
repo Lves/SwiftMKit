@@ -72,7 +72,7 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         super.init(coder: aDecoder)
     }
     public static func pannel(index: Int = 0) -> PasswordPannel {
-        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil)[index] as! PasswordPannel
+        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil)![index] as! PasswordPannel
         view.passwordPannelType = PasswordPannelType(rawValue: index) ?? .Normal
         view.setupUI()
         return view
