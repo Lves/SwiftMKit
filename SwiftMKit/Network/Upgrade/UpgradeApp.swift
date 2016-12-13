@@ -35,7 +35,11 @@ public class UpgradeApp : NSObject {
             if let url = NSURL(string: downloadUrl) {
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
-                    UIApplication.sharedApplication().openURL(url)
+                    if #available(iOS 10.0, *) {
+                        UIApplication.sharedApplication().openURL(url, options: [:], completionHandler: nil)
+                    }else{
+                        UIApplication.sharedApplication().openURL(url)
+                    }
                     return
                 }
             }
@@ -77,7 +81,11 @@ public class UpgradeApp : NSObject {
             if let url = NSURL(string: downloadUrl) {
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
-                    UIApplication.sharedApplication().openURL(url)
+                    if #available(iOS 10.0, *) {
+                        UIApplication.sharedApplication().openURL(url, options: [:], completionHandler: nil)
+                    }else{
+                        UIApplication.sharedApplication().openURL(url)
+                    }
                     exit(0)
                 }
             }

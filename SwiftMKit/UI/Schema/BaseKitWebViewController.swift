@@ -285,7 +285,11 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     func sharePannelViewButtonAction(webViewToolsPannelView: SharePannelView, model: ToolsModel) {
         switch model.used {
         case .OpenBySafari:
-            UIApplication.sharedApplication().openURL((webView?.request?.URL)!)
+            if #available(iOS 10.0, *) {
+                UIApplication.sharedApplication().openURL((webView?.request?.URL)!, options: [:], completionHandler: nil)
+            }else{
+                UIApplication.sharedApplication().openURL((webView?.request?.URL)!)
+            }
             break
         case .CopyLink:
             UIPasteboard.generalPasteboard().string = url
