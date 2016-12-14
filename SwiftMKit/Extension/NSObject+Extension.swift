@@ -72,6 +72,23 @@ public extension NSObject {
         return fullName
     }
 
+    class func dictToJson(object:[String:AnyObject]?) -> NSString{
+        
+        var jsonStr : NSString = ""
+        
+        if  (object != nil){
+            
+            do {
+                let jsonData = try NSJSONSerialization.dataWithJSONObject(object ?? [:], options: .PrettyPrinted)
+                jsonStr = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
+            }
+            catch{
+                
+            }
+        }
+        
+        return jsonStr
+    }
 
 }
 
