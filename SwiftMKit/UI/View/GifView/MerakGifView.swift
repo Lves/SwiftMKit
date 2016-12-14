@@ -11,8 +11,14 @@
 import UIKit
 import ImageIO
 import QuartzCore
+import CocoaLumberjack
 
-class MerakGifView: UIView {
+public protocol MerakGifViewDelegate: class {
+    func gv_didFinished(gifView: MerakGifView?)
+}
+
+public class MerakGifView: UIView {
+    weak var delegate : MerakGifViewDelegate?
     var repeatCount : Float = HUGE
     var animation : CAKeyframeAnimation?
     var width:CGFloat{return self.frame.size.width}
@@ -109,7 +115,21 @@ class MerakGifView: UIView {
         animation?.duration = NSTimeInterval(totalTime)
         animation?.removedOnCompletion = false //结束后禁止删除
         animation?.fillMode = kCAFillModeForwards //结束后停留在最后一帧
+        animation?.delegate = self
         self.layer.addAnimation(animation!, forKey: "MerakGifView")
     }
     
+}
+
+extension MerakGifView : CAAnimationDelegate{
+    public func animationDidStart(anim: CAAnimation) {
+        
+    }
+    
+    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        DDLogInfo("animationDidStop \(flag)")
+        if flag {
+            self.delegate?.gv_didFinished(self)
+        }
+    }
 }
