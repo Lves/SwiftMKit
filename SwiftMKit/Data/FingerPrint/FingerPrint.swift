@@ -13,10 +13,10 @@ import ReactiveSwift
 import CocoaLumberjack
 
 open class FingerPrint {
-    open class func isSupport() -> SignalProducer<LAContext, Error> {
+    open class func isSupport() -> SignalProducer<LAContext, NSError> {
         return SignalProducer { sink,disposable in
             let context = LAContext()
-            var error: Error?
+            var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 DDLogInfo("[FingerPrint] Supported")
                 sink.send(value: context)
@@ -28,26 +28,26 @@ open class FingerPrint {
         }
     }
     
-    open class func authenticate(_ title: String) -> SignalProducer<Bool, Error> {
-        return FingerPrint.isSupport().flatMap(.Concat) { (context) -> SignalProducer<Bool, Error> in
+    open class func authenticate(_ title: String) -> SignalProducer<Bool, NSError> {
+        return FingerPrint.isSupport().flatMap(.concat) { (context) -> SignalProducer<Bool, NSError> in
             return SignalProducer { sink,disposable in
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: title) {
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: title, reply: {
                     (success: Bool, authenticationError: Error?) -> Void in
                     if success {
                         DDLogInfo("[FingerPrint] Matched Success")
-                        sink.sendNext(success)
+                        sink.send(value: success)
                         sink.sendCompleted()
                     } else {
-                        if authenticationError != nil && authenticationError!.code == LAError.UserCancel.rawValue {
+                        if authenticationError != nil && authenticationError?.localizedDescription == "Cancel" {
                             DDLogWarn("[FingerPrint] Matched Cancel")
-                            sink.sendNext(false)
+                            sink.send(value: false)
                             sink.sendCompleted()
                         } else {
                             DDLogError("[FingerPrint] Matched Failure: \(authenticationError)")
-                            sink.sendFailed(authenticationError ?? NSError(domain: "", code: -1, userInfo: nil))
+                            sink.send(error: authenticationError as NSError? ?? NSError(domain: "", code: -1, userInfo: nil))
                         }
                     }
-                }
+                })
             }
         }
     }
