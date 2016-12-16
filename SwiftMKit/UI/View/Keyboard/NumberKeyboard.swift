@@ -140,7 +140,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
             let range = self.selectedRange()
             if let tempDelegete = self.textField?.delegate {
                 if tempDelegete.responds(to: #selector(UITextFieldDelegate.textField)) {
-                    if !tempDelegete.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: ".") {
+                    if !tempDelegete.textField!(self.textField!, shouldChangeCharactersIn:range ,replacementString: "."){
                         return
                     }
                 }
@@ -159,7 +159,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
             var range = self.selectedRange()
             if let tempDelegete = self.textField?.delegate {
                 if tempDelegete.responds(to: #selector(UITextFieldDelegate.textField)) {
-                    if !tempDelegete.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
+                    if !tempDelegete.textField!(self.textField!, shouldChangeCharactersIn: range, replacementString: "") {
                         return
                     }
                 }
@@ -187,7 +187,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 let range = self.selectedRange()
                 if let tempDelegete = self.textField?.delegate {
                     if tempDelegete.responds(to: #selector(UITextFieldDelegate.textField)) {
-                        if !tempDelegete.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
+                        if !tempDelegete.textField!(self.textField!, shouldChangeCharactersIn: range, replacementString: inputText) {
                             return
                         }
                     }
