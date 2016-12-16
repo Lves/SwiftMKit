@@ -16,11 +16,11 @@ class MKPHAssetVideoViewController: BaseListViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    var assetsFetchResults: PHFetchResult?
+    var assetsFetchResults: PHFetchResult<AnyObject>?
     
     var dataArray: [PHAsset] = []
     
-    lazy private var _viewModel = BaseListViewModel()
+    lazy fileprivate var _viewModel = BaseListViewModel()
     override var viewModel: BaseListViewModel!{
         get { return _viewModel }
     }
@@ -28,14 +28,14 @@ class MKPHAssetVideoViewController: BaseListViewController {
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .None }
+        get { return .none }
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let bvc = segue.destinationViewController as? MKPHAssetVideoDetailViewController,
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bvc = segue.destination as? MKPHAssetVideoDetailViewController,
             let cell = sender as? UITableViewCell {
-            let index = tableView.indexPathForCell(cell)
+            let index = tableView.indexPath(for: cell)
             bvc.asset = dataArray[index?.row ?? 0]
             bvc.dataArray = dataArray
         }
@@ -54,7 +54,7 @@ class MKPHAssetVideoViewController: BaseListViewController {
         super.loadData()
         let allPhotosOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        assetsFetchResults = PHAsset.fetchAssetsWithMediaType(.Video, options: allPhotosOptions)
+        assetsFetchResults = PHAsset.fetchAssets(with: .video, options: allPhotosOptions)
         for index in 0..<assetsFetchResults!.count {
             let asset = assetsFetchResults![index] as! PHAsset
             dataArray.append(asset)
@@ -62,21 +62,21 @@ class MKPHAssetVideoViewController: BaseListViewController {
         tableView.reloadData()
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         return 1
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier, forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier, for: indexPath)
         let asset = dataArray[indexPath.row]
-        cell.textLabel?.text = asset.valueForKey("filename") as? String
+        cell.textLabel?.text = asset.value(forKey: "filename") as? String
         cell.detailTextLabel?.text = asset.duration.formatToTimeMMss()
         return cell
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
@@ -116,36 +116,36 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
     lazy var player: VideoPlayer = { return VideoPlayer(viewController: self) }()
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
-    override func viewWillDisappear(animated : Bool) {
+    override func viewWillDisappear(_ animated : Bool) {
         super.viewWillDisappear(animated)
         
-        if (self.isMovingFromParentViewController()) {
-            UIDevice.currentDevice().setValue(Int(UIInterfaceOrientation.Portrait.rawValue), forKey: "orientation")
+        if (self.isMovingFromParentViewController) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
     }
     
     override func setupUI() {
         super.setupUI()
         UIViewController.attemptRotationToDeviceOrientation()
-        if let oldValue =  UIDevice.currentDevice().valueForKey("orientation") as? Int {
+        if let oldValue =  UIDevice.current.value(forKey: "orientation") as? Int {
             let orientation = UIInterfaceOrientation(rawValue: oldValue)
-            if orientation != .LandscapeLeft && orientation != .LandscapeRight {
-                let value = UIInterfaceOrientation.LandscapeLeft.rawValue
-                UIDevice.currentDevice().setValue(value, forKey: "orientation")
+            if orientation != .landscapeLeft && orientation != .landscapeRight {
+                let value = UIInterfaceOrientation.landscapeLeft.rawValue
+                UIDevice.current.setValue(value, forKey: "orientation")
             }
         }
         
         lblStartTime.font = UIFont(name: "DBLCDTempBlack", size: 18)
         lblEndTime.font = UIFont(name: "DBLCDTempBlack", size: 18)
-        lblName.text = asset?.valueForKey("filename") as? String
+        lblName.text = asset?.value(forKey: "filename") as? String
         
         player.btnPlay = btnPlay
         player.lblStartTime = lblStartTime
@@ -158,23 +158,23 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
         playAsset(asset!)
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [.LandscapeLeft, .LandscapeRight]
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return [.landscapeLeft, .landscapeRight]
     }
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return .LandscapeLeft
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
+        return .landscapeLeft
     }
     
-    func playAsset(asset: PHAsset) {
+    func playAsset(_ asset: PHAsset) {
         self.asset = asset
         Async.background {
-            PHImageManager.defaultManager().requestAVAssetForVideo(self.asset!, options: nil) { (avasset, _, _) in
+            PHImageManager.default().requestAVAsset(forVideo: self.asset!, options: nil) { (avasset, _, _) in
                 Async.main {
                     if let urlAsset = avasset as? AVURLAsset {
-                        self.player.readToPlay(urlAsset.URL)
+                        self.player.readToPlay(urlAsset.url)
                     }
                 }
             }
@@ -182,24 +182,24 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
     }
    
     
-    @IBAction func click_close(sender: UIButton) {
+    @IBAction func click_close(_ sender: UIButton) {
         self.routeBack()
     }
-    @IBAction func click_last(sender: UIButton) {
+    @IBAction func click_last(_ sender: UIButton) {
         var index = dataArray.indexesOf(asset!).first!
         index = max(index - 1, 0)
         let video = dataArray[index]
         playAsset(video)
     }
-    @IBAction func click_back(sender: UIButton) {
+    @IBAction func click_back(_ sender: UIButton) {
         player.seekAddTime(-20)
         player.delayToolBarHidden()
     }
-    @IBAction func click_fast(sender: UIButton) {
+    @IBAction func click_fast(_ sender: UIButton) {
         player.seekAddTime(20)
         player.delayToolBarHidden()
     }
-    @IBAction func click_next(sender: UIButton) {
+    @IBAction func click_next(_ sender: UIButton) {
         var index = dataArray.indexesOf(asset!).first!
         index = min(index + 1, dataArray.count - 1)
         let video = dataArray[index]

@@ -12,7 +12,7 @@ import UserNotificationsUI
 
 
 struct NotificationPresentItem {
-    let url: NSURL
+    let url: URL
     let title: String
     let text: String
 }
@@ -21,7 +21,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     var items: [NotificationPresentItem] = []
     
-    private var index: Int = 0
+    fileprivate var index: Int = 0
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
@@ -32,7 +32,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         // Do any required interface initialization here.
     }
     
-    func didReceiveNotification(notification: UNNotification) {
+    func didReceive(_ notification: UNNotification) {
         let content = notification.request.content
         if let items = content.userInfo["items"] as? [[String: AnyObject]] {
             
@@ -46,7 +46,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                     continue
                 }
                 
-                let url = content.attachments[i].URL
+                let url = content.attachments[i].url
                 
                 let presentItem = NotificationPresentItem(url: url, title: title, text: text)
                 self.items.append(presentItem)
@@ -56,10 +56,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         updateUI(index: 0)
     }
     
-    private func updateUI(index index: Int) {
+    fileprivate func updateUI(index: Int) {
         let item = items[index]
         if item.url.startAccessingSecurityScopedResource() {
-            imageView.image = UIImage(contentsOfFile: item.url.path!)
+            imageView.image = UIImage(contentsOfFile: item.url.path)
             item.url.stopAccessingSecurityScopedResource()
         }
         label.text = item.title
@@ -69,7 +69,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     }
     
     
-    func didReceiveNotificationResponse(response: UNNotificationResponse, completionHandler completion: (UNNotificationContentExtensionResponseOption) -> Void) {
+    func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
         if response.actionIdentifier == "switch" {
             let nextIndex: Int
             if index == 0 {
@@ -79,13 +79,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             }
             
             updateUI(index: nextIndex)
-            completion(.DoNotDismiss)
+            completion(.doNotDismiss)
         } else if response.actionIdentifier == "open" {
-            completion(.DismissAndForwardAction)
+            completion(.dismissAndForwardAction)
         } else if response.actionIdentifier == "dismiss" {
-            completion(.Dismiss)
+            completion(.dismiss)
         } else {
-            completion(.DismissAndForwardAction)
+            completion(.dismissAndForwardAction)
         }
     }
 }

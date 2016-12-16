@@ -12,47 +12,47 @@ import CocoaLumberjack
 import WebKit
 import WebViewJavascriptBridge
 
-public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate ,WebViewProgressDelegate{
+open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate ,WebViewProgressDelegate{
     
     struct InnerConst {
         static let RootViewBackgroundColor : UIColor = UIColor(hex6: 0x2F3549)
-        static let WebViewBackgroundColor : UIColor = UIColor.clearColor()
-        static let PannelTitleColor : UIColor = UIColor.grayColor()
-        static let BackGroundTitleColor : UIColor = UIColor.lightTextColor()
+        static let WebViewBackgroundColor : UIColor = UIColor.clear
+        static let PannelTitleColor : UIColor = UIColor.gray
+        static let BackGroundTitleColor : UIColor = UIColor.lightText
     }
     
-    public var webView: UIWebView?
-    public var webViewBridge: WebViewBridge?
-    public var webViewUserAgent: [String: AnyObject]? {
+    open var webView: UIWebView?
+    open var webViewBridge: WebViewBridge?
+    open var webViewUserAgent: [String: AnyObject]? {
         didSet {
             webViewBridge?.userAgent = webViewUserAgent
         }
     }
-    public var webViewRequestHeader: [String: String]? {
+    open var webViewRequestHeader: [String: String]? {
         didSet {
             webViewBridge?.requestHeader = webViewRequestHeader
         }
     }
     
-    public var progressView : UIProgressView?
-    public var webViewProgress: WebViewProgress = WebViewProgress()
+    open var progressView : UIProgressView?
+    open var webViewProgress: WebViewProgress = WebViewProgress()
     
-    public var disableUserSelect = false
-    public var disableLongTouch = false
-    public var showNavigationBarTopLeftCloseButton: Bool = true
-    public var shouldAllowRirectToUrlInView: Bool = true
-    public var showNavRightToolPannelItem: Bool = true {
+    open var disableUserSelect = false
+    open var disableLongTouch = false
+    open var showNavigationBarTopLeftCloseButton: Bool = true
+    open var shouldAllowRirectToUrlInView: Bool = true
+    open var showNavRightToolPannelItem: Bool = true {
         didSet {
             self.refreshNavigationBarTopRightMoreButton()
         }
     }
     
-    public var recordOffset: Bool = true
-    public static var webOffsets: [String: CGFloat] = [:]
-    public var url: String?
-    public var moreUrlTitle: String? {
+    open var recordOffset: Bool = true
+    open static var webOffsets: [String: CGFloat] = [:]
+    open var url: String?
+    open var moreUrlTitle: String? {
         get {
-            if let host = NSURL(string:url ?? "")?.host {
+            if let host = URL(string:url ?? "")?.host {
                 return host
             }
             return url
@@ -61,16 +61,16 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     
     var webViewToolsPannelView :SharePannelView?
     
-    override public func viewWillDisappear(animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         webViewToolsPannelView?.tappedCancel()
     }
     
-    public override func setupUI() {
+    open override func setupUI() {
         super.setupUI()
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
         self.view.addSubview(self.getBackgroundLab())
-        webView = UIWebView(frame: CGRectZero)
+        webView = UIWebView(frame: CGRect.zero)
         webView?.backgroundColor = InnerConst.WebViewBackgroundColor
         self.view.addSubview(webView!)
         webView!.delegate = self
@@ -80,8 +80,8 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
         webViewBridge = WebViewBridge(webView: webView!, viewController: self)
         webViewProgress.progressDelegate = self
-        progressView = UIProgressView(frame: CGRectMake(0, 0, self.screenW, 0))
-        progressView?.trackTintColor = UIColor.clearColor()
+        progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.screenW, height: 0))
+        progressView?.trackTintColor = UIColor.clear
         self.view.addSubview(progressView!)
         bindEvents()
         
@@ -89,28 +89,28 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
             self.loadData()
         }
     }
-    public override func setupNavigation() {
+    open override func setupNavigation() {
         super.setupNavigation()
         if let btnBack = navBtnBack() {
             self.navigationItem.leftBarButtonItems = [btnBack]
         }
         self.refreshNavigationBarTopRightMoreButton()
     }
-    public override func loadData() {
+    open override func loadData() {
         super.loadData()
         if url != nil {
             self.webViewBridge?.requestUrl(self.url)
         }
     }
-    public func bindEvents() {
+    open func bindEvents() {
         DDLogWarn("Need to implement the function of 'bindEvents'")
     }
-    public func bindEvent(eventName: String, handler: WVJBHandler) {
+    open func bindEvent(_ eventName: String, handler: WVJBHandler) {
         webViewBridge?.addEvent(eventName, handler: handler)
     }
     
     //WebViewProgressDelegate
-    func webViewProgress(webViewProgress: WebViewProgress, updateProgress progress: Float) {
+    func webViewProgress(_ webViewProgress: WebViewProgress, updateProgress progress: Float) {
         DDLogInfo("WebView Progress: \(progress)")
         if progress > 0.0 && progress < 1.0 {
             self.progressView?.alpha = 1.0
@@ -122,14 +122,14 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
         else if progress == 1.0 {
             self.progressView?.setProgress(progress, animated: true)
-            UIView.animateWithDuration(2.5, animations: {
+            UIView.animate(withDuration: 2.5, animations: {
                 self.progressView?.alpha = 0.0
             })
         }
     }
     
     //WebViewDelegate
-    public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 
         var ret = true
         
@@ -146,43 +146,43 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         return ret
     }
     
-    public func webViewDidStartLoad(webView: UIWebView) {
+    open func webViewDidStartLoad(_ webView: UIWebView) {
         webViewProgress.progressWebViewDidStartLoad(webView)
         webViewBridge?.indicator.startAnimating()
-        webView.bringSubviewToFront(webViewBridge!.indicator)
+        webView.bringSubview(toFront: webViewBridge!.indicator)
     }
     
-    public func webViewDidFinishLoad(webView: UIWebView) {
+    open func webViewDidFinishLoad(_ webView: UIWebView) {
         webViewProgress.progressWebViewDidFinishLoad(webView)
         webViewBridge?.indicator.stopAnimating()
         if self.title == nil {
-            self.title = webView.stringByEvaluatingJavaScriptFromString("document.title")
+            self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
         }
         if disableUserSelect {
-            webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitUserSelect='none';")
+            webView.stringByEvaluatingJavaScript(from: "document.documentElement.style.webkitUserSelect='none';")
         }
         if disableLongTouch {
-            webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitTouchCallout='none';")
+            webView.stringByEvaluatingJavaScript(from: "document.documentElement.style.webkitTouchCallout='none';")
         }
 
         refreshNavigationBarTopLeftCloseButton()
         
-        url = webView.request?.URL?.URLString
+        url = webView.request?.url?.URLString
         
         if recordOffset {
             if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
-                webView.scrollView.setContentOffset(CGPointMake(0, offset), animated: false)
+                webView.scrollView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
             }
         }
     }
     
-    public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    open func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
     
-        if let tip = error?.localizedDescription {
+        if let tip = error.localizedDescription {
             
-            if (error?.code == NSURLError.Cancelled.rawValue){
+            if (error.code == URLError.cancelled.rawValue){
                 return
             }
             
@@ -190,7 +190,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
-    public func refreshNavigationBarTopLeftCloseButton() {
+    open func refreshNavigationBarTopLeftCloseButton() {
         if showNavigationBarTopLeftCloseButton {
             if webView?.canGoBack ?? false {
                 if self.navigationItem.leftBarButtonItems != nil {
@@ -206,7 +206,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
-    public func refreshNavigationBarTopRightMoreButton() {
+    open func refreshNavigationBarTopRightMoreButton() {
         if showNavRightToolPannelItem {
             if let btnMore : UIBarButtonItem = navBtnMore() {
                 self.navigationItem.rightBarButtonItem = btnMore
@@ -216,86 +216,86 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
-    public func navBtnBack() -> UIBarButtonItem? {
+    open func navBtnBack() -> UIBarButtonItem? {
         if let btnBack = self.navigationItem.leftBarButtonItems?.first {
             return btnBack
         }
-        return UIBarButtonItem(title: "返回", style: .Plain, target: self, action: #selector(BaseKitWebViewController.click_nav_back(_:)))
+        return UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(BaseKitWebViewController.click_nav_back(_:)))
     }
-    public func navBtnClose() -> UIBarButtonItem {
-        return UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(BaseKitWebViewController.click_nav_close(_:)))
+    open func navBtnClose() -> UIBarButtonItem {
+        return UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(BaseKitWebViewController.click_nav_close(_:)))
     }
-    public func navBtnMore() -> UIBarButtonItem {
-        return UIBarButtonItem(title: "•••", style: .Plain, target: self, action: #selector(BaseKitWebViewController.click_nav_more(_:)))
+    open func navBtnMore() -> UIBarButtonItem {
+        return UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(BaseKitWebViewController.click_nav_more(_:)))
     }
     
-    public func getToolMoreHeaderView() -> UIView {
-        let labHeaderView : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.w, 30))
+    open func getToolMoreHeaderView() -> UIView {
+        let labHeaderView : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.w, height: 30))
         labHeaderView.clipsToBounds = true
         if let urlTitle = moreUrlTitle {
-            labHeaderView.font = UIFont.systemFontOfSize(10)
+            labHeaderView.font = UIFont.systemFont(ofSize: 10)
             labHeaderView.text = "网页由 \(urlTitle) 提供"
             labHeaderView.textColor = InnerConst.PannelTitleColor
-            labHeaderView.textAlignment = NSTextAlignment.Center
+            labHeaderView.textAlignment = NSTextAlignment.center
         } else {
             labHeaderView.h = 0
         }
         return labHeaderView
     }
     
-    public func getBackgroundLab() -> UIView {
-        let labBackground : UILabel = UILabel(frame: CGRectMake(0, 10, self.screenW, 30))
+    open func getBackgroundLab() -> UIView {
+        let labBackground : UILabel = UILabel(frame: CGRect(x: 0, y: 10, width: self.screenW, height: 30))
         labBackground.clipsToBounds = true
         if let urlTitle = moreUrlTitle {
-            labBackground.font = UIFont.systemFontOfSize(10)
+            labBackground.font = UIFont.systemFont(ofSize: 10)
             labBackground.text = "网页由 \(urlTitle) 提供"
             labBackground.textColor = InnerConst.BackGroundTitleColor
-            labBackground.textAlignment = NSTextAlignment.Center
+            labBackground.textAlignment = NSTextAlignment.center
         } else {
             labBackground.h = 0
         }
         return labBackground
     }
     
-    public func click_nav_back(sender: UIBarButtonItem) {
+    open func click_nav_back(_ sender: UIBarButtonItem) {
         if webView?.canGoBack ?? false {
             webView?.goBack()
         } else {
             self.routeBack()
         }
     }
-    public func click_nav_close(sender: UIBarButtonItem) {
+    open func click_nav_close(_ sender: UIBarButtonItem) {
         self.routeBack()
     }
-    public func click_nav_more(sender: UIBarButtonItem) {
+    open func click_nav_more(_ sender: UIBarButtonItem) {
         
-        webViewToolsPannelView = SharePannelView(frame: CGRectMake(0, 0, self.view.w, self.view.h+64))
+        webViewToolsPannelView = SharePannelView(frame: CGRect(x: 0, y: 0, width: self.view.w, height: self.view.h+64))
         webViewToolsPannelView?.delegate = self
         webViewToolsPannelView!.headerView = getToolMoreHeaderView()
         webViewToolsPannelView!.toolsArray =
             [[
-                ToolsModel(image: "pannel_icon_safari", highlightedImage: "pannel_icon_safari", title: "在Safari中\n打开", used: .OpenBySafari),
-                ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接", used: .CopyLink),
-                ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新", used: .WebRefresh)]]
+                ToolsModel(image: "pannel_icon_safari", highlightedImage: "pannel_icon_safari", title: "在Safari中\n打开", used: .openBySafari),
+                ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接", used: .copyLink),
+                ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新", used: .webRefresh)]]
         
         self.navigationController?.view.addSubview(webViewToolsPannelView!)
     }
     
     //MARK : - WebViewToolsPannelViewDelegate
-    func sharePannelViewButtonAction(webViewToolsPannelView: SharePannelView, model: ToolsModel) {
+    func sharePannelViewButtonAction(_ webViewToolsPannelView: SharePannelView, model: ToolsModel) {
         switch model.used {
-        case .OpenBySafari:
+        case .openBySafari:
             if #available(iOS 10.0, *) {
-                UIApplication.sharedApplication().openURL((webView?.request?.URL)!, options: [:], completionHandler: nil)
+                UIApplication.shared.open((webView?.request?.url)!, options: [:], completionHandler: nil)
             }else{
-                UIApplication.sharedApplication().openURL((webView?.request?.URL)!)
+                UIApplication.shared.openURL((webView?.request?.url)!)
             }
             break
-        case .CopyLink:
-            UIPasteboard.generalPasteboard().string = url
+        case .copyLink:
+            UIPasteboard.general.string = url
             self.showTip("已复制链接到剪切版")
             break
-        case .WebRefresh:
+        case .webRefresh:
             webView?.reload()
             break
             
@@ -304,18 +304,18 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
         }
     }
     
-    private func saveWebOffsetY (scrollView : UIScrollView){
+    fileprivate func saveWebOffsetY (_ scrollView : UIScrollView){
         if let key_url = url {
             BaseKitWebViewController.webOffsets[key_url] = scrollView.contentOffset.y
         }
     }
     
     //MARK : - ScrollViewDelegate
-    public func scrollViewDidEndDragging(scrollView: UIScrollView) {
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView) {
         self.saveWebOffsetY(scrollView)
     }
     
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         self.saveWebOffsetY(scrollView)
     }
     

@@ -11,8 +11,9 @@ import PINCache
 import CocoaLumberjack
 import UserNotifications
 import ReactiveCocoa
+import ReactiveSwift
 
-struct UserNotificationOption : OptionSetType {
+struct UserNotificationOption : OptionSet {
     
     let rawValue: UInt
     
@@ -23,15 +24,15 @@ struct UserNotificationOption : OptionSetType {
 }
 
 @available(iOS 10.0, *)
-public class UserNotificationManager: NSObject {
+open class UserNotificationManager: NSObject {
     
     static let sharedInstance = UserNotificationManager()
     
-    public var willPresentNotificationHandler: ((UNNotification) -> Bool)?
-    public var didRecieveNotificationHandler: ((UNNotificationResponse) -> Bool)?
+    open var willPresentNotificationHandler: ((UNNotification) -> Bool)?
+    open var didRecieveNotificationHandler: ((UNNotificationResponse) -> Bool)?
     
-    private struct Constant {
-        static let DeviceTokenName = "DeviceTokenName"
+    fileprivate struct Constant {
+        static let DeviceTokenName: String? = "DeviceTokenName"
         static let CFBundleInfoDictionaryVersion = "CFBundleInfoDictionaryVersion"
         static let CFBundleVersion = "CFBundleVersion"
         static let CFBundleShortVersionString = "CFBundleShortVersionString"
@@ -40,29 +41,29 @@ public class UserNotificationManager: NSObject {
     
     static var deviceToken: String? {
         get {
-            let token = PINMemoryCache.sharedCache().objectForKey(Constant.DeviceTokenName) as? String
+            let token = PINMemoryCache.shared().object(forKey: Constant.DeviceTokenName) as? String
             DDLogInfo("Get Push Device Token: \(token ?? "")")
             return token
         }
         set {
             if let deviceToken = newValue {
-                PINMemoryCache.sharedCache().setObject(deviceToken, forKey: Constant.DeviceTokenName)
+                PINMemoryCache.shared().setObject(deviceToken, forKey: Constant.DeviceTokenName!)
                 DDLogInfo("Set Push Device Token: \(deviceToken)")
             } else {
-                PINMemoryCache.sharedCache().removeObjectForKey(Constant.DeviceTokenName)
+                PINMemoryCache.shared().removeObject(forKey: Constant.DeviceTokenName)
                 DDLogWarn("Remove Push Device Token: \(deviceToken)")
             }
         }
     }
     
-    static var authorizationStatus = MutableProperty<UNAuthorizationStatus>(.NotDetermined)
+    static var authorizationStatus = MutableProperty<UNAuthorizationStatus>(.notDetermined)
     static var settings = MutableProperty<UNNotificationSettings?>(nil)
     
     static func registerForRemoteNotifications() {
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+        UIApplication.shared.registerForRemoteNotifications()
     }
-    static func requestAuthorization(options: UserNotificationOption, completionHandler: (Bool, NSError?) -> Void) {
-        UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(UNAuthorizationOptions(rawValue: options.rawValue)) { (granted, error) in
+    static func requestAuthorization(_ options: UserNotificationOption, completionHandler: @escaping (Bool, Error?) -> Void) {
+        UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions(rawValue: options.rawValue)) { (granted, error) in
             if granted {
                 DDLogInfo("推送授权成功")
                 UserNotificationManager.registerForRemoteNotifications()
@@ -70,15 +71,15 @@ public class UserNotificationManager: NSObject {
             } else {
                 DDLogInfo("推送授权失败")
             }
-            Async.main {
-                completionHandler(granted, error)
+            let _ = Async.main {
+                completionHandler(granted, error as Error?)
             }
         }
     }
     
-    static func getNotificationSettings(completionHandler: (UNNotificationSettings) -> Void) {
-        UNUserNotificationCenter.currentNotificationCenter().getNotificationSettingsWithCompletionHandler { (settings) in
-            Async.main {
+    static func getNotificationSettings(_ completionHandler: @escaping (UNNotificationSettings) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            let _ = Async.main {
                 self.settings.value = settings
                 self.authorizationStatus.value = settings.authorizationStatus
                 completionHandler(settings)
@@ -86,10 +87,10 @@ public class UserNotificationManager: NSObject {
         }
     }
     
-    static func addNotify(title: String, body: String, triggerTime: NSTimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+    static func addNotify(_ title: String, body: String, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
         addNotify(title, body: body, attachments: nil, triggerTime: triggerTime, repeats: repeats, identifier: identifier, categoryIdentifier: categoryIdentifier, withCompletionHandler: completionHandler)
     }
-    static func addNotify(title: String, body: String, attachments: [UNNotificationAttachment]?, triggerTime: NSTimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+    static func addNotify(_ title: String, body: String, attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
         // 1. 创建通知内容
         let content = UNMutableNotificationContent()
         content.title = title
@@ -109,40 +110,40 @@ public class UserNotificationManager: NSObject {
         let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
         
         // 将请求添加到发送中心
-        UNUserNotificationCenter.currentNotificationCenter().addNotificationRequest(request) { error in
+        UNUserNotificationCenter.current().add(request) { error in
             if error == nil {
                 DDLogInfo("定时推送添加成功：\(requestIdentifier)")
             }
-            completionHandler?(error)
+            completionHandler?(error as NSError?)
         }
     }
     
-    static func removeDeliveredNotifies(identifiers: [String]) {
-        UNUserNotificationCenter.currentNotificationCenter().removeDeliveredNotificationsWithIdentifiers(identifiers)
+    static func removeDeliveredNotifies(_ identifiers: [String]) {
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
     }
     static func removeAllDeliveredNotifies() {
-        UNUserNotificationCenter.currentNotificationCenter().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
-    static func cancelNotifies(identifiers: [String]) {
-        UNUserNotificationCenter.currentNotificationCenter().removePendingNotificationRequestsWithIdentifiers(identifiers)
+    static func cancelNotifies(_ identifiers: [String]) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
     static func cancelAllNotifies() {
-        UNUserNotificationCenter.currentNotificationCenter().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }
 
 
 @available(iOS 10.0, *)
 extension UserNotificationManager: UNUserNotificationCenterDelegate {
-    public func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if (willPresentNotificationHandler?(notification) ?? false) == true {
-            completionHandler([.Alert, .Sound])
+            completionHandler([.alert, .sound])
         } else {
             completionHandler([])
         }
     }
     
-    public func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if (didRecieveNotificationHandler?(response) ?? true) == true {
             completionHandler()
         }

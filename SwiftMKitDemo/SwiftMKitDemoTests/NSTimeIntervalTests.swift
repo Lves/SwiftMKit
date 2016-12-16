@@ -27,13 +27,13 @@ class NSTimeIntervalTests: XCTestCase {
     }
     
     func validateTime() {
-        func validateItem(expectTuple: (Int,Int,Int), tuple: (Int,Int,Int), expectResult: String, result: String, source: NSTimeInterval) {
+        func validateItem(_ expectTuple: (Int,Int,Int), tuple: (Int,Int,Int), expectResult: String, result: String, source: TimeInterval) {
             XCTAssertEqual(expectTuple.0, tuple.0, "source: \(source)")
             XCTAssertEqual(expectTuple.1, tuple.1, "source: \(source)")
             XCTAssertEqual(expectTuple.2, tuple.2, "source: \(source)")
             XCTAssertEqual(expectResult, result, "source: \(source)")
         }
-        var test: NSTimeInterval = 0
+        var test: TimeInterval = 0
         validateItem((0,0,0), tuple: test.secondsToHHmmss(), expectResult: "00:00:00", result: test.secondsToHHmmssString(), source: test)
         
         test = 3600
@@ -68,7 +68,7 @@ class NSTimeIntervalTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

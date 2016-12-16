@@ -25,10 +25,10 @@ public extension UIButton {
     @IBInspectable
     public var borderColor: UIColor {
         get {
-            return UIColor(CGColor: layer.borderColor ?? UIColor.clearColor().CGColor)
+            return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
         }
         set {
-            layer.borderColor = newValue.CGColor
+            layer.borderColor = newValue.cgColor
         }
     }
     /// borderWidth
@@ -45,7 +45,7 @@ public extension UIButton {
 }
 
 extension UIControl {
-    func addTarget_(target: AnyObject?) {
+    func addTarget_(_ target: AnyObject?) {
         addTarget(target, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
     }
 }

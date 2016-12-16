@@ -41,15 +41,15 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return optionsArray.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         var cellHeight: CGFloat = 0.0
         if optionsArray.count > 0 {
@@ -62,9 +62,9 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
         
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if optionsArray.count > 0 {
             let optionModel = optionsArray[indexPath.row]
             cell?.textLabel?.text = optionModel.optionCont ?? ""
@@ -79,15 +79,15 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
     }
     
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let height = headerViewHeightWithText(questionModel?.title ?? "")
-        let view = UIView(frame:CGRectMake(0, 0, tableView.size.width, height))
-        let lblQuestion = UILabel(frame:CGRectMake(10.0, 30.0, tableView.size.width - 20.0, height - 45.0))
+        let view = UIView(frame:CGRect(x: 0, y: 0, width: tableView.size.width, height: height))
+        let lblQuestion = UILabel(frame:CGRect(x: 10.0, y: 30.0, width: tableView.size.width - 20.0, height: height - 45.0))
         lblQuestion.numberOfLines = 0
         view.backgroundColor = UIColor.clearColor()
         lblQuestion.backgroundColor = UIColor.clearColor()
-        let font = UIFont.systemFontOfSize(InnerConst.QuestionFontOfSize)
+        let font = UIFont.systemFont(ofSize: InnerConst.QuestionFontOfSize)
         lblQuestion.font = font
         lblQuestion.textColor = UIColor(hex6: 0x53606E)
         lblQuestion.text = "\(questionModel?.title ?? "")"
@@ -95,39 +95,39 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
         return view
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return headerViewHeightWithText(questionModel?.title ?? "")
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView(frame:CGRectMake(0, 0, tableView.size.width, 1.0))
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView(frame:CGRect(x: 0, y: 0, width: tableView.size.width, height: 1.0))
         view.backgroundColor = UIColor(hex6: 0xF3F6FC)
         return view
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
     }
     
-    private func headerViewHeightWithText(text:String) -> CGFloat {
-        let font = UIFont.systemFontOfSize(InnerConst.QuestionFontOfSize)
+    fileprivate func headerViewHeightWithText(_ text:String) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: InnerConst.QuestionFontOfSize)
         let labelW: CGFloat = listView.size.width - 20.0
-        let rect: CGRect = text.boundingRectWithSize(CGSizeMake(labelW, CGFloat.max), options: [.UsesLineFragmentOrigin, .UsesFontLeading] , attributes: [NSFontAttributeName: font] , context: nil)
+        let rect: CGRect = text.boundingRect(with: CGSize(width: labelW, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading] , attributes: [NSFontAttributeName: font] , context: nil)
         return rect.height+50.0
     }
     
-    private func cellHeightWithText(text:String) -> CGFloat {
-        var font = UIFont.systemFontOfSize(14)
+    fileprivate func cellHeightWithText(_ text:String) -> CGFloat {
+        var font = UIFont.systemFont(ofSize: 14)
         if #available(iOS 8.2, *) {
-            font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
+            font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightLight)
         }
         let labelW: CGFloat = listView.size.width - 31.0
-        let rect: CGRect = text.boundingRectWithSize(CGSizeMake(labelW, CGFloat.max), options: [.UsesLineFragmentOrigin, .UsesFontLeading] , attributes: [NSFontAttributeName:font] , context: nil)
+        let rect: CGRect = text.boundingRect(with: CGSize(width: labelW, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading] , attributes: [NSFontAttributeName:font] , context: nil)
         return rect.height + 30.0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if let handler = didSelectCellBlock {
             let optionModel = optionsArray[indexPath.row]
             questionModel?.selectedOption = optionModel

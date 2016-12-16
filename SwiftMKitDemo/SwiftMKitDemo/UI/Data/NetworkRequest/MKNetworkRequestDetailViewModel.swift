@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import CocoaLumberjack
 
 class MKNetworkRequestDetailViewModel: BaseViewModel {
@@ -26,23 +27,23 @@ class MKNetworkRequestDetailViewModel: BaseViewModel {
                 if let like = self?.isLike.value {
                     self?.isLike.value = !like
                 }
-                sink.sendNext(input)
+                sink.send(value: input)
                 sink.sendCompleted()
             }
         }
-        action.values.observeNext { values in
+        action.values.observeValues { values in
             DDLogVerbose("\(values)")
         }
-        action.errors.observeNext { error in
+        action.errors.observeValues { error in
             DDLogError("\(error)")
         }
         return action
     }()
     
-    private var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NetError> {
+    fileprivate var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NetError> {
         get {
             return PX500PhotoDetailApiData(photoId: photoId!).setIndicator(self.indicator, view: self.view).signal().on(
-                next: { [weak self] data in
+                starting: { [weak self] data in
                     if let photo = data.photo {
                         self?.photo.value = photo
                     }

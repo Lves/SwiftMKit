@@ -15,16 +15,16 @@ public enum PresentationDirection {
     case bottom
 }
 
-public class SlideInPresentationManager: NSObject {
-    public var direction = PresentationDirection.left
-    public var coverPercent: CGFloat = 0.8
-    public var dimmingColor: UIColor = UIColor(white: 0.0, alpha: 0.5)
-    public var statusBarHidden = false
-    public var disableCompactHeight = false
+open class SlideInPresentationManager: NSObject {
+    open var direction = PresentationDirection.left
+    open var coverPercent: CGFloat = 0.8
+    open var dimmingColor: UIColor = UIColor(white: 0.0, alpha: 0.5)
+    open var statusBarHidden = false
+    open var disableCompactHeight = false
 
     
     var presentationController: UIPresentationController?
-    public var sourceViewController: UIViewController? {
+    open var sourceViewController: UIViewController? {
         return presentationController?.presentedViewController
     }
     
@@ -32,7 +32,7 @@ public class SlideInPresentationManager: NSObject {
 
 // MARK: - UIViewControllerTransitioningDelegate
 extension SlideInPresentationManager: UIViewControllerTransitioningDelegate {
-    public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
+    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         let presentationController = SlideInPresentationController(presentedViewController: presented,
                                                                    presenting: presenting,
                                                                    direction: direction)
@@ -43,11 +43,11 @@ extension SlideInPresentationManager: UIViewControllerTransitioningDelegate {
 
         return presentationController
     }
-    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return SlideInPresentationAnimator(direction: direction, isPresentation: true)
     }
     
-    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
             return SlideInPresentationAnimator(direction: direction, isPresentation: false)
     }
 }
@@ -55,11 +55,11 @@ extension SlideInPresentationManager: UIViewControllerTransitioningDelegate {
 // MARK: - UIAdaptivePresentationControllerDelegate
 extension SlideInPresentationManager: UIAdaptivePresentationControllerDelegate {
     
-    public func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        if traitCollection.verticalSizeClass == .Compact && disableCompactHeight {
-            return .OverFullScreen
+    public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        if traitCollection.verticalSizeClass == .compact && disableCompactHeight {
+            return .overFullScreen
         } else {
-            return .None
+            return .none
         }
     }
 }

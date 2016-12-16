@@ -10,18 +10,18 @@ import UIKit
 import CocoaLumberjack
 
 public protocol GesturePasswordViewDelegate : class {
-    func gp_verification(success: Bool, message: String, canTryAgain: Bool)
-    func gp_setPassword(success: Bool, message: String)
-    func gp_confirmSetPassword(success: Bool, message: String)
+    func gp_verification(_ success: Bool, message: String, canTryAgain: Bool)
+    func gp_setPassword(_ success: Bool, message: String)
+    func gp_confirmSetPassword(_ success: Bool, message: String)
 }
 
 @IBDesignable
-public class GesturePasswordView: UIView, GestureTentacleDelegate {
+open class GesturePasswordView: UIView, GestureTentacleDelegate {
     
     struct InnerConstant {
         static let SuccessColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1)
         static let FailureColor = UIColor(red: 208/255, green: 36/255, blue: 36/255, alpha: 1)
-        static let NormalColor = UIColor.whiteColor()
+        static let NormalColor = UIColor.white
         static let ColorFillAlpha: CGFloat = 0.3
         static let ColorLineAlpha: CGFloat = 0.7
         static let ButtonBorderWidth: CGFloat = 2
@@ -30,69 +30,69 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     }
     
     @IBInspectable
-    public var padding: CGFloat = 20 { didSet { setNeedsDisplay() } }
+    open var padding: CGFloat = 20 { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var lineSuccessColor: UIColor = InnerConstant.SuccessColor {
+    open var lineSuccessColor: UIColor = InnerConstant.SuccessColor {
         didSet {
             updateTentacleView()
             setNeedsDisplay()
         }
     }
     @IBInspectable
-    public var lineFailureColor: UIColor = InnerConstant.FailureColor {
+    open var lineFailureColor: UIColor = InnerConstant.FailureColor {
         didSet {
             updateTentacleView()
             setNeedsDisplay()
         }
     }
     @IBInspectable
-    public var dotSuccessColor: UIColor = InnerConstant.SuccessColor { didSet { setNeedsDisplay() } }
+    open var dotSuccessColor: UIColor = InnerConstant.SuccessColor { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var dotFailureColor: UIColor = InnerConstant.FailureColor { didSet { setNeedsDisplay() } }
+    open var dotFailureColor: UIColor = InnerConstant.FailureColor { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var colorFillAlpha: CGFloat = InnerConstant.ColorFillAlpha { didSet { setNeedsDisplay() } }
+    open var colorFillAlpha: CGFloat = InnerConstant.ColorFillAlpha { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var dotNormalColor: UIColor = InnerConstant.NormalColor { didSet { setNeedsDisplay() } }
+    open var dotNormalColor: UIColor = InnerConstant.NormalColor { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var buttonBorderWidth: CGFloat = InnerConstant.ButtonBorderWidth { didSet { setNeedsDisplay() } }
+    open var buttonBorderWidth: CGFloat = InnerConstant.ButtonBorderWidth { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var lineWidth: CGFloat = InnerConstant.LineWidth {
+    open var lineWidth: CGFloat = InnerConstant.LineWidth {
         didSet {
             updateTentacleView()
             setNeedsDisplay()
         }
     }
     @IBInspectable
-    public var colorLineAlpha: CGFloat = InnerConstant.ColorLineAlpha {
+    open var colorLineAlpha: CGFloat = InnerConstant.ColorLineAlpha {
         didSet {
             updateTentacleView()
             setNeedsDisplay()
         }
     }
     @IBInspectable
-    public var buttonPanelLeading: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
+    open var buttonPanelLeading: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var buttonPanelTrailing: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
+    open var buttonPanelTrailing: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
     @IBInspectable
-    public var buttonPanelBottom: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
+    open var buttonPanelBottom: CGFloat = InnerConstant.ButtonPanelMargin { didSet { setNeedsDisplay() } }
     
-    public var style: GestureTentacleStyle = .Verify {
+    open var style: GestureTentacleStyle = .verify {
         didSet {
             tentacleView?.style = style
             setNeedsDisplay()
         }
     }
-    public var minGestureNumber: Int = 3
-    public var maxGestureTryNumber: Int = 5
-    private var gestureTriedNumber: Int = 0
-    public var buttons = [GesturePasswordButton]()
-    public var tentacleView: GestureTentacleView?
-    private var buttonPannel: UIView = UIView()
-    public weak var delegate: GesturePasswordViewDelegate?
-    private var previousPassword: String = ""
+    open var minGestureNumber: Int = 3
+    open var maxGestureTryNumber: Int = 5
+    fileprivate var gestureTriedNumber: Int = 0
+    open var buttons = [GesturePasswordButton]()
+    open var tentacleView: GestureTentacleView?
+    fileprivate var buttonPannel: UIView = UIView()
+    open weak var delegate: GesturePasswordViewDelegate?
+    fileprivate var previousPassword: String = ""
     
     /// 标识是否画实心内圆
-    public var innerCircleSolid = false {
+    open var innerCircleSolid = false {
         didSet {
             let _ = buttons.map {
                 $0.innerCircleSolid = innerCircleSolid
@@ -100,7 +100,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             }
         }
     }
-    public var innerCircleSizePercent: CGFloat = 0.25 {
+    open var innerCircleSizePercent: CGFloat = 0.25 {
         didSet {
             let _ = buttons.map {
                 $0.innerCircleSizePercent = innerCircleSizePercent
@@ -119,16 +119,16 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         setupUI()
     }
     deinit {
-        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
     }
     
-    public func setupUI() {
-        self.backgroundColor = UIColor.clearColor()
+    open func setupUI() {
+        self.backgroundColor = UIColor.clear
         buttonPannel.frame = self.frame
-        buttonPannel.backgroundColor = UIColor.clearColor()
-        buttonPannel.userInteractionEnabled = false
+        buttonPannel.backgroundColor = UIColor.clear
+        buttonPannel.isUserInteractionEnabled = false
         for index in 0..<9 {
-            let button = GesturePasswordButton(frame: CGRectZero)
+            let button = GesturePasswordButton(frame: CGRect.zero)
             button.tag = index + 1
             button.innerCircleSolid = innerCircleSolid
             button.innerCircleSizePercent = innerCircleSizePercent
@@ -142,7 +142,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         self.addSubview(tentacleView!)
         self.addSubview(buttonPannel)
     }
-    public override func drawRect(rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         let left = buttonPanelLeading
         let width = self.w - buttonPanelLeading - buttonPanelTrailing
         let height = width
@@ -153,7 +153,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             let button = buttons[index]
             let row = index / 3
             let col = index % 3
-            button.frame = CGRectMake(left + CGFloat(row) * (length + padding), top + CGFloat(col) * (length + padding), length, length)
+            button.frame = CGRect(x: left + CGFloat(row) * (length + padding), y: top + CGFloat(col) * (length + padding), width: length, height: length)
             button.lineSuccessColor = lineSuccessColor
             button.lineFailureColor = lineFailureColor
             button.dotSuccessColor = dotSuccessColor
@@ -167,7 +167,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         tentacleView?.frame = buttonPannel.frame
         
     }
-    private func updateTentacleView() {
+    fileprivate func updateTentacleView() {
         tentacleView?.lineWidth = lineWidth
         tentacleView?.lineFailureColor = lineFailureColor
         tentacleView?.lineSuccessColor = lineSuccessColor
@@ -176,7 +176,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     
     // MARK: Delegate
     
-    public func verification(result: String) -> Bool {
+    open func verification(_ result: String) -> Bool {
         Async.main(after: 1) { [weak self] in
             self?.tentacleView?.enterArgin()
         }
@@ -204,7 +204,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         delegate?.gp_verification(success, message: message, canTryAgain: canTry)
         return success
     }
-    public func resetPassword(result: String) -> Bool {
+    open func resetPassword(_ result: String) -> Bool {
         if result.length < minGestureNumber {
             delegate?.gp_setPassword(false, message: "至少要绘制3个点，请重试")
             Async.main(after: 1) { [weak self] in
@@ -234,7 +234,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             }
         }
     }
-    public func reset() {
+    open func reset() {
         tentacleView?.enterArgin()
     }
 }

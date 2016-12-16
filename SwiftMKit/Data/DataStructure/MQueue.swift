@@ -9,10 +9,10 @@
 import Foundation
 
 public struct MQueue<T> {
-    private var array = [T?]()
-    private var head = 0
+    fileprivate var array = [T?]()
+    fileprivate var head = 0
     
-    public mutating func enqueue(element: T) {
+    public mutating func enqueue(_ element: T) {
         array.append(element)
     }
     

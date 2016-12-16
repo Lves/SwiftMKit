@@ -1,15 +1,15 @@
 import Foundation
 
-class SessionDelegate: NSObject, NSURLSessionDataDelegate  {
+class SessionDelegate: NSObject, URLSessionDataDelegate  {
   weak var scout: ImageScout?
   
-  func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+  func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
     guard let scout = scout else { return }
     scout.didReceiveData(data, task: dataTask)
   }
   
-  func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+  func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
     guard let scout = scout else { return }
-    scout.didCompleteWithError(error, task: task as! NSURLSessionDataTask)
+    scout.didCompleteWithError(error as NSError?, task: task as! URLSessionDataTask)
   }
 }

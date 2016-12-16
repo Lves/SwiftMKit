@@ -10,19 +10,19 @@ import UIKit
 import MJRefresh
 import CocoaLumberjack
 
-public class BaseListKitViewModel: BaseKitViewModel {
-    private struct InnerConstant {
+open class BaseListKitViewModel: BaseKitViewModel {
+    fileprivate struct InnerConstant {
         static let StringNoMoreDataTip = "数据已全部加载完毕"
     }
     override init() {
         super.init()
     }
-    public var listViewController: BaseListKitViewController! {
+    open var listViewController: BaseListKitViewController! {
         get {
             return viewController as! BaseListKitViewController
         }
     }
-    public var listIndicator: IndicatorProtocol {
+    open var listIndicator: IndicatorProtocol {
         get { return self.listViewController.listIndicator }
     }
     var dataArray:[AnyObject] {
@@ -36,7 +36,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
             dataSource = [newValue]
         }
     }
-    private var isDataSourceChanged: Bool = false
+    fileprivate var isDataSourceChanged: Bool = false
     var dataSource:[[AnyObject]] = [[AnyObject]]() {
         didSet {
             if self.viewController == nil {
@@ -59,8 +59,8 @@ public class BaseListKitViewModel: BaseKitViewModel {
             } else if oldCount == 0 {
                 self.viewController.emptyView?.hide()
             }
-            if self.listViewController.listViewType == .RefreshOnly ||
-               self.listViewController.listViewType == .None {
+            if self.listViewController.listViewType == .refreshOnly ||
+               self.listViewController.listViewType == .none {
                 return
             }
             var noMoreDataTip = InnerConstant.StringNoMoreDataTip
@@ -89,7 +89,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
     var listLoadNumber: UInt { get { return 20 } }
     var listMaxNumber: UInt { get { return UInt.max } }
     
-    public func updateDataArray(newData: [AnyObject]?) {
+    open func updateDataArray(_ newData: [AnyObject]?) {
         isDataSourceChanged = true
         if let data = newData {
             if dataIndex == 0 {
@@ -108,7 +108,7 @@ public class BaseListKitViewModel: BaseKitViewModel {
             collect.reloadData()
         }
     }
-    public func updateDataSource(newData: [[AnyObject]]?) {
+    open func updateDataSource(_ newData: [[AnyObject]]?) {
         isDataSourceChanged = true
         dataSource = newData ?? [[AnyObject]]()
         if let table = self.listViewController.listView as? UITableView {

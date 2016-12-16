@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 public protocol IndicatorProtocol : class {
-    var runningTasks: [NSURLSessionTask] { get set }
-    func bindTask(task: NSURLSessionTask, view: UIView?, text: String?)
+    var runningTasks: [URLSessionTask] { get set }
+    func bindTask(_ task: URLSessionTask, view: UIView?, text: String?)
 }

@@ -11,24 +11,48 @@ import CoreLocation
 import PINCache
 import CocoaLumberjack
 import ReactiveCocoa
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
 
 
-public class LocationManager : NSObject, CLLocationManagerDelegate {
+
+open class LocationManager : NSObject, CLLocationManagerDelegate {
     
     static let NotificationLocationUpdatedName = "NotificationLocationUpdated"
     
-    private struct Constant {
+    fileprivate struct Constant {
         static let Longitude = "LocationLongitude"
         static let Latitude = "LocationLatitude"
         static let CurCityName = "LocationCurCityName"
     }
     
-    lazy public var manager = CLLocationManager()
-    public static var shared = LocationManager()
-    private var locatieCompletion: ((CLLocation?, NSError?) -> ())?
-    private var autoStop: Bool = false
+    lazy open var manager = CLLocationManager()
+    open static var shared = LocationManager()
+    fileprivate var locatieCompletion: ((CLLocation?, NSError?) -> ())?
+    fileprivate var autoStop: Bool = false
     
-    public class func start(autoStop autoStop: Bool = false, accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
+    open class func start(autoStop: Bool = false, accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
         if always {
             shared.manager.requestAlwaysAuthorization()
         } else {
@@ -47,19 +71,19 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
             return false
         }
     }
-    public class func stop() {
+    open class func stop() {
         shared.manager.stopUpdatingLocation()
         DDLogInfo("Stopped");
     }
-    public func getlocation(complete: (CLLocation?, NSError?) -> ()) {
+    open func getlocation(_ complete: @escaping (CLLocation?, NSError?) -> ()) {
         locatieCompletion = { location, error in
             complete(location, error)
             LocationManager.stop()
         }
-        LocationManager.start()
+        let _ = LocationManager.start()
     }
     
-    @objc public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    @objc open func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             let long = location.coordinate.longitude
             let lat = location.coordinate.latitude
@@ -81,53 +105,53 @@ public class LocationManager : NSObject, CLLocationManagerDelegate {
                 }
             })
             
-            NSNotificationCenter.defaultCenter().postNotificationName(LocationManager.NotificationLocationUpdatedName, object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: LocationManager.NotificationLocationUpdatedName), object: nil)
         }
         if autoStop {
             LocationManager.stop()
         }
     }
-    @objc public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        self.locatieCompletion?(nil, error)
+    @objc open func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        self.locatieCompletion?(nil, error as NSError?)
         self.locatieCompletion = nil
     }
     
-    var cache = PINDiskCache.sharedCache()
-    public var longitude: Double? {
+    var cache = PINDiskCache.shared()
+    open var longitude: Double? {
         get {
-            return cache.objectForKey(Constant.Longitude) as? Double
+            return cache.object(forKey: Constant.Longitude) as? Double
         }
         set {
             if let value = newValue {
-                cache.setObject(value, forKey: Constant.Longitude)
+                cache.setObject(value as NSCoding, forKey: Constant.Longitude)
             }else {
-                cache.removeObjectForKey(Constant.Longitude)
+                cache.removeObject(forKey: Constant.Longitude)
             }
         }
     }
-    public var latitude: Double? {
+    open var latitude: Double? {
         get {
-            return cache.objectForKey(Constant.Latitude) as? Double
+            return cache.object(forKey: Constant.Latitude) as? Double
         }
         set {
             if let value = newValue {
-                cache.setObject(value, forKey: Constant.Latitude)
+                cache.setObject(value as NSCoding, forKey: Constant.Latitude)
             }else {
-                cache.removeObjectForKey(Constant.Latitude)
+                cache.removeObject(forKey: Constant.Latitude)
             }
         }
     }
     
-    public var curCityName:String? {
+    open var curCityName:String? {
         get{
-            return cache.objectForKey(Constant.CurCityName) as? String
+            return cache.object(forKey: Constant.CurCityName) as? String
         }
         set {
             DDLogInfo("当前城市: (\(curCityName)")
             if let value = newValue {
-                cache.setObject(value, forKey: Constant.CurCityName)
+                cache.setObject(value as NSCoding, forKey: Constant.CurCityName)
             }else {
-                cache.removeObjectForKey(Constant.CurCityName)
+                cache.removeObject(forKey: Constant.CurCityName)
             }
         }
     }

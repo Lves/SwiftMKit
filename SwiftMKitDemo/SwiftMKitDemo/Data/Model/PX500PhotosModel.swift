@@ -18,7 +18,7 @@ class PX500PopularPhotoModel: NSObject {
     var descriptionString: String?
     var imageurl: String?
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["photoId":"id",
                 "descriptionString":"description",
                 "username":"user.fullname",
@@ -29,16 +29,16 @@ class PX500PopularPhotoModel: NSObject {
 
 extension PX500PhotosEntity {
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["entityId":"current_page"]
     }
-    override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+    override static func mj_objectClassInArray() -> [AnyHashable: Any]! {
         return ["photos":"PX500PhotoEntity"]
     }
 }
 extension PX500PhotoEntity {
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["entityId":"id",
                 "photoId":"id",
                 "descriptionString":"description",
@@ -47,7 +47,7 @@ extension PX500PhotoEntity {
 }
 extension PX500UserEntity {
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["entityId":"id",
                 "userId":"id",
                 "userName":"username",

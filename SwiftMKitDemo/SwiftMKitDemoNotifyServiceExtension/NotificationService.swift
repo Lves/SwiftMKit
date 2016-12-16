@@ -13,7 +13,7 @@ class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
 
-    override func didReceiveNotificationRequest(request: UNNotificationRequest, withContentHandler contentHandler: (UNNotificationContent) -> Void) {
+    override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
@@ -22,12 +22,12 @@ class NotificationService: UNNotificationServiceExtension {
             bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
             
             if let imageURLString = bestAttemptContent.userInfo["image"] as? String,
-                let URL = NSURL(string: imageURLString)
+                let URL = URL(string: imageURLString)
             {
                 downloadAndSave(URL) { localURL, error in
                     if let localURL = localURL {
                         do {
-                            let attachment = try UNNotificationAttachment(identifier: "image_downloaded", URL: localURL, options: nil)
+                            let attachment = try UNNotificationAttachment(identifier: "image_downloaded", url: localURL, options: nil)
                             bestAttemptContent.attachments = [attachment]
                         } catch {
                             print(error)
@@ -50,26 +50,26 @@ class NotificationService: UNNotificationServiceExtension {
         }
     }
     
-    private func downloadAndSave(url: NSURL, handler: (localURL: NSURL?, error: NSError?) -> Void) {
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {
+    fileprivate func downloadAndSave(_ url: URL, handler: @escaping (_ localURL: URL?, _ error: NSError?) -> Void) {
+        let task = URLSession.shared.dataTask(with: url, completionHandler: {
             data, res, err in
             
-            var localURL: NSURL? = nil
-            var error: NSError? = err
+            var localURL: URL? = nil
+            var error: NSError? = err as NSError?
             
             if let data = data {
-                let ext = (url.absoluteString! as NSString).pathExtension
-                let cacheURL = NSURL(fileURLWithPath: NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).first?.absoluteString ?? "")
-                let url = cacheURL.URLByAppendingPathComponent("cacheImageUrl")?.URLByAppendingPathExtension(ext)
+                let ext = (url.absoluteString as NSString).pathExtension
+                let cacheURL = URL(fileURLWithPath: FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.absoluteString ?? "")
+                let url = cacheURL.appendingPathComponent("cacheImageUrl").appendingPathExtension(ext)
                 do {
-                    try data.writeToURL(url!, options: .DataWritingAtomic)
+                    try data.write(to: url, options: .atomic)
                     localURL = url
                 } catch let e as NSError {
                     error = e
                 }
             }
             
-            handler(localURL: localURL, error: error)
+            handler(localURL, error)
         })
         
         task.resume()

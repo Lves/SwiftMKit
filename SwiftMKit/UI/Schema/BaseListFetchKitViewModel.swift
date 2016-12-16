@@ -10,13 +10,13 @@ import UIKit
 import CoreData
 import CocoaLumberjack
 
-public class BaseListFetchKitViewModel: BaseListKitViewModel {
-    public var listFetchViewController: BaseListFetchKitViewController! {
+open class BaseListFetchKitViewModel: BaseListKitViewModel {
+    open var listFetchViewController: BaseListFetchKitViewController! {
         get {
             return viewController as! BaseListFetchKitViewController
         }
     }
-    public var fetchRequest: NSFetchRequest? {
+    open var fetchRequest: NSFetchRequest<NSFetchRequestResult>? {
         get {
             return nil
         }
@@ -26,8 +26,8 @@ public class BaseListFetchKitViewModel: BaseListKitViewModel {
             self.fetchRequest?.fetchLimit = Int(self.listLoadNumber * (self.dataIndex+1))
         }
     }
-    public func fetchCachedData() {
-        let logPrefix = "[\(NSStringFromClass(self.dynamicType)) \(#function)]"
+    open func fetchCachedData() {
+        let logPrefix = "[\(NSStringFromClass(type(of: self))) \(#function)]"
         if let fetchedController = listFetchViewController.fetchedResultsController {
             if fetchedController.fetchRequest.predicate != nil {
                 DDLogVerbose("\(logPrefix) fetching \(fetchedController.fetchRequest.entityName) with predicate: \(fetchedController.fetchRequest.predicate)")

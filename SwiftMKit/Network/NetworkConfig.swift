@@ -10,31 +10,31 @@ import Foundation
 import PINCache
 
 public enum Environment: Int {
-    case Local,Dev,Gray,PreProduct,Product,Custom,LoanDev
+    case local,dev,gray,preProduct,product,custom,loanDev
 }
 
-public class NetworkConfig {
+open class NetworkConfig {
     
-    private struct Constant {
+    fileprivate struct Constant {
         static let Evn = "NetworkEvn"
     }
     
-    private init() {
+    fileprivate init() {
     }
     
-    public static let shared = NetworkConfig()
+    open static let shared = NetworkConfig()
     
-    public static var Release: Bool = true
-    public static var Evn: Environment {
+    open static var Release: Bool = true
+    open static var Evn: Environment {
         get {
             if Release {
-                return .Product
+                return .product
             }
-            let evn = PINDiskCache.sharedCache().objectForKey(Constant.Evn) as? Int ?? Environment.Product.rawValue
-            return Environment(rawValue: evn) ?? Environment.Product
+            let evn = PINDiskCache.shared().object(forKey: Constant.Evn) as? Int ?? Environment.product.rawValue
+            return Environment(rawValue: evn) ?? Environment.product
         }
         set {
-            PINDiskCache.sharedCache().setObject(newValue.rawValue, forKey: Constant.Evn)
+            PINDiskCache.shared().setObject(newValue.rawValue as NSCoding, forKey: Constant.Evn)
         }
     }
     

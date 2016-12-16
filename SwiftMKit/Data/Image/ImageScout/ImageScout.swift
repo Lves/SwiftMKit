@@ -15,15 +15,15 @@ let invalidURIErrorMessage = "Invalid URI parameter."
 
 let errorDomain = "ImageScoutErrorDomain"
 
-public class ImageScout {
-  private var session: NSURLSession
-  private var sessionDelegate = SessionDelegate()
-  private var queue = NSOperationQueue()
-  private var operations = [String : ScoutOperation]()
+open class ImageScout {
+  fileprivate var session: URLSession
+  fileprivate var sessionDelegate = SessionDelegate()
+  fileprivate var queue = OperationQueue()
+  fileprivate var operations = [String : ScoutOperation]()
   
   public init() {
-    let sessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-    session = NSURLSession(configuration: sessionConfig, delegate: sessionDelegate, delegateQueue: nil)
+    let sessionConfig = URLSessionConfiguration.ephemeral
+    session = URLSession(configuration: sessionConfig, delegate: sessionDelegate, delegateQueue: nil)
     sessionDelegate.scout = self
   }
 
@@ -31,13 +31,13 @@ public class ImageScout {
   /// The completion block takes an optional error, a size, and an image type,
   /// and returns void.
   
-  public func scoutImageWithURI(URI: String, completion: ScoutCompletionBlock) {
-    guard let URL = NSURL(string: URI) else {
+  open func scoutImageWithURI(_ URI: String, completion: @escaping ScoutCompletionBlock) {
+    guard let URL = URL(string: URI) else {
       let URLError = ImageScout.error(invalidURIErrorMessage, code: 100)
-      return completion(URLError, CGSizeZero, ScoutedImageType.Unsupported)
+      return completion(URLError, CGSize.zero, ScoutedImageType.Unsupported)
     }
 
-    let operation = ScoutOperation(task: session.dataTaskWithURL(URL))
+    let operation = ScoutOperation(task: session.dataTask(with: URL))
     operation.completionBlock = { [unowned self] in
       completion(operation.error, operation.size, operation.type)
       self.operations[URI] = nil
@@ -48,15 +48,15 @@ public class ImageScout {
 
   // MARK: Delegate Methods
 
-  func didReceiveData(data: NSData, task: NSURLSessionDataTask) {
-    guard let requestURL = task.currentRequest?.URL?.absoluteString else { return }
+  func didReceiveData(_ data: Data, task: URLSessionDataTask) {
+    guard let requestURL = task.currentRequest?.url?.absoluteString else { return }
     guard let operation = operations[requestURL] else { return }
 
     operation.appendData(data)
   }
 
-  func didCompleteWithError(error: NSError?, task: NSURLSessionDataTask) {
-    guard let requestURL = task.currentRequest?.URL?.absoluteString else { return }
+  func didCompleteWithError(_ error: NSError?, task: URLSessionDataTask) {
+    guard let requestURL = task.currentRequest?.url?.absoluteString else { return }
     guard let operation = operations[requestURL] else { return }
 
     let completionError = error ?? ImageScout.error(unableToParseErrorMessage, code: 101)
@@ -65,14 +65,14 @@ public class ImageScout {
 
   // MARK: Private Methods
 
-  private func addOperation(operation: ScoutOperation, withURI URI: String) {
+  fileprivate func addOperation(_ operation: ScoutOperation, withURI URI: String) {
     operations[URI] = operation
     queue.addOperation(operation)
   }
 
   // MARK: Class Methods
 
-  class func error(message: String, code: Int) -> NSError {
+  class func error(_ message: String, code: Int) -> NSError {
     return NSError(domain: errorDomain, code:code, userInfo:[NSLocalizedDescriptionKey: message])
   }
 }

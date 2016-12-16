@@ -12,46 +12,70 @@ import CocoaLumberjack
 import Alamofire
 import ObjectiveC
 import MJRefresh
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-public class BaseKitTableViewController: UITableViewController, UIGestureRecognizerDelegate {
-    public var params = Dictionary<String, AnyObject>() {
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
+open class BaseKitTableViewController: UITableViewController, UIGestureRecognizerDelegate {
+    open var params = Dictionary<String, AnyObject>() {
         didSet {
             for (key,value) in params {
                 self.setValue(value, forKey: key)
             }
         }
     }
-    public var completion: () -> Void = {}
-    public var hud: HUDProtocol = MBHUDView()
-    lazy public var indicator: IndicatorProtocol = {
+    open var completion: () -> Void = {}
+    open var hud: HUDProtocol = MBHUDView()
+    lazy open var indicator: IndicatorProtocol = {
         return TaskIndicator(hud: self.hud)
     }()
     
-    public var viewModel: BaseKitTableViewModel? {
+    open var viewModel: BaseKitTableViewModel? {
         get { return nil }
     }
-    public var listViewModel: BaseKitTableViewModel! {
+    open var listViewModel: BaseKitTableViewModel! {
         get {
             return viewModel! as BaseKitTableViewModel
         }
     }
     
-    public var screenW: CGFloat { get { return UIScreen.mainScreen().bounds.w } }
-    public var screenH: CGFloat { get { return UIScreen.mainScreen().bounds.h } }
-    public var autoHidesBottomBarWhenPushed: Bool { get { return true } }
+    open var screenW: CGFloat { get { return UIScreen.mainScreen.bounds.w } }
+    open var screenH: CGFloat { get { return UIScreen.mainScreen.bounds.h } }
+    open var autoHidesBottomBarWhenPushed: Bool { get { return true } }
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let vc = segue.destinationViewController
+    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination
         if let bvc = vc as? BaseKitViewController {
             if let dict = sender as? NSDictionary {
                 if var params = dict["params"] as? Dictionary<String, AnyObject> {
                     if params["hidesBottomBarWhenPushed"] == nil {
-                        params["hidesBottomBarWhenPushed"] = true
+                        params["hidesBottomBarWhenPushed"] = true as AnyObject?
                     }
                     bvc.params = params
                 }
@@ -59,23 +83,23 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
         }
     }
     
-    public func setupUI() {
+    open func setupUI() {
         viewModel?.viewController = self
         
-        if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
+        if self.listViewType == .none || self.listViewType == .loadMoreOnly {
             self.listView.mj_header = nil
         }
-        if self.listViewType == .None || self.listViewType == .RefreshOnly {
+        if self.listViewType == .none || self.listViewType == .refreshOnly {
             self.listView.mj_footer = nil
         }
-        if self.listViewType == .Both || self.listViewType == .RefreshOnly {
+        if self.listViewType == .both || self.listViewType == .refreshOnly {
             self.listView.mj_header = self.listViewHeaderWithRefreshingBlock {
                 [weak self] in
                 self?.listViewModel?.dataIndex = 0
                 self?.listViewModel?.fetchData()
             }
         }
-        if self.listViewType == .Both || self.listViewType == .LoadMoreOnly {
+        if self.listViewType == .both || self.listViewType == .loadMoreOnly {
             self.listView.mj_footer = self.listViewFooterWithRefreshingBlock {
                 [weak self] in
                 self?.listViewModel?.dataIndex += 1
@@ -91,19 +115,19 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
         setupNotification()
         bindingData()
     }
-    public func setupNotification() {
+    open func setupNotification() {
     }
-    public func setupNavigation() {
+    open func setupNavigation() {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
-    public func bindingData() {
+    open func bindingData() {
     }
-    public func loadData() {
+    open func loadData() {
     }
-    public func showEmptyView() {}
-    public func hideEmptyView() {}
+    open func showEmptyView() {}
+    open func hideEmptyView() {}
     
-    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if (gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer) {
             //只有二级以及以下的页面允许手势返回
             return self.navigationController?.viewControllers.count > 1
@@ -111,30 +135,30 @@ public class BaseKitTableViewController: UITableViewController, UIGestureRecogni
         return true
     }
     
-    public var listView: UIScrollView! {
+    open var listView: UIScrollView! {
         get {
             return tableView
         }
     }
-    public var listViewType: ListViewType {
+    open var listViewType: ListViewType {
         get {
-            return .None
+            return .none
         }
     }
     
-    public func listViewHeaderWithRefreshingBlock(refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshHeader {
+    open func listViewHeaderWithRefreshingBlock(_ refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshHeader {
         let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
         header.activityIndicatorViewStyle = .Gray
         return header
     }
-    public func listViewFooterWithRefreshingBlock(refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshFooter {
+    open func listViewFooterWithRefreshingBlock(_ refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshFooter {
         let footer = MJRefreshAutoStateFooter(refreshingBlock:refreshingBlock);
         return footer
     }
     
     deinit {
-        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
+        NotificationCenter.default.removeObserver(self)
         DDLogInfo("Running tasks: \(indicator.runningTasks.count)")
         for task in indicator.runningTasks {
             DDLogInfo("Cancel task: \(task)")

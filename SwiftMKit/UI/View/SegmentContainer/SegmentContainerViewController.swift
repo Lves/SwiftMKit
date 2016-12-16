@@ -11,47 +11,47 @@ import CocoaLumberjack
 import ReactiveCocoa
 
 public protocol SegmentContainerViewControllerDelegate : class {
-    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat)
+    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat)
 }
 public extension SegmentContainerViewControllerDelegate {
-    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat) {}
+    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat) {}
 }
 
-public class SegmentContainerViewController: UIViewController ,UIScrollViewDelegate{
+open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegate{
     
-    public let screenW: CGFloat = UIScreen.mainScreen().bounds.w
-    public let screenH: CGFloat = UIScreen.mainScreen().bounds.h
+    open let screenW: CGFloat = UIScreen.main.bounds.w
+    open let screenH: CGFloat = UIScreen.main.bounds.h
     
-    private var _viewControllers = [UIViewController]()
+    fileprivate var _viewControllers = [UIViewController]()
     
-    public var viewControllers:[UIViewController] {
+    open var viewControllers:[UIViewController] {
         get {
             return _viewControllers
         }
     }
     
-    private var _selectedSegment: Int = 0
+    fileprivate var _selectedSegment: Int = 0
     
-    public var selectedSegment: Int {
+    open var selectedSegment: Int {
         get {
             return _selectedSegment
         }
     }
     
-    public var selectedViewController: UIViewController? {
+    open var selectedViewController: UIViewController? {
         get {
             return viewControllers[safe: selectedSegment]
         }
     }
-    public weak var delegate: SegmentContainerViewControllerDelegate?
-    public var scrollView : UIScrollView!
+    open weak var delegate: SegmentContainerViewControllerDelegate?
+    open var scrollView : UIScrollView!
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    override public func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         
         if scrollView == nil {
             self.setUI()
@@ -60,33 +60,33 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
     }
     
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    public func setUI() {
+    open func setUI() {
         scrollView = UIScrollView(frame: self.view.bounds)
-        scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.clear
         scrollView.delegate = self
-        scrollView.scrollEnabled = true
-        scrollView.pagingEnabled = true
+        scrollView.isScrollEnabled = true
+        scrollView.isPagingEnabled = true
         scrollView.bounces = false
         scrollView.scrollsToTop = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.clear
         self.view.addSubview(scrollView)
         self.resetChildControllerView()
     }
     
-    public func addSegmentViewControllers(childController: [UIViewController], selectedSegment: Int = 0) {
+    open func addSegmentViewControllers(_ childController: [UIViewController], selectedSegment: Int = 0) {
         _viewControllers = childController
         _selectedSegment = selectedSegment
     }
     
-    private func resetChildControllerView(){
-        scrollView.contentSize = CGSizeMake((self.screenW * CGFloat(viewControllers.count)), 0)
+    fileprivate func resetChildControllerView(){
+        scrollView.contentSize = CGSize(width: (self.screenW * CGFloat(viewControllers.count)), height: 0)
         scrollView.removeSubviews()
         
         for index in 0..<viewControllers.count {
@@ -98,13 +98,13 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             if index == selectedSegment && !(scrollView.subviews.contains(vc.view)) {
                 scrollView.addSubview(vc.view)
             }
-            scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: false)
+            scrollView.setContentOffset(CGPoint(x: (self.screenW * CGFloat(selectedSegment)), y: 0), animated: false)
 
         }
         self.resetSubUIFrame()
     }
     
-    private func resetSubUIFrame() {
+    fileprivate func resetSubUIFrame() {
         if scrollView != nil{
             scrollView.frame = self.view.bounds
             for index in 0..<viewControllers.count {
@@ -115,7 +115,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
     }
     
-    dynamic public func scrollViewDidScroll(scrollView: UIScrollView) {
+    dynamic open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = self.screenW
         let offsetX = scrollView.contentOffset.x
         let percentX : CGFloat = offsetX / scrollView.contentSize.width
@@ -132,7 +132,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
     }
 
-    public func selectSegment(index: Int) -> Bool {
+    open func selectSegment(_ index: Int) -> Bool {
         if index < 0 || index >= viewControllers.count {
             DDLogError("Segment Index out of bounds")
             return false
@@ -149,7 +149,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         }
         for vc in viewControllers {
             if let listVC = vc as? BaseListKitViewController {
-                if index == viewControllers.indexOf(vc) {
+                if index == viewControllers.index(of: vc) {
                     listVC.listView?.scrollsToTop = true
                 } else {
                     listVC.listView?.scrollsToTop = false
@@ -157,7 +157,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             }
         }
         _selectedSegment = index
-        scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: (self.screenW * CGFloat(selectedSegment)), y: 0), animated: true)
         DDLogInfo("self.screenW \(self.screenW)")
         return true
     }

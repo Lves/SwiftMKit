@@ -17,7 +17,7 @@ class MKEmptyCustomViewController: BaseViewController {
         super.setupUI()
 //        emptyView?.image = UIImage(named: "view_custom_empty")!
 //        emptyView?.yOffset = -150
-        emptyView?.titleLabel.textColor = UIColor.blueColor()
+        emptyView?.titleLabel.textColor = UIColor.blue
         loadData()
     }
     override func loadData() {

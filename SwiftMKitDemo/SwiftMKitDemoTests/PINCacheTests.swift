@@ -21,45 +21,45 @@ class PINCacheTests: XCTestCase {
         super.tearDown()
     }
     
-    var cache = PINCache.sharedCache()
+    var cache = PINCache.shared()
     
     let userNameKey = "username"
     
     var userName: String? {
         get {
-            return cache.objectForKey(userNameKey) as? String
+            return cache.object(forKey: userNameKey) as? String
         }
         set {
             if let value = newValue {
-                cache.setObject(value, forKey: userNameKey)
+                cache.setObject(value as NSCoding, forKey: userNameKey)
             }else {
-                cache.removeObjectForKey(userNameKey)
+                cache.removeObject(forKey: userNameKey)
             }
         }
     }
     let userAgeKey = "userage"
     var userAge: Int? {
         get {
-            return cache.objectForKey(userAgeKey) as? Int
+            return cache.object(forKey: userAgeKey) as? Int
         }
         set {
             if let value = newValue {
-                cache.setObject(value, forKey: userAgeKey)
+                cache.setObject(value as NSCoding, forKey: userAgeKey)
             }else {
-                cache.removeObjectForKey(userAgeKey)
+                cache.removeObject(forKey: userAgeKey)
             }
         }
     }
     let userInfoKey = "userinfo"
     var userInfo: Dictionary<String,String>? {
         get {
-            return cache.objectForKey(userInfoKey) as? Dictionary<String,String>
+            return cache.object(forKey: userInfoKey) as? Dictionary<String,String>
         }
         set {
             if let value = newValue {
-                cache.setObject(value, forKey: userInfoKey)
+                cache.setObject(value as NSCoding, forKey: userInfoKey)
             }else {
-                cache.removeObjectForKey(userInfoKey)
+                cache.removeObject(forKey: userInfoKey)
             }
         }
     }
@@ -89,7 +89,7 @@ class PINCacheTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

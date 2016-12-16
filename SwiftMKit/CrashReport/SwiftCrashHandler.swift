@@ -8,23 +8,23 @@
 
 import Foundation
 
-func handleSwiftCrash(crashContext: UnsafeMutablePointer<MachExceptionContext>) {
-    SwiftCrashHandler.reportCrashWithContext(crashContext.memory)
+func handleSwiftCrash(_ crashContext: UnsafeMutablePointer<MachExceptionContext>) {
+    SwiftCrashHandler.reportCrashWithContext(crashContext.pointee)
 }
 
 class SwiftCrashHandler {
-    private static var _formatter: SwiftCrashFormatter.Type = SwiftCrashDefaultFormatter.self
-    private static var _reporter: SwiftCrashReporter.Type = SwiftCrashConsoleReporter.self
+    fileprivate static var _formatter: SwiftCrashFormatter.Type = SwiftCrashDefaultFormatter.self
+    fileprivate static var _reporter: SwiftCrashReporter.Type = SwiftCrashConsoleReporter.self
     
-    class func setFormatter(formatter: SwiftCrashFormatter.Type) {
+    class func setFormatter(_ formatter: SwiftCrashFormatter.Type) {
         _formatter = formatter
     }
     
-    class func setReporter(reporter: SwiftCrashReporter.Type) {
+    class func setReporter(_ reporter: SwiftCrashReporter.Type) {
         _reporter = reporter
     }
     
-     class func reportCrashWithContext(crashContext: MachExceptionContext) {
+     class func reportCrashWithContext(_ crashContext: MachExceptionContext) {
         _reporter.reportCrashMessage(_formatter.formatCrashMessage(crashContext))
     }
 }

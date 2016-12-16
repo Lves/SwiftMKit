@@ -13,68 +13,68 @@ import Alamofire
 import CocoaLumberjack
 
 public enum ListViewType {
-    case None
-    case RefreshOnly
-    case LoadMoreOnly
-    case Both
+    case none
+    case refreshOnly
+    case loadMoreOnly
+    case both
 }
 
 
 public protocol ListViewProtocol {
     var listViewType: ListViewType { get }
     var listView: UIScrollView? { get }
-    func listViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader
-    func listViewFooterWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshFooter
+    func listViewHeaderWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshHeader
+    func listViewFooterWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshFooter
 }
 
-public class BaseListKitViewController: BaseKitViewController, ListViewProtocol {
-    public var listViewModel: BaseListKitViewModel! {
+open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate, UITableViewDataSource, ListViewProtocol {
+    open var listViewModel: BaseListKitViewModel! {
         get {
             return viewModel as! BaseListKitViewModel
         }
     }
-    public var listView: UIScrollView? {
+    open var listView: UIScrollView? {
         get {
             return nil
         }
     }
-    public var listViewType: ListViewType {
+    open var listViewType: ListViewType {
         get {
-            return .None
+            return .none
         }
     }
     
-    lazy public var listIndicator: IndicatorProtocol = {
+    lazy open var listIndicator: IndicatorProtocol = {
         return TaskIndicatorList(listView: self.listView, viewController: self)
     }()
     
-    public func listViewHeaderWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
+    open func listViewHeaderWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
         let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
-        header.activityIndicatorViewStyle = .Gray
-        return header
+        header?.activityIndicatorViewStyle = .gray
+        return header!
     }
-    public func listViewFooterWithRefreshingBlock(refreshingBlock:MJRefreshComponentRefreshingBlock)->MJRefreshFooter{
+    open func listViewFooterWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshFooter{
         let footer = MJRefreshAutoStateFooter(refreshingBlock:refreshingBlock);
-        return footer
+        return footer!
     }
-    public override func setupUI() {
+    open override func setupUI() {
         super.setupUI()
         emptyView?.inView = self.listView!
         let _ = listIndicator
-        if self.listViewType == .None || self.listViewType == .LoadMoreOnly {
+        if self.listViewType == .none || self.listViewType == .loadMoreOnly {
             self.listView?.mj_header = nil
         }
-        if self.listViewType == .None || self.listViewType == .RefreshOnly {
+        if self.listViewType == .none || self.listViewType == .refreshOnly {
             self.listView?.mj_footer = nil
         }
-        if self.listViewType == .Both || self.listViewType == .RefreshOnly {
+        if self.listViewType == .both || self.listViewType == .refreshOnly {
             self.listView?.mj_header = self.listViewHeaderWithRefreshingBlock {
                 [weak self] in
                 self?.listViewModel?.dataIndex = 0
                 self?.listViewModel?.fetchData()
                 }
         }
-        if self.listViewType == .Both || self.listViewType == .LoadMoreOnly {
+        if self.listViewType == .both || self.listViewType == .loadMoreOnly {
             self.listView?.mj_footer = self.listViewFooterWithRefreshingBlock {
                 [weak self] in
                 self?.listViewModel?.dataIndex += 1
@@ -82,65 +82,65 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
                 }
             self.listView?.mj_footer.endRefreshingWithNoMoreData()
             if let footer = self.listView?.mj_footer as? MJRefreshAutoStateFooter {
-                footer.setTitle("", forState: .NoMoreData)
+                footer.setTitle("", for: .noMoreData)
             }
         }
     }
-    public func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
+    open func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         DDLogError("Need to implement the function of 'getCellWithTableView'")
         return nil
     }
-    public func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    open func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         DDLogError("Need to implement the function of 'configureCell'")
     }
-    public func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    open func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
     }
-    public func objectByIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+    open func objectByIndexPath(_ indexPath: IndexPath) -> AnyObject? {
         let object = listViewModel.dataSource[indexPath.section][safe: indexPath.row]
         return object
     }
     
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         let sections = listViewModel.dataSource.count
         return sections
     }
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
         if listViewModel.dataSource.count > 0 {
             rows = listViewModel.dataSource[section].count
         }
         return rows
     }
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = getCellWithTableView(tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             configureCell(cell, object: object, indexPath: indexPath)
         }
         return cell
     }
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let cell = getCellWithTableView(tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             didSelectCell(cell, object: object, indexPath: indexPath)
         }
     }
     
-    public func endListRefresh() {
+    open func endListRefresh() {
         if self.listViewModel.dataIndex == 0 {
             if self.listView?.mj_header != nil {
                 self.listView?.mj_header.endRefreshing()
             }
         }else{
             if self.listView?.mj_footer != nil {
-                if self.listView?.mj_footer.state == .Refreshing {
+                if self.listView?.mj_footer.state == .refreshing {
                     self.listView?.mj_footer.endRefreshing()
                 }
             }
         }
     }
 
-    public override func showTip(tip: String, view: UIView, offset: CGPoint, completion: () -> Void) {
+    open override func showTip(_ tip: String, view: UIView, offset: CGPoint, completion: () -> Void) {
         endListRefresh()
         super.showTip(tip, view: view, offset: offset, completion: completion)
     }

@@ -23,11 +23,11 @@ class MKKeyboardViewController: BaseViewController {
         IQKeyboardManager.sharedManager().disabledToolbarClasses.addObject(MKKeyboardViewController)
         self.title = "Keyboard View"
 
-        var keyboard = NumberKeyboard.keyboard(self.txtNormal, type: .Normal)
+        var keyboard = NumberKeyboard.keyboard(self.txtNormal, type: .normal)
         self.txtNormal.inputView = keyboard
-        keyboard = NumberKeyboard.keyboard(self.txtNoDot, type: .NoDot)
+        keyboard = NumberKeyboard.keyboard(self.txtNoDot, type: .noDot)
         self.txtNoDot.inputView = keyboard
-        keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .Money)
+        keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .money)
         self.txtMoney.inputView = keyboard
         
         btnSuccess.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in

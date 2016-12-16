@@ -12,7 +12,7 @@ import Photos
 class MKPHAssetImageViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var assetsFetchResults: PHFetchResult?
+    var assetsFetchResults: PHFetchResult<AnyObject>?
     
     var dataArray: [PHAsset] = []
     
@@ -26,7 +26,7 @@ class MKPHAssetImageViewController: BaseViewController {
         super.loadData()
         let allPhotosOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        assetsFetchResults = PHAsset.fetchAssetsWithMediaType(.Image, options: allPhotosOptions)
+        assetsFetchResults = PHAsset.fetchAssets(with: .image, options: allPhotosOptions)
         for index in 0..<assetsFetchResults!.count {
             let asset = assetsFetchResults![index] as! PHAsset
             dataArray.append(asset)
@@ -35,8 +35,8 @@ class MKPHAssetImageViewController: BaseViewController {
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let bvc = segue.destinationViewController as? MKPHAssetImageDetailViewController,
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bvc = segue.destination as? MKPHAssetImageDetailViewController,
             let cell = sender as? MKPHAssetImageCell {
             bvc.asset = cell.asset
         }
@@ -46,17 +46,17 @@ class MKPHAssetImageViewController: BaseViewController {
 extension MKPHAssetImageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     //返回多少个cell
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArray.count
     }
     //返回自定义的cell
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MKPHAssetImageCell", forIndexPath: indexPath) as! MKPHAssetImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MKPHAssetImageCell", for: indexPath) as! MKPHAssetImageCell
         let model = dataArray[indexPath.row]
         cell.asset = model
         return cell
@@ -74,7 +74,7 @@ class MKPHAssetImageCell: UICollectionViewCell {
     var asset: PHAsset? {
         didSet {
             Async.background {
-                PHCachingImageManager.defaultManager().requestImageForAsset(self.asset!, targetSize: CGSize(width: 100, height: 100), contentMode: .AspectFit, options: nil) { (image, info) in
+                PHCachingImageManager.default().requestImage(for: self.asset!, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: nil) { (image, info) in
                     Async.main {
                         self.imageView.image = image
                     }
@@ -93,7 +93,7 @@ class MKPHAssetImageDetailViewController: BaseViewController {
     override func setupUI() {
         super.setupUI()
         Async.background {
-            PHCachingImageManager.defaultManager().requestImageForAsset(self.asset!, targetSize: self.view.bounds.size, contentMode: .AspectFit, options: nil) { (image, info) in
+            PHCachingImageManager.default().requestImage(for: self.asset!, targetSize: self.view.bounds.size, contentMode: .aspectFit, options: nil) { (image, info) in
                 Async.main {
                     self.imageView.image = image
                 }

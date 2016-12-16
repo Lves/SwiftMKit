@@ -13,81 +13,81 @@ import ObjectiveC
 import CocoaLumberjack
 import MJRefresh
 
-public class TaskIndicatorList: NSObject, IndicatorProtocol {
-    private weak var listView: UIScrollView?
-    private weak var viewController: BaseListKitViewController?
-    lazy public var runningTasks = [NSURLSessionTask]()
+open class TaskIndicatorList: NSObject, IndicatorProtocol {
+    fileprivate weak var listView: UIScrollView?
+    fileprivate weak var viewController: BaseListKitViewController?
+    lazy open var runningTasks = [URLSessionTask]()
     
     public init(listView: UIScrollView?, viewController: BaseListKitViewController){
         self.listView = listView
         self.viewController = viewController
         super.init()
     }
-    public func bindTask(task: NSURLSessionTask, view: UIView?, text: String?) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.removeObserver(self, name: Notifications.Task.DidResume, object: nil)
-        notificationCenter.removeObserver(self, name: Notifications.Task.DidSuspend, object: nil)
-        notificationCenter.removeObserver(self, name: Notifications.Task.DidCancel, object: nil)
-        notificationCenter.removeObserver(self, name: Notifications.Task.DidComplete, object: nil)
-        if task.state == .Running {
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_resume(_:)), name: Notifications.Task.DidResume, object: task)
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_suspend(_:)), name: Notifications.Task.DidSuspend, object: task)
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_cancel(_:)), name: Notifications.Task.DidCancel, object: task)
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_end(_:)), name: Notifications.Task.DidComplete, object: task)
-            let notify = NSNotification(name: "", object: task)
+    open func bindTask(_ task: URLSessionTask, view: UIView?, text: String?) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self, name: Notification.Name.Task.DidResume, object: nil)
+        notificationCenter.removeObserver(self, name: Notification.Name.Task.DidSuspend, object: nil)
+        notificationCenter.removeObserver(self, name: Notification.Name.Task.DidCancel, object: nil)
+        notificationCenter.removeObserver(self, name: Notification.Name.Task.DidComplete, object: nil)
+        if task.state == .running {
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_resume(_:)), name: Notification.Name.Task.DidResume, object: task)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_suspend(_:)), name: Notification.Name.Task.DidSuspend, object: task)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_cancel(_:)), name: Notification.Name.Task.DidCancel, object: task)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_end(_:)), name: Notification.Name.Task.DidComplete, object: task)
+            let notify = Notification(name: Notification.Name(rawValue: ""), object: task)
             self.task_list_resume(notify)
         } else {
-            let notify = NSNotification(name: "", object: task)
+            let notify = Notification(name: Notification.Name(rawValue: ""), object: task)
             self.task_list_end(notify)
         }
     }
     
     
-    @objc func task_list_resume(notify:NSNotification) {
+    @objc func task_list_resume(_ notify:Notification) {
         DDLogVerbose("List Task resume")
         
-        if let task = notify.object as? NSURLSessionTask {
+        if let task = notify.object as? URLSessionTask {
             if !self.runningTasks.contains(task) {
-                UIApplication.sharedApplication().showNetworkActivityIndicator()
+                UIApplication.shared.showNetworkActivityIndicator()
                 self.runningTasks.append(task)
             }
         }
     }
-    @objc func task_list_suspend(notify:NSNotification) {
+    @objc func task_list_suspend(_ notify:Notification) {
         DDLogVerbose("List Task suspend")
-        UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        Async.main { [weak self] in
+        UIApplication.shared.hideNetworkActivityIndicator()
+        let _ = Async.main { [weak self] in
             self?.viewController?.endListRefresh()
         }
     }
-    @objc func task_list_cancel(notify:NSNotification) {
+    @objc func task_list_cancel(_ notify:Notification) {
         DDLogVerbose("List Task cancel")
-        UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        Async.main { [weak self] in
+        UIApplication.shared.hideNetworkActivityIndicator()
+        let _ = Async.main { [weak self] in
             self?.viewController?.endListRefresh()
         }
     }
-    @objc func task_list_end(notify:NSNotification) {
+    @objc func task_list_end(_ notify:Notification) {
         DDLogVerbose("List Task complete")
-        UIApplication.sharedApplication().hideNetworkActivityIndicator()
-        if let task = notify.object as? NSURLSessionTask {
-            if let index = self.runningTasks.indexOf(task) {
-                self.runningTasks.removeAtIndex(index)
+        UIApplication.shared.hideNetworkActivityIndicator()
+        if let task = notify.object as? URLSessionTask {
+            if let index = self.runningTasks.index(of: task) {
+                self.runningTasks.remove(at: index)
             }
         }
-        Async.main { [weak self] in
+        let _ = Async.main { [weak self] in
             self?.viewController?.endListRefresh()
         }
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         if runningTasks.count > 0 {
             DDLogVerbose("Running list tasks: \(runningTasks.count)")
         }
         for task in runningTasks {
             DDLogVerbose("Cancel list task: \(task)")
-            UIApplication.sharedApplication().hideNetworkActivityIndicator()
+            UIApplication.shared.hideNetworkActivityIndicator()
             task.cancel()
         }
     }

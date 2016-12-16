@@ -14,34 +14,34 @@ import IQKeyboardManager
 ///  - Normal: 普通类型
 ///  - Fund:   Only for HongdianFund
 enum PasswordPannelType: Int {
-    case Normal, Fund
+    case normal, fund
 }
 
 public protocol PasswordPannelDelegate: class {
-    func pp_didCancel(pannel: PasswordPannel?) 
-    func pp_forgetPassword(pannel: PasswordPannel?)
-    func pp_didInputPassword(pannel: PasswordPannel?, password : String, completion: ((Bool, String, PasswordPannelStatus) -> Void))
-    func pp_didFinished(pannel: PasswordPannel?, success: Bool)
+    func pp_didCancel(_ pannel: PasswordPannel?) 
+    func pp_forgetPassword(_ pannel: PasswordPannel?)
+    func pp_didInputPassword(_ pannel: PasswordPannel?, password : String, completion: ((Bool, String, PasswordPannelStatus) -> Void))
+    func pp_didFinished(_ pannel: PasswordPannel?, success: Bool)
 }
 public extension PasswordPannelDelegate {
-    func pp_didCancel(pannel: PasswordPannel?) {}
-    func pp_didFinished(pannel: PasswordPannel?, success: Bool) {}
+    func pp_didCancel(_ pannel: PasswordPannel?) {}
+    func pp_didFinished(_ pannel: PasswordPannel?, success: Bool) {}
 }
 
 public enum PasswordPannelStatus: Int {
-    case Normal, PasswordWrong, PasswordLocked
+    case normal, passwordWrong, passwordLocked
 }
 
-public class PasswordPannel: UIView, PasswordTextViewDelegate{
-    private struct InnerConstant {
+open class PasswordPannel: UIView, PasswordTextViewDelegate{
+    fileprivate struct InnerConstant {
         static let AnimationDuration = 0.25
         static let MaskColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.45)
         static let Title = "输入交易密码"
     }
-    public weak var delegate: PasswordPannelDelegate?
-    public var animationDuration = InnerConstant.AnimationDuration
-    public var maskColor = InnerConstant.MaskColor
-    public var title: String? {
+    open weak var delegate: PasswordPannelDelegate?
+    open var animationDuration = InnerConstant.AnimationDuration
+    open var maskColor = InnerConstant.MaskColor
+    open var title: String? {
         get {
             return lblTitle.text
         }
@@ -49,21 +49,21 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             lblTitle.text = newValue
         }
     }
-    var passwordPannelType: PasswordPannelType = .Normal
+    var passwordPannelType: PasswordPannelType = .normal
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgRotation: UIImageView!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var btnForget: UIButton!
     @IBOutlet weak var passwordInputView: PasswordTextView!
-    public var coverView : UIControl = UIControl()
-    public var eventCancel: ((PasswordPannel?) -> ()) = { _ in }
-    public var eventForgetPassword: ((PasswordPannel?) -> ()) = { _ in }
-    public var eventInputPassword: ((PasswordPannel?, password: String, completion: ((Bool, String, PasswordPannelStatus) -> Void)) -> ()) = { _,_,_ in }
-    public var eventFinish: ((PasswordPannel?, success: Bool) -> ()) = { _,_ in }
+    open var coverView : UIControl = UIControl()
+    open var eventCancel: ((PasswordPannel?) -> ()) = { _ in }
+    open var eventForgetPassword: ((PasswordPannel?) -> ()) = { _ in }
+    open var eventInputPassword: ((PasswordPannel?, _ password: String, _ completion: ((Bool, String, PasswordPannelStatus) -> Void)) -> ()) = { _,_,_ in }
+    open var eventFinish: ((PasswordPannel?, _ success: Bool) -> ()) = { _,_ in }
     
     
-    public var loadingText = ""
+    open var loadingText = ""
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,13 +71,13 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public static func pannel(index: Int = 0) -> PasswordPannel {
-        let view = NSBundle.mainBundle().loadNibNamed("PasswordPannel", owner: self, options: nil)![index] as! PasswordPannel
-        view.passwordPannelType = PasswordPannelType(rawValue: index) ?? .Normal
+    open static func pannel(_ index: Int = 0) -> PasswordPannel {
+        let view = Bundle.main.loadNibNamed("PasswordPannel", owner: self, options: nil)![index] as! PasswordPannel
+        view.passwordPannelType = PasswordPannelType(rawValue: index) ?? .normal
         view.setupUI()
         return view
     }
-    private func setupUI() {
+    fileprivate func setupUI() {
         self.btnClose.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             self?.passwordInputView.inactive()
             self?.hide() {
@@ -94,13 +94,13 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             }
         }
         lblTitle.text = InnerConstant.Title
-        imgRotation.hidden = true
-        lblMessage.hidden = true
+        imgRotation.isHidden = true
+        lblMessage.isHidden = true
         passwordInputView.delegate = self
         passwordInputView.inputViewColor = UIColor(hex6: 0xD8E0EB)
         passwordInputView.passwordPannelType = passwordPannelType
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removePanel), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removePanel), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
         // 作用：禁止全屏手势滑动返回
         coverView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan)))
@@ -113,65 +113,65 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         self.coverView.removeFromSuperview()
     }
     
-    private func showKeyboard() {
+    fileprivate func showKeyboard() {
         passwordInputView.active()
     }
-    public func hideKeyboard() {
+    open func hideKeyboard() {
         passwordInputView.inactive()
     }
     /** 弹出 */
-    public func showInView(view : UIView) {
+    open func showInView(_ view : UIView) {
         self.size.width = view.size.width
         coverView.frame = view.bounds
-        coverView.backgroundColor = UIColor.clearColor()
+        coverView.backgroundColor = UIColor.clear
         view.addSubview(coverView)
         view.addSubview(self)
         passwordInputView.password = ""
         showKeyboard()
         Async.main {
             self.y = self.coverView.h
-            UIView.animateWithDuration(self.animationDuration) {
+            UIView.animate(withDuration: self.animationDuration, animations: {
                 self.coverView.backgroundColor = self.maskColor
                 self.y = self.coverView.h - self.h;
-            }
+            }) 
         }
     }
     /** 隐藏 */
-    public func hide(completion: () -> Void = {}) {
+    open func hide(_ completion: @escaping () -> Void = {}) {
         Async.main {
             self.hideKeyboard()
-            UIView.animateWithDuration(self.animationDuration, animations: {
+            UIView.animate(withDuration: self.animationDuration, animations: {
                 self.y = self.coverView.h
-                self.coverView.backgroundColor = UIColor.clearColor()
-            }) { _ in
+                self.coverView.backgroundColor = UIColor.clear
+            }, completion: { _ in
                 self.removeFromSuperview()
                 self.coverView.removeFromSuperview()
                 completion()
-            }
+            }) 
         }
     }
     /** 加载期间禁止按钮点击 */
-    private func freezePanel(freeze: Bool) {
-        btnClose.userInteractionEnabled = !freeze;
-        self.btnForget.userInteractionEnabled = !freeze;
+    fileprivate func freezePanel(_ freeze: Bool) {
+        btnClose.isUserInteractionEnabled = !freeze;
+        self.btnForget.isUserInteractionEnabled = !freeze;
     }
     /** 开始加载 */
-    public func startLoading() {
+    open func startLoading() {
         freezePanel(true)
-        imgRotation.hidden = false
-        lblMessage.hidden = false
+        imgRotation.isHidden = false
+        lblMessage.isHidden = false
         imgRotation.image = UIImage.init(named: "password_loading_b")
         lblMessage.text = ""
         var rotationAnimation = CABasicAnimation()
         rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotationAnimation.toValue = NSNumber.init(double: M_PI * 2.0)
+        rotationAnimation.toValue = NSNumber.init(value: M_PI * 2.0 as Double)
         rotationAnimation.duration = 2.0;
-        rotationAnimation.cumulative = true;
+        rotationAnimation.isCumulative = true;
         rotationAnimation.repeatCount = MAXFLOAT;
-        imgRotation.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        imgRotation.layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
     /** 加载完成 */
-    public func stopLoading(success: Bool, message: String) {
+    open func stopLoading(_ success: Bool, message: String) {
         freezePanel(false)
         imgRotation.layer.removeAllAnimations()
         if success {
@@ -185,22 +185,22 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
         }
     }
     /** 输入六位密码完成时调用的代理方法 */
-    public func pt_didInputSixNumber(textView: PasswordTextView?, password: String) {
+    open func pt_didInputSixNumber(_ textView: PasswordTextView?, password: String) {
         hideKeyboard()
         startLoading()
         lblMessage.text = loadingText
         let complete = { [weak self] (success: Bool, message: String, status: PasswordPannelStatus) in
-            if status == .PasswordWrong {
-                let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "重新输入", style: .Default, handler:  { [weak self] _ in
+            if status == .passwordWrong {
+                let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "重新输入", style: .default, handler:  { [weak self] _ in
                     //还原界面
                     self?.passwordInputView.password = ""
-                    self?.lblMessage.hidden = true
-                    self?.imgRotation.hidden = true
+                    self?.lblMessage.isHidden = true
+                    self?.imgRotation.isHidden = true
                     self?.stopLoading(success, message: message)
                     self?.showKeyboard()
                     }))
-                alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
+                alert.addAction(UIAlertAction(title: "忘记密码", style: .cancel) { [weak self] _ in
                     self?.hide() {
                         self?.delegate?.pp_forgetPassword(self)
                         self?.eventForgetPassword(self)
@@ -208,12 +208,12 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
                     })
                 UIViewController.topController?.showAlert(alert, completion: nil)
                 return
-            } else if status == .PasswordLocked {
-                let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "取消", style: .Default, handler:  { [weak self] _ in
+            } else if status == .passwordLocked {
+                let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "取消", style: .default, handler:  { [weak self] _ in
                     self?.hide()
                     }))
-                alert.addAction(UIAlertAction(title: "忘记密码", style: .Cancel) { [weak self] _ in
+                alert.addAction(UIAlertAction(title: "忘记密码", style: .cancel) { [weak self] _ in
                     self?.hide() {
                         self?.delegate?.pp_forgetPassword(self)
                         self?.eventForgetPassword(self)
@@ -227,28 +227,28 @@ public class PasswordPannel: UIView, PasswordTextViewDelegate{
             Async.main(after: 1) { [weak self] in
                 self?.hide() {
                     self?.delegate?.pp_didFinished(self, success: success)
-                    self?.eventFinish(self, success: success)
+                    self?.eventFinish(self, success)
                 }
             }
         }
         delegate?.pp_didInputPassword(self, password: password, completion: complete)
-        self.eventInputPassword(self,  password: password, completion: complete)
+        self.eventInputPassword(self,  password, complete)
         self.eventInputPassword = { _,_,_ in }
     }
     
-    public func requestComplete(success: Bool, message: String, status: PasswordPannelStatus) {
+    open func requestComplete(_ success: Bool, message: String, status: PasswordPannelStatus) {
         self.stopLoading(success, message: message)
         Async.main(after: 1) { [weak self] in
             self?.hide() {
                 self?.delegate?.pp_didFinished(self, success: success)
-                self?.eventFinish(self, success: success)
+                self?.eventFinish(self, success)
                 self?.eventFinish = { _,_ in }
             }
         }
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         print("PasswordPannel  deinit")
     }
 }

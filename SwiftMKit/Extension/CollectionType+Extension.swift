@@ -9,9 +9,9 @@
 import Foundation
 import CocoaLumberjack
 
-extension CollectionType {
+extension Collection {
     /// Returns the element at the specified index if it is within bounds, otherwise nil.
-    subscript (safe index: Index) -> Generator.Element? {
+    subscript (safe index: Index) -> Iterator.Element? {
         if indices.contains(index) {
             return self[index]
         } else {

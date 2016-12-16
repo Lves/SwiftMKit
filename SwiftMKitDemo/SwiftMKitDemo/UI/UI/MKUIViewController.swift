@@ -30,7 +30,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
 
     }
     
-    private var _viewModel = MKUIViewModel()
+    fileprivate var _viewModel = MKUIViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
@@ -40,23 +40,23 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
     
     override func setupNavigation() {
         super.setupNavigation()
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? MKDataListModel {
             tableViewCell.textLabel?.text = model.title
             tableViewCell.detailTextLabel?.text = model.detail
         }
     }
-    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? MKDataListModel {
             if model.route?.hasPrefix("http") == true {
                 self.routeToUrl(model.route ?? "")

@@ -17,7 +17,7 @@ class MKCustomPullRefreshViewController: BaseListViewController{
     }
 
     @IBOutlet weak var tableView: UITableView!
-    private var _viewModel = MKCustomPullRefreshViewModel()
+    fileprivate var _viewModel = MKCustomPullRefreshViewModel()
     override var viewModel: MKCustomPullRefreshViewModel!{
         get { return _viewModel }
     }
@@ -25,7 +25,7 @@ class MKCustomPullRefreshViewController: BaseListViewController{
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .RefreshOnly }
+        get { return .refreshOnly }
     }
     override func setupUI() {
         super.setupUI()
@@ -47,17 +47,17 @@ class MKCustomPullRefreshViewController: BaseListViewController{
         self.tableView.mj_header.beginRefreshing()
     }
     
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         tableViewCell.textLabel?.text = "Cell - \(indexPath.row)"
     }
-    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         
     }
 

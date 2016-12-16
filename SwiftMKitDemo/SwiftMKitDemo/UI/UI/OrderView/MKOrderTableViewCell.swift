@@ -39,22 +39,22 @@ class MKOrderTableViewCell: UITableViewCell {
     }
     
     //自定义选中图像
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         if editing {
             self.addSubview(imgEdit)
         }
         imgEdit.image = model.isSelect ? UIImage(named: "order_cell_selected") : UIImage(named: "order_cell_unselected")
-        imgEdit.center = CGPointMake(-CGRectGetWidth(imgEdit.frame) * 0.5, CGRectGetHeight(self.bounds) * 0.5)
-        imgEdit.frame.size = CGSizeMake(19, 19)
-        setCustomImageViewCenter(CGPointMake(20.5, CGRectGetHeight(bounds) * 0.5), alpha: 1.0, animated: animated)
+        imgEdit.center = CGPoint(x: -imgEdit.frame.width * 0.5, y: self.bounds.height * 0.5)
+        imgEdit.frame.size = CGSize(width: 19, height: 19)
+        setCustomImageViewCenter(CGPoint(x: 20.5, y: bounds.height * 0.5), alpha: 1.0, animated: animated)
     }
     
-    func setCustomImageViewCenter(pt: CGPoint, alpha: CGFloat, animated: Bool) {
+    func setCustomImageViewCenter(_ pt: CGPoint, alpha: CGFloat, animated: Bool) {
         if animated {
-            let options = UIViewAnimationOptions.CurveEaseOut
-            UIView.animateWithDuration(0.3, delay: 0.0, options: options, animations: { [weak self] _ in
+            let options = UIViewAnimationOptions.curveEaseOut
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: options, animations: { [weak self] _ in
                 self?.imgEdit.center = pt
                 self?.imgEdit.alpha = alpha
                 }, completion: nil)

@@ -12,12 +12,12 @@ import UIKit
 public protocol CacheModelProtocol {
     var key: String { get }
     var name: String { get set }
-    var filePath: NSURL { get }
+    var filePath: URL? { get }
     var size: Int64 { get }
     var mimeType : String { get set }
-    var createTime: NSTimeInterval { get }
-    var lastVisitTime: NSTimeInterval { get set }
-    var expireTime: NSTimeInterval { get set }
+    var createTime: TimeInterval { get }
+    var lastVisitTime: TimeInterval { get set }
+    var expireTime: TimeInterval { get set }
 }
 
 public protocol CachePoolProtocol {
@@ -27,7 +27,7 @@ public protocol CachePoolProtocol {
     /// 已缓存大小
     var size: Int64 { get }
     /// 缓存根路径
-    var basePath: NSURL? { get set }
+    var basePath: URL? { get set }
     /// 缓存文件夹名称
     var namespace: String { get set }
     
@@ -38,26 +38,26 @@ public protocol CachePoolProtocol {
     ///  :param: data 值
     ///
     ///  :returns: 加密后的文件名
-    func addCache(data: NSData, name: String?) -> String
+    func addCache(_ data: Data, name: String?) -> String
     ///  缓存图片
-    func addCache(image: UIImage, name: String?) -> String
+    func addCache(_ image: UIImage, name: String?) -> String
     ///  缓存文件（拷贝）
     ///
     ///  :param: name     文件名称
     ///  :param: filePath 源地址
     ///
     ///  :returns: 加密后的文件名
-    func addCache(filePath: NSURL, name: String?) -> String
+    func addCache(_ filePath: URL, name: String?) -> String
     ///  获取所有缓存对象
     func all() -> [CacheModelProtocol]?
     ///  获取缓存对象
     ///
     ///  :param: key key
-    func getCache(key: String) -> AnyObject?
+    func getCache(_ key: String) -> AnyObject?
     ///  移除缓存对象
     ///
     ///  :param: key key
-    func removeCache(key: String) -> Bool
+    func removeCache(_ key: String) -> Bool
     ///  清空缓存
     func clear() -> Bool
 }

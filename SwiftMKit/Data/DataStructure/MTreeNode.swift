@@ -8,21 +8,21 @@
 
 import Foundation
 
-public class MTreeNode<T: Comparable> {
-    public var value: T
+open class MTreeNode<T: Comparable> {
+    open var value: T
     
-    public var parent: MTreeNode?
-    public var children = [MTreeNode<T>]()
+    open var parent: MTreeNode?
+    open var children = [MTreeNode<T>]()
     
     public init(value: T) {
         self.value = value
     }
     
-    public func addChild(node: MTreeNode<T>) {
+    open func addChild(_ node: MTreeNode<T>) {
         children.append(node)
         node.parent = self
     }
-    public func search(value: T) -> MTreeNode? {
+    open func search(_ value: T) -> MTreeNode? {
         if value == self.value {
             return self
         }
@@ -39,7 +39,7 @@ extension MTreeNode: CustomStringConvertible {
     public var description: String {
         var s = "\(value)"
         if !children.isEmpty {
-            s += " {" + children.map { $0.description }.joinWithSeparator(",") + "}"
+            s += " {" + children.map { $0.description }.joined(separator: ",") + "}"
         }
         return s
     }

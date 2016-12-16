@@ -12,18 +12,18 @@ import CocoaLumberjack
 
 protocol ConnectPeerServiceManagerDelegate {
     
-    func connectedDeviceChanged(manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID], changedDevice: MCPeerID, changedState: MCSessionState)
-    func dataReceived(manager : ConnectPeerServiceManager, fromDevice: MCPeerID, data: NSData, dataString: String)
+    func connectedDeviceChanged(_ manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID], changedDevice: MCPeerID, changedState: MCSessionState)
+    func dataReceived(_ manager : ConnectPeerServiceManager, fromDevice: MCPeerID, data: Data, dataString: String)
     
 }
 class ConnectPeerServiceManager : NSObject {
     
     // Service type must be a unique string, at most 15 characters long
     // and can contain only ASCII lowercase letters, numbers and hyphens.
-    private let ConnectPeerServiceType = "ConnectPeer"
-    private let myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
-    private let serviceAdvertiser : MCNearbyServiceAdvertiser
-    private let serviceBrowser : MCNearbyServiceBrowser
+    fileprivate let ConnectPeerServiceType = "ConnectPeer"
+    fileprivate let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    fileprivate let serviceAdvertiser : MCNearbyServiceAdvertiser
+    fileprivate let serviceBrowser : MCNearbyServiceBrowser
     var delegate : ConnectPeerServiceManagerDelegate?
     
     override init() {
@@ -46,21 +46,21 @@ class ConnectPeerServiceManager : NSObject {
     }
     
     lazy var session: MCSession = {
-        let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.Required)
+        let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.required)
         session.delegate = self
         return session
     }()
     
-    func sendDataString(data : String) {
-        if let dataString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+    func sendDataString(_ data : String) {
+        if let dataString = data.data(using: String.Encoding.utf8, allowLossyConversion: false) {
             sendData(dataString)
         }
     }
-    func sendData(data : NSData) {
+    func sendData(_ data : Data) {
         DDLogVerbose("[ConnectPeerServiceManager] SendData: \(data)")
         
         if session.connectedPeers.count > 0 {
-            let _ = try? self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            let _ = try? self.session.send(data, toPeers: session.connectedPeers, with: MCSessionSendDataMode.reliable)
         }
     }
     
@@ -69,10 +69,10 @@ class ConnectPeerServiceManager : NSObject {
 
 extension ConnectPeerServiceManager : MCNearbyServiceAdvertiserDelegate {
     
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         DDLogError("[ConnectPeerServiceManager] DidNotStartAdvertisingPeer: \(error)")
     }
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession?) -> Void) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         DDLogInfo("[ConnectPeerServiceManager] DidReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
     }
@@ -81,16 +81,16 @@ extension ConnectPeerServiceManager : MCNearbyServiceAdvertiserDelegate {
 
 extension ConnectPeerServiceManager : MCNearbyServiceBrowserDelegate {
     
-    func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError) {
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
         DDLogError("[ConnectPeerServiceManager] DidNotStartBrowsingForPeers: \(error)")
     }
-    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         DDLogInfo("[ConnectPeerServiceManager] FoundPeer: \(peerID)")
         DDLogInfo("[ConnectPeerServiceManager] InvitePeer: \(peerID)")
-        browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 10)
+        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
     }
     
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         DDLogWarn("[ConnectPeerServiceManager] LostPeer: \(peerID)")
     }
     
@@ -100,9 +100,9 @@ extension MCSessionState {
     
     func stringValue() -> String {
         switch(self) {
-        case .NotConnected: return "NotConnected"
-        case .Connecting: return "Connecting"
-        case .Connected: return "Connected"
+        case .notConnected: return "NotConnected"
+        case .connecting: return "Connecting"
+        case .connected: return "Connected"
         }
     }
     
@@ -110,26 +110,26 @@ extension MCSessionState {
 
 extension ConnectPeerServiceManager : MCSessionDelegate {
     
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DDLogInfo("[ConnectPeerServiceManager] Peer \(peerID) didChangeState: \(state.stringValue())")
         self.delegate?.connectedDeviceChanged(self, connectedDevices: session.connectedPeers, changedDevice: peerID, changedState: state)
     }
     
-    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DDLogVerbose("[ConnectPeerServiceManager] DidReceiveData: \(data.length) bytes")
-        let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+        let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as! String
         self.delegate?.dataReceived(self, fromDevice: peerID, data: data, dataString: str)
     }
     
-    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         DDLogVerbose("[ConnectPeerServiceManager] DidReceiveStream")
     }
     
-    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
         DDLogVerbose("[ConnectPeerServiceManager] DidFinishReceivingResourceWithName")
     }
     
-    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         DDLogVerbose("[ConnectPeerServiceManager] DidStartReceivingResourceWithName")
     }
     

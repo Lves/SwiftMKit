@@ -12,11 +12,11 @@ struct RegexHelper {
     let regex: NSRegularExpression
     
     init(_ pattern: String) throws {
-        try regex = NSRegularExpression(pattern: pattern, options: .CaseInsensitive)
+        try regex = NSRegularExpression(pattern: pattern, options: .caseInsensitive)
     }
     
-    func match(input: String) -> Bool {
-        let matches = regex.matchesInString(input, options: [], range: NSMakeRange(0, input.characters.count))
+    func match(_ input: String) -> Bool {
+        let matches = regex.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
         return matches.count > 0
     }
 }

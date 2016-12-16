@@ -13,15 +13,15 @@ import ReactiveCocoa
 class MKIndicatorButtonViewController: BaseViewController {
     
     @IBOutlet var buttons: [IndicatorButton]!
-    private var _viewModel = MKUIIndicatorButtonViewModel()
+    fileprivate var _viewModel = MKUIIndicatorButtonViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
     override func setupUI() {
         super.setupUI()
         self.title = "Indicator Button"
-        buttons.last?.animateDirection = IndicatorButton.AnimateDirection.FromUpToDown
-        buttons.first?.indicatorPosition = .Right
+        buttons.last?.animateDirection = IndicatorButton.AnimateDirection.fromUpToDown
+        buttons.first?.indicatorPosition = .right
     }
     override func bindingData() {
         super.bindingData()

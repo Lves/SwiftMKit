@@ -10,12 +10,12 @@ import UIKit
 
 class MKCustomEmptyView: BaseKitEmptyView {
     
-    private struct InnerConst {
+    fileprivate struct InnerConst {
         static let NibName = "MKCustomEmptyView"
     }
     
     override class func getView() -> MKCustomEmptyView {
-        return NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! MKCustomEmptyView
+        return Bundle.main.loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! MKCustomEmptyView
     }
 
 }

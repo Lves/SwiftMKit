@@ -22,7 +22,7 @@ class MKNetworkRequestDetailViewController: BaseViewController {
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var constraintImgPicAspect: NSLayoutConstraint!
     
-    private var _viewModel = MKNetworkRequestDetailViewModel()
+    fileprivate var _viewModel = MKNetworkRequestDetailViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
@@ -32,7 +32,7 @@ class MKNetworkRequestDetailViewController: BaseViewController {
         self.title = "Detail"
         self.lblName.text = ""
         self.lblContent.text = ""
-        self.btnLike.hidden = true
+        self.btnLike.isHidden = true
         loadData()
     }
     override func loadData() {

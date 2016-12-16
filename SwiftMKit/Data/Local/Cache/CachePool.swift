@@ -13,37 +13,37 @@ import CocoaLumberjack
 public struct CachePoolConstant {
     // 取手机剩余空间 DefaultCapacity = MIN(剩余空间, 100M)
     static let DefaultCapacity: Int64 = 100*1024*1024 // 默认缓存池空间 100M
-    static let DefaultCachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first! + "/"
+    static let DefaultCachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first! + "/"
     static let MimeType4Image = "image"
 }
 
 private class CacheModel : NSObject, NSCoding, CacheModelProtocol {
     var key: String = ""
     var name: String = ""
-    var filePath: NSURL = NSURL()
+    var filePath: URL?
     var size: Int64 = 0
     var mimeType: String = ""
-    var createTime: NSTimeInterval = 0
-    var lastVisitTime: NSTimeInterval = 0
-    var expireTime: NSTimeInterval = 0
+    var createTime: TimeInterval = 0
+    var lastVisitTime: TimeInterval = 0
+    var expireTime: TimeInterval = 0
     
-    @objc func encodeWithCoder(aCoder: NSCoder){
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.key, forKey: "key")
-        aCoder.encodeObject(self.filePath, forKey: "filePath")
-        aCoder.encodeObject(self.createTime, forKey: "createTime")
-        aCoder.encodeInt64(self.size, forKey: "size")
-        aCoder.encodeObject(self.mimeType, forKey: "mimeType")
+    @objc func encode(with aCoder: NSCoder){
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.key, forKey: "key")
+        aCoder.encode(self.filePath, forKey: "filePath")
+        aCoder.encode(self.createTime, forKey: "createTime")
+        aCoder.encode(self.size, forKey: "size")
+        aCoder.encode(self.mimeType, forKey: "mimeType")
     }
     
     @objc required init(coder aDecoder: NSCoder) {
         super.init()
-        self.name = aDecoder.decodeObjectForKey("name") as! String
-        self.key = aDecoder.decodeObjectForKey("key") as! String
-        self.filePath = aDecoder.decodeObjectForKey("filePath") as! NSURL
-        self.createTime = aDecoder.decodeObjectForKey("createTime") as! NSTimeInterval
-        self.size = aDecoder.decodeInt64ForKey("size")
-        self.mimeType = aDecoder.decodeObjectForKey("mimeType") as! String
+        self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.key = aDecoder.decodeObject(forKey: "key") as! String
+        self.filePath = aDecoder.decodeObject(forKey: "filePath") as? URL
+        self.createTime = aDecoder.decodeObject(forKey: "createTime") as! TimeInterval
+        self.size = aDecoder.decodeInt64(forKey: "size")
+        self.mimeType = aDecoder.decodeObject(forKey: "mimeType") as! String
     }
     
     override init() {
@@ -56,22 +56,22 @@ private class CacheModel : NSObject, NSCoding, CacheModelProtocol {
 }
 
 /// 缓存池：用于存储文件
-public class CachePool: CachePoolProtocol {
-    let fileManager = NSFileManager.defaultManager()
+open class CachePool: CachePoolProtocol {
+    let fileManager = FileManager.default
     var cache: PINCache?
-    public var namespace: String = "CachePool"
-    public var capacity: Int64 = CachePoolConstant.DefaultCapacity
-    public var size: Int64 {
+    open var namespace: String = "CachePool"
+    open var capacity: Int64 = CachePoolConstant.DefaultCapacity
+    open var size: Int64 {
         // 遍历配置文件
         // 取出缓存字典
-        let cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+        let cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         var cachedSize: Int64 = 0
         for value in cachedDict.values {
             cachedSize += value.size
         }
         return cachedSize
     }
-    public var basePath: NSURL?
+    open var basePath: URL?
     
     init() {
         cache = PINCache(name: "Config", rootPath: cachePath())
@@ -84,58 +84,58 @@ public class CachePool: CachePoolProtocol {
         createFolder(self.namespace, baseUrl: baseCacheUrl())
     }
     
-    public func addCache(data: NSData, name: String?) -> String {
+    open func addCache(_ data: Data, name: String?) -> String {
         return addCache(data, name: name, mimeType: nil)
     }
     
-    public func addCache(image: UIImage, name: String?) -> String {
+    open func addCache(_ image: UIImage, name: String?) -> String {
         let data = UIImagePNGRepresentation(image)
         return self.addCache(data!, name: name, mimeType: CachePoolConstant.MimeType4Image)
     }
     
-    public func addCache(filePath: NSURL, name: String?) -> String {
+    open func addCache(_ filePath: URL, name: String?) -> String {
         // 拷贝文件
         // 生成目标路径
-        let timestamp = NSDate().timeIntervalSince1970
+        let timestamp = Date().timeIntervalSince1970
         let nameTime = ( name ?? "" ) + "\(timestamp)"
         let encryptName = nameTime.md5
         let dir = self.cachePath()
-        let destFilePath:String = dir + encryptName
-        try! fileManager.copyItemAtPath(filePath.path!, toPath: destFilePath)
-        DDLogInfo("filePath: \(filePath.path!)")
+        let destFilePath:String = dir + encryptName!
+        try! fileManager.copyItem(atPath: filePath.path, toPath: destFilePath)
+        DDLogInfo("filePath: \(filePath.path)")
         DDLogInfo("destFilePath: \(destFilePath)")
         // 获取文件信息
         if let attrs = self.getFileAttributes(destFilePath) {
             DDLogInfo("file info:\(attrs)")
             // 更新配置文件
-            let num = attrs[NSFileSize] as? NSNumber ?? 0
-            let size = num.longLongValue
+            let num = attrs[FileAttributeKey.size] as? NSNumber ?? 0
+            let size = num.int64Value
             return self.updateConfig(name, timestamp:timestamp, size: size)
         }
         // TODO: 返回值需要思考一下
-        return encryptName
+        return encryptName!
     }
     
-    public func getCache(key: String) -> AnyObject? {
+    open func getCache(_ key: String) -> AnyObject? {
         let dir = self.cachePath()
         let filePath:String = dir + key
         DDLogInfo("objectForName filePath：" + filePath)
-        let cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+        let cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         if let obj = cachedDict[key] {
             if obj.mimeType == CachePoolConstant.MimeType4Image {
-                if let data = fileManager.contentsAtPath(filePath) {
+                if let data = fileManager.contents(atPath: filePath) {
                     return UIImage(data: data)
                 } else {
                     return nil
                 }
             }
-            return fileManager.contentsAtPath(filePath)
+            return fileManager.contents(atPath: filePath) as AnyObject?
         }
-        return fileManager.contentsAtPath(filePath)
+        return fileManager.contents(atPath: filePath) as AnyObject?
     }
     
-    public func all() -> [CacheModelProtocol]? {
-        let cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+    open func all() -> [CacheModelProtocol]? {
+        let cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         var cacheModelList:[CacheModelProtocol] = []
         for obj in cachedDict.values {
             cacheModelList.append(obj)
@@ -143,36 +143,36 @@ public class CachePool: CachePoolProtocol {
         return cacheModelList
     }
     
-    public func removeCache(key: String) -> Bool {
-        var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+    open func removeCache(_ key: String) -> Bool {
+        var cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         if let obj = cachedDict[key] {
             print(obj)
             // 从沙河中删除
             let filePathStr = cachePath() + obj.key
-            if fileManager.fileExistsAtPath(filePathStr) {
-                try! fileManager.removeItemAtPath(filePathStr)
+            if fileManager.fileExists(atPath: filePathStr) {
+                try! fileManager.removeItem(atPath: filePathStr)
             }
             // 从配置文件中删除
-            cachedDict.removeValueForKey(key)
+            cachedDict.removeValue(forKey: key)
             cacheDict = cachedDict
             return true
         }
         return false
     }
     
-    public func clear() -> Bool {
+    open func clear() -> Bool {
         let cachepath = cachePath()
-        if fileManager.fileExistsAtPath(cachepath) {
-            let fileArray:[AnyObject]? = fileManager.subpathsAtPath(cachepath)
+        if fileManager.fileExists(atPath: cachepath) {
+            let fileArray:[AnyObject]? = fileManager.subpaths(atPath: cachepath) as [AnyObject]?
             for fn in fileArray!{
                 let subpath = cachepath + "/\(fn)";
                 var flag: ObjCBool = false
-                if fileManager.fileExistsAtPath(subpath, isDirectory: &flag) {
-                    if flag {
+                if fileManager.fileExists(atPath: subpath, isDirectory: &flag) {
+                    if flag.boolValue {
                         // 是文件夹
                         continue
                     } else {
-                        try! fileManager.removeItemAtPath(subpath)
+                        try! fileManager.removeItem(atPath: subpath)
                     }
                 }
 //                if fileManager.fileExistsAtPath(subpath) {
@@ -193,30 +193,30 @@ public class CachePool: CachePoolProtocol {
     
     // 缓存相关
     let cacheDictKey = "CacheModels"
-    private var cacheDict: Dictionary<String, CacheModel>? {
+    fileprivate var cacheDict: Dictionary<String, CacheModel>? {
         get {
-            return cache!.objectForKey(cacheDictKey) as? Dictionary<String, CacheModel>
+            return cache!.object(forKey: cacheDictKey) as? Dictionary<String, CacheModel>
         }
         set {
             if let value = newValue {
-                cache!.setObject(value, forKey: cacheDictKey)
+                cache!.setObject(value as NSCoding, forKey: cacheDictKey)
             } else {
-                cache!.removeObjectForKey(cacheDictKey)
+                cache!.removeObject(forKey: cacheDictKey)
             }
         }
     }
 }
 
 extension CachePool {
-    private func addCache(data: NSData, name: String?, mimeType: String?) -> String {
+    fileprivate func addCache(_ data: Data, name: String?, mimeType: String?) -> String {
         // 更新配置文件
-        let timestamp = NSDate().timeIntervalSince1970
-        let encryptName = self.updateConfig(name, timestamp:timestamp, size: Int64(data.length), mimeType: mimeType)
+        let timestamp = Date().timeIntervalSince1970
+        let encryptName = self.updateConfig(name, timestamp:timestamp, size: Int64(data.count), mimeType: mimeType)
         // 保存对象到沙盒
         let dir = self.cachePath()
         let filePath:String = dir + encryptName
-        Async.background {
-            if data.writeToFile(filePath, atomically: true) {
+        let _ = Async.background {
+            if (try? data.write(to: URL(fileURLWithPath: filePath), options: [.atomic])) != nil {
                 DDLogDebug("文件写入成功：\(filePath)")
             } else {
                 DDLogDebug("文件写入失败！")
@@ -228,7 +228,7 @@ extension CachePool {
     ///  存储文件之前，判断是否有足够的空间存储
     ///
     ///  :param: size 即将存储的文件大小
-    private func preparePoolForSize(size: Int64) -> Bool {
+    fileprivate func preparePoolForSize(_ size: Int64) -> Bool {
         // 比较 设备剩余可用空间 & 文件大小
         var leftCapacity = capacity - self.size
         leftCapacity = min(UIDevice.freeDiskSpaceInBytes, leftCapacity)  // 取出最小可用空间
@@ -247,26 +247,26 @@ extension CachePool {
     ///  :param: size 文件大小
     ///
     ///  :returns: 加密后的文件名
-    private func updateConfig(name: String?, timestamp: NSTimeInterval, size: Int64) -> String {
+    fileprivate func updateConfig(_ name: String?, timestamp: TimeInterval, size: Int64) -> String {
         return updateConfig(name, timestamp: timestamp, size: size, mimeType: nil)
     }
     
-    private func updateConfig(name: String?, timestamp: NSTimeInterval, size: Int64, mimeType: String?) -> String {
+    fileprivate func updateConfig(_ name: String?, timestamp: TimeInterval, size: Int64, mimeType: String?) -> String {
         // 核心方法：判断是否有足够的空间存储
         if !(self.preparePoolForSize(size)) {
             return ""
         }
         let cacheObj = CacheModel()
         // 已缓存的字典
-        var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+        var cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         let nameTime = (name ?? "") + "\(timestamp)"
-        let encryptName = nameTime.md5
+        let encryptName = nameTime.md5 ?? nameTime
         cacheObj.name = name ?? ""
         cacheObj.key = encryptName
         cacheObj.createTime = timestamp
         cacheObj.mimeType = (mimeType ?? "")
         cacheObj.size = size
-        cacheObj.filePath = NSURL(fileURLWithPath: (cachePath() + encryptName))
+        cacheObj.filePath = URL(fileURLWithPath: (cachePath() + encryptName))
         cachedDict[encryptName] = cacheObj
         // 同步到PINCache
         cacheDict = cachedDict
@@ -274,30 +274,30 @@ extension CachePool {
     }
     
     ///  创建文件夹
-    private func createFolder(name: String, baseUrl: NSURL) {
-        let folder = baseUrl.URLByAppendingPathComponent(name, isDirectory: true)
-        let exist = fileManager.fileExistsAtPath(folder!.path!)
+    fileprivate func createFolder(_ name: String, baseUrl: URL) {
+        let folder = baseUrl.appendingPathComponent(name, isDirectory: true)
+        let exist = fileManager.fileExists(atPath: folder.path)
         if !exist {
-            try! fileManager.createDirectoryAtURL(folder!, withIntermediateDirectories: true, attributes: nil)
-            DDLogVerbose("缓存文件夹：" + folder!.path!)
+            try! fileManager.createDirectory(at: folder, withIntermediateDirectories: true, attributes: nil)
+            DDLogVerbose("缓存文件夹：" + folder.path)
         }
     }
     
     ///  获取文件属性
     ///
     ///  :param: filePath 文件路径
-    private func getFileAttributes(filePath: String) -> [String: AnyObject]? {
-        let attributes = try? fileManager.attributesOfItemAtPath(filePath)
+    fileprivate func getFileAttributes(_ filePath: String) -> [FileAttributeKey: Any]? {
+        let attributes = try? fileManager.attributesOfItem(atPath: filePath)
         return attributes
     }
     
-    private func cachePath() -> String {
-        let baseStr = ((basePath) != nil) ? basePath!.path! : CachePoolConstant.DefaultCachePath
+    fileprivate func cachePath() -> String {
+        let baseStr = ((basePath) != nil) ? basePath!.path : CachePoolConstant.DefaultCachePath
         return baseStr + "/" + namespace + "/"
     }
     
-    private func baseCacheUrl() -> NSURL {
-        let baseUrl = ((basePath) != nil) ? basePath! : NSURL(fileURLWithPath: CachePoolConstant.DefaultCachePath)
+    fileprivate func baseCacheUrl() -> URL {
+        let baseUrl = ((basePath) != nil) ? basePath! : URL(fileURLWithPath: CachePoolConstant.DefaultCachePath)
         self.basePath = baseUrl
         return baseUrl
     }
@@ -306,14 +306,14 @@ extension CachePool {
     ///
     ///  :param: lastSize 剩余空间
     ///  :param: size     至少需要的空间
-    private func cleanDisk(lastSize: Int64, size: Int64) -> Int64 {
+    fileprivate func cleanDisk(_ lastSize: Int64, size: Int64) -> Int64 {
         var leftCapacity = lastSize
         // 遍历配置文件
         // 取出缓存字典
-        var cachedDict = (cache!.objectForKey(cacheDictKey) as? [String: CacheModel]) ?? [:]
+        var cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         DDLogVerbose("排序前：\(cachedDict)")
         // 升序，最新的数据在最下面(目的：删除日期最小的旧数据)
-        let sortedList = cachedDict.sort { $0.1.createTime < $1.1.createTime }
+        let sortedList = cachedDict.sorted { $0.1.createTime < $1.1.createTime }
         DDLogVerbose("=========================================================")
         DDLogVerbose("排序后：\(sortedList)")
         
@@ -321,11 +321,11 @@ extension CachePool {
         for (key, model) in sortedList {
             // 从沙河中删除
             let filePathStr = cachePath() + key
-            if fileManager.fileExistsAtPath(filePathStr) {
-                try! fileManager.removeItemAtPath(filePathStr)
+            if fileManager.fileExists(atPath: filePathStr) {
+                try! fileManager.removeItem(atPath: filePathStr)
             }
             // 从配置文件中删除
-            cachedDict.removeValueForKey(key)
+            cachedDict.removeValue(forKey: key)
             cacheDict = cachedDict
             // 更新剩余空间大小
             leftCapacity += model.size

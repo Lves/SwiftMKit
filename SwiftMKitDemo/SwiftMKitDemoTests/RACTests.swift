@@ -36,7 +36,7 @@ class RACTests: XCTestCase {
     }
 
     func testCombineLatestSignal() {
-        let expectation = self.expectationWithDescription("CombineLatest Signal then reduce")
+        let expectation = self.expectation(description: "CombineLatest Signal then reduce")
         
         let signal: SignalProducer<Int, NSError> = combineLatest(signal1, signal2).reduce(0) { x, data in
             let (a, b) = data
@@ -54,10 +54,10 @@ class RACTests: XCTestCase {
         })
         signal.start()
         
-        self.waitForExpectationsWithTimeout(100, handler: nil)
+        self.waitForExpectations(timeout: 100, handler: nil)
     }
     func testCombineLatestErrorSignal() {
-        let expectation = self.expectationWithDescription("CombineLatest Signal then reduce with error")
+        let expectation = self.expectation(description: "CombineLatest Signal then reduce with error")
         
         let signal: SignalProducer<Int, NSError> = combineLatest(signalError, signal2).reduce(0) { x, data in
             let (a, b) = data
@@ -72,10 +72,10 @@ class RACTests: XCTestCase {
                     expectation.fulfill()
             })
         signal.start()
-        self.waitForExpectationsWithTimeout(100, handler: nil)
+        self.waitForExpectations(timeout: 100, handler: nil)
     }
     func testCombineLatestEatErrorSignal() {
-        let expectation = self.expectationWithDescription("CombineLatest Signal then reduce with eat error")
+        let expectation = self.expectation(description: "CombineLatest Signal then reduce with eat error")
         
         let signalEatError: SignalProducer<Int, NSError> = signalError.flatMapError { error in
             print("I know the error: \(error)")
@@ -97,7 +97,7 @@ class RACTests: XCTestCase {
                     expectation.fulfill()
             })
         signal.start()
-        self.waitForExpectationsWithTimeout(100, handler: nil)
+        self.waitForExpectations(timeout: 100, handler: nil)
     }
     
     var mproperty: MutableProperty<Int> = MutableProperty<Int>(1)
@@ -106,9 +106,9 @@ class RACTests: XCTestCase {
     var mmessage: MutableProperty<String> = MutableProperty<String>("")
     
     func testRACObserver() {
-        let expectation1 = self.expectationWithDescription("Observe Signal")
-        let expectation2 = self.expectationWithDescription("Observe Signal")
-        let expectation3 = self.expectationWithDescription("Observe Signal")
+        let expectation1 = self.expectation(description: "Observe Signal")
+        let expectation2 = self.expectation(description: "Observe Signal")
+        let expectation3 = self.expectation(description: "Observe Signal")
         var index = 1
         mproperty.producer.skip(1).startWithNext { x in
             XCTAssertEqual(index, x)
@@ -126,7 +126,7 @@ class RACTests: XCTestCase {
         mmessage <~ textfield.rac_textSignalProducer()
         XCTAssertEqual("", mmessage.value)
         textfield.text = message
-        textfield.sendActionsForControlEvents(.EditingChanged)
+        textfield.sendActions(for: .editingChanged)
         XCTAssertEqual(textfield.text, mmessage.value)
         textfield.rac_textSignalProducer().skip(1).startWithNext { text in
             XCTAssertEqual(message, text)
@@ -137,8 +137,8 @@ class RACTests: XCTestCase {
         mproperty.value = index
         property = index
         textfield.text = message
-        textfield.sendActionsForControlEvents(.EditingChanged)
-        self.waitForExpectationsWithTimeout(100, handler: nil)
+        textfield.sendActions(for: .editingChanged)
+        self.waitForExpectations(timeout: 100, handler: nil)
     }
     
     var button: UIButton = UIButton()
@@ -152,22 +152,22 @@ class RACTests: XCTestCase {
         }
         mproperty.value = 0
         textfield.text = "12"
-        textfield.sendActionsForControlEvents(.EditingChanged)
-        XCTAssertFalse(button.enabled)
+        textfield.sendActions(for: .editingChanged)
+        XCTAssertFalse(button.isEnabled)
         textfield.text = "123"
-        textfield.sendActionsForControlEvents(.EditingChanged)
-        XCTAssertFalse(button.enabled)
+        textfield.sendActions(for: .editingChanged)
+        XCTAssertFalse(button.isEnabled)
         mproperty.value = 1
-        XCTAssertTrue(button.enabled)
+        XCTAssertTrue(button.isEnabled)
         textfield.text = "12"
-        textfield.sendActionsForControlEvents(.EditingChanged)
-        XCTAssertFalse(button.enabled)
+        textfield.sendActions(for: .editingChanged)
+        XCTAssertFalse(button.isEnabled)
     }
     
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

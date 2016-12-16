@@ -9,14 +9,14 @@
 import Foundation
 import PINCache
 
-public class DocumentCache: PINDiskCache {
+open class DocumentCache: PINDiskCache {
     init(name: String) {
         super.init(name: name, rootPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!)
     }
     
     static let DocumentCacheSharedName = "PINDiskCacheShared"
-    private static let sharedInstance = DocumentCache(name: DocumentCacheSharedName)
-    override public class func sharedCache() -> DocumentCache {
+    fileprivate static let sharedInstance = DocumentCache(name: DocumentCacheSharedName)
+    override open class func shared() -> DocumentCache {
         return sharedInstance
     }
 }

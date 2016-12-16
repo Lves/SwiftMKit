@@ -14,7 +14,7 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
-    private var _viewModel = BaseKitViewModel()
+    fileprivate var _viewModel = BaseKitViewModel()
     override var viewModel: BaseKitViewModel! {
         get { return _viewModel }
     }
@@ -24,8 +24,8 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
         slideInTransitioningDelegate.statusBarHidden = true
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let controller = segue.destinationViewController as? MKSideMenuViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? MKSideMenuViewController {
             if segue.identifier == "Left" {
                 slideInTransitioningDelegate.direction = .left
             } else if segue.identifier == "Right" {
@@ -33,11 +33,11 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
             }
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.delegate = self
-            controller.modalPresentationStyle = .Custom
+            controller.modalPresentationStyle = .custom
         }
     }
     
-    func sideMenuViewController(controller: MKSideMenuViewController, didSelectRow selectedRow: Int) {
+    func sideMenuViewController(_ controller: MKSideMenuViewController, didSelectRow selectedRow: Int) {
         self.dismissVC(completion: {_ in self.routeToName("routeToDetail") })
     }
 }
@@ -45,7 +45,7 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
 
 
 protocol MKSideMenuViewControllerDelegate: class {
-    func sideMenuViewController(controller: MKSideMenuViewController, didSelectRow selectedRow: Int)
+    func sideMenuViewController(_ controller: MKSideMenuViewController, didSelectRow selectedRow: Int)
 }
 
 class MKSideMenuViewController: BaseListViewController {
@@ -54,13 +54,13 @@ class MKSideMenuViewController: BaseListViewController {
         static let CellIdentifier = "MKSideMenuTableViewCell"
         static let SegueToNextSideViewDetail = "MKSideDetailViewController"
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     weak var delegate: MKSideMenuViewControllerDelegate?
     @IBOutlet weak var tableView: UITableView!
     
-    private var _viewModel = BaseListViewModel()
+    fileprivate var _viewModel = BaseListViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
@@ -73,21 +73,21 @@ class MKSideMenuViewController: BaseListViewController {
     }
     override func loadData() {
         super.loadData()
-        listViewModel.dataArray = [1,2,3,4,5,6,7,8,9,10]
+        listViewModel.dataArray = [1 as AnyObject,2 as AnyObject,3 as AnyObject,4 as AnyObject,5 as AnyObject,6 as AnyObject,7 as AnyObject,8,9,10]
         tableView.reloadData()
     }
     
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         tableViewCell.textLabel?.text = "Menu - \(indexPath.row)"
     }
-    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         delegate?.sideMenuViewController(self, didSelectRow: indexPath.row)
     }
 }

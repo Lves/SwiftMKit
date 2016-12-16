@@ -10,35 +10,36 @@ import UIKit
 import ReactiveCocoa
 import CocoaLumberjack
 import MJExtension
+import ReactiveSwift
 
 public struct NetApiDataConst {
-    static let DefaultTimeoutInterval: NSTimeInterval = 45
+    static let DefaultTimeoutInterval: TimeInterval = 45
 }
 
-public class NetApiData: NSObject, NetApiProtocol {
+open class NetApiData: NSObject, NetApiProtocol {
     
-    public var error: NetError?
-    public var query: [String: AnyObject] = [:]
-    public var method: ApiMethod = .GET
-    public var url: String = ""
-    public var timeout: NSTimeInterval = NetApiDataConst.DefaultTimeoutInterval
-    public var request: AnyObject?
-    public var response: AnyObject?
-    public var indicator: NetApiIndicator?
+    open var error: NetError?
+    open var query: [String: AnyObject] = [:]
+    open var method: ApiMethod = .GET
+    open var url: String = ""
+    open var timeout: TimeInterval = NetApiDataConst.DefaultTimeoutInterval
+    open var request: AnyObject?
+    open var response: AnyObject?
+    open var indicator: NetApiIndicator?
     
-    public func fillJSON(json: AnyObject) {}
-    public func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest { return request }
-    public func transferResponseJSON(response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError> { return response }
-    public func transferResponseData(response: NetApiResponse<NSData, NSError>) -> NetApiResponse<NSData, NSError> { return response }
-    public func transferResponseString(response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError> { return response }
-    public func requestJSON() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
-    public func requestData() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
-    public func requestString() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
-    public func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> { return SignalProducer.empty }
+    open func fillJSON(_ json: AnyObject) {}
+    open func transferURLRequest(_ request:URLRequest) -> URLRequest { return request }
+    open func transferResponseJSON(_ response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError> { return response }
+    open func transferResponseData(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError> { return response }
+    open func transferResponseString(_ response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError> { return response }
+    open func requestJSON() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
+    open func requestData() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
+    open func requestString() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
+    open func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> { return SignalProducer.empty }
     
-    private var runningApis = [NetApiData]()
+    fileprivate var runningApis = [NetApiData]()
     
-    private static let sharedInstance = NetApiData()
+    fileprivate static let sharedInstance = NetApiData()
     
     public override init() {
         super.init()
@@ -50,33 +51,33 @@ public class NetApiData: NSObject, NetApiProtocol {
     
     // MARK: RunningApi
     
-    class public func requestingApis() -> [NetApiData] {
+    class open func requestingApis() -> [NetApiData] {
         return sharedInstance.runningApis
     }
-    class public func addApi(api: NetApiData) {
+    class open func addApi(_ api: NetApiData) {
         sharedInstance.runningApis.append(api)
-        DDLogDebug("[Api++ \(sharedInstance.runningApis.count)] \(unsafeAddressOf(api))")
+        DDLogDebug("[Api++ \(sharedInstance.runningApis.count)] \(Unmanaged.passUnretained(api).toOpaque())")
     }
-    class public func removeApi(api: NetApiData) {
-        if let index = sharedInstance.runningApis.indexOf(api) {
-            sharedInstance.runningApis.removeAtIndex(index)
-            DDLogDebug("[Api-- \(sharedInstance.runningApis.count)] \(unsafeAddressOf(api))")
+    class open func removeApi(_ api: NetApiData) {
+        if let index = sharedInstance.runningApis.index(of: api) {
+            sharedInstance.runningApis.remove(at: index)
+            DDLogDebug("[Api-- \(sharedInstance.runningApis.count)] \(Unmanaged.passUnretained(api).toOpaque())")
         }
     }
-        
-    class internal func getURLRequest(api: NetApiProtocol) -> NSURLRequest {
-        let (method, path, parameters) = (api.method ?? .GET, api.url ?? "", api.query ?? [:])
-        let url = NSURL(string: path)!
-        var mutableURLRequest = NSMutableURLRequest(URL: url)
-        mutableURLRequest.HTTPMethod = method.rawValue
-        mutableURLRequest.timeoutInterval = api.timeout ?? NetApiDataConst.DefaultTimeoutInterval
+    
+    class internal func getURLRequest(_ api: NetApiProtocol) -> URLRequest {
+        let (method, path, parameters) = (api.method , api.url , api.query )
+        let url = URL(string: path)!
+        var mutableURLRequest = NSMutableURLRequest(url: url)
+        mutableURLRequest.httpMethod = method.rawValue
+        mutableURLRequest.timeoutInterval = api.timeout 
         let parameterString = parameters.stringFromHttpParameters()
-        DDLogInfo("请求地址: \(method.rawValue) \(mutableURLRequest.URL!.absoluteString)?\(parameterString)")
-        mutableURLRequest = api.transferURLRequest(mutableURLRequest)
-        return mutableURLRequest
+        DDLogInfo("请求地址: \(method.rawValue) \(mutableURLRequest.url!.absoluteString)?\(parameterString)")
+        mutableURLRequest = api.transferURLRequest(mutableURLRequest as URLRequest) as (URLRequest)
+        return mutableURLRequest as URLRequest
     }
     
-    class public func combineQuery(base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {
+    class open func combineQuery(_ base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {
         if var queryBase = base {
             if let queryAppend = append {
                 for (key, value) in queryAppend {

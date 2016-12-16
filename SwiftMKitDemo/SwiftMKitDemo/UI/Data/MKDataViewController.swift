@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MKDataViewController: BaseListViewController, UITableViewDelegate, UITableViewDataSource{
+class MKDataViewController: BaseListViewController {
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
@@ -17,7 +17,7 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
         static let SegueToNextStore = "routeToDataStore"
     }
     
-    private var _viewModel = MKDataViewModel()
+    fileprivate var _viewModel = MKDataViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
@@ -26,17 +26,17 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     }
     var networkStatus: String = NetApiClient.shared.networkStatus.value.description {
         didSet {
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Fade)
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         }
     }
     var locationInfo: String = "Unknown" {
         didSet {
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Fade)
+            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         }
     }
     override func bindingData() {
         super.bindingData()
-        NetApiClient.shared.networkStatus.producer.startWithNext { [weak self] status in
+        NetApiClient.shared.networkStatus.producer.startWithValues { [weak self] status in
             self?.networkStatus = status.description
         }
         locationInfo = "Locating"
@@ -50,31 +50,31 @@ class MKDataViewController: BaseListViewController, UITableViewDelegate, UITable
     }
     
     
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        var cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: InnerConst.CellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? MKDataListModel {
             tableViewCell.textLabel?.text = model.title
             tableViewCell.detailTextLabel?.text = model.detail
             if indexPath.row == 0 {
                 tableViewCell.detailTextLabel?.text = networkStatus
-                tableViewCell.accessoryType = .None
+                tableViewCell.accessoryType = .none
             } else if indexPath.row == 1 {
                 tableViewCell.detailTextLabel?.text = locationInfo
-                tableViewCell.accessoryType = .None
+                tableViewCell.accessoryType = .none
             } else {
-                tableViewCell.accessoryType = .DisclosureIndicator
+                tableViewCell.accessoryType = .disclosureIndicator
             }
         }
     }
-    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? MKDataListModel {
-            self.routeToName(model.route ?? "", storyboardName: model.routeSB)
+            let _ = self.routeToName(model.route ?? "", storyboardName: model.routeSB)
         }
     }
 }

@@ -10,24 +10,24 @@ import UIKit
 import CocoaLumberjack
 
 public enum GestureTentacleStyle : Int {
-    case Verify, Reset
+    case verify, reset
 }
 
 public protocol GestureTentacleDelegate : class {
     func gestureTouchBegin()
-    func verification(result: String) -> Bool
-    func resetPassword(result: String) -> Bool
+    func verification(_ result: String) -> Bool
+    func resetPassword(_ result: String) -> Bool
 }
 public extension GestureTentacleDelegate {
     func gestureTouchBegin() {}
 }
 
-public class GestureTentacleView: UIView {
+open class GestureTentacleView: UIView {
     
-    public var lineSuccessColor: UIColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1) { didSet { setNeedsDisplay() } }
-    public var lineFailureColor: UIColor = UIColor(red: 208/255, green: 36/255, blue: 36/255, alpha: 1) { didSet { setNeedsDisplay() } }
-    public var lineColorAlpha: CGFloat = 0.7 { didSet { setNeedsDisplay() } }
-    public var lineWidth: CGFloat = 5 { didSet { setNeedsDisplay() } }
+    open var lineSuccessColor: UIColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1) { didSet { setNeedsDisplay() } }
+    open var lineFailureColor: UIColor = UIColor(red: 208/255, green: 36/255, blue: 36/255, alpha: 1) { didSet { setNeedsDisplay() } }
+    open var lineColorAlpha: CGFloat = 0.7 { didSet { setNeedsDisplay() } }
+    open var lineWidth: CGFloat = 5 { didSet { setNeedsDisplay() } }
     
     var buttonArray = [GesturePasswordButton]()
     var touchesArray = [Dictionary<String, Float>]()
@@ -36,14 +36,14 @@ public class GestureTentacleView: UIView {
     var lineStartPoint:CGPoint?
     var lineEndPoint:CGPoint?
     
-    public weak var delegate: GestureTentacleDelegate?
+    open weak var delegate: GestureTentacleDelegate?
     
-    public var style: GestureTentacleStyle = .Verify
+    open var style: GestureTentacleStyle = .verify
     
     var success: Bool = false
     var drawed: Bool = false
     
-    private var touching: Bool = false
+    fileprivate var touching: Bool = false
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,17 +55,17 @@ public class GestureTentacleView: UIView {
         setupUI()
     }
     deinit {
-        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
     }
     
     
-    public func setupUI() {
-        self.backgroundColor = UIColor.clearColor()
-        self.userInteractionEnabled = true
+    open func setupUI() {
+        self.backgroundColor = UIColor.clear
+        self.isUserInteractionEnabled = true
         success = true
     }
     
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         touching = true
         var touchPoint: CGPoint
         let touch: UITouch? = touches.first
@@ -79,14 +79,14 @@ public class GestureTentacleView: UIView {
         drawed = false
         
         if (touch != nil) {
-            touchPoint = touch!.locationInView(self)
+            touchPoint = touch!.location(in: self)
             for i in 0..<buttonArray.count {
                 let buttonTemp = buttonArray[i]
                 buttonTemp.success = true
                 buttonTemp.selected = false
-                if (CGRectContainsPoint(buttonTemp.frame, touchPoint)) {
+                if (buttonTemp.frame.contains(touchPoint)) {
                     let frameTemp = buttonTemp.frame
-                    let point = CGPointMake(frameTemp.origin.x + frameTemp.size.width/2 + 1, frameTemp.origin.y + frameTemp.size.height/2)
+                    let point = CGPoint(x: frameTemp.origin.x + frameTemp.size.width/2 + 1, y: frameTemp.origin.y + frameTemp.size.height/2)
                     var dict: Dictionary<String,Float> = [:]
                     dict["x"] = Float(point.x)
                     dict["y"] = Float(point.y)
@@ -101,14 +101,14 @@ public class GestureTentacleView: UIView {
         }
     }
     
-    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         var touchPoint: CGPoint
         let touch: UITouch? = touches.first
         if (touch != nil) {
-            touchPoint = touch!.locationInView(self)
+            touchPoint = touch!.location(in: self)
             for i in 0..<buttonArray.count {
                 let buttonTemp = buttonArray[i]
-                if (CGRectContainsPoint(buttonTemp.frame, touchPoint)){
+                if (buttonTemp.frame.contains(touchPoint)){
                     let tps = touchedArray.filter{ el in el == "num\(i)" }
                     if(tps.count > 0){
                         lineEndPoint = touchPoint
@@ -121,7 +121,7 @@ public class GestureTentacleView: UIView {
                     buttonTemp.setNeedsDisplay()
                     
                     let frameTemp = buttonTemp.frame
-                    let point = CGPointMake(frameTemp.origin.x + frameTemp.size.width/2 + 1, frameTemp.origin.y + frameTemp.size.height/2)
+                    let point = CGPoint(x: frameTemp.origin.x + frameTemp.size.width/2 + 1, y: frameTemp.origin.y + frameTemp.size.height/2)
                     var dict: Dictionary<String,Float> = [:]
                     dict["x"] = Float(point.x)
                     dict["y"] = Float(point.y)
@@ -137,7 +137,7 @@ public class GestureTentacleView: UIView {
         
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         touching = false
         var resultString:String = ""
         
@@ -152,9 +152,9 @@ public class GestureTentacleView: UIView {
         drawed = true
         
         switch style {
-        case .Verify:
+        case .verify:
             success = delegate?.verification(resultString) ?? false
-        case .Reset:
+        case .reset:
             success = delegate?.resetPassword(resultString) ?? false
         }
         
@@ -175,7 +175,7 @@ public class GestureTentacleView: UIView {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    public override func drawRect(rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         // Drawing code
         
         if(touchesArray.count<=0){
@@ -185,37 +185,37 @@ public class GestureTentacleView: UIView {
         
         for var i in 0..<touchesArray.count {
             if i >= touchedArray.count { break }
-            let context: CGContextRef = UIGraphicsGetCurrentContext()!
+            let context: CGContext = UIGraphicsGetCurrentContext()!
             
             if(touchesArray[i]["num"] == nil){
-                touchesArray.removeAtIndex(i)
+                touchesArray.remove(at: i)
                 i = i-1
                 continue
             }
             
             let (r,g,b,_) = success ? lineSuccessColor.colorComponents() : lineFailureColor.colorComponents()
-            CGContextSetRGBStrokeColor(context, r, g, b, lineColorAlpha) //线条颜色
+            context.setStrokeColor(red: r, green: g, blue: b, alpha: lineColorAlpha) //线条颜色
             
-            CGContextSetLineWidth(context, lineWidth)
+            context.setLineWidth(lineWidth)
             
-            CGContextMoveToPoint(context,CGFloat(touchesArray[i]["x"]!),CGFloat(touchesArray[i]["y"]!))
+            context.move(to: CGPoint(x: CGFloat(touchesArray[i]["x"]!), y: CGFloat(touchesArray[i]["y"]!)))
             
             if (i < touchesArray.count-1) {
                 
-                CGContextAddLineToPoint(context,CGFloat(touchesArray[i+1]["x"]!),CGFloat(touchesArray[i+1]["y"]!))
+                context.addLine(to: CGPoint(x: CGFloat(touchesArray[i+1]["x"]!), y: CGFloat(touchesArray[i+1]["y"]!)))
             }else {
                 
                 if (success && drawed != true) {
-                    CGContextAddLineToPoint(context, lineEndPoint!.x,lineEndPoint!.y);
+                    context.addLine(to: CGPoint(x: lineEndPoint!.x, y: lineEndPoint!.y));
                 }
             }
-            CGContextStrokePath(context)
+            context.strokePath()
             
         }
     }
     
     
-    public func enterArgin() {
+    open func enterArgin() {
         if touching {
             return
         }

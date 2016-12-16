@@ -16,24 +16,24 @@ public extension UIView {
         static let BlurViewTag = 1001
     }
     
-    func shake(count: Int, directionX: CGFloat = 3, directionY: CGFloat = 0) {
-        UIView.animateWithDuration(0.05, animations: {
-            self.transform = CGAffineTransformMakeTranslation(directionX, directionY)
-        }) { finished in
+    func shake(_ count: Int, directionX: CGFloat = 3, directionY: CGFloat = 0) {
+        UIView.animate(withDuration: 0.05, animations: {
+            self.transform = CGAffineTransform(translationX: directionX, y: directionY)
+        }, completion: { finished in
             if count <= 0 {
-                self.transform = CGAffineTransformIdentity
+                self.transform = CGAffineTransform.identity
                 return
             }
             self.shake(count - 1, directionX: directionX * -1, directionY: directionY * -1)
-        }
+        }) 
     }
     
-    func addBlur(style: UIBlurEffectStyle = .Dark) {
+    func addBlur(_ style: UIBlurEffectStyle = .dark) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
         blurEffectView.tag = InnerConstant.BlurViewTag
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
         self.addSubview(blurEffectView)
     }
     func removeBlur() {
@@ -54,10 +54,10 @@ public extension UIView {
     @IBInspectable
     public var mBorderColor: UIColor {
         get {
-            return UIColor(CGColor: layer.borderColor ?? UIColor.clearColor().CGColor)
+            return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
         }
         set {
-            layer.borderColor = newValue.CGColor
+            layer.borderColor = newValue.cgColor
         }
     }
     /// borderWidth
@@ -78,13 +78,13 @@ public extension UIView {
      */
     func getViewController() -> UIViewController? {
         var vc: UIViewController?
-        var next = self.nextResponder()
+        var next = self.next
         while next != nil {
-            if (next?.isKindOfClass(UIViewController.self) ?? false) == true {
+            if (next?.isKind(of: UIViewController.self) ?? false) == true {
                 vc = next as? UIViewController
                 break
             }
-            next = next?.nextResponder()
+            next = next?.next
         }
         return vc
     }

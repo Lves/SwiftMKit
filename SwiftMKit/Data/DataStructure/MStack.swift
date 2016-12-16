@@ -9,9 +9,9 @@
 import Foundation
 
 public struct MStack<T> {
-    private var array = [T]()
+    fileprivate var array = [T]()
     
-    public mutating func push(element: T) {
+    public mutating func push(_ element: T) {
         array.append(element)
     }
     
@@ -32,10 +32,10 @@ public struct MStack<T> {
     }
 }
 
-extension MStack: SequenceType {
-    public func generate() -> AnyGenerator<T> {
+extension MStack: Sequence {
+    public func makeIterator() -> AnyIterator<T> {
         var curr = self
-        return AnyGenerator {
+        return AnyIterator {
             _ -> T? in
             return curr.pop()
         }

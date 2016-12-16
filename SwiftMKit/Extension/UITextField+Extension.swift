@@ -8,12 +8,13 @@
 
 import Foundation
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 import EZSwiftExtensions
 
 public extension UITextField {
-    public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
-        return self.rac_textSignal().toSignalProducer().map { $0 as! String }.flatMapError { _ in SignalProducer.empty }
+    public func rac_textSignalProducer() -> Signal<String?, NoError> {
+        return self.reactive.continuousTextValues
     }
     @IBInspectable public var placeHolderColor: UIColor? {
         get {
@@ -32,7 +33,7 @@ public extension UITextField {
         }
     }
     
-    private struct AssociatedKeys {
+    fileprivate struct AssociatedKeys {
         static var isFirstNan = 0
     }
     var isFirstNan: Bool {
@@ -43,36 +44,36 @@ public extension UITextField {
             objc_setAssociatedObject(self, &AssociatedKeys.isFirstNan, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
-    public func reformatCardNumber(range: NSRange, replaceString string: String) -> Bool {
+    public func reformatCardNumber(_ range: NSRange, replaceString string: String) -> Bool {
         var text = self.text?.toNSString ?? ""
         var range = range
-        let characterSet = NSCharacterSet(charactersInString: "0123456789")
-        let string = string.stringByReplacingOccurrencesOfString(" ", withString: "").toNSString ?? ""
-        if string.rangeOfCharacterFromSet(characterSet.invertedSet).location != NSNotFound {
+        let characterSet = NSCharacterSet(charactersIn: "0123456789")
+        let string = string.toNSString.replacingOccurrences(of: " ", with: "").toNSString 
+        if string.rangeOfCharacter(from: characterSet.inverted).location != NSNotFound {
             return false
         }
-        let oldString = text.stringByReplacingOccurrencesOfString(" ", withString: "").toNSString
-        text = text.stringByReplacingCharactersInRange(range, withString: string as String).toNSString
-        let newString = text.stringByReplacingOccurrencesOfString(" ", withString: "")
+        let oldString = text.replacingOccurrences(of: " ", with: "").toNSString
+        text = text.replacingCharacters(in: range, with: string as String).toNSString
+        let newString = text.replacingOccurrences(of: " ", with: "")
         
-        if oldString == newString && string == "" {
+        if oldString as String == newString && string as String == "" {
             range.location -= 1
-            text = text.stringByReplacingCharactersInRange(range, withString: string as String)
+            text = text.replacingCharacters(in: range, with: string as String).toNSString
         }
-        text = text.stringByReplacingOccurrencesOfString(" ", withString: "")
+        text = text.replacingOccurrences(of: " ", with: "").toNSString
         
-        var result = ""
+        var result = "".toNSString
         let i = 4
         while text.length > 0 {
-            let subString = text.substringToIndex(min(text.length, i))
-            result = result.stringByAppendingString(subString)
+            let subString = text.substring(to: min(text.length, i))
+            result = result.appending(subString).toNSString
             if subString.length == i {
-                result = result.stringByAppendingString(" ")
+                result = result.appending(" ").toNSString
             }
-            text = text.substringFromIndex(min(text.length, i))
+            text = text.substring(from: min(text.length, i)).toNSString
         }
-        result = result.stringByTrimmingCharactersInSet(characterSet.invertedSet)
-        self.text = result
+        result = result.trimmingCharacters(in: characterSet.inverted).toNSString
+        self.text = result as String
         if string == "" {
             range.location = (range.location >= result.length ? result.length : range.location)
             self.selectedTextRange = NSRange(location: range.location, length: 0).toTextRange(textInput: self)
@@ -86,19 +87,19 @@ public extension UITextField {
         }
         return false
     }
-    public func reformatMobile(range: NSRange, replaceString string: String) -> Bool {
+    public func reformatMobile(_ range: NSRange, replaceString string: String) -> Bool {
         
-        func noneSpaseString(string: String?) -> String {
-            return (string ?? "").stringByReplacingOccurrencesOfString(" ", withString: "")
+        func noneSpaseString(_ string: String?) -> String {
+            return (string ?? "").toNSString.replacingOccurrences(of: " ", with: "")
         }
-        func parseString(string: String?) -> String? {
-            guard let str = string else { return nil }
-            let mStr = NSMutableString(string: str.stringByReplacingOccurrencesOfString(" ", withString: ""))
+        func parseString(_ string: String?) -> String? {
+            guard let str = string?.toNSString else { return nil }
+            let mStr = NSMutableString(string: str.replacingOccurrences(of: " ", with: ""))
             if  mStr.length > 3 {
-                mStr.insertString(" ", atIndex: 3)
+                mStr.insert(" ", at: 3)
             }
             if mStr.length > 8 {
-                mStr .insertString(" ", atIndex: 8)
+                mStr .insert(" ", at: 8)
             }
             return mStr as String
         }
@@ -111,12 +112,12 @@ public extension UITextField {
                 //选择的结束位置
                 let selectionEnd = selectedRange.end;
                 //选择的实际位置
-                var location = self.offsetFromPosition(beginning, toPosition: selectionStart)
+                var location = self.offset(from: beginning, to: selectionStart)
                 //选择的长度
-                let length = self.offsetFromPosition(selectionStart, toPosition: selectionEnd)
+                let length = self.offset(from: selectionStart, to: selectionEnd)
                 let txt = self.text ?? ""
-                let index = txt.startIndex.advancedBy(location)
-                let splitTxt = txt.substringToIndex(index)
+                let index = txt.index(txt.startIndex, offsetBy: location)
+                let splitTxt = txt.substring(to: index)
                 let list = splitTxt.split(" ")
                 let count = list.count - 1
                 if count == 1 {
@@ -130,20 +131,20 @@ public extension UITextField {
             }
             return NSMakeRange(0, 0)
         }
-        func setSelectedRange(range : NSRange) {
+        func setSelectedRange(_ range : NSRange) {
             let beginning = self.beginningOfDocument;
-            let startPosition = self.positionFromPosition(beginning, offset: range.location) ?? UITextPosition()
-            let endPosition = self.positionFromPosition(beginning, offset: range.location + range.length) ??  UITextPosition()
-            let selectionRange = self.textRangeFromPosition(startPosition, toPosition: endPosition)
+            let startPosition = self.position(from: beginning, offset: range.location) ?? UITextPosition()
+            let endPosition = self.position(from: beginning, offset: range.location + range.length) ??  UITextPosition()
+            let selectionRange = self.textRange(from: startPosition, to: endPosition)
             self.selectedTextRange = selectionRange
-            self.sendActionsForControlEvents(.EditingChanged)
+            self.sendActions(for: .editingChanged)
         }
         
         let RegStr4Number = "^\\d+$"
         // 判断用户输入的是否都是数字
         let predicate = NSPredicate(format: "SELF MATCHES %@", RegStr4Number)
         let xxx = "\(self.text ?? "")\(string)"
-        let match = predicate.evaluateWithObject(noneSpaseString(xxx))
+        let match = predicate.evaluate(with: noneSpaseString(xxx))
         if match == false && (self.text ?? "").length > 0 {
 //            // 如果有非整数的字符，就当做用户输入的是用户名
 //            // 清空之前自动产生的空格
@@ -169,20 +170,20 @@ public extension UITextField {
                 if range.length == 1 {
                     // 最后一位,遇到空格则多删除一
                     if range.location == text.length-1 {
-                        if  nsText.characterAtIndex(text.length-1) == ch {
+                        if  nsText.character(at: text.length-1) == ch {
                             self.deleteBackward()
                         }
                         return true
                     } else { //从中间删除
                         var offset = range.location
-                        if range.location < text.length && nsText.characterAtIndex(range.location) == ch && self.selectedTextRange?.empty == true {
+                        if range.location < text.length && nsText.character(at: range.location) == ch && self.selectedTextRange?.isEmpty == true {
                             self.deleteBackward()
                             offset -= 1
                         }
                         self.deleteBackward()
                         self.text = parseString(self.text)
-                        let newPos = self.positionFromPosition(self.beginningOfDocument, offset: offset) ?? UITextPosition()
-                        self.selectedTextRange = self.textRangeFromPosition(newPos, toPosition: newPos)
+                        let newPos = self.position(from: self.beginningOfDocument, offset: offset) ?? UITextPosition()
+                        self.selectedTextRange = self.textRange(from: newPos, to: newPos)
                         return false
                     }
                 } else if range.length > 1 {
@@ -199,8 +200,8 @@ public extension UITextField {
                     if isLast {
                         
                     } else {
-                        let newPos = self.positionFromPosition(self.beginningOfDocument, offset: offset) ?? UITextPosition()
-                        self.selectedTextRange = self.textRangeFromPosition(newPos, toPosition: newPos)
+                        let newPos = self.position(from: self.beginningOfDocument, offset: offset) ?? UITextPosition()
+                        self.selectedTextRange = self.textRange(from: newPos, to: newPos)
                     }
                     return false
                 } else {
@@ -216,8 +217,8 @@ public extension UITextField {
                 if range.location == 3 || range.location == 8 {
                     offset += 1
                 }
-                let newPos = self.positionFromPosition(self.beginningOfDocument, offset: offset) ?? UITextPosition()
-                self.selectedTextRange = self.textRangeFromPosition(newPos, toPosition: newPos)
+                let newPos = self.position(from: self.beginningOfDocument, offset: offset) ?? UITextPosition()
+                self.selectedTextRange = self.textRange(from: newPos, to: newPos)
                 return false
             } else {
                 return true

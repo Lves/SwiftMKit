@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 import Aspects
 
-public class SendCodeButton: UIButton {
-    private var timer: NSTimer?
-    private var stopTime: Int = 0
+open class SendCodeButton: UIButton {
+    fileprivate var timer: Timer?
+    fileprivate var stopTime: Int = 0
     
-    public var countDownSeconds: Int = 60
-    public var timeupTitle: String = "重新获取"
+    open var countDownSeconds: Int = 60
+    open var timeupTitle: String = "重新获取"
     
     required override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,39 +24,39 @@ public class SendCodeButton: UIButton {
         super.init(coder: aDecoder)
     }
     
-    public func countDown() {
+    open func countDown() {
         countDown(countDownSeconds)
     }
-    public func countDown(seconds: Int) {
+    open func countDown(_ seconds: Int) {
         stop()
-        self.selected = true
-        self.userInteractionEnabled = false
-        self.stopTime = NSDate().timeIntervalSince1970.toInt + seconds
+        self.isSelected = true
+        self.isUserInteractionEnabled = false
+        self.stopTime = Date().timeIntervalSince1970.toInt + seconds
         self.showRemainSecond()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(SendCodeButton.timerCountDown), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SendCodeButton.timerCountDown), userInfo: nil, repeats: true)
     }
     
-    public func stop() {
+    open func stop() {
         timer?.invalidate()
         timer = nil
-        self.selected = false
-        self.userInteractionEnabled = true
+        self.isSelected = false
+        self.isUserInteractionEnabled = true
     }
     
-    private func showRemainSecond() {
-        let now = NSDate().timeIntervalSince1970.toInt
+    fileprivate func showRemainSecond() {
+        let now = Date().timeIntervalSince1970.toInt
         setTitle("\(stopTime - now)秒后可重发", forState: .Selected)
     }
-    @objc private func timerCountDown() {
-        let now = NSDate().timeIntervalSince1970.toInt
+    @objc fileprivate func timerCountDown() {
+        let now = Date().timeIntervalSince1970.toInt
         if now > stopTime {
             stop()
-            setTitle(timeupTitle, forState: .Normal)
+            setTitle(timeupTitle, for: UIControlState())
         } else {
             showRemainSecond()
         }
     }
-    public override func removeFromSuperview() {
+    open override func removeFromSuperview() {
         stop()
         super.removeFromSuperview()
     }

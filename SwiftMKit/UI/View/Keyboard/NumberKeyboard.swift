@@ -24,7 +24,7 @@ public struct NumberKeyboardUITheme {
     var viewScreenImage: String = ""
 }
 
-public class NumberKeyboard: UIView, NumberKeyboardProtocol {
+open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     
     struct Theme {
         static let DefaultTheme: NumberKeyboardUITheme = NumberKeyboardUITheme(
@@ -62,23 +62,23 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     
-    public var type: NumberKeyboardType = .Normal
-    public var textField: UITextField?
-    public var text: String = ""
-    public var enableAutoToolbar = true {
+    open var type: NumberKeyboardType = .normal
+    open var textField: UITextField?
+    open var text: String = ""
+    open var enableAutoToolbar = true {
         willSet {
             IQKeyboardManager.sharedManager().enableAutoToolbar = newValue
         }
     }
     
-    public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal) -> NumberKeyboard {
-        return keyboard(textField, type: type, style: .Default)
+    open static func keyboard(_ textField: UITextField, type: NumberKeyboardType = .normal) -> NumberKeyboard {
+        return keyboard(textField, type: type, style: .default)
     }
-    public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal, style: NumberKeyboardStyle) -> NumberKeyboard {
+    open static func keyboard(_ textField: UITextField, type: NumberKeyboardType = .normal, style: NumberKeyboardStyle) -> NumberKeyboard {
         return keyboard(textField, type: type, theme: Theme.DefaultTheme)
     }
-    public static func keyboard(textField: UITextField, type: NumberKeyboardType = .Normal, theme: NumberKeyboardUITheme) -> NumberKeyboard {
-        let view = NSBundle.mainBundle().loadNibNamed("NumberKeyboard", owner: self, options: nil)?.first as? NumberKeyboard
+    open static func keyboard(_ textField: UITextField, type: NumberKeyboardType = .normal, theme: NumberKeyboardUITheme) -> NumberKeyboard {
+        let view = Bundle.main.loadNibNamed("NumberKeyboard", owner: self, options: nil)?.first as? NumberKeyboard
         view?.textField = textField
         view?.type = type
         view?.setupUI(theme)
@@ -91,21 +91,21 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public func clear() {
+    open func clear() {
         text = ""
     }
-    private func setupUI(theme: NumberKeyboardUITheme) {
-        btnDel.setBackgroundImage(UIImage(color: theme.viewDelColor), forState: .Normal)
-        btnOk.setBackgroundImage(UIImage(color: theme.viewEnterColor), forState: .Normal)
-        btnKey.setBackgroundImage(UIImage(color: theme.viewNumberColor), forState: .Normal)
-        btnDel.setBackgroundImage(UIImage(color: theme.viewDelHiglightColor), forState: .Highlighted)
-        btnOk.setBackgroundImage(UIImage(color: theme.viewEnterHiglightColor), forState: .Highlighted)
-        btnKey.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), forState: .Highlighted)
-        btnKey.setImage(UIImage(named: theme.viewScreenImage), forState: .Normal)
-        btnDel.setImage(UIImage(named: theme.viewDelImage), forState: .Normal)
+    fileprivate func setupUI(_ theme: NumberKeyboardUITheme) {
+        btnDel.setBackgroundImage(UIImage(color: theme.viewDelColor), for: UIControlState())
+        btnOk.setBackgroundImage(UIImage(color: theme.viewEnterColor), for: UIControlState())
+        btnKey.setBackgroundImage(UIImage(color: theme.viewNumberColor), for: UIControlState())
+        btnDel.setBackgroundImage(UIImage(color: theme.viewDelHiglightColor), for: .highlighted)
+        btnOk.setBackgroundImage(UIImage(color: theme.viewEnterHiglightColor), for: .highlighted)
+        btnKey.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), for: .highlighted)
+        btnKey.setImage(UIImage(named: theme.viewScreenImage), for: UIControlState())
+        btnDel.setImage(UIImage(named: theme.viewDelImage), for: UIControlState())
         for button in buttonNumbers {
-            button.setBackgroundImage(UIImage(color: theme.viewNumberColor), forState: .Normal)
-            button.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), forState: .Highlighted)
+            button.setBackgroundImage(UIImage(color: theme.viewNumberColor), for: UIControlState())
+            button.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), for: .highlighted)
         }
         for line in lines {
             line.backgroundColor = theme.viewLineColor
@@ -115,23 +115,23 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
             self.text = text
         }
         for button in buttonNumbers {
-            button.exclusiveTouch = true
+            button.isExclusiveTouch = true
             bindNumberButtonAction(button)
         }
-        btnKey.exclusiveTouch = true
-        btnOk.exclusiveTouch = true
-        btnDel.exclusiveTouch = true
-        btnDot.exclusiveTouch = true
+        btnKey.isExclusiveTouch = true
+        btnOk.isExclusiveTouch = true
+        btnDel.isExclusiveTouch = true
+        btnDot.isExclusiveTouch = true
         bindKeyButtonAction(btnKey)
         bindKeyButtonAction(btnOk)
         bindDelButtonAction(btnDel)
         bindDotButtonAction(btnDot)
-        if self.type == .NoDot {
-            self.btnDot.hidden = true
+        if self.type == .noDot {
+            self.btnDot.isHidden = true
         }
     }
     //小数点输入
-    private func bindDotButtonAction(button: UIButton) {
+    fileprivate func bindDotButtonAction(_ button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { _ in
             if self.text.contains(".") {
                 return
@@ -153,7 +153,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     //删除事件
-    private func bindDelButtonAction(button: UIButton) {
+    fileprivate func bindDelButtonAction(_ button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
             //获取光标位置
             var range = self.selectedRange()
@@ -177,7 +177,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     //数字输入
-    private func bindNumberButtonAction(button: UIButton) {
+    fileprivate func bindNumberButtonAction(_ button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { _ in
             if let inputText = button.currentTitle {
                 if inputText.length <= 0 {
@@ -201,7 +201,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     //键盘回收
-    private func bindKeyButtonAction(button: UIButton) {
+    fileprivate func bindKeyButtonAction(_ button: UIButton) {
         button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
             if let temp = self?.text {
                 self?.textField?.text = self?.matchConfirm(temp)
@@ -210,7 +210,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     //删除
-    private func matchInputDel(old : String, new : String) -> (String, NSRange) {
+    fileprivate func matchInputDel(_ old : String, new : String) -> (String, NSRange) {
         //删除小数点匹配
         if old.contains(".") && !new.contains(".") {
             return matchDeleteDot(old, new: new)
@@ -219,11 +219,11 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
     }
     //确定---匹配
-    public func matchConfirm(input : String) -> String {
+    open func matchConfirm(_ input : String) -> String {
         if input == "" {
             return ""
         }
-        let noSpacesStr = input.stringByReplacingOccurrencesOfString(" ", withString: "")
+        let noSpacesStr = input.replacingOccurrences(of: " ", with: "")
         let output =  NSDecimalNumber(string : noSpacesStr)
         return "\(output)"
 //        var output = input
@@ -238,7 +238,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
 //        return output
     }
     //输入小数点---匹配
-    public func matchInputDot(old : String, new : String) -> (String, NSRange) {
+    open func matchInputDot(_ old : String, new : String) -> (String, NSRange) {
         //获取光标位置
         var range = self.selectedRange()
         var result = old
@@ -260,7 +260,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         }
         //金额类型的特殊处理
         if self.limitWithTwoPoint(result) {
-            let dotArray = result.componentsSeparatedByString(".")
+            let dotArray = result.components(separatedBy: ".")
             if let forward = dotArray.first {
                 if var behind = dotArray.last {
                     behind = behind.toNSString.substringToIndex(2)
@@ -271,7 +271,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return (result, range)
     }
     //删除小数点---匹配
-    public func matchDeleteDot(old : String, new : String) -> (String, NSRange) {
+    open func matchDeleteDot(_ old : String, new : String) -> (String, NSRange) {
         //获取光标位置
         var range = self.selectedRange()
         var result = old
@@ -294,12 +294,12 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return (result, range)
     }
     //输入数字---匹配
-    public func matchInputNumber(old : String, new : String) -> (String, NSRange) {
+    open func matchInputNumber(_ old : String, new : String) -> (String, NSRange) {
         //获取光标位置
         var range = self.selectedRange()
         var result = old
-        let oldArray = old.componentsSeparatedByString(".")
-        let newArray = new.componentsSeparatedByString(".")
+        let oldArray = old.components(separatedBy: ".")
+        let newArray = new.components(separatedBy: ".")
         if oldArray.last == newArray.last {
             range.location += 1
             result = new
@@ -313,14 +313,14 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return (result, range)
     }
     //删除数字---匹配
-    public func matchDeleteNumber(old : String, new : String) -> (String, NSRange) {
+    open func matchDeleteNumber(_ old : String, new : String) -> (String, NSRange) {
         //获取光标位置
         var range = self.selectedRange()
         range.location -= 1
         return (new, range)
     }
     //数字正则匹配
-    private func matchNumber(string : String) -> Bool {
+    fileprivate func matchNumber(_ string : String) -> Bool {
         //(string =~ "^[0-9]+[.][0-9]+$") || string =~ "^[0-9]+$"
         return string =~ "^\\d+\\.?\\d*$"
     }
@@ -329,7 +329,7 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
      *
      *  @return 获取光标选择的范围
      */
-    private func selectedRange() -> NSRange {
+    fileprivate func selectedRange() -> NSRange {
         if let tempTextField = self.textField {            //开始位置
             let beginning = tempTextField.beginningOfDocument;
             //光标选择区域
@@ -339,9 +339,9 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
                 //选择的结束位置
                 let selectionEnd = selectedRange.end;
                 //选择的实际位置
-                let location = tempTextField.offsetFromPosition(beginning, toPosition: selectionStart)
+                let location = tempTextField.offset(from: beginning, to: selectionStart)
                 //选择的长度
-                let length = tempTextField.offsetFromPosition(selectionStart, toPosition: selectionEnd)
+                let length = tempTextField.offset(from: selectionStart, to: selectionEnd)
                 return NSMakeRange(location, length);
             }
         }
@@ -352,29 +352,29 @@ public class NumberKeyboard: UIView, NumberKeyboardProtocol {
      *
      *  @param range 光标选择的范围
      */
-    private func setSelectedRange(range : NSRange) {
+    fileprivate func setSelectedRange(_ range : NSRange) {
         if let tempTextField = self.textField {
             let beginning = tempTextField.beginningOfDocument;
-            let startPosition = tempTextField.positionFromPosition(beginning, offset: range.location) ?? UITextPosition()
-            let endPosition = tempTextField.positionFromPosition(beginning, offset: range.location + range.length) ??  UITextPosition()
-            let selectionRange = tempTextField.textRangeFromPosition(startPosition, toPosition: endPosition)
+            let startPosition = tempTextField.position(from: beginning, offset: range.location) ?? UITextPosition()
+            let endPosition = tempTextField.position(from: beginning, offset: range.location + range.length) ??  UITextPosition()
+            let selectionRange = tempTextField.textRange(from: startPosition, to: endPosition)
             tempTextField.selectedTextRange = selectionRange
-            self.textField?.sendActionsForControlEvents(.EditingChanged)
+            self.textField?.sendActions(for: .editingChanged)
         }
     }
     //获取光标前的字符串
-    private func getForwardString(string : String, range : NSRange) -> String {
+    fileprivate func getForwardString(_ string : String, range : NSRange) -> String {
         return self.text.toNSString.substringWithRange(NSMakeRange(0, range.location))
     }
     //获取光标后的字符串
-    private func getBehindString(string : String, range : NSRange) -> String {
+    fileprivate func getBehindString(_ string : String, range : NSRange) -> String {
         let length = string.length
         return self.text.toNSString.substringWithRange(NSMakeRange(range.location, length - range.location))
     }
     //限制两位小数逻辑处理
-    private func limitWithTwoPoint(string : String) -> Bool {
-        if self.type == .Money && string.contains(".") {
-            let dotArray = string.componentsSeparatedByString(".")
+    fileprivate func limitWithTwoPoint(_ string : String) -> Bool {
+        if self.type == .money && string.contains(".") {
+            let dotArray = string.components(separatedBy: ".")
             if let behind = dotArray.last {
                 if behind.length >= 2 {
                     return true

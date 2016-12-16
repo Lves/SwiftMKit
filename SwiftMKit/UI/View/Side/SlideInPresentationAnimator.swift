@@ -15,7 +15,7 @@ public final class SlideInPresentationAnimator: NSObject {
     
     let isPresentation: Bool
     
-    var duration: NSTimeInterval = 0.3
+    var duration: TimeInterval = 0.3
     
     // MARK: - Initializers
     init(direction: PresentationDirection, isPresentation: Bool) {
@@ -27,41 +27,41 @@ public final class SlideInPresentationAnimator: NSObject {
 
 // MARK: - UIViewControllerAnimatedTransitioning
 extension SlideInPresentationAnimator: UIViewControllerAnimatedTransitioning {
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
-    public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let key = isPresentation ? UITransitionContextToViewControllerKey
-            : UITransitionContextFromViewControllerKey
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let key = isPresentation ? UITransitionContextViewControllerKey.to
+            : UITransitionContextViewControllerKey.from
         
-        let controller = transitionContext.viewControllerForKey(key)!
+        let controller = transitionContext.viewController(forKey: key)!
         
         if isPresentation {
-            transitionContext.containerView().addSubview(controller.view)
+            transitionContext.containerView.addSubview(controller.view)
         }
         
-        let presentedFrame = transitionContext.finalFrameForViewController(controller)
+        let presentedFrame = transitionContext.finalFrame(for: controller)
         var dismissedFrame = presentedFrame
         switch direction {
         case .left:
             dismissedFrame.origin.x = -presentedFrame.width
         case .right:
-            dismissedFrame.origin.x = transitionContext.containerView().frame.size.width ?? 0
+            dismissedFrame.origin.x = transitionContext.containerView.frame.size.width ?? 0
         case .top:
             dismissedFrame.origin.y = -presentedFrame.height
         case .bottom:
-            dismissedFrame.origin.y = transitionContext.containerView().frame.size.height ?? 0
+            dismissedFrame.origin.y = transitionContext.containerView.frame.size.height ?? 0
         }
         
         let initialFrame = isPresentation ? dismissedFrame : presentedFrame
         let finalFrame = isPresentation ? presentedFrame : dismissedFrame
         
-        let animationDuration = transitionDuration(transitionContext)
+        let animationDuration = transitionDuration(using: transitionContext)
         controller.view.frame = initialFrame
-        UIView.animateWithDuration(animationDuration, animations: {
+        UIView.animate(withDuration: animationDuration, animations: {
             controller.view.frame = finalFrame
-        }) { finished in
+        }, completion: { finished in
             transitionContext.completeTransition(finished)
-        }
+        }) 
     }
 }

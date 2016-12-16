@@ -8,24 +8,25 @@
 
 import Foundation
 import ReactiveCocoa
+import UIKit
 
-public extension Action {
-    public func bindEnabled(button: UIButton) {
-        self.unsafeCocoaAction.rac_valuesForKeyPath("enabled", observer: nil).toSignalProducer().map{ $0! as! Bool }.startWithNext { enabled in
-            button.enabled = enabled
-            button.viewController?.view.userInteractionEnabled = enabled
-            button.viewController?.view.endEditing(false)
-        }
-    }
-    public var toCocoaAction: CocoaAction {
-        get {
-            unsafeCocoaAction = CocoaAction(self) { input in
-                if let button = input as? UIButton {
-                    self.bindEnabled(button)
-                }
-                return input as! Input
-            }
-            return unsafeCocoaAction
-        }
-    }
-}
+//public extension Action {
+//    public func bindEnabled(_ button: UIButton) {
+//        self.unsafeCocoaAction.rac_valuesForKeyPath("enabled", observer: nil).toSignalProducer().map{ $0! as! Bool }.startWithNext { enabled in
+//            button.enabled = enabled
+//            button.viewController?.view.userInteractionEnabled = enabled
+//            button.viewController?.view.endEditing(false)
+//        }
+//    }
+//    public var toCocoaAction: CocoaAction {
+//        get {
+//            unsafeCocoaAction = CocoaAction(self) { input in
+//                if let button = input as? UIButton {
+//                    self.bindEnabled(button)
+//                }
+//                return input as! Input
+//            }
+//            return unsafeCocoaAction
+//        }
+//    }
+//}

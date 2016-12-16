@@ -19,7 +19,7 @@ struct PX500Config {
     static var urlHost: String {
         get {
             switch DemoNetworkConfig.Evn {
-            case .Dev:
+            case .dev:
                 return "https://api.500px.com"
             default:
                 return "https://api.500px.com"
@@ -31,7 +31,7 @@ struct BuDeJieConfig {
     static var urlHost: String {
         get {
             switch DemoNetworkConfig.Evn {
-            case .Dev:
+            case .dev:
                 return "http://api.budejie.com"
             default:
                 return "http://api.budejie.com"
@@ -42,7 +42,7 @@ struct BuDeJieConfig {
 
 class DemoNetworkConfig : NetworkConfig {
     
-    private struct Constant {
+    fileprivate struct Constant {
         static let Station = "NetworkStation"
     }
     

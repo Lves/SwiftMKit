@@ -9,29 +9,30 @@
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
+import ReactiveSwift
 
-public class MKitEmptyView: NSObject {
-    public var title: String {
+open class MKitEmptyView: NSObject {
+    open var title: String {
         didSet {
             self.view.lblTitle.text = title
         }
     }
-    public var image: UIImage? {
+    open var image: UIImage? {
         didSet {
             self.view.imgView.image = image
-            self.view.imgView.size = image?.size ?? CGSizeZero
+            self.view.imgView.size = image?.size ?? CGSize.zero
         }
     }
-    public var titleLabel: UILabel {
+    open var titleLabel: UILabel {
         return self.view.lblTitle
     }
-    public var imageView: UIImageView {
+    open var imageView: UIImageView {
         return self.view.imgView
     }
-    public var showed = MutableProperty<Bool>(false)
-    public var yOffset: CGFloat
-    public var view: BaseKitEmptyView
-    public var inView: UIView
+    open var showed = MutableProperty<Bool>(false)
+    open var yOffset: CGFloat
+    open var view: BaseKitEmptyView
+    open var inView: UIView
     
     public init(title: String, image: UIImage?, yOffset: CGFloat, view: BaseKitEmptyView, inView: UIView) {
         self.title = title
@@ -41,7 +42,7 @@ public class MKitEmptyView: NSObject {
         self.inView = inView
         super.init()
     }
-    public func show(title title: String? = nil, image: UIImage? = nil, yOffset: CGFloat? = nil, inView: UIView? = nil) {
+    open func show(title: String? = nil, image: UIImage? = nil, yOffset: CGFloat? = nil, inView: UIView? = nil) {
         if let title = title { self.title = title }
         if let image = image { self.image = image }
         if let yOffset = yOffset { self.yOffset = yOffset }
@@ -55,7 +56,7 @@ public class MKitEmptyView: NSObject {
         DDLogInfo("Show Empty View")
         showed.value = true
     }
-    public func hide() {
+    open func hide() {
         view.removeFromSuperview()
         DDLogInfo("Hide Empty View")
         showed.value = false

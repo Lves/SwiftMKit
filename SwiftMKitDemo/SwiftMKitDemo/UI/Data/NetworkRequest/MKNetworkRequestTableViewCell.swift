@@ -22,7 +22,7 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -43,7 +43,7 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
             }
         }
     }
-    func setPostImage(image : UIImage) {
+    func setPostImage(_ image : UIImage) {
         let aspect = image.size.width / image.size.height
         constraintImagePicAspect.setMultiplier(aspect)
         imgPic.image = image
@@ -53,9 +53,9 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
         didSet {
             self.lblTitle?.text = photoModel?.name
             self.lblContent?.text = photoModel?.descriptionString
-            self.imgHead.hnk_setImageFromURL(NSURL(string: (photoModel?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
+            self.imgHead.hnk_setImageFromURL(URL(string: (photoModel?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
             if let imageUrl = photoModel?.imageurl {
-                self.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
+                self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
                     [weak self] image in
                     self?.setPostImage(image)
                     self?.layoutIfNeeded()
@@ -70,9 +70,9 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
         didSet {
             self.lblTitle?.text = photoEntity?.name
             self.lblContent?.text = photoEntity?.descriptionString
-            self.imgHead.hnk_setImageFromURL(NSURL(string: (photoEntity?.user?.userPicUrl)!)!, placeholder: UIImage(named:"icon_user_head"))
+            self.imgHead.hnk_setImageFromURL(URL(string: (photoEntity?.user?.userPicUrl)!)!, placeholder: UIImage(named:"icon_user_head"))
             if let imageUrl = photoEntity?.imageUrl {
-                self.imgPic.hnk_setImageFromURL(NSURL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
+                self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
                     [weak self] image in
                     self?.setPostImage(image)
                     self?.layoutIfNeeded()

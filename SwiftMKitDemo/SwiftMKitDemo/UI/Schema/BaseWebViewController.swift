@@ -10,7 +10,7 @@ import UIKit
 
 class BaseWebViewController: BaseKitWebViewController {
     
-    private var _viewModel = BaseViewModel()
+    fileprivate var _viewModel = BaseViewModel()
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }

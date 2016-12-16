@@ -10,24 +10,24 @@ import UIKit
 import CocoaLumberjack
 import Alamofire
 
-public class BaseKitViewModel: NSObject {
-    public weak var viewController: BaseKitViewController!
-    public var hud: HUDProtocol {
+open class BaseKitViewModel: NSObject {
+    open weak var viewController: BaseKitViewController!
+    open var hud: HUDProtocol {
         get { return self.viewController.hud }
     }
-    public var indicator: IndicatorProtocol {
+    open var indicator: IndicatorProtocol {
         get { return self.viewController.indicator }
     }
-    public var view: UIView {
+    open var view: UIView {
         get { return self.viewController.view }
     }
-    public func fetchData() {
+    open func fetchData() {
     }
-    public func dataBinded() {
+    open func dataBinded() {
     }
     
     deinit {
-        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
     }
 }
 
@@ -35,25 +35,25 @@ public class BaseKitViewModel: NSObject {
 
 extension BaseKitViewModel {
     
-    public func showTip(tip: String, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, completion : () -> Void = {}) {
         viewController.showTip(tip, view: viewController.view, completion: completion)
     }
-    public func showTip(tip: String, image: UIImage?, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, image: UIImage?, completion : () -> Void = {}) {
         viewController.showTip(tip, image: image, completion: completion)
     }
-    public func showTip(tip: String, view: UIView, offset: CGPoint = CGPointZero, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : () -> Void = {}) {
         viewController.showTip(tip, view: view, offset: offset, completion: completion)
     }
-    public func showLoading(text: String = "") {
+    public func showLoading(_ text: String = "") {
         viewController.showLoading(text)
     }
-    public func showLoading(text: String, view: UIView) {
+    public func showLoading(_ text: String, view: UIView) {
         viewController.showLoading(text, view: view)
     }
     public func hideLoading() {
         viewController.hideLoading()
     }
-    public func hideLoading(view: UIView) {
+    public func hideLoading(_ view: UIView) {
         viewController.hideLoading(view)
     }
     

@@ -12,37 +12,37 @@ import CocoaLumberjack
 import ReactiveCocoa
 
 protocol SharePannelViewDelegate: class {
-    func sharePannelViewButtonAction(SharePannelView: SharePannelView, model: ToolsModel)
+    func sharePannelViewButtonAction(_ SharePannelView: SharePannelView, model: ToolsModel)
 }
 
 public protocol ToolsPannelScrollViewDelegate: class {
-    func toolsPannelScrollViewButtonAction(toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel)
+    func toolsPannelScrollViewButtonAction(_ toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel)
 }
 
 public enum ToolUsed : Int {
-    case Default
-    case ShareToSina
-    case ShareToQQ
-    case ShareToQZone
-    case ShareToWeChat
-    case ShareToTimeLine
-    case ShareToZhifubao
-    case ShareToSms
-    case ShareToEmail
-    case Collection
-    case CopyLink
-    case OpenBySafari
-    case SetTextFont
-    case WebRefresh
+    case `default`
+    case shareToSina
+    case shareToQQ
+    case shareToQZone
+    case shareToWeChat
+    case shareToTimeLine
+    case shareToZhifubao
+    case shareToSms
+    case shareToEmail
+    case collection
+    case copyLink
+    case openBySafari
+    case setTextFont
+    case webRefresh
 }
 
 // MARK: - 模型：ToolsModel
-public class ToolsModel{
+open class ToolsModel{
     
     var image: String?
     var highlightedImage: String?
     var title: String?
-    var used : ToolUsed = .Default
+    var used : ToolUsed = .default
     
     init(image:String? = "", highlightedImage:String? = "", title:String? = "", used:ToolUsed) {
         self.image = image
@@ -53,16 +53,16 @@ public class ToolsModel{
 }
 
 // MARK: -
-public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
+open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     
     struct InnerConstant {
         static let BackgroundViewAlpha : CGFloat = 0.6
         static let BackgroundViewColor : UIColor = UIColor(r: 0, g: 0, b: 0, a: BackgroundViewAlpha)
         static let PannelViewColor : UIColor = UIColor(r: 240, g: 240, b: 240, a: 0.95)
-        static let BoderViewColor : UIColor = UIColor.clearColor()
+        static let BoderViewColor : UIColor = UIColor.clear
         
         static let CancelBtnH : CGFloat = 45
-        static let CancelBtnTitleFont : UIFont = UIFont.systemFontOfSize(16)
+        static let CancelBtnTitleFont : UIFont = UIFont.systemFont(ofSize: 16)
         static let CancelBtnTitleColor : UIColor = UIColor(r: 0, g: 0, b: 0, a: 1)
         static let CancelBtnBGColor : UIColor = UIColor(r: 248, g: 248, b: 248, a: 1)
         
@@ -87,21 +87,21 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
                     array1 = toolsArray?.first ?? []
                 }
                 //第一行
-                let toolsPannelScrollView1 : ToolsPannelScrollView = ToolsPannelScrollView(frame: CGRectMake(0, 0, self.w, CGFloat(ToolsPannelScrollView.getToolsScrollViewHeight())))
+                let toolsPannelScrollView1 : ToolsPannelScrollView = ToolsPannelScrollView(frame: CGRect(x: 0, y: 0, width: self.w, height: CGFloat(ToolsPannelScrollView.getToolsScrollViewHeight())))
                 toolsPannelScrollView1.toolsArray = array1
                 toolsPannelScrollView1.toolsDelegate = self
                 boderView.addSubview(toolsPannelScrollView1)
-                boderView.frame = CGRectMake(0, 0, self.w, toolsPannelScrollView1.h)
+                boderView.frame = CGRect(x: 0, y: 0, width: self.w, height: toolsPannelScrollView1.h)
                 
                 //第二行
                 if array2.count > 0 {
-                    lineView.frame = CGRectMake(0, toolsPannelScrollView1.h, self.w, 0.5)
+                    lineView.frame = CGRect(x: 0, y: toolsPannelScrollView1.h, width: self.w, height: 0.5)
                     
-                    let toolsPannelScrollView2 : ToolsPannelScrollView = ToolsPannelScrollView(frame: CGRectMake(0, toolsPannelScrollView1.h+1, self.w, CGFloat(ToolsPannelScrollView.getToolsScrollViewHeight())))
+                    let toolsPannelScrollView2 : ToolsPannelScrollView = ToolsPannelScrollView(frame: CGRect(x: 0, y: toolsPannelScrollView1.h+1, width: self.w, height: CGFloat(ToolsPannelScrollView.getToolsScrollViewHeight())))
                     toolsPannelScrollView2.toolsArray = array2
                     toolsPannelScrollView2.toolsDelegate = self
                     boderView.addSubview(toolsPannelScrollView2)
-                    boderView.frame = CGRectMake(0, 0, self.w, toolsPannelScrollView1.h + toolsPannelScrollView2.h + 1)
+                    boderView.frame = CGRect(x: 0, y: 0, width: self.w, height: toolsPannelScrollView1.h + toolsPannelScrollView2.h + 1)
                 }
             }
         }
@@ -110,7 +110,7 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     dynamic var backgroundView : UIView = UIView() //背影
     dynamic var pannelView : UIView = UIView() //面板整体
     dynamic var boderView : UIView = UIView() //图标界面
-    dynamic var btnCancel : UIButton = UIButton(type:.Custom) //取消按钮
+    dynamic var btnCancel : UIButton = UIButton(type:.custom) //取消按钮
     dynamic var lineView : UIView = UIView() //分割线
     
     dynamic var headerView : UIView? {
@@ -140,35 +140,35 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
         setupUI(frame)
     }
     
-    dynamic func setupUI(frame : CGRect){
+    dynamic func setupUI(_ frame : CGRect){
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
         backgroundView.frame = frame
         backgroundView.backgroundColor = InnerConstant.BackgroundViewColor
-        backgroundView.userInteractionEnabled = true
+        backgroundView.isUserInteractionEnabled = true
         let tap  = UITapGestureRecognizer(target: self, action: #selector(tapBackgroundView(_:)))
         backgroundView.addGestureRecognizer(tap)
         self.addSubview(backgroundView)
         
-        pannelView.frame = CGRectMake(0, self.h, self.w, 0)
+        pannelView.frame = CGRect(x: 0, y: self.h, width: self.w, height: 0)
         pannelView.backgroundColor = InnerConstant.PannelViewColor
-        pannelView.userInteractionEnabled = true
+        pannelView.isUserInteractionEnabled = true
         self.addSubview(pannelView)
         
         boderView.frame = pannelView.frame
         boderView.backgroundColor = InnerConstant.BoderViewColor
-        boderView.userInteractionEnabled = true
+        boderView.isUserInteractionEnabled = true
         self.pannelView.addSubview(boderView)
         
-        lineView.frame = CGRectZero
+        lineView.frame = CGRect.zero
         lineView.backgroundColor = InnerConstant.LineViewColor
         boderView.addSubview(lineView)
         
-        btnCancel.frame = CGRectMake(0, 0, self.w, InnerConstant.CancelBtnH)
+        btnCancel.frame = CGRect(x: 0, y: 0, width: self.w, height: InnerConstant.CancelBtnH)
         btnCancel.titleLabel?.font = InnerConstant.CancelBtnTitleFont
-        btnCancel.setTitle("取消", forState: .Normal)
-        btnCancel.setTitleColor(InnerConstant.CancelBtnTitleColor, forState: .Normal)
+        btnCancel.setTitle("取消", for: UIControlState())
+        btnCancel.setTitleColor(InnerConstant.CancelBtnTitleColor, for: UIControlState())
         btnCancel.backgroundColor = InnerConstant.CancelBtnBGColor
         self.pannelView.addSubview(btnCancel)
         
@@ -179,55 +179,55 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override public func drawRect(rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         // Drawing code
         
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         var height : CGFloat = 0
         
         //HeaderView
         if let headerView_t = headerView {
-            headerView_t.frame = CGRectMake(0, 0, headerView_t.w, headerView_t.h)
+            headerView_t.frame = CGRect(x: 0, y: 0, width: headerView_t.w, height: headerView_t.h)
             height += headerView_t.h
         }
         
         //BoderView
-        boderView.frame = CGRectMake(0, height, boderView.w, boderView.h)
+        boderView.frame = CGRect(x: 0, y: height, width: boderView.w, height: boderView.h)
         height += boderView.h
         
         //FooterView
         if let footerView_t = footerView {
-            footerView_t.frame = CGRectMake(0, height, footerView_t.w, footerView_t.h)
+            footerView_t.frame = CGRect(x: 0, y: height, width: footerView_t.w, height: footerView_t.h)
             height += footerView_t.h
         }
         
         //取消按钮
-        btnCancel.frame = CGRectMake(0, height, btnCancel.w, btnCancel.h)
+        btnCancel.frame = CGRect(x: 0, y: height, width: btnCancel.w, height: btnCancel.h)
         height += btnCancel.h
         
         //面板
-        pannelView.frame = CGRectMake(0, self.h, pannelView.w, height)
+        pannelView.frame = CGRect(x: 0, y: self.h, width: pannelView.w, height: height)
         
-        UIView.animateWithDuration(InnerConstant.TimeInterval, animations: {
-            self.pannelView.frame = CGRectMake(0, self.h - height, self.pannelView.w, height)
+        UIView.animate(withDuration: InnerConstant.TimeInterval, animations: {
+            self.pannelView.frame = CGRect(x: 0, y: self.h - height, width: self.pannelView.w, height: height)
             self.backgroundView.alpha = InnerConstant.BackgroundViewAlpha
         })
     }
     
     //MARK: Action
-    dynamic func tapBackgroundView(gusture:UITapGestureRecognizer){
+    dynamic func tapBackgroundView(_ gusture:UITapGestureRecognizer){
         self.tappedCancel()
     }
     
     dynamic func tappedCancel(){
-        UIView.animateWithDuration(InnerConstant.TimeInterval, animations: { _ in
+        UIView.animate(withDuration: InnerConstant.TimeInterval, animations: { _ in
             
             self.backgroundView.alpha = 0
-            self.pannelView.frame = CGRectMake(0, self.h, self.pannelView.w, self.pannelView.h)
+            self.pannelView.frame = CGRect(x: 0, y: self.h, width: self.pannelView.w, height: self.pannelView.h)
             
         }, completion:{ (finished:Bool) -> Void in
             self.removeFromSuperview()
@@ -235,7 +235,7 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     }
     
     //MARK: Delegate
-    public func toolsPannelScrollViewButtonAction(toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel) {
+    open func toolsPannelScrollViewButtonAction(_ toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel) {
         
         self.tappedCancel()
         
@@ -246,7 +246,7 @@ public class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
 }
 
 
-public class ToolsPannelScrollView: UIScrollView {
+open class ToolsPannelScrollView: UIScrollView {
     
     struct InnerConstant {
         static let OriginX : CGFloat = 15.0 //ico起点X坐标
@@ -260,7 +260,7 @@ public class ToolsPannelScrollView: UIScrollView {
         static let HorizontalSpace : CGFloat = 15.0 //横向间距
     }
     
-    private weak var toolsDelegate : ToolsPannelScrollViewDelegate?
+    fileprivate weak var toolsDelegate : ToolsPannelScrollViewDelegate?
     
     var toolsArray : [ToolsModel]? {
         didSet{
@@ -272,16 +272,16 @@ public class ToolsPannelScrollView: UIScrollView {
                 }
                 
                 //设置当前scrollView的contentSize
-                self.contentSize = CGSizeMake(InnerConstant.OriginX + CGFloat(toolsArray_t.count) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),self.h)
+                self.contentSize = CGSize(width: InnerConstant.OriginX + CGFloat(toolsArray_t.count) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),height: self.h)
                 
                 //遍历标签数组,将标签显示在界面上,并给每个标签打上tag加以区分
                 for index in 0..<toolsArray_t.count {
                     let model = toolsArray_t[safe: index]
                     if let toolModel = model {
-                        let itemView = self.getToolItme(CGRectMake(InnerConstant.OriginX + CGFloat(index) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),
-                            InnerConstant.OriginY,
-                            InnerConstant.IcoWidth,
-                            InnerConstant.IcoWidth + InnerConstant.IcoAndTitleSpace + InnerConstant.TitleLabelHeight), model: toolModel, btnTag: index + 1)
+                        let itemView = self.getToolItme(CGRect(x: InnerConstant.OriginX + CGFloat(index) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),
+                            y: InnerConstant.OriginY,
+                            width: InnerConstant.IcoWidth,
+                            height: InnerConstant.IcoWidth + InnerConstant.IcoAndTitleSpace + InnerConstant.TitleLabelHeight), model: toolModel, btnTag: index + 1)
                         self.addSubview(itemView)
                     }
                 }
@@ -300,8 +300,8 @@ public class ToolsPannelScrollView: UIScrollView {
     }
     
     dynamic func setupUI() {
-        self.userInteractionEnabled = true
-        self.backgroundColor = UIColor.clearColor()
+        self.isUserInteractionEnabled = true
+        self.backgroundColor = UIColor.clear
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
     }
@@ -311,24 +311,24 @@ public class ToolsPannelScrollView: UIScrollView {
         return Float(height)
     }
     
-    private func getToolItme(frame : CGRect , model : ToolsModel ,btnTag :Int) -> UIView {
+    fileprivate func getToolItme(_ frame : CGRect , model : ToolsModel ,btnTag :Int) -> UIView {
         let toolItme = UIView(frame: frame)
-        toolItme.backgroundColor = UIColor.clearColor()
+        toolItme.backgroundColor = UIColor.clear
         
-        let btn : UIButton = UIButton(type: .Custom)
+        let btn : UIButton = UIButton(type: .custom)
         btn.tag = btnTag
-        btn.frame = CGRectMake((toolItme.w - InnerConstant.IcoWidth)/2, 0, InnerConstant.IcoWidth, InnerConstant.IcoWidth)
-        btn.backgroundColor = UIColor.clearColor()
+        btn.frame = CGRect(x: (toolItme.w - InnerConstant.IcoWidth)/2, y: 0, width: InnerConstant.IcoWidth, height: InnerConstant.IcoWidth)
+        btn.backgroundColor = UIColor.clear
         
         if let imageStr = model.image {
             if let image = UIImage(named: imageStr) {
-                btn.setImage(image, forState: .Normal)
+                btn.setImage(image, for: UIControlState())
             }
         }
         
         if let imageStr = model.highlightedImage {
             if let image = UIImage(named: imageStr) {
-                btn.setImage(image, forState: .Highlighted)
+                btn.setImage(image, for: .highlighted)
             }
         }
         toolItme.addSubview(btn)
@@ -342,18 +342,18 @@ public class ToolsPannelScrollView: UIScrollView {
             }
         }
         
-        let label : UILabel = UILabel(frame: CGRectMake(-5, btn.h + InnerConstant.IcoAndTitleSpace , toolItme.w+10, InnerConstant.TitleLabelHeight))
-        label.font = UIFont.systemFontOfSize(InnerConstant.TitleSize)
+        let label : UILabel = UILabel(frame: CGRect(x: -5, y: btn.h + InnerConstant.IcoAndTitleSpace , width: toolItme.w+10, height: InnerConstant.TitleLabelHeight))
+        label.font = UIFont.systemFont(ofSize: InnerConstant.TitleSize)
         label.text = model.title ?? ""
         label.textColor = InnerConstant.TitleColor
-        label.textAlignment = NSTextAlignment.Center
-        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.textAlignment = NSTextAlignment.center
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.numberOfLines = 0
-        label.backgroundColor = UIColor.clearColor()
+        label.backgroundColor = UIColor.clear
         label.sizeToFit()
         toolItme.addSubview(label)
         
-        label.frame = CGRectMake(-5, btn.h + InnerConstant.IcoAndTitleSpace , toolItme.w+10, label.h)
+        label.frame = CGRect(x: -5, y: btn.h + InnerConstant.IcoAndTitleSpace , width: toolItme.w+10, height: label.h)
         
         return toolItme
     }

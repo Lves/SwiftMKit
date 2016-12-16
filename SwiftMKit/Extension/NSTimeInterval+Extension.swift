@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension NSTimeInterval {
+public extension TimeInterval {
     
     func secondsToHHmmss () -> (Int, Int, Int) {
         let seconds : Int = Int(self)

@@ -13,7 +13,7 @@ import ObjectiveC
 private var indicatorViewAssociationKey: UInt8 = 0
 private var indicatorTextAssociationKey: UInt8 = 0
 
-extension NSURLSessionTask {
+extension URLSessionTask {
     var indicatorView: UIView? {
         get {
             return objc_getAssociatedObject(self, &indicatorViewAssociationKey) as? UIView

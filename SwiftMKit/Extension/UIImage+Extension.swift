@@ -18,8 +18,8 @@ public extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        guard let cgImage = image?.CGImage else { return nil }
-        self.init(CGImage: cgImage)
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
     }
     
     /**
@@ -28,7 +28,7 @@ public extension UIImage {
      - returns:占用内存大小
      */
     public func getImageSize() -> Int {
-        return CGImageGetHeight(self.CGImage!) * CGImageGetBytesPerRow(self.CGImage!)
+        return self.cgImage!.height * self.cgImage!.bytesPerRow
     }
     
     /**
@@ -41,12 +41,12 @@ public extension UIImage {
      
      - returns: 返回图片
      */
-    func textToImage(drawText: NSString, textColor: UIColor, textFont: UIFont, atPoint: CGPoint) -> UIImage {
+    func textToImage(_ drawText: NSString, textColor: UIColor, textFont: UIFont, atPoint: CGPoint) -> UIImage {
         
         // Setup the font specific variables
         
         // Setup the image context using the passed image
-        let scale = UIScreen.mainScreen().scale
+        let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(self.size, false, scale)
         
         // Setup the font attributes that will be later used to dictate how the text should be drawn
@@ -56,13 +56,13 @@ public extension UIImage {
             ]
         
         // Put the image into a rectangle as large as the original image
-        self.drawInRect(CGRectMake(0, 0, self.size.width, self.size.height))
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         
         // Create a point within the space that is as bit as the image
-        let rect = CGRectMake(atPoint.x, atPoint.y, self.size.width, self.size.height)
+        let rect = CGRect(x: atPoint.x, y: atPoint.y, width: self.size.width, height: self.size.height)
         
         // Draw the text into an image
-        drawText.drawInRect(rect, withAttributes: textFontAttributes)
+        drawText.draw(in: rect, withAttributes: textFontAttributes)
         
         // Create a new image out of the images we have created
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -78,12 +78,12 @@ public extension UIImage {
     /**
      压缩图片
      */
-    func restrict(maxWidth maxWidth: CGFloat, maxHeight: CGFloat, maxSize: Int) -> NSData? {
+    func restrict(maxWidth: CGFloat, maxHeight: CGFloat, maxSize: Int) -> Data? {
         let newImage = resizeImage(self, maxWidth: maxWidth, maxHeight: maxHeight)
         return compressImageSizeLess500(newImage)
     }
     
-    func resizeImage(originalImg:UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage{
+    func resizeImage(_ originalImg:UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage{
         //prepare constants
         let width = originalImg.size.width
         let height = originalImg.size.height
@@ -127,7 +127,7 @@ public extension UIImage {
         }
         UIGraphicsBeginImageContext(sizeChange)
         //draw resized image on Context
-        originalImg.drawInRect(CGRectMake(0, 0, sizeChange.width, sizeChange.height))
+        originalImg.draw(in: CGRect(x: 0, y: 0, width: sizeChange.width, height: sizeChange.height))
         //create UIImage
         let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -136,14 +136,14 @@ public extension UIImage {
     }
     
     //图片质量压缩
-    func compressImageSizeLess500(image:UIImage) -> NSData{
+    func compressImageSizeLess500(_ image:UIImage) -> Data{
         
         var zipImageData = UIImageJPEGRepresentation(image, 1.0)!
-        let originalImgSize = zipImageData.length/1024 as Int  //获取图片大小
+        let originalImgSize = zipImageData.count/1024 as Int  //获取图片大小
         print("原始大小: \(originalImgSize)")
         if originalImgSize > 3000 {
             zipImageData = UIImageJPEGRepresentation(image,0.3)!
-            if zipImageData.length/1024 > 500 {
+            if zipImageData.count/1024 > 500 {
                 zipImageData = UIImageJPEGRepresentation(image,0.1)!
             }
         } else if originalImgSize > 1500 {
@@ -153,7 +153,7 @@ public extension UIImage {
         } else {
             return zipImageData
         }
-        print("上传大小: \(zipImageData.length/1024)")
+        print("上传大小: \(zipImageData.count/1024)")
         return zipImageData
     }
     

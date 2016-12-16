@@ -9,19 +9,43 @@
 import Foundation
 import UIKit
 import CocoaLumberjack
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 public extension UIViewController {
     public static var topController: UIViewController? {
         get {
-            var window = UIApplication.sharedApplication().keyWindow
+            var window = UIApplication.shared.keyWindow
             if window?.windowLevel != UIWindowLevelNormal {
-                window = UIApplication.sharedApplication().windows.filter { $0.windowLevel == UIWindowLevelNormal }.first ?? window
+                window = UIApplication.shared.windows.filter { $0.windowLevel == UIWindowLevelNormal }.first ?? window
             }
             
             let frontView = window?.subviews.last
-            let nextResponder = frontView?.nextResponder()
+            let nextResponder = frontView?.next
             
-            func getTopFromVC(vc: UIViewController) -> UIViewController {
+            func getTopFromVC(_ vc: UIViewController) -> UIViewController {
                 var topController = vc
                 while let presentedViewController = topController.presentedViewController {
                     topController = presentedViewController
@@ -56,31 +80,31 @@ public extension UIViewController {
 //Alert
 public extension UIViewController {
     
-    public func showAlert(alert: UIAlertController, animated: Bool = true, completion: (() -> Void)?) {
-        self.presentViewController(alert, animated: animated, completion: completion)
+    public func showAlert(_ alert: UIAlertController, animated: Bool = true, completion: (() -> Void)?) {
+        self.present(alert, animated: animated, completion: completion)
     }
 }
 
 //Route
 public extension UIViewController {
-    public func routeToName(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", animation: Bool = true, pop: Bool = false) -> Bool {
+    public func routeToName(_ name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "", animation: Bool = true, pop: Bool = false) -> Bool {
         DDLogInfo("Route name: \(name) (\(nextParams.stringFromHttpParameters()))")
         if let vc = initialedViewController(name, params: nextParams, storyboardName: storyboardName) {
             if pop {
-                self.presentViewController(vc, animated: animation, completion: nil)
+                self.present(vc, animated: animation, completion: nil)
             } else {
                 self.navigationController?.pushViewController(vc, animated: animation)
             }
             return true
         } else if canPerformSegueWithIdentifier(name){
-            self.performSegueWithIdentifier(name, sender: ["params": nextParams])
+            self.performSegue(withIdentifier: name, sender: ["params": nextParams])
             return true
         } else {
             DDLogError("Can't route to: \(name), please check the name")
             return false
         }
     }
-    public func initialedViewController(name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "") -> UIViewController? {
+    public func initialedViewController(_ name: String, params nextParams: Dictionary<String, AnyObject> = [:], storyboardName: String? = "") -> UIViewController? {
         var vc = instanceViewControllerInStoryboardWithName(name, storyboardName: storyboardName)
         if (vc == nil) {
             vc = instanceViewControllerInXibWithName(name)
@@ -90,7 +114,7 @@ public extension UIViewController {
                 var params = nextParams
                 if baseVC.autoHidesBottomBarWhenPushed {
                     if params["hidesBottomBarWhenPushed"] == nil {
-                        params["hidesBottomBarWhenPushed"] = true
+                        params["hidesBottomBarWhenPushed"] = true as AnyObject?
                     }
                 }
                 baseVC.params = params
@@ -98,7 +122,7 @@ public extension UIViewController {
                 var params = nextParams
                 if baseVC.autoHidesBottomBarWhenPushed {
                     if params["hidesBottomBarWhenPushed"] == nil {
-                        params["hidesBottomBarWhenPushed"] = true
+                        params["hidesBottomBarWhenPushed"] = true as AnyObject?
                     }
                 }
                 baseVC.params = params
@@ -108,50 +132,51 @@ public extension UIViewController {
         }
         return vc
     }
-    public func instanceViewControllerInXibWithName(name: String) -> UIViewController? {
+    public func instanceViewControllerInXibWithName(_ name: String) -> UIViewController? {
         let type = UIViewController.fullClassName(name) as? UIViewController.Type
         if let vc = type?.init(nibName: name, bundle: nil) {
             return vc
         }
-        let nibPath = NSBundle.mainBundle().pathForResource(name, ofType: "nib")
+        let nibPath = Bundle.main.path(forResource: name, ofType: "nib")
         if (nibPath != nil) {
             return NSObject.fromClassName(name) as? UIViewController
         }
         return nil
     }
-    public func instanceViewControllerInStoryboardWithName(name: String) -> UIViewController? {
+    public func instanceViewControllerInStoryboardWithName(_ name: String) -> UIViewController? {
         return self.instanceViewControllerInStoryboardWithName(name, storyboardName: nil)
     }
-    public func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String?) -> UIViewController? {
+    public func instanceViewControllerInStoryboardWithName(_ name: String, storyboardName: String?) -> UIViewController? {
         let story = storyboardName != nil && storyboardName?.length > 0 ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
-        if story?.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
-            return story?.instantiateViewControllerWithIdentifier(name)
+        if (story?.value(forKey: "identifierToNibNameMap") as AnyObject).object(forKey: name) != nil {
+            return story?.instantiateViewController(withIdentifier: name)
         }
         return nil
     }
-    public class func instanceViewControllerInStoryboardWithName(name: String, storyboardName: String) -> UIViewController? {
+    public class func instanceViewControllerInStoryboardWithName(_ name: String, storyboardName: String) -> UIViewController? {
         let story = UIStoryboard(name: storyboardName, bundle: nil)
-        if story.valueForKey("identifierToNibNameMap")?.objectForKey(name) != nil {
-            return story.instantiateViewControllerWithIdentifier(name)
+        if (story.value(forKey: "identifierToNibNameMap") as AnyObject).object(forKey: name) != nil {
+            return story.instantiateViewController(withIdentifier: name)
         }
         return nil
     }
-    public func canPerformSegueWithIdentifier(identifier: String) -> Bool {
-        let segueTemplates = self.valueForKey("storyboardSegueTemplates")
-        let filteredArray = segueTemplates?.filteredArrayUsingPredicate(NSPredicate(format: "identifier = %@", identifier))
-        return filteredArray?.count > 0
+    public func canPerformSegueWithIdentifier(_ identifier: String) -> Bool {
+        let segueTemplates: AnyObject = self.value(forKey: "storyboardSegueTemplates") as AnyObject
+        let predicate = NSPredicate(format: "identifier = %@", identifier)
+        let filteredArray: [Any] = segueTemplates.filtered(using: predicate)
+        return filteredArray.count > 0
     }
     
-    public func routeToUrl(url: String, name: String = "BaseKitWebViewController", params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+    public func routeToUrl(_ url: String, name: String = "BaseKitWebViewController", params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) -> Bool {
         var params = nextParams
-        params["url"] = url
-        routeToName(name, params: params, pop: pop)
+        params["url"] = url as AnyObject?
+        return routeToName(name, params: params, pop: pop)
     }
     
-    public func routeBack(params: Dictionary<String, AnyObject> = [:], animation: Bool = true, completeion: (() -> Void)? = nil) {
+    public func routeBack(_ params: Dictionary<String, AnyObject> = [:], animation: Bool = true, completeion: (() -> Void)? = nil) {
         DDLogInfo("Route back")
         if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
-            self.dismissViewControllerAnimated(animation, completion: completeion)
+            self.dismiss(animated: animation, completion: completeion)
         } else {
             let count = self.navigationController?.viewControllers.count ?? 0
             if count > 1 {
@@ -160,14 +185,14 @@ public extension UIViewController {
                         let baseVC = vc as! BaseKitViewController
                         baseVC.params = params
                     }
-                    self.navigationController?.popToViewController(vc, animated: animation)
+                    let _ = self.navigationController?.popToViewController(vc, animated: animation)
                     return
                 }
             }
-            self.navigationController?.popViewControllerAnimated(animation)
+            let _ = self.navigationController?.popViewController(animated: animation)
         }
     }
-    public func routeBack(name name: String, params: Dictionary<String, AnyObject> = [:], animation: Bool = true) -> Bool {
+    public func routeBack(name: String, params: Dictionary<String, AnyObject> = [:], animation: Bool = true) -> Bool {
         DDLogInfo("Route back to \(name)")
         if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
             return false
@@ -187,37 +212,36 @@ public extension UIViewController {
                     let baseVC = vc as! BaseKitViewController
                     baseVC.params = params
                 }
-                self.navigationController?.popToViewController(vc!, animated: animation)
+                let _ = self.navigationController?.popToViewController(vc!, animated: animation)
                 return true
             } else {
                 return false
             }
         }
     }
-    public func routeBack(pageNumber: Int, animation: Bool = true) {
+    public func routeBack(_ pageNumber: Int, animation: Bool = true) {
         DDLogInfo("Route back: \(pageNumber)")
         if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
-            self.dismissViewControllerAnimated(animation, completion: nil)
+            self.dismiss(animated: animation, completion: nil)
         } else {
             let count = self.navigationController?.viewControllers.count ?? 0
             if count > pageNumber {
                 if let vc = self.navigationController?.viewControllers[count - 1 - pageNumber] {
-                    self.navigationController?.popToViewController(vc, animated: animation)
+                    let _ = self.navigationController?.popToViewController(vc, animated: animation)
                     return
                 }
             }
-            self.navigationController?.popViewControllerAnimated(animation)
+            let _ = self.navigationController?.popViewController(animated: animation)
         }
     }
-    public func routeToRoot(animation: Bool = true) {
+    public func routeToRoot(_ animation: Bool = true) {
         DDLogInfo("Route to root")
-        self.navigationController?.popToRootViewControllerAnimated(animation)
+        let _ = self.navigationController?.popToRootViewController(animated: animation)
     }
-    public func getStackIndexForViewController(name name: String) -> Int? {
+    public func getStackIndexForViewController(name: String) -> Int? {
         if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
             return nil
         } else {
-            var vc: UIViewController?
             let count = self.navigationController?.viewControllers.count ?? 0
             for index in 0..<count {
                 if let viewController = self.navigationController?.viewControllers[count - 1 - index] {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MSearch {
+open class MSearch {
     
     /**
      二分搜索
@@ -18,18 +18,18 @@ public class MSearch {
      
      - returns: 是否找到
      */
-    public class func binarySearch<T: Comparable>(nums: [T], target: T) -> Int? {
+    open class func binarySearch<T: Comparable>(_ nums: [T], target: T) -> Int? {
         var range = 0..<nums.count
         
-        while range.startIndex < range.endIndex {
-            let midIndex = range.startIndex + (range.endIndex - range.startIndex) / 2
+        while range.lowerBound < range.upperBound {
+            let midIndex = range.lowerBound + (range.upperBound - range.lowerBound) / 2
             
             if nums[midIndex] == target {
                 return midIndex
             } else if nums[midIndex] < target {
-                range.startIndex = midIndex + 1
+                range = midIndex + 1..<range.upperBound
             } else {
-                range.endIndex = midIndex
+                range = range.lowerBound..<(midIndex+1)
             }
         }
         return nil
@@ -43,10 +43,10 @@ public class MSearch {
      
      - returns: 是否找到
      */
-    private class func binarySearchRecursive<T: Comparable>(nums: [T], target: T) -> Bool {
+    fileprivate class func binarySearchRecursive<T: Comparable>(_ nums: [T], target: T) -> Bool {
         return binarySearchRecursive(nums, target: target, left: 0, right: nums.count - 1)
     }
-    private class func binarySearchRecursive<T: Comparable>(nums: [T], target: T, left: Int, right: Int) -> Bool {
+    fileprivate class func binarySearchRecursive<T: Comparable>(_ nums: [T], target: T, left: Int, right: Int) -> Bool {
         guard left <= right else { return false }
         let mid = (right - left) / 2 + left
         if nums[mid] == target {

@@ -12,7 +12,7 @@ import CocoaLumberjack
 class MKTreeViewController: BaseViewController, TreeTableViewDelegate {
     @IBOutlet weak var tableView: TreeTableView!
     @IBOutlet weak var containerView: UIView!
-    private var containerVc: MKTreeContainerTableViewController? {
+    fileprivate var containerVc: MKTreeContainerTableViewController? {
         get {
             return (self.childViewControllers.first) as? MKTreeContainerTableViewController
         }
@@ -25,7 +25,7 @@ class MKTreeViewController: BaseViewController, TreeTableViewDelegate {
         loadData()
         tableView.dataArray = dataArray
         automaticallyAdjustsScrollViewInsets = false
-        tableView.separatorStyle = .None
+        tableView.separatorStyle = .none
         // 设置代理
         tableView.tt_delegate = self
         
@@ -76,20 +76,20 @@ class MKTreeViewController: BaseViewController, TreeTableViewDelegate {
     }
     
     // MARK: - <TreeTableViewDelegate>
-    func tableView(treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: NSIndexPath, node: MKTreeViewNode) {
+    func tableView(_ treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: IndexPath, node: MKTreeViewNode) {
         DDLogInfo("选中了第 \(indexPath.row) 行，值是 \(node.name)")
     }
 }
 
 public protocol TreeTableViewDelegate: class {
-    func tableView(treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: NSIndexPath, node: MKTreeViewNode);
+    func tableView(_ treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: IndexPath, node: MKTreeViewNode);
 }
 
 public extension TreeTableViewDelegate {
-    public func tableView(treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: NSIndexPath, node: MKTreeViewNode){}
+    public func tableView(_ treeTableView: TreeTableView, didSelectRowAtIndexPath indexPath: IndexPath, node: MKTreeViewNode){}
 }
 
-public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+open class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     struct InnerConst {
         static let CellName = "MKUITreeViewCellTableViewCell"
         static let CellID = "MKUITreeViewCellTableViewCell"
@@ -117,7 +117,7 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
     weak var tt_delegate: TreeTableViewDelegate?
     
     public override init(frame: CGRect, style: UITableViewStyle) {
-        super.init(frame: frame, style: .Grouped)
+        super.init(frame: frame, style: .grouped)
         setup()
     }
     
@@ -133,11 +133,11 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
     }
     
     // MARK: - <TableViewDelegate>
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tmpDataArray?.count ?? 0
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let node = tmpDataArray![indexPath.row]
         let isParentNode = node.parentId == -1
         let cell = MKUITreeViewCellTableViewCell.getCell(tableView, isParentNode: isParentNode)
@@ -151,13 +151,13 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
             let lastParentNode = tmpDataArray?.filter({ (obj) -> Bool in
                 obj.parentId == -1
             }).last
-            cell.imgLastArrow.hidden = !(lastParentNode!.nodeId == node.nodeId)
+            cell.imgLastArrow.isHidden = !(lastParentNode!.nodeId == node.nodeId)
         }
         cell.node = node
         return cell
     }
     
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: 代理，让调用方知道点击的是哪个
         let parentNode = tmpDataArray![indexPath.row]
         if let handle = tt_delegate {
@@ -184,12 +184,12 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
             if children.first!.expand {
                 // 折叠节点
                 expand = false
-                startIndex = (tmpDataArray! as NSArray).indexOfObject(parentNode)
+                startIndex = (tmpDataArray! as NSArray).index(of: parentNode)
                 expandNodeCount += (startIndex + 1)
                 endPosition = calcExpandNodesCountAtParentNode(parentNode)
                 // 删除被折叠的元素
                 for _ in startIndex + 1 ..< endPosition {
-                    tmpDataArray?.removeAtIndex(startIndex + 1)
+                    tmpDataArray?.remove(at: startIndex + 1)
                 }
                 // 重置状态
                 startIndex = 0
@@ -198,47 +198,47 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
                 // 展开节点
                 expand = true
                 for node in children {
-                    tmpDataArray?.insert(node, atIndex: endPosition)
+                    tmpDataArray?.insert(node, at: endPosition)
                     endPosition += 1
                     node.expand = true
                 }
             }
         }
         
-        var indexPathArray: [NSIndexPath] = []
+        var indexPathArray: [IndexPath] = []
         for i in startPosition ..< endPosition {
-            let indexPath = NSIndexPath(forRow: i, inSection: 0)
+            let indexPath = IndexPath(row: i, section: 0)
             indexPathArray.append(indexPath)
         }
         // 旋转箭头
         if expand {
-            insertRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MKUITreeViewCellTableViewCell
+            insertRows(at: indexPathArray, with: .none)
+            let cell = tableView.cellForRow(at: indexPath) as! MKUITreeViewCellTableViewCell
             guard let imgArrow = cell.imgArrow else {
                 return
             }
-            UIView.animateWithDuration(InnerConst.Duration) {
-                imgArrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-            }
+            UIView.animate(withDuration: InnerConst.Duration, animations: {
+                imgArrow.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+            }) 
         } else {
-            deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .None)
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MKUITreeViewCellTableViewCell
+            deleteRows(at: indexPathArray, with: .none)
+            let cell = tableView.cellForRow(at: indexPath) as! MKUITreeViewCellTableViewCell
             guard let imgArrow = cell.imgArrow else {
                 return
             }
-            UIView.animateWithDuration(InnerConst.Duration) {
-                imgArrow.transform = CGAffineTransformMakeRotation(-CGFloat(M_PI * 2))
-            }
+            UIView.animate(withDuration: InnerConst.Duration, animations: {
+                imgArrow.transform = CGAffineTransform(rotationAngle: -CGFloat(M_PI * 2))
+            }) 
         }
     }
     
     // MARK: - 计算某个节点下展开的所有子节点数量
-    func calcExpandNodesCountAtParentNode(parentNode: MKTreeViewNode) -> Int {
+    func calcExpandNodesCountAtParentNode(_ parentNode: MKTreeViewNode) -> Int {
         // 递归删除该节点下的所有子节点
         for node in parentNode.children! {
             expandNodeCount += 1
             node.expand = false
-            guard let children = node.children where children.count > 0 && children.first!.expand else {
+            guard let children = node.children, children.count > 0 && children.first!.expand else {
                 continue
             }
             calcExpandNodesCountAtParentNode(node)
@@ -286,7 +286,7 @@ public class TreeTableView: UITableView, UITableViewDataSource, UITableViewDeleg
 }
 
 // MARK: - 模型：Node
-public class MKTreeViewNode {
+open class MKTreeViewNode {
     var parentId: Int
     var nodeId: Int
     var name: String
@@ -315,12 +315,12 @@ class MKTreeContainerTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MKTreeContainerTableViewCell") as! MKTreeContainerTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MKTreeContainerTableViewCell") as! MKTreeContainerTableViewCell
         let data = dataArray![indexPath.row]
         for (key, value) in data {
             cell.lblLeft.text = "\(key)"
@@ -337,7 +337,7 @@ class MKTreeContainerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = UIColor(colorLiteralRed: 35/255.0, green: 39/255.0, blue: 57/255.0, alpha: 1.0)
-        lblLeft.textColor = UIColor.lightTextColor()
-        lblRight.textColor = UIColor.whiteColor()
+        lblLeft.textColor = UIColor.lightText
+        lblRight.textColor = UIColor.white
     }
 }

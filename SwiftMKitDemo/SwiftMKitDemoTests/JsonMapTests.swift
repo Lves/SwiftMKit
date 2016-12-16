@@ -26,23 +26,23 @@ class JsonMapTests: XCTestCase {
     }
     
     var studentJSON = ["id":1,"name":"张三","age":20,"money":100.21,"height":183.10,
-                       "teacher":["id":1,"name":"李老师"]]
+                       "teacher":["id":1,"name":"李老师"]] as [String : Any]
     var teacherJSON = ["id":1,"name":"李老师",
                        "students":[
                         ["id":1,"name":"张三","age":20,"money":100.21,"height":183.10,
                             "teacher":["id":1,"name":"李老师"]],
                         ["id":2,"name":"李四","age":21,"money":101.21,"height":182.10,
-                            "teacher":["id":1,"name":"李老师"]]]]
+                            "teacher":["id":1,"name":"李老师"]]]] as [String : Any]
     var studentJSONUpdated = ["id":1,"name":"张三","age":20,"money":110.21,"height":183.10,
-                              "teacher":["id":2,"name":"王老师"]]
+                              "teacher":["id":2,"name":"王老师"]] as [String : Any]
     var teacherJSONNew = ["id":2,"name":"李李老师",
                           "students":[
                             ["id":1,"name":"张三","age":20,"money":100.21,"height":183.10,
                                 "teacher":["id":2]],
                             ["id":2,"name":"李四","age":21,"money":101.21,"height":182.10,
-                                "teacher":["id":2]]]]
+                                "teacher":["id":2]]]] as [String : Any]
 
-    func validateStudent(student: TestStudent?) {
+    func validateStudent(_ student: TestStudent?) {
         XCTAssertNotNil(student)
         XCTAssertEqual("张三", student!.name)
         XCTAssertEqual(student!.name, student!.aliasName)
@@ -52,7 +52,7 @@ class JsonMapTests: XCTestCase {
         XCTAssertNotNil(student?.teacher)
         XCTAssertEqual("李老师", student!.teacher?.name)
     }
-    func validateStudents(students: [TestStudent]?) {
+    func validateStudents(_ students: [TestStudent]?) {
         XCTAssertEqual(2, students?.count)
         let student:TestStudent? = students![0]
         XCTAssertNotNil(student)
@@ -62,7 +62,7 @@ class JsonMapTests: XCTestCase {
         XCTAssertEqual("100.21", student!.money?.stringValue)
         XCTAssertEqual(183.1, student!.height)
     }
-    func validateTeacher(teacher: TestTeacher?) {
+    func validateTeacher(_ teacher: TestTeacher?) {
         XCTAssertNotNil(teacher)
         XCTAssertEqual("李老师", teacher!.name)
         XCTAssertNotNil(teacher?.students)
@@ -74,7 +74,7 @@ class JsonMapTests: XCTestCase {
         XCTAssertEqual(100.21, studentInTeacher!.money)
     }
     
-    func validateStudentEntity(student: TestStudentEntity?, updated: Bool = false) {
+    func validateStudentEntity(_ student: TestStudentEntity?, updated: Bool = false) {
         XCTAssertNotNil(student)
         XCTAssertEqual("1", student!.entityId)
         XCTAssertEqual("张三", student!.name)
@@ -92,7 +92,7 @@ class JsonMapTests: XCTestCase {
             XCTAssertEqual("李老师", student!.teacher?.name)
         }
     }
-    func validateStudentsEntity(students: [TestStudentEntity]?) {
+    func validateStudentsEntity(_ students: [TestStudentEntity]?) {
         XCTAssertEqual(2, students?.count)
         let student:TestStudentEntity? = students![0]
         let student2:TestStudentEntity? = students![1]
@@ -105,7 +105,7 @@ class JsonMapTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(Int64(student2!.entityUpdateTime), Int64(student!.entityUpdateTime))
         XCTAssertGreaterThan(student2!.entityOrder, student!.entityOrder)
     }
-    func validateTeacherEntity(teacher: TestTeacherEntity?, updated: Bool = false) {
+    func validateTeacherEntity(_ teacher: TestTeacherEntity?, updated: Bool = false) {
         XCTAssertNotNil(teacher)
         XCTAssertEqual("李老师", teacher!.name)
         XCTAssertNotNil(teacher?.students)
@@ -127,7 +127,7 @@ class JsonMapTests: XCTestCase {
             XCTAssertEqual(100.21, studentInTeacher!.money)
         }
     }
-    func validateTeacherEntityNew(teacher: TestTeacherEntity?) {
+    func validateTeacherEntityNew(_ teacher: TestTeacherEntity?) {
         XCTAssertNotNil(teacher)
         XCTAssertEqual("李李老师", teacher!.name)
         XCTAssertNotNil(teacher?.students)
@@ -171,7 +171,7 @@ class JsonMapTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -188,7 +188,7 @@ class TestStudent : NSObject {
     var height:Double = 0
     var teacher:TestTeacher?
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["aliasName": "name"]
     }
 }
@@ -196,21 +196,21 @@ class TestTeacher: NSObject {
     var name:String?
     var students:[TestStudent]?
     
-    override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+    override static func mj_objectClassInArray() -> [AnyHashable: Any]! {
         return ["students": "SwiftMKitDemoTests.TestStudent"]
     }
 }
 extension TestStudentEntity {
-    override internal static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override internal static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["entityId":"id",
                 "aliasName": "name"]
     }
 }
 extension TestTeacherEntity {
-    override internal static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override internal static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["entityId":"id"]
     }
-    override internal static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
+    override internal static func mj_objectClassInArray() -> [AnyHashable: Any]! {
         return ["students": "TestStudentEntity"]
     }
 }

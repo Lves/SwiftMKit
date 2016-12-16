@@ -11,28 +11,28 @@ import MBProgressHUD
 import CocoaLumberjack
 
 public enum MBHUDViewStyle: Int {
-    case Default, Black
+    case `default`, black
 }
 
-public class MBHUDView: HUDProtocol{
+open class MBHUDView: HUDProtocol{
     struct InnerConstant {
         static let TitleToDetailTextLenght: Int = 10
     }
     
-    private var indicatorShowed: Bool = false
-    public weak var showingHUD: MBProgressHUD?
-    public static var shared: MBHUDView = MBHUDView()
-    public var style: MBHUDViewStyle = .Default
+    fileprivate var indicatorShowed: Bool = false
+    open weak var showingHUD: MBProgressHUD?
+    open static var shared: MBHUDView = MBHUDView()
+    open var style: MBHUDViewStyle = .default
     
     
-    public func showHUDAddedTo(view: UIView, animated: Bool, text: String?) {
+    open func showHUDAddedTo(_ view: UIView, animated: Bool, text: String?) {
         showHUDAddedTo(view, animated: animated, text: text, detailText: nil)
     }
-    public func showHUDAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?) {
+    open func showHUDAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?) {
         DDLogInfo("show: \(view)")
         indicatorShowed = true
-        MBProgressHUD.hideHUDForView(view, animated: animated)
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        MBProgressHUD.hide(for: view, animated: animated)
+        let hud = MBProgressHUD.showAdded(to: view, animated: animated)
         setHUDStyle(hud, style: style)
         if let indicateString = text {
             hud.label.text = indicateString
@@ -40,18 +40,18 @@ public class MBHUDView: HUDProtocol{
         if let detailString = detailText {
             hud.detailsLabel.text = detailString
         }
-        hud.button.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        hud.button.removeTarget(nil, action: nil, for: .allEvents)
         showingHUD = hud
     }
-    public func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void)) {
+    open func showHUDTextAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: TimeInterval, offset: CGPoint?, completion: (() -> Void)) {
         DDLogInfo("show: \(view)")
         indicatorShowed = false
-        showingHUD?.hideAnimated(false)
-        MBProgressHUD.hideHUDForView(view, animated: animated)
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: animated)
+        showingHUD?.hide(animated: false)
+        MBProgressHUD.hide(for: view, animated: animated)
+        let hud = MBProgressHUD.showAdded(to: view, animated: animated)
         setHUDStyle(hud, style: style)
         
-        hud.mode = .Text
+        hud.mode = .text
         if let offset = offset {
             hud.offset = offset
         }
@@ -62,90 +62,90 @@ public class MBHUDView: HUDProtocol{
             setHUDText(hud, text: text)
         }
         if let image = image {
-            hud.mode = .CustomView;
+            hud.mode = .customView;
             hud.customView = UIImageView(image: image)
-            hud.square = true
+            hud.isSquare = true
         }
-        hud.button.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        hud.hideAnimated(animated, afterDelay: hideAfterDelay)
+        hud.button.removeTarget(nil, action: nil, for: .allEvents)
+        hud.hide(animated: animated, afterDelay: hideAfterDelay)
         showingHUD = hud
-        Async.main(after: hideAfterDelay, block: completion)
+        let _ = Async.main(after: hideAfterDelay, block: completion)
     }
-    public func showHUDProgressAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
-        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .Determinate)
+    open func showHUDProgressAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
+        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .determinate)
     }
-    public func showHUDProgressAnnularDeterminateAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
-        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .AnnularDeterminate)
+    open func showHUDProgressAnnularDeterminateAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
+        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .annularDeterminate)
     }
-    public func showHUDProgressHorizontalBarAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
-        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .DeterminateHorizontalBar)
+    open func showHUDProgressHorizontalBarAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
+        showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .determinateHorizontalBar)
     }
-    public func showHUDProgressAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil, mode: MBProgressHUDMode) {
+    open func showHUDProgressAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil, mode: MBProgressHUDMode) {
         showHUDAddedTo(view, animated: animated, text: text, detailText: detailText)
         showingHUD?.mode = mode
         if cancelEnable == true {
-            let progressObject = NSProgress(totalUnitCount: 100)
+            let progressObject = Progress(totalUnitCount: 100)
             showingHUD?.progressObject = progressObject
             if let title = cancelTitle {
-                showingHUD?.button.setTitle(title, forState: .Normal)
-                showingHUD?.button.addTarget(progressObject, action: #selector(NSProgress.cancel), forControlEvents: .TouchUpInside)
+                showingHUD?.button.setTitle(title, for: .normal)
+                showingHUD?.button.addTarget(progressObject, action: #selector(Progress.cancel), for: .touchUpInside)
             } else {
-                showingHUD?.button.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+                showingHUD?.button.removeTarget(nil, action: nil, for: .allEvents)
             }
         }
     }
-    public func changeHUDProgress(progress: Float) {
+    open func changeHUDProgress(_ progress: Float) {
         if let progressObject = showingHUD?.progressObject {
-            if progressObject.cancelled {
-                showingHUD?.hideAnimated(true)
+            if progressObject.isCancelled {
+                showingHUD?.hide(animated: true)
                 showingHUD = nil
                 indicatorShowed = false
                 return
             }
             let increase: Int64 = Int64((Double(progress) - progressObject.fractionCompleted) * 100)
-            progressObject.becomeCurrentWithPendingUnitCount(increase)
+            progressObject.becomeCurrent(withPendingUnitCount: increase)
             progressObject.resignCurrent()
         } else {
             showingHUD?.progress = progress
         }
     }
-    public func changeHUDText(text: String?) {
+    open func changeHUDText(_ text: String?) {
         if let hud = showingHUD {
             setHUDText(hud, text: text)
         }
     }
-    public func setHUDText(hud: MBProgressHUD, text: String?) {
+    open func setHUDText(_ hud: MBProgressHUD, text: String?) {
         if let indicateString = text {
-            if text?.length > InnerConstant.TitleToDetailTextLenght {
+            if (text?.length ?? 0) > InnerConstant.TitleToDetailTextLenght {
                 hud.detailsLabel.text = indicateString
             } else {
                 hud.label.text = indicateString
             }
         }
     }
-    public func setHUDStyle(hud: MBProgressHUD, style: MBHUDViewStyle) {
+    open func setHUDStyle(_ hud: MBProgressHUD, style: MBHUDViewStyle) {
         switch style {
-        case .Default:
+        case .default:
             break
-        case .Black:
-            hud.bezelView.color = UIColor.blackColor().colorWithAlphaComponent(0.9)
-            hud.bezelView.style = .SolidColor
-            hud.contentColor = UIColor.whiteColor()
+        case .black:
+            hud.bezelView.color = UIColor.black.withAlphaComponent(0.9)
+            hud.bezelView.style = .solidColor
+            hud.contentColor = UIColor.white
         }
     }
-    public func hideHUDForView(view: UIView, animated: Bool) -> Bool {
+    open func hideHUDForView(_ view: UIView, animated: Bool) -> Bool {
         DDLogInfo("hide: \(view)")
         showingHUD = nil
         indicatorShowed = false
-        return MBProgressHUD.hideHUDForView(view, animated: animated)
+        return MBProgressHUD.hide(for: view, animated: animated)
     }
-    public func hideIndicatorHUDForView(view: UIView, animated: Bool) -> Bool {
+    open func hideIndicatorHUDForView(_ view: UIView, animated: Bool) -> Bool {
         DDLogInfo("hide: \(view)")
-        if showingHUD?.mode == .Text {
+        if showingHUD?.mode == .text {
             return false
         }
         showingHUD = nil
         indicatorShowed = false
-        return MBProgressHUD.hideHUDForView(view, animated: animated)
+        return MBProgressHUD.hide(for: view, animated: animated)
     }
 }

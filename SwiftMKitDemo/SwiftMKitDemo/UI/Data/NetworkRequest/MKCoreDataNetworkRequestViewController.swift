@@ -13,17 +13,17 @@ import ReactiveCocoa
 import Haneke
 
 enum DataStoreType: Int {
-    case Memory, CoreData
+    case memory, coreData
 }
 
-class MKCoreDataNetworkRequestViewController: BaseListFetchViewController, UITableViewDataSource, UITableViewDelegate {
+class MKCoreDataNetworkRequestViewController: BaseListFetchViewController {
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
         static let CellIdentifier = "MKNetworkRequestTableViewCell"
         static let SegueToNext = "routeToNetworkRequestDetail"
     }
-    lazy private var _viewModel = MKCoreDataNetworkRequestViewModel()
+    lazy fileprivate var _viewModel = MKCoreDataNetworkRequestViewModel()
     override var viewModel: MKCoreDataNetworkRequestViewModel!{
         get { return _viewModel }
     }
@@ -31,12 +31,12 @@ class MKCoreDataNetworkRequestViewController: BaseListFetchViewController, UITab
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .Both }
+        get { return .both }
     }
     
     override func setupUI() {
         super.setupUI()
-        self.tableView.registerNib(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
+        self.tableView.register(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = self.tableView.rowHeight;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -46,19 +46,19 @@ class MKCoreDataNetworkRequestViewController: BaseListFetchViewController, UITab
         super.loadData()
         self.tableView.mj_header.beginRefreshing()
     }
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        return tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let cell = tableViewCell as? MKNetworkRequestTableViewCell {
             if let model = object as? PX500PhotoEntity {
                 cell.photoEntity = model
             }
         }
     }
-    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? PX500PhotoEntity {
-            self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId!])
+            let _ = self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId! as AnyObject])
         }
     }
 }

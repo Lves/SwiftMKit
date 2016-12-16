@@ -12,30 +12,30 @@ import CocoaLumberjack
 import Alamofire
 import MJRefresh
 
-public class BaseKitTableViewModel: NSObject {
-    public weak var viewController: BaseKitTableViewController!
-    public var hud: HUDProtocol {
+open class BaseKitTableViewModel: NSObject {
+    open weak var viewController: BaseKitTableViewController!
+    open var hud: HUDProtocol {
         get { return self.viewController.hud }
     }
-    public var indicator: IndicatorProtocol {
+    open var indicator: IndicatorProtocol {
         get { return self.viewController.indicator }
     }
-    public var view: UIView {
+    open var view: UIView {
         get { return self.viewController.view }
     }
-    public func fetchData() {
+    open func fetchData() {
     }
     
     deinit {
-        DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
     }
     
     
-    private struct InnerConstant {
+    fileprivate struct InnerConstant {
         static let StringNoMoreDataTip = "数据已全部加载完毕"
     }
     
-    public var listViewController: BaseKitTableViewController! {
+    open var listViewController: BaseKitTableViewController! {
         get {
             return viewController as BaseKitTableViewController
         }
@@ -56,8 +56,8 @@ public class BaseKitTableViewModel: NSObject {
             if self.viewController == nil {
                 return
             }
-            if self.listViewController.listViewType == .RefreshOnly ||
-                self.listViewController.listViewType == .None {
+            if self.listViewController.listViewType == .refreshOnly ||
+                self.listViewController.listViewType == .none {
                 return
             }
             var noMoreDataTip = InnerConstant.StringNoMoreDataTip
@@ -87,7 +87,7 @@ public class BaseKitTableViewModel: NSObject {
     let listLoadNumber: UInt = 20
     let listMaxNumber: UInt = UInt.max
     
-    public func updateDataArray(newData: [AnyObject]?) {
+    open func updateDataArray(_ newData: [AnyObject]?) {
         if let data = newData {
             if dataIndex == 0 {
                 dataArray = data
@@ -105,7 +105,7 @@ public class BaseKitTableViewModel: NSObject {
             collect.reloadData()
         }
     }
-    public func updateDataSource(newData: [[AnyObject]]?) {
+    open func updateDataSource(_ newData: [[AnyObject]]?) {
         dataSource = newData ?? [[AnyObject]]()
         if let table = self.listViewController.listView as? UITableView {
             table.reloadData()
@@ -119,25 +119,25 @@ public class BaseKitTableViewModel: NSObject {
 
 extension BaseKitTableViewModel {
     
-    public func showTip(tip: String, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, completion : () -> Void = {}) {
         showTip(tip, view: self.view, completion: completion)
     }
-    public func showTip(tip: String, image: UIImage?, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, image: UIImage?, completion : () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
     }
-    public func showTip(tip: String, view: UIView, offset: CGPoint = CGPointZero, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
     }
-    public func showLoading(text: String = "") {
+    public func showLoading(_ text: String = "") {
         viewController.showLoading(text)
     }
-    public func showLoading(text: String, view: UIView) {
+    public func showLoading(_ text: String, view: UIView) {
         viewController.showLoading(text, view: view)
     }
     public func hideLoading() {
         viewController.hideLoading()
     }
-    public func hideLoading(view: UIView) {
+    public func hideLoading(_ view: UIView) {
         viewController.hideLoading(view)
     }
     

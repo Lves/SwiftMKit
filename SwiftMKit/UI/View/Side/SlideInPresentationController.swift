@@ -9,17 +9,17 @@
 import UIKit
 import SnapKit
 
-public class SlideInPresentationController: UIPresentationController {
-    public var dimmingColor: UIColor = UIColor(white: 0.0, alpha: 0.5) {
+open class SlideInPresentationController: UIPresentationController {
+    open var dimmingColor: UIColor = UIColor(white: 0.0, alpha: 0.5) {
         didSet {
             dimmingView?.backgroundColor = dimmingColor
         }
     }
-    public var coverPercent: CGFloat = 0.8
-    public var statusBarHidden: Bool = false
+    open var coverPercent: CGFloat = 0.8
+    open var statusBarHidden: Bool = false
     
-    private var direction: PresentationDirection
-    private var dimmingView: UIView!
+    fileprivate var direction: PresentationDirection
+    fileprivate var dimmingView: UIView!
 
     
     init(presentedViewController: UIViewController,
@@ -28,53 +28,53 @@ public class SlideInPresentationController: UIPresentationController {
         self.direction = direction
         
         super.init(presentedViewController: presentedViewController,
-                   presentingViewController: presentingViewController)
+                   presenting: presentingViewController)
         
         setupDimmingView()
 
     }
     
-    override public func presentationTransitionWillBegin() {
+    override open func presentationTransitionWillBegin() {
         if statusBarHidden {
             hideStatusBar()
         }
         
-        containerView?.insertSubview(dimmingView, atIndex: 0)
+        containerView?.insertSubview(dimmingView, at: 0)
         
         dimmingView.snp_makeConstraints { (make) in
             make.edges.equalTo(containerView!)
         }
         
-        guard let coordinator = presentedViewController.transitionCoordinator() else {
+        guard let coordinator = presentedViewController.transitionCoordinator else {
             dimmingView.alpha = 1.0
             return
         }
         
-        coordinator.animateAlongsideTransition({ _ in
+        coordinator.animate(alongsideTransition: { _ in
             self.dimmingView.alpha = 1.0
             }, completion: {_ in})
     }
     
-    override public func dismissalTransitionWillBegin() {
+    override open func dismissalTransitionWillBegin() {
         if statusBarHidden {
             showStatusBar()
         }
         
-        guard let coordinator = presentedViewController.transitionCoordinator() else {
+        guard let coordinator = presentedViewController.transitionCoordinator else {
             dimmingView.alpha = 0.0
             return
         }
         
-        coordinator.animateAlongsideTransition({ _ in
+        coordinator.animate(alongsideTransition: { _ in
             self.dimmingView.alpha = 0.0
         }, completion: {_ in})
     }
     
-    override public func containerViewWillLayoutSubviews() {
-        presentedView()?.frame = frameOfPresentedViewInContainerView()
+    override open func containerViewWillLayoutSubviews() {
+        presentedView?.frame = frameOfPresentedViewInContainerView
     }
     
-    public override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
+    open override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         switch direction {
         case .left, .right:
             return CGSize(width: parentSize.width*coverPercent, height: parentSize.height)
@@ -82,10 +82,10 @@ public class SlideInPresentationController: UIPresentationController {
             return CGSize(width: parentSize.width, height: parentSize.height*coverPercent)
         }
     }
-    public override func frameOfPresentedViewInContainerView() -> CGRect {
+    open override var frameOfPresentedViewInContainerView : CGRect {
         
         var frame: CGRect = .zero
-        frame.size = sizeForChildContentContainer(presentedViewController,
+        frame.size = size(forChildContentContainer: presentedViewController,
                           withParentContainerSize: containerView!.bounds.size)
         
         switch direction {
@@ -100,11 +100,11 @@ public class SlideInPresentationController: UIPresentationController {
     }
     
     
-    private func showStatusBar() {
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+    fileprivate func showStatusBar() {
+        UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.slide)
     }
-    private func hideStatusBar() {
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+    fileprivate func hideStatusBar() {
+        UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.slide)
     }
 }
 
@@ -118,7 +118,7 @@ extension SlideInPresentationController {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         dimmingView.addGestureRecognizer(recognizer)
     }
-    func handleTap(recognizer: UITapGestureRecognizer) {
+    func handleTap(_ recognizer: UITapGestureRecognizer) {
         presentingViewController.dismissVC(completion: nil)
     }
 }

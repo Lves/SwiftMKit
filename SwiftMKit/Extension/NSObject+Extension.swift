@@ -11,7 +11,7 @@ import MJExtension
 import MagicalRecord
 
 public extension NSObject {
-    class public func arrayFromJson<T: NSObject>(json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> [T]?{
+    class public func arrayFromJson<T: NSObject>(_ json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> [T]?{
         if let jsonString = json {
             let arr = T.mj_objectArrayWithKeyValuesArray(jsonString, context:context).copy() as? Array<T>
             //如果是第一页，删除旧数据
@@ -35,7 +35,7 @@ public extension NSObject {
             }
             if arr != nil {
                 var index:Int64 = 1
-                let time = NSDate().timeIntervalSince1970
+                let time = Date().timeIntervalSince1970
                 for obj in arr! {
                     if let entity = obj as? BaseKitEntity {
                         entity.entityUpdateTime = time
@@ -48,39 +48,39 @@ public extension NSObject {
         }
         return nil
     }
-    class public func objectFromJson<T: NSObject>(json: AnyObject?, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> T?{
+    class public func objectFromJson<T: NSObject>(_ json: AnyObject?, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> T?{
         if let jsonString = json {
             let obj = T.mj_objectWithKeyValues(jsonString, context:context)
             if let entity = obj as? BaseKitEntity {
-                entity.entityUpdateTime = NSDate().timeIntervalSince1970
+                entity.entityUpdateTime = Date().timeIntervalSince1970
             }
             return obj
         }
         return nil
     }
     
-    class func fromClassName(className : String) -> NSObject? {
-        let className = (NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? "") + "." + className
+    class func fromClassName(_ className : String) -> NSObject? {
+        let className = (Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "") + "." + className
         let aClass = NSClassFromString(className) as? NSObject.Type
         return aClass?.init()
     }
     
     ///  获取完整的类名
-    class func fullClassName(className : String) -> NSObject.Type? {
-        let className = (NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? "") + "." + className
+    class func fullClassName(_ className : String) -> NSObject.Type? {
+        let className = (Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "") + "." + className
         let fullName = NSClassFromString(className) as? NSObject.Type
         return fullName
     }
 
-    class func dictToJson(object:[String:AnyObject]?) -> NSString{
+    class func dictToJson(_ object:[String:AnyObject]?) -> NSString{
         
         var jsonStr : NSString = ""
         
         if  (object != nil){
             
             do {
-                let jsonData = try NSJSONSerialization.dataWithJSONObject(object ?? [:], options: .PrettyPrinted)
-                jsonStr = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
+                let jsonData = try JSONSerialization.data(withJSONObject: object ?? [:], options: .prettyPrinted)
+                jsonStr = NSString(data: jsonData, encoding:String.Encoding.utf8.rawValue)!
             }
             catch{
                 
@@ -95,7 +95,7 @@ public extension NSObject {
 public protocol Then {}
 
 extension Then {
-    func then(closure: Self -> Void) -> Self {
+    func then(_ closure: (Self) -> Void) -> Self {
         closure(self)
         return self
     }

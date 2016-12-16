@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 class MKNetworkRequestViewModel: BaseListViewModel {
     
-    private var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NetError> {
+    fileprivate var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NetError> {
         get {
                 return PX500PopularPhotosApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicator(self.listIndicator).signal().on(
                     next: { [weak self] data in

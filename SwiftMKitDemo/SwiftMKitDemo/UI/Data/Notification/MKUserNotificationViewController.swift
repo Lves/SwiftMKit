@@ -11,7 +11,7 @@ import UserNotifications
 
 class MKUserNotificationViewController: BaseViewController {
     
-    private struct InnerConstant {
+    fileprivate struct InnerConstant {
         static let NotifyIdentifier = "com.cdts.notify"
         static let NotifyCategoryIdentifier = "saySomethingCategory"
     }
@@ -68,8 +68,8 @@ class MKUserNotificationViewController: BaseViewController {
                     default: break
                     }
                     if !text.isEmpty {
-                        let alert = UIAlertController(title: nil, message: "You just said \(text)", preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Got It", style: .Default, handler: nil))
+                        let alert = UIAlertController(title: nil, message: "You just said \(text)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Got It", style: .default, handler: nil))
                         self.showAlert(alert, completion: nil)
                     }
                 }
@@ -79,7 +79,7 @@ class MKUserNotificationViewController: BaseViewController {
             // Fallback on earlier versions
         }
     }
-    @IBAction func click_sendLocalNotify(sender: UIButton) {
+    @IBAction func click_sendLocalNotify(_ sender: UIButton) {
         if #available(iOS 10.0, *) {
             UserNotificationManager.addNotify("Time Interval Notification", body: "My notification", triggerTime: 5, repeats: false, identifier: InnerConstant.NotifyIdentifier, categoryIdentifier: InnerConstant.NotifyCategoryIdentifier, withCompletionHandler: nil)
             showTip("5秒后将收到本地推送")
@@ -87,26 +87,26 @@ class MKUserNotificationViewController: BaseViewController {
             // Fallback on earlier versions
         }
     }
-    @IBAction func click_cancelLocalNotify(sender: UIButton) {
+    @IBAction func click_cancelLocalNotify(_ sender: UIButton) {
         if #available(iOS 10.0, *) {
             UserNotificationManager.cancelNotifies([InnerConstant.NotifyIdentifier])
         } else {
             // Fallback on earlier versions
         }
     }
-    @IBAction func click_removeDeliveredNotify(sender: UIButton) {
+    @IBAction func click_removeDeliveredNotify(_ sender: UIButton) {
         if #available(iOS 10.0, *) {
             UserNotificationManager.removeDeliveredNotifies([InnerConstant.NotifyIdentifier])
         } else {
             // Fallback on earlier versions
         }
     }
-    @IBAction func click_sendNotifyWithImage(sender: UIButton) {
+    @IBAction func click_sendNotifyWithImage(_ sender: UIButton) {
         
         if #available(iOS 10.0, *) {
             var attachments = [UNNotificationAttachment]()
-            if let imageURL = NSBundle.mainBundle().URLForResource("appicon", withExtension: "png") {
-                if let attachment = try? UNNotificationAttachment(identifier: "imageAttachment", URL: imageURL, options: nil) {
+            if let imageURL = Bundle.main.url(forResource: "appicon", withExtension: "png") {
+                if let attachment = try? UNNotificationAttachment(identifier: "imageAttachment", url: imageURL, options: nil) {
                     attachments.append(attachment)
                 }
             }
@@ -124,7 +124,7 @@ class MKUserNotificationViewController: BaseViewController {
             let inputAction = UNTextInputNotificationAction(
                 identifier: "action.input",
                 title: "Input",
-                options: [.Foreground],
+                options: [.foreground],
                 textInputButtonTitle: "Send",
                 textInputPlaceholder: "What do you want to say...")
             
@@ -132,18 +132,18 @@ class MKUserNotificationViewController: BaseViewController {
             let goodbyeAction = UNNotificationAction(
                 identifier: "action.goodbye",
                 title: "Goodbye",
-                options: [.Foreground])
+                options: [.foreground])
             
             let cancelAction = UNNotificationAction(
                 identifier: "action.cancel",
                 title: "Cancel",
-                options: [.Destructive])
+                options: [.destructive])
             
             // 3
-            return UNNotificationCategory(identifier:"saySomethingCategory", actions: [inputAction, goodbyeAction, cancelAction], intentIdentifiers: [], options: [.CustomDismissAction])
+            return UNNotificationCategory(identifier:"saySomethingCategory", actions: [inputAction, goodbyeAction, cancelAction], intentIdentifiers: [], options: [.customDismissAction])
         }()
         
-        UNUserNotificationCenter.currentNotificationCenter().setNotificationCategories([saySomethingCategory])
+        UNUserNotificationCenter.current().setNotificationCategories([saySomethingCategory])
     }
 }
 
@@ -151,9 +151,9 @@ class MKUserNotificationViewController: BaseViewController {
 extension UNAuthorizationStatus: CustomStringConvertible {
     public var description: String {
         switch self {
-        case NotDetermined: return "NotDetermined"
-        case Denied: return "Denied"
-        case Authorized: return "Authorized"
+        case .notDetermined: return "NotDetermined"
+        case .denied: return "Denied"
+        case .authorized: return "Authorized"
         }
     }
 }
@@ -162,9 +162,9 @@ extension UNAuthorizationStatus: CustomStringConvertible {
 extension UNNotificationSetting: CustomStringConvertible {
     public var description: String {
         switch self {
-        case NotSupported: return "NotSupported"
-        case Disabled: return "Disabled"
-        case Enabled: return "Enabled"
+        case .notSupported: return "NotSupported"
+        case .disabled: return "Disabled"
+        case .enabled: return "Enabled"
         }
     }
 }
@@ -173,9 +173,9 @@ extension UNNotificationSetting: CustomStringConvertible {
 extension UNAlertStyle: CustomStringConvertible {
     public var description: String {
         switch self {
-        case None: return "None"
-        case Banner: return "Banner"
-        case Alert: return "Alert"
+        case .none: return "None"
+        case .banner: return "Banner"
+        case .alert: return "Alert"
         }
     }
 }

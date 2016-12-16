@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class MKiPodAssetViewController: BaseListViewController, UITableViewDelegate, UITableViewDataSource {
+class MKiPodAssetViewController: BaseListViewController {
     
     struct InnerConst {
         static let CellIdentifier = "MKiPodAssetTableViewCell"
@@ -19,7 +19,7 @@ class MKiPodAssetViewController: BaseListViewController, UITableViewDelegate, UI
     
     var source: [String: [MPMediaItem]] = [:]
     
-    lazy private var _viewModel = BaseListViewModel()
+    lazy fileprivate var _viewModel = BaseListViewModel()
     override var viewModel: BaseListViewModel!{
         get { return _viewModel }
     }
@@ -27,12 +27,12 @@ class MKiPodAssetViewController: BaseListViewController, UITableViewDelegate, UI
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .None }
+        get { return .none }
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let bvc = segue.destinationViewController as? MKiPodVideoDetailViewController,
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bvc = segue.destination as? MKiPodVideoDetailViewController,
             let asset = sender as? MPMediaItem {
             bvc.asset = asset
             if segue.identifier == "routeToVideo" {
@@ -57,7 +57,7 @@ class MKiPodAssetViewController: BaseListViewController, UITableViewDelegate, UI
         source["Song"] = []
         for item in items {
             let type = item.mediaType
-            if type == .Movie {
+            if type == .movie {
                 source["Movie"]?.append(item)
             } else {
                 source["Song"]?.append(item)
@@ -66,31 +66,31 @@ class MKiPodAssetViewController: BaseListViewController, UITableViewDelegate, UI
         tableView.reloadData()
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return source["Movie"]?.count ?? 0
         }
         return source["Song"]?.count ?? 0
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, w: self.view.w, h: 40))
-        view.backgroundColor = UIColor.lightGrayColor()
+        view.backgroundColor = UIColor.lightGray
         let label = UILabel(frame: view.bounds)
         label.text = (section == 0 ? "Movie" : "Song")
-        label.font = UIFont.systemFontOfSize(16)
-        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.white
         label.x = 10
         view.addSubview(label)
         return view
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier, forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier, for: indexPath)
         let section = (indexPath.section == 0 ? "Movie" : "Song")
         if let asset = source[section]?[indexPath.row] {
             cell.textLabel?.text = asset.title
@@ -101,15 +101,15 @@ class MKiPodAssetViewController: BaseListViewController, UITableViewDelegate, UI
         }
         return cell
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             if let asset = source["Movie"]?[indexPath.row] {
-                self.performSegueWithIdentifier("routeToVideo", sender: asset)
+                self.performSegue(withIdentifier: "routeToVideo", sender: asset)
             }
         } else {
             if let asset = source["Song"]?[indexPath.row] {
-                self.performSegueWithIdentifier("routeToSong", sender: asset)
+                self.performSegue(withIdentifier: "routeToSong", sender: asset)
             }
         }
     }
@@ -149,30 +149,30 @@ class MKiPodVideoDetailViewController: BaseViewController {
     
     lazy var player: VideoPlayer = { return VideoPlayer(viewController: self) }()
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
-    override func viewWillDisappear(animated : Bool) {
+    override func viewWillDisappear(_ animated : Bool) {
         super.viewWillDisappear(animated)
         
-        if (self.isMovingFromParentViewController()) {
-            UIDevice.currentDevice().setValue(Int(UIInterfaceOrientation.Portrait.rawValue), forKey: "orientation")
+        if (self.isMovingFromParentViewController) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
     }
     
     override func setupUI() {
         super.setupUI()
         UIViewController.attemptRotationToDeviceOrientation()
-        if let oldValue =  UIDevice.currentDevice().valueForKey("orientation") as? Int {
+        if let oldValue =  UIDevice.current.value(forKey: "orientation") as? Int {
             let orientation = UIInterfaceOrientation(rawValue: oldValue)
-            if orientation != .LandscapeLeft && orientation != .LandscapeRight {
-                let value = UIInterfaceOrientation.LandscapeLeft.rawValue
-                UIDevice.currentDevice().setValue(value, forKey: "orientation")
+            if orientation != .landscapeLeft && orientation != .landscapeRight {
+                let value = UIInterfaceOrientation.landscapeLeft.rawValue
+                UIDevice.current.setValue(value, forKey: "orientation")
             }
         }
         
@@ -191,39 +191,39 @@ class MKiPodVideoDetailViewController: BaseViewController {
         playAsset(asset!)
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [.LandscapeLeft, .LandscapeRight]
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return [.landscapeLeft, .landscapeRight]
     }
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return .LandscapeLeft
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
+        return .landscapeLeft
     }
     
-    func playAsset(asset: MPMediaItem) {
+    func playAsset(_ asset: MPMediaItem) {
         self.asset = asset
         self.player.readToPlay(asset.assetURL!)
     }
     
-    @IBAction func click_close(sender: UIButton) {
+    @IBAction func click_close(_ sender: UIButton) {
         self.routeBack()
     }
-    @IBAction func click_last(sender: UIButton) {
+    @IBAction func click_last(_ sender: UIButton) {
         var index = dataArray.indexesOf(asset!).first!
         index = max(index - 1, 0)
         let video = dataArray[index]
         playAsset(video)
     }
-    @IBAction func click_back(sender: UIButton) {
+    @IBAction func click_back(_ sender: UIButton) {
         player.seekAddTime(-20)
         player.delayToolBarHidden()
     }
-    @IBAction func click_fast(sender: UIButton) {
+    @IBAction func click_fast(_ sender: UIButton) {
         player.seekAddTime(20)
         player.delayToolBarHidden()
     }
-    @IBAction func click_next(sender: UIButton) {
+    @IBAction func click_next(_ sender: UIButton) {
         var index = dataArray.indexesOf(asset!).first!
         index = min(index + 1, dataArray.count - 1)
         let video = dataArray[index]

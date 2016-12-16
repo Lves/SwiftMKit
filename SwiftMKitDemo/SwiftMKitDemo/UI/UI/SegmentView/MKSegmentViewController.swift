@@ -27,7 +27,7 @@ class MKSegmentViewController: BaseViewController, SegmentContainerViewControlle
         // Dispose of any resources that can be recreated.
     }
     
-    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController, percentX: CGFloat) {
+    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController, percentX: CGFloat) {
         segment.selectedSegmentIndex = index
     }
     
@@ -40,10 +40,10 @@ class MKSegmentViewController: BaseViewController, SegmentContainerViewControlle
     }
     override func bindingData() {
         super.bindingData()
-        segment.rac_signalForControlEvents(.ValueChanged).toSignalProducer().startWithNext { [weak self] _ in
+        segment.reactive.selectedSegmentIndexes.observeValues { [weak self] _ in
             let index = self?.segment.selectedSegmentIndex ?? 0
             DDLogInfo("Segment index: \(index)")
-            self?.segmentContainer.selectSegment(index)
+            let _ = self?.segmentContainer.selectSegment(index)
         }
     }
 

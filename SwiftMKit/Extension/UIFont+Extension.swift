@@ -17,8 +17,8 @@ extension UIFont {
      */
     class func allFontNames() -> [String] {
         var fontNames = [String]()
-        for familyName in UIFont.familyNames() {
-            let names = UIFont.fontNamesForFamilyName(familyName)
+        for familyName in UIFont.familyNames {
+            let names = UIFont.fontNames(forFamilyName: familyName)
             for name in names {
                 fontNames.append(name)
             }

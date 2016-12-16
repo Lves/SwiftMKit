@@ -20,7 +20,7 @@ class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSou
         static let CellIdentifier = "MKNetworkRequestTableViewCell"
         static let SegueToNext = "routeToNetworkRequestDetail"
     }
-    lazy private var _viewModel = MKNetworkRequestViewModel()
+    lazy fileprivate var _viewModel = MKNetworkRequestViewModel()
     override var viewModel: MKNetworkRequestViewModel!{
         get { return _viewModel }
     }
@@ -28,12 +28,12 @@ class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSou
         get { return tableView }
     }
     override var listViewType: ListViewType {
-        get { return .Both }
+        get { return .both }
     }
     
     override func setupUI() {
         super.setupUI()
-        self.tableView.registerNib(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
+        self.tableView.register(UINib(nibName: InnerConst.CellIdentifier, bundle: nil), forCellReuseIdentifier: InnerConst.CellIdentifier)
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = self.tableView.rowHeight;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -44,17 +44,17 @@ class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSou
         self.listView.mj_header.beginRefreshing()
     }
     
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier) as? MKNetworkRequestTableViewCell
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        return tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier) as? MKNetworkRequestTableViewCell
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let cell = tableViewCell as? MKNetworkRequestTableViewCell {
             if let model = object as? PX500PopularPhotoModel {
                 cell.photoModel = model
             }
         }
     }
-    override func didSelectCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? PX500PopularPhotoModel {
             self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId!])
         }

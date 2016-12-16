@@ -7,10 +7,34 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class MKOrderTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private struct InnerConst {
+    fileprivate struct InnerConst {
         static let CellID = "MKOrderTableViewCell"
     }
     
@@ -38,46 +62,46 @@ class MKOrderTableViewController: BaseViewController, UITableViewDelegate, UITab
         tableView.reloadData()
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.data?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(InnerConst.CellID) as? MKOrderTableViewCell else { return UITableViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellID) as? MKOrderTableViewCell else { return UITableViewCell() }
         cell.model = self.data?[indexPath.row] ?? MKOrderViewModel()
-        cell.backgroundColor = indexPath.row % 2 == 0 ? UIColor.whiteColor() : UIColor(hex6: 0xF8F8F8)
+        cell.backgroundColor = indexPath.row % 2 == 0 ? UIColor.white : UIColor(hex6: 0xF8F8F8)
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = self.data?[indexPath.row] ?? MKOrderViewModel()
         model.isSelect = !model.isSelect
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
     }
     
     
     //在编辑状态，可以拖动设置cell位置
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     //移动cell事件
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if sourceIndexPath != destinationIndexPath {
             //获取移动行对应的值
             if let model = data?[sourceIndexPath.row] {
                 //删除移动的值
-                data?.removeAtIndex(sourceIndexPath.row)
+                data?.remove(at: sourceIndexPath.row)
                 //如果移动区域大于现有行数，直接在最后添加移动的值
                 if sourceIndexPath.row > data?.count {
                     data?.append(model)
                 } else {
                     //没有超过最大行数，则在目标位置添加刚才删除的值
-                    data?.insert(model, atIndex: destinationIndexPath.row)
+                    data?.insert(model, at: destinationIndexPath.row)
                 }
             }
             tableView.reloadData()
@@ -85,8 +109,8 @@ class MKOrderTableViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     //删除、全选
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
     }
     
 }

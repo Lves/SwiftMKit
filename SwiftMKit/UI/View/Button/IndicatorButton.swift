@@ -8,41 +8,41 @@
 
 import UIKit
 
-public class IndicatorButton: UIButton {
+open class IndicatorButton: UIButton {
     
     public enum AnimateDirection: Int {
-        case FromDownToUp, FromUpToDown
+        case fromDownToUp, fromUpToDown
     }
     public enum IndicatorPosition: Int {
-        case Left, Right
+        case left, right
     }
     
     // MARK: - 公开属性
     /// 标识是否是向下切换title
-    var animateDirection: AnimateDirection = .FromDownToUp
-    var indicatorStyle: UIActivityIndicatorViewStyle = .White {
+    var animateDirection: AnimateDirection = .fromDownToUp
+    var indicatorStyle: UIActivityIndicatorViewStyle = .white {
         didSet {
             indicatorView.activityIndicatorViewStyle = indicatorStyle
         }
     }
-    var indicatorPosition: IndicatorPosition = .Left
+    var indicatorPosition: IndicatorPosition = .left
     var indicatorMargin: CGFloat = 8
     
-    public override var enabled: Bool {
+    open override var isEnabled: Bool {
         willSet {
-            if newValue != enabled {
+            if newValue != isEnabled {
                 Async.main {
-                    if let title = self.titleForState(.Disabled) {
+                    if let title = self.title(for: .disabled) {
                         if title.length > 0 {
                             self.disabledTitle = title
-                            self.setTitle("", forState: .Disabled)
+                            self.setTitle("", for: .disabled)
                         }
                     }
                 }
             }
         }
         didSet {
-            if oldValue != enabled {
+            if oldValue != isEnabled {
                 Async.main {
                     if oldValue {
                         // 动画切换title，显示菊花
@@ -60,10 +60,10 @@ public class IndicatorButton: UIButton {
     lazy var backView = UIView()
     lazy var lblMessage = UILabel()
     lazy var indicatorView = UIActivityIndicatorView()
-    private var lastTitle: String?
-    private var disabledTitle: String?
-    private var fastEnabled: Bool = false
-    private var transformY: CGFloat {
+    fileprivate var lastTitle: String?
+    fileprivate var disabledTitle: String?
+    fileprivate var fastEnabled: Bool = false
+    fileprivate var transformY: CGFloat {
         get {
             return self.h * (animateDirection == .FromDownToUp ? 1 : -1)
         }
@@ -76,17 +76,17 @@ public class IndicatorButton: UIButton {
     }
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         setup()
     }
     
     // MARK: - 私有方法
-    private func setup() {
+    fileprivate func setup() {
         layer.masksToBounds = true
         // 初始化backView及其子视图
         lblMessage.textColor = titleLabel?.textColor
         lblMessage.font = titleLabel?.font
-        lblMessage.textAlignment = .Center
+        lblMessage.textAlignment = .center
         backView.addSubview(lblMessage)
         
         indicatorView.activityIndicatorViewStyle = indicatorStyle
@@ -96,20 +96,20 @@ public class IndicatorButton: UIButton {
         
         // 要先设置高度  再设置center
         backView.h = self.h
-        backView.center = CGPointMake(self.w * 0.5, self.h * 0.5)
-        backView.backgroundColor = UIColor.clearColor()
+        backView.center = CGPoint(x: self.w * 0.5, y: self.h * 0.5)
+        backView.backgroundColor = UIColor.clear
         backView.alpha = 0
         
         addSubview(backView)
         
         lastTitle = currentTitle
-        disabledTitle = titleForState(.Disabled)
-        self.setTitle("", forState: .Disabled)
+        disabledTitle = title(for: .disabled)
+        self.setTitle("", for: .disabled)
     }
     
-    private func ib_loadingWithTitle(title: String?) {
-        let color = titleColorForState(.Disabled)
-        let shadowColor = titleShadowColorForState(.Disabled)
+    fileprivate func ib_loadingWithTitle(_ title: String?) {
+        let color = titleColor(for: .disabled)
+        let shadowColor = titleShadowColor(for: .disabled)
         lblMessage.text = title
         lblMessage.textColor = color
         lblMessage.shadowColor = shadowColor
@@ -118,10 +118,10 @@ public class IndicatorButton: UIButton {
         indicatorView.centerY = backView.centerY
         lblMessage.centerY = indicatorView.centerY
         switch indicatorPosition {
-        case .Left:
+        case .left:
             lblMessage.left = indicatorView.right + indicatorMargin
             backView.right = lblMessage.right
-        case .Right:
+        case .right:
             indicatorView.left = lblMessage.right + indicatorMargin
             backView.right = indicatorView.right
         }
@@ -143,36 +143,36 @@ public class IndicatorButton: UIButton {
         if title == lastTitle {
             // 如果title和旧title相同  不需要显示动画滚动
         } else {
-            backView.transform = CGAffineTransformMakeTranslation(0, transformY)
+            backView.transform = CGAffineTransform(translationX: 0, y: transformY)
         }
         fastEnabled = false
         Async.main(after: 0.1) {
             if self.fastEnabled {
                 return
             }
-            UIView.animateWithDuration(0.2) {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.titleLabel!.alpha = 0
                 self.backView.alpha = 1
-                self.backView.transform = CGAffineTransformIdentity
-            }
+                self.backView.transform = CGAffineTransform.identity
+            }) 
         }
     }
     
-    private func ib_resetToNormalState() {
+    fileprivate func ib_resetToNormalState() {
         fastEnabled = true
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.titleLabel!.alpha = 1
             self.backView.alpha = 0
             if self.currentTitle == self.disabledTitle {
                 // 如果title和旧title相同  不需要显示动画滚动
             } else {
-                self.backView.transform = CGAffineTransformMakeTranslation(0, self.transformY)
+                self.backView.transform = CGAffineTransform(translationX: 0, y: self.transformY)
             }
-        }) { (finished) in
-            if self.enabled {
-                self.backView.transform = CGAffineTransformIdentity
+        }, completion: { (finished) in
+            if self.isEnabled {
+                self.backView.transform = CGAffineTransform.identity
                 self.indicatorView.stopAnimating()
             }
-        }
+        }) 
     }
 }

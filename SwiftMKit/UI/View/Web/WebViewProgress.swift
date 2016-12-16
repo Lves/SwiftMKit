@@ -11,10 +11,10 @@ import UIKit
 import CocoaLumberjack
 
 protocol WebViewProgressDelegate: class {
-    func webViewProgress(webViewProgress: WebViewProgress, updateProgress progress: Float)
+    func webViewProgress(_ webViewProgress: WebViewProgress, updateProgress progress: Float)
 }
 
-public class WebViewProgress : NSObject {
+open class WebViewProgress : NSObject {
     
     struct InnerConst {
         static let InitialProgressValue : Float = 0.1
@@ -23,8 +23,8 @@ public class WebViewProgress : NSObject {
         static let CompleteRPCURLPath : String = "/webviewprogressproxy/complete"
     }
     
-    private weak var _webView: UIWebView?
-    public weak var webView: UIWebView? {
+    fileprivate weak var _webView: UIWebView?
+    open weak var webView: UIWebView? {
         get {
             return _webView
         }
@@ -41,7 +41,7 @@ public class WebViewProgress : NSObject {
     }
     var loadingCount : Int = 0
     var maxLoadCount : Int = 0
-    var currentURL : NSURL?
+    var currentURL : URL?
     var interactive : Bool = false
     
     func startProgress() {
@@ -73,71 +73,71 @@ public class WebViewProgress : NSObject {
         interactive = false
     }
  
-    public func progressWebView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType , delegatRet : Bool) -> Bool {
+    open func progressWebView(_ webView: UIWebView, shouldStartLoadWithRequest request: URLRequest, navigationType: UIWebViewNavigationType , delegatRet : Bool) -> Bool {
         
-        if request.URL!.path == InnerConst.CompleteRPCURLPath {
+        if request.url!.path == InnerConst.CompleteRPCURLPath {
             self.completeProgress()
             return false
         }
         
         var isFragmentJump : Bool = false
         
-        if ((request.URL?.fragment) != nil) {
-            let nonFragmentURL = request.URL?.absoluteString?.stringByReplacingOccurrencesOfString("#\(request.URL!.fragment)", withString: "")
+        if ((request.url?.fragment) != nil) {
+            let nonFragmentURL = request.url?.absoluteString.replacingOccurrences(of: "#\(request.url!.fragment)", with: "")
             
-            if let url = webView.request?.URL{
+            if let url = webView.request?.url{
                 if let absoluteString : String = url.absoluteString{
                     isFragmentJump = nonFragmentURL == absoluteString
                 }
             }
         }
         
-        let isTopLevelNavigation : Bool = request.mainDocumentURL == request.URL
+        let isTopLevelNavigation : Bool = request.mainDocumentURL == request.url
         
-        let isHTTPOrLocalFile : Bool = (request.URL!.scheme == "http")
-                                    || (request.URL!.scheme == "https")
-                                    || (request.URL!.scheme == "file")
+        let isHTTPOrLocalFile : Bool = (request.url!.scheme == "http")
+                                    || (request.url!.scheme == "https")
+                                    || (request.url!.scheme == "file")
         
         if (delegatRet && !isFragmentJump && isHTTPOrLocalFile && isTopLevelNavigation){
-            currentURL = request.URL
+            currentURL = request.url
             self.reset()
         }
         
-        currentURL = request.URL
+        currentURL = request.url
         
         return true
     }
     
-    public func progressWebViewDidStartLoad(webView: UIWebView) {
+    open func progressWebViewDidStartLoad(_ webView: UIWebView) {
         loadingCount += 1
         maxLoadCount = max(maxLoadCount, loadingCount)
         self.startProgress()
     }
     
-    public func progressWebViewDidFinishLoad(webView: UIWebView) {
+    open func progressWebViewDidFinishLoad(_ webView: UIWebView) {
         loadingCount -= 1
         self.incrementProgress()
         self.runFinishJS(webView,error: nil)
     }
     
-    public func progressWebView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    open func progressWebView(_ webView: UIWebView, didFailLoadWithError error: NSError?) {
         loadingCount -= 1
         self.incrementProgress()
         self.runFinishJS(webView,error: error)
     }
 
-    private func runFinishJS(webView: UIWebView, error: NSError?) {
-        let readyState = webView.stringByEvaluatingJavaScriptFromString("document.readyState")
+    fileprivate func runFinishJS(_ webView: UIWebView, error: NSError?) {
+        let readyState = webView.stringByEvaluatingJavaScript(from: "document.readyState")
         let tempInteractive : Bool = readyState == "interactive"
         
         //运行自定义的结束JS
         if tempInteractive {
             interactive = true
             let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request!.mainDocumentURL!.scheme)://\(webView.request!.mainDocumentURL!.host)\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
-            webView.stringByEvaluatingJavaScriptFromString(waitForCompleteJS)
+            webView.stringByEvaluatingJavaScript(from: waitForCompleteJS)
         }
         
-        let isNotRedirect : Bool = (currentURL?.isEqual(webView.request!.mainDocumentURL))!
+        let isNotRedirect : Bool = (currentURL? == webView.request!.mainDocumentURL)
         
         let complete = readyState == "complete"
         

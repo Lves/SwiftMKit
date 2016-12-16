@@ -9,9 +9,9 @@
 import UIKit
 
 enum MKCoverFlowSelectBtnCellType: Int {
-    case Normal
-    case Disabled
-    case Selected
+    case normal
+    case disabled
+    case selected
 }
 class MKCoverFlowSelectBtnsCollectionViewCell: UICollectionViewCell {
     
@@ -19,13 +19,13 @@ class MKCoverFlowSelectBtnsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblNumber: UILabel!
     var type : MKCoverFlowSelectBtnCellType? {
         didSet {
-            if type == .Normal {
+            if type == .normal {
                 self.imageView.image = nil
                 self.lblNumber.textColor = UIColor(hex6: 0xFD734C)
-            } else if type == .Disabled {
+            } else if type == .disabled {
                 self.imageView.image = nil
                 self.lblNumber.textColor = UIColor(hex6: 0x969CA4)
-            }else if type == .Selected {
+            }else if type == .selected {
                 self.imageView.image = UIImage(named: "coverflow_btn_select")
                 self.lblNumber.textColor = UIColor(hex6: 0xFFFFFF)
             }

@@ -10,71 +10,67 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
+import ReactiveSwift
 import ReachabilitySwift
 
 public enum NetworkStatus: CustomStringConvertible {
     
-    case Unknown, NotReachable, ReachableViaWiFi, ReachableViaWWAN
+    case unknown, notReachable, reachableViaWiFi, reachableViaWWAN
     
     public var description: String {
         switch self {
-        case .Unknown:
+        case .unknown:
             return "Unknown"
-        case .ReachableViaWWAN:
+        case .reachableViaWWAN:
             return "Cellular"
-        case .ReachableViaWiFi:
+        case .reachableViaWiFi:
             return "WiFi"
-        case .NotReachable:
+        case .notReachable:
             return "No Connection"
         }
     }
 }
 
 public protocol NetApiClientProtocol {
-    static func requestJSON(request: NSURLRequest, api: NetApiProtocol,
-                           completionHandler: (NetApiResponse<AnyObject, NSError> -> Void)?)
+    static func requestJSON(_ request: URLRequest, api: NetApiProtocol,
+                           completionHandler: ((NetApiResponse<AnyObject, NSError>) -> Void)?)
         -> AnyObject
     
-    static func requestData(request: NSURLRequest, api: NetApiProtocol,
-                            completionHandler: (NetApiResponse<NSData, NSError> -> Void)?)
+    static func requestData(_ request: URLRequest, api: NetApiProtocol,
+                            completionHandler: ((NetApiResponse<Data, NSError>) -> Void)?)
         -> AnyObject
     
-    static func requestString(request: NSURLRequest, api: NetApiProtocol,
-                             completionHandler: (NetApiResponse<String, NSError> -> Void)?)
+    static func requestString(_ request: URLRequest, api: NetApiProtocol,
+                             completionHandler: ((NetApiResponse<String, NSError>) -> Void)?)
         -> AnyObject
     
-    static func requestUpload(request: NSURLRequest, api: UploadNetApiProtocol,
-                             completionHandler: (NetApiResponse<AnyObject, NSError> -> Void)?)
+    static func requestUpload(_ request: URLRequest, api: UploadNetApiProtocol,
+                             completionHandler: ((NetApiResponse<AnyObject, NSError>) -> Void)?)
         -> AnyObject
 }
 
-public class NetApiClient : NSObject {
-    public var networkStatus = MutableProperty<NetworkStatus>(.Unknown)
-    private var reachability: Reachability?
+open class NetApiClient : NSObject {
+    open var networkStatus = MutableProperty<NetworkStatus>(.unknown)
+    fileprivate var reachability: Reachability?
     
-    private override init() {
+    fileprivate override init() {
     }
-    public static let shared = NetApiClient()
+    open static let shared = NetApiClient()
     
-    public func startNotifyNetworkStatus() {
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            DDLogError("Unable to create Reachability")
-            return
-        }
+    open func startNotifyNetworkStatus() {
+        reachability = Reachability.init()
         reachability?.whenReachable = { reachability in
-            if reachability.isReachableViaWiFi() {
+            if reachability.isReachableViaWiFi {
                 DDLogInfo("当前网络: WiFi")
-                self.networkStatus.value = .ReachableViaWiFi
+                self.networkStatus.value = .reachableViaWiFi
             } else {
                 DDLogInfo("当前网络: Cellular")
-                self.networkStatus.value = .ReachableViaWWAN
+                self.networkStatus.value = .reachableViaWWAN
             }
         }
         reachability?.whenUnreachable = { reachability in
             DDLogInfo("网络无法连接")
-            self.networkStatus.value = .NotReachable
+            self.networkStatus.value = .notReachable
         }
         
         do {
@@ -86,14 +82,14 @@ public class NetApiClient : NSObject {
     
     class func clearCookie() {
         DDLogInfo("清除Cookie")
-        let cookieJar = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let cookieJar = HTTPCookieStorage.shared
         
         for cookie in cookieJar.cookies! {
             cookieJar.deleteCookie(cookie)
         }
     }
     
-    class func createBodyWithParameters(parameters: [String: AnyObject]?, filePathKey: String?, mimetype: String, uploadData: NSData) -> NSData {
+    class func createBodyWithParameters(_ parameters: [String: AnyObject]?, filePathKey: String?, mimetype: String, uploadData: Data) -> Data {
         let body = NSMutableData()
         let boundary = generateBoundaryString()
         
@@ -108,11 +104,11 @@ public class NetApiClient : NSObject {
         body.appendString("--\(boundary)\r\n")
         body.appendString("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\r\n")
         body.appendString("Content-Type: \(mimetype)\r\n\r\n")
-        body.appendData(uploadData)
+        body.append(uploadData)
         body.appendString("\r\n")
         
         body.appendString("--\(boundary)--\r\n")
-        return body
+        return body as Data
     }
     
     /// Create boundary string for multipart/form-data request

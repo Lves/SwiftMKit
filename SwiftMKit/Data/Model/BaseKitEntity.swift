@@ -21,11 +21,11 @@ struct BaseEntityProperty {
     }
 }
 
-public class BaseKitEntity: NSManagedObject {
+open class BaseKitEntity: NSManagedObject {
     
     @NSManaged var entityId: String?
     @NSManaged var entityOrder: Int64
     @NSManaged var entityType: String?
-    @NSManaged var entityUpdateTime: NSTimeInterval
+    @NSManaged var entityUpdateTime: TimeInterval
     
 }

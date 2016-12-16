@@ -112,10 +112,10 @@ class CachePoolTests: XCTestCase {
     func testCacheFile() {
         let cachePool: CachePoolProtocol = CachePool()
         cachePool.clear()
-        let filePath = NSBundle.mainBundle().pathForResource("testhaha", ofType: "jpg")
+        let filePath = Bundle.main.path(forResource: "testhaha", ofType: "jpg")
         let fileName = " "
         XCTAssertNotNil(filePath)
-        let fileUrl = NSURL(fileURLWithPath: filePath!)
+        let fileUrl = URL(fileURLWithPath: filePath!)
         XCTAssertNotNil(fileUrl)
         let sizeBeforeCache = cachePool.size
         let key = (cachePool.addCache(fileUrl, name: fileName))
@@ -199,7 +199,7 @@ class CachePoolTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

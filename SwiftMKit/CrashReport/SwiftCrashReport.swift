@@ -18,17 +18,17 @@ import Foundation
 //}
 
 class SwiftCrashReport {
-    @available(*, deprecated, message="default exception handler report to console, please specify a custom reporter")
+    @available(*, deprecated, message: "default exception handler report to console, please specify a custom reporter")
     class func install() {
         machExceptionHandlerInstall(handleSwiftCrash)
     }
     
-    class func install(reporter: SwiftCrashReporter.Type) {
+    class func install(_ reporter: SwiftCrashReporter.Type) {
         SwiftCrashHandler.setReporter(reporter)
         machExceptionHandlerInstall(handleSwiftCrash)
     }
     
-    class func install(formatter: SwiftCrashFormatter.Type, reporter: SwiftCrashReporter.Type) {
+    class func install(_ formatter: SwiftCrashFormatter.Type, reporter: SwiftCrashReporter.Type) {
         SwiftCrashHandler.setFormatter(formatter)
         SwiftCrashHandler.setReporter(reporter)
         machExceptionHandlerInstall(handleSwiftCrash)

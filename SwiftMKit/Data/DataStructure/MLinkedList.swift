@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class MLinkedListNode<T: Comparable>: NSObject {
+open class MLinkedListNode<T: Comparable>: NSObject {
     var value: T
     var next: MLinkedListNode?
     weak var previous: MLinkedListNode?
@@ -18,18 +18,18 @@ public class MLinkedListNode<T: Comparable>: NSObject {
     }
 }
 
-public class MLinkedList<T: Comparable> {
+open class MLinkedList<T: Comparable> {
     public typealias Node = MLinkedListNode<T>
-    private var head: Node?
+    fileprivate var head: Node?
     
-    public var isEmpty: Bool {
+    open var isEmpty: Bool {
         return head == nil
     }
     
-    public var first: Node? {
+    open var first: Node? {
         return head
     }
-    public var last: Node? {
+    open var last: Node? {
         if var node = head {
             while case let next? = node.next {
                 node = next
@@ -40,7 +40,7 @@ public class MLinkedList<T: Comparable> {
         }
     }
     
-    public var count: Int {
+    open var count: Int {
         if var node = head {
             var c = 1
             while case let next? = node.next {
@@ -53,7 +53,7 @@ public class MLinkedList<T: Comparable> {
         }
     }
     
-    public func nodeAtIndex(index: Int) -> Node? {
+    open func nodeAtIndex(_ index: Int) -> Node? {
         if index >= 0 {
             var node = head
             var i = index
@@ -67,13 +67,13 @@ public class MLinkedList<T: Comparable> {
         return nil
     }
     
-    public subscript(index: Int) -> T {
+    open subscript(index: Int) -> T {
         let node = nodeAtIndex(index)
         assert(node != nil)
         return node!.value
     }
     
-    public func append(value: T) {
+    open func append(_ value: T) {
         let newNode = Node(value: value)
         if let lastNode = last {
             newNode.previous = lastNode
@@ -82,7 +82,7 @@ public class MLinkedList<T: Comparable> {
             head = newNode
         }
     }
-    public func insert(value: T, atIndex index: Int) {
+    open func insert(_ value: T, atIndex index: Int) {
         let (prev, next) = nodesBeforeAndAfter(index)
         let newNode = Node(value: value)
         newNode.previous = prev
@@ -95,7 +95,7 @@ public class MLinkedList<T: Comparable> {
         }
     }
     
-    private func nodesBeforeAndAfter(index: Int) -> (Node?, Node?) {
+    fileprivate func nodesBeforeAndAfter(_ index: Int) -> (Node?, Node?) {
         assert(index >= 0)
         var i = index
         var next = head
@@ -109,10 +109,10 @@ public class MLinkedList<T: Comparable> {
         return (prev, next)
     }
     
-    public func removeAll() {
+    open func removeAll() {
         head = nil
     }
-    public func removeNode(node: Node) -> T {
+    open func removeNode(_ node: Node) -> T {
         let prev = node.previous
         let next = node.next
         
@@ -127,20 +127,20 @@ public class MLinkedList<T: Comparable> {
         node.next = nil
         return node.value
     }
-    public func removeLast() -> T? {
+    open func removeLast() -> T? {
         if let last = last {
             return removeNode(last)
         }
         return nil
     }
-    public func removeAtIndex(index: Int) -> T? {
+    open func removeAtIndex(_ index: Int) -> T? {
         if let node = nodeAtIndex(index) {
             return removeNode(node)
         }
         return nil
     }
     
-    public func reverse() {
+    open func reverse() {
         var node = head
         while let currentNode = node {
             node = currentNode.next
@@ -149,7 +149,7 @@ public class MLinkedList<T: Comparable> {
         }
     }
     
-    public func map<U>(transform: T -> U) -> MLinkedList<U> {
+    open func map<U>(_ transform: (T) -> U) -> MLinkedList<U> {
         let result = MLinkedList<U>()
         var node = head
         while node != nil {
@@ -159,7 +159,7 @@ public class MLinkedList<T: Comparable> {
         return result
     }
     
-    public func filter(predicate: T -> Bool) -> MLinkedList<T> {
+    open func filter(_ predicate: (T) -> Bool) -> MLinkedList<T> {
         let result = MLinkedList<T>()
         var node = head
         while node != nil {
@@ -178,7 +178,7 @@ public class MLinkedList<T: Comparable> {
      
      - returns: 返回是否有环
      */
-    public func hasCycle(node: Node?) -> Bool {
+    open func hasCycle(_ node: Node?) -> Bool {
         var slow = node
         var fast = node
         

@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class BaseKitEmptyView: UIView {
+open class BaseKitEmptyView: UIView {
     
-    private struct InnerConst {
+    fileprivate struct InnerConst {
         static let NibName = "BaseKitEmptyView"
     }
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     
-    public class func getView() -> BaseKitEmptyView {
-        return NSBundle.mainBundle().loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! BaseKitEmptyView
+    open class func getView() -> BaseKitEmptyView {
+        return Bundle.main.loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! BaseKitEmptyView
     }
 }

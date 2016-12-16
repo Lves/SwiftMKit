@@ -16,7 +16,7 @@ class MKEmptyListViewController: BaseListViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    lazy private var _viewModel = MKEmptyListViewModel()
+    lazy fileprivate var _viewModel = MKEmptyListViewModel()
     override var viewModel: MKEmptyListViewModel!{
         get { return _viewModel }
     }
@@ -26,7 +26,7 @@ class MKEmptyListViewController: BaseListViewController {
     }
     
     override var listViewType: ListViewType {
-        get { return .RefreshOnly }
+        get { return .refreshOnly }
     }
     
     override func setupUI() {
@@ -38,10 +38,10 @@ class MKEmptyListViewController: BaseListViewController {
         super.loadData()
         self.listView.mj_header.beginRefreshing()
     }
-    override func getCellWithTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell? {
-        return tableView.dequeueReusableCellWithIdentifier(InnerConst.CellIdentifier)
+    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+        return tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
     }
-    override func configureCell(tableViewCell: UITableViewCell, object: AnyObject, indexPath: NSIndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? String {
             tableViewCell.textLabel?.text = model
         }
@@ -50,7 +50,7 @@ class MKEmptyListViewController: BaseListViewController {
 
 class MKEmptyListViewModel: BaseListViewModel {
     
-    private var hasData = false
+    fileprivate var hasData = false
     
     override func fetchData() {
         Async.main(after: 1) { [weak self] in

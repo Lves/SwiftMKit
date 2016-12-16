@@ -11,17 +11,17 @@ import Foundation
 public extension Double {
     
     // MARK: Format
-    func formatCurrency(locale: String = "en_US") -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: locale)
+    func formatCurrency(_ locale: String = "en_US") -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.currency
+        formatter.locale = Locale(identifier: locale)
         formatter.currencySymbol = ""
-        return formatter.stringFromNumber(self) ?? "\(self)"
+        return formatter.string(from: NSNumber(self)) ?? "\(self)"
     }
-    func formatCurrencyWithoutDot(locale: String = "en_US") -> String {
+    func formatCurrencyWithoutDot(_ locale: String = "en_US") -> String {
         var value = self.formatCurrency(locale)
         if value.contains(".") {
-            value = value.componentsSeparatedByString(".").first ?? value
+            value = value.components(separatedBy: ".").first ?? value
         }
         return value
     }

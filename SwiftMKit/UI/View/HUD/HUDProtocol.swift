@@ -10,18 +10,18 @@ import Foundation
 import UIKit
 
 struct HUDConstant {
-    static let HideTipAfterDelay: NSTimeInterval = 2
+    static let HideTipAfterDelay: TimeInterval = 2
     static let LoadingText: String = "正在加载"
 }
 
 public protocol HUDProtocol : class {
-    func showHUDAddedTo(view: UIView, animated: Bool, text: String?)
-    func showHUDTextAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: NSTimeInterval, offset: CGPoint?, completion: (() -> Void))
-    func showHUDProgressAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
-    func showHUDProgressAnnularDeterminateAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
-    func showHUDProgressHorizontalBarAddedTo(view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
-    func changeHUDProgress(progress: Float)
-    func changeHUDText(text: String?)
-    func hideHUDForView(view: UIView, animated: Bool) -> Bool
-    func hideIndicatorHUDForView(view: UIView, animated: Bool) -> Bool
+    func showHUDAddedTo(_ view: UIView, animated: Bool, text: String?)
+    func showHUDTextAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: TimeInterval, offset: CGPoint?, completion: (() -> Void))
+    func showHUDProgressAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
+    func showHUDProgressAnnularDeterminateAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
+    func showHUDProgressHorizontalBarAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool?, cancelTitle: String?)
+    func changeHUDProgress(_ progress: Float)
+    func changeHUDText(_ text: String?)
+    func hideHUDForView(_ view: UIView, animated: Bool) -> Bool
+    func hideIndicatorHUDForView(_ view: UIView, animated: Bool) -> Bool
 }

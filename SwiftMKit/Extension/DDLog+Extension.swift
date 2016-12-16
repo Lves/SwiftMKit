@@ -10,13 +10,13 @@ import Foundation
 import CocoaLumberjack
 
 public extension DDLog {
-    public class func setup(level: DDLogLevel = DDLogLevel.Debug) {
+    public class func setup(_ level: DDLogLevel = DDLogLevel.debug) {
         defaultDebugLevel = level
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
-        DDLog.addLogger(DDASLLogger.sharedInstance())
+        DDLog.add(DDTTYLogger.sharedInstance())
+        DDLog.add(DDASLLogger.sharedInstance())
         DDTTYLogger.sharedInstance().colorsEnabled = true
-        DDTTYLogger.sharedInstance().setForegroundColor(UIColor.blueColor(), backgroundColor: nil, forFlag: .Info)
-        DDTTYLogger.sharedInstance().setForegroundColor(UIColor(rgba: "#008040"), backgroundColor: nil, forFlag: .Verbose)
+        DDTTYLogger.sharedInstance().setForegroundColor(UIColor.blue, backgroundColor: nil, for: .info)
+        DDTTYLogger.sharedInstance().setForegroundColor(UIColor(rgba: "#008040"), backgroundColor: nil, for: .verbose)
         DDLogVerbose("Verbose")
         DDLogDebug("Debug")
         DDLogInfo("Info")

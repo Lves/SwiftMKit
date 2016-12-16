@@ -13,29 +13,29 @@ import SnapKit
 import EZSwiftExtensions
 import CocoaLumberjack
 
-public class WebViewBridge : NSObject {
-    private weak var _webView: UIWebView?
-    public weak var webView: UIWebView? {
+open class WebViewBridge : NSObject {
+    fileprivate weak var _webView: UIWebView?
+    open weak var webView: UIWebView? {
         get {
             return _webView
         }
     }
-    public weak var viewController: UIViewController?
-    lazy public var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    public var userAgent: [String: AnyObject]? {
+    open weak var viewController: UIViewController?
+    lazy open var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    open var userAgent: [String: AnyObject]? {
         didSet {
             if var userAgent = userAgent {
                 let view = UIWebView()
-                let ua = view.stringByEvaluatingJavaScriptFromString("navigator.userAgent") ?? ""
+                let ua = view.stringByEvaluatingJavaScript(from: "navigator.userAgent") ?? ""
                 if !ua.contains("WebViewBridgeInjected") {
-                    userAgent["WebViewBridgeInjected"] = true
-                    NSUserDefaults.standardUserDefaults().registerDefaults(userAgent)
+                    userAgent["WebViewBridgeInjected"] = true as AnyObject?
+                    UserDefaults.standard.register(defaults: userAgent)
                 }
             }
         }
     }
-    public var requestHeader: [String: String]?
-    private var bridge: WebViewJavascriptBridge
+    open var requestHeader: [String: String]?
+    fileprivate var bridge: WebViewJavascriptBridge
     
     init(webView: UIWebView, viewController: UIViewController) {
         _webView = webView
@@ -45,41 +45,41 @@ public class WebViewBridge : NSObject {
             bridge.setWebViewDelegate(viewController as! UIWebViewDelegate)
         }
         super.init()
-        self.indicator.activityIndicatorViewStyle = .Gray
+        self.indicator.activityIndicatorViewStyle = .gray
         _webView?.addSubview(self.indicator)
-        _webView?.bringSubviewToFront(self.indicator)
+        _webView?.bringSubview(toFront: self.indicator)
         indicator.snp_makeConstraints { (make) in
             make.center.equalTo(_webView!)
         }
     }
-    public func addEvent(eventName: String, handler: WVJBHandler) {
+    open func addEvent(_ eventName: String, handler: WVJBHandler) {
         bridge.registerHandler(eventName, handler: handler)
     }
     
-    public func requestUrl(url: String?) {
-        if url == nil || url!.length <= 0 || !UIApplication.sharedApplication().canOpenURL(NSURL(string: url!)!) {
+    open func requestUrl(_ url: String?) {
+        if url == nil || url!.length <= 0 || !UIApplication.sharedApplication().canOpenURL(URL(string: url!)!) {
             DDLogError("Request Invalid Url: \(url)")
             return
         }
         DDLogInfo("Request url: \(url)")
         //清除旧数据
-        webView?.stringByEvaluatingJavaScriptFromString("document.body.innerHTML='';")
+        webView?.stringByEvaluatingJavaScript(from: "document.body.innerHTML='';")
         willRequestUrl(url!)
-        var request = NSURLRequest(URL: NSURL(string:url!)!)
+        var request = URLRequest(url: URL(string:url!)!)
         request = willLoadRequest(request)
         Async.background {
             self.webView?.loadRequest(request)
         }
     }
-    public func willRequestUrl(url: String) {
+    open func willRequestUrl(_ url: String) {
     }
-    public func willLoadRequest(request: NSURLRequest) -> NSURLRequest {
+    open func willLoadRequest(_ request: URLRequest) -> URLRequest {
         if let header = requestHeader {
-            if let newRequest = request.mutableCopy() as? NSMutableURLRequest {
+            if let newRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest {
                 for (key, value) in header {
                     newRequest.setValue(value, forHTTPHeaderField: key)
                 }
-                return newRequest
+                return newRequest as URLRequest
             }
         }
         return request

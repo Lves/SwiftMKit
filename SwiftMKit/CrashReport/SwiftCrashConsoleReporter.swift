@@ -12,7 +12,7 @@ import Foundation
  * Default implementation of crash reporter, output the crash report to stdout.
  */
 class SwiftCrashConsoleReporter : SwiftCrashReporter {
-    @objc class func reportCrashMessage(message: String) {
+    @objc class func reportCrashMessage(_ message: String) {
         print(message)
     }
 }

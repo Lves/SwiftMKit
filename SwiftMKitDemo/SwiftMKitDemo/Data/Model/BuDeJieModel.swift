@@ -14,7 +14,7 @@ class BuDeJieADModel: BaseModel {
     var image: String?
     var url: String?
     
-    override static func mj_replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable: Any]! {
         return ["idstr":"id"]
     }
 }

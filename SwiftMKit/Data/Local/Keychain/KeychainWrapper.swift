@@ -18,7 +18,7 @@ let SecAttrGeneric: String! = kSecAttrGeneric as String
 let SecAttrAccount: String! = kSecAttrAccount as String
 
 class KeychainWrapper {
-    private struct internalVars {
+    fileprivate struct internalVars {
         static var serviceName: String = ""
     }
     
@@ -32,7 +32,7 @@ class KeychainWrapper {
     class var serviceName: String {
         get {
             if internalVars.serviceName.isEmpty {
-                internalVars.serviceName = NSBundle.mainBundle().bundleIdentifier ?? "KeychainWrapper"
+                internalVars.serviceName = Bundle.main.bundleIdentifier ?? "KeychainWrapper"
             }
             return internalVars.serviceName
         }
@@ -42,34 +42,34 @@ class KeychainWrapper {
     }
     
     // MARK: Public Methods
-    class func hasValueForKey(key: String) -> Bool {
+    class func hasValueForKey(_ key: String) -> Bool {
         return self.dataForKey(key) != nil
     }
     
     // MARK: Getting Values
-    class func stringForKey(keyName: String) -> String? {
-        let keychainData: NSData? = self.dataForKey(keyName)
+    class func stringForKey(_ keyName: String) -> String? {
+        let keychainData: Data? = self.dataForKey(keyName)
         var stringValue: String?
         if let data = keychainData {
-            stringValue = NSString(data: data, encoding: NSUTF8StringEncoding) as String?
+            stringValue = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String?
         }
         
         return stringValue
     }
     
-    class func objectForKey(keyName: String) -> NSCoding? {
-        let dataValue: NSData? = self.dataForKey(keyName)
+    class func objectForKey(_ keyName: String) -> NSCoding? {
+        let dataValue: Data? = self.dataForKey(keyName)
         
         var objectValue: NSCoding?
         
         if let data = dataValue {
-            objectValue = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSCoding
+            objectValue = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSCoding
         }
         
         return objectValue;
     }
     
-    class func dataForKey(keyName: String) -> NSData? {
+    class func dataForKey(_ keyName: String) -> Data? {
         let keychainQueryDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
         
         // Limit search results to one
@@ -80,13 +80,13 @@ class KeychainWrapper {
         
         // Search
         var searchResultRef: AnyObject?
-        var keychainValue: NSData?
+        var keychainValue: Data?
         
         let status: OSStatus = SecItemCopyMatching(keychainQueryDictionary, &searchResultRef)
         
         if status == noErr {
             if let resultRef = searchResultRef {
-                keychainValue = resultRef as? NSData
+                keychainValue = resultRef as? Data
             }
         }
         
@@ -94,21 +94,21 @@ class KeychainWrapper {
     }
     
     // MARK: Setting Values
-    class func setString(value: String, forKey keyName: String) -> Bool {
-        if let data = value.dataUsingEncoding(NSUTF8StringEncoding) {
+    class func setString(_ value: String, forKey keyName: String) -> Bool {
+        if let data = value.data(using: String.Encoding.utf8) {
             return self.setData(data, forKey: keyName)
         } else {
             return false
         }
     }
     
-    class func setObject(value: NSCoding, forKey keyName: String) -> Bool {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(value)
+    class func setObject(_ value: NSCoding, forKey keyName: String) -> Bool {
+        let data = NSKeyedArchiver.archivedData(withRootObject: value)
         
         return self.setData(data, forKey: keyName)
     }
     
-    class func setData(value: NSData, forKey keyName: String) -> Bool {
+    class func setData(_ value: Data, forKey keyName: String) -> Bool {
         let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
         
         keychainQueryDictionary[SecValueData] = value
@@ -128,7 +128,7 @@ class KeychainWrapper {
     }
     
     // MARK: Removing Values
-    class func removeObjectForKey(keyName: String) -> Bool {
+    class func removeObjectForKey(_ keyName: String) -> Bool {
         let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
         
         // Delete
@@ -142,12 +142,12 @@ class KeychainWrapper {
     }
     
     // MARK: Private Methods
-    private class func updateData(value: NSData, forKey keyName: String) -> Bool {
+    fileprivate class func updateData(_ value: Data, forKey keyName: String) -> Bool {
         let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
         let updateDictionary = [SecValueData:value]
         
         // Update
-        let status: OSStatus = SecItemUpdate(keychainQueryDictionary, updateDictionary)
+        let status: OSStatus = SecItemUpdate(keychainQueryDictionary, updateDictionary as CFDictionary)
         
         if status == errSecSuccess {
             return true
@@ -156,7 +156,7 @@ class KeychainWrapper {
         }
     }
     
-    private class func setupKeychainQueryDictionaryForKey(keyName: String) -> NSMutableDictionary {
+    fileprivate class func setupKeychainQueryDictionaryForKey(_ keyName: String) -> NSMutableDictionary {
         // Setup dictionary to access keychain and specify we are using a generic password (rather than a certificate, internet password, etc)
         let keychainQueryDictionary: NSMutableDictionary = [SecClass:kSecClassGenericPassword]
         
@@ -164,7 +164,7 @@ class KeychainWrapper {
         keychainQueryDictionary[SecAttrService] = KeychainWrapper.serviceName
         
         // Uniquely identify the account who will be accessing the keychain
-        let encodedIdentifier: NSData? = keyName.dataUsingEncoding(NSUTF8StringEncoding)
+        let encodedIdentifier: Data? = keyName.data(using: String.Encoding.utf8)
         
         keychainQueryDictionary[SecAttrGeneric] = encodedIdentifier
         
