@@ -163,21 +163,19 @@ Wait for block to finish:
 */
 public struct Async {
 
-
     // MARK: - Private properties and init
 
     /**
      Private property to hold internally on to a `dispatch_block_t`
     */
-    fileprivate let block: ()->()
+    fileprivate let blockItem : DispatchWorkItem
 
     /**
      Private init that takes a `dispatch_block_t`
      */
-    fileprivate init(_ block: @escaping ()->()) {
-        self.block = block
+    fileprivate init(_ blockItem : DispatchWorkItem) {
+        self.blockItem = blockItem
     }
-
 
     // MARK: - Static methods
 
@@ -192,8 +190,8 @@ public struct Async {
 
     - SeeAlso: Has parity with non-static method
     */
-    public static func main(after: Double? = nil, block: ()->()) -> Async {
-        return Async.async(after, block: block, queue: GCD.mainQueue())
+    public static func main(after: Double? = nil, block: @escaping ()->()) -> Async {
+        return Async.async(after, chainingBlock: block, queue: GCD.mainQueue())
     }
 
     /**
@@ -207,8 +205,8 @@ public struct Async {
 
      - SeeAlso: Has parity with non-static method
      */
-    public static func userInteractive(after: Double? = nil, block: ()->()) -> Async {
-        return Async.async(after, block: block, queue: GCD.userInteractiveQueue())
+    public static func userInteractive(after: Double? = nil, block: @escaping ()->()) -> Async {
+        return Async.async(after, chainingBlock: block, queue: GCD.userInteractiveQueue())
     }
 
     /**
@@ -222,8 +220,8 @@ public struct Async {
 
      - SeeAlso: Has parity with non-static method
      */
-    public static func userInitiated(after: Double? = nil, block: ()->()) -> Async {
-        return Async.async(after, block: block, queue: GCD.userInitiatedQueue())
+    public static func userInitiated(after: Double? = nil, block: @escaping ()->()) -> Async {
+        return Async.async(after, chainingBlock: block, queue: GCD.userInitiatedQueue())
     }
 
     /**
@@ -237,8 +235,8 @@ public struct Async {
 
      - SeeAlso: Has parity with non-static method
      */
-    public static func utility(after: Double? = nil, block: ()->()) -> Async {
-        return Async.async(after, block: block, queue: GCD.utilityQueue())
+    public static func utility(after: Double? = nil, block: @escaping ()->()) -> Async {
+        return Async.async(after, chainingBlock: block, queue: GCD.utilityQueue())
     }
 
     /**
@@ -252,8 +250,8 @@ public struct Async {
 
      - SeeAlso: Has parity with non-static method
      */
-    public static func background(after: Double? = nil, block: ()->()) -> Async {
-        return Async.async(after, block: block, queue: GCD.backgroundQueue())
+    public static func background(after: Double? = nil, block: @escaping ()->()) -> Async {
+        return Async.async(after, chainingBlock: block, queue: GCD.backgroundQueue())
     }
 
     /**
@@ -267,8 +265,8 @@ public struct Async {
 
      - SeeAlso: Has parity with non-static method
      */
-    public static func customQueue(_ queue: DispatchQueue, after: Double? = nil, block: ()->()) -> Async {
-        return Async.async(after, block: block, queue: queue)
+    public static func customQueue(_ queue: DispatchQueue, after: Double? = nil, block: @escaping ()->()) -> Async {
+        return Async.async(after, chainingBlock: block, queue: queue)
     }
 
 
@@ -284,7 +282,7 @@ public struct Async {
 
     - returns: An `Async` struct which encapsulates the `dispatch_block_t`
     */
-    fileprivate static func async(_ seconds: Double? = nil, block chainingBlock: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate static func async(_ seconds: Double? = nil, chainingBlock: @escaping ()->(), queue: DispatchQueue) -> Async {
         if let seconds = seconds {
             return asyncAfter(seconds, block: chainingBlock, queue: queue)
         }
@@ -300,14 +298,18 @@ public struct Async {
 
      - returns: An `Async` struct which encapsulates the `dispatch_block_t`
      */
-    fileprivate static func asyncNow(_ block: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate static func asyncNow(_ block: @escaping ()->(), queue: DispatchQueue) -> Async {
         // Create a new block (Qos Class) from block to allow adding a notification to it later (see matching regular Async methods)
         // Create block with the "inherit" type
-        let _block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, block)
-        // Add block to queue
-        queue.async(execute: _block)
-        // Wrap block in a struct since dispatch_block_t can't be extended
-        return Async(_block)
+//        let _block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, block)
+//        // Add block to queue
+//        queue.async(execute: _block)
+//        // Wrap block in a struct since dispatch_block_t can't be extended
+//        return Async(_block)
+        
+        let workItem = DispatchWorkItem(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.inheritQoS, block: block)
+        queue.async(execute: workItem)
+        return Async(workItem)
     }
 
     /**
@@ -320,7 +322,7 @@ public struct Async {
 
      - returns: An `Async` struct which encapsulates the `dispatch_block_t`
      */
-    fileprivate static func asyncAfter(_ seconds: Double, block: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate static func asyncAfter(_ seconds: Double, block: @escaping ()->(), queue: DispatchQueue) -> Async {
         let nanoSeconds = Int64(seconds * Double(NSEC_PER_SEC))
         let time = DispatchTime.now() + Double(nanoSeconds) / Double(NSEC_PER_SEC)
         return at(time, block: block, queue: queue)
@@ -336,11 +338,15 @@ public struct Async {
 
      - returns: An `Async` struct which encapsulates the `dispatch_block_t`
      */
-    fileprivate static func at(_ time: DispatchTime, block: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate static func at(_ time: DispatchTime, block: @escaping ()->(), queue: DispatchQueue) -> Async {
         // See Async.async() for comments
-        let _block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, block)
-        queue.asyncAfter(deadline: time, execute: _block)
-        return Async(_block)
+//        let _block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, block)
+//        queue.asyncAfter(deadline: time, execute: _block)
+//        return Async(_block)
+        
+        let workItem = DispatchWorkItem(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.inheritQoS, block: block)
+        queue.asyncAfter(deadline: time, execute: workItem)
+        return Async(workItem)
     }
 
 
@@ -357,7 +363,7 @@ public struct Async {
 
     - SeeAlso: Has parity with static method
     */
-    public func main(after: Double? = nil, chainingBlock: ()->()) -> Async {
+    public func main(after: Double? = nil, chainingBlock: @escaping ()->()) -> Async {
         return chain(after, block: chainingBlock, queue: GCD.mainQueue())
     }
 
@@ -372,7 +378,7 @@ public struct Async {
 
      - SeeAlso: Has parity with static method
      */
-    public func userInteractive(after: Double? = nil, chainingBlock: ()->()) -> Async {
+    public func userInteractive(after: Double? = nil, chainingBlock: @escaping ()->()) -> Async {
         return chain(after, block: chainingBlock, queue: GCD.userInteractiveQueue())
     }
 
@@ -387,7 +393,7 @@ public struct Async {
 
      - SeeAlso: Has parity with static method
      */
-    public func userInitiated(after: Double? = nil, chainingBlock: ()->()) -> Async {
+    public func userInitiated(after: Double? = nil, chainingBlock: @escaping ()->()) -> Async {
         return chain(after, block: chainingBlock, queue: GCD.userInitiatedQueue())
     }
 
@@ -402,7 +408,7 @@ public struct Async {
 
      - SeeAlso: Has parity with static method
      */
-    public func utility(after: Double? = nil, chainingBlock: ()->()) -> Async {
+    public func utility(after: Double? = nil, chainingBlock: @escaping ()->()) -> Async {
         return chain(after, block: chainingBlock, queue: GCD.utilityQueue())
     }
 
@@ -417,7 +423,7 @@ public struct Async {
 
      - SeeAlso: Has parity with static method
      */
-    public func background(after: Double? = nil, chainingBlock: ()->()) -> Async {
+    public func background(after: Double? = nil, chainingBlock: @escaping ()->()) -> Async {
         return chain(after, block: chainingBlock, queue: GCD.backgroundQueue())
     }
 
@@ -432,7 +438,7 @@ public struct Async {
 
      - SeeAlso: Has parity with static method
      */
-    public func customQueue(_ queue: DispatchQueue, after: Double? = nil, chainingBlock: ()->()) -> Async {
+    public func customQueue(_ queue: DispatchQueue, after: Double? = nil, chainingBlock: @escaping ()->()) -> Async {
         return chain(after, block: chainingBlock, queue: queue)
     }
 
@@ -458,7 +464,8 @@ public struct Async {
 
     */
     public func cancel() {
-        dispatch_block_cancel(block)
+//        dispatch_block_cancel(block)
+        self.blockItem.cancel()
     }
 
 
@@ -475,9 +482,11 @@ public struct Async {
         if seconds != nil {
             let nanoSeconds = Int64(seconds * Double(NSEC_PER_SEC))
             let time = DispatchTime.now() + Double(nanoSeconds) / Double(NSEC_PER_SEC)
-            dispatch_block_wait(block, time)
+//            dispatch_block_wait(block, time)
+            self.blockItem.wait(timeout: time)
         } else {
-            dispatch_block_wait(block, DispatchTime.distantFuture)
+            self.blockItem.wait(timeout: DispatchTime.distantFuture)
+//            dispatch_block_wait(block, DispatchTime.distantFuture)
         }
     }
 
@@ -493,7 +502,7 @@ public struct Async {
 
     - returns: An `Async` struct which encapsulates the `dispatch_block_t`, which is called when the current block has finished + any given amount of seconds.
     */
-    fileprivate func chain(_ seconds: Double? = nil, block chainingBlock: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate func chain(_ seconds: Double? = nil, block chainingBlock: @escaping ()->(), queue: DispatchQueue) -> Async {
         if let seconds = seconds {
             return chainAfter(seconds, block: chainingBlock, queue: queue)
         }
@@ -511,11 +520,15 @@ public struct Async {
 
      - SeeAlso: dispatch_block_notify, dispatch_block_create
      */
-    fileprivate func chainNow(block chainingBlock: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate func chainNow(block chainingBlock: @escaping ()->(), queue: DispatchQueue) -> Async {
         // See Async.async() for comments
-        let _chainingBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, chainingBlock)
-        dispatch_block_notify(block, queue, _chainingBlock)
-        return Async(_chainingBlock)
+//        let _chainingBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, chainingBlock)
+//        dispatch_block_notify(block, queue, _chainingBlock)
+//        return Async(_chainingBlock)
+        
+        let workItem = DispatchWorkItem(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.inheritQoS, block: chainingBlock)
+        self.blockItem.notify(queue: queue, execute: workItem)
+        return Async(workItem)
     }
 
 
@@ -529,25 +542,37 @@ public struct Async {
 
      - returns: An `Async` struct which encapsulates the `dispatch_block_t`, which is called when the current block has finished + the given amount of seconds.
      */
-    fileprivate func chainAfter(_ seconds: Double, block chainingBlock: ()->(), queue: DispatchQueue) -> Async {
+    fileprivate func chainAfter(_ seconds: Double, block chainingBlock: @escaping ()->(), queue: DispatchQueue) -> Async {
         // Create a new block (Qos Class) from block to allow adding a notification to it later (see Async)
         // Create block with the "inherit" type
-        let _chainingBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, chainingBlock)
-
-        // Wrap block to be called when previous block is finished
+//        let _chainingBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, chainingBlock)
+//
+//        // Wrap block to be called when previous block is finished
+//        let chainingWrapperBlock: ()->() = {
+//            // Calculate time from now
+//            let nanoSeconds = Int64(seconds * Double(NSEC_PER_SEC))
+//            let time = DispatchTime.now() + Double(nanoSeconds) / Double(NSEC_PER_SEC)
+//            queue.asyncAfter(deadline: time, execute: _chainingBlock)
+//        }
+//        // Create a new block (Qos Class) from block to allow adding a notification to it later (see Async)
+//        // Create block with the "inherit" type
+//        let _chainingWrapperBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, chainingWrapperBlock)
+//        // Add block to queue *after* previous block is finished
+//        dispatch_block_notify(self.block, queue, _chainingWrapperBlock)
+//        // Wrap block in a struct since dispatch_block_t can't be extended
+//        return Async(_chainingBlock)
+        
+        let _chainingBlockItem = DispatchWorkItem(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.inheritQoS, block: chainingBlock)
         let chainingWrapperBlock: ()->() = {
             // Calculate time from now
             let nanoSeconds = Int64(seconds * Double(NSEC_PER_SEC))
             let time = DispatchTime.now() + Double(nanoSeconds) / Double(NSEC_PER_SEC)
-            queue.asyncAfter(deadline: time, execute: _chainingBlock)
+            queue.asyncAfter(deadline: time, execute: _chainingBlockItem)
         }
-        // Create a new block (Qos Class) from block to allow adding a notification to it later (see Async)
-        // Create block with the "inherit" type
-        let _chainingWrapperBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, chainingWrapperBlock)
-        // Add block to queue *after* previous block is finished
-        dispatch_block_notify(self.block, queue, _chainingWrapperBlock)
-        // Wrap block in a struct since dispatch_block_t can't be extended
-        return Async(_chainingBlock)
+
+        let chainingWrapperBlockItem = DispatchWorkItem(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.inheritQoS, block: chainingWrapperBlock)
+        self.blockItem.notify(queue: queue, execute: chainingWrapperBlockItem)
+        return Async(chainingWrapperBlockItem)
     }
 }
 
@@ -700,8 +725,9 @@ public struct AsyncGroup {
 
      - SeeAlso: dispatch_group_async, dispatch_group_create
      */
-    fileprivate func async(block: ()->(), queue: DispatchQueue) {
-        queue.async(group: group, execute: block)
+    fileprivate func async(block: @escaping ()->(), queue: DispatchQueue) {
+        let _block = DispatchWorkItem(block: block)
+        queue.async(group: group, execute: _block)
     }
 
     /**
@@ -731,7 +757,7 @@ public struct AsyncGroup {
     - parameters:
         - block: The block that is to be passed to be run on the main queue
     */
-    public func main(_ block: ()->()) {
+    public func main(_ block: @escaping ()->()) {
         async(block: block, queue: GCD.mainQueue())
     }
 
@@ -741,7 +767,7 @@ public struct AsyncGroup {
      - parameters:
         - block: The block that is to be passed to be run on the queue
      */
-    public func userInteractive(_ block: ()->()) {
+    public func userInteractive(_ block: @escaping ()->()) {
         async(block: block, queue: GCD.userInteractiveQueue())
     }
 
@@ -751,7 +777,7 @@ public struct AsyncGroup {
      - parameters:
         - block: The block that is to be passed to be run on the queue
      */
-    public func userInitiated(_ block: ()->()) {
+    public func userInitiated(_ block: @escaping ()->()) {
         async(block: block, queue: GCD.userInitiatedQueue())
     }
 
@@ -762,7 +788,7 @@ public struct AsyncGroup {
      - parameters:
         - block: The block that is to be passed to be run on the queue
      */
-    public func utility(_ block: ()->()) {
+    public func utility(_ block: @escaping ()->()) {
         async(block: block, queue: GCD.utilityQueue())
     }
 
@@ -772,7 +798,7 @@ public struct AsyncGroup {
      - parameters:
          - block: The block that is to be passed to be run on the queue
      */
-    public func background(_ block: ()->()) {
+    public func background(_ block: @escaping ()->()) {
         async(block: block, queue: GCD.backgroundQueue())
     }
 
@@ -783,7 +809,7 @@ public struct AsyncGroup {
          - queue: Custom queue where the block will be run.
          - block: The block that is to be passed to be run on the queue
      */
-    public func customQueue(_ queue: DispatchQueue, block: ()->()) {
+    public func customQueue(_ queue: DispatchQueue, block: @escaping ()->()) {
         async(block: block, queue: queue)
     }
 
@@ -823,12 +849,12 @@ public extension qos_class_t {
         get {
             switch self {
             case qos_class_main(): return "Main"
-            case DispatchQoS.QoSClass.userInteractive: return "User Interactive"
-            case DispatchQoS.QoSClass.userInitiated: return "User Initiated"
-            case DispatchQoS.QoSClass.default: return "Default"
-            case DispatchQoS.QoSClass.utility: return "Utility"
-            case DispatchQoS.QoSClass.background: return "Background"
-            case DispatchQoS.QoSClass.unspecified: return "Unspecified"
+            case QOS_CLASS_USER_INTERACTIVE: return "User Interactive"
+            case QOS_CLASS_USER_INITIATED: return "User Initiated"
+            case QOS_CLASS_DEFAULT: return "Default"
+            case QOS_CLASS_UTILITY: return "Utility"
+            case QOS_CLASS_BACKGROUND: return "Background"
+            case QOS_CLASS_UNSPECIFIED: return "Unspecified"
             default: return "Unknown"
             }
         }

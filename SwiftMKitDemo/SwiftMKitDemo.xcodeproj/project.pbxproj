@@ -1759,9 +1759,8 @@
 					};
 					3FC9DEF41CBFD35900C2D938 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = TE2BYM67AU;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2445,6 +2444,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2482,6 +2482,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2496,6 +2497,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemo/SwiftMKitDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2547,6 +2549,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemo/SwiftMKitDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
