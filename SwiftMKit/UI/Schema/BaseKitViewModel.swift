@@ -35,13 +35,13 @@ open class BaseKitViewModel: NSObject {
 
 extension BaseKitViewModel {
     
-    public func showTip(_ tip: String, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, completion : @escaping () -> Void = {}) {
         viewController.showTip(tip, view: viewController.view, completion: completion)
     }
-    public func showTip(_ tip: String, image: UIImage?, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
         viewController.showTip(tip, image: image, completion: completion)
     }
-    public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : () -> Void = {}) {
+    public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
         viewController.showTip(tip, view: view, offset: offset, completion: completion)
     }
     public func showLoading(_ text: String = "") {

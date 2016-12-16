@@ -9,6 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
+import ReactiveSwift
 
 class MKIndicatorButtonViewController: BaseViewController {
     
@@ -27,7 +28,7 @@ class MKIndicatorButtonViewController: BaseViewController {
         super.bindingData()
         for button in buttons {
             button.cornerRadius = 3
-            button.addTarget(_viewModel.actionButton.toCocoaAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+            button.addTarget(_viewModel.actionButton.toCocoaAction, action: CocoaAction.selector, for: .touchUpInside)
 
         }
     }
@@ -39,7 +40,7 @@ class MKUIIndicatorButtonViewModel: BaseViewModel {
         get {
             return Action<AnyObject, AnyObject, NSError> { input in
                 return SignalProducer { (sink, _) in
-                    sink.sendNext(input)
+                    sink.send(value: input)
                     sink.sendCompleted()
                     }.delay(1, onScheduler: QueueScheduler())
             }

@@ -67,7 +67,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     open var text: String = ""
     open var enableAutoToolbar = true {
         willSet {
-            IQKeyboardManager.sharedManager().enableAutoToolbar = newValue
+            IQKeyboardManager.shared().isEnableAutoToolbar = newValue
         }
     }
     
@@ -111,8 +111,8 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
             line.backgroundColor = theme.viewLineColor
         }
         //监听TextField的text
-        self.textField?.rac_textSignalProducer().startWithNext { text in
-            self.text = text
+        _ = self.textField?.reactive.continuousTextValues.observeValues { text in
+            self.text = text ?? ""
         }
         for button in buttonNumbers {
             button.isExclusiveTouch = true
@@ -132,15 +132,15 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //小数点输入
     fileprivate func bindDotButtonAction(_ button: UIButton) {
-        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { _ in
             if self.text.contains(".") {
                 return
             }
             //获取光标位置
             let range = self.selectedRange()
-            if let tempDeleget = self.textField?.delegate {
-                if tempDeleget.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) {
-                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: ".") {
+            if let tempDelegete = self.textField?.delegate {
+                if tempDelegete.responds(to: #selector(UITextFieldDelegate.textField)) {
+                    if !tempDelegete.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: ".") {
                         return
                     }
                 }
@@ -154,12 +154,12 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //删除事件
     fileprivate func bindDelButtonAction(_ button: UIButton) {
-        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
             //获取光标位置
             var range = self.selectedRange()
-            if let tempDeleget = self.textField?.delegate {
-                if tempDeleget.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) {
-                    if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
+            if let tempDelegete = self.textField?.delegate {
+                if tempDelegete.responds(to: #selector(UITextFieldDelegate.textField)) {
+                    if !tempDelegete.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: "") {
                         return
                     }
                 }
@@ -178,16 +178,16 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //数字输入
     fileprivate func bindNumberButtonAction(_ button: UIButton) {
-        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { _ in
             if let inputText = button.currentTitle {
                 if inputText.length <= 0 {
                     return
                 }
                 //获取光标位置
                 let range = self.selectedRange()
-                if let tempDeleget = self.textField?.delegate {
-                    if tempDeleget.respondsToSelector(#selector(UITextFieldDelegate.textField(_:shouldChangeCharactersInRange:replacementString:))) {
-                        if !tempDeleget.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
+                if let tempDelegete = self.textField?.delegate {
+                    if tempDelegete.responds(to: #selector(UITextFieldDelegate.textField)) {
+                        if !tempDelegete.textField!(self.textField!, shouldChangeCharactersInRange: range, replacementString: inputText) {
                             return
                         }
                     }
@@ -202,7 +202,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //键盘回收
     fileprivate func bindKeyButtonAction(_ button: UIButton) {
-        button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             if let temp = self?.text {
                 self?.textField?.text = self?.matchConfirm(temp)
             }
@@ -249,7 +249,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
             if old.contains(".") {
                 result = old
             } else {
-                if new.toNSString.substringToIndex(1) == "." {
+                if new.toNSString.substring(to: 1) == "." {
                     range.location += 2
                     result = "0" + new
                 } else {
@@ -263,7 +263,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
             let dotArray = result.components(separatedBy: ".")
             if let forward = dotArray.first {
                 if var behind = dotArray.last {
-                    behind = behind.toNSString.substringToIndex(2)
+                    behind = behind.toNSString.substring(to: 2)
                     result = forward + "." + behind
                 }
             }
@@ -276,7 +276,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
         var range = self.selectedRange()
         var result = old
         if matchNumber(new) {
-            if new.toNSString.substringToIndex(1) == "0" && new != "0" {
+            if new.toNSString.substring(to: 1) == "0" && new != "0" {
                 if let returnString = new.toInt() {
                     range.location = 0
                     result = String(format: "%d",returnString)
@@ -364,12 +364,12 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //获取光标前的字符串
     fileprivate func getForwardString(_ string : String, range : NSRange) -> String {
-        return self.text.toNSString.substringWithRange(NSMakeRange(0, range.location))
+        return self.text.toNSString.substring(with: NSMakeRange(0, range.location))
     }
     //获取光标后的字符串
     fileprivate func getBehindString(_ string : String, range : NSRange) -> String {
         let length = string.length
-        return self.text.toNSString.substringWithRange(NSMakeRange(range.location, length - range.location))
+        return self.text.toNSString.substring(with: NSMakeRange(range.location, length - range.location))
     }
     //限制两位小数逻辑处理
     fileprivate func limitWithTwoPoint(_ string : String) -> Bool {

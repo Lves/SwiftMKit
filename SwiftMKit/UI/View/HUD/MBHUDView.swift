@@ -43,7 +43,7 @@ open class MBHUDView: HUDProtocol{
         hud.button.removeTarget(nil, action: nil, for: .allEvents)
         showingHUD = hud
     }
-    open func showHUDTextAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: TimeInterval, offset: CGPoint?, completion: (() -> Void)) {
+    open func showHUDTextAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, image: UIImage?, hideAfterDelay: TimeInterval, offset: CGPoint?, completion: @escaping (() -> Void)) {
         DDLogInfo("show: \(view)")
         indicatorShowed = false
         showingHUD?.hide(animated: false)
@@ -69,7 +69,7 @@ open class MBHUDView: HUDProtocol{
         hud.button.removeTarget(nil, action: nil, for: .allEvents)
         hud.hide(animated: animated, afterDelay: hideAfterDelay)
         showingHUD = hud
-        let _ = Async.main(after: hideAfterDelay, block: completion)
+        _ = Async.main(after: hideAfterDelay, completion)
     }
     open func showHUDProgressAddedTo(_ view: UIView, animated: Bool, text: String?, detailText: String?, cancelEnable: Bool? = false, cancelTitle: String? = nil) {
         showHUDProgressAddedTo(view, animated: animated, text: text, detailText: detailText, mode: .determinate)

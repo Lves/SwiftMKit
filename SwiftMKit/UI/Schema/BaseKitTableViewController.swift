@@ -146,14 +146,14 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
         }
     }
     
-    open func listViewHeaderWithRefreshingBlock(_ refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshHeader {
+    open func listViewHeaderWithRefreshingBlock(_ refreshingBlock: @escaping MJRefreshComponentRefreshingBlock) -> MJRefreshHeader {
         let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
-        header.activityIndicatorViewStyle = .Gray
-        return header
+        header!.activityIndicatorViewStyle = .gray
+        return header!
     }
-    open func listViewFooterWithRefreshingBlock(_ refreshingBlock: MJRefreshComponentRefreshingBlock) -> MJRefreshFooter {
+    open func listViewFooterWithRefreshingBlock(_ refreshingBlock: @escaping MJRefreshComponentRefreshingBlock) -> MJRefreshFooter {
         let footer = MJRefreshAutoStateFooter(refreshingBlock:refreshingBlock);
-        return footer
+        return footer!
     }
     
     deinit {

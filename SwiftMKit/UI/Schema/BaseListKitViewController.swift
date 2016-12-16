@@ -140,7 +140,7 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
         }
     }
 
-    open override func showTip(_ tip: String, view: UIView, offset: CGPoint, completion: () -> Void) {
+    open override func showTip(_ tip: String, view: UIView, offset: CGPoint, completion: @escaping () -> Void) {
         endListRefresh()
         super.showTip(tip, view: view, offset: offset, completion: completion)
     }
