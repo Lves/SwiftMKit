@@ -28,7 +28,7 @@ class MKIndicatorButtonViewController: BaseViewController {
         super.bindingData()
         for button in buttons {
             button.cornerRadius = 3
-            button.addTarget(_viewModel.actionButton.toCocoaAction, action: CocoaAction.selector, for: .touchUpInside)
+            button.addTarget(_viewModel.actionButton.toCocoaAction, action: CocoaAction<Any>.selector, for: .touchUpInside)
 
         }
     }

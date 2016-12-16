@@ -167,7 +167,7 @@ public extension UIViewController {
         return filteredArray.count > 0
     }
     
-    public func routeToUrl(_ url: String, name: String = "BaseKitWebViewController", params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) -> Bool {
+    public func routeToUrl(_ url: String, name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) -> Bool {
         var params = nextParams
         params["url"] = url as AnyObject?
         return routeToName(name, params: params, pop: pop)

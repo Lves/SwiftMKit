@@ -41,24 +41,24 @@ class MKNetworkRequestDetailViewController: BaseViewController {
     }
     override func bindingData() {
         super.bindingData()
-        _viewModel.photo.producer.startWithNext { [weak self] model in
+        _viewModel.photo.producer.startWithValues { [weak self] model in
             if let photo = model {
-                self?.imgPic.hnk_setImageFromURL(NSURL(string: photo.imageurl!)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
+                self?.imgPic.hnk_setImageFromURL(URL(string: photo.imageurl!)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
                     image in
                     let aspect = image.size.width / image.size.height
-                    self?.constraintImgPicAspect.setMultiplier(aspect)
+                    self?.constraintImgPicAspect = self?.constraintImgPicAspect.setMultiplier(aspect)
                     self?.imgPic.image = image
                 }
-                self?.imgPic.hnk_setImageFromURL(NSURL(string: photo.imageurl!)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original"))
-                self?.imgHead.hnk_setImageFromURL(NSURL(string: (photo.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
+                self?.imgPic.hnk_setImageFromURL(URL(string: photo.imageurl!)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original"))
+                self?.imgHead.hnk_setImageFromURL(URL(string: (photo.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
                 self?.lblName.text = photo.username
                 self?.lblContent.text = photo.descriptionString
-                self?.btnLike.hidden = false
+                self?.btnLike.isHidden = false
             }
         }
-        _viewModel.isLike.producer.startWithNext { [weak self] isLike in
-            self?.btnLike.selected = isLike
+        _viewModel.isLike.producer.startWithValues { [weak self] isLike in
+            self?.btnLike.isSelected = isLike
         }
-        self.btnLike.addTarget(_viewModel.actionLike.toCocoaAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+        self.btnLike.addTarget(_viewModel.actionLike.toCocoaAction, action: CocoaAction<Any>.selector, for: .touchUpInside)
     }
 }

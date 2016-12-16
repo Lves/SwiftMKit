@@ -151,10 +151,10 @@ extension String {
     }
     func formatDateStringToOther(_ oFormat:String = "yyyyMMdd",toFormat:String = "yyyy-MM-dd") -> String {
         guard self.length > 0 else { return "" }
-        let date = Date(timeInterval: self, since: oFormat)
+        let date = Date(fromString: self, format: oFormat)
         let fmt = DateFormatter()
         fmt.dateFormat = toFormat
-        return  date == nil ? self : fmt.stringFromDate(date!)
+        return  date == nil ? self : fmt.string(from: date!)
     }
 
 //    ///  字符串 -> N为小数

@@ -16,7 +16,7 @@ public extension Double {
         formatter.numberStyle = NumberFormatter.Style.currency
         formatter.locale = Locale(identifier: locale)
         formatter.currencySymbol = ""
-        return formatter.string(from: NSNumber(self)) ?? "\(self)"
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
     }
     func formatCurrencyWithoutDot(_ locale: String = "en_US") -> String {
         var value = self.formatCurrency(locale)

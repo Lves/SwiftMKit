@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableViewDataSource{
+class MKUIViewController: BaseListViewController {
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
@@ -62,7 +62,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
                 self.routeToUrl(model.route ?? "")
                 return
             } else {
-                self.routeToName(model.route ?? "", storyboardName: model.routeSB)
+                _ = self.routeToName(model.route ?? "", storyboardName: model.routeSB)
                 return
             }
         }
