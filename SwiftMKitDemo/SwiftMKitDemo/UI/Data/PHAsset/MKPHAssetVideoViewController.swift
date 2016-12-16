@@ -62,20 +62,20 @@ class MKPHAssetVideoViewController: BaseListViewController {
         tableView.reloadData()
     }
     
-    override func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
-    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier, for: indexPath)
         let asset = dataArray[indexPath.row]
         cell.textLabel?.text = asset.value(forKey: "filename") as? String
         cell.detailTextLabel?.text = asset.duration.formatToTimeMMss()
         return cell
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

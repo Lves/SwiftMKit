@@ -9,29 +9,30 @@
 import Foundation
 import LocalAuthentication
 import ReactiveCocoa
+import ReactiveSwift
 import CocoaLumberjack
 
 open class FingerPrint {
-    open class func isSupport() -> SignalProducer<LAContext, NSError> {
+    open class func isSupport() -> SignalProducer<LAContext, Error> {
         return SignalProducer { sink,disposable in
             let context = LAContext()
-            var error: NSError?
-            if context.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
+            var error: Error?
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 DDLogInfo("[FingerPrint] Supported")
-                sink.sendNext(context)
+                sink.send(value: context)
                 sink.sendCompleted()
             } else {
                 DDLogWarn("[FingerPrint] UnSupported")
-                sink.sendFailed(error ?? NSError(domain: "", code: -1, userInfo: nil))
+                sink.send(error: error ?? NSError(domain: "", code: -1, userInfo: nil))
             }
         }
     }
     
-    open class func authenticate(_ title: String) -> SignalProducer<Bool, NSError> {
-        return FingerPrint.isSupport().flatMap(.Concat) { (context) -> SignalProducer<Bool, NSError> in
+    open class func authenticate(_ title: String) -> SignalProducer<Bool, Error> {
+        return FingerPrint.isSupport().flatMap(.Concat) { (context) -> SignalProducer<Bool, Error> in
             return SignalProducer { sink,disposable in
-                context.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: title) {
-                    (success: Bool, authenticationError: NSError?) -> Void in
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: title) {
+                    (success: Bool, authenticationError: Error?) -> Void in
                     if success {
                         DDLogInfo("[FingerPrint] Matched Success")
                         sink.sendNext(success)

@@ -26,7 +26,7 @@ class MKUITreeViewCellTableViewCell: UITableViewCell {
                     if let children = fatherNode.children {
                         var maskPath: UIBezierPath = UIBezierPath()
                         // FIXME: 宽度计算！！！
-                        bgView.w = UIScreen.mainScreen().bounds.size.width - 39 - 15
+                        bgView.w = UIScreen.main.bounds.size.width - 39 - 15
                         if children.count == 1 {
                             // 上下左右四个圆角
                             maskPath = UIBezierPath(roundedRect: bgView.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: InnerConst.CornerRadius, height: InnerConst.CornerRadius))

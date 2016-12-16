@@ -40,7 +40,7 @@ open class WebViewBridge : NSObject {
     init(webView: UIWebView, viewController: UIViewController) {
         _webView = webView
         self.viewController = viewController
-        bridge = WebViewJavascriptBridge(forWebView: webView)
+        bridge = WebViewJavascriptBridge(for: webView)
         if viewController is UIWebViewDelegate {
             bridge.setWebViewDelegate(viewController as! UIWebViewDelegate)
         }
@@ -48,26 +48,26 @@ open class WebViewBridge : NSObject {
         self.indicator.activityIndicatorViewStyle = .gray
         _webView?.addSubview(self.indicator)
         _webView?.bringSubview(toFront: self.indicator)
-        indicator.snp_makeConstraints { (make) in
+        indicator.snp.makeConstraints { (make) in
             make.center.equalTo(_webView!)
         }
     }
-    open func addEvent(_ eventName: String, handler: WVJBHandler) {
+    open func addEvent(_ eventName: String, handler: @escaping WVJBHandler) {
         bridge.registerHandler(eventName, handler: handler)
     }
     
     open func requestUrl(_ url: String?) {
-        if url == nil || url!.length <= 0 || !UIApplication.sharedApplication().canOpenURL(URL(string: url!)!) {
+        if url == nil || url!.length <= 0 || !UIApplication.shared.canOpenURL(URL(string: url!)!) {
             DDLogError("Request Invalid Url: \(url)")
             return
         }
         DDLogInfo("Request url: \(url)")
         //清除旧数据
-        webView?.stringByEvaluatingJavaScript(from: "document.body.innerHTML='';")
+        _ = webView?.stringByEvaluatingJavaScript(from: "document.body.innerHTML='';")
         willRequestUrl(url!)
         var request = URLRequest(url: URL(string:url!)!)
         request = willLoadRequest(request)
-        Async.background {
+        _ = Async.background {
             self.webView?.loadRequest(request)
         }
     }

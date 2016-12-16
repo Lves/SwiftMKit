@@ -46,6 +46,6 @@ public extension UIButton {
 
 extension UIControl {
     func addTarget_(_ target: AnyObject?) {
-        addTarget(target, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+        addTarget(target, action: CocoaAction<Any>.selector, for: .touchUpInside)
     }
 }

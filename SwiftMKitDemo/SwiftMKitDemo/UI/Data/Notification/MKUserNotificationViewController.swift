@@ -39,7 +39,7 @@ class MKUserNotificationViewController: BaseViewController {
             UserNotificationManager.requestAuthorization([.Alert, .Sound, .Badge]) { (granted, error) in
             }
             
-            UserNotificationManager.authorizationStatus.producer.startWithNext({ (status) in
+            UserNotificationManager.authorizationStatus.producer.startWithValues({ (status) in
                 self.lblAuthorizeStatus.text = "\(status)"
             })
             

@@ -137,7 +137,7 @@ open class WebViewProgress : NSObject {
             webView.stringByEvaluatingJavaScript(from: waitForCompleteJS)
         }
         
-        let isNotRedirect : Bool = (currentURL? == webView.request!.mainDocumentURL)
+        let isNotRedirect : Bool = (currentURL == webView.request!.mainDocumentURL)
         
         let complete = readyState == "complete"
         
@@ -151,6 +151,6 @@ open class WebViewProgress : NSObject {
         
         DDLogInfo("[runFinishJS] \(complete) \(isNotRedirect)")
         
-        DDLogInfo("[runFinishJS] \n\(currentURL) \n\(webView.request!.mainDocumentURL) \n\(webView.request!.URLString)")
+        DDLogInfo("[runFinishJS] \n\(currentURL) \n\(webView.request!.mainDocumentURL) \n\(webView.request!.url!.absoluteString)")
     }
 }

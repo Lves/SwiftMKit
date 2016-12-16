@@ -137,7 +137,7 @@ extension String {
         let date = Date(timeIntervalSince1970: timestamp)
         let fmt = DateFormatter()
         fmt.dateFormat = format
-        return fmt.stringFromDate(date)
+        return fmt.string(from: date)
     }
     func formatTimestampToDateString(_ format: String = "yyyy-MM-dd") -> String {
         guard self.length > 0 else { return "" }
@@ -147,7 +147,7 @@ extension String {
         let date = Date(timeIntervalSince1970: timestamp)
         let fmt = DateFormatter()
         fmt.dateFormat = format
-        return fmt.stringFromDate(date)
+        return fmt.string(from: date)
     }
     func formatDateStringToOther(_ oFormat:String = "yyyyMMdd",toFormat:String = "yyyy-MM-dd") -> String {
         guard self.length > 0 else { return "" }
@@ -184,21 +184,21 @@ extension String {
     
     
     static func getAttributedStringHeight(width:CGFloat,attributedString:NSAttributedString?)->CGFloat{
-        let options: NSStringDrawingOptions = [NSStringDrawingOptions.UsesLineFragmentOrigin,NSStringDrawingOptions.UsesFontLeading]
+        let options: NSStringDrawingOptions = [NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading]
 
-        let size = attributedString?.boundingRectWithSize(CGSizeMake(width, CGFloat.max),
+        let size = attributedString?.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
                                                    options: options,
                                                    context: nil)
         return size?.height ?? 0
     }
 
-    func getAttributedString(_ font:UIFont,lineSpacing:CGFloat,alignment: NSTextAlignment? = .Left)->NSAttributedString{
+    func getAttributedString(_ font:UIFont,lineSpacing:CGFloat,alignment: NSTextAlignment? = .left)->NSAttributedString{
         guard self.length > 0 else { return NSAttributedString() }
         let attributedString = NSMutableAttributedString(string: self,
                                                          attributes: [NSFontAttributeName:font])
         let style = NSMutableParagraphStyle()
         style.lineSpacing = lineSpacing
-        style.alignment = alignment ?? .Left
+        style.alignment = alignment ?? .left
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedString.length))
         return attributedString
     }

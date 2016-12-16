@@ -79,7 +79,7 @@ open class BaseKitTableViewModel: NSObject {
                 self.listViewController.listView.mj_footer.endRefreshingWithNoMoreData()
             }
             if let footer = self.listViewController.listView.mj_footer as? MJRefreshAutoStateFooter {
-                footer.setTitle(noMoreDataTip, forState: .NoMoreData)
+                footer.setTitle(noMoreDataTip, for: .noMoreData)
             }
         }
     }

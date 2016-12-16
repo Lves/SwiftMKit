@@ -191,7 +191,7 @@ open class AlamofireNetApiData: NetApiData {
             let wself  = self as! UploadNetApiProtocol
             let uploadData = NetApiClient.createBodyWithParameters(wself.query, filePathKey: wself.uploadDataName, mimetype: wself.uploadDataMimeType ?? "", uploadData: wself.uploadData!)
             let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.upload(data: uploadData, with: urlRequest as URLRequestConvertible)
+            let request = Alamofire.upload(data: uploadData, with: urlRequest)
             self.request = request
             self.indicator?.bindTask(request.task)
             let timeBegin = Date()

@@ -34,11 +34,11 @@ public extension UIApplication {
     }
     
     fileprivate struct Constant {
-        static let BundleIdentifier = "BundleIdentifier"
-        static let CFBundleInfoDictionaryVersion = "CFBundleInfoDictionaryVersion"
-        static let CFBundleVersion = "CFBundleVersion"
-        static let CFBundleShortVersionString = "CFBundleShortVersionString"
-        static let BuildDateString = "BuildDateString"
+        static let BundleIdentifier: String? = "BundleIdentifier"
+        static let CFBundleInfoDictionaryVersion: String? = "CFBundleInfoDictionaryVersion"
+        static let CFBundleVersion: String? = "CFBundleVersion"
+        static let CFBundleShortVersionString: String? = "CFBundleShortVersionString"
+        static let BuildDateString: String? = "BuildDateString"
     }
     
     var remoteNotificationEnabled: Bool {
@@ -56,44 +56,44 @@ public extension UIApplication {
     
     var bundleIdentifier: String {
         get {
-            if let identifier = PINMemoryCache.sharedCache().objectForKey(Constant.BundleIdentifier) as? String {
+            if let identifier = PINMemoryCache.shared().object(forKey: Constant.BundleIdentifier) as? String {
                 return identifier
             }
             let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String ?? ""
-            PINMemoryCache.sharedCache().setObject(identifier, forKey: Constant.BundleIdentifier)
+            PINMemoryCache.shared().setObject(identifier, forKey: Constant.BundleIdentifier!)
             DDLogInfo("BundleIdentifier: \(identifier)")
             return identifier
         }
     }
     var minTargetVersion: String {
         get {
-            if let version = PINMemoryCache.sharedCache().objectForKey(Constant.CFBundleInfoDictionaryVersion) as? String {
+            if let version = PINMemoryCache.shared().object(forKey: Constant.CFBundleInfoDictionaryVersion) as? String {
                 return version
             }
-            let version = Bundle.main.infoDictionary?[Constant.CFBundleInfoDictionaryVersion] as? String ?? ""
-            PINMemoryCache.sharedCache().setObject(version, forKey: Constant.CFBundleInfoDictionaryVersion)
+            let version = Bundle.main.infoDictionary?[Constant.CFBundleInfoDictionaryVersion!] as? String ?? ""
+            PINMemoryCache.shared().setObject(version, forKey: Constant.CFBundleInfoDictionaryVersion!)
             DDLogInfo("CFBundleInfoDictionaryVersion: \(version)")
             return version
         }
     }
     var bundleVersion: String {
         get {
-            if let version = PINMemoryCache.sharedCache().objectForKey(Constant.CFBundleVersion) as? String {
+            if let version = PINMemoryCache.shared().object(forKey: Constant.CFBundleVersion) as? String {
                 return version
             }
-            let version = Bundle.main.infoDictionary?[Constant.CFBundleVersion] as? String ?? ""
-            PINMemoryCache.sharedCache().setObject(version, forKey: Constant.CFBundleVersion)
+            let version = Bundle.main.infoDictionary?[Constant.CFBundleVersion!] as? String ?? ""
+            PINMemoryCache.shared().setObject(version, forKey: Constant.CFBundleVersion!)
             DDLogInfo("CFBundleVersion: \(version)")
             return version
         }
     }
     var bundleShortVersionString: String {
         get {
-            if let version = PINMemoryCache.sharedCache().objectForKey(Constant.CFBundleShortVersionString) as? String {
+            if let version = PINMemoryCache.shared().object(forKey: Constant.CFBundleShortVersionString) as? String {
                 return version
             }
-            let version = Bundle.main.infoDictionary?[Constant.CFBundleShortVersionString] as? String ?? ""
-            PINMemoryCache.sharedCache().setObject(version, forKey: Constant.CFBundleShortVersionString)
+            let version = Bundle.main.infoDictionary?[Constant.CFBundleShortVersionString!] as? String ?? ""
+            PINMemoryCache.shared().setObject(version, forKey: Constant.CFBundleShortVersionString!)
             DDLogInfo("CFBundleShortVersionString: \(version)")
             return version
         }
@@ -105,11 +105,11 @@ public extension UIApplication {
     }
     var bundleBuildDateString: String {
         get {
-            if let dateString = PINMemoryCache.sharedCache().objectForKey(Constant.BuildDateString) as? String {
+            if let dateString = PINMemoryCache.shared().object(forKey: Constant.BuildDateString) as? String {
                 return dateString
             }
-            let dateString = Bundle.main.infoDictionary?[Constant.BuildDateString] as? String ?? ""
-            PINMemoryCache.sharedCache().setObject(dateString, forKey: Constant.BuildDateString)
+            let dateString = Bundle.main.infoDictionary?[Constant.BuildDateString!] as? String ?? ""
+            PINMemoryCache.shared().setObject(dateString, forKey: Constant.BuildDateString!)
             DDLogInfo("BuildDateString: \(dateString)")
             return dateString
         }

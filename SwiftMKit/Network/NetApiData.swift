@@ -68,13 +68,13 @@ open class NetApiData: NSObject, NetApiProtocol {
     class internal func getURLRequest(_ api: NetApiProtocol) -> URLRequest {
         let (method, path, parameters) = (api.method , api.url , api.query )
         let url = URL(string: path)!
-        var mutableURLRequest = NSMutableURLRequest(url: url)
+        var mutableURLRequest = URLRequest(url: url)
         mutableURLRequest.httpMethod = method.rawValue
         mutableURLRequest.timeoutInterval = api.timeout 
         let parameterString = parameters.stringFromHttpParameters()
         DDLogInfo("请求地址: \(method.rawValue) \(mutableURLRequest.url!.absoluteString)?\(parameterString)")
-        mutableURLRequest = api.transferURLRequest(mutableURLRequest as URLRequest) as (URLRequest)
-        return mutableURLRequest as URLRequest
+        mutableURLRequest = api.transferURLRequest(mutableURLRequest)
+        return mutableURLRequest
     }
     
     class open func combineQuery(_ base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {

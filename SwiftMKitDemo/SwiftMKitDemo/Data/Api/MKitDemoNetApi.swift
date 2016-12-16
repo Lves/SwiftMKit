@@ -14,7 +14,7 @@ class PX500NetApi: AlamofireNetApiData {
     fileprivate var _query: [String: AnyObject] = [:]
     override var query: [String: AnyObject] {
         get {
-            let result = NetApiData.combineQuery(PX500NetApi.baseQuery, append: _query)
+            let result = NetApiData.combineQuery(PX500NetApi.baseQuery as [String : AnyObject]?, append: _query)
             return result ?? [:]
         }
         set {
@@ -48,7 +48,7 @@ class BuDeJieNetApi: AlamofireNetApiData {
             if newValue.hasPrefix("http") {
                 _url = URL(string: newValue)?.absoluteString ?? ""
             }else{
-                _url =  URL(string: BuDeJieNetApi.baseUrl)?.appendingPathComponent(newValue ?? "").absoluteString ?? ""
+                _url =  URL(string: BuDeJieNetApi.baseUrl)?.appendingPathComponent(newValue).absoluteString ?? ""
             }
         }
     }

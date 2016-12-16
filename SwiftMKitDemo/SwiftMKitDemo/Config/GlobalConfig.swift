@@ -48,10 +48,10 @@ class DemoNetworkConfig : NetworkConfig {
     
     static var Station: Int {
         get {
-            return PINDiskCache.sharedCache().objectForKey(Constant.Station) as? Int ?? 0
+            return PINDiskCache.shared().object(forKey: Constant.Station) as? Int ?? 0
         }
         set {
-            PINDiskCache.sharedCache().setObject(newValue, forKey: Constant.Station)
+            PINDiskCache.shared().setObject(newValue as NSCoding, forKey: Constant.Station)
         }
     }
 }

@@ -123,7 +123,7 @@ extension PersentAnimator: UIViewControllerAnimatedTransitioning {
         }
         
         // 3. Add toVC's view to containerView
-        let containerView = transitionContext.containerView ?? UIView()
+        let containerView = transitionContext.containerView 
         containerView.addSubview(toVC.view)
         if !isPersent {
             containerView.bringSubview(toFront: fromVC.view)

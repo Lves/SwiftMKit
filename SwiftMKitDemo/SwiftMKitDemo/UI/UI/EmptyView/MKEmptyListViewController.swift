@@ -53,9 +53,9 @@ class MKEmptyListViewModel: BaseListViewModel {
     fileprivate var hasData = false
     
     override func fetchData() {
-        Async.main(after: 1) { [weak self] in
+        let _ = Async.main(after: 1) { [weak self] in
             if self?.hasData == true {
-                self?.updateDataArray(["Cell","Cell","Cell"])
+                self?.updateDataArray(["Cell" as AnyObject,"Cell" as AnyObject,"Cell" as AnyObject])
             } else {
                 self?.updateDataArray([])
             }

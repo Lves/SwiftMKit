@@ -60,8 +60,8 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
         }
     }
     
-    open var screenW: CGFloat { get { return UIScreen.mainScreen.bounds.w } }
-    open var screenH: CGFloat { get { return UIScreen.mainScreen.bounds.h } }
+    open var screenW: CGFloat { get { return UIScreen.main.bounds.w } }
+    open var screenH: CGFloat { get { return UIScreen.main.bounds.h } }
     open var autoHidesBottomBarWhenPushed: Bool { get { return true } }
     
     
@@ -107,7 +107,7 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
             }
             self.listView.mj_footer.endRefreshingWithNoMoreData()
             if let footer = self.listView.mj_footer as? MJRefreshAutoStateFooter {
-                footer.setTitle("", forState: .NoMoreData)
+                footer.setTitle("", for: .noMoreData)
             }
         }
         

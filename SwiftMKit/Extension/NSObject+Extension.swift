@@ -11,13 +11,13 @@ import MJExtension
 import MagicalRecord
 
 public extension NSObject {
-    class public func arrayFromJson<T: NSObject>(_ json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> [T]?{
+    class public func arrayFromJson<T: NSObject>(_ json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.mr_default()) -> [T]?{
         if let jsonString = json {
-            let arr = T.mj_objectArrayWithKeyValuesArray(jsonString, context:context).copy() as? Array<T>
+            let arr = T.mj_objectArray(withKeyValuesArray: jsonString, context:context).copy() as? Array<T>
             //如果是第一页，删除旧数据
             if page == 0 {
                 if let entityType = T.self as? BaseKitEntity.Type {
-                    let oldData = entityType.MR_findAllWithPredicate(BaseEntityProperty.predicateUpdateTimeNotNil())?.filter { (object) -> Bool in
+                    let oldData = entityType.mr_findAll(with: BaseEntityProperty.predicateUpdateTimeNotNil())?.filter { (object) -> Bool in
                         if arr == nil {
                             return true
                         }
@@ -28,7 +28,7 @@ public extension NSObject {
                         }
                     }
                     let _ = oldData?.map { (object) -> Void in
-                        object.MR_deleteEntity()
+                        object.mr_deleteEntity()
                     }
                     DDLogDebug("[\(NSStringFromClass(entityType))] Delete old data: \(oldData?.count)")
                 }
@@ -48,9 +48,9 @@ public extension NSObject {
         }
         return nil
     }
-    class public func objectFromJson<T: NSObject>(_ json: AnyObject?, context: NSManagedObjectContext = NSManagedObjectContext.MR_defaultContext()) -> T?{
+    class public func objectFromJson<T: NSObject>(_ json: AnyObject?, context: NSManagedObjectContext = NSManagedObjectContext.mr_default()) -> T?{
         if let jsonString = json {
-            let obj = T.mj_objectWithKeyValues(jsonString, context:context)
+            let obj = T.mj_object(withKeyValues: jsonString, context:context)
             if let entity = obj as? BaseKitEntity {
                 entity.entityUpdateTime = Date().timeIntervalSince1970
             }

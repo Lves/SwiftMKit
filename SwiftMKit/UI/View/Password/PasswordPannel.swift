@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManager
+import ReactiveSwift
 
 ///  Type
 ///
@@ -78,7 +79,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         return view
     }
     fileprivate func setupUI() {
-        self.btnClose.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+        self.btnClose.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             self?.passwordInputView.inactive()
             self?.hide() {
                 self?.passwordInputView.password = ""
@@ -87,7 +88,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
                 self?.eventCancel = { _ in }
             }
         }
-        self.btnForget.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [weak self] _ in
+        self.btnForget.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             self?.hide() {
                 self?.delegate?.pp_forgetPassword(self)
                 self?.eventForgetPassword(self)
@@ -128,7 +129,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         view.addSubview(self)
         passwordInputView.password = ""
         showKeyboard()
-        Async.main {
+        _ = Async.main {
             self.y = self.coverView.h
             UIView.animate(withDuration: self.animationDuration, animations: {
                 self.coverView.backgroundColor = self.maskColor
@@ -138,7 +139,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
     }
     /** 隐藏 */
     open func hide(_ completion: @escaping () -> Void = {}) {
-        Async.main {
+        _ = Async.main {
             self.hideKeyboard()
             UIView.animate(withDuration: self.animationDuration, animations: {
                 self.y = self.coverView.h
@@ -224,7 +225,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
                 return
             }
             self?.stopLoading(success, message: message)
-            Async.main(after: 1) { [weak self] in
+            _ = Async.main(after: 1) { [weak self] in
                 self?.hide() {
                     self?.delegate?.pp_didFinished(self, success: success)
                     self?.eventFinish(self, success)
@@ -238,7 +239,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
     
     open func requestComplete(_ success: Bool, message: String, status: PasswordPannelStatus) {
         self.stopLoading(success, message: message)
-        Async.main(after: 1) { [weak self] in
+        _ = Async.main(after: 1) { [weak self] in
             self?.hide() {
                 self?.delegate?.pp_didFinished(self, success: success)
                 self?.eventFinish(self, success)

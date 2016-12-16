@@ -38,7 +38,7 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
     }
     
     func sideMenuViewController(_ controller: MKSideMenuViewController, didSelectRow selectedRow: Int) {
-        self.dismissVC(completion: {_ in self.routeToName("routeToDetail") })
+        let _ = self.dismissVC(completion: {_ in self.routeToName("routeToDetail") })
     }
 }
 
@@ -73,7 +73,7 @@ class MKSideMenuViewController: BaseListViewController {
     }
     override func loadData() {
         super.loadData()
-        listViewModel.dataArray = [1 as AnyObject,2 as AnyObject,3 as AnyObject,4 as AnyObject,5 as AnyObject,6 as AnyObject,7 as AnyObject,8,9,10]
+        listViewModel.dataArray = [1 as AnyObject,2 as AnyObject,3 as AnyObject,4 as AnyObject,5 as AnyObject,6 as AnyObject,7 as AnyObject,8 as AnyObject,9 as AnyObject,10 as AnyObject]
         tableView.reloadData()
     }
     

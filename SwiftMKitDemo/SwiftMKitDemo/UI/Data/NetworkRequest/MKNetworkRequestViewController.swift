@@ -13,7 +13,7 @@ import ReactiveCocoa
 import Haneke
 import FDFullscreenPopGesture
 
-class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSource, UITableViewDelegate {
+class MKNetworkRequestViewController: BaseListViewController {
     @IBOutlet weak var tableView: UITableView!
     
     struct InnerConst {
@@ -56,7 +56,7 @@ class MKNetworkRequestViewController: BaseListViewController, UITableViewDataSou
     }
     override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? PX500PopularPhotoModel {
-            self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId!])
+            self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId! as AnyObject])
         }
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
+import ReactiveSwift
 
 protocol SharePannelViewDelegate: class {
     func sharePannelViewButtonAction(_ SharePannelView: SharePannelView, model: ToolsModel)
@@ -172,7 +173,7 @@ open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
         btnCancel.backgroundColor = InnerConstant.CancelBtnBGColor
         self.pannelView.addSubview(btnCancel)
         
-        btnCancel.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext{ [weak self] _ in
+        btnCancel.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             self?.tappedCancel()
         }
     }
