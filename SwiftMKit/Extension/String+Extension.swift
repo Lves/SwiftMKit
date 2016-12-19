@@ -30,10 +30,10 @@ extension String {
     
     // MARK: Format
     func formatCurrency(_ locale: String = "en_US") -> String {
-        return NSString(string: self).doubleValue.formatCurrency(locale)
+        return NSString(string: self).doubleValue.formatCurrency(locale: locale)
     }
     func formatCurrencyWithoutDot(_ locale: String = "en_US") -> String {
-        return NSString(string: self).doubleValue.formatCurrencyWithoutDot(locale)
+        return NSString(string: self).doubleValue.formatCurrencyWithoutDot(locale: locale)
     }
     
     func jsonStringToDictionary() -> [String: AnyObject]? {

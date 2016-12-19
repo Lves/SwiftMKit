@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImageView {
     
-    func createARGBBitmapContext(_ inImage: CGImage) -> CGContext {
+    func createARGBBitmapContext(inImage: CGImage) -> CGContext {
         var bitmapByteCount = 0
         var bitmapBytesPerRow = 0
         
@@ -51,7 +51,7 @@ extension UIImageView {
      */
     func getPixelColorAtLocation(_ point:CGPoint, inImage:CGImage) -> UIColor {
         // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
-        let context = self.createARGBBitmapContext(inImage)
+        let context = self.createARGBBitmapContext(inImage: inImage)
         let pixelsWide = inImage.width
         let pixelsHigh = inImage.height
         let rect = CGRect(x:0, y:0, width:Int(pixelsWide), height:Int(pixelsHigh))

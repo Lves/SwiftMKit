@@ -41,7 +41,7 @@ public extension UIImage {
      
      - returns: 返回图片
      */
-    func textToImage(_ drawText: NSString, textColor: UIColor, textFont: UIFont, atPoint: CGPoint) -> UIImage {
+    func textToImage(drawText: NSString, textColor: UIColor, textFont: UIFont, atPoint: CGPoint) -> UIImage {
         
         // Setup the font specific variables
         
@@ -79,11 +79,11 @@ public extension UIImage {
      压缩图片
      */
     func restrict(maxWidth: CGFloat, maxHeight: CGFloat, maxSize: Int) -> Data? {
-        let newImage = resizeImage(self, maxWidth: maxWidth, maxHeight: maxHeight)
-        return compressImageSizeLess500(newImage)
+        let newImage = resizeImage(originalImg: self, maxWidth: maxWidth, maxHeight: maxHeight)
+        return newImage.compressImageSizeLessThan500()
     }
     
-    func resizeImage(_ originalImg:UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage{
+    func resizeImage(originalImg:UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage{
         //prepare constants
         let width = originalImg.size.width
         let height = originalImg.size.height
@@ -136,20 +136,20 @@ public extension UIImage {
     }
     
     //图片质量压缩
-    func compressImageSizeLess500(_ image:UIImage) -> Data{
+    func compressImageSizeLessThan500() -> Data{
         
-        var zipImageData = UIImageJPEGRepresentation(image, 1.0)!
+        var zipImageData = UIImageJPEGRepresentation(self, 1.0)!
         let originalImgSize = zipImageData.count/1024 as Int  //获取图片大小
         print("原始大小: \(originalImgSize)")
         if originalImgSize > 3000 {
-            zipImageData = UIImageJPEGRepresentation(image,0.3)!
+            zipImageData = UIImageJPEGRepresentation(self, 0.3)!
             if zipImageData.count/1024 > 500 {
-                zipImageData = UIImageJPEGRepresentation(image,0.1)!
+                zipImageData = UIImageJPEGRepresentation(self, 0.1)!
             }
         } else if originalImgSize > 1500 {
-            zipImageData = UIImageJPEGRepresentation(image,0.5)!
+            zipImageData = UIImageJPEGRepresentation(self, 0.5)!
         } else if originalImgSize > 500 {
-            zipImageData = UIImageJPEGRepresentation(image,0.7)!
+            zipImageData = UIImageJPEGRepresentation(self, 0.7)!
         } else {
             return zipImageData
         }
