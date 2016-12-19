@@ -27,7 +27,7 @@ class MKCoreDataNetworkRequestViewModel: BaseListFetchViewModel {
     fileprivate var _fetchRequest: NSFetchRequest<NSFetchRequestResult>?
     override var fetchRequest: NSFetchRequest<NSFetchRequestResult>? {
         if _fetchRequest == nil {
-            _fetchRequest = NSFetchRequest(entityName: NSStringFromClass(PX500PhotoEntity))
+            _fetchRequest = NSFetchRequest(entityName: NSStringFromClass(PX500PhotoEntity.self))
             _fetchRequest?.sortDescriptors = BaseEntityProperty.defaultSort
             _fetchRequest?.fetchBatchSize = Int(listLoadNumber)
             _fetchRequest?.fetchLimit = Int(listLoadNumber * (dataIndex + 1))

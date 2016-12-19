@@ -78,7 +78,6 @@ open class GesturePasswordButton: UIView {
             let (r,g,b,a) = dotNormalColor.colorComponents()
             context.setStrokeColor(red: r,green: g,blue: b,alpha: a);//线条颜色
             let frame: CGRect = CGRect(x: bounds.size.width/2-bounds.size.width*innerCircleSizePercent/2+1, y: bounds.size.height/2-bounds.size.height*innerCircleSizePercent/2, width: bounds.size.width * innerCircleSizePercent, height: bounds.size.height * innerCircleSizePercent);
-            frame.x
             context.addEllipse(in: frame)
             if innerCircleSolid {
                 context.setFillColor(red: r, green: g, blue: b, alpha: a)

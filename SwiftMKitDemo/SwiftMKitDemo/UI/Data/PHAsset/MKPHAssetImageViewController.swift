@@ -12,7 +12,7 @@ import Photos
 class MKPHAssetImageViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var assetsFetchResults: PHFetchResult<AnyObject>?
+    var assetsFetchResults: PHFetchResult<PHAsset>?
     
     var dataArray: [PHAsset] = []
     
@@ -28,7 +28,7 @@ class MKPHAssetImageViewController: BaseViewController {
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         assetsFetchResults = PHAsset.fetchAssets(with: .image, options: allPhotosOptions)
         for index in 0..<assetsFetchResults!.count {
-            let asset = assetsFetchResults![index] as! PHAsset
+            let asset = assetsFetchResults![index] 
             dataArray.append(asset)
         }
         collectionView.reloadData()

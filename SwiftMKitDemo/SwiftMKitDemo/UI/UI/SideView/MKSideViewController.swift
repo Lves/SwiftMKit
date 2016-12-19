@@ -38,7 +38,7 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
     }
     
     func sideMenuViewController(_ controller: MKSideMenuViewController, didSelectRow selectedRow: Int) {
-        let _ = self.dismissVC(completion: {_ in self.routeToName("routeToDetail") })
+        self.dismissVC(completion: {_ in _ = self.routeToName("routeToDetail") })
     }
 }
 

@@ -96,7 +96,7 @@ open class VideoPlayer: NSObject {
     
     open var playing: Bool {
         get {
-            return player.playbackState == .Playing
+            return player.playbackState == .playing
         }
         set {
             if playing == newValue {
@@ -230,7 +230,7 @@ open class VideoPlayer: NSObject {
                 print("step: \(step)")
                 var value = UIScreen.main.brightness + CGFloat(Double(step) * dragingBrightnessUnit)
                 value = max(min(value, 1), 0)
-                UIScreen.mainScreen().brightness = value
+                UIScreen.main.brightness = value
                 print("panForBrightness: \(value)")
             }
             touchPosition = gestureRecognizer.location(ofTouch: 0, in: self.view)

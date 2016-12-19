@@ -65,7 +65,7 @@ open class IndicatorButton: UIButton {
     fileprivate var fastEnabled: Bool = false
     fileprivate var transformY: CGFloat {
         get {
-            return self.h * (animateDirection == .FromDownToUp ? 1 : -1)
+            return self.h * (animateDirection == .fromDownToUp ? 1 : -1)
         }
     }
     

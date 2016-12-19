@@ -49,7 +49,7 @@ open class MKitEmptyView: NSObject {
         if let inView = inView { self.inView = inView }
         view.removeFromSuperview()
         self.inView.addSubview(self.view)
-        self.view.snp_makeConstraints { [unowned self] (make) in
+        self.view.snp.makeConstraints { [unowned self] (make) in
             make.centerX.equalTo(self.inView)
             make.centerY.equalTo(self.inView).offset(self.yOffset)
         }

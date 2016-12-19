@@ -16,7 +16,7 @@ class MKPHAssetVideoViewController: BaseListViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    var assetsFetchResults: PHFetchResult<AnyObject>?
+    var assetsFetchResults: PHFetchResult<PHAsset>?
     
     var dataArray: [PHAsset] = []
     
@@ -56,7 +56,7 @@ class MKPHAssetVideoViewController: BaseListViewController {
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         assetsFetchResults = PHAsset.fetchAssets(with: .video, options: allPhotosOptions)
         for index in 0..<assetsFetchResults!.count {
-            let asset = assetsFetchResults![index] as! PHAsset
+            let asset = assetsFetchResults![index]
             dataArray.append(asset)
         }
         tableView.reloadData()

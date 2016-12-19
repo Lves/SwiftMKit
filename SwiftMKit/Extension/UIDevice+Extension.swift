@@ -55,9 +55,9 @@ public enum DeviceType {
 public extension UIDevice {
     
     fileprivate struct Constant {
-        static let UUIDString = "UUIDString"
-        static let IDFAString = "IDFAString"
-        static let DeviceName = "DeviceName"
+        static let UUIDString: String = "UUIDString"
+        static let IDFAString: String = "IDFAString"
+        static let DeviceName: String? = "DeviceName"
     }
     
     //MARK: UUID
@@ -95,7 +95,7 @@ public extension UIDevice {
                 return name
             }
             let name = UIDevice.current.name
-            PINMemoryCache.shared().setObject(name, forKey: Constant.DeviceName)
+            PINMemoryCache.shared().setObject(name, forKey: Constant.DeviceName!)
             DDLogInfo("DeviceName: \(name)")
             return name
         }

@@ -42,7 +42,7 @@ class MKUIIndicatorButtonViewModel: BaseViewModel {
                 return SignalProducer { (sink, _) in
                     sink.send(value: input)
                     sink.sendCompleted()
-                    }.delay(1, onScheduler: QueueScheduler())
+                    }.delay(1, on: QueueScheduler())
             }
         }
     }

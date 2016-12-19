@@ -56,7 +56,7 @@ class MKNetworkRequestViewController: BaseListViewController {
     }
     override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
         if let model = object as? PX500PopularPhotoModel {
-            self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId! as AnyObject])
+            _ = self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId! as AnyObject])
         }
     }
 }
