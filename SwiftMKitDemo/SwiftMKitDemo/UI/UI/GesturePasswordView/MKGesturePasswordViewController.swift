@@ -96,7 +96,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         updateUI()
         if style == .verify {
             FingerPrint.isSupport().on(
-                next: { [weak self] _ in self?.btnFingerPrint.hidden = false},
+                starting: { [weak self] _ in self?.btnFingerPrint.hidden = false},
                 failed: { [weak self] _ in self?.btnFingerPrint.hidden = true }).start()
         }
     }

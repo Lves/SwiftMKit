@@ -105,7 +105,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     open func bindEvents() {
         DDLogWarn("Need to implement the function of 'bindEvents'")
     }
-    open func bindEvent(_ eventName: String, handler: WVJBHandler) {
+    open func bindEvent(_ eventName: String, handler: @escaping WVJBHandler) {
         webViewBridge?.addEvent(eventName, handler: handler)
     }
     

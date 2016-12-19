@@ -191,14 +191,15 @@ open class AlamofireNetApiData: NetApiData {
             let wself  = self as! UploadNetApiProtocol
             let uploadData = NetApiClient.createBodyWithParameters(wself.query, filePathKey: wself.uploadDataName, mimetype: wself.uploadDataMimeType ?? "", uploadData: wself.uploadData!)
             let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.upload(data: uploadData, with: urlRequest)
+
+            let request = Alamofire.upload(uploadData, with: urlRequest)
             self.request = request
-            self.indicator?.bindTask(request.task)
+            self.indicator?.bindTask(request.task!)
             let timeBegin = Date()
             request.responseJSON { [weak self] response in
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
-                DDLogWarn("请求耗时: \(NSDate().timeIntervalSinceDate(timeBegin).secondsToHHmmssString())")
+                DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
                 let transferedResponse = wself.transferResponseJSON(response.toNetApiResponse())
                 switch transferedResponse.result {
                 case .success:
@@ -207,14 +208,14 @@ open class AlamofireNetApiData: NetApiData {
                         DDLogVerbose("JSON: \(value)")
                         wself.response = value
                         wself.fillJSON(value)
-                        sink.sendNext(wself as! UploadNetApiProtocol)
+                        sink.send(value: wself as! UploadNetApiProtocol)
                         sink.sendCompleted()
                         return
                     }
                 case .failure(let error):
                     if let statusCode = StatusCode(rawValue:error.code) {
                         switch(statusCode) {
-                        case .Canceled:
+                        case .canceled:
                             DDLogWarn("请求取消: \(wself.url)")
                             sink.sendInterrupted()
                             return
@@ -227,7 +228,7 @@ open class AlamofireNetApiData: NetApiData {
                     
                     let err = error is NetError ? error as! NetError : NetError(error: error)
                     err.response = transferedResponse.response
-                    sink.sendFailed(err)
+                    sink.send(error: err)
                 }
             }
             disposable.add { [weak self] in
