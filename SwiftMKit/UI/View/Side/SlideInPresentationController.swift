@@ -41,7 +41,7 @@ open class SlideInPresentationController: UIPresentationController {
         
         containerView?.insertSubview(dimmingView, at: 0)
         
-        dimmingView.snp_makeConstraints { (make) in
+        dimmingView.snp.makeConstraints { (make) in
             make.edges.equalTo(containerView!)
         }
         
