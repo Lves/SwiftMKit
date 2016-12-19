@@ -24,12 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setenv("XcodeColors", "YES", 0);
         DemoNetworkConfig.Release = false
         DemoNetworkConfig.Evn = .product
-        DDLog.setup(.Debug)
+        DDLog.setup(.debug)
         DDTTYLogger.sharedInstance().logFormatter = DDLogMKitFormatter()
         MagicalRecord.setShouldDeleteStoreOnModelMismatch(true)
         MagicalRecord.setupCoreDataStack()
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
         NetApiClient.shared.startNotifyNetworkStatus()
         // debug时可显示加密库的log
 //        EncryptedNetworkManager.setShowLog(true)

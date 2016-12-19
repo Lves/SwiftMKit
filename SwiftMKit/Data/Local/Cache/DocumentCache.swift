@@ -11,7 +11,7 @@ import PINCache
 
 open class DocumentCache: PINDiskCache {
     init(name: String) {
-        super.init(name: name, rootPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!)
+        super.init(name: name, rootPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .UserDomainMask, true).first!)
     }
     
     static let DocumentCacheSharedName = "PINDiskCacheShared"

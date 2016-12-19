@@ -53,10 +53,9 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
         
         var cellHeight: CGFloat = 0.0
         if optionsArray.count > 0 {
-            if let optionModel:QuestionOption = optionsArray[indexPath.row] {
-                cellHeight = cellHeightWithText(optionModel.optionCont ?? "")
-                cellHeight = CGFloat(Int(cellHeight))
-            }
+            let optionModel:QuestionOption = optionsArray[indexPath.row]
+            cellHeight = cellHeightWithText(optionModel.optionCont ?? "")
+            cellHeight = CGFloat(Int(cellHeight))
         }
         return cellHeight < 46.0 ? 46.0 : cellHeight
         
@@ -85,8 +84,8 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
         let view = UIView(frame:CGRect(x: 0, y: 0, width: tableView.size.width, height: height))
         let lblQuestion = UILabel(frame:CGRect(x: 10.0, y: 30.0, width: tableView.size.width - 20.0, height: height - 45.0))
         lblQuestion.numberOfLines = 0
-        view.backgroundColor = UIColor.clearColor()
-        lblQuestion.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
+        lblQuestion.backgroundColor = UIColor.clear
         let font = UIFont.systemFont(ofSize: InnerConst.QuestionFontOfSize)
         lblQuestion.font = font
         lblQuestion.textColor = UIColor(hex6: 0x53606E)

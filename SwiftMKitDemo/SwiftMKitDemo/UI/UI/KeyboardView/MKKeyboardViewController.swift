@@ -8,6 +8,8 @@
 
 import UIKit
 import IQKeyboardManager
+import ReactiveSwift
+import ReactiveCocoa
 
 class MKKeyboardViewController: BaseViewController {
 
@@ -20,7 +22,7 @@ class MKKeyboardViewController: BaseViewController {
     
     override func setupUI() {
         super.setupUI()
-        IQKeyboardManager.sharedManager().disabledToolbarClasses.addObject(MKKeyboardViewController)
+        IQKeyboardManager.shared().disabledToolbarClasses.add(MKKeyboardViewController.self)
         self.title = "Keyboard View"
 
         var keyboard = NumberKeyboard.keyboard(self.txtNormal, type: .normal)
@@ -30,29 +32,29 @@ class MKKeyboardViewController: BaseViewController {
         keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .money)
         self.txtMoney.inputView = keyboard
         
-        btnSuccess.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
+        btnSuccess.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
             pannel.eventInputPassword = { _,_,finish in
                 Async.main(after: 1) {
-                    finish(true, "提交成功", .Normal)
+                    finish(true, "提交成功", .normal)
                 }
             }
             pannel.showInView(self.view)
         }
-        btnFail.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
+        btnFail.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
             pannel.eventInputPassword = { _,_,finish in
                 Async.main(after: 1) {
-                    finish(false, "提交失败", .PasswordWrong)
+                    finish(false, "提交失败", .passwordWrong)
                 }
             }
             pannel.showInView(self.view)
         }
-        btnLock.rac_signalForControlEvents(.TouchUpInside).toSignalProducer().startWithNext { [unowned self] _ in
+        btnLock.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
             pannel.eventInputPassword = { _,_,finish in
                 Async.main(after: 1) {
-                    finish(false, "密码被锁", .PasswordLocked)
+                    finish(false, "密码被锁", .passwordLocked)
                 }
             }
             pannel.showInView(self.view)

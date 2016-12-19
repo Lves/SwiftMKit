@@ -9,6 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
+import ReactiveSwift
 
 class MKGesturePasswordViewController: BaseViewController {
 
@@ -44,7 +45,9 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         }
     }
     @IBAction func click_fingerPrint(_ sender: UIButton) {
-        FingerPrint.authenticate("指纹解锁").observeOn(QueueScheduler.mainQueueScheduler).startWithNext { success in
+        FingerPrint.authenticate("指纹解锁").observe(on: QueueScheduler.main).flatMapError({ _ in
+            return SignalProducer.empty
+        }).startWithValues { success in
             if success {
                 GesturePasswordViewController.unlockScreen()
             }
@@ -96,8 +99,8 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         updateUI()
         if style == .verify {
             FingerPrint.isSupport().on(
-                starting: { [weak self] _ in self?.btnFingerPrint.hidden = false},
-                failed: { [weak self] _ in self?.btnFingerPrint.hidden = true }).start()
+                failed: { [weak self] _ in self?.btnFingerPrint.isHidden = true },
+                value: { [weak self] _ in self?.btnFingerPrint.isHidden = false}).start()
         }
     }
     func updateUI() {

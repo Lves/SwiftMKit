@@ -67,7 +67,7 @@ extension UIImageView {
         // Now we can get a pointer to the image data associated with the bitmap
         // context.
         let data = context.data
-        let dataType = UnsafePointer<UInt8>(data)
+        let dataType = data!.assumingMemoryBound(to: UInt8.self)
         
         let offset = 4*((Int(pixelsWide) * Int(point.y)) + Int(point.x))
         let alpha = dataType[offset]

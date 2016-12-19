@@ -45,7 +45,7 @@ open class SendCodeButton: UIButton {
     
     fileprivate func showRemainSecond() {
         let now = Date().timeIntervalSince1970.toInt
-        setTitle("\(stopTime - now)秒后可重发", forState: .Selected)
+        setTitle("\(stopTime - now)秒后可重发", for: .selected)
     }
     @objc fileprivate func timerCountDown() {
         let now = Date().timeIntervalSince1970.toInt

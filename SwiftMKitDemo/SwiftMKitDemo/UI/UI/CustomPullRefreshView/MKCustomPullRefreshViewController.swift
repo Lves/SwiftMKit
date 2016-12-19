@@ -36,8 +36,8 @@ class MKCustomPullRefreshViewController: BaseListViewController{
             self?.listViewModel?.dataIndex = 0
             self?.listViewModel?.fetchData()
         })
-        header.lastUpdatedTimeLabel.hidden = true
-        header.stateLabel.hidden = true
+        header?.lastUpdatedTimeLabel.isHidden = true
+        header?.stateLabel.isHidden = true
         self.listView.mj_header = header
     
         loadData()
@@ -68,7 +68,7 @@ class MKCustomPullRefreshViewModel: BaseListViewModel {
     
     override func fetchData() {
         Async.main(after: 1) { [weak self] in
-            self?.updateDataArray(["Cell","Cell","Cell"])
+            self?.updateDataArray(["Cell" as AnyObject,"Cell" as AnyObject,"Cell" as AnyObject])
             self?.listViewController.endListRefresh()
         }
     }
@@ -87,10 +87,10 @@ class LLGifHeader: MJRefreshGifHeader
                 IdleImages.append(nextImage)
             }
         }
-        self.setImages(IdleImages, forState: .Idle)
+        self.setImages(IdleImages, for: .idle)
         
         //正在刷新状态动画
-        self.setImages(IdleImages, forState: .Refreshing)
+        self.setImages(IdleImages, for: .refreshing)
     }
 }
 

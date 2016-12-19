@@ -144,12 +144,12 @@ open class VideoPlayer: NSObject {
         self.player.delegate = self
         self.viewController.addChildViewController(self.player)
         
-        self.view.insertSubview(self.player.view, atIndex: 0)
+        self.view.insertSubview(self.player.view, at: 0)
         
-        self.player.view.snp_makeConstraints { (make) in
+        self.player.view.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
-        self.player.didMoveToParentViewController(self.viewController)
+        self.player.didMove(toParentViewController: self.viewController)
         
         let panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGestureRecognizer(_:)))
         self.player.view.addGestureRecognizer(panGestureRecognizer)
@@ -163,7 +163,7 @@ open class VideoPlayer: NSObject {
     
     func handleTapGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
         doubleTap = false
-        Async.main(after: 0.4, block: {
+        Async.main(after: 0.4, {
             if self.doubleTap == false {
                 self.showToolBar = !self.showToolBar
             }
@@ -228,7 +228,7 @@ open class VideoPlayer: NSObject {
                 
             } else if panForBrightness {
                 print("step: \(step)")
-                var value = UIScreen.mainScreen().brightness + CGFloat(Double(step) * dragingBrightnessUnit)
+                var value = UIScreen.main.brightness + CGFloat(Double(step) * dragingBrightnessUnit)
                 value = max(min(value, 1), 0)
                 UIScreen.mainScreen().brightness = value
                 print("panForBrightness: \(value)")
@@ -271,15 +271,15 @@ open class VideoPlayer: NSObject {
     
     func click_play(_ sender: AnyObject) {
         switch (player.playbackState) {
-        case .Stopped:
+        case .stopped:
             player.playFromBeginning()
             btnPlay?.isSelected = true
             delayToolBarHidden()
-        case .Paused:
+        case .paused:
             playing = true
-        case .Playing:
+        case .playing:
             playing = false
-        case .Failed:
+        case .failed:
             playing = false
         }
     }

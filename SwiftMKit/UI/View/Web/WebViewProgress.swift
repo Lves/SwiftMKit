@@ -86,9 +86,8 @@ open class WebViewProgress : NSObject {
             let nonFragmentURL = request.url?.absoluteString.replacingOccurrences(of: "#\(request.url!.fragment)", with: "")
             
             if let url = webView.request?.url{
-                if let absoluteString : String = url.absoluteString{
-                    isFragmentJump = nonFragmentURL == absoluteString
-                }
+                let absoluteString : String = url.absoluteString
+                isFragmentJump = nonFragmentURL == absoluteString
             }
         }
         
@@ -120,13 +119,13 @@ open class WebViewProgress : NSObject {
         self.runFinishJS(webView,error: nil)
     }
     
-    open func progressWebView(_ webView: UIWebView, didFailLoadWithError error: NSError?) {
+    open func progressWebView(_ webView: UIWebView, didFailLoadWithError error: Error?) {
         loadingCount -= 1
         self.incrementProgress()
         self.runFinishJS(webView,error: error)
     }
 
-    fileprivate func runFinishJS(_ webView: UIWebView, error: NSError?) {
+    fileprivate func runFinishJS(_ webView: UIWebView, error: Error?) {
         let readyState = webView.stringByEvaluatingJavaScript(from: "document.readyState")
         let tempInteractive : Bool = readyState == "interactive"
         

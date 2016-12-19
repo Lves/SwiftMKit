@@ -116,7 +116,7 @@ extension ConnectPeerServiceManager : MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        DDLogVerbose("[ConnectPeerServiceManager] DidReceiveData: \(data.length) bytes")
+        DDLogVerbose("[ConnectPeerServiceManager] DidReceiveData: \(data.count) bytes")
         let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as! String
         self.delegate?.dataReceived(self, fromDevice: peerID, data: data, dataString: str)
     }

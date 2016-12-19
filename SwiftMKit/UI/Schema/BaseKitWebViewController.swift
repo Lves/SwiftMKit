@@ -75,7 +75,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         self.view.addSubview(webView!)
         webView!.delegate = self
         webView?.scrollView.delegate = self
-        webView!.snp_makeConstraints { (make) in
+        webView!.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
         webViewBridge = WebViewBridge(webView: webView!, viewController: self)
@@ -134,10 +134,10 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         var ret = true
         
         if shouldAllowRirectToUrlInView {
-            DDLogInfo("Web view direct to url: \(request.URLRequest.URLString)")
+            DDLogInfo("Web view direct to url: \(request.urlRequest?.url?.absoluteString)")
             ret = true
         } else {
-            DDLogWarn("Web view direct to url forbidden: \(request.URLRequest.URLString)")
+            DDLogWarn("Web view direct to url forbidden: \(request.urlRequest?.url?.absoluteString)")
             ret = false
         }
         
@@ -167,7 +167,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
 
         refreshNavigationBarTopLeftCloseButton()
         
-        url = webView.request?.url?.URLString
+        url = webView.request?.url?.absoluteString
         
         if recordOffset {
             if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
@@ -176,18 +176,18 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         }
     }
     
-    open func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
-    
-        if let tip = error.localizedDescription {
-            
-            if (error.code == URLError.cancelled.rawValue){
-                return
-            }
-            
-            self.showTip(tip)
-        }
+        
+//        if let tip = error.localizedDescription {
+//            
+//            if (error.code == URLError.cancelled.rawValue){
+//                return
+//            }
+//            
+//            self.showTip(tip)
+//        }
     }
     
     open func refreshNavigationBarTopLeftCloseButton() {
@@ -195,7 +195,9 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
             if webView?.canGoBack ?? false {
                 if self.navigationItem.leftBarButtonItems != nil {
                     if let btnBack = navBtnBack() {
-                        self.navigationItem.leftBarButtonItems = [btnBack, navBtnClose()]
+                        if let btnClose = navBtnClose() {
+                            self.navigationItem.leftBarButtonItems = [btnBack, btnClose]
+                        }
                     }
                 }
             } else {
@@ -222,10 +224,10 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         }
         return UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(BaseKitWebViewController.click_nav_back(_:)))
     }
-    open func navBtnClose() -> UIBarButtonItem {
+    open func navBtnClose() -> UIBarButtonItem? {
         return UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(BaseKitWebViewController.click_nav_close(_:)))
     }
-    open func navBtnMore() -> UIBarButtonItem {
+    open func navBtnMore() -> UIBarButtonItem? {
         return UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(BaseKitWebViewController.click_nav_more(_:)))
     }
     
@@ -311,7 +313,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     }
     
     //MARK : - ScrollViewDelegate
-    open func scrollViewDidEndDragging(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         self.saveWebOffsetY(scrollView)
     }
     

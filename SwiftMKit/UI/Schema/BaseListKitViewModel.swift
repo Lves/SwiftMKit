@@ -68,7 +68,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
                 self.listViewController.listView?.mj_footer.endRefreshingWithNoMoreData()
                 noMoreDataTip = ""
                 if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
-                    footer.setTitle(noMoreDataTip, forState: .NoMoreData)
+                    footer.setTitle(noMoreDataTip, for: .noMoreData)
                 }
                 return
             }
@@ -81,7 +81,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
                 self.listViewController.listView?.mj_footer.resetNoMoreData()
             }
             if let footer = self.listViewController.listView?.mj_footer as? MJRefreshAutoStateFooter {
-                footer.setTitle(noMoreDataTip, forState: .NoMoreData)
+                footer.setTitle(noMoreDataTip, for: .noMoreData)
             }
         }
     }

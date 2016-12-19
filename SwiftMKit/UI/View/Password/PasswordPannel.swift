@@ -60,7 +60,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
     open var coverView : UIControl = UIControl()
     open var eventCancel: ((PasswordPannel?) -> ()) = { _ in }
     open var eventForgetPassword: ((PasswordPannel?) -> ()) = { _ in }
-    open var eventInputPassword: ((PasswordPannel?, _ password: String, _ completion: ((Bool, String, PasswordPannelStatus) -> Void)) -> ()) = { _,_,_ in }
+    open var eventInputPassword: ((PasswordPannel?, _ password: String, _ completion: @escaping ((Bool, String, PasswordPannelStatus) -> Void)) -> ()) = { _,_,_ in }
     open var eventFinish: ((PasswordPannel?, _ success: Bool) -> ()) = { _,_ in }
     
     
