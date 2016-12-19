@@ -45,7 +45,8 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
     }
     func setPostImage(_ image : UIImage) {
         let aspect = image.size.width / image.size.height
-        constraintImagePicAspect.setMultiplier(aspect)
+        constraintImagePicAspect.constant = aspect
+        setNeedsLayout()
         imgPic.image = image
     }
 
