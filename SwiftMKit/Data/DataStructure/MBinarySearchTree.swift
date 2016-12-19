@@ -126,7 +126,7 @@ extension MBinarySearchTree {
         
         // If this in-order successor has a right child of its own (it cannot
         // have a left child by definition), then that must take its place.
-        successor.remove()
+        _ = successor.remove()
         
         // Connect our left child with the new node.
         successor.left = left

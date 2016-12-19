@@ -1759,8 +1759,9 @@
 					};
 					3FC9DEF41CBFD35900C2D938 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = TE2BYM67AU;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2502,31 +2503,10 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemo/SwiftMKitDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TE2BYM67AU;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Alamofire",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Aspects",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Charts",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/CocoaLumberjack",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/CryptoSwift",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/EZSwiftExtensions",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/HanekeSwift",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/IQKeyboardManager",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/JSPatch",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MagicalRecord",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MBProgressHUD",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MJExtension",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MJRefresh",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/PINCache",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/pop",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/PulsingHalo",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/ReachabilitySwift",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/ReactiveCocoa",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Result",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/SnapKit",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/WebViewJavascriptBridge",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SwiftMKitDemo",
 					"$(PROJECT_DIR)/SwiftMKitDemo/Frameworks",
@@ -2554,31 +2534,10 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemo/SwiftMKitDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TE2BYM67AU;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Alamofire",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Aspects",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Charts",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/CocoaLumberjack",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/CryptoSwift",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/EZSwiftExtensions",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/HanekeSwift",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/IQKeyboardManager",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/JSPatch",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MagicalRecord",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MBProgressHUD",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MJExtension",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/MJRefresh",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/PINCache",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/pop",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/PulsingHalo",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/ReachabilitySwift",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/ReactiveCocoa",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/Result",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/SnapKit",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/WebViewJavascriptBridge",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SwiftMKitDemo",
 					"$(PROJECT_DIR)/SwiftMKitDemo/Frameworks",

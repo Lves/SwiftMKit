@@ -101,10 +101,10 @@ open class SlideInPresentationController: UIPresentationController {
     
     
     fileprivate func showStatusBar() {
-        UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.slide)
+        UIApplication.shared.isStatusBarHidden = false
     }
     fileprivate func hideStatusBar() {
-        UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.slide)
+        UIApplication.shared.isStatusBarHidden = true
     }
 }
 

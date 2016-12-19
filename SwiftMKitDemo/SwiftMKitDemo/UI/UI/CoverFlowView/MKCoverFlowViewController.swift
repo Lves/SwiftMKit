@@ -238,10 +238,9 @@ class MKCoverFlowViewController: BaseViewController , UICollectionViewDelegate ,
             
             //先清除后面题的已选
             for index in startIndex...endIndex {
-                if let question : Question = questions[index]{
-                    question.selectedOptionId = "-1"
-                    question.selectedOption = question.options?.first
-                }
+                let question : Question = questions[index]
+                question.selectedOptionId = "-1"
+                question.selectedOption = question.options?.first
             }
         }
     }

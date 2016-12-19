@@ -139,13 +139,13 @@ public extension UIColor {
         }
     }
     
-    open override var description: String {
-        return self.hexString(true)
-    }
-    
-    open override var debugDescription: String {
-        return self.hexString(true)
-    }
+//    open override var description: String {
+//        return self.hexString(true)
+//    }
+//    
+//    open override var debugDescription: String {
+//        return self.hexString(true)
+//    }
 }
 
 public extension UIColor {

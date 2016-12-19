@@ -21,10 +21,8 @@ struct RegexHelper {
     }
 }
 
-infix operator =~ {
-    associativity none
-    precedence 130
-}
+// >>>操作符, 优先级别名
+infix operator =~ : ComparisonPrecedence
 
 func =~(lhs: String, rhs: String) -> Bool {
     do {

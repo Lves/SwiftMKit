@@ -241,7 +241,7 @@ open class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegat
             guard let children = node.children, children.count > 0 && children.first!.expand else {
                 continue
             }
-            calcExpandNodesCountAtParentNode(node)
+            _ = calcExpandNodesCountAtParentNode(node)
             
 //            if let children = node.children {
 //                if children.count > 0 && children.first!.expand {
