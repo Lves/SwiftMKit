@@ -31,22 +31,24 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
         notificationCenter.removeObserver(self, name: Notification.Name.Task.DidCancel, object: nil)
         notificationCenter.removeObserver(self, name: Notification.Name.Task.DidComplete, object: nil)
         if task.state == .running {
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_resume(_:)), name: Notification.Name.Task.DidResume, object: task)
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_suspend(_:)), name: Notification.Name.Task.DidSuspend, object: task)
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_cancel(_:)), name: Notification.Name.Task.DidCancel, object: task)
-            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_end(_:)), name: Notification.Name.Task.DidComplete, object: task)
-            let notify = Notification(name: Notification.Name(rawValue: ""), object: task)
+            notificationCenter.addObserver(forName: Notification.Name.Task.DidResume, object: nil, queue: nil, using: task_resume)
+            notificationCenter.addObserver(forName: Notification.Name.Task.DidSuspend, object: nil, queue: nil, using: task_suspend)
+            notificationCenter.addObserver(forName: Notification.Name.Task.DidCancel, object: nil, queue: nil, using: task_cancel)
+            notificationCenter.addObserver(forName: Notification.Name.Task.DidComplete, object: nil, queue: nil, using: task_end)
+            var notify = Notification(name: Notification.Name(rawValue: ""), object: nil)
+            notify.userInfo = [Notification.Key.Task: task]
             self.task_resume(notify)
         } else {
-            let notify = Notification(name: Notification.Name(rawValue: ""), object: task)
+            var notify = Notification(name: Notification.Name(rawValue: ""), object: nil)
+            notify.userInfo = [Notification.Key.Task: task]
             self.task_end(notify)
         }
     }
     
-    @objc func task_resume(_ notify:Notification) {
+    func task_resume(_ notify:Notification) {
         DDLogVerbose("Task resume")
         
-        if let task = notify.object as? URLSessionTask {
+        if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if !self.runningTasks.contains(task) {
                 UIApplication.shared.showNetworkActivityIndicator()
                 self.runningTasks.append(task)
@@ -63,10 +65,10 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
             }
         }
     }
-    @objc func task_suspend(_ notify:Notification) {
+    func task_suspend(_ notify:Notification) {
         DDLogVerbose("Task suspend")
         UIApplication.shared.hideNetworkActivityIndicator()
-        if let task = notify.object as? URLSessionTask {
+        if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if let index = self.runningTasks.index(of: task) {
                 self.runningTasks.remove(at: index)
             }
@@ -82,10 +84,10 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
             }
         }
     }
-    @objc func task_cancel(_ notify:Notification) {
+    func task_cancel(_ notify:Notification) {
         DDLogVerbose("Task cancel")
         UIApplication.shared.hideNetworkActivityIndicator()
-        if let task = notify.object as? URLSessionTask {
+        if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if let index = self.runningTasks.index(of: task) {
                 self.runningTasks.remove(at: index)
             }
@@ -101,10 +103,10 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
             }
         }
     }
-    @objc func task_end(_ notify:Notification) {
+    func task_end(_ notify:Notification) {
         DDLogVerbose("Task complete")
         UIApplication.shared.hideNetworkActivityIndicator()
-        if let task = notify.object as? URLSessionTask {
+        if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if let index = self.runningTasks.index(of: task) {
                 self.runningTasks.remove(at: index)
             }

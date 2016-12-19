@@ -7,7 +7,7 @@ use_frameworks!
 def pods
     pod 'CocoaLumberjack/Swift', '~> 3.0.0'
     pod 'ReactiveCocoa', '5.0.0-alpha.3'
-    pod 'Alamofire', '~> 4.0.0'
+    pod 'Alamofire', '~> 4.2.0'
     pod 'ReachabilitySwift', '~> 3'
     pod 'MagicalRecord', '~> 2.3.0'
     pod 'MJExtension', '~> 3.0.0'
