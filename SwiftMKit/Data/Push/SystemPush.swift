@@ -39,7 +39,7 @@ public class SystemPush: PushManagerProtocol {
     func receivePushData(userInfo: [NSObject: AnyObject]){
         DDLogVerbose("\(userInfo)")
         let title: String = "消息推送"
-        var message = userInfo["aps"]?["alert"] as? String
+        let message = userInfo["aps"]?["alert"] as? String
         if let message = message {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             let action = UIAlertAction(title: "我知道了", style: .Default, handler: { _ in
