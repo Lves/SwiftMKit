@@ -14,8 +14,8 @@ import CocoaLumberjack
 import MJRefresh
 
 open class TaskIndicatorList: NSObject, IndicatorProtocol {
-    fileprivate weak var listView: UIScrollView?
-    fileprivate weak var viewController: BaseListKitViewController?
+    private weak var listView: UIScrollView?
+    private weak var viewController: BaseListKitViewController?
     lazy open var runningTasks = [URLSessionTask]()
     
     public init(listView: UIScrollView?, viewController: BaseListKitViewController){
@@ -30,10 +30,10 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
         notificationCenter.removeObserver(self, name: Notification.Name.Task.DidCancel, object: nil)
         notificationCenter.removeObserver(self, name: Notification.Name.Task.DidComplete, object: nil)
         if task.state == .running {
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidResume, object: nil, queue: nil, using: task_list_resume)
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidSuspend, object: nil, queue: nil, using: task_list_suspend)
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidCancel, object: nil, queue: nil, using: task_list_cancel)
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidComplete, object: nil, queue: nil, using: task_list_end)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_resume), name: Notification.Name.Task.DidResume, object: nil)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_suspend), name: Notification.Name.Task.DidSuspend, object: nil)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_cancel), name: Notification.Name.Task.DidCancel, object: nil)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicatorList.task_list_end), name: Notification.Name.Task.DidComplete, object: nil)
             var notify = Notification(name: Notification.Name(rawValue: ""), object: nil)
             notify.userInfo = [Notification.Key.Task: task]
             self.task_list_resume(notify: notify)

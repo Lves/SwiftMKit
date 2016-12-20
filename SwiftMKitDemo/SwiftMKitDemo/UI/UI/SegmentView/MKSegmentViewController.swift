@@ -33,8 +33,8 @@ class MKSegmentViewController: BaseViewController, SegmentContainerViewControlle
     
     override func setupUI() {
         super.setupUI()
-        let vc1 = self.instanceViewControllerInStoryboardWithName("MKSegmentAViewController")!
-        let vc2 = self.instanceViewControllerInStoryboardWithName("MKSegmentBViewController")!
+        let vc1 = self.instanceViewControllerInStoryboard(withName: "MKSegmentAViewController")!
+        let vc2 = self.instanceViewControllerInStoryboard(withName: "MKSegmentBViewController")!
         segmentContainer.delegate = self
         segmentContainer.addSegmentViewControllers([vc1,vc2])
     }

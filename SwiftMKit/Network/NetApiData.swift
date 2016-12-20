@@ -19,12 +19,12 @@ public struct NetApiDataConst {
 open class NetApiData: NSObject, NetApiProtocol {
     
     open var error: NetError?
-    open var query: [String: AnyObject] = [:]
+    open var query: [String: Any] = [:]
     open var method: ApiMethod = .GET
     open var url: String = ""
     open var timeout: TimeInterval = NetApiDataConst.DefaultTimeoutInterval
-    open var request: AnyObject?
-    open var response: AnyObject?
+    open var request: Any?
+    open var response: Any?
     open var indicator: NetApiIndicator?
     
     open func fillJSON(_ json: AnyObject) {}
@@ -77,7 +77,7 @@ open class NetApiData: NSObject, NetApiProtocol {
         return mutableURLRequest
     }
     
-    class open func combineQuery(_ base: [String: AnyObject]?, append: [String: AnyObject]?) -> [String: AnyObject]? {
+    class open func combineQuery(_ base: [String: Any]?, append: [String: Any]?) -> [String: Any]? {
         if var queryBase = base {
             if let queryAppend = append {
                 for (key, value) in queryAppend {

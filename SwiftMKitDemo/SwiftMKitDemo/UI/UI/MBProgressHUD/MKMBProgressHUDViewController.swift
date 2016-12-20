@@ -44,19 +44,19 @@ class MKMBProgressHUDViewController: BaseListViewController {
         tableView.reloadData()
     }
     
-    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    override func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let text = object as? String {
             tableViewCell.textLabel?.text = text
         }
     }
-    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
             self.showLoading()

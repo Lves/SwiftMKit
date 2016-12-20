@@ -29,10 +29,10 @@ extension String {
     }
     
     // MARK: Format
-    func formatCurrency(_ locale: String = "en_US") -> String {
+    func formatCurrency(locale: String = "en_US") -> String {
         return NSString(string: self).doubleValue.formatCurrency(locale: locale)
     }
-    func formatCurrencyWithoutDot(_ locale: String = "en_US") -> String {
+    func formatCurrencyWithoutDot(locale: String = "en_US") -> String {
         return NSString(string: self).doubleValue.formatCurrencyWithoutDot(locale: locale)
     }
     
@@ -72,7 +72,7 @@ extension String {
     
     // MARK: Encrypt
     
-    var md5: String! {
+    var md5: String {
         let str = self.cString(using: String.Encoding.utf8)
         let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8))
         let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -131,7 +131,7 @@ extension String {
             return self
         }
     }
-    func formatToDateString(_ format: String = "yyyy-MM-dd") -> String {
+    func formatToDateString(withFormat format: String = "yyyy-MM-dd") -> String {
         guard self.length > 0 else { return "" }
         let timestamp = self.toDouble() ?? 0
         let date = Date(timeIntervalSince1970: timestamp)
@@ -139,7 +139,7 @@ extension String {
         fmt.dateFormat = format
         return fmt.string(from: date)
     }
-    func formatTimestampToDateString(_ format: String = "yyyy-MM-dd") -> String {
+    func formatTimestampToDateString(withFormat format: String = "yyyy-MM-dd") -> String {
         guard self.length > 0 else { return "" }
         let tmp = self.toDouble() ?? 0
         // NSTimeInterval
@@ -149,7 +149,7 @@ extension String {
         fmt.dateFormat = format
         return fmt.string(from: date)
     }
-    func formatDateStringToOther(_ oFormat:String = "yyyyMMdd",toFormat:String = "yyyy-MM-dd") -> String {
+    func formatDateStringToOtherFormat(orignFormat oFormat:String = "yyyyMMdd", targetFormat toFormat:String = "yyyy-MM-dd") -> String {
         guard self.length > 0 else { return "" }
         let date = Date(fromString: self, format: oFormat)
         let fmt = DateFormatter()
@@ -173,7 +173,7 @@ extension String {
     ///  :param: percent 标识是否显示成百分比字符串
     ///
     ///  :returns: 指定格式的字符串
-    func formatFloatString(_ digit: UInt = 2, percent: Bool = false) -> String {
+    func formatFloatString(digit: UInt = 2, percent: Bool = false) -> String {
         var fmt = "%.\(digit)f"
         if percent {
             fmt = "%.\(digit)f%%"
@@ -183,8 +183,8 @@ extension String {
     
     
     
-    static func getAttributedStringHeight(width:CGFloat,attributedString:NSAttributedString?)->CGFloat{
-        let options: NSStringDrawingOptions = [NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading]
+    static func getAttributedStringHeight(matchWidth width:CGFloat, attributedString:NSAttributedString?) -> CGFloat {
+        let options: NSStringDrawingOptions = [NSStringDrawingOptions.usesLineFragmentOrigin, NSStringDrawingOptions.usesFontLeading]
 
         let size = attributedString?.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
                                                    options: options,
@@ -192,7 +192,7 @@ extension String {
         return size?.height ?? 0
     }
 
-    func getAttributedString(_ font:UIFont,lineSpacing:CGFloat,alignment: NSTextAlignment? = .left)->NSAttributedString{
+    func getAttributedString(withFont font: UIFont, lineSpacing: CGFloat, alignment: NSTextAlignment? = .left) -> NSAttributedString {
         guard self.length > 0 else { return NSAttributedString() }
         let attributedString = NSMutableAttributedString(string: self,
                                                          attributes: [NSFontAttributeName:font])

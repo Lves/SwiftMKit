@@ -54,7 +54,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         }
     }
     
-    fileprivate static let sharedViewController: GesturePasswordViewController = UIViewController.instanceViewControllerInStoryboardWithName("GesturePasswordViewController", storyboardName: "MKGesturePasswordView") as! GesturePasswordViewController
+    fileprivate static let sharedViewController: GesturePasswordViewController = UIViewController.instanceViewControllerInStoryboard(withName: "GesturePasswordViewController", storyboardName: "MKGesturePasswordView") as! GesturePasswordViewController
     class func shared() -> GesturePasswordViewController {
         return GesturePasswordViewController.sharedViewController
     }
@@ -127,7 +127,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
             lblInfo.text = message
             GesturePasswordViewController.unlockScreen()
         } else {
-            lblInfo.shake(3)
+            lblInfo.shake(withCount: 3)
             if !canTryAgain {
                 Async.main(after: 1) {
                     GesturePasswordViewController.unlockScreen()
@@ -141,7 +141,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
         if success {
             lblInfo.text = message
         } else {
-            lblInfo.shake(3)
+            lblInfo.shake(withCount: 3)
         }
     }
     func gp_confirmSetPassword(_ success: Bool, message: String) {
@@ -151,7 +151,7 @@ class GesturePasswordViewController: BaseViewController, GesturePasswordViewDele
             lblInfo.text = message
             GesturePasswordViewController.unlockScreen()
         } else {
-            lblInfo.shake(3)
+            lblInfo.shake(withCount: 3)
         }
     }
 }

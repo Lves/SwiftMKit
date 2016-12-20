@@ -13,10 +13,10 @@ import ObjectiveC
 import CocoaLumberjack
 
 open class TaskIndicator: NSObject, IndicatorProtocol {
-    fileprivate weak var hud: HUDProtocol?
+    private weak var hud: HUDProtocol?
     lazy open var runningTasks = [URLSessionTask]()
     
-    fileprivate var waitForHide : Bool = false
+    private var waitForHide : Bool = false
     
     init(hud: HUDProtocol){
         self.hud = hud
@@ -31,27 +31,28 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
         notificationCenter.removeObserver(self, name: Notification.Name.Task.DidCancel, object: nil)
         notificationCenter.removeObserver(self, name: Notification.Name.Task.DidComplete, object: nil)
         if task.state == .running {
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidResume, object: nil, queue: nil, using: task_resume)
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidSuspend, object: nil, queue: nil, using: task_suspend)
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidCancel, object: nil, queue: nil, using: task_cancel)
-            notificationCenter.addObserver(forName: Notification.Name.Task.DidComplete, object: nil, queue: nil, using: task_end)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_resume), name: Notification.Name.Task.DidResume, object: nil)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_suspend), name: Notification.Name.Task.DidSuspend, object: nil)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_cancel), name: Notification.Name.Task.DidCancel, object: nil)
+            notificationCenter.addObserver(self, selector: #selector(TaskIndicator.task_end), name: Notification.Name.Task.DidComplete, object: nil)
             var notify = Notification(name: Notification.Name(rawValue: ""), object: nil)
             notify.userInfo = [Notification.Key.Task: task]
-            self.task_resume(notify)
+            self.task_resume(notify: notify)
         } else {
             var notify = Notification(name: Notification.Name(rawValue: ""), object: nil)
             notify.userInfo = [Notification.Key.Task: task]
-            self.task_end(notify)
+            self.task_end(notify: notify)
         }
     }
     
-    func task_resume(_ notify:Notification) {
+    func task_resume(notify:Notification) {
         DDLogVerbose("Task resume")
         
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if !self.runningTasks.contains(task) {
                 UIApplication.shared.showNetworkActivityIndicator()
-                self.runningTasks.append(task)
+                weak var weakTask = task
+                self.runningTasks.append(weakTask!)
             }
             if let view = task.indicatorView {
                 if !waitForHide {
@@ -65,7 +66,7 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
             }
         }
     }
-    func task_suspend(_ notify:Notification) {
+    func task_suspend(notify:Notification) {
         DDLogVerbose("Task suspend")
         UIApplication.shared.hideNetworkActivityIndicator()
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
@@ -84,7 +85,7 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
             }
         }
     }
-    func task_cancel(_ notify:Notification) {
+    func task_cancel(notify:Notification) {
         DDLogVerbose("Task cancel")
         UIApplication.shared.hideNetworkActivityIndicator()
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
@@ -103,7 +104,7 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
             }
         }
     }
-    func task_end(_ notify:Notification) {
+    func task_end(notify:Notification) {
         DDLogVerbose("Task complete")
         UIApplication.shared.hideNetworkActivityIndicator()
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {

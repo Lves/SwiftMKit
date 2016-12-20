@@ -75,13 +75,13 @@ open class CachePool: CachePoolProtocol {
     
     init() {
         cache = PINCache(name: "Config", rootPath: cachePath())
-        createFolder(namespace, baseUrl: baseCacheUrl())
+        createFolder(forName: namespace, baseUrl: baseCacheUrl())
     }
     
     init(namespace: String?) {
         self.namespace = namespace ?? self.namespace
         cache = PINCache(name: "Config", rootPath: cachePath())
-        createFolder(self.namespace, baseUrl: baseCacheUrl())
+        createFolder(forName: self.namespace, baseUrl: baseCacheUrl())
     }
     
     open func addCache(_ data: Data, name: String?) -> String {
@@ -100,23 +100,23 @@ open class CachePool: CachePoolProtocol {
         let nameTime = ( name ?? "" ) + "\(timestamp)"
         let encryptName = nameTime.md5
         let dir = self.cachePath()
-        let destFilePath:String = dir + encryptName!
+        let destFilePath:String = dir + encryptName
         try! fileManager.copyItem(atPath: filePath.path, toPath: destFilePath)
         DDLogInfo("filePath: \(filePath.path)")
         DDLogInfo("destFilePath: \(destFilePath)")
         // 获取文件信息
-        if let attrs = self.getFileAttributes(destFilePath) {
+        if let attrs = self.getFileAttributes(withFilePath: destFilePath) {
             DDLogInfo("file info:\(attrs)")
             // 更新配置文件
             let num = attrs[FileAttributeKey.size] as? NSNumber ?? 0
             let size = num.int64Value
-            return self.updateConfig(name, timestamp:timestamp, size: size)
+            return self.updateConfig(forName: name, timestamp:timestamp, size: size)
         }
         // TODO: 返回值需要思考一下
-        return encryptName!
+        return encryptName
     }
     
-    open func getCache(_ key: String) -> AnyObject? {
+    open func getCache(forKey key: String) -> AnyObject? {
         let dir = self.cachePath()
         let filePath:String = dir + key
         DDLogInfo("objectForName filePath：" + filePath)
@@ -143,7 +143,7 @@ open class CachePool: CachePoolProtocol {
         return cacheModelList
     }
     
-    open func removeCache(_ key: String) -> Bool {
+    open func removeCache(forKey key: String) -> Bool {
         var cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         if let obj = cachedDict[key] {
             print(obj)
@@ -185,7 +185,7 @@ open class CachePool: CachePoolProtocol {
             cacheDict?.removeAll()
             // 重新生成配置文件
             cache = PINCache(name: "Config", rootPath: cachePath())
-            createFolder(namespace, baseUrl: baseCacheUrl())
+            createFolder(forName: namespace, baseUrl: baseCacheUrl())
             return true
         }
         return size == 0
@@ -211,7 +211,7 @@ extension CachePool {
     fileprivate func addCache(_ data: Data, name: String?, mimeType: String?) -> String {
         // 更新配置文件
         let timestamp = Date().timeIntervalSince1970
-        let encryptName = self.updateConfig(name, timestamp:timestamp, size: Int64(data.count), mimeType: mimeType)
+        let encryptName = self.updateConfig(forName: name, timestamp:timestamp, size: Int64(data.count), mimeType: mimeType)
         // 保存对象到沙盒
         let dir = self.cachePath()
         let filePath:String = dir + encryptName
@@ -228,7 +228,7 @@ extension CachePool {
     ///  存储文件之前，判断是否有足够的空间存储
     ///
     ///  :param: size 即将存储的文件大小
-    fileprivate func preparePoolForSize(_ size: Int64) -> Bool {
+    fileprivate func preparePool(forSize size: Int64) -> Bool {
         // 比较 设备剩余可用空间 & 文件大小
         var leftCapacity = capacity - self.size
         leftCapacity = min(UIDevice.freeDiskSpaceInBytes, leftCapacity)  // 取出最小可用空间
@@ -236,7 +236,7 @@ extension CachePool {
         if leftCapacity < size {
             // 读取配置文件，删除已过期、即将过期、最近未访问的文件，直至可以保存为止
             DDLogInfo("需要删除文件后保存")
-            leftCapacity = self.cleanDisk(leftCapacity, size: size)
+            leftCapacity = self.cleanDisk(leftCapacity: leftCapacity, size: size)
         }
         return size <= leftCapacity
     }
@@ -247,20 +247,20 @@ extension CachePool {
     ///  :param: size 文件大小
     ///
     ///  :returns: 加密后的文件名
-    fileprivate func updateConfig(_ name: String?, timestamp: TimeInterval, size: Int64) -> String {
-        return updateConfig(name, timestamp: timestamp, size: size, mimeType: nil)
+    fileprivate func updateConfig(forName name: String?, timestamp: TimeInterval, size: Int64) -> String {
+        return updateConfig(forName: name, timestamp: timestamp, size: size, mimeType: nil)
     }
     
-    fileprivate func updateConfig(_ name: String?, timestamp: TimeInterval, size: Int64, mimeType: String?) -> String {
+    fileprivate func updateConfig(forName name: String?, timestamp: TimeInterval, size: Int64, mimeType: String?) -> String {
         // 核心方法：判断是否有足够的空间存储
-        if !(self.preparePoolForSize(size)) {
+        if !(self.preparePool(forSize: size)) {
             return ""
         }
         let cacheObj = CacheModel()
         // 已缓存的字典
         var cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         let nameTime = (name ?? "") + "\(timestamp)"
-        let encryptName = nameTime.md5 ?? nameTime
+        let encryptName = nameTime.md5 
         cacheObj.name = name ?? ""
         cacheObj.key = encryptName
         cacheObj.createTime = timestamp
@@ -274,7 +274,7 @@ extension CachePool {
     }
     
     ///  创建文件夹
-    fileprivate func createFolder(_ name: String, baseUrl: URL) {
+    fileprivate func createFolder(forName name: String, baseUrl: URL) {
         let folder = baseUrl.appendingPathComponent(name, isDirectory: true)
         let exist = fileManager.fileExists(atPath: folder.path)
         if !exist {
@@ -286,7 +286,7 @@ extension CachePool {
     ///  获取文件属性
     ///
     ///  :param: filePath 文件路径
-    fileprivate func getFileAttributes(_ filePath: String) -> [FileAttributeKey: Any]? {
+    fileprivate func getFileAttributes(withFilePath filePath: String) -> [FileAttributeKey: Any]? {
         let attributes = try? fileManager.attributesOfItem(atPath: filePath)
         return attributes
     }
@@ -304,9 +304,9 @@ extension CachePool {
     
     ///  设备剩余空间不足时，删除本地缓存文件
     ///
-    ///  :param: lastSize 剩余空间
+    ///  :param: leftCapacity 剩余空间
     ///  :param: size     至少需要的空间
-    fileprivate func cleanDisk(_ lastSize: Int64, size: Int64) -> Int64 {
+    fileprivate func cleanDisk(leftCapacity lastSize: Int64, size: Int64) -> Int64 {
         var leftCapacity = lastSize
         // 遍历配置文件
         // 取出缓存字典

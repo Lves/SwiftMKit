@@ -38,7 +38,7 @@ class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate
     }
     
     func sideMenuViewController(_ controller: MKSideMenuViewController, didSelectRow selectedRow: Int) {
-        self.dismissVC(completion: {_ in _ = self.routeToName("routeToDetail") })
+        self.dismissVC(completion: {_ in self.route(toName: "routeToDetail") })
     }
 }
 
@@ -77,17 +77,17 @@ class MKSideMenuViewController: BaseListViewController {
         tableView.reloadData()
     }
     
-    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    override func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         tableViewCell.textLabel?.text = "Menu - \(indexPath.row)"
     }
-    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         delegate?.sideMenuViewController(self, didSelectRow: indexPath.row)
     }
 }

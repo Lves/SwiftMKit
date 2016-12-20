@@ -42,13 +42,13 @@ class KeychainWrapper {
     }
     
     // MARK: Public Methods
-    class func hasValueForKey(_ key: String) -> Bool {
-        return self.dataForKey(key) != nil
+    class func hasValue(forKey key: String) -> Bool {
+        return self.data(forKey: key) != nil
     }
     
     // MARK: Getting Values
-    class func stringForKey(_ keyName: String) -> String? {
-        let keychainData: Data? = self.dataForKey(keyName)
+    class func string(forKey keyName: String) -> String? {
+        let keychainData: Data? = self.data(forKey: keyName)
         var stringValue: String?
         if let data = keychainData {
             stringValue = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String?
@@ -57,8 +57,8 @@ class KeychainWrapper {
         return stringValue
     }
     
-    class func objectForKey(_ keyName: String) -> NSCoding? {
-        let dataValue: Data? = self.dataForKey(keyName)
+    class func object(forKey keyName: String) -> NSCoding? {
+        let dataValue: Data? = self.data(forKey: keyName)
         
         var objectValue: NSCoding?
         
@@ -66,11 +66,11 @@ class KeychainWrapper {
             objectValue = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSCoding
         }
         
-        return objectValue;
+        return objectValue
     }
     
-    class func dataForKey(_ keyName: String) -> Data? {
-        let keychainQueryDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
+    class func data(forKey keyName: String) -> Data? {
+        let keychainQueryDictionary = self.setupKeychainQueryDictionary(forKey: keyName)
         
         // Limit search results to one
         keychainQueryDictionary[SecMatchLimit] = kSecMatchLimitOne
@@ -109,7 +109,7 @@ class KeychainWrapper {
     }
     
     class func setData(_ value: Data, forKey keyName: String) -> Bool {
-        let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
+        let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionary(forKey: keyName)
         
         keychainQueryDictionary[SecValueData] = value
         
@@ -128,8 +128,8 @@ class KeychainWrapper {
     }
     
     // MARK: Removing Values
-    class func removeObjectForKey(_ keyName: String) -> Bool {
-        let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
+    class func removeObject(forKey keyName: String) -> Bool {
+        let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionary(forKey: keyName)
         
         // Delete
         let status: OSStatus =  SecItemDelete(keychainQueryDictionary);
@@ -143,7 +143,7 @@ class KeychainWrapper {
     
     // MARK: Private Methods
     fileprivate class func updateData(_ value: Data, forKey keyName: String) -> Bool {
-        let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionaryForKey(keyName)
+        let keychainQueryDictionary: NSMutableDictionary = self.setupKeychainQueryDictionary(forKey: keyName)
         let updateDictionary = [SecValueData:value]
         
         // Update
@@ -156,7 +156,7 @@ class KeychainWrapper {
         }
     }
     
-    fileprivate class func setupKeychainQueryDictionaryForKey(_ keyName: String) -> NSMutableDictionary {
+    fileprivate class func setupKeychainQueryDictionary(forKey keyName: String) -> NSMutableDictionary {
         // Setup dictionary to access keychain and specify we are using a generic password (rather than a certificate, internet password, etc)
         let keychainQueryDictionary: NSMutableDictionary = [SecClass:kSecClassGenericPassword]
         

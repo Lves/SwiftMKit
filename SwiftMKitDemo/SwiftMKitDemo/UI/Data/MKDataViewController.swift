@@ -50,14 +50,14 @@ class MKDataViewController: BaseListViewController {
     }
     
     
-    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    override func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let model = object as? MKDataListModel {
             tableViewCell.textLabel?.text = model.title
             tableViewCell.detailTextLabel?.text = model.detail
@@ -72,9 +72,9 @@ class MKDataViewController: BaseListViewController {
             }
         }
     }
-    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let model = object as? MKDataListModel {
-            let _ = self.routeToName(model.route ?? "", storyboardName: model.routeSB)
+            self.route(toName: model.route ?? "", storyboardName: model.routeSB)
         }
     }
 }

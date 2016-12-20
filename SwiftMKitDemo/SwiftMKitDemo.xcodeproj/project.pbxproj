@@ -179,6 +179,7 @@
 		27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */; };
 		27DC8A9D1CE5EB1500A898CD /* BaseKitTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */; };
 		27F7ADD21CE1C24E00C24706 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */; };
+		27FB53FB1E08D0DA0034B1A3 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FB53FA1E08D0DA0034B1A3 /* MemoryCache.swift */; };
 		3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */; };
 		3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38A1CC1F37B0061C5B0 /* NetApiProtocol.swift */; };
 		3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */; };
@@ -503,6 +504,7 @@
 		27DC8A9A1CE5DEC600A898CD /* BaseKitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewController.swift; sourceTree = "<group>"; };
 		27DC8A9C1CE5EB1500A898CD /* BaseKitTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitTableViewModel.swift; sourceTree = "<group>"; };
 		27F7ADD11CE1C24E00C24706 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		27FB53FA1E08D0DA0034B1A3 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		2BA84B8C839A38DF70639431 /* Pods-SwiftMKitDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		3F0309A9864D0980C2ED5378 /* Pods_SwiftMKitDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0E85351CD0FDFC00A55D1D /* CollectionType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extension.swift"; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 				270692C61CE9F27100CF211A /* CachePool.swift */,
 				270692C71CE9F27100CF211A /* CacheProtocol.swift */,
 				270692C81CE9F27100CF211A /* DocumentCache.swift */,
+				27FB53FA1E08D0DA0034B1A3 /* MemoryCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -2208,6 +2211,7 @@
 				6CD0E2691D87D65100B2FC40 /* UpgradeApp.swift in Sources */,
 				3FC9DF371CBFD53A00C2D938 /* BaseListKitViewModel.swift in Sources */,
 				2783E02C1DB62716005E087C /* MKNetworkRequestDetailViewController.swift in Sources */,
+				27FB53FB1E08D0DA0034B1A3 /* MemoryCache.swift in Sources */,
 				27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */,
 				576E13CE1D3DC70A00A948CE /* MachExceptionHandler.c in Sources */,
 				273F51AC1CC8CAA1003ABE4A /* HUDProtocol.swift in Sources */,

@@ -13,16 +13,21 @@ import SnapKit
 import EZSwiftExtensions
 import CocoaLumberjack
 
+public protocol WebViewBridgeProtocol: class {
+    func requestHeader(request: URLRequest) -> [String: String]?
+}
+
 open class WebViewBridge : NSObject {
-    fileprivate weak var _webView: UIWebView?
+    private weak var _webView: UIWebView?
     open weak var webView: UIWebView? {
         get {
             return _webView
         }
     }
     open weak var viewController: UIViewController?
+    public weak var delegate: WebViewBridgeProtocol?
     lazy open var indicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    open var userAgent: [String: AnyObject]? {
+    open var userAgent: [String: Any]? {
         didSet {
             if var userAgent = userAgent {
                 let view = UIWebView()
@@ -34,8 +39,7 @@ open class WebViewBridge : NSObject {
             }
         }
     }
-    open var requestHeader: [String: String]?
-    fileprivate var bridge: WebViewJavascriptBridge
+    private var bridge: WebViewJavascriptBridge
     
     init(webView: UIWebView, viewController: UIViewController) {
         _webView = webView
@@ -74,12 +78,10 @@ open class WebViewBridge : NSObject {
     open func willRequestUrl(_ url: String) {
     }
     open func willLoadRequest(_ request: URLRequest) -> URLRequest {
-        if let header = requestHeader {
-            if let newRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest {
-                for (key, value) in header {
-                    newRequest.setValue(value, forHTTPHeaderField: key)
-                }
-                return newRequest as URLRequest
+        var request = request
+        if let header = delegate?.requestHeader(request: request) {
+            for (key, value) in header {
+                request.setValue(value, forHTTPHeaderField: key)
             }
         }
         return request

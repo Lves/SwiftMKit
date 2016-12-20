@@ -11,31 +11,6 @@ import CoreLocation
 import PINCache
 import CocoaLumberjack
 import ReactiveCocoa
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-
 
 open class LocationManager : NSObject, CLLocationManagerDelegate {
     
@@ -96,7 +71,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
             //获取城市信息
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location, completionHandler: { array , error in
-                if array?.count > 0 {
+                if (array?.count ?? 0) > 0 {
                     let placemark = array?.first
                     self.curCityName = placemark?.locality
                     if (placemark?.locality == nil) {
@@ -147,7 +122,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
             return cache.object(forKey: Constant.CurCityName) as? String
         }
         set {
-            DDLogInfo("当前城市: (\(curCityName)")
+            DDLogInfo("当前城市: \(curCityName ?? "")")
             if let value = newValue {
                 cache.setObject(value as NSCoding, forKey: Constant.CurCityName)
             }else {

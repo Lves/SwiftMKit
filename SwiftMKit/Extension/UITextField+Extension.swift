@@ -13,9 +13,6 @@ import Result
 import EZSwiftExtensions
 
 public extension UITextField {
-    public func rac_textSignalProducer() -> Signal<String?, NoError> {
-        return self.reactive.continuousTextValues
-    }
     @IBInspectable public var placeHolderColor: UIColor? {
         get {
             return self.placeHolderColor
@@ -33,7 +30,7 @@ public extension UITextField {
         }
     }
     
-    fileprivate struct AssociatedKeys {
+    private struct AssociatedKeys {
         static var isFirstNan = 0
     }
     var isFirstNan: Bool {
@@ -44,7 +41,7 @@ public extension UITextField {
             objc_setAssociatedObject(self, &AssociatedKeys.isFirstNan, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
-    public func reformatCardNumber(_ range: NSRange, replaceString string: String) -> Bool {
+    public func reformatCardNumber(range: NSRange, replaceString string: String) -> Bool {
         var text = self.text?.toNSString ?? ""
         var range = range
         let characterSet = NSCharacterSet(charactersIn: "0123456789")
@@ -87,7 +84,7 @@ public extension UITextField {
         }
         return false
     }
-    public func reformatMobile(_ range: NSRange, replaceString string: String) -> Bool {
+    public func reformatMobile(range: NSRange, replaceString string: String) -> Bool {
         
         func noneSpaseString(_ string: String?) -> String {
             return (string ?? "").toNSString.replacingOccurrences(of: " ", with: "")

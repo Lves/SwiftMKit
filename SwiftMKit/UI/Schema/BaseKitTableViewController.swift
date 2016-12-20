@@ -12,33 +12,10 @@ import CocoaLumberjack
 import Alamofire
 import ObjectiveC
 import MJRefresh
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 
 open class BaseKitTableViewController: UITableViewController, UIGestureRecognizerDelegate {
-    open var params = Dictionary<String, AnyObject>() {
+    open var params = [String: Any]() {
         didSet {
             for (key,value) in params {
                 self.setValue(value, forKey: key)
@@ -72,10 +49,10 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
     open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination
         if let bvc = vc as? BaseKitViewController {
-            if let dict = sender as? NSDictionary {
-                if var params = dict["params"] as? Dictionary<String, AnyObject> {
+            if let dict = sender as? [String: Any] {
+                if var params = dict["params"] as? [String: Any] {
                     if params["hidesBottomBarWhenPushed"] == nil {
-                        params["hidesBottomBarWhenPushed"] = true as AnyObject?
+                        params["hidesBottomBarWhenPushed"] = true
                     }
                     bvc.params = params
                 }
@@ -130,7 +107,7 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
     open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if (gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer) {
             //只有二级以及以下的页面允许手势返回
-            return self.navigationController?.viewControllers.count > 1
+            return (self.navigationController?.viewControllers.count ?? 0) > 1
         }
         return true
     }

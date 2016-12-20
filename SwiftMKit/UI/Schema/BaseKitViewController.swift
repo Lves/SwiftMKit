@@ -15,7 +15,7 @@ import SnapKit
 
 open class BaseKitViewController : UIViewController {
     /// 页面参数（大部分用于初始化使用）
-    open var params = [String: AnyObject]() {
+    open var params = [String: Any]() {
         didSet {
             for (key,value) in params {
                 self.setValue(value, forKey: key)
@@ -49,12 +49,10 @@ open class BaseKitViewController : UIViewController {
     open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination
         if let bvc = vc as? BaseKitViewController {
-            if let dict = sender as? NSDictionary {
-                if var params = dict["params"] as? Dictionary<String, AnyObject> {
-                    if autoHidesBottomBarWhenPushed {
-                        if params["hidesBottomBarWhenPushed"] == nil {
-                            params["hidesBottomBarWhenPushed"] = true as AnyObject?
-                        }
+            if let dict = sender as? [String: Any] {
+                if var params = dict["params"] as? [String: Any] {
+                    if params["hidesBottomBarWhenPushed"] == nil {
+                        params["hidesBottomBarWhenPushed"] = true
                     }
                     bvc.params = params
                 }
@@ -137,18 +135,5 @@ public extension UIViewController {
         let _ = MBHUDView.shared.hideHUDForView(view, animated: true)
     }
 }
-
-
-open class LoanBaseKitViewController : UIViewController {
-    /// 页面参数（大部分用于初始化使用）
-    open var params = [String: AnyObject]() {
-        didSet {
-            for (key,value) in params {
-                self.setValue(value, forKey: key)
-            }
-        }
-    }
-}
-
 
 

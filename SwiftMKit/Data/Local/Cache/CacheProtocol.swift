@@ -53,11 +53,11 @@ public protocol CachePoolProtocol {
     ///  获取缓存对象
     ///
     ///  :param: key key
-    func getCache(_ key: String) -> AnyObject?
+    func getCache(forKey key: String) -> AnyObject?
     ///  移除缓存对象
     ///
     ///  :param: key key
-    func removeCache(_ key: String) -> Bool
+    func removeCache(forKey key: String) -> Bool
     ///  清空缓存
     func clear() -> Bool
 }

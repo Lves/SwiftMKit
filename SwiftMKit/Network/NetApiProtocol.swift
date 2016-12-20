@@ -18,8 +18,8 @@ public enum ApiMethod: String {
 }
 
 public protocol NetApiIndicatorProtocol {
-    var indicator: IndicatorProtocol? { get set }
-    var view: UIView? { get set }
+    weak var indicator: IndicatorProtocol? { get set }
+    weak var view: UIView? { get set }
     var text: String? { get set }
 }
 open class NetApiIndicator : NetApiIndicatorProtocol {
@@ -97,12 +97,12 @@ public struct NetApiResponse<Value, NError: Error> {
 
 public protocol NetApiProtocol: class {
     var error: NetError? { get }
-    var query: [String: AnyObject] { get }
+    var query: [String: Any] { get }
     var method: ApiMethod { get }
     var url: String { get }
     var timeout: TimeInterval { get set }
-    var request: AnyObject? { get set }
-    var response: AnyObject? { get set }
+    var request: Any? { get set }
+    var response: Any? { get set }
     var indicator: NetApiIndicator? { get set }
     
     func fillJSON(_ json: AnyObject)
@@ -125,7 +125,7 @@ public protocol UploadNetApiProtocol: NetApiProtocol {
 
 public extension NetApiProtocol {
     
-    func signal(_ format:ApiFormatType = .json) -> SignalProducer<Self, NetError> {
+    func signal(format:ApiFormatType = .json) -> SignalProducer<Self, NetError> {
         if let err = error {
             return SignalProducer { sink, _ in
                 sink.send(error: err)

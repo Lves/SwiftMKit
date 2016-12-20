@@ -15,7 +15,7 @@ open class GesturePassword: GesturePasswordProtocol {
     
     open class func verify(_ password: String) -> Bool {
         if password.length > 0 {
-            if let mPassword = KeychainWrapper.stringForKey(passwordKey) {
+            if let mPassword = KeychainWrapper.string(forKey: passwordKey) {
                 if mPassword == password {
                     DDLogInfo("[GesturePassword] Success: \(password)")
                     return true
@@ -30,11 +30,11 @@ open class GesturePassword: GesturePasswordProtocol {
         return KeychainWrapper.setString(password, forKey: passwordKey)
     }
     open class func exist() -> Bool {
-        return KeychainWrapper.stringForKey(passwordKey) != nil
+        return KeychainWrapper.string(forKey: passwordKey) != nil
     }
     open class func clear() -> Bool {
         DDLogInfo("[GesturePassword] Clear")
-        return KeychainWrapper.removeObjectForKey(passwordKey)
+        return KeychainWrapper.removeObject(forKey: passwordKey)
     }
     
 }

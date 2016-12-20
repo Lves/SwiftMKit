@@ -11,7 +11,7 @@ import MJExtension
 import MagicalRecord
 
 public extension NSObject {
-    class public func arrayFromJson<T: NSObject>(_ json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.mr_default()) -> [T]?{
+    class public func arrayFromJson<T: NSObject>(_ json: Array<AnyObject>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.mr_default()) -> [T]? {
         if let jsonString = json {
             let arr = T.mj_objectArray(withKeyValuesArray: jsonString, context:context).copy() as? Array<T>
             //如果是第一页，删除旧数据
@@ -72,7 +72,7 @@ public extension NSObject {
         return fullName
     }
 
-    class func dictToJson(_ object:[String:AnyObject]?) -> NSString{
+    class func dictToJson(_ object:[String: Any]?) -> NSString{
         
         var jsonStr : NSString = ""
         

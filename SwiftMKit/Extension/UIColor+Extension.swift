@@ -125,7 +125,7 @@ public extension UIColor {
      
      - parameter rgba: Whether the alpha should be included.
      */
-    public func hexString(_ includeAlpha: Bool) -> String {
+    public func hexString(includeAlpha: Bool) -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0

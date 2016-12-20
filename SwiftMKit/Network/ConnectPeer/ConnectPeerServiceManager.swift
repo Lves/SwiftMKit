@@ -12,18 +12,18 @@ import CocoaLumberjack
 
 protocol ConnectPeerServiceManagerDelegate {
     
-    func connectedDeviceChanged(_ manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID], changedDevice: MCPeerID, changedState: MCSessionState)
-    func dataReceived(_ manager : ConnectPeerServiceManager, fromDevice: MCPeerID, data: Data, dataString: String)
+    func connectedDeviceChanged(manager : ConnectPeerServiceManager, connectedDevices: [MCPeerID], changedDevice: MCPeerID, changedState: MCSessionState)
+    func dataReceived(manager : ConnectPeerServiceManager, fromDevice: MCPeerID, data: Data, dataString: String)
     
 }
 class ConnectPeerServiceManager : NSObject {
     
     // Service type must be a unique string, at most 15 characters long
     // and can contain only ASCII lowercase letters, numbers and hyphens.
-    fileprivate let ConnectPeerServiceType = "ConnectPeer"
-    fileprivate let myPeerId = MCPeerID(displayName: UIDevice.current.name)
-    fileprivate let serviceAdvertiser : MCNearbyServiceAdvertiser
-    fileprivate let serviceBrowser : MCNearbyServiceBrowser
+    private let ConnectPeerServiceType = "ConnectPeer"
+    private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    private let serviceAdvertiser : MCNearbyServiceAdvertiser
+    private let serviceBrowser : MCNearbyServiceBrowser
     var delegate : ConnectPeerServiceManagerDelegate?
     
     override init() {
@@ -112,13 +112,13 @@ extension ConnectPeerServiceManager : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DDLogInfo("[ConnectPeerServiceManager] Peer \(peerID) didChangeState: \(state.stringValue())")
-        self.delegate?.connectedDeviceChanged(self, connectedDevices: session.connectedPeers, changedDevice: peerID, changedState: state)
+        self.delegate?.connectedDeviceChanged(manager: self, connectedDevices: session.connectedPeers, changedDevice: peerID, changedState: state)
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DDLogVerbose("[ConnectPeerServiceManager] DidReceiveData: \(data.count) bytes")
         let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as! String
-        self.delegate?.dataReceived(self, fromDevice: peerID, data: data, dataString: str)
+        self.delegate?.dataReceived(manager: self, fromDevice: peerID, data: data, dataString: str)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

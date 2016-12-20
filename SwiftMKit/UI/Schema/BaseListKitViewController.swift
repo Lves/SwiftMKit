@@ -86,16 +86,16 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
             }
         }
     }
-    open func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    open func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         DDLogError("Need to implement the function of 'getCellWithTableView'")
         return nil
     }
-    open func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    open func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         DDLogError("Need to implement the function of 'configureCell'")
     }
-    open func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    open func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
     }
-    open func objectByIndexPath(_ indexPath: IndexPath) -> AnyObject? {
+    open func objectByIndexPath(_ indexPath: IndexPath) -> Any? {
         let object = listViewModel.dataSource[indexPath.section][safe: indexPath.row]
         return object
     }
@@ -112,7 +112,7 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
         return rows
     }
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        let cell = getCell(withTableView: tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             configureCell(cell, object: object, indexPath: indexPath)
         }
@@ -120,7 +120,7 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
     }
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        let cell = getCell(withTableView: tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             didSelectCell(cell, object: object, indexPath: indexPath)
         }

@@ -34,19 +34,19 @@ public enum NetworkStatus: CustomStringConvertible {
 public protocol NetApiClientProtocol {
     static func requestJSON(_ request: URLRequest, api: NetApiProtocol,
                            completionHandler: ((NetApiResponse<AnyObject, NSError>) -> Void)?)
-        -> AnyObject
+        -> Any
     
     static func requestData(_ request: URLRequest, api: NetApiProtocol,
                             completionHandler: ((NetApiResponse<Data, NSError>) -> Void)?)
-        -> AnyObject
+        -> Any
     
     static func requestString(_ request: URLRequest, api: NetApiProtocol,
                              completionHandler: ((NetApiResponse<String, NSError>) -> Void)?)
-        -> AnyObject
+        -> Any
     
     static func requestUpload(_ request: URLRequest, api: UploadNetApiProtocol,
                              completionHandler: ((NetApiResponse<AnyObject, NSError>) -> Void)?)
-        -> AnyObject
+        -> Any
 }
 
 open class NetApiClient : NSObject {
@@ -89,7 +89,7 @@ open class NetApiClient : NSObject {
         }
     }
     
-    class func createBodyWithParameters(_ parameters: [String: AnyObject]?, filePathKey: String?, mimetype: String, uploadData: Data) -> Data {
+    class func createBody(withParameters parameters: [String: Any]?, filePathKey: String?, mimetype: String, uploadData: Data) -> Data {
         let body = NSMutableData()
         let boundary = generateBoundaryString()
         

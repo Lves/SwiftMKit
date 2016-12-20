@@ -9,8 +9,6 @@
 import Foundation
 
 public protocol UpgradeAppProtocol {
-    var appId: String { get }
-    var channelId: String { get }
     var version: String { get }
-    func requestUpgrade(_ appId: String, version: String, channelId: String, deviceId: String, completion:(_ needUpgrade: Bool, _ newVersion: String, _ upgradeMessage: String, _ downloadUrl: String) -> Void)
+    func requestUpgrade(version: String, completion:(_ needUpgrade: Bool, _ newVersion: String, _ upgradeMessage: String, _ downloadUrl: String) -> Void)
 }

@@ -10,7 +10,7 @@ import Foundation
 import CocoaLumberjack
 
 public extension DDLog {
-    public class func setup(_ level: DDLogLevel = DDLogLevel.debug) {
+    public class func setup(level: DDLogLevel = DDLogLevel.debug) {
         defaultDebugLevel = level
         DDLog.add(DDTTYLogger.sharedInstance())
         DDLog.add(DDASLLogger.sharedInstance())

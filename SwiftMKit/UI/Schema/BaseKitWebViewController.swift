@@ -12,7 +12,7 @@ import CocoaLumberjack
 import WebKit
 import WebViewJavascriptBridge
 
-open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , SharePannelViewDelegate ,UIScrollViewDelegate ,WebViewProgressDelegate{
+open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, SharePannelViewDelegate, UIScrollViewDelegate, WebViewProgressDelegate, WebViewBridgeProtocol{
     
     struct InnerConst {
         static let RootViewBackgroundColor : UIColor = UIColor(hex6: 0x2F3549)
@@ -21,18 +21,40 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         static let BackGroundTitleColor : UIColor = UIColor.lightText
     }
     
-    open var webView: UIWebView?
-    open var webViewBridge: WebViewBridge?
-    open var webViewUserAgent: [String: AnyObject]? {
-        didSet {
-            webViewBridge?.userAgent = webViewUserAgent
+    private var _webView: UIWebView?
+    open var webView: UIWebView {
+        get {
+            if _webView == nil {
+                _webView = UIWebView(frame: CGRect.zero)
+                _webView?.backgroundColor = InnerConst.WebViewBackgroundColor
+                self.view.addSubview(_webView!)
+                if let progressView = progressView {
+                    self.view.bringSubview(toFront: progressView)
+                }
+                _webView!.delegate = self
+                _webView?.scrollView.delegate = self
+                _webView!.snp.makeConstraints { (make) in
+                    make.edges.equalTo(self.view)
+                }
+            }
+            return _webView!
         }
     }
-    open var webViewRequestHeader: [String: String]? {
-        didSet {
-            webViewBridge?.requestHeader = webViewRequestHeader
+    private var _webViewBridge: WebViewBridge?
+    open var webViewBridge: WebViewBridge {
+        get {
+            if _webViewBridge == nil {
+                _webViewBridge = WebViewBridge(webView: webView, viewController: self)
+            }
+            return _webViewBridge!
         }
     }
+    open var webViewUserAgent: [String: Any]? {
+        didSet {
+            webViewBridge.userAgent = webViewUserAgent
+        }
+    }
+    open var webViewRequestHeader: [String: String]?
     
     open var progressView : UIProgressView?
     open var webViewProgress: WebViewProgress = WebViewProgress()
@@ -52,7 +74,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     open var url: String?
     open var moreUrlTitle: String? {
         get {
-            if let host = URL(string:url ?? "")?.host {
+            if let host = URL(string: url ?? "")?.host {
                 return host
             }
             return url
@@ -70,24 +92,13 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         super.setupUI()
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
         self.view.addSubview(self.getBackgroundLab())
-        webView = UIWebView(frame: CGRect.zero)
-        webView?.backgroundColor = InnerConst.WebViewBackgroundColor
-        self.view.addSubview(webView!)
-        webView!.delegate = self
-        webView?.scrollView.delegate = self
-        webView!.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        webViewBridge = WebViewBridge(webView: webView!, viewController: self)
         webViewProgress.progressDelegate = self
         progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.screenW, height: 0))
         progressView?.trackTintColor = UIColor.clear
         self.view.addSubview(progressView!)
         bindEvents()
         
-        if url != nil {
-            self.loadData()
-        }
+        loadData()
     }
     open override func setupNavigation() {
         super.setupNavigation()
@@ -99,14 +110,18 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     open override func loadData() {
         super.loadData()
         if url != nil {
-            self.webViewBridge?.requestUrl(self.url)
+            self.webViewBridge.requestUrl(self.url)
         }
     }
     open func bindEvents() {
         DDLogWarn("Need to implement the function of 'bindEvents'")
     }
     open func bindEvent(_ eventName: String, handler: @escaping WVJBHandler) {
-        webViewBridge?.addEvent(eventName, handler: handler)
+        webViewBridge.addEvent(eventName, handler: handler)
+    }
+    
+    public func requestHeader(request: URLRequest) -> [String : String]? {
+        return webViewRequestHeader
     }
     
     //WebViewProgressDelegate
@@ -134,10 +149,10 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         var ret = true
         
         if shouldAllowRirectToUrlInView {
-            DDLogInfo("Web view direct to url: \(request.urlRequest?.url?.absoluteString)")
+            DDLogInfo("Web view direct to url: \(request.urlRequest?.url?.absoluteString ?? "")")
             ret = true
         } else {
-            DDLogWarn("Web view direct to url forbidden: \(request.urlRequest?.url?.absoluteString)")
+            DDLogWarn("Web view direct to url forbidden: \(request.urlRequest?.url?.absoluteString ?? "")")
             ret = false
         }
         
@@ -148,13 +163,13 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     
     open func webViewDidStartLoad(_ webView: UIWebView) {
         webViewProgress.progressWebViewDidStartLoad(webView)
-        webViewBridge?.indicator.startAnimating()
-        webView.bringSubview(toFront: webViewBridge!.indicator)
+        webViewBridge.indicator.startAnimating()
+        webView.bringSubview(toFront: webViewBridge.indicator)
     }
     
     open func webViewDidFinishLoad(_ webView: UIWebView) {
         webViewProgress.progressWebViewDidFinishLoad(webView)
-        webViewBridge?.indicator.stopAnimating()
+        webViewBridge.indicator.stopAnimating()
         if self.title == nil {
             self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
         }
@@ -178,7 +193,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     
     public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
-        webViewBridge?.indicator.stopAnimating()
+        webViewBridge.indicator.stopAnimating()
         
 //        if let tip = error.localizedDescription {
 //            
@@ -192,7 +207,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     
     open func refreshNavigationBarTopLeftCloseButton() {
         if showNavigationBarTopLeftCloseButton {
-            if webView?.canGoBack ?? false {
+            if webView.canGoBack {
                 if self.navigationItem.leftBarButtonItems != nil {
                     if let btnBack = navBtnBack() {
                         if let btnClose = navBtnClose() {
@@ -260,8 +275,8 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
     }
     
     open func click_nav_back(_ sender: UIBarButtonItem) {
-        if webView?.canGoBack ?? false {
-            webView?.goBack()
+        if webView.canGoBack {
+            webView.goBack()
         } else {
             self.routeBack()
         }
@@ -288,9 +303,9 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
         switch model.used {
         case .openBySafari:
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open((webView?.request?.url)!, options: [:], completionHandler: nil)
+                UIApplication.shared.open((webView.request?.url)!, options: [:], completionHandler: nil)
             }else{
-                UIApplication.shared.openURL((webView?.request?.url)!)
+                UIApplication.shared.openURL((webView.request?.url)!)
             }
             break
         case .copyLink:
@@ -298,7 +313,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate , 
             self.showTip("已复制链接到剪切版")
             break
         case .webRefresh:
-            webView?.reload()
+            webView.reload()
             break
             
         default:

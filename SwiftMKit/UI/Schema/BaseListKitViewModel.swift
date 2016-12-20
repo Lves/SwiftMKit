@@ -25,10 +25,10 @@ open class BaseListKitViewModel: BaseKitViewModel {
     open var listIndicator: IndicatorProtocol {
         get { return self.listViewController.listIndicator }
     }
-    var dataArray:[AnyObject] {
+    var dataArray:[Any] {
         get {
             if dataSource.first == nil {
-                dataSource.append([AnyObject]())
+                dataSource.append([Any]())
             }
             return dataSource.first!
         }
@@ -37,7 +37,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
         }
     }
     fileprivate var isDataSourceChanged: Bool = false
-    var dataSource:[[AnyObject]] = [[AnyObject]]() {
+    var dataSource:[[Any]] = [[Any]]() {
         didSet {
             if self.viewController == nil {
                 return
@@ -89,7 +89,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
     var listLoadNumber: UInt { get { return 20 } }
     var listMaxNumber: UInt { get { return UInt.max } }
     
-    open func updateDataArray(_ newData: [AnyObject]?) {
+    open func updateDataArray(_ newData: [Any]?) {
         isDataSourceChanged = true
         if let data = newData {
             if dataIndex == 0 {
@@ -108,9 +108,9 @@ open class BaseListKitViewModel: BaseKitViewModel {
             collect.reloadData()
         }
     }
-    open func updateDataSource(_ newData: [[AnyObject]]?) {
+    open func updateDataSource(_ newData: [[Any]]?) {
         isDataSourceChanged = true
-        dataSource = newData ?? [[AnyObject]]()
+        dataSource = newData ?? [[Any]]()
         if let table = self.listViewController.listView as? UITableView {
             table.reloadData()
         } else if let collect = self.listViewController.listView as? UICollectionView {

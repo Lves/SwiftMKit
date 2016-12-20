@@ -11,8 +11,8 @@ import Alamofire
 
 class PX500NetApi: AlamofireNetApiData {
     static let baseQuery = ["consumer_key": PX500Config.consumerKey]
-    fileprivate var _query: [String: AnyObject] = [:]
-    override var query: [String: AnyObject] {
+    fileprivate var _query: [String: Any] = [:]
+    override var query: [String: Any] {
         get {
             let result = NetApiData.combineQuery(PX500NetApi.baseQuery as [String : AnyObject]?, append: _query)
             return result ?? [:]

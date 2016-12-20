@@ -81,7 +81,7 @@ class MKUserNotificationViewController: BaseViewController {
     }
     @IBAction func click_sendLocalNotify(_ sender: UIButton) {
         if #available(iOS 10.0, *) {
-            UserNotificationManager.addNotify("Time Interval Notification", body: "My notification", triggerTime: 5, repeats: false, identifier: InnerConstant.NotifyIdentifier, categoryIdentifier: InnerConstant.NotifyCategoryIdentifier, withCompletionHandler: nil)
+            UserNotificationManager.addNotify(title: "Time Interval Notification", body: "My notification", triggerTime: 5, repeats: false, identifier: InnerConstant.NotifyIdentifier, categoryIdentifier: InnerConstant.NotifyCategoryIdentifier, withCompletionHandler: nil)
             showTip("5秒后将收到本地推送")
         } else {
             // Fallback on earlier versions
@@ -89,14 +89,14 @@ class MKUserNotificationViewController: BaseViewController {
     }
     @IBAction func click_cancelLocalNotify(_ sender: UIButton) {
         if #available(iOS 10.0, *) {
-            UserNotificationManager.cancelNotifies([InnerConstant.NotifyIdentifier])
+            UserNotificationManager.cancelNotifies(identifiers: [InnerConstant.NotifyIdentifier])
         } else {
             // Fallback on earlier versions
         }
     }
     @IBAction func click_removeDeliveredNotify(_ sender: UIButton) {
         if #available(iOS 10.0, *) {
-            UserNotificationManager.removeDeliveredNotifies([InnerConstant.NotifyIdentifier])
+            UserNotificationManager.removeDeliveredNotifies(identifiers: [InnerConstant.NotifyIdentifier])
         } else {
             // Fallback on earlier versions
         }
@@ -110,7 +110,7 @@ class MKUserNotificationViewController: BaseViewController {
                     attachments.append(attachment)
                 }
             }
-            UserNotificationManager.addNotify("Image Notification", body: "Show me an image", attachments: attachments, triggerTime: 5, repeats: false, identifier: InnerConstant.NotifyIdentifier, categoryIdentifier: InnerConstant.NotifyCategoryIdentifier, withCompletionHandler: nil)
+            UserNotificationManager.addNotify(title: "Image Notification", body: "Show me an image", attachments: attachments, triggerTime: 5, repeats: false, identifier: InnerConstant.NotifyIdentifier, categoryIdentifier: InnerConstant.NotifyCategoryIdentifier, withCompletionHandler: nil)
             showTip("5秒后将收到本地推送")
         } else {
             // Fallback on earlier versions

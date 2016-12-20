@@ -32,7 +32,7 @@ open class UserNotificationManager: NSObject {
     open var didRecieveNotificationHandler: ((UNNotificationResponse) -> Bool)?
     
     fileprivate struct Constant {
-        static let DeviceTokenName: String? = "DeviceTokenName"
+        static let DeviceTokenName = "DeviceTokenName"
         static let CFBundleInfoDictionaryVersion = "CFBundleInfoDictionaryVersion"
         static let CFBundleVersion = "CFBundleVersion"
         static let CFBundleShortVersionString = "CFBundleShortVersionString"
@@ -41,16 +41,16 @@ open class UserNotificationManager: NSObject {
     
     static var deviceToken: String? {
         get {
-            let token = PINMemoryCache.shared().object(forKey: Constant.DeviceTokenName) as? String
+            let token = MemoryCache.shared().getObject(forKey: Constant.DeviceTokenName) as? String
             DDLogInfo("Get Push Device Token: \(token ?? "")")
             return token
         }
         set {
             if let deviceToken = newValue {
-                PINMemoryCache.shared().setObject(deviceToken, forKey: Constant.DeviceTokenName!)
+                MemoryCache.shared().setObject(deviceToken, forKey: Constant.DeviceTokenName)
                 DDLogInfo("Set Push Device Token: \(deviceToken)")
             } else {
-                PINMemoryCache.shared().removeObject(forKey: Constant.DeviceTokenName)
+                MemoryCache.shared().removeObject(forKey: Constant.DeviceTokenName)
                 DDLogWarn("Remove Push Device Token: \(deviceToken)")
             }
         }
@@ -87,10 +87,10 @@ open class UserNotificationManager: NSObject {
         }
     }
     
-    static func addNotify(_ title: String, body: String, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
-        addNotify(title, body: body, attachments: nil, triggerTime: triggerTime, repeats: repeats, identifier: identifier, categoryIdentifier: categoryIdentifier, withCompletionHandler: completionHandler)
+    static func addNotify(title: String, body: String, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+        addNotify(title: title, body: body, attachments: nil, triggerTime: triggerTime, repeats: repeats, identifier: identifier, categoryIdentifier: categoryIdentifier, withCompletionHandler: completionHandler)
     }
-    static func addNotify(_ title: String, body: String, attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+    static func addNotify(title: String, body: String, attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
         // 1. 创建通知内容
         let content = UNMutableNotificationContent()
         content.title = title
@@ -118,13 +118,13 @@ open class UserNotificationManager: NSObject {
         }
     }
     
-    static func removeDeliveredNotifies(_ identifiers: [String]) {
+    static func removeDeliveredNotifies(identifiers: [String]) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
     }
     static func removeAllDeliveredNotifies() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
-    static func cancelNotifies(_ identifiers: [String]) {
+    static func cancelNotifies(identifiers: [String]) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
     static func cancelAllNotifies() {

@@ -34,7 +34,7 @@ class BaseViewController: BaseKitViewController {
 }
 
 extension BaseKitViewController {
-    public func routeToUrl(_ url: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
-        _ = routeToUrl(url, name: "BaseWebViewController", params: nextParams, pop: pop)
+    public func route(toUrl url: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) {
+        route(toUrl: url, name: "BaseWebViewController", params: nextParams, pop: pop)
     }
 }

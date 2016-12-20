@@ -44,19 +44,22 @@ class MKNetworkRequestViewController: BaseListViewController {
         self.listView.mj_header.beginRefreshing()
     }
     
-    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    override func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         return tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier) as? MKNetworkRequestTableViewCell
     }
-    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let cell = tableViewCell as? MKNetworkRequestTableViewCell {
             if let model = object as? PX500PopularPhotoModel {
                 cell.photoModel = model
             }
         }
     }
-    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let model = object as? PX500PopularPhotoModel {
-            _ = self.routeToName(InnerConst.SegueToNext, params: ["photoId":model.photoId! as AnyObject])
+            self.route(toName: InnerConst.SegueToNext, params: ["photoId":model.photoId!])
         }
+    }
+    deinit {
+        print("aa")
     }
 }

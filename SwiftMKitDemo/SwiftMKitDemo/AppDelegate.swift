@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setenv("XcodeColors", "YES", 0);
         DemoNetworkConfig.Release = false
         DemoNetworkConfig.Evn = .product
-        DDLog.setup(.debug)
+        DDLog.setup(level: .debug)
         DDTTYLogger.sharedInstance().logFormatter = DDLogMKitFormatter()
         MagicalRecord.setShouldDeleteStoreOnModelMismatch(true)
         MagicalRecord.setupCoreDataStack()

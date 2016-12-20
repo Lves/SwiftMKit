@@ -10,30 +10,6 @@ import UIKit
 import CoreData
 import CocoaLumberjack
 import ReactiveCocoa
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 open class BaseListFetchKitViewController: BaseListKitViewController {
     open var listFetchViewModel: BaseListFetchKitViewModel! {
@@ -62,7 +38,7 @@ open class BaseListFetchKitViewController: BaseListKitViewController {
         listFetchViewModel.fetchCachedData()
     }
     
-    override open func objectByIndexPath(_ indexPath: IndexPath) -> AnyObject? {
+    override open func objectByIndexPath(_ indexPath: IndexPath) -> Any? {
         let object = fetchedResultsController?.sections?[indexPath.section].objects?[safe: indexPath.row]
         return object as AnyObject?
     }
@@ -73,14 +49,14 @@ open class BaseListFetchKitViewController: BaseListKitViewController {
     }
     override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
-        if fetchedResultsController?.sections?.count > 0 {
+        if (fetchedResultsController?.sections?.count ?? 0) > 0 {
             rows = fetchedResultsController?.sections?[section].numberOfObjects ?? 0
         }
         return rows
     }
     
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        let cell = getCell(withTableView: tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             configureCell(cell, object: object, indexPath: indexPath)
         }
@@ -88,7 +64,7 @@ open class BaseListFetchKitViewController: BaseListKitViewController {
     }
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let cell = getCellWithTableView(tableView, indexPath: indexPath)!
+        let cell = getCell(withTableView: tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             didSelectCell(cell, object: object, indexPath: indexPath)
         }

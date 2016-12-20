@@ -47,17 +47,17 @@ class MKCustomPullRefreshViewController: BaseListViewController{
         self.tableView.mj_header.beginRefreshing()
     }
     
-    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    override func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         var cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
         return cell
     }
-    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         tableViewCell.textLabel?.text = "Cell - \(indexPath.row)"
     }
-    override func didSelectCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         
     }
 

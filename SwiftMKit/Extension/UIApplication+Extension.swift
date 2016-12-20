@@ -54,70 +54,64 @@ public extension UIApplication {
         return Bundle.main.infoDictionary as [String : AnyObject]?
     }
     
-    func bundleIdentifier(_ completion: @escaping (String?) -> Void) {
-        if PINMemoryCache.shared().containsObject(forKey: Constant.BundleIdentifier) {
-            PINMemoryCache.shared().object(forKey: Constant.BundleIdentifier)  { _, _, value in
-                completion(value as? String)
+    var bundleIdentifier: String {
+        get {
+            if let identifier = MemoryCache.shared().getObject(forKey: Constant.BundleIdentifier) as? String {
+                return identifier
             }
-        } else {
             let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String ?? ""
             PINMemoryCache.shared().setObject(identifier, forKey: Constant.BundleIdentifier)
             DDLogInfo("BundleIdentifier: \(identifier)")
-            completion(identifier)
+            return identifier
         }
     }
-    func minTargetVersion(_ completion: @escaping (String?) -> Void) {
-        if PINMemoryCache.shared().containsObject(forKey: Constant.CFBundleInfoDictionaryVersion) {
-            PINMemoryCache.shared().object(forKey: Constant.CFBundleInfoDictionaryVersion)  { _, _, value in
-                completion(value as? String)
+    var minTargetVersion: String {
+        get {
+            if let version = MemoryCache.shared().getObject(forKey: Constant.CFBundleInfoDictionaryVersion) as? String {
+                return version
             }
-        } else {
             let version = Bundle.main.infoDictionary?[Constant.CFBundleInfoDictionaryVersion] as? String ?? ""
             PINMemoryCache.shared().setObject(version, forKey: Constant.CFBundleInfoDictionaryVersion)
             DDLogInfo("CFBundleInfoDictionaryVersion: \(version)")
-            completion(version)
+            return version
         }
     }
-    func bundleVersion(_ completion: @escaping (String?) -> Void) {
-        if PINMemoryCache.shared().containsObject(forKey: Constant.CFBundleVersion) {
-            PINMemoryCache.shared().object(forKey: Constant.CFBundleVersion)  { _, _, value in
-                completion(value as? String)
+    var bundleVersion: String {
+        get {
+            if let version = MemoryCache.shared().getObject(forKey: Constant.CFBundleVersion) as? String {
+                return version
             }
-        } else {
             let version = Bundle.main.infoDictionary?[Constant.CFBundleVersion] as? String ?? ""
             PINMemoryCache.shared().setObject(version, forKey: Constant.CFBundleVersion)
             DDLogInfo("CFBundleVersion: \(version)")
-            completion(version)
+            return version
         }
     }
-    func bundleShortVersionString(_ completion: @escaping (String?) -> Void) {
-        if PINMemoryCache.shared().containsObject(forKey: Constant.CFBundleShortVersionString) {
-            PINMemoryCache.shared().object(forKey: Constant.CFBundleShortVersionString)  { _, _, value in
-                completion(value as? String)
+    var bundleShortVersionString: String {
+        get {
+            if let version = MemoryCache.shared().getObject(forKey: Constant.CFBundleShortVersionString) as? String {
+                return version
             }
-        } else {
             let version = Bundle.main.infoDictionary?[Constant.CFBundleShortVersionString] as? String ?? ""
             PINMemoryCache.shared().setObject(version, forKey: Constant.CFBundleShortVersionString)
             DDLogInfo("CFBundleShortVersionString: \(version)")
-            completion(version)
+            return version
         }
     }
-    func bundleShortVersionNumber(_ completion: @escaping (Int?) -> Void) {
-        bundleShortVersionString { value in
-            let number = value?.replacingOccurrences(of: ".", with: "").toInt()
-            completion(number)
+    var bundleShortVersionNumber: Int {
+        get {
+            return bundleShortVersionString.replacingOccurrences(of: ".", with: "").toInt() ?? 0
         }
     }
-    func bundleBuildDateString(_ completion: @escaping (String?) -> Void) {
-        if PINMemoryCache.shared().containsObject(forKey: Constant.BuildDateString) {
-            PINMemoryCache.shared().object(forKey: Constant.BuildDateString)  { _, _, value in
-                completion(value as? String)
+    var bundleBuildDateString: String {
+        get {
+            if let dateString = MemoryCache.shared().getObject(forKey: Constant.BuildDateString) as? String {
+                return dateString
             }
-        } else {
             let dateString = Bundle.main.infoDictionary?[Constant.BuildDateString] as? String ?? ""
-            PINMemoryCache.shared().setObject(dateString, forKey: Constant.CFBundleShortVersionString)
+            PINMemoryCache.shared().setObject(dateString, forKey: Constant.BuildDateString)
             DDLogInfo("BuildDateString: \(dateString)")
-            completion(dateString)
+            return dateString
         }
     }
 }

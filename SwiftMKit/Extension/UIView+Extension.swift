@@ -16,7 +16,7 @@ public extension UIView {
         static let BlurViewTag = 1001
     }
     
-    func shake(_ count: Int, directionX: CGFloat = 3, directionY: CGFloat = 0) {
+    func shake(withCount count: Int, directionX: CGFloat = 3, directionY: CGFloat = 0) {
         UIView.animate(withDuration: 0.05, animations: {
             self.transform = CGAffineTransform(translationX: directionX, y: directionY)
         }, completion: { finished in
@@ -24,11 +24,11 @@ public extension UIView {
                 self.transform = CGAffineTransform.identity
                 return
             }
-            self.shake(count - 1, directionX: directionX * -1, directionY: directionY * -1)
+            self.shake(withCount: count - 1, directionX: directionX * -1, directionY: directionY * -1)
         }) 
     }
     
-    func addBlur(_ style: UIBlurEffectStyle = .dark) {
+    func addBlur(style: UIBlurEffectStyle = .dark) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
@@ -41,7 +41,7 @@ public extension UIView {
         view?.removeFromSuperview()
     }
     /*UIView 在sb中设置圆角*/
-    @IBInspectable var mCornerRadius:CGFloat{
+    @IBInspectable var layerCornerRadius: CGFloat{
         set{
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0
@@ -52,7 +52,7 @@ public extension UIView {
     }
     /// borderColor
     @IBInspectable
-    public var mBorderColor: UIColor {
+    public var layerBorderColor: UIColor {
         get {
             return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
         }
@@ -62,7 +62,7 @@ public extension UIView {
     }
     /// borderWidth
     @IBInspectable
-    public var mBorderWidth: CGFloat {
+    public var layerBorderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -88,6 +88,7 @@ public extension UIView {
         }
         return vc
     }
+    
     
     /**
      查找一个视图的所有子视图

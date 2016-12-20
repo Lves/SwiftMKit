@@ -23,7 +23,7 @@ class DDLogMKitFormatter: NSObject, DDLogFormatter {
      **/
     public func format(message logMessage: DDLogMessage!) -> String! {
         let date = dateFormatter().string(from: logMessage.timestamp)
-        return "\(date) \(logMessage.fileName)[T\(logMessage.threadID):L\(logMessage.line)] " + logMessage.message
+        return "\(date) \(logMessage.fileName!)[T\(logMessage.threadID!):L\(logMessage.line)] " + logMessage.message
     }
     
     fileprivate func dateFormatter() -> DateFormatter {

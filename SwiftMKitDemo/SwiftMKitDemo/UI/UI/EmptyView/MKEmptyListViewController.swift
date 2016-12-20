@@ -38,10 +38,10 @@ class MKEmptyListViewController: BaseListViewController {
         super.loadData()
         self.listView.mj_header.beginRefreshing()
     }
-    override func getCellWithTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
+    override func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         return tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier)
     }
-    override func configureCell(_ tableViewCell: UITableViewCell, object: AnyObject, indexPath: IndexPath) {
+    override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let model = object as? String {
             tableViewCell.textLabel?.text = model
         }
