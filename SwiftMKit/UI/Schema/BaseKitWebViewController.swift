@@ -179,7 +179,7 @@ public class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate 
     public func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge?.indicator.stopAnimating()
-    
+        
         if let tip = error?.localizedDescription {
             
             if (error?.code == NSURLError.Cancelled.rawValue){
