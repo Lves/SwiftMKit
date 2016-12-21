@@ -12,22 +12,28 @@ import CocoaLumberjack
 
 public class SystemPush: PushManagerProtocol {
     
+    public func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
+        let token = deviceToken.hexString
+        if #available(iOS 10.0, *) {
+            UserNotificationManager.deviceToken = token
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     public func pmp_registerRemoteNotification(application: UIApplication, launchOptions: [NSObject : AnyObject]?) {
         if #available(iOS 10.0, *) {
-            let notifiCenter = UNUserNotificationCenter.currentNotificationCenter()
             let types = UNAuthorizationOptions(arrayLiteral: [.Alert, .Badge, .Sound])
-            notifiCenter.requestAuthorizationWithOptions(types) { (flag, error) in
-                if flag {
-                    DDLogInfo("iOS request notification success")
-                }else{
-                    DDLogInfo(" iOS 10 request notification fail")
-                }
-            }
+            UserNotificationManager.requestAuthorization(types, completionHandler: {})
         } else { //iOS8,iOS9注册通知
             let setting = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(setting)
+            UIApplication.sharedApplication().registerForRemoteNotifications()
         }
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+    }
+    
+    public func pmp_didFailToRegisterForRemoteNotificationsWithError(error: NSError) {
+        DDLogError("Fail to get device token: \(error)")
     }
     
     public func pmp_didReceiveNotification(from: PushFrom, userInfo: [NSObject : AnyObject]) {
