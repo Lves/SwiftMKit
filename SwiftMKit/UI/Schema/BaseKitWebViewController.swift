@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import CocoaLumberjack
+import MJRefresh
 import WebKit
 import WebViewJavascriptBridge
 
@@ -61,6 +62,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     
     open var disableUserSelect = false
     open var disableLongTouch = false
+    open var showRefreshHeader: Bool = true
     open var showNavigationBarTopLeftCloseButton: Bool = true
     open var shouldAllowRirectToUrlInView: Bool = true
     open var showNavRightToolPannelItem: Bool = true {
@@ -98,8 +100,15 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         self.view.addSubview(progressView!)
         bindEvents()
         
+        if showRefreshHeader {
+            self.webView.scrollView.mj_header = self.webViewWithRefreshingBlock { [weak self] in
+                self?.loadData()
+            }
+        }
+        
         loadData()
     }
+    
     open override func setupNavigation() {
         super.setupNavigation()
         if let btnBack = navBtnBack() {
@@ -107,6 +116,13 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         }
         self.refreshNavigationBarTopRightMoreButton()
     }
+    
+    open func webViewWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
+        let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
+        header?.activityIndicatorViewStyle = .gray
+        return header!
+    }
+    
     open override func loadData() {
         super.loadData()
         if url != nil {
@@ -168,6 +184,10 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     }
     
     open func webViewDidFinishLoad(_ webView: UIWebView) {
+        if let header = self.webView.scrollView.mj_header {
+            header.endRefreshing()//结束下拉刷新
+        }
+        
         webViewProgress.progressWebViewDidFinishLoad(webView)
         webViewBridge.indicator.stopAnimating()
         if self.title == nil {
@@ -192,6 +212,9 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     }
     
     public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        if let header = self.webView.scrollView.mj_header {
+            header.endRefreshing()//结束下拉刷新
+        }
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge.indicator.stopAnimating()
         
@@ -313,7 +336,11 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
             self.showTip("已复制链接到剪切版")
             break
         case .webRefresh:
-            webView.reload()
+            if showRefreshHeader {
+                self.webView.scrollView.mj_header.beginRefreshing()
+            }else{
+                webView.reload()
+            }
             break
             
         default:
