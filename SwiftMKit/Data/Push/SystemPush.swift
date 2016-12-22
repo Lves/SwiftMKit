@@ -23,8 +23,8 @@ public class SystemPush: PushManagerProtocol {
     
     public func pmp_registerRemoteNotification(application: UIApplication, launchOptions: [NSObject : AnyObject]?) {
         if #available(iOS 10.0, *) {
-            let types = UNAuthorizationOptions(arrayLiteral: [.Alert, .Badge, .Sound])
-            UserNotificationManager.requestAuthorization(types, completionHandler: {})
+            let types = UserNotificationOption(arrayLiteral: [.Alert, .Badge, .Sound])
+            UserNotificationManager.requestAuthorization(types, completionHandler: {_,_ in })
         } else { //iOS8,iOS9注册通知
             let setting = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(setting)
