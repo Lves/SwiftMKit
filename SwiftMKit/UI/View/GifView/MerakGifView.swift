@@ -35,7 +35,7 @@ public class MerakGifView: UIView {
         imageArr.removeAll()
         timeArr.removeAll()
         //重新加载
-        gifurl = NSBundle.mainBundle().URLForResource(name, withExtension: "gif")
+        gifurl = Bundle.main.url(forResource: name, withExtension: "gif") as NSURL!
         self.creatKeyFrame()
     }
     
@@ -50,7 +50,7 @@ public class MerakGifView: UIView {
      *  获取GIF图片的每一帧 有关的东西  比如：每一帧的图片、每一帧的图片执行的时间
      */
     private func creatKeyFrame() {
-        let url:CFURLRef = gifurl as CFURLRef
+        let url:CFURL = gifurl as CFURL
         let gifSource = CGImageSourceCreateWithURL(url, nil)
         let imageCount = CGImageSourceGetCount(gifSource!)
         
@@ -59,14 +59,14 @@ public class MerakGifView: UIView {
             imageArr.append(imageRef!)
             
             let sourceDict = CGImageSourceCopyPropertiesAtIndex(gifSource!, i, nil) as NSDictionary!
-            let gifDict = sourceDict[String(kCGImagePropertyGIFDictionary)]
-            let time = gifDict![String(kCGImagePropertyGIFUnclampedDelayTime)] as! NSNumber// 每一帧的动画时间
+            let gifDict : [String:AnyObject] = (sourceDict?[String(kCGImagePropertyGIFDictionary)] as? [String : AnyObject])!
+            let time = gifDict[String(kCGImagePropertyGIFUnclampedDelayTime)] as! NSNumber// 每一帧的动画时间
             timeArr.append(time)
             totalTime += time.floatValue
             
             // 获取图片的尺寸 (适应)
-            let imageWitdh = sourceDict[String(kCGImagePropertyPixelWidth)] as! NSNumber
-            let imageHeight = sourceDict[String(kCGImagePropertyPixelHeight)] as! NSNumber
+            let imageWitdh = sourceDict?[String(kCGImagePropertyPixelWidth)] as! NSNumber
+            let imageHeight = sourceDict?[String(kCGImagePropertyPixelHeight)] as! NSNumber
             if ((imageWitdh.floatValue)/(imageHeight.floatValue) != Float((width)/(height))) {
                 self.fitScale(imageWitdh: CGFloat(imageWitdh.floatValue), imageHeight: CGFloat(imageHeight.floatValue))
             }
@@ -78,7 +78,7 @@ public class MerakGifView: UIView {
     /**
      *  (适应)
      */
-    private func fitScale(imageWitdh imageWitdh:CGFloat, imageHeight:CGFloat) {
+    private func fitScale(imageWitdh:CGFloat, imageHeight:CGFloat) {
         var newWidth:CGFloat
         var newHeight:CGFloat
         if imageWitdh/imageHeight > width/height {
@@ -89,7 +89,7 @@ public class MerakGifView: UIView {
             newHeight = height;
         }
         let point = self.center;
-        self.frame.size = CGSizeMake(newWidth, newHeight);
+        self.frame.size = CGSize(width: newWidth, height: newHeight);
         self.center = point;
     }
     
@@ -105,31 +105,31 @@ public class MerakGifView: UIView {
         var timeKeys:Array<NSNumber> = []
         
         for time in timeArr {
-            timeKeys.append(NSNumber(float: current/totalTime))
+            timeKeys.append(NSNumber(value: current/totalTime))
             current += time.floatValue
         }
         
         animation?.keyTimes = timeKeys
         animation?.values = imageArr
         animation?.repeatCount = repeatCount
-        animation?.duration = NSTimeInterval(totalTime)
-        animation?.removedOnCompletion = false //结束后禁止删除
+        animation?.duration = TimeInterval(totalTime)
+        animation?.isRemovedOnCompletion = false //结束后禁止删除
         animation?.fillMode = kCAFillModeForwards //结束后停留在最后一帧
         animation?.delegate = self
-        self.layer.addAnimation(animation!, forKey: "MerakGifView")
+        self.layer.add(animation!, forKey: "MerakGifView")
     }
     
 }
 
 extension MerakGifView : CAAnimationDelegate{
-    public func animationDidStart(anim: CAAnimation) {
+    public func animationDidStart(_ anim: CAAnimation) {
         
     }
     
-    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         DDLogInfo("animationDidStop \(flag)")
         if flag {
-            self.delegate?.gv_didFinished(self)
+            self.delegate?.gv_didFinished(gifView: self)
         }
     }
 }

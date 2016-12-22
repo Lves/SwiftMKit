@@ -12,7 +12,7 @@ import Haneke
 class MKNetworkRequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgHead: UIImageView!
-    @IBOutlet weak var imgPic: UIImageView!
+    @IBOutlet weak var imgPic: HQImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblContent: UILabel!
     @IBOutlet weak var constraintImagePicAspect: NSLayoutConstraint!
@@ -56,6 +56,7 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
             self.lblContent?.text = photoModel?.descriptionString
             self.imgHead.hnk_setImageFromURL(URL(string: (photoModel?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
             if let imageUrl = photoModel?.imageurl {
+                imgPic.imageViewHighQualitySrc = imageUrl
                 self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
                     [weak self] image in
                     self?.setPostImage(image)

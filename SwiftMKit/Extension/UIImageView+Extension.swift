@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 extension UIImageView {
     
     func createARGBBitmapContext(inImage: CGImage) -> CGContext {

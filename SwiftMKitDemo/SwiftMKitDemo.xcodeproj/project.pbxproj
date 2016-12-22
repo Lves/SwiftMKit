@@ -215,6 +215,10 @@
 		576E13D21D3DC70A00A948CE /* SwiftCrashHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576E13C81D3DC70A00A948CE /* SwiftCrashHandler.swift */; };
 		576E13D31D3DC70A00A948CE /* SwiftCrashReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576E13CA1D3DC70A00A948CE /* SwiftCrashReport.swift */; };
 		576E13D41D3DC70A00A948CE /* SwiftCrashUmengReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E13CD1D3DC70A00A948CE /* SwiftCrashUmengReporter.m */; };
+		656286FA1E0B6B6F00F0017E /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656286F91E0B6B6F00F0017E /* PopAnimator.swift */; };
+		656286FD1E0BAADB00F0017E /* MerakGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656286FC1E0BAADB00F0017E /* MerakGifView.swift */; };
+		65EED9361E0A937B00D3EE08 /* HQImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EED9351E0A937B00D3EE08 /* HQImageView.swift */; };
+		65EED9381E0A949800D3EE08 /* HQImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EED9371E0A949800D3EE08 /* HQImageViewController.swift */; };
 		6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51A9E51D3C853C006EF254 /* SharePannelView.swift */; };
 		6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */; };
 		6C724B3C1D0FCF0100CD5608 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */; };
@@ -554,6 +558,10 @@
 		576E13CC1D3DC70A00A948CE /* SwiftCrashUmengReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashUmengReporter.h; sourceTree = "<group>"; };
 		576E13CD1D3DC70A00A948CE /* SwiftCrashUmengReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashUmengReporter.m; sourceTree = "<group>"; };
 		576E13D71D3DD51600A948CE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		656286F91E0B6B6F00F0017E /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
+		656286FC1E0BAADB00F0017E /* MerakGifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerakGifView.swift; sourceTree = "<group>"; };
+		65EED9351E0A937B00D3EE08 /* HQImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQImageView.swift; sourceTree = "<group>"; };
+		65EED9371E0A949800D3EE08 /* HQImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQImageViewController.swift; sourceTree = "<group>"; };
 		6C51A9E51D3C853C006EF254 /* SharePannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePannelView.swift; sourceTree = "<group>"; };
 		6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+Extension.swift"; sourceTree = "<group>"; };
 		6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -797,11 +805,13 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				656286FB1E0BAADB00F0017E /* GifView */,
 				278725621DB4C73C00C1F19A /* AlertView */,
 				6CEFCB411D3485F3008B3382 /* Pannel */,
 				FBE54A2E1CF3F2A3001C493A /* Password */,
 				27D1A9AE1CEEA70A00B511D7 /* CollectionView */,
 				27D989711DB46EA4004E79A0 /* EmptyView */,
+				65EED9341E0A92FD00D3EE08 /* ImageView */,
 				27A1C5F01CEACB6B004FEA63 /* Button */,
 				270692CF1CE9F27D00CF211A /* GesturePassword */,
 				277EA9F71CE9A9D200AA62A0 /* Keyboard */,
@@ -1522,6 +1532,24 @@
 			path = ../SwiftMKit/ImportedModules;
 			sourceTree = "<group>";
 		};
+		656286FB1E0BAADB00F0017E /* GifView */ = {
+			isa = PBXGroup;
+			children = (
+				656286FC1E0BAADB00F0017E /* MerakGifView.swift */,
+			);
+			path = GifView;
+			sourceTree = "<group>";
+		};
+		65EED9341E0A92FD00D3EE08 /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				65EED9351E0A937B00D3EE08 /* HQImageView.swift */,
+				65EED9371E0A949800D3EE08 /* HQImageViewController.swift */,
+				656286F91E0B6B6F00F0017E /* PopAnimator.swift */,
+			);
+			path = ImageView;
+			sourceTree = "<group>";
+		};
 		6CD0E2631D87D65100B2FC40 /* ConnectPeer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2154,6 +2182,7 @@
 				273E41281DD2FE3800A09830 /* MKUserNotificationViewController.swift in Sources */,
 				6CD0E26F1D87D67600B2FC40 /* NSMutableData+Extension.swift in Sources */,
 				278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */,
+				656286FA1E0B6B6F00F0017E /* PopAnimator.swift in Sources */,
 				6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */,
 				576E13CF1D3DC70A00A948CE /* MachThreadBacktrace.c in Sources */,
 				2783E0341DB62BB6005E087C /* MKCoreDataNetworkRequestViewModel.swift in Sources */,
@@ -2205,6 +2234,7 @@
 				277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */,
+				65EED9381E0A949800D3EE08 /* HQImageViewController.swift in Sources */,
 				3FC9DF621CBFD6D400C2D938 /* BaseListViewController.swift in Sources */,
 				2783E00C1DB626FD005E087C /* MKGesturePasswordViewController.swift in Sources */,
 				2740B81E1DD1719C00CF2F5B /* SlideInPresentationController.swift in Sources */,
@@ -2226,6 +2256,7 @@
 				2786557A1DDA9DB7005BDDCC /* VideoPlayer.swift in Sources */,
 				2783E0011DB626FD005E087C /* MKCustomPullRefreshViewController.swift in Sources */,
 				2783E0001DB626FD005E087C /* MKQuestionCollectionViewCell.swift in Sources */,
+				656286FD1E0BAADB00F0017E /* MerakGifView.swift in Sources */,
 				3F33D38B1CC1F37B0061C5B0 /* NetApiProtocol.swift in Sources */,
 				27A1C5F21CEACB78004FEA63 /* IndicatorButton.swift in Sources */,
 				278938071CD0BC7600F43699 /* BaseListFetchKitViewModel.swift in Sources */,
@@ -2241,6 +2272,7 @@
 				6CD0E2681D87D65100B2FC40 /* ConnectPeerServiceManager.swift in Sources */,
 				2783E0111DB626FD005E087C /* MKKeyboardViewController.swift in Sources */,
 				3FC9DEF91CBFD35900C2D938 /* AppDelegate.swift in Sources */,
+				65EED9361E0A937B00D3EE08 /* HQImageView.swift in Sources */,
 				3F0E85361CD0FDFC00A55D1D /* CollectionType+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

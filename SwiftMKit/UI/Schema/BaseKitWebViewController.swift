@@ -16,10 +16,10 @@ import WebViewJavascriptBridge
 open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, SharePannelViewDelegate, UIScrollViewDelegate, WebViewProgressDelegate, WebViewBridgeProtocol{
     
     struct InnerConst {
-        static let RootViewBackgroundColor : UIColor = UIColor(hex6: 0x2F3549)
+        static let RootViewBackgroundColor : UIColor = UIColor(hex6: 0xefeff4)
         static let WebViewBackgroundColor : UIColor = UIColor.clear
         static let PannelTitleColor : UIColor = UIColor.gray
-        static let BackGroundTitleColor : UIColor = UIColor.lightText
+        static let BackGroundTitleColor : UIColor = UIColor.darkGray
     }
     
     private var _webView: UIWebView?
@@ -120,6 +120,12 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     open func webViewWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
         let header = MJRefreshNormalHeader(refreshingBlock:refreshingBlock);
         header?.activityIndicatorViewStyle = .gray
+        header?.labelLeftInset = 0
+        header?.setTitle("", for: .idle)
+        header?.setTitle("", for: .pulling)
+        header?.setTitle("", for: .refreshing)
+        header?.lastUpdatedTimeLabel.text = ""
+        header?.lastUpdatedTimeText = { _ in return "" }
         return header!
     }
     
