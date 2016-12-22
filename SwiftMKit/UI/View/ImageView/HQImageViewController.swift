@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Haneke
 
 public class HQImageViewController: BaseKitViewController {
 
@@ -70,14 +71,24 @@ public class HQImageViewController: BaseKitViewController {
             let imageUrl : String = imageModel.imageUrl ?? ""
             let x = CGFloat(i - 1) * self.screenW
             let image = imageModel.image ?? UIImage(named: "appicon")
-            let imageView = UIImageView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
-            imageView.contentMode = UIViewContentMode.scaleAspectFit
-            imageView.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: nil, failure: nil, success: nil)
-            scrollView.addSubview(imageView)
+            
+            let zoomView = ZoomView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
+            zoomView.isUserInteractionEnabled = true
+            zoomView.delegate = self
+            zoomView.imageView?.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: Format<UIImage>(name: "original"), failure: nil, success: { (image) in
+                zoomView.image = image
+            })
+            scrollView.addSubview(zoomView)
+
+//            let imageView = UIImageView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
+//            imageView.isUserInteractionEnabled = true
+//            imageView.contentMode = UIViewContentMode.scaleAspectFit
+//            imageView.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: nil, failure: nil, success: nil)
+//            scrollView.addSubview(imageView)
+//            
+//            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissView(recoginzer:)))
+//            imageView.addGestureRecognizer(tap)
         }
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissView(recoginzer:)))
-        scrollView.addGestureRecognizer(tap)
         
         Async.main(after: 0.25) { _ in
             self.pageControl.isHidden = false
@@ -99,3 +110,10 @@ extension HQImageViewController : UIScrollViewDelegate {
         selectedIndex = Int(index)
     }
 }
+
+extension HQImageViewController : ZoomViewDelegate {
+    public func zv_singleTapClick(tap: UITapGestureRecognizer){
+        self.dismissView(recoginzer: tap)
+    }
+}
+

@@ -11,7 +11,7 @@ import UIKit
 class HQImageView: UIImageView {
     
     var imageViewHighQualitySrc: String?
-    let transition = PopAnimator()
+    let transition = HQPopAnimator()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

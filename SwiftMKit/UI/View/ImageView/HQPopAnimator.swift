@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PopAnimator: NSObject,UIViewControllerAnimatedTransitioning {
+class HQPopAnimator: NSObject,UIViewControllerAnimatedTransitioning {
     
     var presenting = true  //是否在presenting
     let duration = 0.25
