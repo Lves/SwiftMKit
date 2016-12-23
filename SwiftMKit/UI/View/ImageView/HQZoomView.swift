@@ -7,12 +7,13 @@
 //  图片预览控件
 
 import UIKit
+import CocoaLumberjack
 
-public protocol ZoomViewDelegate : class {
-    func zv_singleTapClick(tap: UITapGestureRecognizer)
+public protocol HQZoomViewDelegate : class {
+    func hqzv_singleTapClick(tap: UITapGestureRecognizer)
 }
 
-public class ZoomView: UIControl, UIScrollViewDelegate {
+public class HQZoomView: UIControl, UIScrollViewDelegate {
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     private let screenHeight: CGFloat = UIScreen.main.bounds.size.height
@@ -20,7 +21,7 @@ public class ZoomView: UIControl, UIScrollViewDelegate {
     private let minScale: CGFloat = 1.0 // 最小的缩放比例
     private let animDuration: TimeInterval = 0.2 // 动画时长
     
-    weak var delegate : ZoomViewDelegate?
+    weak var delegate : HQZoomViewDelegate?
     
     // MARK: - Public property
     
@@ -30,14 +31,11 @@ public class ZoomView: UIControl, UIScrollViewDelegate {
     public var image: UIImage? {
         didSet {
             if let _image = image {
-                if self.originFrame == CGRect.zero {
-                    let imageViewH = _image.size.height / _image.size.width * screenWidth
-                    self.imageView?.bounds = CGRect(x: 0, y: 0, width: screenWidth, height: imageViewH)
-                    self.imageView?.center = (scrollView?.center)!
-                } else {
-                    self.imageView?.frame = self.originFrame
-                }
+                let imageViewH = _image.size.height / _image.size.width * screenWidth
+                self.imageView?.bounds = CGRect(x: 0, y: 0, width: screenWidth, height: imageViewH)
+                self.imageView?.center = (scrollView?.center)!
                 self.imageView?.image = image
+                originFrame = (self.imageView?.frame)!
             }
         }
     }
@@ -65,83 +63,19 @@ public class ZoomView: UIControl, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UIScrollViewDelegate
-    
-    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        //当捏或移动时，需要对center重新定义以达到正确显示位置
-        var centerX = scrollView.center.x
-        var centerY = scrollView.center.y
-        centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width / 2 : centerX
-        centerY = scrollView.contentSize.height > scrollView.frame.size.height ?scrollView.contentSize.height / 2 : centerY
-        
-        self.imageView?.center = CGPoint(x: centerX, y: centerY)
-        
-        // ****************双击放大图片关键代码*******************
-        
-        if isDoubleTapingForZoom {
-            let contentOffset = self.scrollView?.contentOffset
-            let center = self.center
-            let offsetX = center.x - self.touchX
-//            let offsetY = center.y - self.touchY
-            self.scrollView?.contentOffset = CGPoint(x: (contentOffset?.x)! - offsetX * 2.2, y: (contentOffset?.y)!)
-        }
-        
-        // ****************************************************
-        
-    }
-    
-    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        self.scale = scale
-    }
-    
-    public func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.imageView!
-    }
-    
-    // MARK: - Event response
-    // 单击手势事件
-    @objc func singleTapClick(tap: UITapGestureRecognizer) {
-        self.scrollView?.setZoomScale(self.minScale, animated: false)
-//        UIView.animate(withDuration: self.animDuration, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
-//                self.imageView?.frame = self.originFrame
-//                self.scrollView?.backgroundColor = UIColor.clear
-//            }) { (finished) in
-//                self.scrollView?.backgroundColor = UIColor.black
-//                self.scale = self.minScale
-//        }
-        
-        self.delegate?.zv_singleTapClick(tap: tap)
-
-    }
-    
-    // 双击手势事件
-    @objc func doubleTapClick(tap: UITapGestureRecognizer) {
-        self.touchX = tap.location(in: tap.view).x
-        self.touchY = tap.location(in: tap.view).y
-        
-        if self.scale > 1.0 {
-            self.scale = 1.0
-            self.scrollView?.setZoomScale(self.scale, animated: true)
-        } else {
-            self.scale = maxScale
-            self.isDoubleTapingForZoom = true
-            self.scrollView?.setZoomScale(maxScale, animated: true)
-        }
-        self.isDoubleTapingForZoom = false
-    }
-    
     // MARK: - Private methods
     
     private func initAllView() {
         // UIScrollView
         self.scrollView = UIScrollView()
+        self.scrollView?.frame = self.bounds
+        self.scrollView?.delegate = self
         self.scrollView?.showsVerticalScrollIndicator = false
         self.scrollView?.showsHorizontalScrollIndicator = false
         self.scrollView?.maximumZoomScale = maxScale // scrollView最大缩放比例
         self.scrollView?.minimumZoomScale = minScale // scrollView最小缩放比例
         self.scrollView?.backgroundColor = UIColor.black
-        self.scrollView?.delegate = self
-        self.scrollView?.frame = self.bounds
+        self.scrollView?.contentSize = CGSize(width: self.scrollView?.w ?? 0, height: self.scrollView?.h ?? 0)
         self.addSubview(self.scrollView!)
         
         // 添加手势
@@ -160,10 +94,65 @@ public class ZoomView: UIControl, UIScrollViewDelegate {
         self.imageView = UIImageView()
         self.scrollView?.addSubview(self.imageView!)
     }
-        
+    
+    // MARK: - Public methods
+    public func reset(){
+        self.scrollView?.setZoomScale(self.minScale, animated: true)
+    }
+    
     // MARK: - deinit
     deinit {
         print("ZoomView.swift释放了！");
     }
-
+    
+    // MARK: - UIScrollViewDelegate
+    
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        //当捏或移动时，需要对center重新定义以达到正确显示位置
+        var centerX = scrollView.center.x
+        var centerY = scrollView.center.y
+        centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width / 2 : centerX
+        centerY = scrollView.contentSize.height > scrollView.frame.size.height ?scrollView.contentSize.height / 2 : centerY
+        self.imageView?.center = CGPoint(x: centerX, y: centerY)
+        
+        // ****************双击放大图片关键代码*******************
+        if isDoubleTapingForZoom {
+            let contentOffset = self.scrollView?.contentOffset
+            let offsetX = self.bounds.midX - self.touchX
+            self.scrollView?.contentOffset = CGPoint(x: (contentOffset?.x)! - offsetX * 2.2, y: (contentOffset?.y)!)
+        }
+        // ****************************************************
+    }
+    
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        self.scale = scale
+    }
+    
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView!
+    }
+    
+    // MARK: - Event response
+    // 单击手势事件
+    @objc func singleTapClick(tap: UITapGestureRecognizer) {
+        self.reset()
+        self.delegate?.hqzv_singleTapClick(tap: tap)
+    }
+    
+    // 双击手势事件
+    @objc func doubleTapClick(tap: UITapGestureRecognizer) {
+        self.touchX = tap.location(in: tap.view).x
+        self.touchY = tap.location(in: tap.view).y
+        
+        if self.scale > 1.0 {
+            self.scale = 1
+            self.scrollView?.setZoomScale(self.scale, animated: true)
+        } else {
+            self.scale = maxScale
+            self.isDoubleTapingForZoom = true
+            self.scrollView?.setZoomScale(maxScale, animated: true)
+        }
+        
+        self.isDoubleTapingForZoom = false
+    }
 }

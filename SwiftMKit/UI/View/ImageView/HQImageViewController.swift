@@ -14,6 +14,7 @@ public class HQImageViewController: BaseKitViewController {
 
     var imageModels: [HQImageModel] = []
     var selectedIndex : Int = 0
+    var lastSelectedIndex : Int = 0
     var scrollView : UIScrollView!
     var pageControl: UIPageControl!
     var imageCount : Int {
@@ -72,22 +73,14 @@ public class HQImageViewController: BaseKitViewController {
             let x = CGFloat(i - 1) * self.screenW
             let image = imageModel.image ?? UIImage(named: "appicon")
             
-            let zoomView = ZoomView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
+            let zoomView = HQZoomView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
+            zoomView.tag = 200 + i - 1
             zoomView.isUserInteractionEnabled = true
             zoomView.delegate = self
             zoomView.imageView?.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: Format<UIImage>(name: "original"), failure: nil, success: { (image) in
                 zoomView.image = image
             })
             scrollView.addSubview(zoomView)
-
-//            let imageView = UIImageView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
-//            imageView.isUserInteractionEnabled = true
-//            imageView.contentMode = UIViewContentMode.scaleAspectFit
-//            imageView.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: nil, failure: nil, success: nil)
-//            scrollView.addSubview(imageView)
-//            
-//            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissView(recoginzer:)))
-//            imageView.addGestureRecognizer(tap)
         }
         
         Async.main(after: 0.25) { _ in
@@ -109,10 +102,20 @@ extension HQImageViewController : UIScrollViewDelegate {
         pageControl.currentPage = Int(index)
         selectedIndex = Int(index)
     }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        //恢复上一张图片
+        if lastSelectedIndex != selectedIndex {
+            if let zoomView : HQZoomView = self.scrollView.viewWithTag(200 + lastSelectedIndex) as? HQZoomView {
+                zoomView.reset()
+            }
+            lastSelectedIndex = selectedIndex
+        }
+    }
 }
 
-extension HQImageViewController : ZoomViewDelegate {
-    public func zv_singleTapClick(tap: UITapGestureRecognizer){
+extension HQImageViewController : HQZoomViewDelegate {
+    public func hqzv_singleTapClick(tap: UITapGestureRecognizer){
         self.dismissView(recoginzer: tap)
     }
 }

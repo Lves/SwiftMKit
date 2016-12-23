@@ -217,7 +217,7 @@
 		576E13D41D3DC70A00A948CE /* SwiftCrashUmengReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E13CD1D3DC70A00A948CE /* SwiftCrashUmengReporter.m */; };
 		656286FA1E0B6B6F00F0017E /* HQPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656286F91E0B6B6F00F0017E /* HQPopAnimator.swift */; };
 		656286FD1E0BAADB00F0017E /* MerakGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656286FC1E0BAADB00F0017E /* MerakGifView.swift */; };
-		656286FF1E0BD76300F0017E /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656286FE1E0BD76300F0017E /* ZoomView.swift */; };
+		656286FF1E0BD76300F0017E /* HQZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656286FE1E0BD76300F0017E /* HQZoomView.swift */; };
 		65EED9361E0A937B00D3EE08 /* HQImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EED9351E0A937B00D3EE08 /* HQImageView.swift */; };
 		65EED9381E0A949800D3EE08 /* HQImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EED9371E0A949800D3EE08 /* HQImageViewController.swift */; };
 		6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51A9E51D3C853C006EF254 /* SharePannelView.swift */; };
@@ -561,7 +561,7 @@
 		576E13D71D3DD51600A948CE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		656286F91E0B6B6F00F0017E /* HQPopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQPopAnimator.swift; sourceTree = "<group>"; };
 		656286FC1E0BAADB00F0017E /* MerakGifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerakGifView.swift; sourceTree = "<group>"; };
-		656286FE1E0BD76300F0017E /* ZoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomView.swift; sourceTree = "<group>"; };
+		656286FE1E0BD76300F0017E /* HQZoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQZoomView.swift; sourceTree = "<group>"; };
 		65EED9351E0A937B00D3EE08 /* HQImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQImageView.swift; sourceTree = "<group>"; };
 		65EED9371E0A949800D3EE08 /* HQImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HQImageViewController.swift; sourceTree = "<group>"; };
 		6C51A9E51D3C853C006EF254 /* SharePannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePannelView.swift; sourceTree = "<group>"; };
@@ -1548,7 +1548,7 @@
 				65EED9351E0A937B00D3EE08 /* HQImageView.swift */,
 				65EED9371E0A949800D3EE08 /* HQImageViewController.swift */,
 				656286F91E0B6B6F00F0017E /* HQPopAnimator.swift */,
-				656286FE1E0BD76300F0017E /* ZoomView.swift */,
+				656286FE1E0BD76300F0017E /* HQZoomView.swift */,
 			);
 			path = ImageView;
 			sourceTree = "<group>";
@@ -2155,7 +2155,7 @@
 				2783E0151DB626FD005E087C /* MKOrderTableViewCell.swift in Sources */,
 				2783E03A1DB62E4D005E087C /* MKDataViewModel.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
-				656286FF1E0BD76300F0017E /* ZoomView.swift in Sources */,
+				656286FF1E0BD76300F0017E /* HQZoomView.swift in Sources */,
 				2783E02A1DB62716005E087C /* MKNetworkRequestTableViewCell.swift in Sources */,
 				2783DFFF1DB626FD005E087C /* MKCoverFlowViewController.swift in Sources */,
 				27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */,
