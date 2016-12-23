@@ -40,19 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Fallback on earlier versions
         }
+        
+        //推送
+        PushManager.shared.addManagers([SystemPush()])
+        PushManager.shared.finishLaunchApplication(application, didFinishLaunchingWithOptions: launchOptions)
 
         return true
-    }
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        DDLogError("Fail to get device token: \(error)")
-    }
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = deviceToken.hexString
-        if #available(iOS 10.0, *) {
-            UserNotificationManager.deviceToken = token
-        } else {
-            // Fallback on earlier versions
-        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
