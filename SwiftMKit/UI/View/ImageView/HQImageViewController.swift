@@ -26,6 +26,7 @@ public class HQImageViewController: BaseKitViewController {
     struct InnerConst {
         static let pageControlColor : UIColor = UIColor(hex6: 0x768EAF)
         static let pageControlCurColor : UIColor = UIColor(hex6: 0xFFFFFF)
+        static let zoomViewTag : Int = 200
     }
     
     init(imageModels: [HQImageModel] ,selectedIndex: Int) {
@@ -74,7 +75,7 @@ public class HQImageViewController: BaseKitViewController {
             let image = imageModel.image ?? UIImage(named: "appicon")
             
             let zoomView = HQZoomView(frame: CGRect(x: x, y: 0, w: self.screenW, h: self.screenH))
-            zoomView.tag = 200 + i - 1
+            zoomView.tag = InnerConst.zoomViewTag + i - 1
             zoomView.isUserInteractionEnabled = true
             zoomView.delegate = self
             zoomView.imageView?.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: Format<UIImage>(name: "original"), failure: nil, success: { (image) in
@@ -106,7 +107,7 @@ extension HQImageViewController : UIScrollViewDelegate {
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //恢复上一张图片
         if lastSelectedIndex != selectedIndex {
-            if let zoomView : HQZoomView = self.scrollView.viewWithTag(200 + lastSelectedIndex) as? HQZoomView {
+            if let zoomView : HQZoomView = self.scrollView.viewWithTag(InnerConst.zoomViewTag + lastSelectedIndex) as? HQZoomView {
                 zoomView.reset()
             }
             lastSelectedIndex = selectedIndex
