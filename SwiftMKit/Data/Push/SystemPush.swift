@@ -12,7 +12,7 @@ import CocoaLumberjack
 
 public class SystemPush: PushManagerProtocol {
     
-    public func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
+    public func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: Data) {
         let token = deviceToken.hexString
         if #available(iOS 10.0, *) {
             UserNotificationManager.deviceToken = token
@@ -21,34 +21,34 @@ public class SystemPush: PushManagerProtocol {
         }
     }
     
-    public func pmp_registerRemoteNotification(application: UIApplication, launchOptions: [NSObject : AnyObject]?) {
+    public func pmp_registerRemoteNotification(application: UIApplication, launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         if #available(iOS 10.0, *) {
             let types = UserNotificationOption(arrayLiteral: [.Alert, .Badge, .Sound])
             UserNotificationManager.requestAuthorization(types, completionHandler: {_,_ in })
         } else { //iOS8,iOS9注册通知
-            let setting = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(setting)
-            UIApplication.sharedApplication().registerForRemoteNotifications()
+            let setting = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(setting)
+            UIApplication.shared.registerForRemoteNotifications()
         }
     }
     
-    public func pmp_didFailToRegisterForRemoteNotificationsWithError(error: NSError) {
+    public func pmp_didFailToRegisterForRemoteNotificationsWithError(error: Error) {
         DDLogError("Fail to get device token: \(error)")
     }
     
-    public func pmp_didReceiveNotification(from: PushFrom, userInfo: [NSObject : AnyObject]) {
+    public func pmp_didReceiveNotification(from: PushFrom, userInfo: [AnyHashable: Any]) {
         Async.main {
-            self.receivePushData(userInfo)
+            self.receivePushData(userInfo: userInfo)
         }
     }
     
-    func receivePushData(userInfo: [NSObject: AnyObject]){
+    func receivePushData(userInfo: [AnyHashable: Any]){
         DDLogVerbose("\(userInfo)")
         let title: String = "消息推送"
-        let message = userInfo["aps"]?["alert"] as? String
+        let message = (userInfo["aps"] as? [AnyHashable: Any])?["alert"] as? String
         if let message = message {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            let action = UIAlertAction(title: "我知道了", style: .Default, handler: { _ in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "我知道了", style: .default, handler: { _ in
             })
             alert.addAction(action)
             UIViewController.topController?.showAlert(alert, completion: nil)

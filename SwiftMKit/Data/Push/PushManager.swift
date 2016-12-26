@@ -12,28 +12,28 @@ import CocoaLumberjack
 import UserNotifications
 
 public enum PushFrom : Int {
-    case REMOTE
-    case LOCAL
+    case remote
+    case local
 }
 
 public protocol PushManagerProtocol {
-    func pmp_registerRemoteNotification(application:UIApplication,launchOptions:[NSObject: AnyObject]?)
-    func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData)
-    func pmp_didReceiveNotification(from : PushFrom, userInfo: [NSObject : AnyObject])
-    func pmp_didFailToRegisterForRemoteNotificationsWithError(error: NSError)
+    func pmp_registerRemoteNotification(application:UIApplication, launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
+    func pmp_didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data)
+    func pmp_didReceiveNotification(from : PushFrom, userInfo: [AnyHashable: Any])
+    func pmp_didFailToRegisterForRemoteNotifications(withError error: Error)
 }
 
 extension PushManagerProtocol {
-    public func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {}
-    public func pmp_didReceiveNotification(from : PushFrom, userInfo: [NSObject : AnyObject]){}
-    public func pmp_didFailToRegisterForRemoteNotificationsWithError(error: NSError) {}
+    public func pmp_didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {}
+    public func pmp_didReceiveNotification(from : PushFrom, userInfo: [AnyHashable: Any]){}
+    public func pmp_didFailToRegisterForRemoteNotifications(withError error: Error) {}
 }
 
 public class PushManager: NSObject , UNUserNotificationCenterDelegate{
     private override init() {
     }
     public static let shared = PushManager()
-    private var tempPushUserInfo: [NSObject : AnyObject]? {
+    private var tempPushUserInfo: [AnyHashable: Any]? {
         didSet {
             DDLogInfo("PushUserInfo temp store: \(tempPushUserInfo)")
         }
@@ -43,12 +43,12 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
     public var canReceiveData: Bool = false {
         didSet {
             if canReceiveData == true && tempPushUserInfo != nil && tempPushFrom != nil {
-                didReceiveNotification(tempPushFrom!, userInfo: tempPushUserInfo!)
+                didReceiveNotification(from: tempPushFrom!, userInfo: tempPushUserInfo!)
             }
         }
     }
     
-    public func storeTempData(userInfo: [NSObject : AnyObject], from: PushFrom) {
+    public func storeTempData(userInfo: [AnyHashable: Any], from: PushFrom) {
         tempPushUserInfo = userInfo
         tempPushFrom = from
     }
@@ -59,40 +59,40 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
     
     func register(){
         if #available(iOS 10.0, *) {
-            let notifiCenter = UNUserNotificationCenter.currentNotificationCenter()
-            let appDelegate = (UIApplication.sharedApplication().delegate) as! AppDelegate
+            let notifiCenter = UNUserNotificationCenter.current()
+            let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
             notifiCenter.delegate = appDelegate
         }
     }
     
-    func finishLaunchApplication(application:UIApplication,didFinishLaunchingWithOptions launchOptions:[NSObject: AnyObject]?){
+    func finishLaunch(application:UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?){
         
         PushManager.shared.register()
         if managers.count > 0{
-            _ = managers.map { $0.pmp_registerRemoteNotification(application,launchOptions:launchOptions) }
+            _ = managers.map { $0.pmp_registerRemoteNotification(application: application,launchOptions:launchOptions) }
         }
         
         //开机收到通知
-        if let userInfo = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
-            self.didReceiveNotification(.REMOTE, userInfo: userInfo)
-        }else if let userInfo = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? [NSObject: AnyObject] {
-            self.didReceiveNotification(.LOCAL, userInfo: userInfo)
+        if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+            self.didReceiveNotification(from: .remote, userInfo: userInfo)
+        }else if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? [AnyHashable: Any] {
+            self.didReceiveNotification(from: .local, userInfo: userInfo)
         }
     }
     
-    func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData){
-        _ = managers.map { $0.pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken) }
+    func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data){
+        _ = managers.map { $0.pmp_didRegisterForRemoteNotifications(withDeviceToken: deviceToken) }
     }
-    func didReceiveNotification(from: PushFrom, userInfo: [NSObject : AnyObject]){
-        storeTempData(userInfo, from: from)
+    func didReceiveNotification(from: PushFrom, userInfo: [AnyHashable: Any]){
+        storeTempData(userInfo: userInfo, from: from)
         if canReceiveData {
             tempPushUserInfo = nil
             tempPushFrom = nil
-            _ = managers.map { $0.pmp_didReceiveNotification(from, userInfo: userInfo) }
+            _ = managers.map { $0.pmp_didReceiveNotification(from: from, userInfo: userInfo) }
         }
     }
-    func didFailToRegisterForRemoteNotificationsWithError(error: NSError){
-        _ = managers.map { $0.pmp_didFailToRegisterForRemoteNotificationsWithError(error) }
+    func didFailToRegisterForRemoteNotifications(withError error: Error){
+        _ = managers.map { $0.pmp_didFailToRegisterForRemoteNotifications(withError: error) }
     }
     
 }
@@ -100,46 +100,44 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
 extension AppDelegate : UNUserNotificationCenterDelegate{
     
     //MARK: 推送回调方法
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         DDLogInfo("推送注册成功 DeviceToken: \(deviceToken)")
-        PushManager.shared.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+        PushManager.shared.didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
-    
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         DDLogError("推送注册失败")
-        PushManager.shared.didFailToRegisterForRemoteNotificationsWithError(error)
+        PushManager.shared.didFailToRegisterForRemoteNotifications(withError: error)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if application.applicationState == .Active || application.applicationState == .Inactive {
-            PushManager.shared.didReceiveNotification(.REMOTE, userInfo: userInfo)
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if application.applicationState == .active || application.applicationState == .inactive {
+            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
         }
         
-        completionHandler(.NoData)
+        completionHandler(.noData)
     }
-    
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         if let userInfo = notification.userInfo {
-            PushManager.shared.didReceiveNotification(.LOCAL, userInfo: userInfo)
+            PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
         }
     }
     
     //MARK: iOS10新加入的回调方法
     // 应用在前台收到通知
     @available(iOS 10.0, *)
-    func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        PushManager.shared.didReceiveNotification(.REMOTE, userInfo: userInfo)
+        PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
 
-        completionHandler(.Sound)
+        completionHandler(.sound)
     }
     
     // 点击通知进入应用
     @available(iOS 10.0, *)
-    func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        if ((response.notification.request.trigger?.isKindOfClass(UNPushNotificationTrigger)) != nil){
-            PushManager.shared.didReceiveNotification(.REMOTE, userInfo: userInfo)
+        if ((response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil){
+            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo)
         }
         completionHandler()
     }

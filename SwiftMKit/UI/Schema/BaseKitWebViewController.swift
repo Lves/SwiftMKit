@@ -222,16 +222,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
             header.endRefreshing()//结束下拉刷新
         }
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
-        webViewBridge?.indicator.stopAnimating()
-        
-        if let tip = error?.localizedDescription {
-            
-            if (error?.code == NSURLError.Cancelled.rawValue){
-                return
-            }
-            
-            self.showTip(tip)
-        }
+        webViewBridge.indicator.stopAnimating()
     }
     
     open func refreshNavigationBarTopLeftCloseButton() {

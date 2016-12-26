@@ -63,6 +63,8 @@
 		2749CECE1DD9BA7100D713B0 /* MKiPodAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749CECD1DD9BA7100D713B0 /* MKiPodAssetViewController.swift */; };
 		274C4C881DB4EF8600310C11 /* kb_keyboard_view_del@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */; };
 		274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */; };
+		2761365A1E0D0B1700CC6ED0 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276136581E0D0B1700CC6ED0 /* PushManager.swift */; };
+		2761365B1E0D0B1700CC6ED0 /* SystemPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276136591E0D0B1700CC6ED0 /* SystemPush.swift */; };
 		276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */; };
 		27678DE91D62A78800EB7C23 /* MStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DE81D62A78800EB7C23 /* MStack.swift */; };
 		27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEC1D62C0AE00EB7C23 /* MQueue.swift */; };
@@ -386,6 +388,8 @@
 		2749CECD1DD9BA7100D713B0 /* MKiPodAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKiPodAssetViewController.swift; sourceTree = "<group>"; };
 		274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_del@2x.png"; sourceTree = "<group>"; };
 		274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb_keyboard_view_screen@2x.png"; sourceTree = "<group>"; };
+		276136581E0D0B1700CC6ED0 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		276136591E0D0B1700CC6ED0 /* SystemPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPush.swift; sourceTree = "<group>"; };
 		276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLogMKitFormatter.swift; sourceTree = "<group>"; };
 		27678DE81D62A78800EB7C23 /* MStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MStack.swift; sourceTree = "<group>"; };
 		27678DEC1D62C0AE00EB7C23 /* MQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQueue.swift; sourceTree = "<group>"; };
@@ -698,6 +702,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				276136571E0D0B1700CC6ED0 /* Push */,
 				273E412F1DD301C000A09830 /* UserNotification */,
 				27678DE71D62A62700EB7C23 /* DataStructure */,
 				27D1A9B51CEEADCD00B511D7 /* FingerPrint */,
@@ -854,6 +859,15 @@
 				274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		276136571E0D0B1700CC6ED0 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				276136581E0D0B1700CC6ED0 /* PushManager.swift */,
+				276136591E0D0B1700CC6ED0 /* SystemPush.swift */,
+			);
+			path = Push;
 			sourceTree = "<group>";
 		};
 		276183AB1DAA678D00C3AC77 /* Log */ = {
@@ -2138,6 +2152,7 @@
 				278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
+				2761365B1E0D0B1700CC6ED0 /* SystemPush.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				2783E0031DB626FD005E087C /* MKCustomEmptyView.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
@@ -2192,6 +2207,7 @@
 				2783E0341DB62BB6005E087C /* MKCoreDataNetworkRequestViewModel.swift in Sources */,
 				27276C041CC71F640028E938 /* NSLayoutConstraint+Extension.swift in Sources */,
 				27DC8A9B1CE5DEC600A898CD /* BaseKitTableViewController.swift in Sources */,
+				2761365A1E0D0B1700CC6ED0 /* PushManager.swift in Sources */,
 				576E13D21D3DC70A00A948CE /* SwiftCrashHandler.swift in Sources */,
 				576E13D41D3DC70A00A948CE /* SwiftCrashUmengReporter.m in Sources */,
 				279193441CD05C17009B08F3 /* Int+Extension.swift in Sources */,

@@ -42,8 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //推送
-        PushManager.shared.addManagers([SystemPush()])
-        PushManager.shared.finishLaunchApplication(application, didFinishLaunchingWithOptions: launchOptions)
+        PushManager.shared.addManagers(managers: [SystemPush()])
+        PushManager.shared.finishLaunch(application: application, didFinishLaunchingWithOptions: launchOptions)
 
         return true
     }
