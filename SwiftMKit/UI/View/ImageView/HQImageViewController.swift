@@ -42,7 +42,7 @@ public class HQImageViewController: BaseKitViewController {
     override public func setupUI() {
         
         scrollView = UIScrollView(frame: self.view.bounds)
-        scrollView.backgroundColor = UIColor.clear
+        scrollView.backgroundColor = UIColor.black
         scrollView.delegate = self
         scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
@@ -85,7 +85,9 @@ public class HQImageViewController: BaseKitViewController {
         }
         
         Async.main(after: 0.25) { _ in
-            self.pageControl.isHidden = false
+            if self.imageModels.count > 1 {
+                self.pageControl.isHidden = false
+            }
         }
     }
     
@@ -117,6 +119,7 @@ extension HQImageViewController : UIScrollViewDelegate {
 
 extension HQImageViewController : HQZoomViewDelegate {
     public func hqzv_singleTapClick(tap: UITapGestureRecognizer){
+        scrollView.backgroundColor = UIColor.clear
         self.dismissView(recoginzer: tap)
     }
 }

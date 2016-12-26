@@ -74,7 +74,7 @@ public class HQZoomView: UIControl, UIScrollViewDelegate {
         self.scrollView?.showsHorizontalScrollIndicator = false
         self.scrollView?.maximumZoomScale = maxScale // scrollView最大缩放比例
         self.scrollView?.minimumZoomScale = minScale // scrollView最小缩放比例
-        self.scrollView?.backgroundColor = UIColor.black
+        self.scrollView?.backgroundColor = UIColor.clear
         self.scrollView?.contentSize = CGSize(width: self.scrollView?.w ?? 0, height: self.scrollView?.h ?? 0)
         self.addSubview(self.scrollView!)
         
@@ -102,7 +102,6 @@ public class HQZoomView: UIControl, UIScrollViewDelegate {
     
     // MARK: - deinit
     deinit {
-        print("ZoomView.swift释放了！");
     }
     
     // MARK: - UIScrollViewDelegate

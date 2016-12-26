@@ -55,11 +55,8 @@ class HQImageView: UIImageView {
                 let imgev = ($0 as! HQImageView)
                 return HQImageModel(image: imgev.image, imageUrl: imgev.imageViewHighQualitySrc!, imageType: .PNG, originFrame :(imgev.superview?.convert(imgev.frame, to: nil)))
             })!
-
-        //FIXME: 添加多个数据
-        let tempModels = imageModels + imageModels
         
-        let hqvc : HQImageViewController = HQImageViewController(imageModels: tempModels, selectedIndex: index)
+        let hqvc : HQImageViewController = HQImageViewController(imageModels: imageModels, selectedIndex: index)
         hqvc.view.frame = (self.getViewController()?.view.bounds)!
         hqvc.transitioningDelegate = self //设置过渡代理
         self.getViewController()?.presentVC(hqvc)
