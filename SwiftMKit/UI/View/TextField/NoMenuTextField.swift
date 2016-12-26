@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class NoMenuTextField: UITextField {
-    override public func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+    public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(UIResponder.paste(_:)) || action == #selector(UIResponder.copy(_:)) || action == #selector(UIResponder.selectAll(_:)) || action == #selector(UIResponder.select(_:)) {
             return false
         }

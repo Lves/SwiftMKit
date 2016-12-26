@@ -72,9 +72,9 @@ enum UILabelCountingMethod:Int {
 class LLCountingLabel: UILabel {
     var startValue:Double = 0
     var destinationValue:Double?
-    var progress:NSTimeInterval = 0
-    var lastUpdate:NSTimeInterval?
-    var totalTime:NSTimeInterval?
+    var progress:TimeInterval = 0
+    var lastUpdate:TimeInterval?
+    var totalTime:TimeInterval?
     var easingRate:Double?
     var timer:CADisplayLink?
     var counter:LabelCounter?
@@ -110,12 +110,12 @@ class LLCountingLabel: UILabel {
     }
 
     
-    func countTo(to: Double, duration: NSTimeInterval = InnerConstaint.CountingAnimationDuration) {
+    func countTo(to: Double, duration: TimeInterval = InnerConstaint.CountingAnimationDuration) {
         let old = self.text?.toDouble() ?? 0
-        countForm(old, to: to, duration: duration)
+        countForm(startValue: old, to: to, duration: duration)
     }
     
-    func countForm(startValue:Double, to: Double, duration: NSTimeInterval = InnerConstaint.CountingAnimationDuration) {
+    func countForm(startValue:Double, to: Double, duration: TimeInterval = InnerConstaint.CountingAnimationDuration) {
         
         self.startValue = startValue
         self.destinationValue = to
@@ -124,12 +124,12 @@ class LLCountingLabel: UILabel {
         self.timer = nil
         
         if duration == 0.0 {
-            self.setTextValue(to)
+            self.setTextValue(value: to)
         }
         easingRate = 3.0
         progress = 0
         totalTime = duration
-        lastUpdate = NSDate.timeIntervalSinceReferenceDate()
+        lastUpdate = NSDate.timeIntervalSinceReferenceDate
         if format == nil {
             format = "%f"
         }
@@ -149,28 +149,28 @@ class LLCountingLabel: UILabel {
             break
         }
         
-        let timer = CADisplayLink(target: self, selector: #selector(updateValue(_:)))
+        let timer = CADisplayLink(target: self, selector: #selector(LLCountingLabel.updateValue))
         timer.frameInterval = 2
-        timer.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
-        timer.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: UITrackingRunLoopMode)
+        timer.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        timer.add(to: RunLoop.main, forMode: .UITrackingRunLoopMode)
         self.timer = timer
     }
     
     
-    func updateValue(timer:NSTimer)  {
-        let now  = NSDate.timeIntervalSinceReferenceDate()
+    func updateValue(timer:Timer)  {
+        let now  = NSDate.timeIntervalSinceReferenceDate
         self.progress = (now - self.lastUpdate!) + self.progress
         self.lastUpdate = now
-        if self.progress >= self.totalTime
+        if self.progress >= self.totalTime!
         {
             self.timer?.invalidate()
             self.timer = nil
             self.progress = self.totalTime ?? 0
         }
-        setTextValue(self.currentValue() ?? 0.00)
+        setTextValue(value: self.currentValue() ?? 0.00)
     }
     func currentValue() -> Double? {
-        if progress>=totalTime {
+        if progress>=totalTime! {
             return self.destinationValue
         }
         
@@ -179,7 +179,7 @@ class LLCountingLabel: UILabel {
         }
         
         let percent = progress/totalT
-        let updateVal = self.counter?.update(Double(percent)) ?? 0
+        let updateVal = self.counter?.update(t: Double(percent)) ?? 0
         return startValue + (updateVal * ((destinationValue ?? 0) - startValue))
     }
     

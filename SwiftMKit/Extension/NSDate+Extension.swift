@@ -13,30 +13,30 @@ extension NSDate {
     
     public var currentYear : Int{
         get{
-            let dateFormatter:NSDateFormatter = NSDateFormatter();
+            let dateFormatter:DateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy/MM/dd";
-            let dateString:String = dateFormatter.stringFromDate(self);
-            var dates:[String] = dateString.componentsSeparatedByString("/")
+            let dateString:String = dateFormatter.string(from: self as Date);
+            var dates:[String] = dateString.components(separatedBy: "/")
             return dates[0].toInt() ?? 0
         }
     }
     
     public var currentMonth : Int{
         get{
-            let dateFormatter:NSDateFormatter = NSDateFormatter();
+            let dateFormatter:DateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy/MM/dd";
-            let dateString:String = dateFormatter.stringFromDate(self);
-            var dates:[String] = dateString.componentsSeparatedByString("/")
+            let dateString:String = dateFormatter.string(from: self as Date);
+            var dates:[String] = dateString.components(separatedBy: "/")
             return dates[1].toInt() ?? 0
         }
     }
     
     public var currentDay : Int{
         get{
-            let dateFormatter:NSDateFormatter = NSDateFormatter();
+            let dateFormatter:DateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy/MM/dd";
-            let dateString:String = dateFormatter.stringFromDate(self);
-            var dates:[String] = dateString.componentsSeparatedByString("/")
+            let dateString:String = dateFormatter.string(from: self as Date);
+            var dates:[String] = dateString.components(separatedBy: "/")
             return dates[2].toInt() ?? 0
         }
     }
