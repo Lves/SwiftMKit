@@ -34,25 +34,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // debug时可显示加密库的log
 //        EncryptedNetworkManager.setShowLog(true)
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.currentNotificationCenter().delegate = UserNotificationManager.sharedInstance
+//            UNUserNotificationCenter.currentNotificationCenter().delegate = UserNotificationManager.sharedInstance
             MKUserNotificationViewController.registerNotificationCategory()
 
         } else {
             // Fallback on earlier versions
         }
+        
+        //推送
+        PushManager.shared.addManagers([SystemPush()])
+        PushManager.shared.finishLaunchApplication(application, didFinishLaunchingWithOptions: launchOptions)
 
         return true
-    }
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        DDLogError("Fail to get device token: \(error)")
-    }
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let token = deviceToken.hexString
-        if #available(iOS 10.0, *) {
-            UserNotificationManager.deviceToken = token
-        } else {
-            // Fallback on earlier versions
-        }
     }
     
     func applicationWillResignActive(application: UIApplication) {
