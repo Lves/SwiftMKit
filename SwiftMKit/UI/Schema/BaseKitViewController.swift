@@ -100,13 +100,13 @@ public class BaseKitViewController : UIViewController {
 
 public extension UIViewController {
     
-    public func showTip(tip: String, completion : () -> Void = {}) {
-        showTip(tip, view: self.view, completion: completion)
+    public func showTip(tip: String,hideAfterDelay: NSTimeInterval = HudTool.HideTipAfterDelay, completion : () -> Void = {}) {
+        showTip(tip, view: self.view, hideAfterDelay: hideAfterDelay, completion: completion)
     }
     public func showTip(tip: String, image: UIImage?, completion : () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
     }
-    public func showTip(tip: String, view: UIView, offset: CGPoint = CGPointZero, completion : () -> Void = {}) {
+    public func showTip(tip: String, view: UIView, offset: CGPoint = CGPointZero,hideAfterDelay: NSTimeInterval = HudTool.HideTipAfterDelay, completion : () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
     }
     public func showLoading(text: String = "", detailText: String = "") {
