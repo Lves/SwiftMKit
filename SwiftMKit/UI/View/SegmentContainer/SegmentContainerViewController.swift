@@ -11,9 +11,11 @@ import CocoaLumberjack
 import ReactiveCocoa
 
 public protocol SegmentContainerViewControllerDelegate : class {
+    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController)
     func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat)
 }
 public extension SegmentContainerViewControllerDelegate {
+    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController){}
     func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat) {}
 }
 
@@ -130,6 +132,15 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         if (delegate != nil) {
             delegate?.didSelectSegment(self, index: selectedSegment, viewController: viewControllers[selectedSegment] ,percentX: percentX)
         }
+    }
+    
+    dynamic public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        let index = Int(scrollView.contentOffset.x / scrollView.w)
+        delegate?.didSelectSegment(self, index: index, viewController: viewControllers[index])
+    }
+    
+    dynamic public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        scrollViewDidEndScrollingAnimation(scrollView)
     }
 
     public func selectSegment(index: Int) -> Bool {
