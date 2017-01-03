@@ -140,7 +140,7 @@ public class BaseListKitViewController: BaseKitViewController, ListViewProtocol 
         }
     }
 
-    public override func showTip(tip: String, view: UIView, offset: CGPoint,hideAfterDelay: NSTimeInterval = HudTool.HideTipAfterDelay, completion: () -> Void) {
+    public override func showTip(tip: String, view: UIView, offset: CGPoint,hideAfterDelay: NSTimeInterval = NSTimeInterval(2), completion: () -> Void) {
         endListRefresh()
         super.showTip(tip, view: view, offset: offset, completion: completion)
     }
