@@ -139,16 +139,4 @@ public extension UIViewController {
 }
 
 
-public class LoanBaseKitViewController : UIViewController {
-    /// 页面参数（大部分用于初始化使用）
-    public var params = [String: AnyObject]() {
-        didSet {
-            for (key,value) in params {
-                self.setValue(value, forKey: key)
-            }
-        }
-    }
-}
-
-
 
