@@ -12,11 +12,9 @@ import ReactiveCocoa
 
 public protocol SegmentContainerViewControllerDelegate : class {
     func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController)
-    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat)
 }
 public extension SegmentContainerViewControllerDelegate {
     func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController){}
-    func didSelectSegment(segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat) {}
 }
 
 public class SegmentContainerViewController: UIViewController ,UIScrollViewDelegate{
@@ -47,6 +45,8 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
     }
     public weak var delegate: SegmentContainerViewControllerDelegate?
     public var scrollView : UIScrollView!
+    
+    public var offsetX = MutableProperty<CGFloat>(0)
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -129,9 +129,7 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
                 self.resetSubUIFrame()
             }
         }
-        if (delegate != nil) {
-            delegate?.didSelectSegment(self, index: selectedSegment, viewController: viewControllers[selectedSegment] ,percentX: percentX)
-        }
+        self.offsetX.value = percentX * width
     }
     
     dynamic public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
@@ -171,5 +169,32 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         scrollView.setContentOffset(CGPointMake((self.screenW * CGFloat(selectedSegment)), 0), animated: true)
         DDLogInfo("self.screenW \(self.screenW)")
         return true
+    }
+}
+
+extension UIScrollView {
+    /// 是否允许多个手势共存
+    /// 需要侧边滑动时，返回true，scrollView的手势和页面的滑动返回手势共存，scrollView就不拦截手势
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return panBack(gestureRecognizer)
+    }
+    /// 需要侧边滑动时，返回true，scrollView的手势和页面的滑动返回手势共存，scrollView就不拦截手势
+    /// 侧滑时，让scrollView禁止滑动，否则滑动返回时，scrollView也跟着在滑动
+    public override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return !panBack(gestureRecognizer)
+    }
+    func panBack(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGestureRecognizer {
+            let point = panGestureRecognizer.translationInView(self)
+            let state = panGestureRecognizer.state
+            if UIGestureRecognizerState.Began == state || UIGestureRecognizerState.Possible == state {
+                let location = gestureRecognizer.locationInView(self)
+                if point.x > 0 && location.x < 30 && contentOffset.x <= 0 {
+                    return true
+                }
+            }
+            return false
+        }
+        return false
     }
 }
