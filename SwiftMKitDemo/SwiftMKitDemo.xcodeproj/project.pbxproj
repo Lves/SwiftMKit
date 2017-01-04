@@ -153,6 +153,10 @@
 		27963FDB1DD46FEF007BA28A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27963FDA1DD46FEF007BA28A /* NotificationService.swift */; };
 		27963FDF1DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 27963FD81DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		27975EA71DD163DA006125D8 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27975EA61DD163DA006125D8 /* SlideInPresentationManager.swift */; };
+		2797F9F31E1CF4D300593C27 /* LimitLengthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797F9F11E1CF4D300593C27 /* LimitLengthTextField.swift */; };
+		2797F9F41E1CF4D300593C27 /* NoMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797F9F21E1CF4D300593C27 /* NoMenuTextField.swift */; };
+		2797F9F81E1CF53C00593C27 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797F9F61E1CF53C00593C27 /* PushManager.swift */; };
+		2797F9F91E1CF53C00593C27 /* SystemPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2797F9F71E1CF53C00593C27 /* SystemPush.swift */; };
 		279F038A1DD59E3600543336 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 279F03891DD59E3600543336 /* appicon.png */; };
 		279F03901DD5A43C00543336 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279F03761DD56DF500543336 /* UserNotifications.framework */; };
 		279F03911DD5A43C00543336 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279F03781DD56DF500543336 /* UserNotificationsUI.framework */; };
@@ -474,6 +478,10 @@
 		27963FDA1DD46FEF007BA28A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		27963FDC1DD46FEF007BA28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27975EA61DD163DA006125D8 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
+		2797F9F11E1CF4D300593C27 /* LimitLengthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitLengthTextField.swift; sourceTree = "<group>"; };
+		2797F9F21E1CF4D300593C27 /* NoMenuTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoMenuTextField.swift; sourceTree = "<group>"; };
+		2797F9F61E1CF53C00593C27 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		2797F9F71E1CF53C00593C27 /* SystemPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPush.swift; sourceTree = "<group>"; };
 		279F03761DD56DF500543336 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		279F03781DD56DF500543336 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		279F03891DD59E3600543336 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
@@ -686,6 +694,7 @@
 		18E184E11CC48B1600F14923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2797F9F51E1CF53C00593C27 /* Push */,
 				273E412F1DD301C000A09830 /* UserNotification */,
 				27678DE71D62A62700EB7C23 /* DataStructure */,
 				27D1A9B51CEEADCD00B511D7 /* FingerPrint */,
@@ -794,6 +803,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2797F9F01E1CF4D300593C27 /* TextField */,
 				278725621DB4C73C00C1F19A /* AlertView */,
 				6CEFCB411D3485F3008B3382 /* Pannel */,
 				FBE54A2E1CF3F2A3001C493A /* Password */,
@@ -1105,6 +1115,24 @@
 				27963FDC1DD46FEF007BA28A /* Info.plist */,
 			);
 			path = SwiftMKitDemoNotifyServiceExtension;
+			sourceTree = "<group>";
+		};
+		2797F9F01E1CF4D300593C27 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				2797F9F11E1CF4D300593C27 /* LimitLengthTextField.swift */,
+				2797F9F21E1CF4D300593C27 /* NoMenuTextField.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		2797F9F51E1CF53C00593C27 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				2797F9F61E1CF53C00593C27 /* PushManager.swift */,
+				2797F9F71E1CF53C00593C27 /* SystemPush.swift */,
+			);
+			path = Push;
 			sourceTree = "<group>";
 		};
 		279F03921DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension */ = {
@@ -2103,10 +2131,12 @@
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
 				2783E0031DB626FD005E087C /* MKCustomEmptyView.swift in Sources */,
+				2797F9F81E1CF53C00593C27 /* PushManager.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */,
+				2797F9F91E1CF53C00593C27 /* SystemPush.swift in Sources */,
 				27A1C5F61CEB3E22004FEA63 /* UIView+Extension.swift in Sources */,
 				273E41311DD301D500A09830 /* UserNotificationManager.swift in Sources */,
 				27A0E73B1DB7456100E9C489 /* AlamofireNetApiData.swift in Sources */,
@@ -2179,6 +2209,7 @@
 				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,
 				273F51B61CC8E4EE003ABE4A /* NSURLSessionTask+Extension.swift in Sources */,
 				2783DFFD1DB626FD005E087C /* MKCoverFlowSelectBtnsCollectionViewCell.swift in Sources */,
+				2797F9F41E1CF4D300593C27 /* NoMenuTextField.swift in Sources */,
 				6CD0E2711D87D67600B2FC40 /* UIFont+Extension.swift in Sources */,
 				6C724B3C1D0FCF0100CD5608 /* UIImage+Extension.swift in Sources */,
 				2783E01B1DB626FD005E087C /* MKSideViewController.swift in Sources */,
@@ -2195,6 +2226,7 @@
 				272F397F1CED51EC003C02F4 /* Action+Extension.swift in Sources */,
 				278CAA421CD19849008AC629 /* BaseKitEntity.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
+				2797F9F31E1CF4D300593C27 /* LimitLengthTextField.swift in Sources */,
 				278CAA4F1CD1E6FC008AC629 /* BaseKitWebViewController.swift in Sources */,
 				277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
