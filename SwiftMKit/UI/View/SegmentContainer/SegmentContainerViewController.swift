@@ -9,12 +9,13 @@
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
+import ReactiveSwift
 
 public protocol SegmentContainerViewControllerDelegate : class {
-    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat)
+    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController)
 }
 public extension SegmentContainerViewControllerDelegate {
-    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController ,percentX : CGFloat) {}
+    func didSelectSegment(_ segmentContainer: SegmentContainerViewController, index: Int, viewController: UIViewController){}
 }
 
 open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegate{
@@ -45,6 +46,7 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
     }
     open weak var delegate: SegmentContainerViewControllerDelegate?
     open var scrollView : UIScrollView!
+    open var offsetX = MutableProperty<CGFloat>(0)
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -127,9 +129,16 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
                 self.resetSubUIFrame()
             }
         }
-        if (delegate != nil) {
-            delegate?.didSelectSegment(self, index: selectedSegment, viewController: viewControllers[selectedSegment] ,percentX: percentX)
-        }
+        self.offsetX.value = percentX * width
+    }
+    
+    dynamic public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        let index = Int(scrollView.contentOffset.x / scrollView.w)
+        delegate?.didSelectSegment(self, index: index, viewController: viewControllers[index])
+    }
+    
+    dynamic public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        scrollViewDidEndScrollingAnimation(scrollView: scrollView)
     }
 
     open func selectSegment(_ index: Int) -> Bool {
@@ -160,5 +169,32 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
         scrollView.setContentOffset(CGPoint(x: (self.screenW * CGFloat(selectedSegment)), y: 0), animated: true)
         DDLogInfo("self.screenW \(self.screenW)")
         return true
+    }
+}
+
+extension UIScrollView {
+    /// 是否允许多个手势共存
+    /// 需要侧边滑动时，返回true，scrollView的手势和页面的滑动返回手势共存，scrollView就不拦截手势
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return panBack(gestureRecognizer: gestureRecognizer)
+    }
+    /// 需要侧边滑动时，返回true，scrollView的手势和页面的滑动返回手势共存，scrollView就不拦截手势
+    /// 侧滑时，让scrollView禁止滑动，否则滑动返回时，scrollView也跟着在滑动
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return !panBack(gestureRecognizer: gestureRecognizer)
+    }
+    func panBack(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGestureRecognizer {
+            let point = panGestureRecognizer.translation(in: self)
+            let state = panGestureRecognizer.state
+            if UIGestureRecognizerState.began == state || UIGestureRecognizerState.possible == state {
+                let location = gestureRecognizer.location(in: self)
+                if point.x > 0 && location.x < 30 && contentOffset.x <= 0 {
+                    return true
+                }
+            }
+            return false
+        }
+        return false
     }
 }

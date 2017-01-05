@@ -110,7 +110,6 @@ open class NetApiClient : NSObject {
         body.appendString("--\(boundary)--\r\n")
         return body as Data
     }
-    
     /// Create boundary string for multipart/form-data request
     ///
     /// - returns:            The boundary string that consists of "Boundary-" followed by a UUID string.

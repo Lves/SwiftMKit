@@ -185,6 +185,86 @@ open class AlamofireNetApiData: NetApiData {
         }
     }
     
+    open override func requestMultipartUpload() -> SignalProducer<MultipartUploadNetApiProtocol, NetError>{
+        let urlRequest = NetApiData.getURLRequest(self)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest)
+        let timeBegin = Date()
+        return SignalProducer { [unowned self] sink,disposable in
+            let wself  = self as! MultipartUploadNetApiProtocol
+            task.resume()
+            NotificationCenter.default.post(name: Notification.Name.Task.DidResume, object: task)
+            self.indicator?.bindTask(task)
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                //参数
+                for (key, value) in wself.query {
+                    let kk = String(describing: value)
+                    let data = kk.data(using: String.Encoding.utf8)!
+                    multipartFormData.append(data, withName: key)
+                }
+                //文件
+                if let fileList = wself.fileList{
+                    for fileModel in fileList {
+                        multipartFormData.append(fileModel.uploadData, withName: fileModel.fileName, fileName: fileModel.fileName, mimeType: fileModel.mimetype)
+                    }
+                }
+            }, with: urlRequest, encodingCompletion: { (encodingResult) in
+                task.suspend()
+                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON {  [weak self] response in
+                        guard let wself = self else { return }
+                        NetApiData.removeApi(wself)
+                        DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
+                        let transferedResponse = wself.transferResponseJSON(response.toNetApiResponse())
+                        switch transferedResponse.result {
+                        case .success:
+                            DDLogInfo("请求成功: \(wself.url)")
+                            if let value = transferedResponse.result.value {
+                                DDLogVerbose("JSON: \(value)")
+                                wself.response = value
+                                wself.fillJSON(value)
+                                sink.send(value: wself as! MultipartUploadNetApiProtocol)
+                                sink.sendCompleted()
+                                return
+                            }
+                        case .failure(let error):
+                            if let statusCode = StatusCode(rawValue:error.code) {
+                                switch(statusCode) {
+                                case .canceled:
+                                    DDLogWarn("请求取消: \(wself.url)")
+                                    sink.sendInterrupted()
+                                    return
+                                default:
+                                    break
+                                }
+                            }
+                            DDLogError("请求失败: \(wself.url)")
+                            DDLogError("\(error)")
+                            
+                            let err = error is NetError ? error as! NetError : NetError(error: error)
+                            err.response = transferedResponse.response
+                            sink.send(error: err)
+                        }
+                    }
+                case .failure(_):
+                    DDLogError("请求失败: \(self.url)")
+                    let err = NetError(statusCode: 404, message: "")
+                    sink.send(error: err)
+                }
+
+                
+            })
+            disposable.add { [weak self] in
+                guard let wself = self else { return }
+                NetApiData.removeApi(wself)
+            }
+        }
+        
+       
+    }
+    
     open override func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> {
         NetApiData.addApi(self)
         return SignalProducer { [unowned self] sink,disposable in

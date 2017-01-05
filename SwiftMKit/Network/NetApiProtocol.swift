@@ -11,7 +11,7 @@ import ReactiveCocoa
 import ReactiveSwift
 
 public enum ApiFormatType {
-    case json, data, string, upload
+    case json, data, string, upload, multipartUpload
 }
 public enum ApiMethod: String {
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
@@ -114,12 +114,29 @@ public protocol NetApiProtocol: class {
     func requestData() -> SignalProducer<NetApiProtocol, NetError>
     func requestString() -> SignalProducer<NetApiProtocol, NetError>
     func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError>
+    func requestMultipartUpload( ) -> SignalProducer<MultipartUploadNetApiProtocol, NetError>
 }
+
 
 public protocol UploadNetApiProtocol: NetApiProtocol {
     var uploadData: Data? { get set }
     var uploadDataName: String? { get }
     var uploadDataMimeType: String? { get }
+}
+public protocol MultipartUploadNetApiProtocol: NetApiProtocol {
+    var fileList:[UploadFileModel]? { get } //多文件上传用
+}
+//图片model
+public class UploadFileModel: NSObject {
+    var fileName: String
+    var mimetype: String
+    var uploadData: Data
+    init(fileName: String, mimetype: String, uploadData: Data){
+        self.fileName = fileName
+        self.mimetype = mimetype
+        self.uploadData = uploadData
+        super.init()
+    }
 }
 
 
@@ -148,7 +165,12 @@ public extension NetApiProtocol {
             return self.requestUpload().map { _ in
                 return self
             }
+        case .multipartUpload:
+            return self.requestMultipartUpload().map{_ in
+                return self
+            }
         }
+        
     }
     
     func setIndicator(_ indicator: IndicatorProtocol?, view: UIView? = nil, text: String? = nil) -> Self {

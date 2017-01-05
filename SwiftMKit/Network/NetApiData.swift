@@ -11,6 +11,7 @@ import ReactiveCocoa
 import CocoaLumberjack
 import MJExtension
 import ReactiveSwift
+import Alamofire
 
 public struct NetApiDataConst {
     static let DefaultTimeoutInterval: TimeInterval = 45
@@ -36,6 +37,7 @@ open class NetApiData: NSObject, NetApiProtocol {
     open func requestData() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
     open func requestString() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }
     open func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> { return SignalProducer.empty }
+    open func requestMultipartUpload() -> SignalProducer<MultipartUploadNetApiProtocol, NetError> { return SignalProducer.empty }
     
     fileprivate var runningApis = [NetApiData]()
     
