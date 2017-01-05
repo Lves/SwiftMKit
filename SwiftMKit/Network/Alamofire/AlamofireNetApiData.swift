@@ -209,7 +209,7 @@ public class AlamofireNetApiData: NetApiData {
                 }
             }, encodingCompletion: { (encodingResult) in
                 task.suspend()
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidSuspend, object: task)
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON {  [weak self] response in
