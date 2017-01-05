@@ -8,9 +8,10 @@
 
 import UIKit
 import ReactiveCocoa
+import Alamofire
 
 public enum ApiFormatType {
-    case JSON, Data, String, Upload
+    case JSON, Data, String, Upload, MultipartUpload
 }
 public enum ApiMethod: String {
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
@@ -104,6 +105,7 @@ public protocol NetApiProtocol: class {
     var response: AnyObject? { get set }
     var indicator: NetApiIndicator? { get set }
     
+    
     func fillJSON(json: AnyObject)
     func transferURLRequest(request:NSMutableURLRequest) -> NSMutableURLRequest
     func transferResponseJSON(response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError>
@@ -113,12 +115,32 @@ public protocol NetApiProtocol: class {
     func requestData() -> SignalProducer<NetApiProtocol, NetError>
     func requestString() -> SignalProducer<NetApiProtocol, NetError>
     func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError>
+    func requestMultipartUpload( ) -> SignalProducer<MultipartUploadNetApiProtocol, NetError>
 }
+
 
 public protocol UploadNetApiProtocol: NetApiProtocol {
     var uploadData: NSData? { get set }
     var uploadDataName: String? { get }
     var uploadDataMimeType: String? { get }
+}
+public protocol MultipartUploadNetApiProtocol: NetApiProtocol {
+    var fileList:[UploadFileModel]? { get } //多文件上传用
+}
+//图片model
+public class UploadFileModel: NSObject {
+    var fileName:String?
+    var mimetype:String?
+    var uploadData:NSData?
+    override init() {
+        super.init()
+    }
+    init(fileName:String,mimetype:String,uploadData:NSData){
+        super.init()
+        self.fileName = fileName
+        self.mimetype = mimetype
+        self.uploadData = uploadData
+    }
 }
 
 
@@ -147,7 +169,12 @@ public extension NetApiProtocol {
             return self.requestUpload().map { _ in
                 return self
             }
+        case .MultipartUpload:
+            return self.requestMultipartUpload().map{_ in
+                return self
+            }
         }
+        
     }
     
     func setIndicator(indicator: IndicatorProtocol?, view: UIView? = nil, text: String? = nil) -> Self {

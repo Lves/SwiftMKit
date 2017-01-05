@@ -46,6 +46,7 @@ public protocol NetApiClientProtocol {
     static func requestUpload(request: NSURLRequest, api: UploadNetApiProtocol,
                              completionHandler: (NetApiResponse<AnyObject, NSError> -> Void)?)
         -> AnyObject
+    
 }
 
 public class NetApiClient : NSObject {
@@ -114,7 +115,6 @@ public class NetApiClient : NSObject {
         body.appendString("--\(boundary)--\r\n")
         return body
     }
-    
     /// Create boundary string for multipart/form-data request
     ///
     /// - returns:            The boundary string that consists of "Boundary-" followed by a UUID string.
@@ -123,3 +123,5 @@ public class NetApiClient : NSObject {
         return "******"
     }
 }
+
+
