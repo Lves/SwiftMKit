@@ -38,6 +38,23 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
         get { return tableView }
     }
     
+    override func setupUI() {
+        super.setupUI()
+        let btn = CuteView(point: CGPoint(x: 150, y: 150), containerView: UIApplication.sharedApplication().keyWindow!)
+        btn.bubbleColor = self.view.tintColor
+        let img = UIImage(named: "appicon")!
+        let imgView = UIImageView(image: img)
+        imgView.frame = btn.frame
+        imgView.mCornerRadius = imgView.size.width / 2
+        imgView.mBorderColor = self.view.tintColor
+        imgView.mBorderWidth = 2
+        imgView.contentMode = .ScaleToFill
+        imgView.userInteractionEnabled = false
+        imgView.x = 0
+        imgView.y = 0
+        btn.frontView.addSubview(imgView)
+    }
+    
     override func setupNavigation() {
         super.setupNavigation()
         self.navigationController?.navigationBar.translucent = false
