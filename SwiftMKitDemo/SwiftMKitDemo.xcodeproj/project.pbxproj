@@ -69,6 +69,14 @@
 		27678DED1D62C0AE00EB7C23 /* MQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEC1D62C0AE00EB7C23 /* MQueue.swift */; };
 		27678DEF1D62C31F00EB7C23 /* MTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */; };
 		27678DF11D63050700EB7C23 /* MSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27678DF01D63050700EB7C23 /* MSearch.swift */; };
+		27704A271E23372100E2F78E /* SmarterTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A261E23372100E2F78E /* SmarterTool.swift */; };
+		27704A2B1E23579400E2F78E /* icon_st_apple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A281E23579400E2F78E /* icon_st_apple@2x.png */; };
+		27704A2C1E23579400E2F78E /* icon_st_bug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A291E23579400E2F78E /* icon_st_bug@2x.png */; };
+		27704A2D1E23579400E2F78E /* icon_st_file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A2A1E23579400E2F78E /* icon_st_file@2x.png */; };
+		27704A2F1E23582D00E2F78E /* icon_st_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A2E1E23582D00E2F78E /* icon_st_switch@2x.png */; };
+		277444421E1FB39C0082F8E5 /* JDJellyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444411E1FB39C0082F8E5 /* JDJellyButton.swift */; };
+		277444441E1FB3C90082F8E5 /* JDJellyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */; };
+		277444461E1FB3EC0082F8E5 /* JDJellyMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444451E1FB3EC0082F8E5 /* JDJellyMainButton.swift */; };
 		27784AAF1CF6E25200960071 /* SendCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27784AAE1CF6E25200960071 /* SendCodeButton.swift */; };
 		277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C49C01CE40FBF00295259 /* RegexHelper.swift */; };
 		277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EA9F81CE9AA0100AA62A0 /* NumberKeyboard.swift */; };
@@ -391,7 +399,15 @@
 		27678DEC1D62C0AE00EB7C23 /* MQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQueue.swift; sourceTree = "<group>"; };
 		27678DEE1D62C31F00EB7C23 /* MTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTreeNode.swift; sourceTree = "<group>"; };
 		27678DF01D63050700EB7C23 /* MSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSearch.swift; sourceTree = "<group>"; };
+		27704A261E23372100E2F78E /* SmarterTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmarterTool.swift; sourceTree = "<group>"; };
+		27704A281E23579400E2F78E /* icon_st_apple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_apple@2x.png"; sourceTree = "<group>"; };
+		27704A291E23579400E2F78E /* icon_st_bug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_bug@2x.png"; sourceTree = "<group>"; };
+		27704A2A1E23579400E2F78E /* icon_st_file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_file@2x.png"; sourceTree = "<group>"; };
+		27704A2E1E23582D00E2F78E /* icon_st_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_switch@2x.png"; sourceTree = "<group>"; };
 		27718BB91DD4858F00238F80 /* SwiftMKitDemoNotifyServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftMKitDemoNotifyServiceExtension.entitlements; sourceTree = "<group>"; };
+		277444411E1FB39C0082F8E5 /* JDJellyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButton.swift; sourceTree = "<group>"; };
+		277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButtonView.swift; sourceTree = "<group>"; };
+		277444451E1FB3EC0082F8E5 /* JDJellyMainButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyMainButton.swift; sourceTree = "<group>"; };
 		27784AAE1CF6E25200960071 /* SendCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCodeButton.swift; sourceTree = "<group>"; };
 		2779F51D1DD5567B0057F148 /* SwiftMKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftMKitDemo.entitlements; sourceTree = "<group>"; };
 		277C49C01CE40FBF00295259 /* RegexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
@@ -805,6 +821,8 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				27704A251E2336E600E2F78E /* SmarterView */,
+				277444401E1FB38F0082F8E5 /* JDJellyButton */,
 				275DC1431E1F864000BAE5E7 /* CuteView */,
 				2797F9F01E1CF4D300593C27 /* TextField */,
 				278725621DB4C73C00C1F19A /* AlertView */,
@@ -882,6 +900,28 @@
 				27678DF01D63050700EB7C23 /* MSearch.swift */,
 			);
 			path = DataStructure;
+			sourceTree = "<group>";
+		};
+		27704A251E2336E600E2F78E /* SmarterView */ = {
+			isa = PBXGroup;
+			children = (
+				27704A261E23372100E2F78E /* SmarterTool.swift */,
+				27704A281E23579400E2F78E /* icon_st_apple@2x.png */,
+				27704A291E23579400E2F78E /* icon_st_bug@2x.png */,
+				27704A2A1E23579400E2F78E /* icon_st_file@2x.png */,
+				27704A2E1E23582D00E2F78E /* icon_st_switch@2x.png */,
+			);
+			path = SmarterView;
+			sourceTree = "<group>";
+		};
+		277444401E1FB38F0082F8E5 /* JDJellyButton */ = {
+			isa = PBXGroup;
+			children = (
+				277444411E1FB39C0082F8E5 /* JDJellyButton.swift */,
+				277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */,
+				277444451E1FB3EC0082F8E5 /* JDJellyMainButton.swift */,
+			);
+			path = JDJellyButton;
 			sourceTree = "<group>";
 		};
 		277C49C41CE4108D00295259 /* Opertaion */ = {
@@ -1889,6 +1929,7 @@
 				6CEFCB651D3485F3008B3382 /* pannel_icon_chat@2x.png in Resources */,
 				2783E03F1DB645D5005E087C /* MKMBProgressHUDViewController.xib in Resources */,
 				6CEFCB771D3485F3008B3382 /* pannel_icon_qzone_h@2x.png in Resources */,
+				27704A2B1E23579400E2F78E /* icon_st_apple@2x.png in Resources */,
 				2783E00B1DB626FD005E087C /* MKGesturePasswordView.storyboard in Resources */,
 				6CEFCB6F1D3485F3008B3382 /* pannel_icon_font@2x.png in Resources */,
 				6CEFCB641D3485F3008B3382 /* pannel_icon_cardbackground_h@2x.png in Resources */,
@@ -1908,9 +1949,11 @@
 				2783E0021DB626FD005E087C /* MKCustomPullRefreshViewController.xib in Resources */,
 				6CEFCB7C1D3485F3008B3382 /* pannel_icon_weixin@2x.png in Resources */,
 				2783E0041DB626FD005E087C /* MKCustomEmptyView.xib in Resources */,
+				27704A2F1E23582D00E2F78E /* icon_st_switch@2x.png in Resources */,
 				274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */,
 				2783E02B1DB62716005E087C /* MKNetworkRequestTableViewCell.xib in Resources */,
 				6CEFCB6B1D3485F3008B3382 /* pannel_icon_copy@2x.png in Resources */,
+				27704A2C1E23579400E2F78E /* icon_st_bug@2x.png in Resources */,
 				FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */,
 				2783E01C1DB626FD005E087C /* MKTreeView.storyboard in Resources */,
 				27D989771DB47209004E79A0 /* BaseKitEmptyView.xib in Resources */,
@@ -1922,6 +1965,7 @@
 				27CA0CCC1DD949A900462BC6 /* MKPHAsset.storyboard in Resources */,
 				2783E00E1DB626FD005E087C /* MKIndicatorButtonViewController.xib in Resources */,
 				2783E0091DB626FD005E087C /* MKGalaryCollectionView.storyboard in Resources */,
+				27704A2D1E23579400E2F78E /* icon_st_file@2x.png in Resources */,
 				274593C61DCB5908006D04D9 /* smkit_view_empty@2x.png in Resources */,
 				6CEFCB761D3485F3008B3382 /* pannel_icon_qzone@2x.png in Resources */,
 			);
@@ -2138,6 +2182,7 @@
 				273F51AD1CC8CAA1003ABE4A /* MBHUDView.swift in Sources */,
 				03CC0D761CD204EE00D234FF /* DDLog+Extension.swift in Sources */,
 				278938001CD0A5CC00F43699 /* PX500UserEntity+CoreDataProperties.swift in Sources */,
+				277444461E1FB3EC0082F8E5 /* JDJellyMainButton.swift in Sources */,
 				3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */,
 				3FC9DF581CBFD6D400C2D938 /* BaseModel.swift in Sources */,
 				3FC9DF341CBFD53A00C2D938 /* BaseKitViewController.swift in Sources */,
@@ -2157,12 +2202,15 @@
 				2783E0051DB626FD005E087C /* MKEmptyCustomViewController.swift in Sources */,
 				278725651DB4C73C00C1F19A /* YYCustomAlertView.swift in Sources */,
 				2783E0151DB626FD005E087C /* MKOrderTableViewCell.swift in Sources */,
+				27704A271E23372100E2F78E /* SmarterTool.swift in Sources */,
 				2783E03A1DB62E4D005E087C /* MKDataViewModel.swift in Sources */,
 				278937FD1CD0A5CC00F43699 /* TestStudentEntity.swift in Sources */,
 				2783E02A1DB62716005E087C /* MKNetworkRequestTableViewCell.swift in Sources */,
+				277444441E1FB3C90082F8E5 /* JDJellyButtonView.swift in Sources */,
 				2783DFFF1DB626FD005E087C /* MKCoverFlowViewController.swift in Sources */,
 				27D1A9B71CEEADCD00B511D7 /* FingerPrint.swift in Sources */,
 				181C72EE1CE582AD0072FB7A /* PersentAnimator.swift in Sources */,
+				277444421E1FB39C0082F8E5 /* JDJellyButton.swift in Sources */,
 				2783E0081DB626FD005E087C /* MKNormalEmptyViewController.swift in Sources */,
 				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
