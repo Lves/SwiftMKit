@@ -215,7 +215,7 @@ public extension UIViewController {
         if self.navigationController == nil || self.navigationController?.viewControllers.count == 1 {
             return nil
         } else {
-            var vc: UIViewController?
+//            var vc: UIViewController?
             let count = self.navigationController?.viewControllers.count ?? 0
             for index in 0..<count {
                 if let viewController = self.navigationController?.viewControllers[count - 1 - index] {
