@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 public protocol SmarterToolDelegate {
     func routeToEvnSwitch()
@@ -16,11 +17,20 @@ extension SmarterToolDelegate {
     func routeToEvnSwitch() {}
 }
 
-public class SmarterTool {
+public class SmarterTool: NSObject {
     
     public var delegate: SmarterToolDelegate?
     
     var button:JDJellyButton!
+    
+    override init() {
+        super.init()
+        SwiftCrashReport.install(LocalCrashLogReporter)
+        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+        fileLogger.rollingFrequency = NSTimeInterval(60*60*24)  // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 1
+        DDLog.addLogger(fileLogger)
+    }
     
     func attachToView(view: UIView, homeIcon: String = "icon_st_apple") {
         button = JDJellyButton()
@@ -37,9 +47,10 @@ extension SmarterTool:JellyButtonDelegate
         button.MainButton.closingButtonGroup(expandagain: false)
         if arrindex == 1 {
             delegate?.routeToEvnSwitch()
+        } else if arrindex == 0 {
+            UIViewController.topController?.routeToName("DDLogViewController")
         } else if arrindex == 2 {
-            LocalCrashLogReporter.shared.insertCrashLog("aa")
-            let aa = LocalCrashLogReporter.shared.queryCrashLog()
+            UIViewController.topController?.routeToName("CrashLogViewController")
         }
     }
     

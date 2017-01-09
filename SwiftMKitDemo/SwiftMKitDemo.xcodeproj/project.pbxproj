@@ -78,6 +78,12 @@
 		27704A341E23611000E2F78E /* LocalCrashLogReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A331E23611000E2F78E /* LocalCrashLogReporter.swift */; };
 		27704A371E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A351E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift */; };
 		27704A381E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A361E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift */; };
+		27704A3B1E236ECC00E2F78E /* CrashLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A391E236ECC00E2F78E /* CrashLogViewController.swift */; };
+		27704A3C1E236ECC00E2F78E /* CrashLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27704A3A1E236ECC00E2F78E /* CrashLogViewController.xib */; };
+		27704A431E2371B300E2F78E /* CrashLogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A411E2371B300E2F78E /* CrashLogDetailViewController.swift */; };
+		27704A441E2371B300E2F78E /* CrashLogDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27704A421E2371B300E2F78E /* CrashLogDetailViewController.xib */; };
+		27704A471E23846F00E2F78E /* DDLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A451E23846F00E2F78E /* DDLogViewController.swift */; };
+		27704A481E23846F00E2F78E /* DDLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27704A461E23846F00E2F78E /* DDLogViewController.xib */; };
 		277444421E1FB39C0082F8E5 /* JDJellyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444411E1FB39C0082F8E5 /* JDJellyButton.swift */; };
 		277444441E1FB3C90082F8E5 /* JDJellyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */; };
 		277444461E1FB3EC0082F8E5 /* JDJellyMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444451E1FB3EC0082F8E5 /* JDJellyMainButton.swift */; };
@@ -412,6 +418,12 @@
 		27704A331E23611000E2F78E /* LocalCrashLogReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalCrashLogReporter.swift; sourceTree = "<group>"; };
 		27704A351E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrashLogEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		27704A361E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrashLogEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		27704A391E236ECC00E2F78E /* CrashLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLogViewController.swift; sourceTree = "<group>"; };
+		27704A3A1E236ECC00E2F78E /* CrashLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrashLogViewController.xib; sourceTree = "<group>"; };
+		27704A411E2371B300E2F78E /* CrashLogDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLogDetailViewController.swift; sourceTree = "<group>"; };
+		27704A421E2371B300E2F78E /* CrashLogDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrashLogDetailViewController.xib; sourceTree = "<group>"; };
+		27704A451E23846F00E2F78E /* DDLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLogViewController.swift; sourceTree = "<group>"; };
+		27704A461E23846F00E2F78E /* DDLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDLogViewController.xib; sourceTree = "<group>"; };
 		27718BB91DD4858F00238F80 /* SwiftMKitDemoNotifyServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftMKitDemoNotifyServiceExtension.entitlements; sourceTree = "<group>"; };
 		277444411E1FB39C0082F8E5 /* JDJellyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButton.swift; sourceTree = "<group>"; };
 		277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButtonView.swift; sourceTree = "<group>"; };
@@ -922,6 +934,12 @@
 				27704A291E23579400E2F78E /* icon_st_bug@2x.png */,
 				27704A2A1E23579400E2F78E /* icon_st_file@2x.png */,
 				27704A2E1E23582D00E2F78E /* icon_st_switch@2x.png */,
+				27704A391E236ECC00E2F78E /* CrashLogViewController.swift */,
+				27704A3A1E236ECC00E2F78E /* CrashLogViewController.xib */,
+				27704A411E2371B300E2F78E /* CrashLogDetailViewController.swift */,
+				27704A421E2371B300E2F78E /* CrashLogDetailViewController.xib */,
+				27704A451E23846F00E2F78E /* DDLogViewController.swift */,
+				27704A461E23846F00E2F78E /* DDLogViewController.xib */,
 			);
 			path = SmarterView;
 			sourceTree = "<group>";
@@ -1914,6 +1932,7 @@
 			files = (
 				27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */,
 				6CEFCB7F1D3485F3008B3382 /* pannel_icon_zhifubao_friend@2x.png in Resources */,
+				27704A441E2371B300E2F78E /* CrashLogDetailViewController.xib in Resources */,
 				6CEFCB671D3485F3008B3382 /* pannel_icon_circlefriends@2x.png in Resources */,
 				6CEFCB661D3485F3008B3382 /* pannel_icon_chat_h@2x.png in Resources */,
 				2783E0171DB626FD005E087C /* MKOrderView.storyboard in Resources */,
@@ -1950,6 +1969,7 @@
 				27959A541CD3531900546424 /* BaseKitWebViewController.xib in Resources */,
 				6CEFCB811D3485F3008B3382 /* pannel_icon_zhifubao_h@2x.png in Resources */,
 				2783E0121DB626FD005E087C /* MKKeyboardViewController.xib in Resources */,
+				27704A481E23846F00E2F78E /* DDLogViewController.xib in Resources */,
 				6CEFCB711D3485F3008B3382 /* pannel_icon_mms@2x.png in Resources */,
 				2783E0181DB626FD005E087C /* MKSegmentView.storyboard in Resources */,
 				279F038A1DD59E3600543336 /* appicon.png in Resources */,
@@ -1964,6 +1984,7 @@
 				27704A2F1E23582D00E2F78E /* icon_st_switch@2x.png in Resources */,
 				274C4C891DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png in Resources */,
 				2783E02B1DB62716005E087C /* MKNetworkRequestTableViewCell.xib in Resources */,
+				27704A3C1E236ECC00E2F78E /* CrashLogViewController.xib in Resources */,
 				6CEFCB6B1D3485F3008B3382 /* pannel_icon_copy@2x.png in Resources */,
 				27704A2C1E23579400E2F78E /* icon_st_bug@2x.png in Resources */,
 				FBE54A3C1CF434C0001C493A /* PasswordPannel.xib in Resources */,
@@ -2167,6 +2188,7 @@
 				27704A381E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift in Sources */,
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
 				181C72EB1CE5821F0072FB7A /* SideMenu.swift in Sources */,
+				27704A431E2371B300E2F78E /* CrashLogDetailViewController.swift in Sources */,
 				270692CB1CE9F27100CF211A /* CachePool.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
 				2783E0141DB626FD005E087C /* MKUIViewModel.swift in Sources */,
@@ -2175,6 +2197,7 @@
 				273E412E1DD3010C00A09830 /* NSData+Extension.swift in Sources */,
 				278938051CD0BC3800F43699 /* BaseListFetchKitViewController.swift in Sources */,
 				576E13D01D3DC70A00A948CE /* SwiftCrashConsoleReporter.swift in Sources */,
+				27704A471E23846F00E2F78E /* DDLogViewController.swift in Sources */,
 				270692D41CE9F27D00CF211A /* GesturePassword.swift in Sources */,
 				276183AD1DAA67B100C3AC77 /* DDLogMKitFormatter.swift in Sources */,
 				2783E03E1DB645D5005E087C /* MKMBProgressHUDViewController.swift in Sources */,
@@ -2280,6 +2303,7 @@
 				273E412A1DD2FE4B00A09830 /* MKUserNotificationViewModel.swift in Sources */,
 				6CD0E2741D87D6E600B2FC40 /* WebViewProgress.swift in Sources */,
 				277C49C11CE40FBF00295259 /* RegexHelper.swift in Sources */,
+				27704A3B1E236ECC00E2F78E /* CrashLogViewController.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
 				2783E0301DB62716005E087C /* MKNetworkRequestViewModel.swift in Sources */,
 				27D989731DB46EB7004E79A0 /* MKitEmptyView.swift in Sources */,

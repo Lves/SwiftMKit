@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../SwiftMKit/UI/View/SmarterView/SmarterTool.swift"
-            timestampString = "505637962.283618"
+            filePath = "../SwiftMKit/CrashReport/SwiftCrashUmengReporter.m"
+            timestampString = "505641294.827612"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "JellyButtonHasBeenTap(touch:image:groupindex:arrindex:)"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "+reportCrashMessage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

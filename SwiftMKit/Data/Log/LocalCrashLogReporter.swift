@@ -66,15 +66,29 @@ class LocalCrashLogReporter: NSObject, SwiftCrashReporter {
         fetchRequest.fetchOffset = page
         let entity = NSEntityDescription.entityForName("CrashLogEntity", inManagedObjectContext: context)
         fetchRequest.entity = entity
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createTime", ascending: false)]
         let fetchedObjects = try! context.executeFetchRequest(fetchRequest)
         let array = fetchedObjects.map({ $0 as! CrashLogEntity })
         return array
     }
-    
-    override init() {
-        SwiftCrashReport.install(LocalCrashLogReporter)
-        super.init()
+    func clean() {
+        let context = managedObjectContext
+        let fetchRequest = NSFetchRequest()
+        let entity = NSEntityDescription.entityForName("CrashLogEntity", inManagedObjectContext: context)
+        fetchRequest.entity = entity
+        do
+        {
+            let results = try context.executeFetchRequest(fetchRequest)
+            for managedObject in results
+            {
+                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+                context.deleteObject(managedObjectData)
+            }
+        } catch let error as NSError {
+            print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
+        }
     }
+    
     static func reportCrashMessage(message: String) {
         shared.insertCrashLog(message)
     }
