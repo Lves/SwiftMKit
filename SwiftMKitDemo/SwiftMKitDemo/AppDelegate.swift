@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Fallback on earlier versions
         }
         
+
         //推送
         PushManager.shared.addManagers([SystemPush()])
         PushManager.shared.finishLaunchApplication(application, didFinishLaunchingWithOptions: launchOptions)

@@ -37,6 +37,9 @@ extension SmarterTool:JellyButtonDelegate
         button.MainButton.closingButtonGroup(expandagain: false)
         if arrindex == 1 {
             delegate?.routeToEvnSwitch()
+        } else if arrindex == 2 {
+            LocalCrashLogReporter.shared.insertCrashLog("aa")
+            let aa = LocalCrashLogReporter.shared.queryCrashLog()
         }
     }
     

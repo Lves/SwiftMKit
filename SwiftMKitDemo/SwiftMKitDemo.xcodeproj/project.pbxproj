@@ -74,6 +74,10 @@
 		27704A2C1E23579400E2F78E /* icon_st_bug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A291E23579400E2F78E /* icon_st_bug@2x.png */; };
 		27704A2D1E23579400E2F78E /* icon_st_file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A2A1E23579400E2F78E /* icon_st_file@2x.png */; };
 		27704A2F1E23582D00E2F78E /* icon_st_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27704A2E1E23582D00E2F78E /* icon_st_switch@2x.png */; };
+		27704A321E235F8300E2F78E /* SwiftMKitLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27704A301E235F8300E2F78E /* SwiftMKitLog.xcdatamodeld */; };
+		27704A341E23611000E2F78E /* LocalCrashLogReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A331E23611000E2F78E /* LocalCrashLogReporter.swift */; };
+		27704A371E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A351E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift */; };
+		27704A381E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27704A361E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift */; };
 		277444421E1FB39C0082F8E5 /* JDJellyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444411E1FB39C0082F8E5 /* JDJellyButton.swift */; };
 		277444441E1FB3C90082F8E5 /* JDJellyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */; };
 		277444461E1FB3EC0082F8E5 /* JDJellyMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277444451E1FB3EC0082F8E5 /* JDJellyMainButton.swift */; };
@@ -404,6 +408,10 @@
 		27704A291E23579400E2F78E /* icon_st_bug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_bug@2x.png"; sourceTree = "<group>"; };
 		27704A2A1E23579400E2F78E /* icon_st_file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_file@2x.png"; sourceTree = "<group>"; };
 		27704A2E1E23582D00E2F78E /* icon_st_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_st_switch@2x.png"; sourceTree = "<group>"; };
+		27704A311E235F8300E2F78E /* SwiftMKitLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitLog.xcdatamodel; sourceTree = "<group>"; };
+		27704A331E23611000E2F78E /* LocalCrashLogReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalCrashLogReporter.swift; sourceTree = "<group>"; };
+		27704A351E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrashLogEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		27704A361E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrashLogEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		27718BB91DD4858F00238F80 /* SwiftMKitDemoNotifyServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftMKitDemoNotifyServiceExtension.entitlements; sourceTree = "<group>"; };
 		277444411E1FB39C0082F8E5 /* JDJellyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButton.swift; sourceTree = "<group>"; };
 		277444431E1FB3C90082F8E5 /* JDJellyButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDJellyButtonView.swift; sourceTree = "<group>"; };
@@ -883,7 +891,11 @@
 		276183AB1DAA678D00C3AC77 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				27704A351E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift */,
+				27704A361E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift */,
 				276183AC1DAA67B100C3AC77 /* DDLogMKitFormatter.swift */,
+				27704A301E235F8300E2F78E /* SwiftMKitLog.xcdatamodeld */,
+				27704A331E23611000E2F78E /* LocalCrashLogReporter.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -2152,6 +2164,7 @@
 				273F51B01CC8CB1A003ABE4A /* IndicatorProtocol.swift in Sources */,
 				2783E0191DB626FD005E087C /* MKSegmentViewController.swift in Sources */,
 				2783E0361DB62BD4005E087C /* MKCoreDataNetworkRequestViewController.swift in Sources */,
+				27704A381E23628B00E2F78E /* CrashLogEntity+CoreDataProperties.swift in Sources */,
 				273ACFAD1CC9D60600EB341D /* NetError.swift in Sources */,
 				181C72EB1CE5821F0072FB7A /* SideMenu.swift in Sources */,
 				270692CB1CE9F27100CF211A /* CachePool.swift in Sources */,
@@ -2170,6 +2183,7 @@
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* PX500PhotosModel.swift in Sources */,
 				576E13D31D3DC70A00A948CE /* SwiftCrashReport.swift in Sources */,
+				27704A341E23611000E2F78E /* LocalCrashLogReporter.swift in Sources */,
 				27276C0E1CC748D60028E938 /* SessionDelegate.swift in Sources */,
 				FBE54A3A1CF42983001C493A /* PasswordTextView.swift in Sources */,
 				3FC9DF361CBFD53A00C2D938 /* BaseListKitViewController.swift in Sources */,
@@ -2215,6 +2229,7 @@
 				272F39811CED51F6003C02F4 /* UIButton+Extension.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
 				2783E01E1DB626FD005E087C /* MKUITreeViewCellTableViewCell.swift in Sources */,
+				27704A371E23628B00E2F78E /* CrashLogEntity+CoreDataClass.swift in Sources */,
 				27276C0B1CC748D60028E938 /* ImageParser.swift in Sources */,
 				27A40F6D1CC5DE890012AF12 /* UIColor+Extension.swift in Sources */,
 				3FC77C471CC36AAE002F964B /* String+Extension.swift in Sources */,
@@ -2224,6 +2239,7 @@
 				278937FA1CD0A5CC00F43699 /* PX500PhotosEntity+CoreDataProperties.swift in Sources */,
 				27CA0CCE1DD949E600462BC6 /* MKPHAssetViewController.swift in Sources */,
 				278CAA4D1CD1E00A008AC629 /* WebViewBridge.swift in Sources */,
+				27704A321E235F8300E2F78E /* SwiftMKitLog.xcdatamodeld in Sources */,
 				3FC9DF591CBFD6D400C2D938 /* MKDataListModel.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
 				27D1A9AB1CEEA00400B511D7 /* LocationManager.swift in Sources */,
@@ -2792,6 +2808,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		27704A301E235F8300E2F78E /* SwiftMKitLog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				27704A311E235F8300E2F78E /* SwiftMKitLog.xcdatamodel */,
+			);
+			currentVersion = 27704A311E235F8300E2F78E /* SwiftMKitLog.xcdatamodel */;
+			path = SwiftMKitLog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
