@@ -129,17 +129,14 @@ public protocol MultipartUploadNetApiProtocol: NetApiProtocol {
 }
 //图片model
 public class UploadFileModel: NSObject {
-    var fileName:String?
-    var mimetype:String?
-    var uploadData:NSData?
-    override init() {
-        super.init()
-    }
+    var fileName:String
+    var mimetype:String
+    var uploadData:NSData
     init(fileName:String,mimetype:String,uploadData:NSData){
-        super.init()
         self.fileName = fileName
         self.mimetype = mimetype
         self.uploadData = uploadData
+        super.init()
     }
 }
 

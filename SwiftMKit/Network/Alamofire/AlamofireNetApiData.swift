@@ -204,7 +204,7 @@ public class AlamofireNetApiData: NetApiData {
                 //文件
                 if let fileList = wself.fileList{
                     for fileModel in fileList {
-                        multipartFormData.appendBodyPart(data: fileModel.uploadData ?? NSData(), name: fileModel.fileName ?? "", fileName: fileModel.fileName ?? "", mimeType: fileModel.mimetype ?? "image/gif")
+                        multipartFormData.appendBodyPart(data: fileModel.uploadData, name: fileModel.fileName, fileName: fileModel.fileName, mimeType: fileModel.mimetype)
                     }
                 }
             }, encodingCompletion: { (encodingResult) in
@@ -247,9 +247,10 @@ public class AlamofireNetApiData: NetApiData {
                             sink.sendFailed(err)
                         }
                     }
-                case .Failure(_):
+                case .Failure(let error):
                     DDLogError("请求失败: \(self.url)")
-                    let err = NetError(statusCode: 404, message: "")
+                    DDLogError("\(error)")
+                    let err = error is NetError ? error as! NetError : NetError(error: error as NSError)
                     sink.sendFailed(err)
                 }
 
