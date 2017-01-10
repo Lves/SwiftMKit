@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="cv9-hG-zgS">
+            <objects>
+                <navigationController id="q31-ib-wLn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tNz-mv-0DE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fvr-iK-Fsp" kind="relationship" relationship="rootViewController" id="iCd-cJ-cTa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXh-7l-Di1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-655" y="46"/>
+        </scene>
+        <!--Ringed Pages View Controller-->
+        <scene sceneID="btq-uv-GKf">
+            <objects>
+                <viewController storyboardIdentifier="RingedPagesViewController" id="fvr-iK-Fsp" customClass="RingedPagesViewController" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kwa-cQ-D3E"/>
+                        <viewControllerLayoutGuide type="bottom" id="fsv-cX-EiO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cAl-pk-Opi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Y4-CF-hMj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="675-0E-hhN">
+                                        <rect key="frame" x="8" y="526" width="359" height="29"/>
+                                        <segments>
+                                            <segment title="Origin"/>
+                                            <segment title="(60, 100)"/>
+                                            <segment title="(200, 100)"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="changeMainPageSize:" destination="fvr-iK-Fsp" eventType="valueChanged" id="Gt4-0X-pRT"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="page scale" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N41-f8-1en">
+                                        <rect key="frame" x="8" y="562" width="83" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AuS-eO-1Td">
+                                        <rect key="frame" x="8" y="591" width="359" height="29"/>
+                                        <segments>
+                                            <segment title="Origin"/>
+                                            <segment title="0.8"/>
+                                            <segment title="0.5"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="changePageScale:" destination="fvr-iK-Fsp" eventType="valueChanged" id="DHo-fq-Qgz"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="main page size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLX-Na-WpE">
+                                        <rect key="frame" x="8" y="497" width="114" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="AuS-eO-1Td" secondAttribute="bottom" constant="48" id="6Bj-Rn-2Ty"/>
+                                    <constraint firstItem="N41-f8-1en" firstAttribute="leading" secondItem="AuS-eO-1Td" secondAttribute="leading" id="6b5-OQ-X01"/>
+                                    <constraint firstItem="aLX-Na-WpE" firstAttribute="leading" secondItem="675-0E-hhN" secondAttribute="leading" id="9Bg-ZJ-Bgd"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="675-0E-hhN" secondAttribute="trailing" id="Gaz-fJ-gO5"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="AuS-eO-1Td" secondAttribute="trailing" id="ROi-tL-Y7p"/>
+                                    <constraint firstItem="AuS-eO-1Td" firstAttribute="top" secondItem="N41-f8-1en" secondAttribute="bottom" constant="8" id="UVU-6w-Y8N"/>
+                                    <constraint firstItem="N41-f8-1en" firstAttribute="top" secondItem="675-0E-hhN" secondAttribute="bottom" constant="8" id="eoU-8t-ukW"/>
+                                    <constraint firstAttribute="leadingMargin" secondItem="AuS-eO-1Td" secondAttribute="leading" id="hv0-fj-tac"/>
+                                    <constraint firstItem="675-0E-hhN" firstAttribute="top" secondItem="aLX-Na-WpE" secondAttribute="bottom" constant="8" id="iIy-Dj-Cy4"/>
+                                    <constraint firstAttribute="leadingMargin" secondItem="675-0E-hhN" secondAttribute="leading" id="trh-1J-5ne"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4Y4-CF-hMj" firstAttribute="leading" secondItem="cAl-pk-Opi" secondAttribute="leading" id="Gy9-W2-ryS"/>
+                            <constraint firstItem="fsv-cX-EiO" firstAttribute="top" secondItem="4Y4-CF-hMj" secondAttribute="bottom" id="JNj-BX-x13"/>
+                            <constraint firstAttribute="trailing" secondItem="4Y4-CF-hMj" secondAttribute="trailing" id="PwM-0O-sMV"/>
+                            <constraint firstItem="4Y4-CF-hMj" firstAttribute="top" secondItem="cAl-pk-Opi" secondAttribute="top" id="UCk-Yz-J7t"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mFK-k1-qvu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Htc-nG-H3Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="274" y="45"/>
+        </scene>
+    </scenes>
+</document>

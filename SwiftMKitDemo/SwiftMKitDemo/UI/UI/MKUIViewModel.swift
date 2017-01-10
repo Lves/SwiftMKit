@@ -28,6 +28,8 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "Indicator Button", detail: "Indicator Button", route: "MKIndicatorButtonViewController"))
         self.dataArray.append(MKDataListModel(title: "MBProgress HUD", detail: "MBProgress HUD", route: "MKMBProgressHUDViewController"))
         self.dataArray.append(MKDataListModel(title: "CLLoopView", detail: "CLLoopView", route: "CLLoopViewController", routeSB: "CLLoopView"))
+        self.dataArray.append(MKDataListModel(title: "RingedPages", detail: "RingedPages", route: "RingedPagesViewController", routeSB: "RingedPages"))
+        
     }
 
 }

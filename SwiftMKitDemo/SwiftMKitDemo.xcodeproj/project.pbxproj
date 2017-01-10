@@ -240,6 +240,11 @@
 		6555EAF21E24AC9E00D70C39 /* CLLoopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EAF11E24AC9E00D70C39 /* CLLoopView.swift */; };
 		6555EAF51E24AD4600D70C39 /* CLLoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EAF41E24AD4600D70C39 /* CLLoopViewController.swift */; };
 		6555EAF71E24ADB600D70C39 /* CLLoopView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6555EAF61E24ADB600D70C39 /* CLLoopView.storyboard */; };
+		6555EAFC1E24C40300D70C39 /* ImagePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EAF91E24C40300D70C39 /* ImagePageControl.swift */; };
+		6555EAFD1E24C40300D70C39 /* PagesCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EAFA1E24C40300D70C39 /* PagesCarousel.swift */; };
+		6555EAFE1E24C40300D70C39 /* RingedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EAFB1E24C40300D70C39 /* RingedPages.swift */; };
+		6555EB011E24CA0600D70C39 /* RingedPages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6555EB001E24CA0600D70C39 /* RingedPages.storyboard */; };
+		6555EB031E24CA1800D70C39 /* RingedPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EB021E24CA1800D70C39 /* RingedPagesViewController.swift */; };
 		6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51A9E51D3C853C006EF254 /* SharePannelView.swift */; };
 		6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */; };
 		6C724B3C1D0FCF0100CD5608 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */; };
@@ -604,6 +609,11 @@
 		6555EAF11E24AC9E00D70C39 /* CLLoopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLoopView.swift; sourceTree = "<group>"; };
 		6555EAF41E24AD4600D70C39 /* CLLoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLoopViewController.swift; sourceTree = "<group>"; };
 		6555EAF61E24ADB600D70C39 /* CLLoopView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CLLoopView.storyboard; sourceTree = "<group>"; };
+		6555EAF91E24C40300D70C39 /* ImagePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePageControl.swift; sourceTree = "<group>"; };
+		6555EAFA1E24C40300D70C39 /* PagesCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesCarousel.swift; sourceTree = "<group>"; };
+		6555EAFB1E24C40300D70C39 /* RingedPages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingedPages.swift; sourceTree = "<group>"; };
+		6555EB001E24CA0600D70C39 /* RingedPages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RingedPages.storyboard; sourceTree = "<group>"; };
+		6555EB021E24CA1800D70C39 /* RingedPagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingedPagesViewController.swift; sourceTree = "<group>"; };
 		6C51A9E51D3C853C006EF254 /* SharePannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePannelView.swift; sourceTree = "<group>"; };
 		6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+Extension.swift"; sourceTree = "<group>"; };
 		6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -847,6 +857,7 @@
 		273F51A41CC8C52A003ABE4A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6555EAF81E24C40300D70C39 /* RingedPages */,
 				6555EAF01E24AC9E00D70C39 /* CLLoopView */,
 				27704A251E2336E600E2F78E /* SmarterView */,
 				277444401E1FB38F0082F8E5 /* JDJellyButton */,
@@ -1178,6 +1189,7 @@
 			children = (
 				2783DFEA1DB626FD005E087C /* MKUIViewController.swift */,
 				2783DFEB1DB626FD005E087C /* MKUIViewModel.swift */,
+				6555EAFF1E24C9F900D70C39 /* RingedPages */,
 				6555EAF31E24AD1300D70C39 /* CLLoopView */,
 				2783DFCA1DB626FD005E087C /* ChartView */,
 				2783DFCD1DB626FD005E087C /* CoverFlowView */,
@@ -1653,6 +1665,25 @@
 			path = CLLoopView;
 			sourceTree = "<group>";
 		};
+		6555EAF81E24C40300D70C39 /* RingedPages */ = {
+			isa = PBXGroup;
+			children = (
+				6555EAF91E24C40300D70C39 /* ImagePageControl.swift */,
+				6555EAFA1E24C40300D70C39 /* PagesCarousel.swift */,
+				6555EAFB1E24C40300D70C39 /* RingedPages.swift */,
+			);
+			path = RingedPages;
+			sourceTree = "<group>";
+		};
+		6555EAFF1E24C9F900D70C39 /* RingedPages */ = {
+			isa = PBXGroup;
+			children = (
+				6555EB021E24CA1800D70C39 /* RingedPagesViewController.swift */,
+				6555EB001E24CA0600D70C39 /* RingedPages.storyboard */,
+			);
+			path = RingedPages;
+			sourceTree = "<group>";
+		};
 		6CD0E2631D87D65100B2FC40 /* ConnectPeer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1997,6 +2028,7 @@
 				27704A481E23846F00E2F78E /* DDLogViewController.xib in Resources */,
 				6555EAF71E24ADB600D70C39 /* CLLoopView.storyboard in Resources */,
 				6CEFCB711D3485F3008B3382 /* pannel_icon_mms@2x.png in Resources */,
+				6555EB011E24CA0600D70C39 /* RingedPages.storyboard in Resources */,
 				2783E0181DB626FD005E087C /* MKSegmentView.storyboard in Resources */,
 				279F038A1DD59E3600543336 /* appicon.png in Resources */,
 				6CEFCB7B1D3485F3008B3382 /* pannel_icon_verified@2x.png in Resources */,
@@ -2230,6 +2262,7 @@
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				27678DF11D63050700EB7C23 /* MSearch.swift in Sources */,
 				27959A3E1CD30BE400546424 /* UITextField+Extension.swift in Sources */,
+				6555EAFD1E24C40300D70C39 /* PagesCarousel.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* PX500PhotosModel.swift in Sources */,
 				576E13D31D3DC70A00A948CE /* SwiftCrashReport.swift in Sources */,
 				27704A341E23611000E2F78E /* LocalCrashLogReporter.swift in Sources */,
@@ -2252,6 +2285,7 @@
 				2783E0031DB626FD005E087C /* MKCustomEmptyView.swift in Sources */,
 				2797F9F81E1CF53C00593C27 /* PushManager.swift in Sources */,
 				273F51B41CC8DCFB003ABE4A /* TaskIndicatorList.swift in Sources */,
+				6555EAFC1E24C40300D70C39 /* ImagePageControl.swift in Sources */,
 				27C5A3791CE060B7003C0562 /* UIDevice+Extension.swift in Sources */,
 				270692D51CE9F27D00CF211A /* GesturePasswordButton.swift in Sources */,
 				2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */,
@@ -2321,6 +2355,7 @@
 				270692D61CE9F27D00CF211A /* GesturePasswordProtocol.swift in Sources */,
 				279193461CD05C5B009B08F3 /* NSTimeInterval+Extension.swift in Sources */,
 				3FC9DF321CBFD53A00C2D938 /* NetApiData.swift in Sources */,
+				6555EAFE1E24C40300D70C39 /* RingedPages.swift in Sources */,
 				2783E0131DB626FD005E087C /* MKUIViewController.swift in Sources */,
 				2749CECA1DD95E4300D713B0 /* MKPHAssetVideoViewController.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
@@ -2355,6 +2390,7 @@
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
 				2797F9F31E1CF4D300593C27 /* LimitLengthTextField.swift in Sources */,
 				278CAA4F1CD1E6FC008AC629 /* BaseKitWebViewController.swift in Sources */,
+				6555EB031E24CA1800D70C39 /* RingedPagesViewController.swift in Sources */,
 				277EA9F91CE9AA0100AA62A0 /* NumberKeyboard.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				27276C0D1CC748D60028E938 /* ScoutOperation.swift in Sources */,
