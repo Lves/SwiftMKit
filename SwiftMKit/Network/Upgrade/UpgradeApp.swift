@@ -11,6 +11,7 @@ import UIKit
 import CocoaLumberjack
 
 public class UpgradeApp : NSObject {
+    public static var alertShowing: Bool = false
     public static var alertController: UIAlertController?
     public static var appProtocol: UpgradeAppProtocol?
     public static func checkUpgrade() {
@@ -32,6 +33,7 @@ public class UpgradeApp : NSObject {
     public static func showUpgradeAlert(forceUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) {
         let alert = UIAlertController(title: "发现新版本", message: upgradeMessage, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "立即下载", style: .Default) { _ in
+            UpgradeApp.alertShowing = false
             if let url = NSURL(string: downloadUrl) {
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
@@ -57,6 +59,7 @@ public class UpgradeApp : NSObject {
             }
             })
         alert.addAction(UIAlertAction(title: forceUpgrade ? "退出" : "我知道了", style: .Cancel, handler: { _ in
+            UpgradeApp.alertShowing = false
             alertController = nil
             if forceUpgrade {
                 exit(0)
@@ -72,7 +75,10 @@ public class UpgradeApp : NSObject {
                 }
             }
             alertController = alert
-            vc.showAlert(alert, completion: nil)
+            if (!UpgradeApp.alertShowing){
+                vc.showAlert(alert, completion: nil)
+                UpgradeApp.alertShowing = true
+            }
         }
     }
     public class func showUpgradeAlertAfterExit(forceUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) {
