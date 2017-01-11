@@ -42,7 +42,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
     override func setupUI() {
         super.setupUI()
         c -= 1
-        smarterTool.attachToView(UIApplication.sharedApplication().keyWindow!, homeIcon: "icon_st_apple")
+        smarterTool.attachToView(UIApplication.sharedApplication().keyWindow!)
     }
     var c: Int = 1
     
