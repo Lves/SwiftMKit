@@ -30,6 +30,7 @@ public class UpgradeApp : NSObject {
             }
         })
     }
+    private static var lastForceUpgrade = false
     public static func showUpgradeAlert(forceUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) {
         let alert = UIAlertController(title: "发现新版本", message: upgradeMessage, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "立即下载", style: .Default) { _ in
@@ -68,8 +69,9 @@ public class UpgradeApp : NSObject {
         
         if let vc = UIViewController.topController {
             if alertController != nil {
-                if forceUpgrade {
+                if forceUpgrade && !lastForceUpgrade {
                     alertController?.dismissVC(completion: nil)
+                    UpgradeApp.alertShowing = false
                 } else {
                     return
                 }
@@ -77,6 +79,7 @@ public class UpgradeApp : NSObject {
             alertController = alert
             if (!UpgradeApp.alertShowing){
                 vc.showAlert(alert, completion: nil)
+                lastForceUpgrade = forceUpgrade
                 UpgradeApp.alertShowing = true
             }
         }
