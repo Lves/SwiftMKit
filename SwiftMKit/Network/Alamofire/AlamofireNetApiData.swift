@@ -208,8 +208,9 @@ public class AlamofireNetApiData: NetApiData {
                     }
                 }
             }, encodingCompletion: { (encodingResult) in
-                task.suspend()
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
+//                task.suspend()
+//                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
+                
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON {  [weak self] response in
@@ -224,6 +225,9 @@ public class AlamofireNetApiData: NetApiData {
                                 DDLogVerbose("JSON: \(value)")
                                 wself.response = value
                                 wself.fillJSON(value)
+                                task.suspend()
+                                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
+
                                 sink.sendNext(wself as! MultipartUploadNetApiProtocol)
                                 sink.sendCompleted()
                                 return
@@ -233,6 +237,8 @@ public class AlamofireNetApiData: NetApiData {
                                 switch(statusCode) {
                                 case .Canceled:
                                     DDLogWarn("请求取消: \(wself.url)")
+                                    task.suspend()
+                                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
                                     sink.sendInterrupted()
                                     return
                                 default:
@@ -244,12 +250,16 @@ public class AlamofireNetApiData: NetApiData {
                             
                             let err = error is NetError ? error as! NetError : NetError(error: error)
                             err.response = transferedResponse.response
+                            task.suspend()
+                            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
                             sink.sendFailed(err)
                         }
                     }
                 case .Failure(let error):
                     DDLogError("请求失败: \(self.url)")
                     DDLogError("\(error)")
+                    task.suspend()
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
                     let err = error is NetError ? error as! NetError : NetError(error: error as NSError)
                     sink.sendFailed(err)
                 }
@@ -257,6 +267,8 @@ public class AlamofireNetApiData: NetApiData {
                 
             })
             disposable.addDisposable { [weak self] in
+                task.suspend()
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
             }
