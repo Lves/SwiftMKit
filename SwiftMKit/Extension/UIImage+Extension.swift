@@ -80,7 +80,7 @@ public extension UIImage {
      */
     func restrict(maxWidth maxWidth: CGFloat, maxHeight: CGFloat, maxSize: Int) -> NSData? {
         let newImage = resizeImage(self, maxWidth: maxWidth, maxHeight: maxHeight)
-        return compressImageSizeLess500(newImage)
+        return compressImageSize(maxSize, image:newImage)
     }
     
     func resizeImage(originalImg:UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage{
@@ -136,25 +136,25 @@ public extension UIImage {
     }
     
     //图片质量压缩
-    func compressImageSizeLess500(image:UIImage) -> NSData{
-        
+    func compressImageSize(limitSize:Int,image:UIImage) -> NSData{
         var zipImageData = UIImageJPEGRepresentation(image, 1.0)!
         let originalImgSize = zipImageData.length/1024 as Int  //获取图片大小
         print("原始大小: \(originalImgSize)")
-        if originalImgSize > 3000 {
-            zipImageData = UIImageJPEGRepresentation(image,0.3)!
-            if zipImageData.length/1024 > 500 {
-                zipImageData = UIImageJPEGRepresentation(image,0.1)!
-            }
-        } else if originalImgSize > 1500 {
-            zipImageData = UIImageJPEGRepresentation(image,0.5)!
-        } else if originalImgSize > 500 {
-            zipImageData = UIImageJPEGRepresentation(image,0.7)!
-        } else {
-            return zipImageData
-        }
+        
+        let compressionQuality : CGFloat = self.getCompressionQuality(limitSize, image: image, compressionQuality: 1.0)
+        zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
         print("上传大小: \(zipImageData.length/1024)")
+        
         return zipImageData
     }
     
+    func getCompressionQuality(limitSize:Int,image:UIImage,compressionQuality:CGFloat) -> CGFloat{
+        var ret = compressionQuality
+        let zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
+        if zipImageData.length > limitSize {
+            ret = ret * 0.9
+            ret = self.getCompressionQuality(limitSize, image: image, compressionQuality: ret)
+        }
+        return ret
+    }
 }
