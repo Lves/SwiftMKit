@@ -12,6 +12,18 @@ import Result
 import EZSwiftExtensions
 
 public extension UITextField {
+    
+    //MARK: - 修改clearButtonImage
+    func setClearButtonImage(image:UIImage?,clearButtonMode:UITextFieldViewMode? = .WhileEditing) {
+        guard let clearImage = image else {
+            return
+        }
+        let clearButton:UIButton = self.valueForKey("_clearButton") as! UIButton
+        clearButton.setImage(clearImage, forState: .Normal)
+        self.clearButtonMode = clearButtonMode ?? .WhileEditing
+    }
+    
+    //MARK: -
     public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
         return self.rac_textSignal().toSignalProducer().map { $0 as! String }.flatMapError { _ in SignalProducer.empty }
     }
