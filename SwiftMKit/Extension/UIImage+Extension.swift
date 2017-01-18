@@ -89,6 +89,7 @@ public extension UIImage {
         let height = originalImg.size.height
         let scale = width/height
         print("原始长: \(height), 原始宽: \(width)")
+        
         var sizeChange = CGSize()
         
         if width <= maxWidth && height <= maxHeight{ //a，图片宽或者高均小于或等于1280时图片尺寸保持不变，不改变图片大小
@@ -132,6 +133,7 @@ public extension UIImage {
         let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         print("压缩后长: \(sizeChange.height), 压缩后宽: \(sizeChange.width)")
+        
         return resizedImg!
     }
     
@@ -144,6 +146,15 @@ public extension UIImage {
         let compressionQuality : CGFloat = self.getCompressionQuality(limitSize, image: image, compressionQuality: 1.0)
         zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
         print("上传大小: \(zipImageData.length/1024)")
+        
+//        //FIXME: 打印测试数据信息
+//        let width = image.size.width
+//        let height = image.size.height
+//        print("原始长: \(height), 原始宽: \(width)")
+//        
+//        let alert = UIAlertController(title: "原始长: \(height), 原始宽: \(width) \n原始大小: \(originalImgSize) 上传大小: \(zipImageData.length/1024)", message: "", preferredStyle: .Alert)
+//        alert.addAction(UIAlertAction(title: "关闭", style: .Cancel, handler: nil))
+//        UIViewController.topController?.showAlert(alert, completion: nil)
         
         return zipImageData
     }
