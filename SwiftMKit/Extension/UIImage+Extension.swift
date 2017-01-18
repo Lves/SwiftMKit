@@ -156,6 +156,11 @@ public extension UIImage {
 //        alert.addAction(UIAlertAction(title: "关闭", style: .Cancel, handler: nil))
 //        UIViewController.topController?.showAlert(alert, completion: nil)
         
+//        let homeDirectory = NSHomeDirectory()
+//        let filePath : String = homeDirectory + "/test.jpg"
+//        zipImageData.writeToFile(filePath, atomically: true)
+//        print("filePath \(filePath)")
+        
         return zipImageData
     }
     
