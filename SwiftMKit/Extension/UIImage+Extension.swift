@@ -80,7 +80,7 @@ public extension UIImage {
      */
     func restrict(maxWidth maxWidth: CGFloat, maxHeight: CGFloat, maxSize: Int) -> NSData? {
         let newImage = resizeImage(self, maxWidth: maxWidth, maxHeight: maxHeight)
-        return compressImageSizeLess500(newImage)
+        return compressImageSize(maxSize, image:newImage)
     }
     
     func resizeImage(originalImg:UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage{
@@ -89,6 +89,7 @@ public extension UIImage {
         let height = originalImg.size.height
         let scale = width/height
         print("原始长: \(height), 原始宽: \(width)")
+        
         var sizeChange = CGSize()
         
         if width <= maxWidth && height <= maxHeight{ //a，图片宽或者高均小于或等于1280时图片尺寸保持不变，不改变图片大小
@@ -132,29 +133,44 @@ public extension UIImage {
         let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         print("压缩后长: \(sizeChange.height), 压缩后宽: \(sizeChange.width)")
+        
         return resizedImg!
     }
     
     //图片质量压缩
-    func compressImageSizeLess500(image:UIImage) -> NSData{
-        
+    func compressImageSize(limitSize:Int,image:UIImage) -> NSData{
         var zipImageData = UIImageJPEGRepresentation(image, 1.0)!
         let originalImgSize = zipImageData.length/1024 as Int  //获取图片大小
         print("原始大小: \(originalImgSize)")
-        if originalImgSize > 3000 {
-            zipImageData = UIImageJPEGRepresentation(image,0.3)!
-            if zipImageData.length/1024 > 500 {
-                zipImageData = UIImageJPEGRepresentation(image,0.1)!
-            }
-        } else if originalImgSize > 1500 {
-            zipImageData = UIImageJPEGRepresentation(image,0.5)!
-        } else if originalImgSize > 500 {
-            zipImageData = UIImageJPEGRepresentation(image,0.7)!
-        } else {
-            return zipImageData
-        }
+        
+        let compressionQuality : CGFloat = self.getCompressionQuality(limitSize, image: image, compressionQuality: 1.0)
+        zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
         print("上传大小: \(zipImageData.length/1024)")
+        
+//        //FIXME: 打印测试数据信息
+//        let width = image.size.width
+//        let height = image.size.height
+//        print("原始长: \(height), 原始宽: \(width)")
+//        
+//        let alert = UIAlertController(title: "原始长: \(height), 原始宽: \(width) \n原始大小: \(originalImgSize) 上传大小: \(zipImageData.length/1024)", message: "", preferredStyle: .Alert)
+//        alert.addAction(UIAlertAction(title: "关闭", style: .Cancel, handler: nil))
+//        UIViewController.topController?.showAlert(alert, completion: nil)
+        
+//        let homeDirectory = NSHomeDirectory()
+//        let filePath : String = homeDirectory + "/test.jpg"
+//        zipImageData.writeToFile(filePath, atomically: true)
+//        print("filePath \(filePath)")
+        
         return zipImageData
     }
     
+    func getCompressionQuality(limitSize:Int,image:UIImage,compressionQuality:CGFloat) -> CGFloat{
+        var ret = compressionQuality
+        let zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
+        if zipImageData.length > limitSize {
+            ret = ret * 0.9
+            ret = self.getCompressionQuality(limitSize, image: image, compressionQuality: ret)
+        }
+        return ret
+    }
 }
