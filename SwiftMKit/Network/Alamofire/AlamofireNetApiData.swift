@@ -187,7 +187,7 @@ public class AlamofireNetApiData: NetApiData {
     public override func requestMultipartUpload() -> SignalProducer<MultipartUploadNetApiProtocol, NetError>{
         let urlRequest = NetApiData.getURLRequest(self)
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(urlRequest)
+        let task = session.dataTaskWithRequest(NSURLRequest(URL: NSURL(string: "")!))
         let timeBegin = NSDate()
         return SignalProducer { [unowned self] sink,disposable in
             let wself  = self as! MultipartUploadNetApiProtocol
