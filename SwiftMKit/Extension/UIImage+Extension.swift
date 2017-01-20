@@ -144,9 +144,9 @@ public extension UIImage {
         print("原始大小: \(originalImgSize)")
         
         let compressionQuality : CGFloat = self.getCompressionQuality(limitSize, image: image, compressionQuality: 1.0)
-        if (compressionQuality < 1.0){  //一定要转成jpeg
-            zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
-        }
+        
+        zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
+       
         print("上传大小: \(zipImageData.length/1024)")
         
         //FIXME: 打印测试数据信息
