@@ -165,7 +165,6 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             button.selected = false
         }
         tentacleView?.frame = buttonPannel.frame
-        
     }
     private func updateTentacleView() {
         tentacleView?.lineWidth = lineWidth
@@ -180,12 +179,6 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         Async.main(after: 1) { [weak self] in
             self?.tentacleView?.enterArgin()
         }
-        gestureTriedNumber += 1
-        if gestureTriedNumber > maxGestureTryNumber {
-            let message = "错误次数已达上限，解锁失败"
-            delegate?.gp_verification(false, message: message, canTryAgain: false)
-            return false
-        }
         if result.length < minGestureNumber {
             gestureTriedNumber -= 1
             delegate?.gp_verification(false, message: "至少要绘制3个点，请重试", canTryAgain: gestureTriedNumber < maxGestureTryNumber)
@@ -194,13 +187,23 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         let success = GesturePassword.verify(result)
         var message = ""
         var canTry = true
+        
         if success {
             gestureTriedNumber = 0
             message = "手势密码解锁成功"
         } else {
+            gestureTriedNumber += 1
             message = "错误次数 \(gestureTriedNumber), 您还可以重试 \(maxGestureTryNumber - gestureTriedNumber) 次"
             canTry = (gestureTriedNumber < maxGestureTryNumber)
+            if !canTry {
+                let message = "错误次数已达上限，解锁失败"
+                delegate?.gp_verification(false, message: message, canTryAgain: false)
+                gestureTriedNumber = 0
+                self.userInteractionEnabled = false
+                return false
+            }
         }
+        
         delegate?.gp_verification(success, message: message, canTryAgain: canTry)
         return success
     }
@@ -235,6 +238,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
         }
     }
     public func reset() {
+        self.userInteractionEnabled = true
         tentacleView?.enterArgin()
     }
 }

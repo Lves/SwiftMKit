@@ -11,6 +11,15 @@ import UIKit
 
 extension NSDate {
     
+    public var localDate : NSDate {
+        get {
+            let localTimeZone : NSTimeZone = NSTimeZone.localTimeZone()
+            let offset : NSTimeInterval = NSTimeInterval(localTimeZone.secondsFromGMTForDate(NSDate()))
+            let date : NSDate = NSDate().dateByAddingTimeInterval(offset)
+            return date
+        }
+    }
+    
     public var currentYear : Int{
         get{
             let dateFormatter:NSDateFormatter = NSDateFormatter();
