@@ -180,7 +180,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
             self?.tentacleView?.enterArgin()
         }
         if result.length < minGestureNumber {
-            gestureTriedNumber -= 1
+//            gestureTriedNumber -= 1
             delegate?.gp_verification(false, message: "至少要绘制3个点，请重试", canTryAgain: gestureTriedNumber < maxGestureTryNumber)
             return false
         }
@@ -239,6 +239,7 @@ public class GesturePasswordView: UIView, GestureTentacleDelegate {
     }
     public func reset() {
         self.userInteractionEnabled = true
+        gestureTriedNumber = 0
         tentacleView?.enterArgin()
     }
 }
