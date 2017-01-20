@@ -28,6 +28,8 @@ public class PagesCarousel: UIView, UIScrollViewDelegate {
     public var mainPageSize = CGSize.zero
     /// When the center page is moved to left or right, it's size will change, so we use pageScale for this.
     public var pageScale: CGFloat = 1.0
+    /// Modify add by lixingle  cell之间的间距
+    public var cellMargin: CGFloat = 0
     
     public var autoScrollInterval: NSTimeInterval = 5.0 // is <= 0, will not scroll automatically
     
@@ -263,7 +265,7 @@ private extension PagesCarousel {
                 if delta < mainPageSize.width {
                     inset *= (delta / mainPageSize.width)
                 }
-                let edgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+                let edgeInsets = UIEdgeInsets(top: inset, left: inset+cellMargin, bottom: inset, right: inset+cellMargin)
                 page.frame = UIEdgeInsetsInsetRect(originPageFrame, edgeInsets)
             }
         }
