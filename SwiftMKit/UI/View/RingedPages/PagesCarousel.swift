@@ -15,11 +15,11 @@ public protocol PagesCarouselDataSource {
 
 public protocol PagesCarouselDelegate {
     func carousel(carousel: PagesCarousel, didScrollTo index: Int)
-    func didSelectCurrentPage(in carousel: PagesCarousel)
+    func didSelectCurrentPage(in carousel: PagesCarousel, index: Int)
 }
 public extension PagesCarouselDelegate {
     func carousel(carousel: PagesCarousel, didScrollTo index: Int) {}
-    func didSelectCurrentPage(in carousel: PagesCarousel) {}
+    func didSelectCurrentPage(in carousel: PagesCarousel, index: Int) {}
 }
 
 public class PagesCarousel: UIView, UIScrollViewDelegate {
@@ -206,7 +206,16 @@ private extension PagesCarousel {
     
     @objc func pagesTapedAction(sender : UITapGestureRecognizer) {
         if sender.state == .Ended {
-            delegate?.didSelectCurrentPage(in: self)
+            let xPercent = sender.locationInView(self).x / UIScreen.mainScreen().bounds.w
+            let mainPercent = scrollView.w / UIScreen.mainScreen().bounds.w
+            let leftPercent = (1 - mainPercent) / 2
+            let rightPercent = 1 - leftPercent
+            var index = xPercent < leftPercent ? self.currentIndex - 1 : xPercent > rightPercent ? self.currentIndex + 1 : self.currentIndex
+            if index < 0 {
+                index += orginPageCount
+            }
+            index = index % orginPageCount
+            delegate?.didSelectCurrentPage(in: self, index: index)
         }
     }
     

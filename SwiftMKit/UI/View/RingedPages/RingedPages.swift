@@ -17,11 +17,11 @@ public protocol RingedPagesDataSource {
     func ringedPages(pages: RingedPages, viewForItemAt index: Int) -> UIView
 }
 public protocol RingedPagesDelegate {
-    func didSelectCurrentPage(in pages: RingedPages)
+    func didSelectCurrentPage(in pages: RingedPages, index: Int)
     func ringedPages(pages: RingedPages, didScrollTo index: Int)
 }
 extension RingedPagesDelegate {// This extension makes the protocal optional~
-    func didSelectCurrentPage(in pages: RingedPages) {}
+    func didSelectCurrentPage(in pages: RingedPages, index: Int) {}
     func ringedPages(pages: RingedPages, didScrollTo index: Int) {}
 }
 
@@ -93,8 +93,8 @@ extension RingedPages: PagesCarouselDataSource, PagesCarouselDelegate {
         }
         return UIView()
     }
-    public func didSelectCurrentPage(in carousel: PagesCarousel) {
-        delegate?.didSelectCurrentPage(in: self)
+    public func didSelectCurrentPage(in carousel: PagesCarousel, index: Int) {
+        delegate?.didSelectCurrentPage(in: self, index: index)
     }
     public func carousel(carousel: PagesCarousel, didScrollTo index: Int) {
         if pageControl.currentIndex != index {
