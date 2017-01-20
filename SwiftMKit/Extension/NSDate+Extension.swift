@@ -41,6 +41,16 @@ extension NSDate {
         }
     }
     
+    public var currentHour : Int{
+        get{
+            let dateFormatter:NSDateFormatter = NSDateFormatter();
+            dateFormatter.dateFormat = "HH/MM/SS";
+            let dateString:String = dateFormatter.stringFromDate(self);
+            var dates:[String] = dateString.componentsSeparatedByString("/")
+            return dates[0].toInt() ?? 0
+        }
+    }
+    
     //每调用一次月份向下跳一月，跨年则为下一年1月
     func getNextYearAndMonth () -> (year:Int,month:Int){
         var next_year:Int = currentYear
