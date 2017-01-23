@@ -156,7 +156,7 @@ public extension UIImage {
 //        let alert = UIAlertController(title: "compressionQuality : \(compressionQuality) 原始长: \(height), 原始宽: \(width) \n原始大小: \(originalImgSize) 上传大小: \(zipImageData.length/1024)", message: "", preferredStyle: .Alert)
 //        alert.addAction(UIAlertAction(title: "关闭", style: .Cancel, handler: nil))
 //        UIViewController.topController?.showAlert(alert, completion: nil)
-        
+//        
 //        let homeDirectory = NSHomeDirectory()
 //        let filePath : String = homeDirectory + "/test.jpg"
 //        zipImageData.writeToFile(filePath, atomically: true)
