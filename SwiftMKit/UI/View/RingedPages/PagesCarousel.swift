@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 public protocol PagesCarouselDataSource {
     func numberOfItems(inCarousel carousel: PagesCarousel) -> Int
@@ -15,11 +16,11 @@ public protocol PagesCarouselDataSource {
 
 public protocol PagesCarouselDelegate {
     func carousel(carousel: PagesCarousel, didScrollTo index: Int)
-    func didSelectCurrentPage(in carousel: PagesCarousel, index: Int)
+    func didSelectPage(in carousel: PagesCarousel ,pageIndex: Int)
 }
 public extension PagesCarouselDelegate {
     func carousel(carousel: PagesCarousel, didScrollTo index: Int) {}
-    func didSelectCurrentPage(in carousel: PagesCarousel, index: Int) {}
+    func didSelectPage(in carousel: PagesCarousel ,pageIndex: Int) {}
 }
 
 public class PagesCarousel: UIView, UIScrollViewDelegate {
@@ -28,19 +29,15 @@ public class PagesCarousel: UIView, UIScrollViewDelegate {
     public var mainPageSize = CGSize.zero
     /// When the center page is moved to left or right, it's size will change, so we use pageScale for this.
     public var pageScale: CGFloat = 1.0
-    /// Modify add by lixingle  cell之间的间距
-    public var cellMargin: CGFloat = 0
-    
-    public var autoScrollInterval: NSTimeInterval = 5.0 // is <= 0, will not scroll automatically
-    
+    public var autoScrollInterval: NSTimeInterval = 0.0 // is <= 0, will not scroll automatically
     public var dataSource: PagesCarouselDataSource?
     public var delegate: PagesCarouselDelegate?
-    
     public var currentIndex: Int {
         get {
             return p_currentIndex
         }
     }
+    private var contentPageCount: Int = 0 //页面展示了多少个page
     
     /// Main API
     public func reloadData() {
@@ -143,7 +140,6 @@ public class PagesCarousel: UIView, UIScrollViewDelegate {
     deinit {
         timer?.invalidate()
     }
-    
 }
 
 public extension  PagesCarousel {
@@ -161,7 +157,7 @@ public extension  PagesCarousel {
             }
             if number <= CGFloat(orginPageCount - 1) {
                 let point = CGPoint(x: mainPageSize.width * CGFloat(2 * orginPageCount - 1), y: 0)
-                scrollView .setContentOffset(point, animated: false)
+                scrollView.setContentOffset(point, animated: false)
                 indexForTimer = 2 * orginPageCount
             }
         } else {
@@ -206,16 +202,39 @@ private extension PagesCarousel {
     
     @objc func pagesTapedAction(sender : UITapGestureRecognizer) {
         if sender.state == .Ended {
-            let xPercent = sender.locationInView(self).x / UIScreen.mainScreen().bounds.w
-            let mainPercent = scrollView.w / UIScreen.mainScreen().bounds.w
-            let leftPercent = (1 - mainPercent) / 2
-            let rightPercent = 1 - leftPercent
-            var index = xPercent < leftPercent ? self.currentIndex - 1 : xPercent > rightPercent ? self.currentIndex + 1 : self.currentIndex
-            if index < 0 {
-                index += orginPageCount
+            let point = sender.locationInView(self) //获取点击的位置
+            let touchX = point.x
+            let firstPageW = (bounds.w - (mainPageSize.width * (CGFloat)(contentPageCount))) / 2 //获取第一个page显示的宽度
+            let index = Int((touchX - firstPageW) / mainPageSize.width) //获取点击的是当前显示的第几个page
+            let midIndex = contentPageCount / 2
+            let dvalueIndex = index - midIndex //获取点击的是或左或右的第几个page
+
+            var touchIndex = currentIndex
+            for _ in 0..<abs(dvalueIndex){
+                if dvalueIndex < 0{
+                    if touchIndex - 1 < 0 {
+                        touchIndex = orginPageCount
+                    }
+                    touchIndex -= 1
+                }else if dvalueIndex > 0{
+                    if touchIndex + 1 > orginPageCount - 1 {
+                        touchIndex = 0
+                    }else{
+                        touchIndex += 1
+                    }
+                }
             }
-            index = index % orginPageCount
-            delegate?.didSelectCurrentPage(in: self, index: index)
+            delegate?.didSelectPage(in: self, pageIndex: touchIndex)
+            
+            /*
+            var tempIndex = 1
+            if (dvalueIndex < 0){
+                tempIndex = -1
+            }
+            let scrollToPointX = scrollView.contentOffset.x + (CGFloat)(tempIndex) * mainPageSize.width //获取点击page的x
+            let scrollToPoint = CGPoint(x: scrollToPointX, y: 0)
+            scrollView.setContentOffset(scrollToPoint, animated: true)
+            */
         }
     }
     
@@ -251,6 +270,7 @@ private extension PagesCarousel {
         }
         startIndex = max(startIndex, 0)
         endIndex = min(endIndex + 1, pages.count - 1)
+        contentPageCount = endIndex - startIndex
         visibleRange = NSRange(location: startIndex, length: endIndex - startIndex + 1)
         for i in startIndex...endIndex {
             setPage(at: i)
@@ -274,7 +294,7 @@ private extension PagesCarousel {
                 if delta < mainPageSize.width {
                     inset *= (delta / mainPageSize.width)
                 }
-                let edgeInsets = UIEdgeInsets(top: inset, left: inset+cellMargin, bottom: inset, right: inset+cellMargin)
+                let edgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
                 page.frame = UIEdgeInsetsInsetRect(originPageFrame, edgeInsets)
             }
         }

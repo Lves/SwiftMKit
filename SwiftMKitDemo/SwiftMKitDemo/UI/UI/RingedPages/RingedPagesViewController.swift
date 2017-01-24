@@ -37,7 +37,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
         
         let imageUrls = [imageUrl1,imageUrl2,imageUrl3,imageUrl4]
         
-        return imageUrls
+        return array
     }()
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
     }
     func ringedPages(pages: RingedPages, viewForItemAt index: Int) -> UIView {
         
-        /*//UILabel
+        //UILabel
         var label: UILabel?
         if let view = pages.dequeueReusablePage() {
             if view is UILabel {
@@ -66,8 +66,8 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
             label?.layer.cornerRadius = 5
         }
         label?.text = dataSource[index]
-        */
-        
+ 
+        /*
         var imgv: UIImageView?
         if let view = pages.dequeueReusablePage() {
             if view is UIImageView {
@@ -85,12 +85,13 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
                 imgv?.image = image
             }
         }
+         */
         
-        return imgv!
+        return label!
     }
     
-    func didSelectCurrentPage(in pages: RingedPages) {
-        print("pages selected, the current index is \(pages.currentIndex)")
+    func didSelectPage(in pages: RingedPages ,pageIndex: Int) {
+        print("pages selected, the current index is \(pages.currentIndex) pageIndex is \(pageIndex)" )
     }
     func ringedPages(pages: RingedPages, didScrollTo index: Int) {
         print("Did scrolled to index: \(index)")
