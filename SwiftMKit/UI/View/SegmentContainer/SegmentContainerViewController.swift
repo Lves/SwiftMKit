@@ -123,18 +123,18 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
         let percentX : CGFloat = offsetX / scrollView.contentSize.width
         let index = (offsetX + width / 2) / width
         _selectedSegment = Int(index)
-        if let vc = viewControllers[safe: Int(index)] {
-            if !(scrollView.subviews.contains(vc.view)) {
-                scrollView.addSubview(vc.view)
-                self.resetSubUIFrame()
-            }
-        }
         self.offsetX.value = percentX * width
     }
     
     dynamic public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.w)
         delegate?.didSelectSegment(self, index: index, viewController: viewControllers[index])
+        if let vc = viewControllers[safe: Int(index)] {
+            if !(scrollView.subviews.contains(vc.view)) {
+                vc.view.frame = CGRectMake(CGFloat(index) * screenW, 0, screenW, scrollView.h)
+                scrollView.addSubview(vc.view)
+            }
+        }
     }
     
     dynamic public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -156,6 +156,13 @@ public class SegmentContainerViewController: UIViewController ,UIScrollViewDeleg
             DDLogDebug("Segment Index is same to old one, do nothing")
             return true
         }
+        if let vc = viewControllers[safe: Int(index)] {
+            if !(scrollView.subviews.contains(vc.view)) {
+                vc.view.frame = CGRectMake(CGFloat(index) * screenW, 0, screenW, scrollView.h)
+                scrollView.addSubview(vc.view)
+            }
+        }
+
         for vc in viewControllers {
             if let listVC = vc as? BaseListKitViewController {
                 if index == viewControllers.indexOf(vc) {
