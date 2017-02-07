@@ -13,7 +13,7 @@ import UIKit
 @IBDesignable
 public extension UIView {
     struct InnerConstant {
-        static let BlurViewTag = 1001
+        static let BlurViewTag = 666666
     }
     
     func shake(count: Int, directionX: CGFloat = 3, directionY: CGFloat = 0) {
