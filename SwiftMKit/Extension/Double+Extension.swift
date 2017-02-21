@@ -25,4 +25,8 @@ public extension Double {
         }
         return value
     }
+    
+    func formatDecimals(decimals : Int = 0) -> String {
+        return String(format: "%.\(decimals)f", self)
+    }
 }
