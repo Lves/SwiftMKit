@@ -70,6 +70,7 @@ class MKUIViewController: BaseListViewController, UITableViewDelegate, UITableVi
                 self.routeToUrl(model.route ?? "")
                 return
             } else {
+//                self.hidesBottomBarWhenPushed = true
                 self.routeToName(model.route ?? "", storyboardName: model.routeSB)
                 return
             }

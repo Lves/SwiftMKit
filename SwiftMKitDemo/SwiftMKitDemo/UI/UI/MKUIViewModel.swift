@@ -29,6 +29,7 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "MBProgress HUD", detail: "MBProgress HUD", route: "MKMBProgressHUDViewController"))
         self.dataArray.append(MKDataListModel(title: "CLLoopView", detail: "CLLoopView", route: "CLLoopViewController", routeSB: "CLLoopView"))
         self.dataArray.append(MKDataListModel(title: "RingedPages", detail: "RingedPages", route: "RingedPagesViewController", routeSB: "RingedPages"))
+        self.dataArray.append(MKDataListModel(title: "PickerTextField", detail: "PickerTextField", route: "PickerTextFieldViewController", routeSB: "PickerTextField"))
         
     }
 
