@@ -21,6 +21,9 @@ class PickerTextFieldViewController: UIViewController,PickerTextFieldDelegate {
     func pickerTextField(pickerTextField: PickerTextField, didSelectRow row: Int) {
         print("选中\(row)")
     }
+    func pickerTextField(pickerTextField: PickerTextField, formatString string: String, forRow row: Int) -> String? {
+        return "\(string) 很帅"
+    }
 
 
 }

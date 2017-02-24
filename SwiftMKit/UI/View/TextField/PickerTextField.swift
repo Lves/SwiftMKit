@@ -20,6 +20,7 @@ struct PickerFieldConst{
 @objc
 public protocol PickerTextFieldDelegate : class {
     func pickerTextField(pickerTextField: PickerTextField, didSelectRow row: Int)
+    func pickerTextField(pickerTextField: PickerTextField, formatString string:String ,forRow row:Int) -> String?
 }
 
 
@@ -30,6 +31,7 @@ public class PickerTextField: UITextField ,UIPickerViewDelegate,UIPickerViewData
     var showPickerDuration:NSTimeInterval = 0.5
     var rowHeight:CGFloat = 50
     private var textButton: UIButton?
+    private var selectedRow:Int = 0
     public weak var pickerTextFieldDelegate: PickerTextFieldDelegate?
 
     lazy var coverView:UIView = {
@@ -85,18 +87,20 @@ public class PickerTextField: UITextField ,UIPickerViewDelegate,UIPickerViewData
     }
     
     @objc private func showPicker()  {
-      
-        
         UIApplication.sharedApplication().keyWindow?.addSubview(self.coverView)
         
         UIView.animateWithDuration(showPickerDuration, animations: {
             self.toolView.y =  self.toolView.y - self.toolView.h
         }) { (sucess) in
-            if self.text?.length == 0 { //为设置显示第一个
-                self.text = self.dataArray?[safe:self.defaultIndex]
+            if self.text?.length == 0 { //未设置显示第一个
+                let nextIndexString = self.dataArray?[safe:self.defaultIndex] ?? ""
+                if let string = self.pickerTextFieldDelegate?.pickerTextField(self, formatString: nextIndexString ,forRow: self.defaultIndex) {
+                    self.text = string
+                }else {
+                    self.text = nextIndexString
+                }
             }else { //找到滑动到该cell
-                let index = self.dataArray?.indexOf(self.text ?? "") ?? self.defaultIndex
-                self.pickerView.selectRow(index, inComponent: self.defaultComponent, animated: true)
+                self.pickerView.selectRow(self.selectedRow, inComponent: self.defaultComponent, animated: true)
             }
         }
         
@@ -126,10 +130,21 @@ extension PickerTextField {
         return (dataArray?.count ?? 0)
     }
     public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dataArray?[safe:row] ?? ""
+        let nextIndexString = dataArray?[safe:row] ?? ""
+        if let string = self.pickerTextFieldDelegate?.pickerTextField(self, formatString: nextIndexString ,forRow: row) {
+            return string
+        }else {
+            return nextIndexString
+        }
     }
     public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.text = dataArray?[safe:row] ?? ""
+        selectedRow = row
+        let nextIndexString = dataArray?[safe:row] ?? ""
+        if let string = self.pickerTextFieldDelegate?.pickerTextField(self, formatString: nextIndexString ,forRow: row) {
+            self.text = string
+        }else {
+            self.text = nextIndexString
+        }
         self.pickerTextFieldDelegate?.pickerTextField(self, didSelectRow: row)
     }
     public func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
