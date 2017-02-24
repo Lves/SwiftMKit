@@ -13,7 +13,6 @@ class PickerTextFieldViewController: UIViewController,PickerTextFieldDelegate {
     @IBOutlet weak var pickerTextField: PickerTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         pickerTextField.dataArray = ["刘德华","吴彦祖","梁朝伟","谢霆锋"]
         pickerTextField.pickerTextFieldDelegate = self
     }
@@ -21,9 +20,8 @@ class PickerTextFieldViewController: UIViewController,PickerTextFieldDelegate {
     func pickerTextField(pickerTextField: PickerTextField, didSelectRow row: Int) {
         print("选中\(row)")
     }
+    //可选，格式化字符串
     func pickerTextField(pickerTextField: PickerTextField, formatString string: String, forRow row: Int) -> String? {
         return "\(string) 很帅"
     }
-
-
 }

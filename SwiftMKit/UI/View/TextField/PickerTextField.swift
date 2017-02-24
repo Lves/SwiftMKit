@@ -20,7 +20,7 @@ struct PickerFieldConst{
 @objc
 public protocol PickerTextFieldDelegate : class {
     func pickerTextField(pickerTextField: PickerTextField, didSelectRow row: Int)
-    func pickerTextField(pickerTextField: PickerTextField, formatString string:String ,forRow row:Int) -> String?
+    optional func pickerTextField(pickerTextField: PickerTextField, formatString string:String ,forRow row:Int) -> String?
 }
 
 
@@ -94,7 +94,7 @@ public class PickerTextField: UITextField ,UIPickerViewDelegate,UIPickerViewData
         }) { (sucess) in
             if self.text?.length == 0 { //未设置显示第一个
                 let nextIndexString = self.dataArray?[safe:self.defaultIndex] ?? ""
-                if let string = self.pickerTextFieldDelegate?.pickerTextField(self, formatString: nextIndexString ,forRow: self.defaultIndex) {
+                if let string = self.pickerTextFieldDelegate?.pickerTextField?(self, formatString: nextIndexString ,forRow: self.defaultIndex) {
                     self.text = string
                 }else {
                     self.text = nextIndexString
@@ -131,7 +131,7 @@ extension PickerTextField {
     }
     public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let nextIndexString = dataArray?[safe:row] ?? ""
-        if let string = self.pickerTextFieldDelegate?.pickerTextField(self, formatString: nextIndexString ,forRow: row) {
+        if let string = self.pickerTextFieldDelegate?.pickerTextField?(self, formatString: nextIndexString ,forRow: row) {
             return string
         }else {
             return nextIndexString
@@ -140,7 +140,7 @@ extension PickerTextField {
     public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRow = row
         let nextIndexString = dataArray?[safe:row] ?? ""
-        if let string = self.pickerTextFieldDelegate?.pickerTextField(self, formatString: nextIndexString ,forRow: row) {
+        if let string = self.pickerTextFieldDelegate?.pickerTextField?(self, formatString: nextIndexString ,forRow: row) {
             self.text = string
         }else {
             self.text = nextIndexString
