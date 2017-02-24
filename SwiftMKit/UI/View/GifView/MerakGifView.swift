@@ -23,7 +23,7 @@ public class MerakGifView: UIView {
     var animation : CAKeyframeAnimation?
     var width:CGFloat{return self.frame.size.width}
     var height:CGFloat{return self.frame.size.height}
-    private var gifurl:NSURL! // 把本地图片转化成URL
+    var gifurl:NSURL! // 把本地图片转化成URL
     private var imageArr:Array<CGImage> = [] // 图片数组(存放每一帧的图片)
     private var timeArr:Array<NSNumber> = [] // 时间数组(存放每一帧的图片的时间)
     private var totalTime:Float = 0 // gif动画时间
