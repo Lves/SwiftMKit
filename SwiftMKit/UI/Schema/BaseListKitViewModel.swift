@@ -19,7 +19,10 @@ public class BaseListKitViewModel: BaseKitViewModel {
     }
     public var listViewController: BaseListKitViewController! {
         get {
-            return viewController as! BaseListKitViewController
+            if let viewController = viewController {
+                return viewController as! BaseListKitViewController
+            }
+            return BaseListKitViewController()
         }
     }
     public var listIndicator: IndicatorProtocol {
