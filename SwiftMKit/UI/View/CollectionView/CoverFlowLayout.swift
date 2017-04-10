@@ -94,7 +94,7 @@ open class CoverFlowLayout: UICollectionViewFlowLayout {
     
     
     fileprivate func degreesToRad(_ degrees: CGFloat) -> CGFloat {
-        return degrees * CGFloat(M_PI) / 180
+        return degrees * .pi / 180
     }
     
     fileprivate func minXCenterForRow(_ row: NSInteger) -> CGFloat {
@@ -181,7 +181,7 @@ open class CoverFlowLayout: UICollectionViewFlowLayout {
         
         // Then rotate.
         let angle: CGFloat = -self.maxCoverDegree + (interpolatedX - minX) * 2 * self.maxCoverDegree / spanX
-        transform = CATransform3DRotate(transform, angle * CGFloat(M_PI) / 180, 0, 1, 0)
+        transform = CATransform3DRotate(transform, angle * .pi / 180, 0, 1, 0)
 
         
         // Then scale: 1 - abs(1 - Q - 2 * x * (1 - Q))

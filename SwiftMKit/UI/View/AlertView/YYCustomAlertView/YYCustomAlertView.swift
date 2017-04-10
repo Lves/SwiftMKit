@@ -61,13 +61,13 @@ class YYCustomAlertView: UIView {
         // Attach to the top most window
         switch (UIApplication.shared.statusBarOrientation) {
         case UIInterfaceOrientation.landscapeLeft:
-            self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 270 / 180))
+            self.transform = CGAffineTransform(rotationAngle: .pi * 270 / 180)
             
         case UIInterfaceOrientation.landscapeRight:
-            self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 90 / 180))
+            self.transform = CGAffineTransform(rotationAngle: .pi * 90 / 180)
             
         case UIInterfaceOrientation.portraitUpsideDown:
-            self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 180 / 180))
+            self.transform = CGAffineTransform(rotationAngle: .pi * 180 / 180)
             
         default:
             break
@@ -92,7 +92,7 @@ class YYCustomAlertView: UIView {
         let currentTransform = alertView.layer.transform
         
         let startRotation = (alertView.value(forKeyPath: "layer.transform.rotation.z") as AnyObject).floatValue
-        let rotation = CATransform3DMakeRotation(CGFloat(-startRotation!) + CGFloat(M_PI * 270 / 180), 0, 0, 0)
+        let rotation = CATransform3DMakeRotation(CGFloat(-startRotation!) + .pi * 270 / 180, 0, 0, 0)
         
         alertView.layer.transform = CATransform3DConcat(rotation, CATransform3DMakeScale(1, 1, 1))
         alertView.layer.opacity = 1
@@ -314,15 +314,15 @@ class YYCustomAlertView: UIView {
         
         switch (interfaceOrientation) {
         case UIInterfaceOrientation.landscapeLeft:
-            rotation = CGAffineTransform(rotationAngle: CGFloat(-startRotation!) + CGFloat(M_PI * 270 / 180))
+            rotation = CGAffineTransform(rotationAngle: CGFloat(-startRotation!) + .pi * 270 / 180)
             break
             
         case UIInterfaceOrientation.landscapeRight:
-            rotation = CGAffineTransform(rotationAngle: CGFloat(-startRotation!) + CGFloat(M_PI * 90 / 180))
+            rotation = CGAffineTransform(rotationAngle: CGFloat(-startRotation!) + .pi * 90 / 180)
             break
             
         case UIInterfaceOrientation.portraitUpsideDown:
-            rotation = CGAffineTransform(rotationAngle: CGFloat(-startRotation!) + CGFloat(M_PI * 180 / 180))
+            rotation = CGAffineTransform(rotationAngle: CGFloat(-startRotation!) + .pi * 180 / 180)
             break
             
         default:

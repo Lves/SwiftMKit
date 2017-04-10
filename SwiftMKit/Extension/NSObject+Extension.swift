@@ -30,7 +30,7 @@ public extension NSObject {
                     let _ = oldData?.map { (object) -> Void in
                         object.mr_deleteEntity()
                     }
-                    DDLogDebug("[\(NSStringFromClass(entityType))] Delete old data: \(oldData?.count)")
+                    DDLogDebug("[\(NSStringFromClass(entityType))] Delete old data: \(oldData?.count ?? 0)")
                 }
             }
             if arr != nil {
@@ -39,7 +39,7 @@ public extension NSObject {
                 for obj in arr! {
                     if let entity = obj as? BaseKitEntity {
                         entity.entityUpdateTime = time
-                        entity.entityOrder = index + Int(page * number)
+                        entity.entityOrder = index + Int64(page * number)
                         index += 1
                     }
                 }

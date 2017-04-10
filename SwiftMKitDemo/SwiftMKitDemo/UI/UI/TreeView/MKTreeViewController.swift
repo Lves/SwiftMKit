@@ -218,7 +218,7 @@ open class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegat
                 return
             }
             UIView.animate(withDuration: InnerConst.Duration, animations: {
-                imgArrow.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                imgArrow.transform = CGAffineTransform(rotationAngle: .pi)
             }) 
         } else {
             deleteRows(at: indexPathArray, with: .none)
@@ -227,7 +227,7 @@ open class TreeTableView: UITableView, UITableViewDataSource, UITableViewDelegat
                 return
             }
             UIView.animate(withDuration: InnerConst.Duration, animations: {
-                imgArrow.transform = CGAffineTransform(rotationAngle: -CGFloat(M_PI * 2))
+                imgArrow.transform = CGAffineTransform(rotationAngle: -.pi * 2)
             }) 
         }
     }

@@ -35,7 +35,7 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
     public static let shared = PushManager()
     private var tempPushUserInfo: [AnyHashable: Any]? {
         didSet {
-            DDLogInfo("PushUserInfo temp store: \(tempPushUserInfo)")
+            DDLogInfo("PushUserInfo temp store: \(String(describing: tempPushUserInfo))")
         }
     }
     private var tempPushFrom: PushFrom?

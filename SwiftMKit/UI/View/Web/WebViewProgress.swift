@@ -83,7 +83,7 @@ open class WebViewProgress : NSObject {
         var isFragmentJump : Bool = false
         
         if ((request.url?.fragment) != nil) {
-            let nonFragmentURL = request.url?.absoluteString.replacingOccurrences(of: "#\(request.url!.fragment)", with: "")
+            let nonFragmentURL = request.url?.absoluteString.replacingOccurrences(of: "#\(request.url?.fragment ?? "")", with: "")
             
             if let url = webView.request?.url{
                 let absoluteString : String = url.absoluteString
@@ -132,7 +132,7 @@ open class WebViewProgress : NSObject {
         //运行自定义的结束JS
         if tempInteractive {
             interactive = true
-            let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request!.mainDocumentURL!.scheme)://\(webView.request!.mainDocumentURL!.host)\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
+            let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request!.mainDocumentURL?.scheme ?? "")://\(webView.request?.mainDocumentURL?.host ?? "")\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
             webView.stringByEvaluatingJavaScript(from: waitForCompleteJS)
         }
         
@@ -150,6 +150,6 @@ open class WebViewProgress : NSObject {
         
         DDLogInfo("[runFinishJS] \(complete) \(isNotRedirect)")
         
-        DDLogInfo("[runFinishJS] \n\(currentURL) \n\(webView.request!.mainDocumentURL) \n\(webView.request!.url!.absoluteString)")
+        DDLogInfo("[runFinishJS] \n\(String(describing: currentURL)) \n\(String(describing: webView.request!.mainDocumentURL)) \n\(webView.request!.url?.absoluteString ?? "")")
     }
 }

@@ -51,7 +51,7 @@ open class UserNotificationManager: NSObject {
                 DDLogInfo("Set Push Device Token: \(deviceToken)")
             } else {
                 MemoryCache.shared().removeObject(forKey: Constant.DeviceTokenName)
-                DDLogWarn("Remove Push Device Token: \(deviceToken)")
+                DDLogWarn("Remove Push Device Token: \(deviceToken ?? "")")
             }
         }
     }

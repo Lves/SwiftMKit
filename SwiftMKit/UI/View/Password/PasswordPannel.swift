@@ -79,7 +79,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         return view
     }
     fileprivate func setupUI() {
-        self.btnClose.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
+        self.btnClose.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
             self?.passwordInputView.inactive()
             self?.hide() {
                 self?.passwordInputView.password = ""
@@ -88,7 +88,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
                 self?.eventCancel = { _ in }
             }
         }
-        self.btnForget.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
+        self.btnForget.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
             self?.hide() {
                 self?.delegate?.pp_forgetPassword(self)
                 self?.eventForgetPassword(self)
@@ -165,7 +165,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         lblMessage.text = ""
         var rotationAnimation = CABasicAnimation()
         rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotationAnimation.toValue = NSNumber.init(value: M_PI * 2.0 as Double)
+        rotationAnimation.toValue = NSNumber.init(value: .pi * 2.0 as Double)
         rotationAnimation.duration = 2.0;
         rotationAnimation.isCumulative = true;
         rotationAnimation.repeatCount = MAXFLOAT;

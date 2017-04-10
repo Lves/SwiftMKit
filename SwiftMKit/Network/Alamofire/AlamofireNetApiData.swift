@@ -152,7 +152,7 @@ open class AlamofireNetApiData: NetApiData {
                 case .success:
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
-                        DDLogVerbose("String: \(transferedResponse.result.value)")
+                        DDLogVerbose("String: \(transferedResponse.result.value ?? "")")
                         wself.response = value as AnyObject?
                         wself.fillJSON(value as AnyObject)
                         sink.send(value: wself)

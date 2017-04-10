@@ -166,7 +166,7 @@ open class SideMenu: UIViewController, UIGestureRecognizerDelegate {
             break
         }
         
-        DDLogInfo("panGestureRecognized \(recognizer.state.rawValue) \(direction) \(recognizer.view?.x)")
+        DDLogInfo("panGestureRecognized \(recognizer.state.rawValue) \(direction) \(recognizer.view?.x ?? 0)")
     }
     
     // 解决手势冲突问题
@@ -240,7 +240,7 @@ open class SideMenu: UIViewController, UIGestureRecognizerDelegate {
                 }) 
             case .right:
                 shadowView.right = 0
-                shadowView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI));
+                shadowView.transform = CGAffineTransform(rotationAngle: .pi);
                 menuViewController?.view.x = screenSize.width
                 UIView.animate(withDuration: animationDuration, animations: {
                     self.coverView.backgroundColor = self.maskColor

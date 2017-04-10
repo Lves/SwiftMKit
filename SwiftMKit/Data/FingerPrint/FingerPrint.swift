@@ -43,7 +43,7 @@ open class FingerPrint {
                             sink.send(value: false)
                             sink.sendCompleted()
                         } else {
-                            DDLogError("[FingerPrint] Matched Failure: \(authenticationError)")
+                            DDLogError("[FingerPrint] Matched Failure: \(String(describing: authenticationError))")
                             sink.send(error: authenticationError as NSError? ?? NSError(domain: "", code: -1, userInfo: nil))
                         }
                     }

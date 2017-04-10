@@ -62,10 +62,10 @@ open class WebViewBridge : NSObject {
     
     open func requestUrl(_ url: String?) {
         if url == nil || url!.length <= 0 || !UIApplication.shared.canOpenURL(URL(string: url!)!) {
-            DDLogError("Request Invalid Url: \(url)")
+            DDLogError("Request Invalid Url: \(url ?? "")")
             return
         }
-        DDLogInfo("Request url: \(url)")
+        DDLogInfo("Request url: \(url ?? "")")
         //清除旧数据
         _ = webView?.stringByEvaluatingJavaScript(from: "document.body.innerHTML='';")
         willRequestUrl(url!)

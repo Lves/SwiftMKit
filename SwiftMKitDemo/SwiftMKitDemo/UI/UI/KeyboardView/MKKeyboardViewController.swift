@@ -32,7 +32,7 @@ class MKKeyboardViewController: BaseViewController {
         keyboard = NumberKeyboard.keyboard(self.txtMoney, type: .money)
         self.txtMoney.inputView = keyboard
         
-        btnSuccess.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
+        btnSuccess.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
             pannel.eventInputPassword = { _,_,finish in
                 Async.main(after: 1) {
@@ -41,7 +41,7 @@ class MKKeyboardViewController: BaseViewController {
             }
             pannel.showInView(self.view)
         }
-        btnFail.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
+        btnFail.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
             pannel.eventInputPassword = { _,_,finish in
                 Async.main(after: 1) {
@@ -50,7 +50,7 @@ class MKKeyboardViewController: BaseViewController {
             }
             pannel.showInView(self.view)
         }
-        btnLock.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
+        btnLock.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
             let pannel = PasswordPannel.pannel()
             pannel.eventInputPassword = { _,_,finish in
                 Async.main(after: 1) {
