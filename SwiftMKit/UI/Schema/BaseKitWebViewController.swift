@@ -218,9 +218,16 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     }
     
     public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        if let header = self.webView.scrollView.mj_header {
-            header.endRefreshing()//结束下拉刷新
+        webViewProgress.progressWebView(webView, didFailLoadWithError: error)
+        webViewBridge.indicator.stopAnimating()
+        
+        let tip = error.localizedDescription
+        if ((error as NSError).code == URLError.cancelled.rawValue){
+            return
         }
+        
+        self.showTip(tip)
+        
         webViewProgress.progressWebView(webView, didFailLoadWithError: error)
         webViewBridge.indicator.stopAnimating()
     }

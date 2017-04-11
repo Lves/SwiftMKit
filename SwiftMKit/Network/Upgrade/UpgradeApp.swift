@@ -11,6 +11,7 @@ import UIKit
 import CocoaLumberjack
 
 open class UpgradeApp : NSObject {
+    open static var alertShowing: Bool = false
     open static var alertController: UIAlertController?
     open static var appProtocol: UpgradeAppProtocol?
     open static func checkUpgrade() {
@@ -29,9 +30,12 @@ open class UpgradeApp : NSObject {
             }
         })
     }
+    private static var lastForceUpgrade = false
     open static func showUpgradeAlert(forceUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) {
         let alert = UIAlertController(title: "发现新版本", message: upgradeMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "立即下载", style: .default) { _ in
+            UpgradeApp.alertShowing = false
+            lastForceUpgrade = false
             if let url = URL(string: downloadUrl) {
                 if UIApplication.shared.canOpenURL(url) {
                     DDLogInfo("跳转下载地址: \(downloadUrl)")
@@ -40,8 +44,58 @@ open class UpgradeApp : NSObject {
                     }else{
                         UIApplication.shared.openURL(url)
                     }
-                    if forceUpgrade {
-                        exit(0)
+                    return
+                }
+            }
+            DDLogError("[UpgradeApp] 下载地址错误: \(downloadUrl)")
+            let errorAlert = UIAlertController(title: "抱歉", message: "下载地址不正确，请稍后再试", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: forceUpgrade ? "退出" : "我知道了", style: .cancel, handler: { _ in
+                alertController = nil
+                if forceUpgrade {
+                    exit(0)
+                }
+            }))
+            if let vc = UIViewController.topController {
+                alertController = errorAlert
+                vc.showAlert(errorAlert, completion: nil)
+            }
+            })
+        alert.addAction(UIAlertAction(title: forceUpgrade ? "退出" : "我知道了", style: .cancel, handler: { _ in
+            UpgradeApp.alertShowing = false
+            lastForceUpgrade = false
+            alertController = nil
+            if forceUpgrade {
+                exit(0)
+            }
+        }))
+        
+        if let vc = UIViewController.topController {
+            if alertController != nil {
+                if forceUpgrade && !lastForceUpgrade {
+                    alertController?.dismissVC(completion: nil)
+                    UpgradeApp.alertShowing = false
+                } else {
+                    return
+                }
+            }
+            alertController = alert
+            if (!UpgradeApp.alertShowing){
+                vc.showAlert(alert, completion: nil)
+                lastForceUpgrade = forceUpgrade
+                UpgradeApp.alertShowing = true
+            }
+        }
+    }
+    public class func showUpgradeAlertAfterExit(forceUpgrade: Bool, newVersion: String, upgradeMessage: String, downloadUrl: String) {
+        let alert = UIAlertController(title: "发现新版本", message: upgradeMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "立即下载", style: .default) { _ in
+            if let url = URL(string: downloadUrl) {
+                if UIApplication.shared.canOpenURL(url) {
+                    DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }else{
+                        UIApplication.shared.openURL(url)
                     }
                 }
             }

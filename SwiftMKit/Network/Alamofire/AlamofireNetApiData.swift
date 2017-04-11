@@ -225,6 +225,8 @@ open class AlamofireNetApiData: NetApiData {
                                 DDLogVerbose("JSON: \(value)")
                                 wself.response = value
                                 wself.fillJSON(value)
+                                task.suspend()
+                                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
                                 sink.send(value: wself as! MultipartUploadNetApiProtocol)
                                 sink.sendCompleted()
                                 return
@@ -234,6 +236,8 @@ open class AlamofireNetApiData: NetApiData {
                                 switch(statusCode) {
                                 case .canceled:
                                     DDLogWarn("请求取消: \(wself.url)")
+                                    task.suspend()
+                                    NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
                                     sink.sendInterrupted()
                                     return
                                 default:
@@ -245,18 +249,28 @@ open class AlamofireNetApiData: NetApiData {
                             
                             let err = error is NetError ? error as! NetError : NetError(error: error)
                             err.response = transferedResponse.response
+                            task.suspend()
+                            NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
                             sink.send(error: err)
                         }
                     }
-                case .failure(_):
+                case .failure(let error):
                     DDLogError("请求失败: \(self.url)")
-                    let err = NetError(statusCode: 404, message: "")
-                    sink.send(error: err)
+                    DDLogError("\(error)")
+                    task.suspend()
+                    NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                    if let err = error as? NetError {
+                        sink.send(error: err)
+                    } else {
+                        sink.send(error: NetError(error: error as NSError))
+                    }
                 }
 
                 
             })
             disposable.add { [weak self] in
+                task.suspend()
+                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
             }

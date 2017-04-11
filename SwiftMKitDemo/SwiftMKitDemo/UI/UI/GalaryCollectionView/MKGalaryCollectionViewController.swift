@@ -60,11 +60,11 @@ class MKGalaryCollectionViewController: BaseViewController, GalaryCollectionView
     
     // MARK: - <GalaryCollectionViewDelegate>
     func galaryCollectionView(_ galaryCollectionView: UICollectionView, willSelectItemAtIndexPath indexPath: IndexPath, withUserInfo userInfo: [String : AnyObject]?) {
-        print("即将选中  \(userInfo)")
+        print("即将选中  \(String(describing: userInfo))")
     }
     
     func galaryCollectionView(_ galaryCollectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath, withUserInfo userInfo: [String : AnyObject]?) {
-        print("选中  \(userInfo)")
+        print("选中  \(String(describing: userInfo))")
         if let params = userInfo {
             index = Int(params["model"] as! NSNumber)
             if index != lastIndex {

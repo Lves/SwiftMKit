@@ -10,6 +10,7 @@ import UIKit
 
 class MKUIViewController: BaseListViewController {
     @IBOutlet weak var tableView: UITableView!
+    var smarterTool = SmarterTool()
     
     struct InnerConst {
         static let CellIdentifier = "MKUITableViewCell"
@@ -37,6 +38,13 @@ class MKUIViewController: BaseListViewController {
     override var listView: UIScrollView! {
         get { return tableView }
     }
+    
+    override func setupUI() {
+        super.setupUI()
+        c -= 1
+        smarterTool.attach(toView: UIApplication.shared.keyWindow!)
+    }
+    var c: Int = 1
     
     override func setupNavigation() {
         super.setupNavigation()

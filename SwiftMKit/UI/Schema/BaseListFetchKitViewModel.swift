@@ -30,16 +30,16 @@ open class BaseListFetchKitViewModel: BaseListKitViewModel {
         let logPrefix = "[\(NSStringFromClass(type(of: self))) \(#function)]"
         if let fetchedController = listFetchViewController.fetchedResultsController {
             if fetchedController.fetchRequest.predicate != nil {
-                DDLogVerbose("\(logPrefix) fetching \(fetchedController.fetchRequest.entityName) with predicate: \(fetchedController.fetchRequest.predicate)")
+                DDLogVerbose("\(logPrefix) fetching \(fetchedController.fetchRequest.entityName ?? "") with predicate: \(String(describing: fetchedController.fetchRequest.predicate))")
             } else {
-                DDLogVerbose("\(logPrefix) fetching all \(fetchedController.fetchRequest.entityName) (no predicate)")
+                DDLogVerbose("\(logPrefix) fetching all \(fetchedController.fetchRequest.entityName ?? "") (no predicate)")
             }
             do {
                 try fetchedController.performFetch()
-                DDLogInfo("FetchedResultsController found \(fetchedController.fetchedObjects?.count) objects")
+                DDLogInfo("FetchedResultsController found \(fetchedController.fetchedObjects?.count ?? 0) objects")
                 self.updateDataArray(fetchedController.fetchedObjects)
             } catch let error as NSError{
-                DDLogError("\(logPrefix) perform fetch: failed. reason: \(error.localizedDescription) (\(error.localizedFailureReason))")
+                DDLogError("\(logPrefix) perform fetch: failed. reason: \(error.localizedDescription) (\(error.localizedFailureReason ?? ""))")
             } catch {
                 DDLogError("\(logPrefix) perform fetch: failed. reason: \(error)")
             }

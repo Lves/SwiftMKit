@@ -13,6 +13,21 @@ import Result
 import EZSwiftExtensions
 
 public extension UITextField {
+    
+    //MARK: - 修改clearButtonImage
+    func setClearButtonImage(image:UIImage?,clearButtonMode:UITextFieldViewMode? = .whileEditing) {
+        guard let clearImage = image else {
+            return
+        }
+        let clearButton:UIButton = self.value(forKey: "_clearButton") as! UIButton
+        clearButton.setImage(clearImage, for: .normal)
+        self.clearButtonMode = clearButtonMode ?? .whileEditing
+    }
+    
+    //MARK: -
+    public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
+        return SignalProducer(self.reactive.continuousTextValues).map { $0! }
+    }
     @IBInspectable public var placeHolderColor: UIColor? {
         get {
             return self.placeHolderColor

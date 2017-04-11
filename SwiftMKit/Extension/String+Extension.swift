@@ -182,7 +182,6 @@ extension String {
     }
     
     
-    
     static func getAttributedStringHeight(matchWidth width:CGFloat, attributedString:NSAttributedString?) -> CGFloat {
         let options: NSStringDrawingOptions = [NSStringDrawingOptions.usesLineFragmentOrigin, NSStringDrawingOptions.usesFontLeading]
 
@@ -204,12 +203,19 @@ extension String {
     }
 
     
-    
-    
-    
-    
-    
-    
-    
+    /**
+     *  获取字符串的宽度和高度
+     *
+     *  @param text:NSString
+     *  @param font:UIFont
+     *
+     *  @return CGRect
+     */
+    func getTextRectSize(text:NSString,font:UIFont,size:CGSize) -> CGRect {
+        let attributes = [NSFontAttributeName: font]
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        let rect:CGRect = text.boundingRect(with: size, options: option, attributes: attributes, context: nil)
+        return rect;
+    }
     
 }

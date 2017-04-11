@@ -28,7 +28,7 @@ public class MerakGifView: UIView {
     private var timeArr:Array<NSNumber> = [] // 时间数组(存放每一帧的图片的时间)
     private var totalTime:Float = 0 // gif动画时间
     /**
-     *  加载本地GIF图片
+     *  加载资源GIF图片
      */
     func showGIFImageWithLocalName(name:String) {
         //清除数据
@@ -36,6 +36,18 @@ public class MerakGifView: UIView {
         timeArr.removeAll()
         //重新加载
         gifurl = Bundle.main.url(forResource: name, withExtension: "gif") as NSURL!
+        self.creatKeyFrame()
+    }
+    
+    /**
+     *  加载本地GIF图片
+     */
+    func showGIFImageWithLocalPath(path:String) {
+        //清除数据
+        imageArr.removeAll()
+        timeArr.removeAll()
+        //重新加载
+        gifurl = NSURL(fileURLWithPath: path)
         self.creatKeyFrame()
     }
     

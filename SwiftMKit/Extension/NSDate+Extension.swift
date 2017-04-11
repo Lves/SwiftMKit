@@ -9,13 +9,22 @@
 import Foundation
 import UIKit
 
-extension NSDate {
+extension Date {
+    
+    public var localDate : Date {
+        get {
+            let localTimeZone : TimeZone = NSTimeZone.local
+            let offset : TimeInterval = TimeInterval(localTimeZone.secondsFromGMT(for: Date()))
+            let date : Date = Date().addingTimeInterval(offset)
+            return date
+        }
+    }
     
     public var currentYear : Int{
         get{
             let dateFormatter:DateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy/MM/dd";
-            let dateString:String = dateFormatter.string(from: self as Date);
+            let dateString:String = dateFormatter.string(from: self);
             var dates:[String] = dateString.components(separatedBy: "/")
             return dates[0].toInt() ?? 0
         }
@@ -25,7 +34,7 @@ extension NSDate {
         get{
             let dateFormatter:DateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy/MM/dd";
-            let dateString:String = dateFormatter.string(from: self as Date);
+            let dateString:String = dateFormatter.string(from: self);
             var dates:[String] = dateString.components(separatedBy: "/")
             return dates[1].toInt() ?? 0
         }
@@ -35,9 +44,19 @@ extension NSDate {
         get{
             let dateFormatter:DateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy/MM/dd";
-            let dateString:String = dateFormatter.string(from: self as Date);
+            let dateString:String = dateFormatter.string(from: self);
             var dates:[String] = dateString.components(separatedBy: "/")
             return dates[2].toInt() ?? 0
+        }
+    }
+    
+    public var currentHour : Int{
+        get{
+            let dateFormatter:DateFormatter = DateFormatter();
+            dateFormatter.dateFormat = "HH/MM/SS";
+            let dateString:String = dateFormatter.string(from: self);
+            var dates:[String] = dateString.components(separatedBy: "/")
+            return dates[0].toInt() ?? 0
         }
     }
     

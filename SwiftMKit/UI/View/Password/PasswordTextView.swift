@@ -107,7 +107,7 @@ open class PasswordTextView : UIView, UITextFieldDelegate {
             } else {
                 let path = UIBezierPath()
                 let center = CGPoint(x: centerX, y: centerY)
-                path.addArc(withCenter: center, radius: 5, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
+                path.addArc(withCenter: center, radius: 5, startAngle: 0, endAngle: .pi * 2, clockwise: true)
                 dotColor.setFill()
                 path.fill()
             }

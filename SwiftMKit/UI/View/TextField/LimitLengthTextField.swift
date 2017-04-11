@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 public class UITextFieldMaxLengthObserver: NSObject {
     
@@ -19,7 +20,7 @@ public class UITextFieldMaxLengthObserver: NSObject {
             let selectedRange = textField.markedTextRange
             if selectedRange == nil || selectedRange!.start == selectedRange!.end {
                 if destText.length > maxLength {
-                    textField.text = destText.substringToIndex(destText.startIndex.advancedBy(maxLength))
+                    textField.text = destText.substring(to: destText.index(destText.startIndex, offsetBy: maxLength))
                 }
             }
         }
@@ -39,7 +40,7 @@ public extension UITextField {
         set(newValue) {
             objc_setAssociatedObject(self, &AssociatedKeys.maxLength, newValue, .OBJC_ASSOCIATION_ASSIGN)
             if maxLength > 0 {
-                self.addTarget(observer, action:#selector(UITextFieldMaxLengthObserver.textChanged), forControlEvents: .EditingChanged)
+                self.addTarget(observer, action:#selector(UITextFieldMaxLengthObserver.textChanged), for: .editingChanged)
             }
         }
     }
