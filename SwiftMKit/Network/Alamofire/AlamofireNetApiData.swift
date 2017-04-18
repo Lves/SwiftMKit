@@ -52,7 +52,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("JSON: \(value)")
-                        wself.response = value
+                        wself.response = response.toNetApiResponse() //as? NetApiResponse<AnyObject, NSError>
                         wself.fillJSON(value)
                         sink.sendNext(wself)
                         sink.sendCompleted()
@@ -101,7 +101,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("Data: \(value.length) bytes")
-                        wself.response = value
+                        wself.response = response.toNetApiResponse()
                         wself.fillJSON(value)
                         sink.sendNext(wself)
                         sink.sendCompleted()
@@ -152,7 +152,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("String: \(transferedResponse.result.value)")
-                        wself.response = value
+                        wself.response = response.toNetApiResponse()
                         wself.fillJSON(value)
                         sink.sendNext(wself)
                         sink.sendCompleted()
@@ -223,7 +223,7 @@ public class AlamofireNetApiData: NetApiData {
                             DDLogInfo("请求成功: \(wself.url)")
                             if let value = transferedResponse.result.value {
                                 DDLogVerbose("JSON: \(value)")
-                                wself.response = value
+                                wself.response = response.toNetApiResponse()
                                 wself.fillJSON(value)
                                 task.suspend()
                                 NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Task.DidComplete, object: task)
@@ -297,7 +297,7 @@ public class AlamofireNetApiData: NetApiData {
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("JSON: \(value)")
-                        wself.response = value
+                        wself.response = response.toNetApiResponse()
                         wself.fillJSON(value)
                         sink.sendNext(wself as! UploadNetApiProtocol)
                         sink.sendCompleted()

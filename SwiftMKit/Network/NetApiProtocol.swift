@@ -102,7 +102,7 @@ public protocol NetApiProtocol: class {
     var url: String { get }
     var timeout: NSTimeInterval { get set }
     var request: AnyObject? { get set }
-    var response: AnyObject? { get set }
+    var response: NetApiResponse<AnyObject, NSError>? { get set }
     var indicator: NetApiIndicator? { get set }
     
     
