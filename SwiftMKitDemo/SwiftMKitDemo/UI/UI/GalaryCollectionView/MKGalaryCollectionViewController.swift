@@ -31,6 +31,8 @@ class MKGalaryCollectionViewController: BaseViewController, GalaryCollectionView
         tableView.dataSource = self
         
         containerVc?.delegate = self
+        
+        tableView.tableHeaderView?.h = 200
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,7 +44,7 @@ class MKGalaryCollectionViewController: BaseViewController, GalaryCollectionView
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: InnerConst.CellIdentifier)
         }
-        cell!.textLabel?.text = "信用卡账单 ---- \(index)"
+        cell!.textLabel?.text = "信用卡账单 ---- \(indexPath.row)"
         return cell!
     }
     
