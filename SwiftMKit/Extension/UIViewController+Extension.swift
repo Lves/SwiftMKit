@@ -227,4 +227,17 @@ public extension UIViewController {
         }
         return nil
     }
+    
+    public func navContainsViewController(name:String) -> Bool {
+        if let nav = self.navigationController{
+            if let subVcs : [UIViewController] = nav.childViewControllers{
+                for vc in subVcs {
+                    if vc.className == name {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
 }
