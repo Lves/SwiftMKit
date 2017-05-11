@@ -89,6 +89,9 @@ public class BaseKitViewController : UIViewController {
     public func loadData() {
     }
     
+    public func willTerminate() {
+    }
+    
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(self.dynamicType))")
         NSNotificationCenter.defaultCenter().removeObserver(self)
