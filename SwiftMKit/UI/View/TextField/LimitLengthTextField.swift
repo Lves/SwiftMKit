@@ -34,10 +34,13 @@ public extension UITextField {
     }
     @IBInspectable public var maxLength: Int {
         get {
-            return (objc_getAssociatedObject(self, &AssociatedKeys.maxLength) as? Int) ?? 0
+            guard let length = objc_getAssociatedObject(self, &AssociatedKeys.maxLength) as? NSNumber else {
+                return Int.max
+            }
+            return length.integerValue ?? 0
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.maxLength, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &AssociatedKeys.maxLength, NSNumber(int: Int32(newValue)), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             if maxLength > 0 {
                 self.addTarget(observer, action:#selector(UITextFieldMaxLengthObserver.textChanged), forControlEvents: .EditingChanged)
             }
