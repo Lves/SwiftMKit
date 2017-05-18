@@ -25,9 +25,10 @@ public extension UITextField {
         guard let clearImage = image else {
             return
         }
-        let clearButton:UIButton = self.valueForKey("_clearButton") as! UIButton
-        clearButton.setImage(clearImage, forState: .Normal)
-        self.clearButtonMode = clearButtonMode ?? .WhileEditing
+        if let clearButton:UIButton = self.valueForKey("_clearButton") as? UIButton{
+            clearButton.setImage(clearImage, forState: .Normal)
+            self.clearButtonMode = clearButtonMode ?? .WhileEditing
+        }
     }
     
     //MARK: -
