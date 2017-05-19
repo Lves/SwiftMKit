@@ -75,7 +75,7 @@ public class WebViewProgress : NSObject {
  
     public func progressWebView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType , delegatRet : Bool) -> Bool {
         
-        if request.URL!.path == InnerConst.CompleteRPCURLPath {
+        if request.URL?.path == InnerConst.CompleteRPCURLPath {
             self.completeProgress()
             return false
         }
@@ -133,11 +133,11 @@ public class WebViewProgress : NSObject {
         //运行自定义的结束JS
         if tempInteractive {
             interactive = true
-            let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request!.mainDocumentURL!.scheme)://\(webView.request!.mainDocumentURL!.host)\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
+            let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request?.mainDocumentURL?.scheme ?? "")://\(webView.request?.mainDocumentURL?.host ?? "")\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
             webView.stringByEvaluatingJavaScriptFromString(waitForCompleteJS)
         }
         
-        let isNotRedirect : Bool = (currentURL?.isEqual(webView.request!.mainDocumentURL))!
+        let isNotRedirect : Bool = (currentURL == webView.request?.mainDocumentURL)
         
         let complete = readyState == "complete"
         
@@ -151,6 +151,6 @@ public class WebViewProgress : NSObject {
         
         DDLogInfo("[runFinishJS] \(complete) \(isNotRedirect)")
         
-        DDLogInfo("[runFinishJS] \n\(currentURL) \n\(webView.request!.mainDocumentURL) \n\(webView.request!.URLString)")
+        DDLogInfo("[runFinishJS] \n\(currentURL) \n\(webView.request?.mainDocumentURL) \n\(webView.request?.URLString ?? "")")
     }
 }
