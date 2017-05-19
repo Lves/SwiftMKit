@@ -75,7 +75,7 @@ public class WebViewProgress : NSObject {
  
     public func progressWebView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType , delegatRet : Bool) -> Bool {
         
-        if request.URL?.path == InnerConst.CompleteRPCURLPath {
+        if let path = request.URL?.path where path == InnerConst.CompleteRPCURLPath {
             self.completeProgress()
             return false
         }
