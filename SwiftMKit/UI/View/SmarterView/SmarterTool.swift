@@ -11,10 +11,12 @@ import CocoaLumberjack
 
 public protocol SmarterToolDelegate {
     func routeToEvnSwitch()
+    func routeToCrashLog()
 }
 
 extension SmarterToolDelegate {
     func routeToEvnSwitch() {}
+    func routeToCrashLog() {}
 }
 
 public class SmarterTool: NSObject {
@@ -25,7 +27,6 @@ public class SmarterTool: NSObject {
     
     override init() {
         super.init()
-        SwiftCrashReport.install(LocalCrashLogReporter)
         let fileLogger: DDFileLogger = DDFileLogger() // File Logger
         fileLogger.rollingFrequency = NSTimeInterval(60*60*24)  // 24 hours
         fileLogger.logFileManager.maximumNumberOfLogFiles = 1
@@ -50,7 +51,7 @@ extension SmarterTool:JellyButtonDelegate
         } else if arrindex == 0 {
             UIViewController.topController?.routeToName("DDLogViewController")
         } else if arrindex == 2 {
-            UIViewController.topController?.routeToName("CrashLogViewController")
+            delegate?.routeToCrashLog()
         }
     }
     
