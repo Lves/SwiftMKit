@@ -61,19 +61,35 @@ class RangeSlider: UIControl {
     //用来跟踪记录用户的触摸位置
     var previousLocation = CGPoint()
     
-    //控件的颜色属性
+    //主轨迹的颜色
     var trackTintColor :UIColor = UIColor(white:0.9,alpha: 1.0) {
         didSet{
           trackLayer.setNeedsDisplay()
         }
     }
     
+    //小值轨迹的颜色
+    var lowerTrackHighlightTintColor : UIColor = UIColor.clearColor() {
+        didSet {
+            trackLayer.setNeedsDisplay()
+        }
+    }
+    
+    //大值轨迹的颜色
+    var upperTrackHighlightTintColor : UIColor = UIColor.clearColor() {
+        didSet {
+            trackLayer.setNeedsDisplay()
+        }
+    }
+    
+    //中值轨迹的颜色
     var trackHighlightTintColor : UIColor = UIColor(red: 0.0, green: 0.45, blue: 0.94, alpha: 1.0) {
         didSet {
             trackLayer.setNeedsDisplay()
         }
     }
     
+    //按钮的颜色
     var thumbTintColor: UIColor = UIColor.whiteColor() {
         didSet {
             lowerThumbLayer.setNeedsDisplay()
@@ -81,6 +97,7 @@ class RangeSlider: UIControl {
         }
     }
     
+    //俩按钮边框的颜色
     var thumbBorderColor: UIColor = UIColor.grayColor() {
         didSet {
             lowerThumbLayer.strokeColor = thumbBorderColor
@@ -88,6 +105,21 @@ class RangeSlider: UIControl {
         }
     }
     
+    //小值按钮边框的颜色
+    var lowerThumbBorderColor: UIColor = UIColor.grayColor() {
+        didSet {
+            lowerThumbLayer.strokeColor = lowerThumbBorderColor
+        }
+    }
+    
+    //大值按钮边框的颜色
+    var upperThumbBorderColor: UIColor = UIColor.grayColor() {
+        didSet {
+            upperThumbLayer.strokeColor = upperThumbBorderColor
+        }
+    }
+    
+    //按钮边框的宽度
     var thumbBorderWidth: CGFloat = 0.5 {
         didSet {
             lowerThumbLayer.lineWidth = thumbBorderWidth
@@ -95,22 +127,22 @@ class RangeSlider: UIControl {
         }
     }
     
+    //按钮和轨迹圆角程度
     var curvaceousness: CGFloat = 1.0 {
         didSet {
             if curvaceousness < 0.0 {
                 curvaceousness = 0.0
             }
-            
             if curvaceousness > 1.0 {
                 curvaceousness = 1.0
             }
-            
             trackLayer.setNeedsDisplay()
             lowerThumbLayer.setNeedsDisplay()
             upperThumbLayer.setNeedsDisplay()
         }
     }
     
+    //按钮宽度
     var thumbWidth: CGFloat {
         return CGFloat(bounds.height)
     }
@@ -140,7 +172,6 @@ class RangeSlider: UIControl {
         super.init(coder: aDecoder)
         initializeLayers()
     }
-    
     
     /// init layers
     func initializeLayers() {

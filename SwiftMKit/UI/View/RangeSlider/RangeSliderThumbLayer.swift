@@ -30,10 +30,25 @@ public class RangeSliderTrackLayer: CALayer {
             CGContextAddPath(ctx, path.CGPath)
             CGContextFillPath(ctx)
         
-            // Fill the highlighted range
-            CGContextSetFillColorWithColor(ctx, slider.trackHighlightTintColor.CGColor)
             let lowerValuePosition = CGFloat(slider.positionForValue(slider.lowerValue))
             let upperValuePosition = CGFloat(slider.positionForValue(slider.upperValue))
+            
+            // Fill the lower track range
+            CGContextSetFillColorWithColor(ctx, slider.lowerTrackHighlightTintColor.CGColor)
+            let lowerRect = CGRect(x:0.0 , y: 0.0, width: lowerValuePosition - 0, height: bounds.height)
+            let lowerPath = UIBezierPath(roundedRect: lowerRect, cornerRadius: cornerRadius)
+            CGContextAddPath(ctx, lowerPath.CGPath)
+            CGContextFillPath(ctx)
+            
+            // Fill the upper track range
+            CGContextSetFillColorWithColor(ctx, slider.upperTrackHighlightTintColor.CGColor)
+            let upperRect = CGRect(x: upperValuePosition, y: 0.0, width: bounds.width - upperValuePosition, height: bounds.height)
+            let upperPath = UIBezierPath(roundedRect: upperRect, cornerRadius: cornerRadius)
+            CGContextAddPath(ctx, upperPath.CGPath)
+            CGContextFillPath(ctx)
+            
+            // Fill the highlighted range
+            CGContextSetFillColorWithColor(ctx, slider.trackHighlightTintColor.CGColor)
             let rect = CGRect(x: lowerValuePosition, y: 0.0, width: upperValuePosition - lowerValuePosition, height: bounds.height)
             CGContextFillRect(ctx, rect)
         }
