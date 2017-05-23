@@ -9,6 +9,32 @@
 import UIKit
 import QuartzCore
 
+/* 使用方法：
+    
+ //完成布局的时候
+ override func viewDidLayoutSubviews() {
+    let margin: CGFloat = 20.0
+    let width = view.bounds.width - 2.0 * margin
+ 
+    rangeSlider.frame = CGRect(x:margin,y: margin,width:width,height: 31.0)
+    rangeSlider.trackHighlightTintColor = UIColor.redColor()
+    rangeSlider.lowerThumbBorderColor = UIColor.yellowColor()
+    rangeSlider.upperThumbBorderColor = UIColor.blueColor()
+    rangeSlider.trackTintColor = UIColor.orangeColor()
+    rangeSlider.lowerTrackHighlightTintColor = UIColor.purpleColor()
+    rangeSlider.upperTrackHighlightTintColor = UIColor.brownColor()
+    rangeSlider.curvaceousness = 1.0
+    rangeSlider.addTarget(self, action: #selector(self.rangeSliderValueChange(_:)), forControlEvents: .ValueChanged)
+ }
+ 
+ func rangeSliderValueChange(rangeSlider: RangeSlider) {
+    print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
+ }
+ 
+*/
+
+
+
 class RangeSlider: UIControl {
 
     /*
