@@ -246,6 +246,7 @@
 		6555EB011E24CA0600D70C39 /* RingedPages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6555EB001E24CA0600D70C39 /* RingedPages.storyboard */; };
 		6555EB031E24CA1800D70C39 /* RingedPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555EB021E24CA1800D70C39 /* RingedPagesViewController.swift */; };
 		6C1A405F1E5FD9B700D91438 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A405E1E5FD9B700D91438 /* PickerTextField.swift */; };
+		6C5194181EE10B7F007AA9B2 /* keboard_view_gray_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C5194171EE10B7F007AA9B2 /* keboard_view_gray_h@2x.png */; };
 		6C51A9E61D3C853C006EF254 /* SharePannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51A9E51D3C853C006EF254 /* SharePannelView.swift */; };
 		6C724B3B1D0FCF0100CD5608 /* NSRange+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */; };
 		6C724B3C1D0FCF0100CD5608 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */; };
@@ -618,6 +619,7 @@
 		6555EB001E24CA0600D70C39 /* RingedPages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RingedPages.storyboard; sourceTree = "<group>"; };
 		6555EB021E24CA1800D70C39 /* RingedPagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingedPagesViewController.swift; sourceTree = "<group>"; };
 		6C1A405E1E5FD9B700D91438 /* PickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
+		6C5194171EE10B7F007AA9B2 /* keboard_view_gray_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keboard_view_gray_h@2x.png"; sourceTree = "<group>"; };
 		6C51A9E51D3C853C006EF254 /* SharePannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePannelView.swift; sourceTree = "<group>"; };
 		6C724B381D0FCF0100CD5608 /* NSRange+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+Extension.swift"; sourceTree = "<group>"; };
 		6C724B391D0FCF0100CD5608 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 		274C4C7B1DB4EF8600310C11 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6C5194171EE10B7F007AA9B2 /* keboard_view_gray_h@2x.png */,
 				274C4C801DB4EF8600310C11 /* kb_keyboard_view_del@2x.png */,
 				274C4C811DB4EF8600310C11 /* kb_keyboard_view_screen@2x.png */,
 			);
@@ -2008,6 +2011,7 @@
 				27704A441E2371B300E2F78E /* CrashLogDetailViewController.xib in Resources */,
 				6CEFCB671D3485F3008B3382 /* pannel_icon_circlefriends@2x.png in Resources */,
 				6CEFCB661D3485F3008B3382 /* pannel_icon_chat_h@2x.png in Resources */,
+				6C5194181EE10B7F007AA9B2 /* keboard_view_gray_h@2x.png in Resources */,
 				2783E0171DB626FD005E087C /* MKOrderView.storyboard in Resources */,
 				6CEFCB7D1D3485F3008B3382 /* pannel_icon_weixin_h@2x.png in Resources */,
 				6CEFCB7E1D3485F3008B3382 /* pannel_icon_zhifubao@2x.png in Resources */,
