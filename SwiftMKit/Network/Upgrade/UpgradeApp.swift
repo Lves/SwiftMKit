@@ -93,11 +93,15 @@ public class UpgradeApp : NSObject {
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
                     if #available(iOS 10.0, *) {
-                        UIApplication.sharedApplication().openURL(url, options: [:], completionHandler: nil)
+                        UIApplication.sharedApplication().openURL(url, options: [:], completionHandler: { _ in
+                            exit(0)
+                        })
                     }else{
                         UIApplication.sharedApplication().openURL(url)
+                        Async.main(after: 5) {
+                            exit(0)
+                        }
                     }
-                    exit(0)
                 }
             }
             DDLogError("[UpgradeApp] 下载地址错误: \(downloadUrl)")
