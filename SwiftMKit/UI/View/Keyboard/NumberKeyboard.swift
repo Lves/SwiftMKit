@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import CocoaLumberjack
 import IQKeyboardManager
 
@@ -132,7 +133,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //小数点输入
     fileprivate func bindDotButtonAction(_ button: UIButton) {
-        button.reactive.controlEvents(.touchUpInside).observeValues { _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
             if self.text.contains(".") {
                 return
             }
@@ -154,7 +155,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //删除事件
     fileprivate func bindDelButtonAction(_ button: UIButton) {
-        button.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { [unowned self] _ in
             //获取光标位置
             var range = self.selectedRange()
             if let tempDelegete = self.textField?.delegate {
@@ -178,7 +179,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //数字输入
     fileprivate func bindNumberButtonAction(_ button: UIButton) {
-        button.reactive.controlEvents(.touchUpInside).observeValues { _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { _ in
             if let inputText = button.currentTitle {
                 if inputText.length <= 0 {
                     return
@@ -202,7 +203,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //键盘回收
     fileprivate func bindKeyButtonAction(_ button: UIButton) {
-        button.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
+        button.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             if let temp = self?.text {
                 self?.textField?.text = self?.matchConfirm(temp)
             }

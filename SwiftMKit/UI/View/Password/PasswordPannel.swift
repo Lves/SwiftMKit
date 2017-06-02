@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManager
 import ReactiveSwift
+import ReactiveCocoa
 
 ///  Type
 ///
@@ -79,7 +80,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         return view
     }
     fileprivate func setupUI() {
-        self.btnClose.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
+        self.btnClose.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             self?.passwordInputView.inactive()
             self?.hide() {
                 self?.passwordInputView.password = ""
@@ -88,7 +89,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
                 self?.eventCancel = { _ in }
             }
         }
-        self.btnForget.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
+        self.btnForget.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
             self?.hide() {
                 self?.delegate?.pp_forgetPassword(self)
                 self?.eventForgetPassword(self)
