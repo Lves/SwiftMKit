@@ -101,8 +101,8 @@ public protocol NetApiProtocol: class {
     var method: ApiMethod { get }
     var url: String { get }
     var timeout: TimeInterval { get set }
-    var request: Any? { get set }
-    var response: Any? { get set }
+    var request: AnyObject? { get set }
+    var response: NetApiResponse<AnyObject, NSError>? { get set }
     var indicator: NetApiIndicator? { get set }
     
     func fillJSON(_ json: AnyObject)

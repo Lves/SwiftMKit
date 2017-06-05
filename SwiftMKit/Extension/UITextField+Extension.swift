@@ -26,9 +26,9 @@ public extension UITextField {
     
     //FIXME: - Error
     //MARK: -
-//    public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
-//        return SignalProducer(self.reactive.continuousTextValues).map { $0! }
-//    }
+    public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
+        return SignalProducer(self.reactive.continuousTextValues).map { $0! }
+    }
     @IBInspectable public var placeHolderColor: UIColor? {
         get {
             return self.placeHolderColor

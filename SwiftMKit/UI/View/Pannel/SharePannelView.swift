@@ -173,7 +173,7 @@ open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
         btnCancel.backgroundColor = InnerConstant.CancelBtnBGColor
         self.pannelView.addSubview(btnCancel)
         
-        btnCancel.reactive.trigger(for: .touchUpInside).observeValues { [weak self] _ in
+        btnCancel.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
             self?.tappedCancel()
         }
     }
@@ -334,7 +334,7 @@ open class ToolsPannelScrollView: UIScrollView {
         }
         toolItme.addSubview(btn)
         
-        btn.reactive.trigger(for: .touchUpInside).observeValues { _ in
+        btn.reactive.controlEvents(.touchUpInside).observeValues { _ in
             if let model = self.toolsArray?[btn.tag - 1] {
                 if self.toolsDelegate != nil {
                     self.toolsDelegate?.toolsPannelScrollViewButtonAction(self, model: model)
