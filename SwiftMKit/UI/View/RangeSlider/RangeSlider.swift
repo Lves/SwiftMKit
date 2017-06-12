@@ -33,8 +33,6 @@ import QuartzCore
  
 */
 
-
-
 class RangeSlider: UIControl {
 
     /*
@@ -87,8 +85,15 @@ class RangeSlider: UIControl {
     //用来跟踪记录用户的触摸位置
     var previousLocation = CGPoint()
     
+    //轨迹高度
+    var trackHeight : CGFloat = 0.0 {
+        didSet{
+            trackLayer.setNeedsDisplay()
+        }
+    }
+    
     //主轨迹的颜色
-    var trackTintColor :UIColor = UIColor(white:0.9,alpha: 1.0) {
+    var trackTintColor : UIColor = UIColor(white:0.9,alpha: 1.0) {
         didSet{
           trackLayer.setNeedsDisplay()
         }
@@ -142,6 +147,20 @@ class RangeSlider: UIControl {
     var upperThumbBorderColor: UIColor = UIColor.grayColor() {
         didSet {
             upperThumbLayer.strokeColor = upperThumbBorderColor
+        }
+    }
+    
+    //小值按钮图片
+    var lowerThumbImage: UIImage?{
+        didSet {
+            lowerThumbLayer.image = lowerThumbImage
+        }
+    }
+    
+    //大值按钮图片
+    var upperThumbImage: UIImage?{
+        didSet {
+            upperThumbLayer.image = upperThumbImage
         }
     }
     

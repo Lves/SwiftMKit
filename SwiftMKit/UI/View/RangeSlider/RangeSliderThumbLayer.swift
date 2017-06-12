@@ -21,8 +21,13 @@ public class RangeSliderTrackLayer: CALayer {
     override public func drawInContext(ctx: CGContext) {
         if let slider = rangeSlider {
             // Clip
-            let cornerRadius = bounds.height * slider.curvaceousness / 2.0
-            let path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+            var orgRect = bounds
+            if slider.trackHeight > 0 {
+                orgRect.y = orgRect.y + (orgRect.h - slider.trackHeight)/2
+                orgRect.h = slider.trackHeight
+            }
+            let cornerRadius = orgRect.height * slider.curvaceousness / 2.0
+            let path = UIBezierPath(roundedRect: orgRect, cornerRadius: cornerRadius)
             CGContextAddPath(ctx, path.CGPath)
         
             // Fill the track
@@ -35,21 +40,21 @@ public class RangeSliderTrackLayer: CALayer {
             
             // Fill the lower track range
             CGContextSetFillColorWithColor(ctx, slider.lowerTrackHighlightTintColor.CGColor)
-            let lowerRect = CGRect(x:0.0 , y: 0.0, width: lowerValuePosition - 0, height: bounds.height)
+            let lowerRect = CGRect(x: 0.0 , y: orgRect.y, width: lowerValuePosition - 0, height: orgRect.height)
             let lowerPath = UIBezierPath(roundedRect: lowerRect, cornerRadius: cornerRadius)
             CGContextAddPath(ctx, lowerPath.CGPath)
             CGContextFillPath(ctx)
             
             // Fill the upper track range
             CGContextSetFillColorWithColor(ctx, slider.upperTrackHighlightTintColor.CGColor)
-            let upperRect = CGRect(x: upperValuePosition, y: 0.0, width: bounds.width - upperValuePosition, height: bounds.height)
+            let upperRect = CGRect(x: upperValuePosition, y: orgRect.y, width: orgRect.width - upperValuePosition, height: orgRect.height)
             let upperPath = UIBezierPath(roundedRect: upperRect, cornerRadius: cornerRadius)
             CGContextAddPath(ctx, upperPath.CGPath)
             CGContextFillPath(ctx)
             
             // Fill the highlighted range
             CGContextSetFillColorWithColor(ctx, slider.trackHighlightTintColor.CGColor)
-            let rect = CGRect(x: lowerValuePosition, y: 0.0, width: upperValuePosition - lowerValuePosition, height: bounds.height)
+            let rect = CGRect(x: lowerValuePosition, y: orgRect.y, width: upperValuePosition - lowerValuePosition, height: orgRect.height)
             CGContextFillRect(ctx, rect)
         }
     }
@@ -81,6 +86,13 @@ public class RangeSliderThumbLayer: CALayer {
         }
     }
     
+    /// image
+    public var image: UIImage?{
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     override public func drawInContext(ctx: CGContext) {
     // Clip
         
@@ -91,16 +103,25 @@ public class RangeSliderThumbLayer: CALayer {
             let cornerRadius = thumbFrame.height * slider.curvaceousness / 2.0
             let thumbPath = UIBezierPath(roundedRect: thumbFrame, cornerRadius: cornerRadius)
             
-            // Fill
-            CGContextSetFillColorWithColor(ctx, slider.thumbTintColor.CGColor)
-            CGContextAddPath(ctx, thumbPath.CGPath)
-            CGContextFillPath(ctx)
-            
-            // Outline
-            CGContextSetStrokeColorWithColor(ctx, strokeColor.CGColor)
-            CGContextSetLineWidth(ctx, lineWidth)
-            CGContextAddPath(ctx, thumbPath.CGPath)
-            CGContextStrokePath(ctx)
+            // Image
+            if image != nil {
+                CGContextSaveGState(ctx)
+                CGContextTranslateCTM(ctx, 0, bounds.h)
+                CGContextScaleCTM(ctx, 1.0, -1.0)
+                CGContextDrawImage(ctx, bounds, (image?.CGImage)!)
+                CGContextRestoreGState(ctx)
+            }else{
+                // Fill
+                CGContextSetFillColorWithColor(ctx, slider.thumbTintColor.CGColor)
+                CGContextAddPath(ctx, thumbPath.CGPath)
+                CGContextFillPath(ctx)
+                
+                // Outline
+                CGContextSetStrokeColorWithColor(ctx, strokeColor.CGColor)
+                CGContextSetLineWidth(ctx, lineWidth)
+                CGContextAddPath(ctx, thumbPath.CGPath)
+                CGContextStrokePath(ctx)
+            }
             
             if highlighted {
                 CGContextSetFillColorWithColor(ctx, UIColor(white: 0.0, alpha: 0.1).CGColor)
