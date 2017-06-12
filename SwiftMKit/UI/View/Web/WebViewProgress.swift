@@ -82,8 +82,8 @@ public class WebViewProgress : NSObject {
         
         var isFragmentJump : Bool = false
         
-        if ((request.URL?.fragment) != nil) {
-            let nonFragmentURL = request.URL?.absoluteString?.stringByReplacingOccurrencesOfString("#\(request.URL!.fragment)", withString: "")
+        if let fragment = request.URL?.fragment {
+            let nonFragmentURL = request.URL?.absoluteString?.stringByReplacingOccurrencesOfString("#\(fragment)", withString: "")
             
             if let url = webView.request?.URL{
                 if let absoluteString : String = url.absoluteString{
