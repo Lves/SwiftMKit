@@ -106,9 +106,9 @@ public class RangeSliderThumbLayer: CALayer {
             // Image
             if image != nil {
                 CGContextSaveGState(ctx)
-                CGContextTranslateCTM(ctx, 0, bounds.h)
+                CGContextTranslateCTM(ctx, 0, image!.size.height)
                 CGContextScaleCTM(ctx, 1.0, -1.0)
-                CGContextDrawImage(ctx, bounds, (image?.CGImage)!)
+                CGContextDrawImage(ctx, CGRect(x: (bounds.w - image!.size.width)/2, y: -(bounds.h - image!.size.height)/2, w: image!.size.width, h: image!.size.height), image!.CGImage!)
                 CGContextRestoreGState(ctx)
             }else{
                 // Fill
