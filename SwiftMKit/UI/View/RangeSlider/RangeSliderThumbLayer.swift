@@ -79,6 +79,13 @@ public class RangeSliderThumbLayer: CALayer {
         }
     }
     
+    /// highlightedColor color
+    public var highlightedColor: UIColor = UIColor(white: 0.0, alpha: 0.1) {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     /// line width
     public var lineWidth: CGFloat = 0.5 {
         didSet {
@@ -95,11 +102,10 @@ public class RangeSliderThumbLayer: CALayer {
     
     override public func drawInContext(ctx: CGContext) {
     // Clip
-        
         if let slider = rangeSlider {
             // clip
             
-            let thumbFrame = bounds.insetBy(dx: 2.0, dy: 2.0)
+            let thumbFrame = bounds.insetBy(dx: 0.0, dy: 0.0)
             let cornerRadius = thumbFrame.height * slider.curvaceousness / 2.0
             let thumbPath = UIBezierPath(roundedRect: thumbFrame, cornerRadius: cornerRadius)
             
@@ -124,7 +130,7 @@ public class RangeSliderThumbLayer: CALayer {
             }
             
             if highlighted {
-                CGContextSetFillColorWithColor(ctx, UIColor(white: 0.0, alpha: 0.1).CGColor)
+                CGContextSetFillColorWithColor(ctx, highlightedColor.CGColor)
                 CGContextAddPath(ctx, thumbPath.CGPath)
                 CGContextFillPath(ctx)
             }
