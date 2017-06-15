@@ -10,22 +10,30 @@ import UIKit
 import QuartzCore
 
 /* 使用方法：
-    
- //完成布局的时候
- override func viewDidLayoutSubviews() {
-    let margin: CGFloat = 20.0
-    let width = view.bounds.width - 2.0 * margin
  
-    rangeSlider.frame = CGRect(x:margin,y: margin,width:width,height: 31.0)
-    rangeSlider.trackHighlightTintColor = UIColor.redColor()
-    rangeSlider.lowerThumbBorderColor = UIColor.yellowColor()
-    rangeSlider.upperThumbBorderColor = UIColor.blueColor()
-    rangeSlider.trackTintColor = UIColor.orangeColor()
-    rangeSlider.lowerTrackHighlightTintColor = UIColor.purpleColor()
-    rangeSlider.upperTrackHighlightTintColor = UIColor.brownColor()
-    rangeSlider.curvaceousness = 1.0
-    rangeSlider.addTarget(self, action: #selector(self.rangeSliderValueChange(_:)), forControlEvents: .ValueChanged)
- }
+ rangeSlider.trackTintColor = UIColor(hex6: 0xFA7655)
+ rangeSlider.trackHighlightTintColor = UIColor(hex6: 0xFA7655)
+ rangeSlider.lowerTrackHighlightTintColor = UIColor(hex6: 0x22304A)
+ rangeSlider.upperTrackHighlightTintColor = UIColor(hex6: 0xFFB93B)
+ rangeSlider.thumbHighlightedColor = UIColor.clearColor()
+ rangeSlider.lowerThumbImage = UIImage(named: "slider_lower_thumb")
+ rangeSlider.upperThumbImage = UIImage(named: "slider_upper_thumb")
+ rangeSlider.curvaceousness = 1.0
+ rangeSlider.trackHeight = 2
+ rangeSlider.lowerValue = 0.2
+ rangeSlider.upperValue = 0.7
+ rangeSlider.addTarget(self, action: #selector(self.rangeSliderValueChange(_:)), forControlEvents: .ValueChanged)
+ rangeSlider.addTarget(self, action: #selector(self.rangeSliderValueChangeEnd(_:)), forControlEvents: .TouchUpInside)
+ 
+ rangeSlider.lowerThumbLayer.shadowColor = UIColor.blackColor().CGColor
+ rangeSlider.lowerThumbLayer.shadowOffset = CGSize(width: 0, height: 2)
+ rangeSlider.lowerThumbLayer.shadowOpacity = 0.2 //阴影透明度，默认0
+ rangeSlider.lowerThumbLayer.shadowRadius = 2 //阴影半径，默认3
+ 
+ rangeSlider.upperThumbLayer.shadowColor = UIColor.blackColor().CGColor
+ rangeSlider.upperThumbLayer.shadowOffset = CGSize(width: 0, height: 2)
+ rangeSlider.upperThumbLayer.shadowOpacity = 0.2 //阴影透明度，默认0
+ rangeSlider.upperThumbLayer.shadowRadius = 2 //阴影半径，默认3
  
  func rangeSliderValueChange(rangeSlider: RangeSlider) {
     print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
@@ -125,6 +133,14 @@ class RangeSlider: UIControl {
         didSet {
             lowerThumbLayer.setNeedsDisplay()
             upperThumbLayer.setNeedsDisplay()
+        }
+    }
+    
+    /// 按钮按下时的浮层颜色
+    var thumbHighlightedColor: UIColor = UIColor(white: 0.0, alpha: 0.1) {
+        didSet {
+            lowerThumbLayer.highlightedColor = thumbHighlightedColor
+            upperThumbLayer.highlightedColor = thumbHighlightedColor
         }
     }
     
@@ -265,11 +281,8 @@ class RangeSlider: UIControl {
     
     /*
      那么你该如何来跟踪控件的各种触摸和 release 时间呢？
-     
      UIControl 提供了一些方法来跟踪触摸。UIControl 的子类可以 override 这些方法，以实现自己的交互逻辑。
-     
      在自定义控件中，我们将 override 3 个 UIControl 关键的方法：beginTrackingWithTouch, continueTrackingWithTouch 和 endTrackingWithTouch。
-     
      */
     
     /*当首次触摸控件时,会调用上面的而方法
