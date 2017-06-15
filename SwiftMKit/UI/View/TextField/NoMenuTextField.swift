@@ -18,3 +18,12 @@ public class NoMenuTextField: UITextField {
         return super.canPerformAction(action, withSender: sender)
     }
 }
+public class NoPasteTextField: UITextField {
+    override public func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == #selector(UIResponder.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+}
+
