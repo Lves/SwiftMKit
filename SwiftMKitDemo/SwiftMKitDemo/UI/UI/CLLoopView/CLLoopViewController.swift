@@ -28,7 +28,7 @@ class CLLoopViewController: UIViewController,CLLoopViewDelegate {
         
         let imageUrls = [imageUrl1,imageUrl2,imageUrl3,imageUrl4]
         
-        let rect = CGRectMake(0, 22, self.view.frame.size.width, self.view.frame.size.width/16 * 9)
+        let rect = CGRect(x: 0, y: 22, w: self.view.frame.size.width, h: self.view.frame.size.width/16 * 9)
         let loopView = CLLoopView(frame: rect)
         self.view.addSubview(loopView)
         //add images
