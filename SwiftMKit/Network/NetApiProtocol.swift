@@ -115,6 +115,7 @@ public protocol NetApiProtocol: class {
     func requestString() -> SignalProducer<NetApiProtocol, NetError>
     func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError>
     func requestMultipartUpload( ) -> SignalProducer<MultipartUploadNetApiProtocol, NetError>
+    
 }
 
 
@@ -179,4 +180,20 @@ public extension NetApiProtocol {
         }
         return self
     }
+    
+    func get(_ success: @escaping (Self) -> Void) -> SignalProducer<Self, NetError> {
+        return get(success, error: { error in UIViewController.topController?.showTip(error.message)})
+    }
+    func get(_ success: @escaping (Self) -> Void, error: @escaping (NetError) -> Void) -> SignalProducer<Self, NetError> {
+        return signal().on(
+            failed: error,
+            value: { data in
+                success(data)
+        })
+    }
+}
+
+
+func + <T: NetApiProtocol> (api: T, indicator: IndicatorProtocol) -> T {
+    return api.setIndicator(indicator)
 }

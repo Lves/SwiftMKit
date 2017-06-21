@@ -14,15 +14,11 @@ class MKNetworkRequestViewModel: BaseListViewModel {
     
     fileprivate var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NetError> {
         get {
-                return PX500PopularPhotosApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicator(self.listIndicator).signal().on(
-                    failed: { [weak self] error in
-                        self?.showTip(error.message)
-                    },
-                    value: { [weak self] data in
-                        if let photos = data.photos {
-                            self?.updateDataArray(photos)
-                        }
-                })
+            return (PX500PopularPhotosApiData(page:self.dataIndex+1, number:self.listLoadNumber) + self.listIndicator).get { [weak self] data in
+                if let photos = data.photos {
+                    self?.updateDataArray(photos)
+                }
+            }
         }
     }
     
