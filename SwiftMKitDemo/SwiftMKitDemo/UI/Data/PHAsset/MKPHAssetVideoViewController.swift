@@ -72,7 +72,7 @@ class MKPHAssetVideoViewController: BaseListViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: InnerConst.CellIdentifier, for: indexPath)
         let asset = dataArray[indexPath.row]
         cell.textLabel?.text = asset.value(forKey: "filename") as? String
-        cell.detailTextLabel?.text = asset.duration.formatToTimeMMss()
+//        cell.detailTextLabel?.text = asset.duration.formatToTimeMMss()
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -113,7 +113,7 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
 //    }
     var dataArray: [PHAsset] = []
     
-    lazy var player: VideoPlayer = { return VideoPlayer(viewController: self) }()
+//    lazy var player: VideoPlayer = { return VideoPlayer(viewController: self) }()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,13 +147,13 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
         lblEndTime.font = UIFont(name: "DBLCDTempBlack", size: 18)
         lblName.text = asset?.value(forKey: "filename") as? String
         
-        player.btnPlay = btnPlay
-        player.lblStartTime = lblStartTime
-        player.lblEndTime = lblEndTime
-        player.progressSlider = lblProgress
-        player.toolbarTop = toolbarTop
-        player.toolbarBottom = toolbarBottom
-        player.endTime = asset?.duration ?? 0
+//        player.btnPlay = btnPlay
+//        player.lblStartTime = lblStartTime
+//        player.lblEndTime = lblEndTime
+//        player.progressSlider = lblProgress
+//        player.toolbarTop = toolbarTop
+//        player.toolbarBottom = toolbarBottom
+//        player.endTime = asset?.duration ?? 0
         
         playAsset(asset!)
     }
@@ -170,15 +170,15 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
     
     func playAsset(_ asset: PHAsset) {
         self.asset = asset
-        Async.background {
-            PHImageManager.default().requestAVAsset(forVideo: self.asset!, options: nil) { (avasset, _, _) in
-                Async.main {
-                    if let urlAsset = avasset as? AVURLAsset {
-                        self.player.readToPlay(urlAsset.url)
-                    }
-                }
-            }
-        }
+//        Async.background {
+//            PHImageManager.default().requestAVAsset(forVideo: self.asset!, options: nil) { (avasset, _, _) in
+//                Async.main {
+//                    if let urlAsset = avasset as? AVURLAsset {
+//                        self.player.readToPlay(urlAsset.url)
+//                    }
+//                }
+//            }
+//        }
     }
    
     
@@ -192,12 +192,12 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
         playAsset(video)
     }
     @IBAction func click_back(_ sender: UIButton) {
-        player.seekAddTime(-20)
-        player.delayToolBarHidden()
+//        player.seekAddTime(-20)
+//        player.delayToolBarHidden()
     }
     @IBAction func click_fast(_ sender: UIButton) {
-        player.seekAddTime(20)
-        player.delayToolBarHidden()
+//        player.seekAddTime(20)
+//        player.delayToolBarHidden()
     }
     @IBAction func click_next(_ sender: UIButton) {
         var index = dataArray.indexesOf(asset!).first!

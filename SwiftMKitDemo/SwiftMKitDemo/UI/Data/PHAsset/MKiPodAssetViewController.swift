@@ -94,7 +94,7 @@ class MKiPodAssetViewController: BaseListViewController {
         let section = (indexPath.section == 0 ? "Movie" : "Song")
         if let asset = source[section]?[indexPath.row] {
             cell.textLabel?.text = asset.title
-            cell.detailTextLabel?.text = asset.playbackDuration.formatToTimeMMss()
+//            cell.detailTextLabel?.text = asset.playbackDuration.formatToTimeMMss()
         } else {
             cell.textLabel?.text = ""
             cell.detailTextLabel?.text = ""
@@ -147,7 +147,7 @@ class MKiPodVideoDetailViewController: BaseViewController {
 //    }
     var dataArray: [MPMediaItem] = []
     
-    lazy var player: VideoPlayer = { return VideoPlayer(viewController: self) }()
+//    lazy var player: VideoPlayer = { return VideoPlayer(viewController: self) }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -180,13 +180,13 @@ class MKiPodVideoDetailViewController: BaseViewController {
         lblEndTime.font = UIFont(name: "DBLCDTempBlack", size: 18)
         lblName.text = asset?.title
         
-        player.btnPlay = btnPlay
-        player.lblStartTime = lblStartTime
-        player.lblEndTime = lblEndTime
-        player.progressSlider = lblProgress
-        player.toolbarTop = toolbarTop
-        player.toolbarBottom = toolbarBottom
-        player.endTime = asset?.playbackDuration ?? 0
+//        player.btnPlay = btnPlay
+//        player.lblStartTime = lblStartTime
+//        player.lblEndTime = lblEndTime
+//        player.progressSlider = lblProgress
+//        player.toolbarTop = toolbarTop
+//        player.toolbarBottom = toolbarBottom
+//        player.endTime = asset?.playbackDuration ?? 0
         
         playAsset(asset!)
     }
@@ -203,7 +203,7 @@ class MKiPodVideoDetailViewController: BaseViewController {
     
     func playAsset(_ asset: MPMediaItem) {
         self.asset = asset
-        self.player.readToPlay(asset.assetURL!)
+//        self.player.readToPlay(asset.assetURL!)
     }
     
     @IBAction func click_close(_ sender: UIButton) {
@@ -216,12 +216,12 @@ class MKiPodVideoDetailViewController: BaseViewController {
         playAsset(video)
     }
     @IBAction func click_back(_ sender: UIButton) {
-        player.seekAddTime(-20)
-        player.delayToolBarHidden()
+//        player.seekAddTime(-20)
+//        player.delayToolBarHidden()
     }
     @IBAction func click_fast(_ sender: UIButton) {
-        player.seekAddTime(20)
-        player.delayToolBarHidden()
+//        player.seekAddTime(20)
+//        player.delayToolBarHidden()
     }
     @IBAction func click_next(_ sender: UIButton) {
         var index = dataArray.indexesOf(asset!).first!

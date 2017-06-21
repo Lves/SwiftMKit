@@ -14,7 +14,7 @@ def pods
     pod 'MJRefresh', '~> 3.1.0'
     pod 'EZSwiftExtensions', '~> 1.7.0'
     pod 'JSPatch', '~> 1.1.0'
-    pod 'CryptoSwift', '~> 0.6.0'
+#    pod 'CryptoSwift', '~> 0.6.9'
     pod 'IQKeyboardManager', '~> 4.0.0'
     pod 'WebViewJavascriptBridge', '~> 5.0.0'
     pod 'PINCache', '~> 2.3.0'
@@ -26,7 +26,7 @@ def pods
     pod 'Charts', '~> 3.0.0'
     pod 'PulsingHalo', '~> 0.2.0'
     pod 'FDFullscreenPopGesture', '~> 1.1'
-    pod 'Player', '~> 0.2.0'
+#    pod 'Player', '~> 0.2.0'
 end
 
 target 'SwiftMKitDemo' do

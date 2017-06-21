@@ -11,7 +11,6 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (3.0.0):
     - CocoaLumberjack/Extensions
-  - CryptoSwift (0.6.8)
   - EZSwiftExtensions (1.7)
   - FDFullscreenPopGesture (1.1)
   - HanekeSwift (0.10.1)
@@ -26,7 +25,6 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - PINCache (2.3)
-  - Player (0.2.2)
   - pop (1.0.9)
   - PulsingHalo (0.2.5)
   - ReachabilitySwift (3)
@@ -43,7 +41,6 @@ DEPENDENCIES:
   - Aspects (~> 1.4.0)
   - Charts (~> 3.0.0)
   - CocoaLumberjack/Swift (~> 3.0.0)
-  - CryptoSwift (~> 0.6.0)
   - EZSwiftExtensions (~> 1.7.0)
   - FDFullscreenPopGesture (~> 1.1)
   - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, branch `feature/swift-3`)
@@ -54,7 +51,6 @@ DEPENDENCIES:
   - MJExtension (~> 3.0.0)
   - MJRefresh (~> 3.1.0)
   - PINCache (~> 2.3.0)
-  - Player (~> 0.2.0)
   - pop (~> 1.0.0)
   - PulsingHalo (~> 0.2.0)
   - ReachabilitySwift (~> 3)
@@ -77,7 +73,6 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
-  CryptoSwift: f21ea03ed3a94e79d241648ce26652cd4810508a
   EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
@@ -88,7 +83,6 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  Player: 5cff076cc9f13b51f56b6fb7bed24431569b8102
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   PulsingHalo: cddcc388293326ccc6cfc9af1abff27434035bb5
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
@@ -98,6 +92,6 @@ SPEC CHECKSUMS:
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   WebViewJavascriptBridge: a4390df79bf622fc068dd035c8b5f67590c0ba05
 
-PODFILE CHECKSUM: 4b1d029e08740d2d66396a8f0826454a907d08d8
+PODFILE CHECKSUM: 18df362e6691aa3e8b9bca19bdfdec9a2d328e52
 
 COCOAPODS: 1.1.1

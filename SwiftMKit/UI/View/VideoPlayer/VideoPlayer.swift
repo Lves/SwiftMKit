@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import Player
+//import Player
 import SnapKit
 import CoreMedia
 import CocoaLumberjack
 import MediaPlayer
 import AVKit
-
+  /*
 open class VideoPlayer: NSObject {
-    
+ 
     open var player: Player
     open weak var viewController: UIViewController!
     open var view: UIView {
@@ -307,6 +307,7 @@ open class VideoPlayer: NSObject {
     deinit {
         DDLogError("Deinit")
     }
+
 }
 
 extension VideoPlayer: PlayerDelegate {
@@ -366,3 +367,4 @@ extension Player {
     }
     
 }
+  */

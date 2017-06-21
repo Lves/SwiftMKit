@@ -16,7 +16,7 @@ struct NotificationPresentItem {
     let title: String
     let text: String
 }
-
+@available(iOS 10.0, *)
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
     
     var items: [NotificationPresentItem] = []

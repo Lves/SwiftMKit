@@ -277,14 +277,7 @@
 		279546AD1E9C720C00D36D83 /* WebViewProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545F31E9C720C00D36D83 /* WebViewProgress.swift */; };
 		27959A3C1CD3018900546424 /* BaseWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27959A3B1CD3018900546424 /* BaseWebViewController.xib */; };
 		27959A431CD3331900546424 /* PINCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27959A421CD3331900546424 /* PINCacheTests.swift */; };
-		27963FDB1DD46FEF007BA28A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27963FDA1DD46FEF007BA28A /* NotificationService.swift */; };
-		27963FDF1DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 27963FD81DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		279F038A1DD59E3600543336 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 279F03891DD59E3600543336 /* appicon.png */; };
-		279F03901DD5A43C00543336 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279F03761DD56DF500543336 /* UserNotifications.framework */; };
-		279F03911DD5A43C00543336 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279F03781DD56DF500543336 /* UserNotificationsUI.framework */; };
-		279F03941DD5A43C00543336 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F03931DD5A43C00543336 /* NotificationViewController.swift */; };
-		279F03971DD5A43C00543336 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279F03951DD5A43C00543336 /* MainInterface.storyboard */; };
-		279F039B1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 279F038F1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A5B20C1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld */; };
 		27CA0CCC1DD949A900462BC6 /* MKPHAsset.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27CA0CCB1DD949A900462BC6 /* MKPHAsset.storyboard */; };
 		27CA0CCE1DD949E600462BC6 /* MKPHAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA0CCD1DD949E600462BC6 /* MKPHAssetViewController.swift */; };
@@ -310,20 +303,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		27963FDD1DD46FEF007BA28A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3FC9DEED1CBFD35900C2D938 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 27963FD71DD46FEF007BA28A;
-			remoteInfo = SwiftMKitDemoNotifyServiceExtension;
-		};
-		279F03991DD5A43C00543336 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3FC9DEED1CBFD35900C2D938 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 279F038E1DD5A43C00543336;
-			remoteInfo = SwiftMKitDemoNotifyContentExtension;
-		};
 		3FC9DF0A1CBFD35900C2D938 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3FC9DEED1CBFD35900C2D938 /* Project object */;
@@ -347,8 +326,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				27963FDF1DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex in Embed App Extensions */,
-				279F039B1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,7 +360,6 @@
 		274113CC1CCDC95600EECE5A /* JsonMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonMapTests.swift; sourceTree = "<group>"; };
 		2749CEC91DD95E4300D713B0 /* MKPHAssetVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKPHAssetVideoViewController.swift; sourceTree = "<group>"; };
 		2749CECD1DD9BA7100D713B0 /* MKiPodAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKiPodAssetViewController.swift; sourceTree = "<group>"; };
-		27718BB91DD4858F00238F80 /* SwiftMKitDemoNotifyServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftMKitDemoNotifyServiceExtension.entitlements; sourceTree = "<group>"; };
 		2779F51D1DD5567B0057F148 /* SwiftMKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftMKitDemo.entitlements; sourceTree = "<group>"; };
 		2783DFCB1DB626FD005E087C /* MKChartView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKChartView.storyboard; sourceTree = "<group>"; };
 		2783DFCC1DB626FD005E087C /* MKChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKChartViewController.swift; sourceTree = "<group>"; };
@@ -645,16 +621,9 @@
 		279545F31E9C720C00D36D83 /* WebViewProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewProgress.swift; sourceTree = "<group>"; };
 		27959A3B1CD3018900546424 /* BaseWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseWebViewController.xib; sourceTree = "<group>"; };
 		27959A421CD3331900546424 /* PINCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINCacheTests.swift; sourceTree = "<group>"; };
-		27963FD81DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SwiftMKitDemoNotifyServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		27963FDA1DD46FEF007BA28A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		27963FDC1DD46FEF007BA28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		279F03761DD56DF500543336 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		279F03781DD56DF500543336 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		279F03891DD59E3600543336 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
-		279F038F1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SwiftMKitDemoNotifyContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		279F03931DD5A43C00543336 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		279F03961DD5A43C00543336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		279F03981DD5A43C00543336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A5B20D1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitDemo.xcdatamodel; sourceTree = "<group>"; };
 		27A5B2221CC8710E005A59CA /* SwiftMKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		27CA0CCB1DD949A900462BC6 /* MKPHAsset.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKPHAsset.storyboard; sourceTree = "<group>"; };
@@ -695,22 +664,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		27963FD51DD46FEF007BA28A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		279F038C1DD5A43C00543336 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				279F03911DD5A43C00543336 /* UserNotificationsUI.framework in Frameworks */,
-				279F03901DD5A43C00543336 /* UserNotifications.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FC9DEF21CBFD35900C2D938 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1555,26 +1508,6 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		27963FD91DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension */ = {
-			isa = PBXGroup;
-			children = (
-				27718BB91DD4858F00238F80 /* SwiftMKitDemoNotifyServiceExtension.entitlements */,
-				27963FDA1DD46FEF007BA28A /* NotificationService.swift */,
-				27963FDC1DD46FEF007BA28A /* Info.plist */,
-			);
-			path = SwiftMKitDemoNotifyServiceExtension;
-			sourceTree = "<group>";
-		};
-		279F03921DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension */ = {
-			isa = PBXGroup;
-			children = (
-				279F03931DD5A43C00543336 /* NotificationViewController.swift */,
-				279F03951DD5A43C00543336 /* MainInterface.storyboard */,
-				279F03981DD5A43C00543336 /* Info.plist */,
-			);
-			path = SwiftMKitDemoNotifyContentExtension;
-			sourceTree = "<group>";
-		};
 		27A5B20B1CC86E6F005A59CA /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1649,8 +1582,6 @@
 				3FC9DF0C1CBFD35900C2D938 /* SwiftMKitDemoTests */,
 				3FC9DF171CBFD35A00C2D938 /* SwiftMKitDemoUITests */,
 				576E13D51D3DD4D200A948CE /* Supporting Files */,
-				27963FD91DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension */,
-				279F03921DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension */,
 				3FC9DEF61CBFD35900C2D938 /* Products */,
 				92606744023F345A76BD07D7 /* Frameworks */,
 				D94E82CEF6ED9C0653237B9A /* Pods */,
@@ -1663,8 +1594,6 @@
 				3FC9DEF51CBFD35900C2D938 /* SwiftMKitDemo.app */,
 				3FC9DF091CBFD35900C2D938 /* SwiftMKitDemoTests.xctest */,
 				3FC9DF141CBFD35A00C2D938 /* SwiftMKitDemoUITests.xctest */,
-				27963FD81DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex */,
-				279F038F1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1843,40 +1772,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		27963FD71DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 27963FE21DD46FEF007BA28A /* Build configuration list for PBXNativeTarget "SwiftMKitDemoNotifyServiceExtension" */;
-			buildPhases = (
-				27963FD41DD46FEF007BA28A /* Sources */,
-				27963FD51DD46FEF007BA28A /* Frameworks */,
-				27963FD61DD46FEF007BA28A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftMKitDemoNotifyServiceExtension;
-			productName = SwiftMKitDemoNotifyServiceExtension;
-			productReference = 27963FD81DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		279F038E1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 279F039C1DD5A43C00543336 /* Build configuration list for PBXNativeTarget "SwiftMKitDemoNotifyContentExtension" */;
-			buildPhases = (
-				279F038B1DD5A43C00543336 /* Sources */,
-				279F038C1DD5A43C00543336 /* Frameworks */,
-				279F038D1DD5A43C00543336 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftMKitDemoNotifyContentExtension;
-			productName = SwiftMKitDemoNotifyContentExtension;
-			productReference = 279F038F1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		3FC9DEF41CBFD35900C2D938 /* SwiftMKitDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FC9DF1D1CBFD35A00C2D938 /* Build configuration list for PBXNativeTarget "SwiftMKitDemo" */;
@@ -1893,8 +1788,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				27963FDE1DD46FEF007BA28A /* PBXTargetDependency */,
-				279F039A1DD5A43C00543336 /* PBXTargetDependency */,
 			);
 			name = SwiftMKitDemo;
 			productName = SwiftMKitDemo;
@@ -1953,34 +1846,17 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = cdts;
 				TargetAttributes = {
-					27963FD71DD46FEF007BA28A = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = TE2BYM67AU;
-						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.Push = {
-								enabled = 1;
-							};
-						};
-					};
-					279F038E1DD5A43C00543336 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = TE2BYM67AU;
-						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
-					};
 					3FC9DEF41CBFD35900C2D938 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = TE2BYM67AU;
+						DevelopmentTeam = 4WQAYARMUF;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -2011,28 +1887,11 @@
 				3FC9DEF41CBFD35900C2D938 /* SwiftMKitDemo */,
 				3FC9DF081CBFD35900C2D938 /* SwiftMKitDemoTests */,
 				3FC9DF131CBFD35A00C2D938 /* SwiftMKitDemoUITests */,
-				27963FD71DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension */,
-				279F038E1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		27963FD61DD46FEF007BA28A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		279F038D1DD5A43C00543336 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				279F03971DD5A43C00543336 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FC9DEF31CBFD35900C2D938 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2270,22 +2129,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		27963FD41DD46FEF007BA28A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				27963FDB1DD46FEF007BA28A /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		279F038B1DD5A43C00543336 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				279F03941DD5A43C00543336 /* NotificationViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FC9DEF11CBFD35900C2D938 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2525,16 +2368,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		27963FDE1DD46FEF007BA28A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 27963FD71DD46FEF007BA28A /* SwiftMKitDemoNotifyServiceExtension */;
-			targetProxy = 27963FDD1DD46FEF007BA28A /* PBXContainerItemProxy */;
-		};
-		279F039A1DD5A43C00543336 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 279F038E1DD5A43C00543336 /* SwiftMKitDemoNotifyContentExtension */;
-			targetProxy = 279F03991DD5A43C00543336 /* PBXContainerItemProxy */;
-		};
 		3FC9DF0B1CBFD35900C2D938 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3FC9DEF41CBFD35900C2D938 /* SwiftMKitDemo */;
@@ -2548,14 +2381,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		279F03951DD5A43C00543336 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				279F03961DD5A43C00543336 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		3FC9DEFC1CBFD35900C2D938 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2575,88 +2400,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		27963FE01DD46FEF007BA28A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemoNotifyServiceExtension/SwiftMKitDemoNotifyServiceExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TE2BYM67AU;
-				INFOPLIST_FILE = SwiftMKitDemoNotifyServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo.SwiftMKitDemoNotifyServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		27963FE11DD46FEF007BA28A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemoNotifyServiceExtension/SwiftMKitDemoNotifyServiceExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TE2BYM67AU;
-				INFOPLIST_FILE = SwiftMKitDemoNotifyServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo.SwiftMKitDemoNotifyServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		279F039D1DD5A43C00543336 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TE2BYM67AU;
-				INFOPLIST_FILE = SwiftMKitDemoNotifyContentExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo.SwiftMKitDemoNotifyContentExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		279F039E1DD5A43C00543336 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TE2BYM67AU;
-				INFOPLIST_FILE = SwiftMKitDemoNotifyContentExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo.SwiftMKitDemoNotifyContentExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
 		3FC9DF1B1CBFD35A00C2D938 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2753,10 +2496,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemo/SwiftMKitDemo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TE2BYM67AU;
+				CODE_SIGN_IDENTITY = "iPhone Developer: haitao wu (2P2A8T5U7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: haitao wu (2P2A8T5U7K)";
+				DEVELOPMENT_TEAM = 4WQAYARMUF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2764,11 +2506,12 @@
 					"$(PROJECT_DIR)/SwiftMKitDemo/Frameworks",
 				);
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pintec.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ab9491cf-759c-4836-ba50-6f65e9df6a9d";
+				PROVISIONING_PROFILE_SPECIFIER = develop_pintec;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2781,10 +2524,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = SwiftMKitDemo/SwiftMKitDemo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: XINGLE LI (XZZ579K76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TE2BYM67AU;
+				CODE_SIGN_IDENTITY = "iPhone Developer: haitao wu (2P2A8T5U7K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: haitao wu (2P2A8T5U7K)";
+				DEVELOPMENT_TEAM = 4WQAYARMUF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2792,11 +2534,12 @@
 					"$(PROJECT_DIR)/SwiftMKitDemo/Frameworks",
 				);
 				INFOPLIST_FILE = SwiftMKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdts.swiftdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pintec.swiftdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ab9491cf-759c-4836-ba50-6f65e9df6a9d";
+				PROVISIONING_PROFILE_SPECIFIER = develop_pintec;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../SwiftMKit/ImportedModules";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftMKitDemo/SwiftMKitDemo-Bridging-Header.h";
 			};
@@ -2859,24 +2602,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		27963FE21DD46FEF007BA28A /* Build configuration list for PBXNativeTarget "SwiftMKitDemoNotifyServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				27963FE01DD46FEF007BA28A /* Debug */,
-				27963FE11DD46FEF007BA28A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		279F039C1DD5A43C00543336 /* Build configuration list for PBXNativeTarget "SwiftMKitDemoNotifyContentExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				279F039D1DD5A43C00543336 /* Debug */,
-				279F039E1DD5A43C00543336 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3FC9DEF01CBFD35900C2D938 /* Build configuration list for PBXProject "SwiftMKitDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
