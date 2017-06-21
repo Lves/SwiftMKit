@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import ReactiveCocoa
 import ReactiveSwift
+import ReactiveCocoa
 import Result
 import EZSwiftExtensions
 
@@ -24,6 +24,7 @@ public extension UITextField {
         self.clearButtonMode = clearButtonMode ?? .whileEditing
     }
     
+    //FIXME: - Error
     //MARK: -
     public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
         return SignalProducer(self.reactive.continuousTextValues).map { $0! }

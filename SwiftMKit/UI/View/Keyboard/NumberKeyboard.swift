@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import CocoaLumberjack
 import IQKeyboardManager
 
@@ -132,7 +133,7 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //小数点输入
     fileprivate func bindDotButtonAction(_ button: UIButton) {
-        button.reactive.controlEvents(.touchUpInside).observeValues { _ in
+        button.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
             if self.text.contains(".") {
                 return
             }

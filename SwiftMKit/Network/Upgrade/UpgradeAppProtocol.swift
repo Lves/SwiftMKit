@@ -10,5 +10,5 @@ import Foundation
 
 public protocol UpgradeAppProtocol {
     var version: String { get }
-    func requestUpgrade(version: String, completion:(_ needUpgrade: Bool, _ newVersion: String, _ upgradeMessage: String, _ downloadUrl: String) -> Void)
+    func requestUpgrade(version: String, completion:@escaping(_ needUpgrade: Bool, _ newVersion: String, _ upgradeMessage: String, _ downloadUrl: String) -> Void)
 }

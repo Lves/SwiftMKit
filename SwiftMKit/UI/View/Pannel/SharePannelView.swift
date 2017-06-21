@@ -335,7 +335,6 @@ open class ToolsPannelScrollView: UIScrollView {
         toolItme.addSubview(btn)
         
         btn.reactive.controlEvents(.touchUpInside).observeValues { _ in
-            
             if let model = self.toolsArray?[btn.tag - 1] {
                 if self.toolsDelegate != nil {
                     self.toolsDelegate?.toolsPannelScrollViewButtonAction(self, model: model)

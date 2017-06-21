@@ -24,8 +24,8 @@ open class NetApiData: NSObject, NetApiProtocol {
     open var method: ApiMethod = .GET
     open var url: String = ""
     open var timeout: TimeInterval = NetApiDataConst.DefaultTimeoutInterval
-    open var request: Any?
-    open var response: Any?
+    open var request: AnyObject?
+    open var response: NetApiResponse<AnyObject, NSError>?
     open var indicator: NetApiIndicator?
     
     open func fillJSON(_ json: AnyObject) {}

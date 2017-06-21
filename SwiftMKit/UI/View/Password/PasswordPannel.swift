@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManager
 import ReactiveSwift
+import ReactiveCocoa
 
 ///  Type
 ///
