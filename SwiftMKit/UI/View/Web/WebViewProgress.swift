@@ -74,16 +74,17 @@ open class WebViewProgress : NSObject {
     }
  
     open func progressWebView(_ webView: UIWebView, shouldStartLoadWithRequest request: URLRequest, navigationType: UIWebViewNavigationType , delegatRet : Bool) -> Bool {
-        
-        if request.url!.path == InnerConst.CompleteRPCURLPath {
+
+        if let path = request.url?.path, path == InnerConst.CompleteRPCURLPath {
             self.completeProgress()
             return false
         }
         
         var isFragmentJump : Bool = false
         
-        if ((request.url?.fragment) != nil) {
-            let nonFragmentURL = request.url?.absoluteString.replacingOccurrences(of: "#\(request.url?.fragment ?? "")", with: "")
+
+        if let fragment = request.url?.fragment {
+            let nonFragmentURL = request.url?.absoluteString.replacingOccurrences(of: "#\(fragment)", with: "")
             
             if let url = webView.request?.url{
                 let absoluteString : String = url.absoluteString
@@ -132,11 +133,12 @@ open class WebViewProgress : NSObject {
         //运行自定义的结束JS
         if tempInteractive {
             interactive = true
-            let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request!.mainDocumentURL?.scheme ?? "")://\(webView.request?.mainDocumentURL?.host ?? "")\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
+
+            let waitForCompleteJS = "window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '\(webView.request?.mainDocumentURL?.scheme ?? "")://\(webView.request?.mainDocumentURL?.host ?? "")\(InnerConst.CompleteRPCURLPath)'; document.body.appendChild(iframe);  }, false);"
             webView.stringByEvaluatingJavaScript(from: waitForCompleteJS)
         }
         
-        let isNotRedirect : Bool = (currentURL == webView.request!.mainDocumentURL)
+        let isNotRedirect : Bool = (currentURL == webView.request?.mainDocumentURL)
         
         let complete = readyState == "complete"
         
@@ -149,7 +151,8 @@ open class WebViewProgress : NSObject {
         }
         
         DDLogInfo("[runFinishJS] \(complete) \(isNotRedirect)")
-        
-        DDLogInfo("[runFinishJS] \n\(String(describing: currentURL)) \n\(String(describing: webView.request!.mainDocumentURL)) \n\(webView.request!.url?.absoluteString ?? "")")
+
+        DDLogInfo("[runFinishJS] \n\(String(describing: currentURL)) \n\(webView.request?.mainDocumentURL) \n\(webView.request?.url?.absoluteString ?? "")")
+
     }
 }

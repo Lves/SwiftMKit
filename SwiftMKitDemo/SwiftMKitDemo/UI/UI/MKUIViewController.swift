@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 class MKUIViewController: BaseListViewController {
+
     @IBOutlet weak var tableView: UITableView!
     var smarterTool = SmarterTool()
     
@@ -42,7 +44,12 @@ class MKUIViewController: BaseListViewController {
     override func setupUI() {
         super.setupUI()
         c -= 1
+//<<<<<<< HEAD
         smarterTool.attach(toView: UIApplication.shared.keyWindow!)
+//=======
+//        smarterTool.delegate = self
+//        smarterTool.attachToView(UIApplication.sharedApplication().keyWindow!)
+//>>>>>>> 42a2df262acc59698acb7c00b2a72b884167feec
     }
     var c: Int = 1
     
@@ -74,6 +81,12 @@ class MKUIViewController: BaseListViewController {
                 return
             }
         }
+    }
+    
+    
+    func routeToEvnSwitch() {
+        // FIXME: 跳转
+//        UIViewController.topController?.routeToName("CrashLogViewController")
     }
     
 }

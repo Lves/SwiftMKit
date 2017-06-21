@@ -60,9 +60,14 @@ open class WebViewBridge : NSObject {
         bridge.registerHandler(eventName, handler: handler)
     }
     
-    open func requestUrl(_ url: String?) {
+
+    public func callEvent(eventName: String, data: AnyObject, responseCallback: @escaping WVJBResponseCallback) {
+        bridge.callHandler(eventName, data: data, responseCallback: responseCallback)
+    }
+    
+    public func requestUrl(url: String?) {
         if url == nil || url!.length <= 0 || !UIApplication.shared.canOpenURL(URL(string: url!)!) {
-            DDLogError("Request Invalid Url: \(url ?? "")")
+            DDLogError("Request Invalid Url: \(url ?? ""))")
             return
         }
         DDLogInfo("Request url: \(url ?? "")")

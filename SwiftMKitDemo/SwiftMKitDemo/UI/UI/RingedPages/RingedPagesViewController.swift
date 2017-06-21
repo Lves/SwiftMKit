@@ -12,7 +12,7 @@ import Haneke
 class RingedPagesViewController: UIViewController, RingedPagesDataSource, RingedPagesDelegate {
     
     lazy var pages: RingedPages = {
-        let screenWidth = UIScreen.mainScreen().bounds.size.width
+        let screenWidth = UIScreen.main.bounds.size.width
         let pagesFrame = CGRect(x: 0, y: 100, width: screenWidth, height: screenWidth * 0.4)
         let pages = RingedPages(frame: pagesFrame)
         let height = pagesFrame.size.height - pages.pageControlMarginBottom - pages.pageControlMarginTop - pages.pageControlHeight
@@ -48,7 +48,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
     func numberOfItems(in ringedPages: RingedPages) -> Int {
         return dataSource.count
     }
-    func ringedPages(pages: RingedPages, viewForItemAt index: Int) -> UIView {
+    func ringedPages(_ pages: RingedPages, viewForItemAt index: Int) -> UIView {
         
         //UILabel
         var label: UILabel?
@@ -59,10 +59,10 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
         }
         if label == nil {
             label = UILabel()
-            label?.font = UIFont.systemFontOfSize(50)
-            label?.textAlignment = .Center
-            label?.textColor = UIColor.whiteColor()
-            label?.layer.backgroundColor = UIColor.blackColor().CGColor
+            label?.font = UIFont.systemFont(ofSize: 50)
+            label?.textAlignment = .center
+            label?.textColor = UIColor.white
+            label?.layer.backgroundColor = UIColor.black.cgColor
             label?.layer.cornerRadius = 5
         }
         label?.text = dataSource[index]
@@ -100,7 +100,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    @IBAction func changeMainPageSize(sender: UISegmentedControl) {
+    @IBAction func changeMainPageSize(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
             pages.carousel.mainPageSize = CGSize(width: 60, height: 100)
@@ -112,17 +112,17 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
         pages.reloadData()
     }
     var originMainPageSize: CGSize {
-        var height = UIScreen.mainScreen().bounds.size.width * 0.4
+        var height = UIScreen.main.bounds.size.width * 0.4
         height -= (pages.pageControlMarginBottom + pages.pageControlMarginTop + pages.pageControlHeight)
         return CGSize(width: height * 0.8, height: height)
     }
-    @IBAction func changePageScale(sender: UISegmentedControl) {
+    @IBAction func changePageScale(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 1:
+            case 1:
             pages.carousel.pageScale = 0.8
-        case 2:
+            case 2:
             pages.carousel.pageScale = 0.5
-        default:
+            default:
             pages.carousel.pageScale = 0.6
         }
         pages.reloadData()
@@ -131,7 +131,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
 
 public extension String {
     public subscript(index: Int) -> Character {
-        let index = self.startIndex.advancedBy(index)
+        let index = self.index(self.startIndex, offsetBy: index)//.startIndex.advancedBy(index)
         return self[index]
     }
 }

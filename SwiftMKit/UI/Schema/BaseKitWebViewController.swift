@@ -132,7 +132,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     open override func loadData() {
         super.loadData()
         if url != nil {
-            self.webViewBridge.requestUrl(self.url)
+            self.webViewBridge.requestUrl(url: self.url)
         }
     }
     open func bindEvents() {

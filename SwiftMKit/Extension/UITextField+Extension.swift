@@ -13,15 +13,24 @@ import Result
 import EZSwiftExtensions
 
 public extension UITextField {
+    //MARK: - 去除空格
+    func trim() -> String {
+        if let text = self.text, text.length > 0{ //去掉空格
+            self.text = text.replacingOccurrences(of: " ", with: "")
+        }
+        return self.text ?? ""
+    }
     
     //MARK: - 修改clearButtonImage
     func setClearButtonImage(image:UIImage?,clearButtonMode:UITextFieldViewMode? = .whileEditing) {
         guard let clearImage = image else {
             return
         }
-        let clearButton:UIButton = self.value(forKey: "_clearButton") as! UIButton
-        clearButton.setImage(clearImage, for: .normal)
-        self.clearButtonMode = clearButtonMode ?? .whileEditing
+        if let clearButton:UIButton = self.value(forKey: "_clearButton") as? UIButton {
+            clearButton.setImage(clearImage, for: .normal)
+            self.clearButtonMode = clearButtonMode ?? .whileEditing
+        }
+
     }
     
     //FIXME: - Error

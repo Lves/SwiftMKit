@@ -17,11 +17,12 @@ class PickerTextFieldViewController: UIViewController,PickerTextFieldDelegate {
         pickerTextField.pickerTextFieldDelegate = self
     }
     
-    func pickerTextField(pickerTextField: PickerTextField, didSelectRow row: Int) {
+    func pickerTextField(_ pickerTextField: PickerTextField, didSelectRow row: Int) {
         print("选中\(row)")
     }
     //可选，格式化字符串
-    func pickerTextField(pickerTextField: PickerTextField, formatString string: String, forRow row: Int) -> String? {
+    func pickerTextField(_ pickerTextField: PickerTextField, formatString string: String, forRow row: Int) -> String? {
         return "\(string) 很帅"
     }
+    
 }

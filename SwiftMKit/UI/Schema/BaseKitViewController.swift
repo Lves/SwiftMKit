@@ -87,6 +87,9 @@ open class BaseKitViewController : UIViewController {
     open func loadData() {
     }
     
+    public func willTerminate() {
+    }
+    
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
         NotificationCenter.default.removeObserver(self)

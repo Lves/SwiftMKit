@@ -93,9 +93,15 @@ open class UpgradeApp : NSObject {
                 if UIApplication.shared.canOpenURL(url) {
                     DDLogInfo("[UpgradeApp] 跳转下载地址: \(downloadUrl)")
                     if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+                        UIApplication.shared.open(url, options: [:], completionHandler: { _ in
+                            exit(0)
+                        })
                     }else{
                         UIApplication.shared.openURL(url)
+                        Async.main(after: 5) {
+                            exit(0)
+                        }
                     }
                 }
             }

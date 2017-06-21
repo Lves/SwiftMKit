@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CocoaLumberjack
 
 public extension UIImage {
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
@@ -88,7 +89,7 @@ public extension UIImage {
         let width = originalImg.size.width
         let height = originalImg.size.height
         let scale = width/height
-        print("原始长: \(height), 原始宽: \(width)")
+        DDLogInfo("原始长: \(height), 原始宽: \(width)")
         
         var sizeChange = CGSize()
         
@@ -132,7 +133,7 @@ public extension UIImage {
         //create UIImage
         let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        print("压缩后长: \(sizeChange.height), 压缩后宽: \(sizeChange.width)")
+        DDLogInfo("压缩后长: \(sizeChange.height), 压缩后宽: \(sizeChange.width)")
         
         return resizedImg!
     }
@@ -140,13 +141,14 @@ public extension UIImage {
     //图片质量压缩
     func compressImageSize(limitSize:Int,image:UIImage) -> Data{
         var zipImageData = UIImageJPEGRepresentation(image,1.0)!
+
         let originalImgSize = zipImageData.count/1024 as Int  //获取图片大小
-        print("原始大小: \(originalImgSize)")
+        DDLogInfo("原始大小: \(originalImgSize)")
         
         let compressionQuality : CGFloat = self.getCompressionQuality(limitSize: limitSize, image: image, compressionQuality: 1.0)
         zipImageData = UIImageJPEGRepresentation(image,compressionQuality)!
        
-        print("上传大小: \(zipImageData.count/1024)")
+        DDLogInfo("上传大小: \(zipImageData.count/1024)")
         
         //FIXME: 打印测试数据信息
         let width = image.size.width
