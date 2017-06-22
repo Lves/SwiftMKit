@@ -14,6 +14,7 @@ import EZSwiftExtensions
 
 public extension UITextField {
     //MARK: - 去除空格
+    @discardableResult
     func trim() -> String {
         if let text = self.text, text.length > 0{ //去掉空格
             self.text = text.replacingOccurrences(of: " ", with: "")
