@@ -103,7 +103,7 @@ open class AlamofireNetApiData: NetApiData {
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("Data: \(value.count) bytes")
                         wself.response = response.toNetApiResponse()
-                        wself.fillJSON(value as AnyObject)
+                        wself.fillJSON(value)
                         sink.send(value: wself)
                         sink.sendCompleted()
                         return
@@ -154,7 +154,7 @@ open class AlamofireNetApiData: NetApiData {
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("String: \(transferedResponse.result.value ?? "")")
                         wself.response = response.toNetApiResponse()
-                        wself.fillJSON(value as AnyObject)
+                        wself.fillJSON(value)
                         sink.send(value: wself)
                         sink.sendCompleted()
                         return

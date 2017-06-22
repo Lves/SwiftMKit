@@ -11,9 +11,9 @@ import MJExtension
 import MagicalRecord
 
 public extension NSObject {
-    class public func arrayFromJson<T: NSObject>(_ json: Array<Any>?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.mr_default()) -> [T]? {
+    class public func arrayFromJson<T: NSObject>(_ json: [Any]?, page:UInt = 0, number:UInt = 20, context: NSManagedObjectContext = NSManagedObjectContext.mr_default()) -> [T]? {
         if let jsonString = json {
-            let arr = T.mj_objectArray(withKeyValuesArray: jsonString, context:context).copy() as? Array<T>
+            let arr = T.mj_objectArray(withKeyValuesArray: jsonString, context:context).copy() as? [T]
             //如果是第一页，删除旧数据
             if page == 0 {
                 if let entityType = T.self as? BaseKitEntity.Type {

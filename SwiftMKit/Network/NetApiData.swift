@@ -24,21 +24,21 @@ open class NetApiData: NSObject, NetApiProtocol {
     open var method: ApiMethod = .GET
     open var url: String = ""
     open var timeout: TimeInterval = NetApiDataConst.DefaultTimeoutInterval
-    open var request: AnyObject?
-    open var response: NetApiResponse<AnyObject, NSError>?
+    open var request: Any?
+    open var response: NetApiResponse<Any, NSError>?
     open var indicator: NetApiIndicator?
     
-    open func fillJSON(_ json: AnyObject) {
-        if let map = json as? [String: AnyObject] {
+    open func fillJSON(_ json: Any) {
+        if let map = json as? [String: Any] {
             fillFrom(map: map)
-        } else if let array = json as? [AnyObject] {
+        } else if let array = json as? [Any] {
             fillFrom(array: array)
         }
     }
-    open func fillFrom(map: [String: AnyObject]) {}
-    open func fillFrom(array: [AnyObject]) {}
+    open func fillFrom(map: [String: Any]) {}
+    open func fillFrom(array: [Any]) {}
     open func transferURLRequest(_ request:URLRequest) -> URLRequest { return request }
-    open func transferResponseJSON(_ response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError> { return response }
+    open func transferResponseJSON(_ response: NetApiResponse<Any, NSError>) -> NetApiResponse<Any, NSError> { return response }
     open func transferResponseData(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError> { return response }
     open func transferResponseString(_ response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError> { return response }
     open func requestJSON() -> SignalProducer<NetApiProtocol, NetError> { return SignalProducer.empty }

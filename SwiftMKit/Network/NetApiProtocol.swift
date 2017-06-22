@@ -101,15 +101,15 @@ public protocol NetApiProtocol: class {
     var method: ApiMethod { get }
     var url: String { get }
     var timeout: TimeInterval { get set }
-    var request: AnyObject? { get set }
-    var response: NetApiResponse<AnyObject, NSError>? { get set }
+    var request: Any? { get set }
+    var response: NetApiResponse<Any, NSError>? { get set }
     var indicator: NetApiIndicator? { get set }
     
-    func fillJSON(_ json: AnyObject)
-    func fillFrom(map: [String: AnyObject])
-    func fillFrom(array: [AnyObject])
+    func fillJSON(_ json: Any)
+    func fillFrom(map: [String: Any])
+    func fillFrom(array: [Any])
     func transferURLRequest(_ request:URLRequest) -> URLRequest
-    func transferResponseJSON(_ response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError>
+    func transferResponseJSON(_ response: NetApiResponse<Any, NSError>) -> NetApiResponse<Any, NSError>
     func transferResponseData(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError>
     func transferResponseString(_ response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError>
     func requestJSON() -> SignalProducer<NetApiProtocol, NetError>
