@@ -100,25 +100,25 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
         return object
     }
     
-    open func numberOfSections(in tableView: UITableView) -> Int {
+    open dynamic func numberOfSections(in tableView: UITableView) -> Int {
         let sections = listViewModel.dataSource.count
         return sections
     }
-    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open dynamic func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
         if listViewModel.dataSource.count > 0 {
             rows = listViewModel.dataSource[section].count
         }
         return rows
     }
-    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open dynamic func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = getCell(withTableView: tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
             configureCell(cell, object: object, indexPath: indexPath)
         }
         return cell
     }
-    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open dynamic func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = getCell(withTableView: tableView, indexPath: indexPath)!
         if let object = objectByIndexPath(indexPath) {
