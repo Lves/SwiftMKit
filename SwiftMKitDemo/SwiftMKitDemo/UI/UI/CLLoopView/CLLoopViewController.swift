@@ -19,7 +19,7 @@ class CLLoopViewController: UIViewController,CLLoopViewDelegate {
         let image2 = UIImage(named: "Barcelona1")!
         let image3 = UIImage(named: "Barcelona2")!
         let image4 = UIImage(named: "Barcelona3")!
-        let images = [image1,image2,image3,image4]
+        _ = [image1,image2,image3,image4]
         
         let imageUrl1 = "http://www3.autoimg.cn/newsdfs/g23/M0E/A6/72/620x0_1_autohomecar__wKgFXFhPnaOAZ55GAAIzV2iouyc338.jpg"
         let imageUrl2 = "http://img00.hc360.com/pf/201103/201103111027473156.jpg"

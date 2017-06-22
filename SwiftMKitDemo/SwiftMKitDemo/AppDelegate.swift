@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         setenv("XcodeColors", "YES", 0);
-        SwiftCrashReport.install(LocalCrashLogReporter)
+        SwiftCrashReport.install(LocalCrashLogReporter.self)
         DemoNetworkConfig.Release = false
         DemoNetworkConfig.Evn = .product
         DDLog.setup(level: .debug)
