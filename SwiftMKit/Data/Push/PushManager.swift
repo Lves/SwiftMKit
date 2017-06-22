@@ -53,7 +53,7 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
         tempPushFrom = from
     }
     
-    public func addManagers(managers: [PushManagerProtocol]) {
+    public func addManagers(_ managers: [PushManagerProtocol]) {
         _ = managers.map { self.managers.append($0) }
     }
     

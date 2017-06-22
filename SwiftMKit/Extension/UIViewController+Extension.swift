@@ -83,7 +83,7 @@ public extension UIViewController {
     }
        
     @discardableResult
-    public func route(toUrl url: String, name: String, params nextParams: Dictionary<String, AnyObject> = [:], pop: Bool = false) -> Bool {
+    public func route(toUrl url: String, name: String, params nextParams: [String: Any] = [:], pop: Bool = false) -> Bool {
         var params = nextParams
         params["url"] = url as AnyObject?
         return route(toName: name, params: params, pop: pop)
