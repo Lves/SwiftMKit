@@ -152,7 +152,7 @@ open class WebViewProgress : NSObject {
         
         DDLogInfo("[runFinishJS] \(complete) \(isNotRedirect)")
 
-        DDLogInfo("[runFinishJS] \n\(String(describing: currentURL)) \n\(webView.request?.mainDocumentURL ?? "") \n\(webView.request?.url?.absoluteString ?? "")")
+        DDLogInfo("[runFinishJS] \n\(String(describing: currentURL)) \n\(webView.request?.mainDocumentURL?.absoluteString ?? "") \n\(webView.request?.url?.absoluteString ?? "")")
 
     }
 }
