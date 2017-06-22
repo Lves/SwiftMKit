@@ -23,7 +23,7 @@ public extension UITextField {
     }
     
     //MARK: - 修改clearButtonImage
-    func setClearButtonImage(image:UIImage?,clearButtonMode:UITextFieldViewMode? = .whileEditing) {
+    func setClearButtonImage(_ image:UIImage?,clearButtonMode:UITextFieldViewMode? = .whileEditing) {
         guard let clearImage = image else {
             return
         }
