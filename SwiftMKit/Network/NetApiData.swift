@@ -28,7 +28,15 @@ open class NetApiData: NSObject, NetApiProtocol {
     open var response: NetApiResponse<AnyObject, NSError>?
     open var indicator: NetApiIndicator?
     
-    open func fillJSON(_ json: AnyObject) {}
+    open func fillJSON(_ json: AnyObject) {
+        if let map = json as? [String: AnyObject] {
+            fillFrom(map: map)
+        } else if let array = json as? [AnyObject] {
+            fillFrom(array: array)
+        }
+    }
+    open func fillFrom(map: [String: AnyObject]) {}
+    open func fillFrom(array: [AnyObject]) {}
     open func transferURLRequest(_ request:URLRequest) -> URLRequest { return request }
     open func transferResponseJSON(_ response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError> { return response }
     open func transferResponseData(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError> { return response }

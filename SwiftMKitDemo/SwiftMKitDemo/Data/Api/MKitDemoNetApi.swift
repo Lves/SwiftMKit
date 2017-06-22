@@ -71,21 +71,17 @@ class PX500PopularPhotosApiData: PX500NetApi {
         self.url = "/photos"
         self.method = .GET
     }
-    override func fillJSON(_ json: AnyObject) {
-        if let dict = json as? [String: AnyObject] {
-            if let array = dict["photos"] as? [AnyObject] {
-                self.photos = NSObject.arrayFromJson(array)
-            }
+    override func fillFrom(map: [String : AnyObject]) {
+        if let array = map["photos"] as? [AnyObject] {
+            self.photos = NSObject.arrayFromJson(array)
         }
     }
 }
 class PX500PopularPhotosCoreDataApiData: PX500PopularPhotosApiData {
     var photosCoreData: [PX500PhotoEntity]?
-    override func fillJSON(_ json: AnyObject) {
-        if let dict = json as? [String: AnyObject] {
-            if let array = dict["photos"] as? [AnyObject] {
-                self.photosCoreData =  NSObject.arrayFromJson(array, page: self.page - 1, number: self.number)
-            }
+    override func fillFrom(map: [String : AnyObject]) {
+        if let array = map["photos"] as? [AnyObject] {
+            self.photosCoreData =  NSObject.arrayFromJson(array, page: self.page - 1, number: self.number)
         }
     }
 }
@@ -97,10 +93,8 @@ class PX500PhotoDetailApiData: PX500NetApi {
         self.url = "/photos/" + photoId
         self.method = .GET
     }
-    override func fillJSON(_ json: AnyObject) {
-        if let dict = json as? [String: AnyObject] {
-            self.photo =  NSObject.objectFromJson(dict["photo"])
-        }
+    override func fillFrom(map: [String : AnyObject]) {
+        self.photo =  NSObject.objectFromJson(map["photo"])
     }
 }
 

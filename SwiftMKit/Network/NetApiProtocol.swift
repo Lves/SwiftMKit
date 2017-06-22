@@ -106,6 +106,8 @@ public protocol NetApiProtocol: class {
     var indicator: NetApiIndicator? { get set }
     
     func fillJSON(_ json: AnyObject)
+    func fillFrom(map: [String: AnyObject])
+    func fillFrom(array: [AnyObject])
     func transferURLRequest(_ request:URLRequest) -> URLRequest
     func transferResponseJSON(_ response: NetApiResponse<AnyObject, NSError>) -> NetApiResponse<AnyObject, NSError>
     func transferResponseData(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError>
