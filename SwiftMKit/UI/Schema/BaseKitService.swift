@@ -21,7 +21,7 @@ class BaseKitService: NSObject {
     }
     class func validate<T: NetApiProtocol>(_ conditions: [(Bool, Int, String)], completion: () -> T) -> T where T: NSObject {
         for condition in conditions {
-            if !condition.0 {
+            if condition.0 {
                 let error = NetError(statusCode: condition.1, message: condition.2)
                 let t = T()
                 t.error = error

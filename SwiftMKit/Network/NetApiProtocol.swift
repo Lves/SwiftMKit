@@ -190,7 +190,7 @@ public extension NetApiProtocol {
     
     func setIndicator(_ indicator: IndicatorProtocol?, view: UIView? = nil, text: String? = nil) -> Self {
         if let indicator = indicator {
-            self.indicator = NetApiIndicator(indicator: indicator, view: view, text: text)
+            self.indicator = NetApiIndicator(indicator: indicator, view: view ?? UIViewController.topController?.view, text: text)
         }
         return self
     }
