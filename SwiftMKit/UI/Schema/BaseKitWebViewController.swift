@@ -166,7 +166,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     }
     
     //WebViewDelegate
-    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open dynamic func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 
         var ret = true
         
