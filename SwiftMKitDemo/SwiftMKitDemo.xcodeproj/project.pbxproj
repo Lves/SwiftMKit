@@ -301,6 +301,8 @@
 		6C406E101EFA52F10052BDA8 /* PickerTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */; };
 		6C406E141EFA54380052BDA8 /* CLLoopView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */; };
 		6C406E151EFA54380052BDA8 /* CLLoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */; };
+		7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */; };
+		7A68DCDB1EFCF1C000CE9E43 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */; };
 		868BA5E9AE9EDED0A192ABA9 /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */; };
 		FF6D5557E11EB08BEAAE0A05 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0309A9864D0980C2ED5378 /* Pods_SwiftMKitDemoTests.framework */; };
 /* End PBXBuildFile section */
@@ -663,6 +665,8 @@
 		6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextFieldViewController.swift; sourceTree = "<group>"; };
 		6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CLLoopView.storyboard; sourceTree = "<group>"; };
 		6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLoopViewController.swift; sourceTree = "<group>"; };
+		7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitService.swift; sourceTree = "<group>"; };
+		7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		854BAAE539F6CBB5423DDA35 /* Pods-SwiftMKitDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		86FE2AD90661A2C71A315F4F /* Pods-SwiftMKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B9E51E2DB25BF77A21FA8E9 /* Pods-SwiftMKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -1168,6 +1172,7 @@
 				279545711E9C720B00D36D83 /* BaseListFetchKitViewModel.swift */,
 				279545721E9C720B00D36D83 /* BaseListKitViewController.swift */,
 				279545731E9C720B00D36D83 /* BaseListKitViewModel.swift */,
+				7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -1726,6 +1731,7 @@
 				278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */,
 				27959A3B1CD3018900546424 /* BaseWebViewController.xib */,
 				278CAA551CD20970008AC629 /* BaseWebViewModel.swift */,
+				7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -2295,6 +2301,7 @@
 				18C208651CC878DC00569F42 /* BuDeJieModel.swift in Sources */,
 				2783E0131DB626FD005E087C /* MKUIViewController.swift in Sources */,
 				279545FE1E9C720C00D36D83 /* MQueue.swift in Sources */,
+				7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */,
 				2749CECA1DD95E4300D713B0 /* MKPHAssetVideoViewController.swift in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				273E412A1DD2FE4B00A09830 /* MKUserNotificationViewModel.swift in Sources */,
@@ -2359,6 +2366,7 @@
 				279546441E9C720C00D36D83 /* BaseKitWebViewController.swift in Sources */,
 				2795463F1E9C720C00D36D83 /* SwiftMKit.swift in Sources */,
 				279546531E9C720C00D36D83 /* BaseKitEmptyView.swift in Sources */,
+				7A68DCDB1EFCF1C000CE9E43 /* BaseService.swift in Sources */,
 				2795465C1E9C720C00D36D83 /* MerakGifView.swift in Sources */,
 				2783E0001DB626FD005E087C /* MKQuestionCollectionViewCell.swift in Sources */,
 				27CA0CD01DD94B3300462BC6 /* MKPHAssetImageViewController.swift in Sources */,
