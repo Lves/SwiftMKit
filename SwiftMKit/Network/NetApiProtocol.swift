@@ -16,6 +16,18 @@ public enum ApiFormatType {
 public enum ApiMethod: String {
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }
+public enum NetStatusCode: Int {
+    case `default` = 0
+    case success = 200
+    case businessSuccess = 2000
+    case canceled = -999
+    case validateFailed = -99999
+    case forceUpgrade = -10000
+    case badRequest = 400
+    case unAuthorized = 401
+    case loginOtherDevice = 403
+    case timeOut = 504
+}
 
 public protocol NetApiIndicatorProtocol {
     weak var indicator: IndicatorProtocol? { get set }
@@ -96,7 +108,7 @@ public struct NetApiResponse<Value, NError: Error> {
 }
 
 public protocol NetApiProtocol: class {
-    var error: NetError? { get }
+    var error: NetError? { get set }
     var query: [String: Any] { get }
     var method: ApiMethod { get }
     var url: String { get }
