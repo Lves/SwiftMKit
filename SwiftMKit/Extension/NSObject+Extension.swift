@@ -89,6 +89,24 @@ public extension NSObject {
         
         return jsonStr
     }
+    // Returns the property type
+    func getTypeOfProperty (_ name: String) -> Any.Type {
+        var type: Mirror = Mirror(reflecting: self)
+        for child in type.children {
+            if child.label! == name {
+                return  type(of: child.value)
+            }
+        }
+        while let parent = type.superclassMirror {
+            for child in parent.children {
+                if child.label! == name {
+                    return type(of: child.value)
+                }
+            }
+            type = parent
+        }
+        return NSNull.Type.self
+    }
 
 }
 

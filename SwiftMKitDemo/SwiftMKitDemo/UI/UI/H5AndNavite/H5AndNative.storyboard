@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S5X-aS-Qmd">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--And Native Demo-->
+        <scene sceneID="Mb7-KM-8RL">
+            <objects>
+                <viewController storyboardIdentifier="H5AndNativeDemo" id="D2Z-Qu-GJP" customClass="H5AndNativeDemo" customModule="SwiftMKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gE0-Ll-os2"/>
+                        <viewControllerLayoutGuide type="bottom" id="w9f-2M-TQP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QB4-Ml-uqH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxk-pI-qP2">
+                                <rect key="frame" x="104" y="159" width="169" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="toNextViewController"/>
+                                <connections>
+                                    <action selector="toNextVC:" destination="D2Z-Qu-GJP" eventType="touchUpInside" id="HAe-6b-iFQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeN-03-AqZ">
+                                <rect key="frame" x="118" y="223" width="128" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="本地h5"/>
+                                <connections>
+                                    <action selector="toLocalH5:" destination="D2Z-Qu-GJP" eventType="touchUpInside" id="M1m-h8-w7c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iJo-7Y-C0m"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lla-TM-Gtf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="991.20000000000005" y="210.94452773613196"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vxd-gP-Hmn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S5X-aS-Qmd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eDG-Yv-0OU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="D2Z-Qu-GJP" kind="relationship" relationship="rootViewController" id="ezf-il-4Fk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wpL-cn-oij" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="210.94452773613196"/>
+        </scene>
+    </scenes>
+</document>

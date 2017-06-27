@@ -301,6 +301,11 @@
 		6C406E101EFA52F10052BDA8 /* PickerTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */; };
 		6C406E141EFA54380052BDA8 /* CLLoopView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */; };
 		6C406E151EFA54380052BDA8 /* CLLoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */; };
+		6C6F45C81F00BE58000E7792 /* H5AndNative.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C6F45C71F00BE58000E7792 /* H5AndNative.storyboard */; };
+		6C6F45CA1F00BE88000E7792 /* H5AndNativeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F45C91F00BE88000E7792 /* H5AndNativeDemo.swift */; };
+		6C6F45CC1F00BF61000E7792 /* toNativeDemo.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C6F45CB1F00BF61000E7792 /* toNativeDemo.html */; };
+		6C6F45CF1F00C12C000E7792 /* LocalWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F45CD1F00C12C000E7792 /* LocalWebViewController.swift */; };
+		6C6F45D01F00C12C000E7792 /* LocalWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C6F45CE1F00C12C000E7792 /* LocalWebViewController.xib */; };
 		7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */; };
 		7A68DCDB1EFCF1C000CE9E43 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */; };
 		868BA5E9AE9EDED0A192ABA9 /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */; };
@@ -665,6 +670,11 @@
 		6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextFieldViewController.swift; sourceTree = "<group>"; };
 		6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CLLoopView.storyboard; sourceTree = "<group>"; };
 		6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLoopViewController.swift; sourceTree = "<group>"; };
+		6C6F45C71F00BE58000E7792 /* H5AndNative.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = H5AndNative.storyboard; sourceTree = "<group>"; };
+		6C6F45C91F00BE88000E7792 /* H5AndNativeDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H5AndNativeDemo.swift; sourceTree = "<group>"; };
+		6C6F45CB1F00BF61000E7792 /* toNativeDemo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = toNativeDemo.html; sourceTree = "<group>"; };
+		6C6F45CD1F00C12C000E7792 /* LocalWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalWebViewController.swift; sourceTree = "<group>"; };
+		6C6F45CE1F00C12C000E7792 /* LocalWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalWebViewController.xib; sourceTree = "<group>"; };
 		7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitService.swift; sourceTree = "<group>"; };
 		7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		854BAAE539F6CBB5423DDA35 /* Pods-SwiftMKitDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1503,6 +1513,7 @@
 		27959A471CD3444500546424 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6C6F45C61F00BE3D000E7792 /* H5AndNavite */,
 				6C406E111EFA54380052BDA8 /* CLLoopView */,
 				6C406E0C1EFA52F10052BDA8 /* PickerTextField */,
 				2783DFEA1DB626FD005E087C /* MKUIViewController.swift */,
@@ -1780,6 +1791,18 @@
 			path = CLLoopView;
 			sourceTree = "<group>";
 		};
+		6C6F45C61F00BE3D000E7792 /* H5AndNavite */ = {
+			isa = PBXGroup;
+			children = (
+				6C6F45C71F00BE58000E7792 /* H5AndNative.storyboard */,
+				6C6F45C91F00BE88000E7792 /* H5AndNativeDemo.swift */,
+				6C6F45CD1F00C12C000E7792 /* LocalWebViewController.swift */,
+				6C6F45CE1F00C12C000E7792 /* LocalWebViewController.xib */,
+				6C6F45CB1F00BF61000E7792 /* toNativeDemo.html */,
+			);
+			path = H5AndNavite;
+			sourceTree = "<group>";
+		};
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1980,6 +2003,7 @@
 				279F038A1DD59E3600543336 /* appicon.png in Resources */,
 				279546A31E9C720C00D36D83 /* icon_st_apple@2x.png in Resources */,
 				2795466C1E9C720C00D36D83 /* keyboard_view_screen@2x.png in Resources */,
+				6C6F45CC1F00BF61000E7792 /* toNativeDemo.html in Resources */,
 				2795469E1E9C720C00D36D83 /* CrashLogDetailViewController.xib in Resources */,
 				6C406E0F1EFA52F10052BDA8 /* PickerTextField.storyboard in Resources */,
 				279546561E9C720C00D36D83 /* smkit_view_empty@2x.png in Resources */,
@@ -2002,6 +2026,7 @@
 				279546741E9C720C00D36D83 /* pannel_icon_chat_h@2x.png in Resources */,
 				279546541E9C720C00D36D83 /* BaseKitEmptyView.xib in Resources */,
 				279546761E9C720C00D36D83 /* pannel_icon_circlefriends_h@2x.png in Resources */,
+				6C6F45C81F00BE58000E7792 /* H5AndNative.storyboard in Resources */,
 				3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */,
 				2783E0071DB626FD005E087C /* MKEmptyView.storyboard in Resources */,
 				2795467B1E9C720C00D36D83 /* pannel_icon_email_h@2x.png in Resources */,
@@ -2011,6 +2036,7 @@
 				2783E00E1DB626FD005E087C /* MKIndicatorButtonViewController.xib in Resources */,
 				279546731E9C720C00D36D83 /* pannel_icon_chat@2x.png in Resources */,
 				2783E0091DB626FD005E087C /* MKGalaryCollectionView.storyboard in Resources */,
+				6C6F45D01F00C12C000E7792 /* LocalWebViewController.xib in Resources */,
 				279546881E9C720C00D36D83 /* pannel_icon_share@2x.png in Resources */,
 				2795468B1E9C720C00D36D83 /* pannel_icon_weixin_h@2x.png in Resources */,
 				279546801E9C720C00D36D83 /* pannel_icon_mms_h@2x.png in Resources */,
@@ -2210,6 +2236,7 @@
 				3FC9DF5A1CBFD6D400C2D938 /* PX500PhotosModel.swift in Sources */,
 				279546171E9C720C00D36D83 /* Action+Extension.swift in Sources */,
 				279546911E9C720C00D36D83 /* PasswordPannel.swift in Sources */,
+				6C6F45CF1F00C12C000E7792 /* LocalWebViewController.swift in Sources */,
 				2795469A1E9C720C00D36D83 /* SlideInPresentationAnimator.swift in Sources */,
 				279546211E9C720C00D36D83 /* NSObject+Extension.swift in Sources */,
 				279546051E9C720C00D36D83 /* ScoutOperation.swift in Sources */,
@@ -2270,6 +2297,7 @@
 				279546421E9C720C00D36D83 /* BaseKitViewController.swift in Sources */,
 				279546121E9C720C00D36D83 /* BaseKitEntity.swift in Sources */,
 				6C406E151EFA54380052BDA8 /* CLLoopViewController.swift in Sources */,
+				6C6F45CA1F00BE88000E7792 /* H5AndNativeDemo.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
 				279545F61E9C720C00D36D83 /* SwiftCrashConsoleReporter.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,

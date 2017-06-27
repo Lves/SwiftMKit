@@ -81,6 +81,16 @@ public extension UIViewController {
             return false
         }
     }
+    @discardableResult
+    public func route(name: String,h5Config: [String:String]? = [:], webViewController: String = "BaseKitWebViewController", params: [String: Any] = [:], storyboardName: String? = "", animation: Bool = true, pop: Bool = false) -> Bool {
+        DDLogInfo("Route name: \(name) (\(params.stringFromHttpParameters()))")
+        if let h5Url = h5Config?[name] {  //如果找到紧急修复h5链接
+            route(toUrl: h5Url , name: webViewController, params: params, pop: pop)
+            return true
+        }
+        return route(toName: name, params: params, storyboardName: storyboardName, animation: animation, pop: pop)
+    }
+
        
     @discardableResult
     public func route(toUrl url: String, name: String, params nextParams: [String: Any] = [:], pop: Bool = false) -> Bool {
@@ -200,6 +210,9 @@ public extension UIViewController {
     }
     public func instanceViewControllerInStoryboard(withName name: String, storyboardName: String?) -> UIViewController? {
         let story = storyboardName != nil && storyboardName!.length > 0 ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
+        guard story != nil else {
+            return nil
+        }
         if (story?.value(forKey: "identifierToNibNameMap") as AnyObject).object(forKey: name) != nil {
             return story?.instantiateViewController(withIdentifier: name)
         }

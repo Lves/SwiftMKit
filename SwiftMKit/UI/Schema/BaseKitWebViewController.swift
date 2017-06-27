@@ -136,7 +136,49 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         }
     }
     open func bindEvents() {
-        DDLogWarn("Need to implement the function of 'bindEvents'")
+        /*
+         *  H5跳转到任意原生页面
+         *  事件名：goToNativeView 
+         *  参数:
+         *      vcName:控制器名（必选）
+         *      storyboardName:控制器所在SB名（可选）
+         *      除以上两个之外的其他参数，作为控制器的params
+         */
+        self.bindEvent("goToNativeView", handler: { [weak self] data , responseCallback in
+            if let dic = data as? [String:String] {
+                if let vcName = dic["vcName"] {
+                    var sbName:String? = dic["storyboardName"]
+                    sbName = (sbName?.length ?? 0) > 0 ? sbName : nil
+                    if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
+                        var params:[String:Any] = [:]
+                        for (key,value) in dic {
+                            if key != "vcName" && key != "storyboardName" { //获取除vc和sb之外的参数
+                                let type = vc.getTypeOfProperty(key)
+                                if type == Bool.self || type == Bool?.self{
+                                    params[key] = value.toBool() ?? false
+                                }else if type == Int.self || type == Int?.self{
+                                    params[key] = value.toInt() ?? 0
+                                }else if type == Double.self  || type == Double?.self{
+                                    params[key] = value.toDouble() ?? 0.0
+                                }else if type == Float.self  || type == Float?.self{
+                                    params[key] = value.toFloat() ?? 0.0
+                                }else {
+                                    params[key] = value
+                                }
+                            }
+                        }
+                        if let baseVC = vc as? BaseKitViewController {
+                            baseVC.params = params
+                            self?.navigationController?.pushViewController(baseVC, animated: true)
+                        } else if let baseVC = vc as? BaseKitTableViewController {
+                            baseVC.params = params
+                            self?.navigationController?.pushViewController(baseVC, animated: true)
+                        }
+                        
+                    }
+                }
+            }
+        })
     }
     open func bindEvent(_ eventName: String, handler: @escaping WVJBHandler) {
         webViewBridge.addEvent(eventName, handler: handler)
