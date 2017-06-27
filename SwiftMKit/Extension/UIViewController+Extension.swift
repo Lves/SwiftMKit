@@ -209,12 +209,10 @@ public extension UIViewController {
         return self.instanceViewControllerInStoryboard(withName: name, storyboardName: nil)
     }
     public func instanceViewControllerInStoryboard(withName name: String, storyboardName: String?) -> UIViewController? {
-        let story = storyboardName != nil && storyboardName!.length > 0 ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard
-        guard story != nil else {
-            return nil
-        }
-        if (story?.value(forKey: "identifierToNibNameMap") as AnyObject).object(forKey: name) != nil {
-            return story?.instantiateViewController(withIdentifier: name)
+        if let story = storyboardName != nil && storyboardName!.length > 0 ? UIStoryboard(name: storyboardName!, bundle: nil) : self.storyboard {
+            if (story.value(forKey: "identifierToNibNameMap") as AnyObject).object(forKey: name) != nil {
+                return story.instantiateViewController(withIdentifier: name)
+            }
         }
         return nil
     }
