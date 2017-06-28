@@ -47,6 +47,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
             if _webViewBridge == nil {
                 _webViewBridge = WebViewBridge(webView: webView, viewController: self)
             }
+            _webViewBridge?.delegate = self
             return _webViewBridge!
         }
     }
