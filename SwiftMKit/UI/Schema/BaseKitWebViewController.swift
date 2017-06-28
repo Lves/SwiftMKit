@@ -60,6 +60,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     open var progressView : UIProgressView?
     open var webViewProgress: WebViewProgress = WebViewProgress()
     
+    open var needBackRefresh:Bool = false
     open var disableUserSelect = false
     open var disableLongTouch = false
     open var showRefreshHeader: Bool = true
@@ -88,6 +89,13 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         webViewToolsPannelView?.tappedCancel()
+    }
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if needBackRefresh { //跳转到原生页面，返回时是否需要刷新
+            needBackRefresh = false
+            self.loadData()
+        }
     }
     
     open override func setupUI() {
@@ -138,44 +146,37 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     open func bindEvents() {
         /*
          *  H5跳转到任意原生页面
-         *  事件名：goToNativeView 
+         *  事件名：goToSomewhere
          *  参数:
-         *      vcName:控制器名（必选）
-         *      storyboardName:控制器所在SB名（可选）
-         *      除以上两个之外的其他参数，作为控制器的params
+         *      name:String 用.分割vcName和sbName,例如: vcName.sbName
+         *      refresh:Bool 跳转到原生页面，返回时是否需要刷新
+         *      params:[String:Any] 作为控制器的params
          */
-        self.bindEvent("goToNativeView", handler: { [weak self] data , responseCallback in
-            if let dic = data as? [String:String] {
-                if let vcName = dic["vcName"] {
-                    var sbName:String? = dic["storyboardName"]
-                    sbName = (sbName?.length ?? 0) > 0 ? sbName : nil
-                    if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
-                        var params:[String:Any] = [:]
-                        for (key,value) in dic {
-                            if key != "vcName" && key != "storyboardName" { //获取除vc和sb之外的参数
-                                let type = vc.getTypeOfProperty(key)
-                                if type == Bool.self || type == Bool?.self{
-                                    params[key] = value.toBool() ?? false
-                                }else if type == Int.self || type == Int?.self{
-                                    params[key] = value.toInt() ?? 0
-                                }else if type == Double.self  || type == Double?.self{
-                                    params[key] = value.toDouble() ?? 0.0
-                                }else if type == Float.self  || type == Float?.self{
-                                    params[key] = value.toFloat() ?? 0.0
-                                }else {
-                                    params[key] = value
-                                }
+        self.bindEvent("goToSomewhere", handler: { [weak self] data , responseCallback in
+            if let dic = data as? [String:Any] {
+                if let name = dic["name"] as? String , name.length > 0{
+                    //获得Controller名和Sb名
+                    var (vcName,sbName) = (self?.getVcAndSbName(name: name) ?? (nil,nil))
+                    if let vcName = vcName , vcName.length > 0  {
+                        let refresh = (dic["refresh"] as? Bool) ?? false
+                        sbName = (sbName?.length ?? 0) > 0 ? sbName : nil
+                        if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
+                            //获得需要的参数
+                            let paramsDic = dic["params"] as? [String:Any]
+                            let params:[String:Any] = (self?.getVcParams(vc: vc, paramsDic: paramsDic) ?? [:])
+                            if let baseVC = vc as? BaseKitViewController {
+                                baseVC.params = params
+                                self?.needBackRefresh = refresh
+                                self?.navigationController?.pushViewController(baseVC, animated: true)
+                            } else if let baseVC = vc as? BaseKitTableViewController {
+                                baseVC.params = params
+                                self?.needBackRefresh = refresh
+                                self?.navigationController?.pushViewController(baseVC, animated: true)
                             }
+                            
                         }
-                        if let baseVC = vc as? BaseKitViewController {
-                            baseVC.params = params
-                            self?.navigationController?.pushViewController(baseVC, animated: true)
-                        } else if let baseVC = vc as? BaseKitTableViewController {
-                            baseVC.params = params
-                            self?.navigationController?.pushViewController(baseVC, animated: true)
-                        }
-                        
                     }
+                    
                 }
             }
         })
@@ -411,4 +412,43 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     
     deinit {
     }
+    //MARK: - Priavte
+    //MARK:用.分割vcName和sbName
+    func getVcAndSbName(name:String) -> (String?,String?) {
+        let nameList = name.split(".")
+        var vcName:String?
+        var sbName:String?
+        if nameList.count == 2 {
+            vcName = nameList.first
+            sbName = nameList[1]
+        }else if nameList.count == 1 {
+            vcName = nameList.first
+            sbName = nil
+        }
+        return (vcName,sbName)
+    }
+    //MARK: 获取VC需要参数的类型，进行预处理
+    func getVcParams(vc: UIViewController, paramsDic:[String:Any]?) -> [String:Any] {
+        var params:[String:Any] = [:]
+        if let paramsDic = paramsDic {
+            for (key,value) in paramsDic {
+                let type = vc.getTypeOfProperty(key)
+                if type == NSNull.Type.self{ //未找到
+                    print("VC没有该参数")
+                }else if type == Bool.self || type == Bool?.self{
+                    params[key] = (value as? String)?.toBool() ?? false
+                }else if type == Int.self || type == Int?.self{
+                    params[key] = (value as? String)?.toInt() ?? 0
+                }else if type == Double.self  || type == Double?.self{
+                    params[key] = (value as? String)?.toDouble() ?? 0.0
+                }else if type == Float.self  || type == Float?.self{
+                    params[key] = (value as? String)?.toFloat() ?? 0.0
+                }else {
+                    params[key] = value
+                }
+            }
+        }
+        return params
+    }
+    
 }
