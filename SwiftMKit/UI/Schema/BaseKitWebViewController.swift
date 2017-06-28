@@ -150,7 +150,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
          *  事件名：goToSomewhere
          *  参数:
          *      name:String 用.分割sbName和vcName,例如: sbName.vcName
-         *      refresh:Bool 跳转到原生页面，返回时是否需要刷新 pop
+         *      refresh:Bool 跳转到原生页面，返回时是否需要刷新
          *      pop:Bool     是否present方式弹出
          *      params:[String:Any] 作为控制器的params
          */
