@@ -149,17 +149,19 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
          *  H5跳转到任意原生页面
          *  事件名：goToSomewhere
          *  参数:
-         *      name:String 用.分割vcName和sbName,例如: vcName.sbName
-         *      refresh:Bool 跳转到原生页面，返回时是否需要刷新
+         *      name:String 用.分割sbName和vcName,例如: sbName.vcName
+         *      refresh:Bool 跳转到原生页面，返回时是否需要刷新 pop
+         *      pop:Bool     是否present方式弹出
          *      params:[String:Any] 作为控制器的params
          */
         self.bindEvent("goToSomewhere", handler: { [weak self] data , responseCallback in
             if let dic = data as? [String:Any] {
                 if let name = dic["name"] as? String , name.length > 0{
                     //获得Controller名和Sb名
-                    var (vcName,sbName) = (self?.getVcAndSbName(name: name) ?? (nil,nil))
+                    var (sbName,vcName) = (self?.getVcAndSbName(name: name) ?? (nil,nil))
                     if let vcName = vcName , vcName.length > 0  {
                         let refresh = (dic["refresh"] as? Bool) ?? false
+                        let pop = (dic["pop"] as? Bool) ?? false
                         sbName = (sbName?.length ?? 0) > 0 ? sbName : nil
                         if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
                             //获得需要的参数
@@ -168,13 +170,12 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
                             if let baseVC = vc as? BaseKitViewController {
                                 baseVC.params = params
                                 self?.needBackRefresh = refresh
-                                self?.navigationController?.pushViewController(baseVC, animated: true)
+                                self?.toNextViewController(viewController: baseVC, pop: pop)
                             } else if let baseVC = vc as? BaseKitTableViewController {
                                 baseVC.params = params
                                 self?.needBackRefresh = refresh
-                                self?.navigationController?.pushViewController(baseVC, animated: true)
+                                self?.toNextViewController(viewController: baseVC, pop: pop)
                             }
-                            
                         }
                     }
                     
@@ -420,13 +421,13 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         var vcName:String?
         var sbName:String?
         if nameList.count == 2 {
-            vcName = nameList.first
-            sbName = nameList[1]
+            sbName = nameList.first
+            vcName = nameList[1]
         }else if nameList.count == 1 {
             vcName = nameList.first
             sbName = nil
         }
-        return (vcName,sbName)
+        return (sbName,vcName)
     }
     //MARK: 获取VC需要参数的类型，进行预处理
     func getVcParams(vc: UIViewController, paramsDic:[String:Any]?) -> [String:Any] {
@@ -451,5 +452,4 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         }
         return params
     }
-    
 }

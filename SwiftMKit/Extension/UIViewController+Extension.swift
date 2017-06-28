@@ -257,4 +257,12 @@ public extension UIViewController {
         }
         return false
     }
+    public func toNextViewController(viewController:UIViewController ,pop:Bool)  {
+        if pop {
+            let nav = UINavigationController(rootViewController: viewController)
+            present(nav, animated: true, completion: nil)
+        } else {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
 }
