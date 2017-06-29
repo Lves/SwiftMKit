@@ -9,14 +9,14 @@
 import UIKit
 import ReactiveSwift
 
-class BaseCaptchaImageView: UIButton {
+open class BaseCaptchaImageView: UIButton {
     var indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }

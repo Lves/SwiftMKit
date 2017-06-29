@@ -73,8 +73,12 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             }
         }
     }
-    open var requestHeader: [String: String]?
-    
+    open var requestHeader: [String: String]? {
+        get {
+            return nil
+        }
+    }
+
     open var progressView : UIProgressView?
     let keyPathForProgress : String = "estimatedProgress"
     let keyPathForTitle : String = "title"
