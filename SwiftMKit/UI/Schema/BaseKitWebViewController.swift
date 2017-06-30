@@ -232,27 +232,24 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
          *  不支持同时改变静态属性和成员变量。需要调用多次依次修改
          *  事件名: changeVariables
          *  参数：
-         *       name:String 用.分割类名和单例变量名,例如: BaseService.sharedBaseService（.sharedBaseService为空时,表示修改静态属性）
+         *       name:String    用.分割类名和单例变量名,例如: BaseService.sharedBaseService（.sharedBaseService为空时,表示修改静态属性）
          *       params:[String:Any] 要修改的参数列表 (注意：修改静态属性时params中的key一定是存在的静态属性，否则会奔溃，因为无法映射静态属性列表判断有无该属性)
          */
         self.bindEvent("changeVariables", handler: {[weak self] data , responseCallback in
             if let dic = data as? [String:Any] {
-                if let name = dic["name"] as? String , name.length > 0{
+                if let name = dic["name"] as? String, let paramsDic = dic["params"] as? [String:Any], name.length > 0{
                     let (className , instanceName):(String?,String?) = (self?.getClassAndInstance(name: name) ?? (nil,nil))
                     guard let objcName = className ,objcName.length > 0 else{
                         return
                     }
                     guard let instanceClass:NSObject.Type = NSObject.fullClassName(objcName) else { return }
-                    let paramsDic = dic["params"] as? [String:Any]
                     if let instanceKey = instanceName ,instanceKey.length > 0{    //单例赋值
                         if let instance:NSObject = instanceClass.value(forKey: instanceKey) as? NSObject {
                             self?.setObjectParams(vc: instance, paramsDic: paramsDic)
                         }
                     }else {                                                       //静态属性赋值
-                        if let paramsDic = paramsDic{
-                            for (key,value) in paramsDic {
-                                instanceClass.setValue(value, forKey: key)
-                            }
+                        for (key,value) in paramsDic {
+                            instanceClass.setValue(value, forKey: key)
                         }
                     }
                 }
