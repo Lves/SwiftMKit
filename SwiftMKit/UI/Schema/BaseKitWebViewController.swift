@@ -197,7 +197,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         return request
     }
     open func bindEvents() {
-        /*
+        /**
          *  H5跳转到任意原生页面
          *  事件名：goToSomewhere
          *  参数:
@@ -218,22 +218,47 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                         if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
                             //获得需要的参数
                             let paramsDic = dic["params"] as? [String:Any]
-                            let params:[String:Any] = (self?.getVcParams(vc: vc, paramsDic: paramsDic) ?? [:])
-                            if let baseVC = vc as? BaseKitViewController {
-                                baseVC.params = params
-                                self?.needBackRefresh = refresh
-                                self?.toNextViewController(viewController: baseVC, pop: pop)
-                            } else if let baseVC = vc as? BaseKitTableViewController {
-                                baseVC.params = params
-                                self?.needBackRefresh = refresh
-                                self?.toNextViewController(viewController: baseVC, pop: pop)
-                            }
+                            self?.setObjectParams(vc: vc, paramsDic: paramsDic)
+                            self?.needBackRefresh = refresh
+                            self?.toNextViewController(viewController: vc, pop: pop)
                         }
                     }
                     
                 }
             }
         })
+        /**
+         *  H5给Native的单例或者静态变量赋值，
+         *  不支持同时改变静态属性和成员变量。需要调用多次依次修改
+         *  事件名: changeVariables
+         *  参数：
+         *       name:String 用.分割类名和单例变量名,例如: BaseService.sharedBaseService（.sharedBaseService为空时,表示修改静态可变属性）
+         *       params:[String:Any] 要修改的参数列表
+         */
+        self.bindEvent("changeVariables", handler: {[weak self] data , responseCallback in
+            if let dic = data as? [String:Any] {
+                if let name = dic["name"] as? String , name.length > 0{
+                    let (className , instanceName):(String?,String?) = (self?.getClassAndInstance(name: name) ?? (nil,nil))
+                    guard let objcName = className ,objcName.length > 0 else{
+                        return
+                    }
+                    guard let instanceClass:NSObject.Type = NSObject.fullClassName(objcName) else { return }
+                    let paramsDic = dic["params"] as? [String:Any]
+                    if let instanceKey = instanceName ,instanceKey.length > 0{    //单例赋值
+                        if let instance:NSObject = instanceClass.value(forKey: instanceKey) as? NSObject {
+                            self?.setObjectParams(vc: instance, paramsDic: paramsDic)
+                        }
+                    }else {                                                       //静态属性赋值
+                        if let paramsDic = paramsDic{
+                            for (key,value) in paramsDic {
+                                instanceClass.setValue(value, forKey: key)
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
     }
     open func bindEvent(_ eventName: String, handler: @escaping WVJBHandler) {
         webViewBridge.registerHandler(eventName, handler: handler)
@@ -455,7 +480,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         let nameList = name.split(".")
         var vcName:String?
         var sbName:String?
-        if nameList.count == 2 {
+        if nameList.count >= 2 {
             sbName = nameList.first
             vcName = nameList[1]
         }else if nameList.count == 1 {
@@ -464,28 +489,43 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         }
         return (sbName,vcName)
     }
-    //MARK: 获取VC需要参数的类型，进行预处理
-    func getVcParams(vc: UIViewController, paramsDic:[String:Any]?) -> [String:Any] {
-        var params:[String:Any] = [:]
+    //MARK:用.分割 类名和单例名
+    func getClassAndInstance(name:String) -> (String?,String?) {
+        let nameList = name.split(".")
+        var className:String?
+        var instanceName:String?
+        if nameList.count >= 2 {
+           className = nameList.first
+           instanceName = nameList[1]
+        }else if nameList.count == 1 {
+            className = nameList.first
+        }
+        return (className,instanceName)
+    }
+    //MARK: 给对象赋值 ，传过来的paramsDic是[String:kindOfStirng]
+    func setObjectParams(vc: NSObject, paramsDic:[String:Any]?) {
         if let paramsDic = paramsDic {
             for (key,value) in paramsDic {
                 let type = vc.getTypeOfProperty(key)
                 if type == NSNull.Type.self{ //未找到
                     print("VC没有该参数")
                 }else if type == Bool.self || type == Bool?.self{
-                    params[key] = (value as? String)?.toBool() ?? false
+                    let toValue = (value as? String)?.toBool() ?? false
+                    vc.setValue(toValue, forKey: key)
                 }else if type == Int.self || type == Int?.self{
-                    params[key] = (value as? String)?.toInt() ?? 0
+                    let toValue = (value as? String)?.toInt() ?? 0
+                    vc.setValue(toValue, forKey: key)
                 }else if type == Double.self  || type == Double?.self{
-                    params[key] = (value as? String)?.toDouble() ?? 0.0
+                    let toValue = (value as? String)?.toDouble() ?? 0.0
+                    vc.setValue(toValue, forKey: key)
                 }else if type == Float.self  || type == Float?.self{
-                    params[key] = (value as? String)?.toFloat() ?? 0.0
+                    let toValue = (value as? String)?.toFloat() ?? 0.0
+                    vc.setValue(toValue, forKey: key)
                 }else {
-                    params[key] = value
+                    vc.setValue(value, forKey: key)
                 }
             }
         }
-        return params
     }
 
     

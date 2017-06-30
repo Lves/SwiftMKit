@@ -11,9 +11,18 @@ import UIKit
 class H5AndNativeDemo: BaseViewController {
     var paramStr:String?
     var paramInt:Int = 0
+    var paramBool:Bool = false
     override func setupUI() {
         super.setupUI()
-        print(" \n 参数 paramStr: \(String(describing: paramStr)) paramInt: \(paramInt)")
+        print(" \n 参数 paramStr: \(String(describing: paramStr)) paramInt: \(paramInt) paramBool: \(paramBool)")
+        
+        if let instanceClass:NSObject.Type = NSObject.fullClassName("H5DemoService") {
+        
+            instanceClass.setValue("5", forKey: "age")
+            instanceClass.setValue("1", forKey: "longy")
+            
+        }
+  
     }
 
     @IBAction func toNextVC(_ sender: Any) {
@@ -30,4 +39,10 @@ class H5AndNativeDemo: BaseViewController {
 class H5DemoService: BaseService{
     static let sharedH5DemoService = H5DemoService()
     var applyId:Int = 0
+    static var hello:String = "sss"
+    static let world:String = "sss"
+    static var age:Int = 0
+    static var longly:Bool = false
 }
+
+
