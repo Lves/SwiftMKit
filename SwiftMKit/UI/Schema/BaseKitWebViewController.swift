@@ -13,7 +13,7 @@ import MJRefresh
 import WebKit
 import WebViewJavascriptBridge
 
-open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, SharePannelViewDelegate, UIScrollViewDelegate, WebViewProgressDelegate, WebViewBridgeProtocol{
+open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate, SharePannelViewDelegate, UIScrollViewDelegate {
     
     struct InnerConst {
         static let RootViewBackgroundColor : UIColor = UIColor(hex6: 0xefeff4)
@@ -22,46 +22,68 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         static let BackGroundTitleColor : UIColor = UIColor.darkGray
     }
     
-    private var _webView: UIWebView?
-    open var webView: UIWebView {
+    open lazy var webView: WKWebView = {
+        return self.createWebView()
+    }()
+    private func createWebView() -> WKWebView {
+        let _webView = WKWebView(frame: CGRect.zero)
+        _webView.backgroundColor = InnerConst.WebViewBackgroundColor
+        self.view.addSubview(_webView)
+        if let progressView = self.progressView {
+            self.view.bringSubview(toFront: progressView)
+        }
+        _webView.scrollView.delegate = self
+        _webView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        return _webView
+    }
+    open lazy var webViewBridge: WKWebViewJavascriptBridge = {
+        var bridge: WKWebViewJavascriptBridge = WKWebViewJavascriptBridge(for: self.webView)
+        bridge.setWebViewDelegate(self)
+        return bridge
+    }()
+    open var userAgent: String? {
         get {
-            if _webView == nil {
-                _webView = UIWebView(frame: CGRect.zero)
-                _webView?.backgroundColor = InnerConst.WebViewBackgroundColor
-                self.view.addSubview(_webView!)
-                if let progressView = progressView {
-                    self.view.bringSubview(toFront: progressView)
-                }
-                _webView!.delegate = self
-                _webView?.scrollView.delegate = self
-                _webView!.snp.makeConstraints { (make) in
-                    make.edges.equalTo(self.view)
+            if #available(iOS 9.0, *) {
+                return webView.customUserAgent
+            } else {
+                var ua: String?
+                let semaphore =  DispatchSemaphore(value: 0)
+                webView.evaluateJavaScript("navigator.userAgent", completionHandler: { (result, error) in
+                    ua = result as? String
+                    semaphore.signal()
+                })
+                semaphore.wait()
+                return ua
+            }
+        }
+        set(value) {
+            if #available(iOS 9.0, *) {
+                webView.customUserAgent = value
+            } else {
+                webView.evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
+                    UserDefaults.standard.register(defaults: ["UserAgent": value ?? ""])
+                    if let wv = self?.createWebView() {
+                        self?.webView = wv
+                        _ = self?.webViewBridge
+                        self?.webView.evaluateJavaScript("navigator.userAgent", completionHandler: {_ in})
+                    }
                 }
             }
-            return _webView!
         }
     }
-    private var _webViewBridge: WebViewBridge?
-    open var webViewBridge: WebViewBridge {
+    open var requestHeader: [String: String]? {
         get {
-            if _webViewBridge == nil {
-                _webViewBridge = WebViewBridge(webView: webView, viewController: self)
-            }
-            _webViewBridge?.delegate = self
-            return _webViewBridge!
+            return nil
         }
     }
-    open var webViewUserAgent: [String: Any]? {
-        didSet {
-            webViewBridge.userAgent = webViewUserAgent
-        }
-    }
-    open var webViewRequestHeader: [String: String]?
-    
+
     open var progressView : UIProgressView?
-    open var webViewProgress: WebViewProgress = WebViewProgress()
-    
+    let keyPathForProgress : String = "estimatedProgress"
+    let keyPathForTitle : String = "title"
     open var needBackRefresh:Bool = false
+    
     open var disableUserSelect = false
     open var disableLongTouch = false
     open var showRefreshHeader: Bool = true
@@ -84,6 +106,7 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
             return url
         }
     }
+    private var isTitleFixed: Bool = false
     
     var webViewToolsPannelView :SharePannelView?
     
@@ -101,12 +124,15 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     
     open override func setupUI() {
         super.setupUI()
+        isTitleFixed = (self.title?.length ?? 0) > 0
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
         self.view.addSubview(self.getBackgroundLab())
-        webViewProgress.progressDelegate = self
         progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.screenW, height: 0))
         progressView?.trackTintColor = UIColor.clear
         self.view.addSubview(progressView!)
+        webView.addObserver(self, forKeyPath: keyPathForProgress, options: [NSKeyValueObservingOptions.new, NSKeyValueObservingOptions.old], context: nil)
+        webView.addObserver(self, forKeyPath: keyPathForTitle, options: [NSKeyValueObservingOptions.new], context: nil)
+        _ = self.webViewBridge
         bindEvents()
         
         if showRefreshHeader {
@@ -141,8 +167,34 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
     open override func loadData() {
         super.loadData()
         if url != nil {
-            self.webViewBridge.requestUrl(url: self.url)
+            requestUrl(url: self.url)
         }
+    }
+    
+    open func requestUrl(url: String?) {
+        if url == nil || url!.length <= 0 || !UIApplication.shared.canOpenURL(URL(string: url!)!) {
+            DDLogError("Request Invalid Url: \(url ?? ""))")
+            return
+        }
+        DDLogInfo("Request url: \(url ?? "")")
+        //清除旧数据
+        webView.evaluateJavaScript("document.body.innerHTML='';") { [weak self] _ in
+            let request = URLRequest(url: URL(string:url!)!)
+            if let request = self?.willLoadRequest(request) {
+                _ = Async.background { [weak self] in
+                    self?.webView.load(request)
+                }
+            }
+        }
+    }
+    open func willLoadRequest(_ request: URLRequest) -> URLRequest {
+        var request = request
+        if let header = requestHeader {
+            for (key, value) in header {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+        }
+        return request
     }
     open func bindEvents() {
         /*
@@ -184,76 +236,68 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         })
     }
     open func bindEvent(_ eventName: String, handler: @escaping WVJBHandler) {
-        webViewBridge.addEvent(eventName, handler: handler)
+        webViewBridge.registerHandler(eventName, handler: handler)
     }
     
-    public func requestHeader(request: URLRequest) -> [String : String]? {
-        return webViewRequestHeader
+    /** 计算进度条 */
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if ((object as AnyObject).isEqual(webView) && ((keyPath ?? "") == keyPathForProgress)) {
+            let newProgress = (change?[NSKeyValueChangeKey.newKey] as AnyObject).floatValue ?? 0
+            let oldProgress = (change?[NSKeyValueChangeKey.oldKey] as AnyObject).floatValue ?? 0
+            
+            if newProgress < oldProgress {
+                return
+            }
+            
+            if newProgress >= 1 {
+                progressView!.isHidden = true
+                progressView!.setProgress(0, animated: false)
+            } else {
+                progressView!.isHidden = false
+                progressView!.setProgress(newProgress, animated: true)
+            }
+        } else if ((object as AnyObject).isEqual(webView) && ((keyPath ?? "") == keyPathForTitle)) {
+            if (!isTitleFixed && (object as AnyObject).isEqual(webView)) {
+                self.title = self.webView.title;
+            }
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
     }
     
-    //WebViewProgressDelegate
-    func webViewProgress(_ webViewProgress: WebViewProgress, updateProgress progress: Float) {
-        DDLogInfo("WebView Progress: \(progress)")
-        if progress > 0.0 && progress < 1.0 {
-            self.progressView?.alpha = 1.0
-            self.progressView?.setProgress(progress, animated: true)
-        }
-        else if progress == 0.0 {
-            self.progressView?.alpha = 0.0
-            self.progressView?.setProgress(progress, animated: false)
-        }
-        else if progress == 1.0 {
-            self.progressView?.setProgress(progress, animated: true)
-            UIView.animate(withDuration: 2.5, animations: {
-                self.progressView?.alpha = 0.0
-            })
-        }
-    }
     
-    //WebViewDelegate
-    open dynamic func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var ret = true
+        let url = navigationAction.request.url?.absoluteString.removingPercentEncoding
         
         if shouldAllowRirectToUrlInView {
-            DDLogInfo("Web view direct to url: \(request.urlRequest?.url?.absoluteString ?? "")")
+            DDLogInfo("Web view direct to url: \(url ?? "")")
             ret = true
         } else {
-            DDLogWarn("Web view direct to url forbidden: \(request.urlRequest?.url?.absoluteString ?? "")")
+            DDLogWarn("Web view direct to url forbidden: \(url ?? "")")
             ret = false
         }
         
-        ret = webViewProgress.progressWebView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType ,delegatRet: ret)
-        
-        return ret
+        decisionHandler(ret ? .allow : .cancel)
+    }
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
     }
     
-    open func webViewDidStartLoad(_ webView: UIWebView) {
-        webViewProgress.progressWebViewDidStartLoad(webView)
-        webViewBridge.indicator.startAnimating()
-        webView.bringSubview(toFront: webViewBridge.indicator)
-    }
-    
-    open func webViewDidFinishLoad(_ webView: UIWebView) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let header = self.webView.scrollView.mj_header {
             header.endRefreshing()//结束下拉刷新
         }
-        
-        webViewProgress.progressWebViewDidFinishLoad(webView)
-        webViewBridge.indicator.stopAnimating()
-        if self.title == nil {
-            self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
-        }
         if disableUserSelect {
-            webView.stringByEvaluatingJavaScript(from: "document.documentElement.style.webkitUserSelect='none';")
+            webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none';") {_ in}
         }
         if disableLongTouch {
-            webView.stringByEvaluatingJavaScript(from: "document.documentElement.style.webkitTouchCallout='none';")
+            webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none';") {_ in}
         }
-
+        
         refreshNavigationBarTopLeftCloseButton()
         
-        url = webView.request?.url?.absoluteString
+        url = webView.url?.absoluteString
         
         if recordOffset {
             if let offset = BaseKitWebViewController.webOffsets[url ?? ""] {
@@ -261,20 +305,13 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
             }
         }
     }
-    
-    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        webViewProgress.progressWebView(webView, didFailLoadWithError: error)
-        webViewBridge.indicator.stopAnimating()
-        
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         let tip = error.localizedDescription
         if ((error as NSError).code == URLError.cancelled.rawValue){
             return
         }
         
         self.showTip(tip)
-        
-        webViewProgress.progressWebView(webView, didFailLoadWithError: error)
-        webViewBridge.indicator.stopAnimating()
     }
     
     open func refreshNavigationBarTopLeftCloseButton() {
@@ -375,9 +412,9 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         switch model.used {
         case .openBySafari:
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open((webView.request?.url)!, options: [:], completionHandler: nil)
+                UIApplication.shared.open((webView.url)!, options: [:], completionHandler: nil)
             }else{
-                UIApplication.shared.openURL((webView.request?.url)!)
+                UIApplication.shared.openURL((webView.url)!)
             }
             break
         case .copyLink:
@@ -412,8 +449,6 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
         self.saveWebOffsetY(scrollView)
     }
     
-    deinit {
-    }
     //MARK: - Priavte
     //MARK:用.分割vcName和sbName
     func getVcAndSbName(name:String) -> (String?,String?) {
@@ -451,5 +486,11 @@ open class BaseKitWebViewController: BaseKitViewController, UIWebViewDelegate, S
             }
         }
         return params
+    }
+
+    
+    deinit {
+        webView.removeObserver(self, forKeyPath: keyPathForProgress)
+        webView.removeObserver(self, forKeyPath: keyPathForTitle)
     }
 }
