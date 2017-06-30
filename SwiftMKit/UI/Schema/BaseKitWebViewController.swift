@@ -232,8 +232,8 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
          *  不支持同时改变静态属性和成员变量。需要调用多次依次修改
          *  事件名: changeVariables
          *  参数：
-         *       name:String 用.分割类名和单例变量名,例如: BaseService.sharedBaseService（.sharedBaseService为空时,表示修改静态可变属性）
-         *       params:[String:Any] 要修改的参数列表
+         *       name:String 用.分割类名和单例变量名,例如: BaseService.sharedBaseService（.sharedBaseService为空时,表示修改静态属性）
+         *       params:[String:Any] 要修改的参数列表 (注意：修改静态属性时params中的key一定是存在的静态属性，否则会奔溃，因为无法映射静态属性列表判断有无该属性)
          */
         self.bindEvent("changeVariables", handler: {[weak self] data , responseCallback in
             if let dic = data as? [String:Any] {

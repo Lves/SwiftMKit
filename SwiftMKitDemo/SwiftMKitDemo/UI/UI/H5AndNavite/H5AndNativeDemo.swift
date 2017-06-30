@@ -16,12 +16,12 @@ class H5AndNativeDemo: BaseViewController {
         super.setupUI()
         print(" \n 参数 paramStr: \(String(describing: paramStr)) paramInt: \(paramInt) paramBool: \(paramBool)")
         
-        if let instanceClass:NSObject.Type = NSObject.fullClassName("H5DemoService") {
-        
-            instanceClass.setValue("5", forKey: "age")
-            instanceClass.setValue("1", forKey: "longy")
-            
-        }
+//        if let instanceClass:NSObject.Type = NSObject.fullClassName("H5DemoService") {
+//        
+//            instanceClass.setValue("5", forKey: "age")
+//            instanceClass.setValue("1", forKey: "longy")
+//            
+//        }
   
     }
 
