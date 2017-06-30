@@ -26,3 +26,8 @@ class H5AndNativeDemo: BaseViewController {
 //        route(toUrl: "http://fund-wechat.qa-01.hongdianfund.com/mixin/hybird?token=hd@20161108")
     }
 }
+
+class H5DemoService: BaseService{
+    static let sharedH5DemoService = H5DemoService()
+    var applyId:Int = 0
+}
