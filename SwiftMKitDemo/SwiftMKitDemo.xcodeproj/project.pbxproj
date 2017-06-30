@@ -290,6 +290,11 @@
 		3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */; };
 		3FC9DF651CBFD6D400C2D938 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */; };
 		41F6AD6A95262D1C74D7F241 /* Pods_SwiftMKitDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7AF4869491ACCA6A35784 /* Pods_SwiftMKitDemoUITests.framework */; };
+		6C2F61701F05F57E006E8521 /* H5AndNative.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C2F616B1F05F57E006E8521 /* H5AndNative.storyboard */; };
+		6C2F61711F05F57E006E8521 /* H5AndNativeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2F616C1F05F57E006E8521 /* H5AndNativeDemo.swift */; };
+		6C2F61721F05F57E006E8521 /* LocalWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2F616D1F05F57E006E8521 /* LocalWebViewController.swift */; };
+		6C2F61731F05F57E006E8521 /* LocalWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C2F616E1F05F57E006E8521 /* LocalWebViewController.xib */; };
+		6C2F61741F05F57E006E8521 /* toNativeDemo.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C2F616F1F05F57E006E8521 /* toNativeDemo.html */; };
 		6C406E031EFA433B0052BDA8 /* MKMBProgressHUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E011EFA433B0052BDA8 /* MKMBProgressHUDViewController.swift */; };
 		6C406E041EFA433B0052BDA8 /* MKMBProgressHUDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C406E021EFA433B0052BDA8 /* MKMBProgressHUDViewController.xib */; };
 		6C406E061EFA4D370052BDA8 /* pannel_icon_zhifubao_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C406E051EFA4D370052BDA8 /* pannel_icon_zhifubao_friend@2x.png */; };
@@ -653,6 +658,11 @@
 		3FC9DF521CBFD6D400C2D938 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FC9DF531CBFD6D400C2D938 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		576E13D71D3DD51600A948CE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		6C2F616B1F05F57E006E8521 /* H5AndNative.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = H5AndNative.storyboard; sourceTree = "<group>"; };
+		6C2F616C1F05F57E006E8521 /* H5AndNativeDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H5AndNativeDemo.swift; sourceTree = "<group>"; };
+		6C2F616D1F05F57E006E8521 /* LocalWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalWebViewController.swift; sourceTree = "<group>"; };
+		6C2F616E1F05F57E006E8521 /* LocalWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalWebViewController.xib; sourceTree = "<group>"; };
+		6C2F616F1F05F57E006E8521 /* toNativeDemo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = toNativeDemo.html; sourceTree = "<group>"; };
 		6C406E011EFA433B0052BDA8 /* MKMBProgressHUDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMBProgressHUDViewController.swift; sourceTree = "<group>"; };
 		6C406E021EFA433B0052BDA8 /* MKMBProgressHUDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKMBProgressHUDViewController.xib; sourceTree = "<group>"; };
 		6C406E051EFA4D370052BDA8 /* pannel_icon_zhifubao_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pannel_icon_zhifubao_friend@2x.png"; sourceTree = "<group>"; };
@@ -1500,6 +1510,7 @@
 		27959A471CD3444500546424 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6C2F616A1F05F57E006E8521 /* H5AndNavite */,
 				6C406E111EFA54380052BDA8 /* CLLoopView */,
 				6C406E0C1EFA52F10052BDA8 /* PickerTextField */,
 				2783DFEA1DB626FD005E087C /* MKUIViewController.swift */,
@@ -1750,6 +1761,18 @@
 			path = ../SwiftMKit/ImportedModules;
 			sourceTree = "<group>";
 		};
+		6C2F616A1F05F57E006E8521 /* H5AndNavite */ = {
+			isa = PBXGroup;
+			children = (
+				6C2F616B1F05F57E006E8521 /* H5AndNative.storyboard */,
+				6C2F616C1F05F57E006E8521 /* H5AndNativeDemo.swift */,
+				6C2F616D1F05F57E006E8521 /* LocalWebViewController.swift */,
+				6C2F616E1F05F57E006E8521 /* LocalWebViewController.xib */,
+				6C2F616F1F05F57E006E8521 /* toNativeDemo.html */,
+			);
+			path = H5AndNavite;
+			sourceTree = "<group>";
+		};
 		6C406E071EFA4E9B0052BDA8 /* RingedPages */ = {
 			isa = PBXGroup;
 			children = (
@@ -1992,7 +2015,9 @@
 				279546811E9C720C00D36D83 /* pannel_icon_myFavAdd@2x.png in Resources */,
 				6C406E061EFA4D370052BDA8 /* pannel_icon_zhifubao_friend@2x.png in Resources */,
 				2783DFFE1DB626FD005E087C /* MKCoverFlowView.storyboard in Resources */,
+				6C2F61741F05F57E006E8521 /* toNativeDemo.html in Resources */,
 				2783E0021DB626FD005E087C /* MKCustomPullRefreshViewController.xib in Resources */,
+				6C2F61731F05F57E006E8521 /* LocalWebViewController.xib in Resources */,
 				279546791E9C720C00D36D83 /* pannel_icon_copy@2x.png in Resources */,
 				6C406E0A1EFA4E9B0052BDA8 /* RingedPages.storyboard in Resources */,
 				2795467C1E9C720C00D36D83 /* pannel_icon_expose@2x.png in Resources */,
@@ -2007,6 +2032,7 @@
 				279546741E9C720C00D36D83 /* pannel_icon_chat_h@2x.png in Resources */,
 				279546541E9C720C00D36D83 /* BaseKitEmptyView.xib in Resources */,
 				279546761E9C720C00D36D83 /* pannel_icon_circlefriends_h@2x.png in Resources */,
+				6C2F61701F05F57E006E8521 /* H5AndNative.storyboard in Resources */,
 				3FC9DEFE1CBFD35900C2D938 /* Main.storyboard in Resources */,
 				2783E0071DB626FD005E087C /* MKEmptyView.storyboard in Resources */,
 				2795467B1E9C720C00D36D83 /* pannel_icon_email_h@2x.png in Resources */,
@@ -2208,6 +2234,7 @@
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
 				2783E0141DB626FD005E087C /* MKUIViewModel.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
+				6C2F61711F05F57E006E8521 /* H5AndNativeDemo.swift in Sources */,
 				2795469F1E9C720C00D36D83 /* CrashLogViewController.swift in Sources */,
 				279546971E9C720C00D36D83 /* SegmentContainerViewController.swift in Sources */,
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
@@ -2293,6 +2320,7 @@
 				2783E0341DB62BB6005E087C /* MKCoreDataNetworkRequestViewModel.swift in Sources */,
 				279546351E9C720C00D36D83 /* ConnectPeerServiceManager.swift in Sources */,
 				279546401E9C720C00D36D83 /* BaseKitTableViewController.swift in Sources */,
+				6C2F61721F05F57E006E8521 /* LocalWebViewController.swift in Sources */,
 				279546681E9C720C00D36D83 /* JDJellyMainButton.swift in Sources */,
 				279546031E9C720C00D36D83 /* ImageParser.swift in Sources */,
 				279546571E9C720C00D36D83 /* GesturePassword.swift in Sources */,

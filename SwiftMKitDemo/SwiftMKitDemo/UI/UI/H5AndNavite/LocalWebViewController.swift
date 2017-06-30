@@ -18,7 +18,7 @@ class LocalWebViewController: BaseWebViewController {
     override func loadData() {
         let path = Bundle.main.path(forResource: "toNativeDemo", ofType: ".html")
         let url = URL(fileURLWithPath: path!)
-        self.webView.loadRequest(URLRequest(url: url))
+        self.webView.load( URLRequest(url: url))
     }
    
 
