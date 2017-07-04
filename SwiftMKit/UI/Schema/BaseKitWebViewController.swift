@@ -529,5 +529,6 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     deinit {
         webView.removeObserver(self, forKeyPath: keyPathForProgress)
         webView.removeObserver(self, forKeyPath: keyPathForTitle)
+        webView.scrollView.delegate = nil
     }
 }
