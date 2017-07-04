@@ -52,23 +52,31 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
         }
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if !self.runningTasks.contains(task) {
-                UIApplication.shared.showNetworkActivityIndicator()
                 self.runningTasks.append(task)
             }
+            UIApplication.shared.showNetworkActivityIndicator()
         }
     }
     func task_list_suspend(notify:Notification) {
         DDLogVerbose("List Task suspend")
-        UIApplication.shared.hideNetworkActivityIndicator()
-        let _ = Async.main { [weak self] in
-            self?.viewController?.endListRefresh()
+        if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
+            if self.runningTasks.contains(task) {
+                UIApplication.shared.hideNetworkActivityIndicator()
+                let _ = Async.main { [weak self] in
+                    self?.viewController?.endListRefresh()
+                }
+            }
         }
     }
     func task_list_cancel(notify:Notification) {
         DDLogVerbose("List Task cancel")
-        UIApplication.shared.hideNetworkActivityIndicator()
-        let _ = Async.main { [weak self] in
-            self?.viewController?.endListRefresh()
+        if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
+            if self.runningTasks.contains(task) {
+                UIApplication.shared.hideNetworkActivityIndicator()
+                let _ = Async.main { [weak self] in
+                    self?.viewController?.endListRefresh()
+                }
+            }
         }
     }
     func task_list_end(notify:Notification) {
@@ -77,10 +85,10 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if let index = self.runningTasks.index(of: task) {
                 self.runningTasks.remove(at: index)
+                let _ = Async.main { [weak self] in
+                    self?.viewController?.endListRefresh()
+                }
             }
-        }
-        let _ = Async.main { [weak self] in
-            self?.viewController?.endListRefresh()
         }
     }
     
