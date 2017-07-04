@@ -47,7 +47,9 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
     
     func task_resume(notify:Notification) {
         DDLogVerbose("Task resume")
-        
+        guard notify.name.rawValue.length == 0 else { //只接受本地的调用
+            return
+        }
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if !self.runningTasks.contains(task) {
                 UIApplication.shared.showNetworkActivityIndicator()
