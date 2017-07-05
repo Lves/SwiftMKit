@@ -41,7 +41,7 @@ public extension UIView {
         view?.removeFromSuperview()
     }
     /*UIView 在sb中设置圆角*/
-    @IBInspectable var layerCornerRadius: CGFloat{
+    @IBInspectable var mCornerRadius: CGFloat{
         set{
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0
@@ -52,7 +52,7 @@ public extension UIView {
     }
     /// borderColor
     @IBInspectable
-    public var layerBorderColor: UIColor {
+    public var mBorderColor: UIColor {
         get {
             return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
         }
@@ -62,7 +62,7 @@ public extension UIView {
     }
     /// borderWidth
     @IBInspectable
-    public var layerBorderWidth: CGFloat {
+    public var mBorderWidth: CGFloat {
         get {
             return layer.borderWidth
         }

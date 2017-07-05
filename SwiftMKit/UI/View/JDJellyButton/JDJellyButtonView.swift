@@ -47,9 +47,9 @@ class JDJellyButtonView:UIView
         
         imgView?.frame = self.bounds
         imgView?.contentMode = .scaleAspectFit
-        imgView?.layerBorderColor = UIColor.black
-        imgView?.layerBorderWidth = 2
-        imgView?.layerCornerRadius = (imgView?.size.width ?? 0) / 2
+        imgView?.mBorderColor = UIColor.black
+        imgView?.mBorderWidth = 2
+        imgView?.mCornerRadius = (imgView?.size.width ?? 0) / 2
         self.addSubview(imgView!)
     }
     
