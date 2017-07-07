@@ -245,7 +245,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                     guard let instanceClass:NSObject.Type = NSObject.fullClassName(objcName) else { return }
                     if let instanceKey = instanceName ,instanceKey.length > 0{    //单例赋值
                         if let instance:NSObject = instanceClass.value(forKey: instanceKey) as? NSObject {
-                            self?.setObjectParams(vc: instance, paramsDic: paramsDic)
+                            SwiftReflectionTool.setParams(paramsDic, for: instance)
                         }
                     }else {                                                       //静态属性赋值
                         for (key,value) in paramsDic {
