@@ -44,12 +44,10 @@ class SwiftReflectionTool: NSObject {
     /// - parameter clazz:         对象类型
     ///
     /// - returns: 属性名 & 类型 字典数组.
-    @discardableResult
     open class func propertyList(clazz: NSObject.Type) -> [[String: Any]]? {
         var count: UInt32 = 0
         let list = class_copyPropertyList(clazz, &count)
         var resultList = [[String: Any]]()
-        print("==> property count:\(count)")
         for i in 0..<Int(count) {
             guard let pty = list?[i],
                 let cName = getNameOf(property: pty),
@@ -58,11 +56,26 @@ class SwiftReflectionTool: NSObject {
                     continue
             }
             let type = getTypeOf(property: pty)
-            print("==> '\(name)' has type '\(type)'")
             resultList.append([name: type])
         }
         free(list)
         return resultList
+    }
+    /// 获取对象属性类型列表
+    /// - 注意：这种方式获取属性，对于非引用类型的属性，必须有初始值，否则无法获取到！
+    ///
+    /// - parameter obj:         对象实例(instance) 或者 类类型(Class.self)
+    ///
+    /// - returns: 属性名 & 类型 字典数组.
+    open class func propertyList(obj: Any) -> [[String: Any]]? {
+        var clazz = type(of: obj)
+        if obj is Any.Type {
+            clazz = obj as! Any.Type
+        }
+        if let clazz = clazz as? NSObject.Type {
+            return propertyList(clazz: clazz)
+        }
+        return nil
     }
     // MARK: 给对象赋值
     /// 给对象赋值
@@ -108,6 +121,13 @@ class SwiftReflectionTool: NSObject {
             print("================= 赋值完成 =================")
             complete()
         }
+    }
+    /// 字典 -> 元组
+    open class func convert(dict: [String: Any]) -> (String, Any) {
+        for (key, value) in dict {
+            return (key, value)
+        }
+        return ("", NSNull())
     }
     // MARK: - 私有方法
     // MARK: 获取实例的成员变量列表
@@ -159,12 +179,6 @@ class SwiftReflectionTool: NSObject {
             }
         }
         return InnerConst.NULL
-    }
-    private class func convert(dict: [String: Any]) -> (String, Any) {
-        for (key, value) in dict {
-            return (key, value)
-        }
-        return ("", NSNull())
     }
 }
 
