@@ -88,9 +88,10 @@ open class UserNotificationManager: NSObject {
     }
     
     static func addNotify(title: String, body: String, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
-        addNotify(title: title, body: body, attachments: nil, triggerTime: triggerTime, repeats: repeats, identifier: identifier, categoryIdentifier: categoryIdentifier, withCompletionHandler: completionHandler)
+        addNotify(title: title, body: body , userInfo:nil, attachments: nil, triggerTime: triggerTime, repeats: repeats, identifier: identifier, categoryIdentifier: categoryIdentifier, withCompletionHandler: completionHandler)
     }
-    static func addNotify(title: String, body: String, attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+    //iOS10及以上本地推送
+    static func addNotify(title: String, body: String, userInfo:[AnyHashable:Any]? = [:], attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
         // 1. 创建通知内容
         let content = UNMutableNotificationContent()
         content.title = title
@@ -99,7 +100,7 @@ open class UserNotificationManager: NSObject {
             content.attachments = attachments
         }
         content.categoryIdentifier = categoryIdentifier
-        
+        content.userInfo = userInfo ?? [:]
         // 2. 创建发送触发
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerTime, repeats: repeats)
         
@@ -117,7 +118,6 @@ open class UserNotificationManager: NSObject {
             completionHandler?(error as NSError?)
         }
     }
-    
     static func removeDeliveredNotifies(identifiers: [String]) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
     }
@@ -130,6 +130,7 @@ open class UserNotificationManager: NSObject {
     static func cancelAllNotifies() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
+    
 }
 
 
@@ -150,3 +151,39 @@ extension UserNotificationManager: UNUserNotificationCenterDelegate {
     }
     
 }
+
+class UserNotificationBellowiOS10Manager: NSObject{
+    //MARK: - iOS10 以下本地推送
+    //iOS10以下授权本地推送
+    static func requestAuthorization(){
+        let settings = UIUserNotificationSettings(types: [UIUserNotificationType.alert,UIUserNotificationType.sound,UIUserNotificationType.badge], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
+    }
+    
+    //iOS10以下添加本地推送
+    static func addNotifyBellowiOS10(fireDate: Date, alertBody: String?, alertAction: String? = "OK" , userInfo:[AnyHashable:Any]? = [:]){
+        let localNoti = UILocalNotification()
+        localNoti.fireDate = fireDate
+        localNoti.alertBody = alertBody
+        localNoti.alertAction = "Ok"
+        localNoti.hasAction = true
+        localNoti.userInfo = userInfo
+        UIApplication.shared.scheduleLocalNotification(localNoti)
+    }
+    //iOS10以下删除指定推送
+    static func cancleLocalNotifiesByUserInfo(key:String){
+        if let notifications = UIApplication.shared.scheduledLocalNotifications {
+            for notifi in notifications {
+                if notifi.userInfo?[key] != nil { //找到指定key的本地推送
+                    UIApplication.shared.cancelLocalNotification(notifi)
+                }
+            }
+        }
+    }
+    //iOS10以下删除所有未触发推送
+    static func cancleAllBellowiOS10Notifies(){
+        UIApplication.shared.cancelAllLocalNotifications()
+    }
+
+}
+

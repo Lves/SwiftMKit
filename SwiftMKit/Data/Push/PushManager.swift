@@ -121,7 +121,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
             PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
         }
     }
-    
     //MARK: iOS10新加入的回调方法
     // 应用在前台收到通知
     @available(iOS 10.0, *)
