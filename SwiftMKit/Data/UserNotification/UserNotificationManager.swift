@@ -168,6 +168,7 @@ class UserNotificationBellowiOS10Manager: NSObject{
         localNoti.alertAction = "Ok"
         localNoti.hasAction = true
         localNoti.userInfo = userInfo
+        localNoti.repeatInterval = NSCalendar.Unit(rawValue: 0)
         UIApplication.shared.scheduleLocalNotification(localNoti)
     }
     //iOS10以下删除指定推送
