@@ -117,6 +117,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
         completionHandler(.noData)
     }
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        if UIApplication.shared.applicationState == .active{ //本地推送，用户活动状态  不做处理
+            return
+        }
         if let userInfo = notification.userInfo {
             PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
         }
@@ -126,8 +129,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
-
+        if notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) == true { //远程推送
+            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
+        }else{  //本地推送
+            if UIApplication.shared.applicationState != .active{ //本地推送，用户活动状态  不做处理
+                PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
+            }
+        }
         completionHandler(.sound)
     }
     
@@ -135,8 +143,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        if ((response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self)) != nil){
+        if (response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) == true){
             PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo)
+        }else {
+            PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo)
         }
         completionHandler()
     }
