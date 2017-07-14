@@ -81,11 +81,13 @@ public extension UIViewController {
             return false
         }
     }
+    //具备热切换功能的跳转
     @discardableResult
     public func route(name: String,h5Config: [String:String]? = [:], webViewController: String = "BaseKitWebViewController", params: [String: Any] = [:], storyboardName: String? = "", animation: Bool = true, pop: Bool = false) -> Bool {
         DDLogInfo("Route name: \(name) (\(params.stringFromHttpParameters()))")
         if let h5Url = h5Config?[name] {  //如果找到紧急修复h5链接
-            route(toUrl: h5Url , name: webViewController, params: params, pop: pop)
+            let resultUrl = h5Url.urlStringAddParams(params: params)
+            route(toUrl: resultUrl , name: webViewController, pop: pop)
             return true
         }
         return route(toName: name, params: params, storyboardName: storyboardName, animation: animation, pop: pop)

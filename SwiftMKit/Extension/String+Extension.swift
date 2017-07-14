@@ -216,5 +216,36 @@ extension String {
         let rect:CGRect = text.boundingRect(with: size, options: option, attributes: attributes, context: nil)
         return rect;
     }
-    
+    /*
+     *  url字符串拼接参数
+     */
+    func urlStringAddParams(params: [String:Any]?) -> String {
+        guard let params = params ,params.count > 0 else {
+            return self
+        }
+        //获得参数字符串
+        var paramsStr:String = ""
+        for (index ,key) in params.keys.enumerated() {
+            if let value = params[key] {
+                if type(of: value) is AnyClass {
+                    continue
+                }
+                if index == (params.count-1) {
+                    paramsStr +=  "\(key)=\(value)"
+                }else {
+                    paramsStr +=  "\(key)=\(value)&"
+                }
+            }
+        }
+        //拼接到url
+        var resultUrl = self
+        if paramsStr.length > 0 {
+            if self.contains("?"){ //url上已有参数
+                resultUrl += ("&"+paramsStr)
+            }else{
+                resultUrl += ("?"+paramsStr)
+            }
+        }
+        return resultUrl.encodeUrl
+    }
 }
