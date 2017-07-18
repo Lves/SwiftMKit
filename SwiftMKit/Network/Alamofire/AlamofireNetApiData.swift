@@ -193,7 +193,12 @@ open class AlamofireNetApiData: NetApiData {
         return SignalProducer { [unowned self] sink,disposable in
             let wself  = self as! MultipartUploadNetApiProtocol
             task.resume()
-            NotificationCenter.default.post(name: Notification.Name.Task.DidResume, object: task)
+//            NotificationCenter.default.post(name: Notification.Name.Task.DidResume, object: task)
+            NotificationCenter.default.post(
+                name: Notification.Name.Task.DidResume,
+                object: nil,
+                userInfo: [Notification.Key.Task: task]
+            )
             self.indicator?.bindTask(task)
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 //参数
@@ -210,7 +215,7 @@ open class AlamofireNetApiData: NetApiData {
                 }
             }, with: urlRequest, encodingCompletion: { (encodingResult) in
                 task.suspend()
-                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON {  [weak self] response in
@@ -226,7 +231,7 @@ open class AlamofireNetApiData: NetApiData {
                                 wself.response = response.toNetApiResponse()
                                 wself.fillJSON(value)
                                 task.suspend()
-                                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                                 sink.send(value: wself as! MultipartUploadNetApiProtocol)
                                 sink.sendCompleted()
                                 return
@@ -237,7 +242,7 @@ open class AlamofireNetApiData: NetApiData {
                                 case .canceled:
                                     DDLogWarn("请求取消: \(wself.url)")
                                     task.suspend()
-                                    NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                                    NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                                     sink.sendInterrupted()
                                     return
                                 default:
@@ -250,7 +255,7 @@ open class AlamofireNetApiData: NetApiData {
                             let err = error is NetError ? error as! NetError : NetError(error: error)
                             err.response = transferedResponse.response
                             task.suspend()
-                            NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                            NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                             sink.send(error: err)
                         }
                     }
@@ -258,7 +263,7 @@ open class AlamofireNetApiData: NetApiData {
                     DDLogError("请求失败: \(self.url)")
                     DDLogError("\(error)")
                     task.suspend()
-                    NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
+                    NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                     if let err = error as? NetError {
                         sink.send(error: err)
                     } else {
