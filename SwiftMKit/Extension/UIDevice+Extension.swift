@@ -129,6 +129,15 @@ public extension UIDevice {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
+    public func isJailBroken() -> Bool {
+        let cydiaPath = "/Applications/Cydia.app"
+        let aptPath = "/private/var/lib/apt"
+        if FileManager.default.fileExists(atPath: cydiaPath) ||
+            FileManager.default.fileExists(atPath: aptPath) {
+            return true
+        }
+        return false
+    }
 }
 
 
