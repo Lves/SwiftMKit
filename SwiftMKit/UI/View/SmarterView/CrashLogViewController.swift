@@ -41,14 +41,14 @@ class CrashLogViewController: BaseListKitViewController {
     }
     override func loadData() {
         super.loadData()
-        viewModel.fetchData()
+        _viewModel.fetchData()
     }
     
     func clear() {
         let alert = UIAlertController(title: "确认", message: "确定要清空所有崩溃日志？", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "清空", style: .destructive, handler: { [weak self] _ in
             LocalCrashLogReporter.shared.clean()
-            self?.viewModel.fetchData()
+            self?._viewModel.fetchData()
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         showAlert(alert, completion: nil)
