@@ -75,8 +75,8 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
         //开机收到通知
         if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
             self.didReceiveNotification(from: .remote, userInfo: userInfo)
-        }else if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? [AnyHashable: Any] {
-            self.didReceiveNotification(from: .local, userInfo: userInfo)
+        }else if let localNoti = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
+            self.didReceiveNotification(from: .local, userInfo: localNoti.userInfo ?? [:])
         }
     }
     
