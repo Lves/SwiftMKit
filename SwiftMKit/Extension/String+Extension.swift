@@ -26,6 +26,14 @@ extension String {
     func withoutSeparator() -> String {
         return self.components(separatedBy: CharacterSet.whitespacesAndNewlines).joined(separator: "")
     }
+    /// 解码Url
+    var decodeUrl: String {
+        return self.removingPercentEncoding!
+    }
+    /// 编码Url
+    var encodeUrl: String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    }
     
     // MARK: Format
     func formatCurrency(locale: String = "en_US") -> String {
