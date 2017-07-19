@@ -304,6 +304,7 @@
 		6C406E101EFA52F10052BDA8 /* PickerTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */; };
 		6C406E141EFA54380052BDA8 /* CLLoopView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */; };
 		6C406E151EFA54380052BDA8 /* CLLoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */; };
+		6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */; };
 		7A5688E61F039B0C003BEC89 /* BaseCaptchaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */; };
 		7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */; };
 		7A68DCDB1EFCF1C000CE9E43 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */; };
@@ -672,6 +673,7 @@
 		6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextFieldViewController.swift; sourceTree = "<group>"; };
 		6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CLLoopView.storyboard; sourceTree = "<group>"; };
 		6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLoopViewController.swift; sourceTree = "<group>"; };
+		6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReflectionTool.swift; sourceTree = "<group>"; };
 		7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCaptchaImageView.swift; sourceTree = "<group>"; };
 		7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitService.swift; sourceTree = "<group>"; };
 		7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
@@ -929,6 +931,7 @@
 		2795450B1E9C720B00D36D83 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				6C711D201F1F6AFF00268915 /* Reflector */,
 				2795450C1E9C720B00D36D83 /* DataStructure */,
 				279545141E9C720B00D36D83 /* FingerPrint */,
 				279545161E9C720B00D36D83 /* Image */,
@@ -1800,6 +1803,14 @@
 			path = CLLoopView;
 			sourceTree = "<group>";
 		};
+		6C711D201F1F6AFF00268915 /* Reflector */ = {
+			isa = PBXGroup;
+			children = (
+				6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */,
+			);
+			path = Reflector;
+			sourceTree = "<group>";
+		};
 		7A5688E41F039AF0003BEC89 /* BaseCaptchaImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2289,6 +2300,7 @@
 				2783E0081DB626FD005E087C /* MKNormalEmptyViewController.swift in Sources */,
 				279545F91E9C720C00D36D83 /* SwiftCrashReport.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
+				6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */,
 				279545F81E9C720C00D36D83 /* SwiftCrashHandler.swift in Sources */,
 				279546061E9C720C00D36D83 /* SessionDelegate.swift in Sources */,
 				2783E01E1DB626FD005E087C /* MKUITreeViewCellTableViewCell.swift in Sources */,
