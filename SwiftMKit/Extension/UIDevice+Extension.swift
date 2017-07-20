@@ -20,7 +20,29 @@ public extension UIDevice {
         static let UUIDString: String = "UUIDString"
         static let IDFAString: String = "IDFAString"
         static let DeviceName: String = "DeviceName"
+        static let kUUID: String = "com.pintec.uuid"
     }
+    //MARK: 保存在keychain中的uuid,只使用第一次保存的值
+    static func getKeyChainUUID() -> String {
+        if let uuid = KeychainWrapper.string(forKey: Constant.kUUID), uuid.length > 0 {
+            return uuid;
+        }else {
+            let uuidStr:String = NSUUID().uuidString
+            if KeychainWrapper.setString(uuidStr, forKey: Constant.kUUID){
+                return uuidStr
+            }
+            return ""
+        }
+    }
+    //VendorId 即 idfv
+    static func getVendorId() -> String{
+        return UIDevice.current.uuid
+    }
+    //IDFA
+    static func getIDFA() -> String{
+        return UIDevice.current.idfa
+    }
+
     
     //MARK: UUID
     //The value in this property remains the same while the app (or another app from the same vendor) is installed on the iOS device. The value changes when the user deletes all of that vendor’s apps from the device and subsequently reinstalls one or more of them.
