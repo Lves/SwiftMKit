@@ -28,7 +28,7 @@ public class SmarterTool: NSObject {
     override init() {
         super.init()
 
-        SwiftCrashReport.install(LocalCrashLogReporter.self)
+//        SwiftCrashReport.install(LocalCrashLogReporter.self)
 
         let fileLogger: DDFileLogger = DDFileLogger() // File Logger
         fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
