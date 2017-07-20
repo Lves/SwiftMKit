@@ -198,8 +198,8 @@ extension String {
         return size?.height ?? 0
     }
 
-    func getAttributedString(withFont font: UIFont, lineSpacing: CGFloat, alignment: NSTextAlignment? = .left) -> NSAttributedString {
-        guard self.length > 0 else { return NSAttributedString() }
+    func getAttributedString(withFont font: UIFont, lineSpacing: CGFloat, alignment: NSTextAlignment? = .left) -> NSMutableAttributedString {
+        guard self.length > 0 else { return NSMutableAttributedString() }
         let attributedString = NSMutableAttributedString(string: self,
                                                          attributes: [NSFontAttributeName:font])
         let style = NSMutableParagraphStyle()
