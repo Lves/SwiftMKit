@@ -145,12 +145,12 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
 
     // MARK: - Table view data source
 
-//    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//    public override func numberOfSections(in tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
 //        return 0
 //    }
 //
-//    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        // #warning Incomplete implementation, return the number of rows
 //        return 0
 //    }

@@ -83,7 +83,7 @@ open class GestureTentacleView: UIView {
             for i in 0..<buttonArray.count {
                 let buttonTemp = buttonArray[i]
                 buttonTemp.success = true
-                buttonTemp.selected = false
+                buttonTemp.isSelected = false
                 if (buttonTemp.frame.contains(touchPoint)) {
                     let frameTemp = buttonTemp.frame
                     let point = CGPoint(x: frameTemp.origin.x + frameTemp.size.width/2 + 1, y: frameTemp.origin.y + frameTemp.size.height/2)
@@ -116,7 +116,7 @@ open class GestureTentacleView: UIView {
                         return
                     }
                     touchedArray.append("num\(i)")
-                    buttonTemp.selected = true
+                    buttonTemp.isSelected = true
                     
                     buttonTemp.setNeedsDisplay()
                     
@@ -224,7 +224,7 @@ open class GestureTentacleView: UIView {
         for i in 0..<buttonArray.count {
             let buttonTemp = buttonArray[i]
             buttonTemp.success = true
-            buttonTemp.selected = false
+            buttonTemp.isSelected = false
             buttonTemp.setNeedsDisplay()
         }
         self.setNeedsDisplay()

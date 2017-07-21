@@ -15,7 +15,7 @@ import QuartzCore
  rangeSlider.trackHighlightTintColor = UIColor(hex6: 0xFA7655)
  rangeSlider.lowerTrackHighlightTintColor = UIColor(hex6: 0x22304A)
  rangeSlider.upperTrackHighlightTintColor = UIColor(hex6: 0xFFB93B)
- rangeSlider.thumbHighlightedColor = UIColor.clearColor()
+ rangeSlider.thumbHighlightedColor = UIColor.clear
  rangeSlider.lowerThumbImage = UIImage(named: "slider_lower_thumb")
  rangeSlider.upperThumbImage = UIImage(named: "slider_upper_thumb")
  rangeSlider.curvaceousness = 1.0
@@ -46,7 +46,7 @@ class RangeSlider: UIControl {
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Drawing code
     }
     */
@@ -108,14 +108,14 @@ class RangeSlider: UIControl {
     }
     
     //小值轨迹的颜色
-    var lowerTrackHighlightTintColor : UIColor = UIColor.clearColor() {
+    var lowerTrackHighlightTintColor : UIColor = UIColor.clear {
         didSet {
             trackLayer.setNeedsDisplay()
         }
     }
     
     //大值轨迹的颜色
-    var upperTrackHighlightTintColor : UIColor = UIColor.clearColor() {
+    var upperTrackHighlightTintColor : UIColor = UIColor.clear {
         didSet {
             trackLayer.setNeedsDisplay()
         }
@@ -129,7 +129,7 @@ class RangeSlider: UIControl {
     }
     
     //按钮的颜色
-    var thumbTintColor: UIColor = UIColor.whiteColor() {
+    var thumbTintColor: UIColor = UIColor.white {
         didSet {
             lowerThumbLayer.setNeedsDisplay()
             upperThumbLayer.setNeedsDisplay()
@@ -236,7 +236,7 @@ class RangeSlider: UIControl {
     
     /// init layers
     func initializeLayers() {
-        layer.backgroundColor = UIColor.clearColor().CGColor
+        layer.backgroundColor = UIColor.clear.CGColor
         
         trackLayer.rangeSlider = self
         trackLayer.contentsScale = UIScreen.mainScreen().scale
