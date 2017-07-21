@@ -25,12 +25,12 @@ import QuartzCore
  rangeSlider.addTarget(self, action: #selector(self.rangeSliderValueChange(_:)), forControlEvents: .ValueChanged)
  rangeSlider.addTarget(self, action: #selector(self.rangeSliderValueChangeEnd(_:)), forControlEvents: .TouchUpInside)
  
- rangeSlider.lowerThumbLayer.shadowColor = UIColor.blackColor().CGColor
+ rangeSlider.lowerThumbLayer.shadowColor = UIColor.black.CGColor
  rangeSlider.lowerThumbLayer.shadowOffset = CGSize(width: 0, height: 2)
  rangeSlider.lowerThumbLayer.shadowOpacity = 0.2 //阴影透明度，默认0
  rangeSlider.lowerThumbLayer.shadowRadius = 2 //阴影半径，默认3
  
- rangeSlider.upperThumbLayer.shadowColor = UIColor.blackColor().CGColor
+ rangeSlider.upperThumbLayer.shadowColor = UIColor.black.CGColor
  rangeSlider.upperThumbLayer.shadowOffset = CGSize(width: 0, height: 2)
  rangeSlider.upperThumbLayer.shadowOpacity = 0.2 //阴影透明度，默认0
  rangeSlider.upperThumbLayer.shadowRadius = 2 //阴影半径，默认3
@@ -145,7 +145,7 @@ class RangeSlider: UIControl {
     }
     
     //俩按钮边框的颜色
-    var thumbBorderColor: UIColor = UIColor.grayColor() {
+    var thumbBorderColor: UIColor = UIColor.gray {
         didSet {
             lowerThumbLayer.strokeColor = thumbBorderColor
             upperThumbLayer.strokeColor = thumbBorderColor
@@ -153,14 +153,14 @@ class RangeSlider: UIControl {
     }
     
     //小值按钮边框的颜色
-    var lowerThumbBorderColor: UIColor = UIColor.grayColor() {
+    var lowerThumbBorderColor: UIColor = UIColor.gray {
         didSet {
             lowerThumbLayer.strokeColor = lowerThumbBorderColor
         }
     }
     
     //大值按钮边框的颜色
-    var upperThumbBorderColor: UIColor = UIColor.grayColor() {
+    var upperThumbBorderColor: UIColor = UIColor.gray {
         didSet {
             upperThumbLayer.strokeColor = upperThumbBorderColor
         }
@@ -218,8 +218,8 @@ class RangeSlider: UIControl {
     /// layout sub layers
     ///
     /// - Parameter of: layer
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
         updateLayerFrames()
     }
     
@@ -236,18 +236,18 @@ class RangeSlider: UIControl {
     
     /// init layers
     func initializeLayers() {
-        layer.backgroundColor = UIColor.clear.CGColor
+        layer.backgroundColor = UIColor.clear.cgColor
         
         trackLayer.rangeSlider = self
-        trackLayer.contentsScale = UIScreen.mainScreen().scale
+        trackLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(trackLayer)
         
         lowerThumbLayer.rangeSlider = self
-        lowerThumbLayer.contentsScale = UIScreen.mainScreen().scale
+        lowerThumbLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(lowerThumbLayer)
         
         upperThumbLayer.rangeSlider = self
-        upperThumbLayer.contentsScale = UIScreen.mainScreen().scale
+        upperThumbLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(upperThumbLayer)
     }
     
@@ -260,11 +260,11 @@ class RangeSlider: UIControl {
         trackLayer.frame = bounds.insetBy(dx: 0.0, dy: bounds.height / 3)
         trackLayer.setNeedsDisplay()
         
-        let lowerThumbCenter = CGFloat(positionForValue(lowerValue))
+        let lowerThumbCenter = CGFloat(positionForValue(value: lowerValue))
         lowerThumbLayer.frame = CGRect(x:lowerThumbCenter - thumbWidth/2.0,y:0.0,width:thumbWidth,height:thumbWidth)
         lowerThumbLayer.setNeedsDisplay()
         
-        let upperThumbCenter = CGFloat(positionForValue(upperValue))
+        let upperThumbCenter = CGFloat(positionForValue(value: upperValue))
         upperThumbLayer.frame = CGRect(x:upperThumbCenter - thumbWidth/2.0,y:0.0,width:thumbWidth,height:thumbWidth)
         upperThumbLayer.setNeedsDisplay()
         
@@ -293,9 +293,9 @@ class RangeSlider: UIControl {
      现在,有了初始的触摸事件,我们需要处理用户在屏幕上移动的事件了。
      */
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
-        previousLocation = touch.locationInView(self)
+        previousLocation = touch.location(in: self)
         
         if lowerValue == maximumValue {
             lowerThumbLayer.highlighted = true
@@ -321,8 +321,8 @@ class RangeSlider: UIControl {
      根据用户滑动滑块的距离，修正一下 upper 或 lower 值。
      设置 CATransaction 中的 disabledActions。这样可以确保每个 layer 的frame 立即得到更新，并且不会有动画效果。最后，调用 updateLayerFrames 方法将 thumb 移动到正确的位置。
      */
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let location = touch.locationInView(self)
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let location = touch.location(in: self)
         
         // 1. Determine by how much the user has dragged
         
@@ -334,11 +334,11 @@ class RangeSlider: UIControl {
         
         if lowerThumbLayer.highlighted {
             lowerValue += deltaValue
-            lowerValue = boundValue(lowerValue, toLowerValue: minimumValue, upperValue: upperValue)
+            lowerValue = boundValue(value: lowerValue, toLowerValue: minimumValue, upperValue: upperValue)
             
         }else if upperThumbLayer.highlighted {
             upperValue += deltaValue
-            upperValue = boundValue(upperValue, toLowerValue: lowerValue, upperValue: maximumValue)
+            upperValue = boundValue(value: upperValue, toLowerValue: lowerValue, upperValue: maximumValue)
         }
         
         // 3.Update the UI
@@ -347,12 +347,12 @@ class RangeSlider: UIControl {
 //        updateLayerFrames()
 //        CATransaction.commit()
         
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
         
         return true
     }
     
-    override func endTrackingWithTouch(touch: UITouch!, withEvent event: UIEvent!) {
+    override func endTracking(_ touch: UITouch!, with event: UIEvent!) {
         lowerThumbLayer.highlighted = false
         upperThumbLayer.highlighted = false
     }
