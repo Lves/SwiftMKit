@@ -132,10 +132,17 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
         if runningTasks.count > 0 {
             DDLogVerbose("Running list tasks: \(runningTasks.count)")
         }
+        var tasks = [URLSessionTask]()
         for task in runningTasks {
             DDLogVerbose("Cancel task: \(task)")
             UIApplication.shared.hideNetworkActivityIndicator()
-            task.cancel()
+            tasks.append(task)
+        }
+        runningTasks.removeAll()
+        _ = tasks.map { task in
+            Async.main(after: 1) {
+                task.cancel()
+            }
         }
     }
 

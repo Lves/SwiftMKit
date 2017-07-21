@@ -36,25 +36,25 @@ open class BaseKitViewModel: NSObject {
 extension BaseKitViewModel {
     
     public func showTip(_ tip: String, completion : @escaping () -> Void = {}) {
-        viewController.showTip(tip, view: viewController.view, completion: completion)
+        viewController?.showTip(tip, view: viewController.view, completion: completion)
     }
     public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
-        viewController.showTip(tip, image: image, completion: completion)
+        viewController?.showTip(tip, image: image, completion: completion)
     }
     public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
-        viewController.showTip(tip, view: view, offset: offset, completion: completion)
+        viewController?.showTip(tip, view: view, offset: offset, completion: completion)
     }
     public func showLoading(_ text: String = "") {
-        viewController.showLoading(text)
+        viewController?.showLoading(text)
     }
     public func showLoading(_ text: String, view: UIView) {
-        viewController.showLoading(text, view: view)
+        viewController?.showLoading(text, view: view)
     }
     public func hideLoading() {
-        viewController.hideLoading()
+        viewController?.hideLoading()
     }
     public func hideLoading(_ view: UIView) {
-        viewController.hideLoading(view)
+        viewController?.hideLoading(view)
     }
     
 }
