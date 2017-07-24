@@ -249,11 +249,11 @@ extension String {
         var resultUrl = self
         if paramsStr.length > 0 {
             if self.contains("?"){ //url上已有参数
-                resultUrl += ("&"+paramsStr)
+                resultUrl += ("&"+paramsStr.encodeUrl)
             }else{
-                resultUrl += ("?"+paramsStr)
+                resultUrl += ("?"+paramsStr.encodeUrl)
             }
         }
-        return resultUrl.encodeUrl
+        return resultUrl
     }
 }
