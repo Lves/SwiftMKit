@@ -22,7 +22,7 @@ enum PasswordPannelType: Int {
 public protocol PasswordPannelDelegate: class {
     func pp_didCancel(_ pannel: PasswordPannel?) 
     func pp_forgetPassword(_ pannel: PasswordPannel?)
-    func pp_didInputPassword(_ pannel: PasswordPannel?, password : String, completion: ((Bool, String, PasswordPannelStatus) -> Void))
+    func pp_didInputPassword(_ pannel: PasswordPannel?, password : String, completion: @escaping ((Bool, String, PasswordPannelStatus) -> Void))
     func pp_didFinished(_ pannel: PasswordPannel?, success: Bool)
 }
 public extension PasswordPannelDelegate {

@@ -18,7 +18,7 @@ public class RangeSliderTrackLayer: CALayer {
     /// draw the track between 2 thumbs
     ///
     /// - Parameter ctx: current graphics context
-    override public func drawInContext(ctx: CGContext) {
+    override public func draw(in ctx: CGContext) {
         if let slider = rangeSlider {
             // Clip
             var orgRect = bounds
@@ -28,34 +28,34 @@ public class RangeSliderTrackLayer: CALayer {
             }
             let cornerRadius = orgRect.height * slider.curvaceousness / 2.0
             let path = UIBezierPath(roundedRect: orgRect, cornerRadius: cornerRadius)
-            CGContextAddPath(ctx, path.CGPath)
+            ctx.addPath(path.cgPath)
         
             // Fill the track
-            CGContextSetFillColorWithColor(ctx, slider.trackTintColor.CGColor)
-            CGContextAddPath(ctx, path.CGPath)
-            CGContextFillPath(ctx)
+            ctx.setFillColor(slider.trackTintColor.cgColor)
+            ctx.addPath(path.cgPath)
+            ctx.fillPath()
         
-            let lowerValuePosition = CGFloat(slider.positionForValue(slider.lowerValue))
-            let upperValuePosition = CGFloat(slider.positionForValue(slider.upperValue))
+            let lowerValuePosition = CGFloat(slider.positionForValue(value: slider.lowerValue))
+            let upperValuePosition = CGFloat(slider.positionForValue(value: slider.upperValue))
             
             // Fill the lower track range
-            CGContextSetFillColorWithColor(ctx, slider.lowerTrackHighlightTintColor.CGColor)
+            ctx.setFillColor(slider.lowerTrackHighlightTintColor.cgColor)
             let lowerRect = CGRect(x: 0.0 , y: orgRect.y, width: lowerValuePosition - 0, height: orgRect.height)
             let lowerPath = UIBezierPath(roundedRect: lowerRect, cornerRadius: cornerRadius)
-            CGContextAddPath(ctx, lowerPath.CGPath)
-            CGContextFillPath(ctx)
+            ctx.addPath(lowerPath.cgPath)
+            ctx.fillPath()
             
             // Fill the upper track range
-            CGContextSetFillColorWithColor(ctx, slider.upperTrackHighlightTintColor.CGColor)
+            ctx.setFillColor(slider.upperTrackHighlightTintColor.cgColor)
             let upperRect = CGRect(x: upperValuePosition, y: orgRect.y, width: orgRect.width - upperValuePosition, height: orgRect.height)
             let upperPath = UIBezierPath(roundedRect: upperRect, cornerRadius: cornerRadius)
-            CGContextAddPath(ctx, upperPath.CGPath)
-            CGContextFillPath(ctx)
+            ctx.addPath(upperPath.cgPath)
+            ctx.fillPath()
             
             // Fill the highlighted range
-            CGContextSetFillColorWithColor(ctx, slider.trackHighlightTintColor.CGColor)
+            ctx.setFillColor(slider.trackHighlightTintColor.cgColor)
             let rect = CGRect(x: lowerValuePosition, y: orgRect.y, width: upperValuePosition - lowerValuePosition, height: orgRect.height)
-            CGContextFillRect(ctx, rect)
+            ctx.fill(rect)
         }
     }
 }
@@ -73,7 +73,7 @@ public class RangeSliderThumbLayer: CALayer {
     }
     
     /// stroke color
-    public var strokeColor: UIColor = UIColor.grayColor() {
+    public var strokeColor: UIColor = UIColor.gray {
         didSet {
             setNeedsDisplay()
         }
@@ -100,7 +100,7 @@ public class RangeSliderThumbLayer: CALayer {
         }
     }
     
-    override public func drawInContext(ctx: CGContext) {
+    override public func draw(in ctx: CGContext) {
     // Clip
         if let slider = rangeSlider {
             // clip
@@ -111,28 +111,28 @@ public class RangeSliderThumbLayer: CALayer {
             
             // Image
             if image != nil {
-                CGContextSaveGState(ctx)
-                CGContextTranslateCTM(ctx, 0, image!.size.height)
-                CGContextScaleCTM(ctx, 1.0, -1.0)
-                CGContextDrawImage(ctx, CGRect(x: (bounds.w - image!.size.width)/2, y: -(bounds.h - image!.size.height)/2, w: image!.size.width, h: image!.size.height), image!.CGImage!)
-                CGContextRestoreGState(ctx)
+                ctx.saveGState()
+                ctx.translateBy(x: 0, y: image!.size.height)
+                ctx.scaleBy(x: 1.0, y: -1.0)
+                ctx.draw(image!.cgImage!, in: CGRect(x: (bounds.w - image!.size.width)/2, y: -(bounds.h - image!.size.height)/2, w: image!.size.width, h: image!.size.height))
+                ctx.restoreGState()
             }else{
                 // Fill
-                CGContextSetFillColorWithColor(ctx, slider.thumbTintColor.CGColor)
-                CGContextAddPath(ctx, thumbPath.CGPath)
-                CGContextFillPath(ctx)
+                ctx.setFillColor(slider.thumbTintColor.cgColor)
+                ctx.addPath(thumbPath.cgPath)
+                ctx.fillPath()
                 
                 // Outline
-                CGContextSetStrokeColorWithColor(ctx, strokeColor.CGColor)
-                CGContextSetLineWidth(ctx, lineWidth)
-                CGContextAddPath(ctx, thumbPath.CGPath)
-                CGContextStrokePath(ctx)
+                ctx.setStrokeColor(strokeColor.cgColor)
+                ctx.setLineWidth(lineWidth)
+                ctx.addPath(thumbPath.cgPath)
+                ctx.strokePath()
             }
             
             if highlighted {
-                CGContextSetFillColorWithColor(ctx, highlightedColor.CGColor)
-                CGContextAddPath(ctx, thumbPath.CGPath)
-                CGContextFillPath(ctx)
+                ctx.setFillColor(highlightedColor.cgColor)
+                ctx.addPath(thumbPath.cgPath)
+                ctx.fillPath()
             }
         }
     }

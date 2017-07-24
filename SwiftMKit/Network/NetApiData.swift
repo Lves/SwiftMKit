@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import CocoaLumberjack
 import MJExtension
 import ReactiveSwift
