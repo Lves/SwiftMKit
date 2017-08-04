@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Aspects
 
 open class SendCodeButton: UIButton {
     fileprivate var timer: Timer?
