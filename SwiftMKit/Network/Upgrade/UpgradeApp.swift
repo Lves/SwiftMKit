@@ -127,7 +127,7 @@ open class UpgradeApp : NSObject {
         
         if let vc = UIViewController.topController {
             if alertController != nil {
-                if forceUpgrade {
+                if forceUpgrade && !(vc is UIAlertController){
                     alertController?.dismissVC(completion: nil)
                 } else {
                     return
