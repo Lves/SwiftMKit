@@ -272,11 +272,11 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             }
             
             if newProgress >= 1 {
-                progressView!.isHidden = true
-                progressView!.setProgress(0, animated: false)
+                progressView?.isHidden = true
+                progressView?.setProgress(0, animated: false)
             } else {
-                progressView!.isHidden = false
-                progressView!.setProgress(newProgress, animated: true)
+                progressView?.isHidden = false
+                progressView?.setProgress(newProgress, animated: true)
             }
         } else if ((object as AnyObject).isEqual(webView) && ((keyPath ?? "") == keyPathForTitle)) {
             if (!isTitleFixed && (object as AnyObject).isEqual(webView)) {
