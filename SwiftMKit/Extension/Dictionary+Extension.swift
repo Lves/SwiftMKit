@@ -32,6 +32,10 @@ extension Dictionary {
                     v = intValue.toString
                 } else if let doubleValue = value as? Double {
                     v = doubleValue.toString
+                }else if let boolValue = value as? Bool {
+                    v = boolValue ? "true" : "false"
+                }else {
+                    v = "\(value)"
                 }
             }
             let percentEscapedValue = (v ?? "").stringByAddingPercentEncodingForURLQueryValue()!
