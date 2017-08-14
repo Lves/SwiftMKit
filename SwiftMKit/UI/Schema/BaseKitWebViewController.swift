@@ -301,6 +301,14 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             ret = false
         }
         
+        //判断是不是打开App Store
+        if let url = webView.url {
+            if url.absoluteString.hasPrefix("itms-appss://"){
+                UIApplication.shared.openURL(url)
+                ret = false
+            }
+        }
+        
         decisionHandler(ret ? .allow : .cancel)
     }
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
