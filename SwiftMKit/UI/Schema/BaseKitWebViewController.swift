@@ -291,24 +291,22 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var ret = true
-        let url = navigationAction.request.url?.absoluteString.removingPercentEncoding
+        let urlStr = navigationAction.request.url?.absoluteString.removingPercentEncoding
         
         if shouldAllowRirectToUrlInView {
-            DDLogInfo("Web view direct to url: \(url ?? "")")
+            DDLogInfo("Web view direct to url: \(urlStr ?? "")")
             ret = true
         } else {
-            DDLogWarn("Web view direct to url forbidden: \(url ?? "")")
+            DDLogWarn("Web view direct to url forbidden: \(urlStr ?? "")")
             ret = false
         }
-        
         //判断是不是打开App Store
-        if let url = webView.url {
-            if url.absoluteString.hasPrefix("itms-appss://"){
+        if urlStr?.hasPrefix("itms-appss://") == true || urlStr?.hasPrefix("itms-apps://") == true{
+            if let url = navigationAction.request.url {
                 UIApplication.shared.openURL(url)
                 ret = false
             }
         }
-        
         decisionHandler(ret ? .allow : .cancel)
     }
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
