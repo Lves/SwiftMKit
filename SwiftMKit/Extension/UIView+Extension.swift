@@ -70,7 +70,21 @@ public extension UIView {
             layer.borderWidth = newValue
         }
     }
-    
+    @IBInspectable
+    public var mShadowPath: Bool {
+        get {
+            if let _ = layer.shadowPath {
+                return true
+            }
+            return false
+        }
+        set {
+            if newValue {
+                // 提前告诉 CoreAnimation 要渲染的 View 的形状 Shape，就会减少离屏渲染计算，能大大提高性能
+                layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+            }
+        }
+    }
     /**
      获取view所在的控制器
      
