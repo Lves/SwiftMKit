@@ -26,7 +26,14 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         return self.createWebView()
     }()
     private func createWebView() -> WKWebView {
-        let _webView = WKWebView(frame: CGRect.zero)
+        
+        let wkContentVc = WKUserContentController()
+        let cookieScript = WKUserScript(source: "", injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
+        wkContentVc.addUserScript(cookieScript)
+        let config = WKWebViewConfiguration()
+        config.userContentController = wkContentVc
+        
+        let _webView = WKWebView(frame: CGRect.zero, configuration: config)
         _webView.backgroundColor = InnerConst.WebViewBackgroundColor
         self.view.addSubview(_webView)
         if let progressView = self.progressView {
@@ -286,9 +293,17 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-    
-    
-    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void){
+        //存储返回的cookie
+        if let response = navigationResponse.response as? HTTPURLResponse, let url = response.url{
+            let cookies = HTTPCookie.cookies(withResponseHeaderFields: (response.allHeaderFields as? [String : String]) ?? [:] , for: url)
+            for cookie in cookies {
+                print("保存的ResponseCookie Name:\(cookie.name)   value:\(cookie.value)")
+                HTTPCookieStorage.shared.setCookie(cookie)
+            }
+        }
+        decisionHandler(.allow)
+    }
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var ret = true
         let urlStr = navigationAction.request.url?.absoluteString.removingPercentEncoding
@@ -300,13 +315,27 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             DDLogWarn("Web view direct to url forbidden: \(urlStr ?? "")")
             ret = false
         }
-        //判断是不是打开App Store
+        //1.0 判断是不是打开App Store
         if urlStr?.hasPrefix("itms-appss://") == true || urlStr?.hasPrefix("itms-apps://") == true{
             if let url = navigationAction.request.url {
                 UIApplication.shared.openURL(url)
                 ret = false
             }
         }
+        //2.0 Cookie
+        //获得cookie
+        var cookStr = ""
+        if let cookies =  HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                cookStr += "document.cookie = '\(cookie.name)=\(cookie.value);domain=\(cookie.domain);sessionOnly=\(cookie.isSessionOnly);path=\(cookie.path);isSecure=\(cookie.isSecure)';"
+            }
+        }
+        //设置cookie
+        if cookStr.length > 0 {
+            let sc = WKUserScript(source:cookStr, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
+            webView.configuration.userContentController.addUserScript(sc)
+        }
+        
         decisionHandler(ret ? .allow : .cancel)
     }
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
