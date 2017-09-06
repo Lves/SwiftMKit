@@ -267,21 +267,27 @@ open class ToolsPannelScrollView: UIScrollView {
         didSet{
             if let toolsArray_t = toolsArray {
                 
+                if toolsArray_t.count == 0 {
+                    return
+                }
+                
                 //先移除之前的View
                 if (self.subviews.count > 0) {
                     self.removeSubviews()
                 }
                 
+                let width = max(((self.w - CGFloat(toolsArray_t.count + 1) * InnerConstant.HorizontalSpace) / CGFloat(toolsArray_t.count)), InnerConstant.IcoWidth)
+            
                 //设置当前scrollView的contentSize
-                self.contentSize = CGSize(width: InnerConstant.OriginX + CGFloat(toolsArray_t.count) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),height: self.h)
+                self.contentSize = CGSize(width: InnerConstant.OriginX + CGFloat(toolsArray_t.count) * (width + InnerConstant.HorizontalSpace),height: self.h)
                 
                 //遍历标签数组,将标签显示在界面上,并给每个标签打上tag加以区分
                 for index in 0..<toolsArray_t.count {
                     let model = toolsArray_t[safe: index]
                     if let toolModel = model {
-                        let itemView = self.getToolItme(CGRect(x: InnerConstant.OriginX + CGFloat(index) * (InnerConstant.IcoWidth + InnerConstant.HorizontalSpace),
+                        let itemView = self.getToolItme(CGRect(x: InnerConstant.OriginX + CGFloat(index) * (width + InnerConstant.HorizontalSpace),
                             y: InnerConstant.OriginY,
-                            width: InnerConstant.IcoWidth,
+                            width: width,
                             height: InnerConstant.IcoWidth + InnerConstant.IcoAndTitleSpace + InnerConstant.TitleLabelHeight), model: toolModel, btnTag: index + 1)
                         self.addSubview(itemView)
                     }
