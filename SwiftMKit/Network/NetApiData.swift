@@ -83,7 +83,7 @@ open class NetApiData: NSObject, NetApiProtocol {
         mutableURLRequest.httpMethod = method.rawValue
         mutableURLRequest.timeoutInterval = api.timeout 
         let parameterString = parameters.stringFromHttpParameters()
-        DDLogInfo("请求地址: \(method.rawValue) \(mutableURLRequest.url!.absoluteString)?\(parameterString)")
+        DDLogInfo("请求地址: \(method.rawValue) \(mutableURLRequest.url?.absoluteString ?? "")?\(parameterString)")
         mutableURLRequest = api.transferURLRequest(mutableURLRequest)
         return mutableURLRequest
     }
