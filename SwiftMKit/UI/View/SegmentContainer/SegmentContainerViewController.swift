@@ -124,22 +124,24 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
         let index = (offsetX + width / 2) / width
         _selectedSegment = Int(index)
         self.offsetX.value = percentX * width
-    }
-    dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        let index = Int(scrollView.contentOffset.x / scrollView.w)
-        delegate?.didSelectSegment(self, index: index, viewController: viewControllers[index])
-        if let vc = viewControllers[safe: Int(index)] {
+        
+        delegate?.didSelectSegment(self, index: _selectedSegment, viewController: viewControllers[_selectedSegment])
+        if let vc = viewControllers[safe: Int(_selectedSegment)] {
             if !(scrollView.subviews.contains(vc.view)) {
-                vc.view.frame = CGRect(x: CGFloat(index) * screenW, y: 0, w: screenW, h: scrollView.h)
+                vc.view.frame = CGRect(x: CGFloat(_selectedSegment) * screenW, y: 0, w: screenW, h: scrollView.h)
                 scrollView.addSubview(vc.view)
             }
         }
     }
+    
+    dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        
+    }
     dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollViewDidEndScrollingAnimation(scrollView)
+
     }
 
-    open func selectSegment(_ index: Int) -> Bool {
+    open func selectSegment(_ index: Int, animated: Bool = true) -> Bool {
         if index < 0 || index >= viewControllers.count {
             DDLogError("Segment Index out of bounds")
             return false
@@ -171,7 +173,7 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
             }
         }
         _selectedSegment = index
-        scrollView.setContentOffset(CGPoint(x: (self.screenW * CGFloat(selectedSegment)), y: 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: (self.screenW * CGFloat(selectedSegment)), y: 0), animated: animated)
         DDLogInfo("self.screenW \(self.screenW)")
         return true
     }
