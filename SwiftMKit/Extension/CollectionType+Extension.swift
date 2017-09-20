@@ -35,9 +35,10 @@ extension Collection {
     }
 }
 
-extension Collection
-    where Indices.Iterator.Element: Equatable, Index == Indices.Iterator.Element{
-    subscript (safe index: Indices.Iterator.Element) -> Iterator.Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
+//extension Collection
+//    where Indices.Iterator.Element: Equatable, Index == Indices.Iterator.Element{
+//    subscript (safe index: Indices.Iterator.Element) -> Iterator.Element? {
+//        return indices.contains(index) ? self[index] : nil
+//    }
+//}
+

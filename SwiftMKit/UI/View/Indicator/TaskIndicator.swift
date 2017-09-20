@@ -53,8 +53,8 @@ open class TaskIndicator: NSObject, IndicatorProtocol {
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if !self.runningTasks.contains(task) {
                 
-                weak var weakTask = task
-                self.runningTasks.append(weakTask!)
+//                weak var weakTask = task
+                self.runningTasks.append(task)
             }
             UIApplication.shared.showNetworkActivityIndicator()
             if let view = task.indicatorView {
