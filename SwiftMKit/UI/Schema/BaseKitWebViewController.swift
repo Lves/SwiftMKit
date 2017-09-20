@@ -188,9 +188,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         webView.evaluateJavaScript("document.body.innerHTML='';") { [weak self] _ in
             let request = URLRequest(url: URL(string:url!)!)
             if let request = self?.willLoadRequest(request) {
-                _ = Async.background { [weak self] in
-                    self?.webView.load(request)
-                }
+                self?.webView.load(request)
             }
         }
     }
@@ -279,11 +277,17 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             }
             
             if newProgress >= 1 {
-                progressView?.isHidden = true
-                progressView?.setProgress(0, animated: false)
+                Async.main({ [weak self] in
+                    self?.progressView?.isHidden = true
+                    self?.progressView?.setProgress(0, animated: false)
+                })
+
             } else {
-                progressView?.isHidden = false
-                progressView?.setProgress(newProgress, animated: true)
+                Async.main({ [weak self] in
+                    self?.progressView?.isHidden = false
+                    self?.progressView?.setProgress(newProgress, animated: true)
+                })
+               
             }
         } else if ((object as AnyObject).isEqual(webView) && ((keyPath ?? "") == keyPathForTitle)) {
             if (!isTitleFixed && (object as AnyObject).isEqual(webView)) {
