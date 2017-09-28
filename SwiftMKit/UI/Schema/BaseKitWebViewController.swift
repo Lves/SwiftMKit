@@ -116,6 +116,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     private var isTitleFixed: Bool = false
     
     var webViewToolsPannelView :SharePannelView?
+    var needRefreshCallBack: WVJBResponseCallback?
     
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -126,6 +127,10 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         if needBackRefresh { //跳转到原生页面，返回时是否需要刷新
             needBackRefresh = false
             self.loadData()
+        }
+        if let needRefreshCallBack = needRefreshCallBack { //如果有刷新回调，调用之
+            needRefreshCallBack(nil)
+            self.needRefreshCallBack = nil
         }
     }
     
@@ -212,6 +217,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
          *      params:[String:Any] 作为控制器的params
          */
         self.bindEvent("goToSomewhere", handler: { [weak self] data , responseCallback in
+            
             if let dic = data as? [String:Any] {
                 if let name = dic["name"] as? String , name.length > 0{
                     //获得Controller名和Sb名
@@ -225,6 +231,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                             let paramsDic = dic["params"] as? [String:Any]
                             self?.setObjectParams(vc: vc, paramsDic: paramsDic)
                             self?.needBackRefresh = refresh
+                            self?.needRefreshCallBack = responseCallback
                             self?.toNextViewController(viewController: vc, pop: pop)
                         }
                     }
