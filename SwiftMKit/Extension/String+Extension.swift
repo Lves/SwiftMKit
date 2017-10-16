@@ -256,4 +256,28 @@ extension String {
         }
         return resultUrl
     }
+    
+    func removeDecimalTailZero() -> String{
+    
+        var outNumber = self
+        var i = 1
+        
+        if self.contains("."){
+            while i < self.characters.count{
+                if outNumber.hasSuffix("0"){
+                    outNumber.remove(at: outNumber.index(before: outNumber.endIndex))
+                    i = i + 1
+                }else{
+                    break
+                }
+            }
+            if outNumber.hasSuffix("."){
+                outNumber.remove(at: outNumber.index(before: outNumber.endIndex))
+            }
+            return outNumber
+        }
+        else{
+            return self
+        }
+    }
 }
