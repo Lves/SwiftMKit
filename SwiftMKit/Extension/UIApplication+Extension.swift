@@ -27,7 +27,9 @@ public extension UIApplication {
         lockQueue.sync {
             UIApplication.activityCount -= 1
             if UIApplication.activityCount <= 0 {
-                self.isNetworkActivityIndicatorVisible = false
+                Async.main { [weak self] in
+                    self?.isNetworkActivityIndicatorVisible = false
+                }
                 UIApplication.activityCount = 0
             }
         }

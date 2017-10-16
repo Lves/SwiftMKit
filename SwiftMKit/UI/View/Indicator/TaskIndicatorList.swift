@@ -81,7 +81,9 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
     }
     func task_list_end(notify:Notification) {
         DDLogVerbose("List Task complete")
-        UIApplication.shared.hideNetworkActivityIndicator()
+        Async.main {
+            UIApplication.shared.hideNetworkActivityIndicator()
+        }
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if let index = self.runningTasks.index(of: task) {
                 self.runningTasks.remove(at: index)
