@@ -214,6 +214,9 @@ public extension UIViewController {
     }
     public func canPerformSegue(withIdentifier identifier: String) -> Bool {
         let segueTemplates: AnyObject = self.value(forKey: "storyboardSegueTemplates") as AnyObject
+        guard !(segueTemplates is NSNull) else {
+            return false
+        }
         let predicate = NSPredicate(format: "identifier = %@", identifier)
         let filteredArray: [Any] = segueTemplates.filtered(using: predicate)
         return filteredArray.count > 0
