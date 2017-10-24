@@ -20,6 +20,16 @@ public protocol ToolsPannelScrollViewDelegate: class {
     func toolsPannelScrollViewButtonAction(_ toolsPannelScrollView: ToolsPannelScrollView, model: ToolsModel)
 }
 
+public enum ShareObjectType: Int {
+    case text
+    case textWithImage
+    case image
+    case music
+    case video
+    case webPage
+    case wxMiniProgram
+}
+
 public enum ToolUsed : Int {
     case `default`
     case shareToSina
@@ -43,12 +53,14 @@ open class ToolsModel{
     var image: String?
     var highlightedImage: String?
     var title: String?
+    var shareObjectType : ShareObjectType = .text
     var used : ToolUsed = .default
     
-    init(image:String? = "", highlightedImage:String? = "", title:String? = "", used:ToolUsed) {
+    init(image: String? = "", highlightedImage: String? = "", title: String? = "", shareObjectType: ShareObjectType, used: ToolUsed) {
         self.image = image
         self.highlightedImage = highlightedImage
         self.title = title
+        self.shareObjectType = shareObjectType
         self.used = used
     }
 }

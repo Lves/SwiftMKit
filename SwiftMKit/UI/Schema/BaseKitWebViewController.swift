@@ -468,9 +468,9 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         webViewToolsPannelView!.headerView = getToolMoreHeaderView()
         webViewToolsPannelView!.toolsArray =
             [[
-                ToolsModel(image: "pannel_icon_safari", highlightedImage: "pannel_icon_safari", title: "在Safari中\n打开", used: .openBySafari),
-                ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接", used: .copyLink),
-                ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新", used: .webRefresh)]]
+                ToolsModel(image: "pannel_icon_safari", highlightedImage: "pannel_icon_safari", title: "在Safari中\n打开", shareObjectType: .webPage, used: .openBySafari),
+                ToolsModel(image: "pannel_icon_link", highlightedImage: "pannel_icon_link", title: "复制链接",shareObjectType: .webPage, used: .copyLink),
+                ToolsModel(image: "pannel_icon_refresh", highlightedImage: "pannel_icon_refresh", title: "刷新",shareObjectType: .webPage, used: .webRefresh)]]
         
         self.navigationController?.view.addSubview(webViewToolsPannelView!)
     }
