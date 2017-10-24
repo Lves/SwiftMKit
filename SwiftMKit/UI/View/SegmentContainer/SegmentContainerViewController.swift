@@ -116,15 +116,15 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
             }
         }
     }
-    
-    dynamic open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+    fileprivate func handleScrollEndEvent(_ scrollView: UIScrollView) {
         let width = self.screenW
         let offsetX = scrollView.contentOffset.x
         let percentX : CGFloat = offsetX / scrollView.contentSize.width
         let index = (offsetX + width / 2) / width
         _selectedSegment = Int(index)
         self.offsetX.value = percentX * width
-        
+
         delegate?.didSelectSegment(self, index: _selectedSegment, viewController: viewControllers[_selectedSegment])
         if let vc = viewControllers[safe: Int(_selectedSegment)] {
             if !(scrollView.subviews.contains(vc.view)) {
@@ -135,10 +135,10 @@ open class SegmentContainerViewController: UIViewController ,UIScrollViewDelegat
     }
     
     dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        
+        handleScrollEndEvent(scrollView)
     }
     dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-
+        handleScrollEndEvent(scrollView)
     }
 
     open func selectSegment(_ index: Int, animated: Bool = true) -> Bool {
