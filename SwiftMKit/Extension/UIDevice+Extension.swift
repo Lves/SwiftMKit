@@ -42,8 +42,13 @@ public extension UIDevice {
     static func getIDFA() -> String{
         return UIDevice.current.idfa
     }
-
-    
+    //is iPhone X ?
+    static func isX() -> Bool {
+        if UIScreen.main.bounds.height == 812 {
+            return true
+        }
+        return false
+    }
     //MARK: UUID
     //The value in this property remains the same while the app (or another app from the same vendor) is installed on the iOS device. The value changes when the user deletes all of that vendor’s apps from the device and subsequently reinstalls one or more of them.
     var uuid: String {
