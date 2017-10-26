@@ -85,6 +85,10 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
                 footer.setTitle("", for: .noMoreData)
             }
         }
+        //声明tableView的位置 添加下面代码
+        if #available(iOS 11.0, *) {
+            self.listView?.contentInsetAdjustmentBehavior = .never
+        }
     }
     open func getCell(withTableView tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         DDLogError("Need to implement the function of 'getCellWithTableView'")
