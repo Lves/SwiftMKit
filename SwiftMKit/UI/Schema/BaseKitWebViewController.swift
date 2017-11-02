@@ -332,6 +332,11 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                 UIApplication.shared.openURL(url)
                 ret = false
             }
+        }else if urlStr?.hasPrefix("http") == false && urlStr?.hasPrefix("https") == false{ // 2.0 判断是不是打开其他app，例如支付宝
+            if let url = navigationAction.request.url {
+                UIApplication.shared.openURL(url)
+                ret = false
+            }
         }
         //2.0 Cookie
         //获得cookie
