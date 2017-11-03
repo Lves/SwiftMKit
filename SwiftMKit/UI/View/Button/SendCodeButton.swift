@@ -15,6 +15,7 @@ open class SendCodeButton: UIButton {
     
     open var countDownSeconds: Int = 60
     open var timeupTitle: String = "重新获取"
+    var selectedSubffix:String = "秒后可重发"
     
     required override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +45,7 @@ open class SendCodeButton: UIButton {
     
     fileprivate func showRemainSecond() {
         let now = Date().timeIntervalSince1970.toInt
-        setTitle("\(stopTime - now)秒后可重发", for: .selected)
+        setTitle("\(stopTime - now)\(selectedSubffix)", for: .selected)
     }
     @objc fileprivate func timerCountDown() {
         let now = Date().timeIntervalSince1970.toInt
