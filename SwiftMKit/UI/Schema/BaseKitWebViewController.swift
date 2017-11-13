@@ -34,6 +34,10 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         config.userContentController = wkContentVc
         
         let _webView = WKWebView(frame: CGRect.zero, configuration: config)
+        //声明scrollView的位置 添加下面代码
+        if #available(iOS 11.0, *) {
+            _webView.scrollView.contentInsetAdjustmentBehavior = .never
+        }
         _webView.backgroundColor = InnerConst.WebViewBackgroundColor
         self.view.addSubview(_webView)
         if let progressView = self.progressView {
