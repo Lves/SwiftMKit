@@ -83,6 +83,8 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
         view?.textField = textField
         view?.type = type
         view?.setupUI(theme)
+        //iOS11 解决高度还是之前键盘高度的问题。暂时不打开，有人提bug再来解决。
+//        view?.translatesAutoresizingMaskIntoConstraints = false
         return view!
     }
     public override init(frame: CGRect) {
