@@ -119,4 +119,22 @@ public extension UIView {
         }
         return array
     }
+    
+    /**
+     查找Alert视图的Title和Message(UILabel)
+     
+     - returns: UILabel
+     */
+    static func getParentViewOfTitleAndMessageFromAlertView(view:UIView) -> UIView? {
+        for subView in view.subviews {
+            if subView.isKind(of: UILabel.classForCoder()) {
+                return view
+            }else{
+                if let resultV : UIView = UIView.getParentViewOfTitleAndMessageFromAlertView(view: subView){
+                    return resultV
+                }
+            }
+        }
+        return nil
+    }
 }
