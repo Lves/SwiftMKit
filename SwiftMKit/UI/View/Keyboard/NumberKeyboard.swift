@@ -367,7 +367,10 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     }
     //获取光标前的字符串
     fileprivate func getForwardString(_ string : String, range : NSRange) -> String {
-        return self.text.toNSString.substring(with: NSMakeRange(0, range.location))
+        if self.text.length > range.location {
+            return self.text.toNSString.substring(with: NSMakeRange(0, range.location))
+        }
+        return self.text
     }
     //获取光标后的字符串
     fileprivate func getBehindString(_ string : String, range : NSRange) -> String {
