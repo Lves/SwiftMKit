@@ -64,7 +64,7 @@ open class CachePool: CachePoolProtocol {
     open var size: Int64 {
         // 遍历配置文件
         // 取出缓存字典
-        let cachedDict = (cache!.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
+        let cachedDict = (cache?.object(forKey: cacheDictKey) as? [String: CacheModel]) ?? [:]
         var cachedSize: Int64 = 0
         for value in cachedDict.values {
             cachedSize += value.size
