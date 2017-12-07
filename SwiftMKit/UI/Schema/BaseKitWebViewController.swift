@@ -210,6 +210,19 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         }
         return request
     }
+    ///是否需要跳到热修复,只给 goToSomewhere用
+    ///可以在自己项目中重写该方法
+    func needRouteHotfix(controllerName:String, params:[String:Any]? = [:], pop:Bool? = false, needBlock:()->(), notNeedBlock:()->()) {
+        //默认不需要热修复
+        notNeedBlock()
+        ///重写示例
+//        let needRouteHotfix:Bool
+//        if needRouteHotfix {
+//            needBlock()
+//        }else {
+//            notNeedBlock()
+//        }
+    }
     open func bindEvents() {
         /**
          *  H5跳转到任意原生页面
@@ -221,7 +234,6 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
          *      params:[String:Any] 作为控制器的params
          */
         self.bindEvent("goToSomewhere", handler: { [weak self] data , responseCallback in
-            
             if let dic = data as? [String:Any] {
                 if let name = dic["name"] as? String , name.length > 0{
                     //获得Controller名和Sb名
@@ -230,16 +242,24 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                         let refresh = (dic["refresh"] as? Bool) ?? false
                         let pop = (dic["pop"] as? Bool) ?? false
                         sbName = (sbName?.length ?? 0) > 0 ? sbName : nil
-                        if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
-                            //获得需要的参数
-                            let paramsDic = dic["params"] as? [String:Any]
-                            self?.setObjectParams(vc: vc, paramsDic: paramsDic)
+                        //是否是热切换页面
+                        self?.needRouteHotfix(controllerName:vcName,
+                                              params:dic["params"] as? [String:Any],
+                                              pop:pop,
+                                              needBlock: {
                             self?.needBackRefresh = refresh
                             self?.needRefreshCallBack = responseCallback
-                            self?.toNextViewController(viewController: vc, pop: pop)
-                        }
+                        }, notNeedBlock: {
+                            if let vc = self?.initialedViewController(vcName, storyboardName: sbName){
+                                //获得需要的参数
+                                let paramsDic = dic["params"] as? [String:Any]
+                                self?.setObjectParams(vc: vc, paramsDic: paramsDic)
+                                self?.needBackRefresh = refresh
+                                self?.needRefreshCallBack = responseCallback
+                                self?.toNextViewController(viewController: vc, pop: pop)
+                            }
+                        })
                     }
-                    
                 }
             }
         })
