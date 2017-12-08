@@ -375,7 +375,9 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             let sc = WKUserScript(source:cookStr, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
             webView.configuration.userContentController.addUserScript(sc)
         }
-        
+        if (navigationAction.targetFrame == nil) { //新窗口打不开的bug
+            webView.load(navigationAction.request)
+        }
         decisionHandler(ret ? .allow : .cancel)
     }
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
