@@ -9,7 +9,7 @@
 import UIKit
 import CocoaLumberjack
 
-public protocol SmarterToolDelegate {
+public protocol SmarterToolDelegate:class {
     func routeToEvnSwitch()
     func routeToCrashLog()
 }
@@ -21,7 +21,7 @@ extension SmarterToolDelegate {
 
 public class SmarterTool: NSObject {
     
-    public var delegate: SmarterToolDelegate?
+    open weak var delegate: SmarterToolDelegate?
     
     var button:JDJellyButton!
     
