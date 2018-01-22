@@ -375,7 +375,8 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     //获取光标后的字符串
     fileprivate func getBehindString(_ string : String, range : NSRange) -> String {
         let length = string.length
-        return self.text.toNSString.substring(with: NSMakeRange(range.location, length - range.location))
+        let rangeLength = length > range.location ? length - range.location : 0
+        return self.text.toNSString.substring(with: NSMakeRange(range.location, rangeLength))
     }
     //限制两位小数逻辑处理
     fileprivate func limitWithTwoPoint(_ string : String) -> Bool {
