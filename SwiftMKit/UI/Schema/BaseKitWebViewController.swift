@@ -188,14 +188,15 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     }
     
     open func requestUrl(url: String?) {
-        if url == nil || url!.length <= 0 || !UIApplication.shared.canOpenURL(URL(string: url!)!) {
-            DDLogError("Request Invalid Url: \(url ?? ""))")
+        
+        guard let urlStr = url, urlStr.length > 0 ,let urlResult = URL(string: urlStr), UIApplication.shared.canOpenURL(urlResult) else {
+            DDLogError("Request Invalid Url: \(url ?? "")")
             return
         }
-        DDLogInfo("Request url: \(url ?? "")")
+        DDLogInfo("Request url: \(urlStr)")
         //清除旧数据
         webView.evaluateJavaScript("document.body.innerHTML='';") { [weak self] _ in
-            let request = URLRequest(url: URL(string:url!)!)
+            let request = URLRequest(url: urlResult)
             if let request = self?.willLoadRequest(request) {
                 self?.webView.load(request)
             }
