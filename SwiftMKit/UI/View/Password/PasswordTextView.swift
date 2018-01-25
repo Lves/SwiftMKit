@@ -61,6 +61,7 @@ open class PasswordTextView : UIView, UITextFieldDelegate {
     }
     func setupUI() {
         backgroundColor = inputViewColor
+        inputTextField.keyboardType = .numberPad //解决iPhoneX键盘会忽大忽小的问题
         inputTextField.delegate = self
         inputTextField.inputView = NumberKeyboard.keyboard(inputTextField, type: .noDot)
         addSubview(inputTextField)
@@ -71,7 +72,6 @@ open class PasswordTextView : UIView, UITextFieldDelegate {
         }
     }
     func active() {
-        
         inputTextField.becomeFirstResponder()
     }
     func inactive() {

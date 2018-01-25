@@ -134,7 +134,7 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
             self.y = self.coverView.h
             UIView.animate(withDuration: self.animationDuration, animations: {
                 self.coverView.backgroundColor = self.maskColor
-                self.y = self.coverView.h - self.h;
+                self.y = self.coverView.h - self.h
             }) 
         }
     }
