@@ -148,8 +148,10 @@ open class CoverFlowLayout: UICollectionViewFlowLayout {
         // Simply add index paths between min and max.
         let resultingIdxPaths: NSMutableArray = NSMutableArray()
         
-        for i in minRow...maxRow {
-            resultingIdxPaths.add(IndexPath(row: i, section: 0))
+        if minRow <= maxRow {
+            for i in minRow...maxRow {
+                resultingIdxPaths.add(IndexPath(row: i, section: 0))
+            }
         }
         
         return NSArray(array: resultingIdxPaths);
