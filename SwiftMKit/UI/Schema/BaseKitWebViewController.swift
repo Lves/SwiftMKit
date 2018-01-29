@@ -334,7 +334,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         if let response = navigationResponse.response as? HTTPURLResponse, let url = response.url{
             let cookies = HTTPCookie.cookies(withResponseHeaderFields: (response.allHeaderFields as? [String : String]) ?? [:] , for: url)
             for cookie in cookies {
-                print("保存的ResponseCookie Name:\(cookie.name)   value:\(cookie.value)")
+//                DDLogInfo("保存的ResponseCookie Name:\(cookie.name)   value:\(cookie.value)")
                 HTTPCookieStorage.shared.setCookie(cookie)
             }
         }
