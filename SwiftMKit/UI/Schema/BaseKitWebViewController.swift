@@ -188,7 +188,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     }
     
     open func requestUrl(url: String?) {
-        
+        let url = url?.trimmingCharacters(in: .whitespaces) //去除前后空格
         guard let urlStr = url, urlStr.length > 0 ,let urlResult = URL(string: urlStr), UIApplication.shared.canOpenURL(urlResult) else {
             DDLogError("Request Invalid Url: \(url ?? "")")
             return
