@@ -137,9 +137,26 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             self.needRefreshCallBack = nil
         }
     }
+
+    open func setupBadNetworkView() -> UIView? {
+        return nil
+    }
+    private var isFinishedOnce = false
+    private var isBadNetwork = true
+    private func showBadNetworkView() {
+        guard let badNetwork_view = setupBadNetworkView() else { return }
+        badNetwork_view.frame = view.bounds
+        view.addSubview(badNetwork_view)
+    }
+    private func removeBadNetworkView() {
+        if let badNetwork_view = setupBadNetworkView() {
+            badNetwork_view.removeFromSuperview()
+        }
+    }
     
     open override func setupUI() {
         super.setupUI()
+        NetApiClient.shared.startNotifyNetworkStatus()
         isTitleFixed = (self.title?.length ?? 0) > 0
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
         self.view.addSubview(self.getBackgroundLab())
@@ -158,6 +175,23 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         }
         
         loadData()
+
+        NetApiClient.shared.networkStatus.producer.startWithValues {[weak self](sender) in
+            print("=============== \(sender)")
+            if sender == .reachableViaWWAN || sender == .reachableViaWiFi {
+                print("WIFI或者4G")
+                if self?.isBadNetwork == true && self?.isFinishedOnce == false {
+                    self?.removeBadNetworkView()
+                    self?.loadData()
+                }
+            } else {
+                print("无网络")
+                self?.isBadNetwork = true
+                if self?.isFinishedOnce == false {
+                    self?.showBadNetworkView()
+                }
+            }
+        }
     }
     
     open override func setupNavigation() {
@@ -385,6 +419,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        isFinishedOnce = true
         if let header = self.webView.scrollView.mj_header {
             header.endRefreshing()//结束下拉刷新
         }
