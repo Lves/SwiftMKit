@@ -142,7 +142,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         return nil
     }
     private var isFinishedOnce = false
-    private var isBadNetwork = true
+    private var isBadNetwork = false
     private func showBadNetworkView() {
         guard let badNetwork_view = setupBadNetworkView() else { return }
         badNetwork_view.frame = view.bounds
