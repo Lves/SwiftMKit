@@ -121,6 +121,8 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     
     var webViewToolsPannelView :SharePannelView?
     var needRefreshCallBack: WVJBResponseCallback?
+    /// 标识：webView加载失败后，是否需要显示网络错误页面（如果有）
+    var showBadNetworkViewWhenFail = false
     
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -145,6 +147,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     private var isBadNetwork = false
     private func showBadNetworkView() {
         guard let badNetwork_view = setupBadNetworkView() else { return }
+        guard badNetwork_view.superview == nil else { return }
         badNetwork_view.frame = view.bounds
         view.addSubview(badNetwork_view)
     }
@@ -177,17 +180,16 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         loadData()
 
         NetApiClient.shared.networkStatus.producer.startWithValues {[weak self](sender) in
-            print("=============== \(sender)")
             if sender == .reachableViaWWAN || sender == .reachableViaWiFi {
-                print("WIFI或者4G")
+                DDLogInfo("[Network Status] WIFI或者蜂窝网络, status: \(sender)")
                 if self?.isBadNetwork == true && self?.isFinishedOnce == false {
                     self?.removeBadNetworkView()
                     self?.loadData()
                 }
             } else {
-                print("无网络")
+                DDLogInfo("[Network Status] 无网络, status: \(sender)")
                 self?.isBadNetwork = true
-                if self?.isFinishedOnce == false {
+                if self?.isFinishedOnce == false || self?.showBadNetworkViewWhenFail == true {
                     self?.showBadNetworkView()
                 }
             }
@@ -445,8 +447,10 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         if ((error as NSError).code == URLError.cancelled.rawValue){
             return
         }
-        
         self.showTip(tip)
+        if showBadNetworkViewWhenFail == true {
+            showBadNetworkView()
+        }
     }
     
     open func refreshNavigationBarTopLeftCloseButton() {
