@@ -304,6 +304,10 @@
 		6C406E101EFA52F10052BDA8 /* PickerTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */; };
 		6C406E141EFA54380052BDA8 /* CLLoopView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */; };
 		6C406E151EFA54380052BDA8 /* CLLoopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */; };
+		6C4702A1202AD9F900BB712F /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4702A0202AD9F900BB712F /* LinkTextView.swift */; };
+		6C4702A3202ADA2E00BB712F /* LinkTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4702A2202ADA2E00BB712F /* LinkTextModel.swift */; };
+		6C4702A6202ADAF500BB712F /* LinkText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4702A5202ADAF500BB712F /* LinkText.storyboard */; };
+		6C4702A8202ADB1000BB712F /* LinkTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */; };
 		6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */; };
 		7A5688E61F039B0C003BEC89 /* BaseCaptchaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */; };
 		7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */; };
@@ -673,6 +677,10 @@
 		6C406E0E1EFA52F10052BDA8 /* PickerTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextFieldViewController.swift; sourceTree = "<group>"; };
 		6C406E121EFA54380052BDA8 /* CLLoopView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CLLoopView.storyboard; sourceTree = "<group>"; };
 		6C406E131EFA54380052BDA8 /* CLLoopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLoopViewController.swift; sourceTree = "<group>"; };
+		6C4702A0202AD9F900BB712F /* LinkTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
+		6C4702A2202ADA2E00BB712F /* LinkTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextModel.swift; sourceTree = "<group>"; };
+		6C4702A5202ADAF500BB712F /* LinkText.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LinkText.storyboard; sourceTree = "<group>"; };
+		6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextViewController.swift; sourceTree = "<group>"; };
 		6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReflectionTool.swift; sourceTree = "<group>"; };
 		7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCaptchaImageView.swift; sourceTree = "<group>"; };
 		7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitService.swift; sourceTree = "<group>"; };
@@ -1191,6 +1199,7 @@
 		279545741E9C720B00D36D83 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C47029F202AD9F900BB712F /* LinkTextView */,
 				279545751E9C720B00D36D83 /* AlertView */,
 				279545781E9C720B00D36D83 /* Animation */,
 				2795457A1E9C720C00D36D83 /* Button */,
@@ -1513,6 +1522,7 @@
 		27959A471CD3444500546424 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6C4702A4202ADAE500BB712F /* LinkTextView */,
 				6C2F616A1F05F57E006E8521 /* H5AndNavite */,
 				6C406E111EFA54380052BDA8 /* CLLoopView */,
 				6C406E0C1EFA52F10052BDA8 /* PickerTextField */,
@@ -1803,6 +1813,24 @@
 			path = CLLoopView;
 			sourceTree = "<group>";
 		};
+		6C47029F202AD9F900BB712F /* LinkTextView */ = {
+			isa = PBXGroup;
+			children = (
+				6C4702A0202AD9F900BB712F /* LinkTextView.swift */,
+				6C4702A2202ADA2E00BB712F /* LinkTextModel.swift */,
+			);
+			path = LinkTextView;
+			sourceTree = "<group>";
+		};
+		6C4702A4202ADAE500BB712F /* LinkTextView */ = {
+			isa = PBXGroup;
+			children = (
+				6C4702A5202ADAF500BB712F /* LinkText.storyboard */,
+				6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */,
+			);
+			path = LinkTextView;
+			sourceTree = "<group>";
+		};
 		6C711D201F1F6AFF00268915 /* Reflector */ = {
 			isa = PBXGroup;
 			children = (
@@ -2049,6 +2077,7 @@
 				2795467B1E9C720C00D36D83 /* pannel_icon_email_h@2x.png in Resources */,
 				2795468A1E9C720C00D36D83 /* pannel_icon_weixin@2x.png in Resources */,
 				279546841E9C720C00D36D83 /* pannel_icon_qzone@2x.png in Resources */,
+				6C4702A6202ADAF500BB712F /* LinkText.storyboard in Resources */,
 				27CA0CCC1DD949A900462BC6 /* MKPHAsset.storyboard in Resources */,
 				2783E00E1DB626FD005E087C /* MKIndicatorButtonViewController.xib in Resources */,
 				279546731E9C720C00D36D83 /* pannel_icon_chat@2x.png in Resources */,
@@ -2487,6 +2516,7 @@
 				279546031E9C720C00D36D83 /* ImageParser.swift in Sources */,
 				279546571E9C720C00D36D83 /* GesturePassword.swift in Sources */,
 				2795469B1E9C720C00D36D83 /* SlideInPresentationController.swift in Sources */,
+				6C4702A8202ADB1000BB712F /* LinkTextViewController.swift in Sources */,
 				279546361E9C720C00D36D83 /* NetApiClient.swift in Sources */,
 				6C406E101EFA52F10052BDA8 /* PickerTextFieldViewController.swift in Sources */,
 				279546621E9C720C00D36D83 /* HQZoomView.swift in Sources */,
@@ -2530,6 +2560,7 @@
 				2795464D1E9C720C00D36D83 /* SendCodeButton.swift in Sources */,
 				2783E00F1DB626FD005E087C /* MKIQKeyboardManagerViewController.swift in Sources */,
 				2783DFFC1DB626FD005E087C /* MKChartViewController.swift in Sources */,
+				6C4702A3202ADA2E00BB712F /* LinkTextModel.swift in Sources */,
 				279546091E9C720C00D36D83 /* DocumentCache.swift in Sources */,
 				2795460D1E9C720C00D36D83 /* CrashLogEntity+CoreDataClass.swift in Sources */,
 				6C406E0B1EFA4E9B0052BDA8 /* RingedPagesViewController.swift in Sources */,
@@ -2537,6 +2568,7 @@
 				2795462F1E9C720C00D36D83 /* UINavigationItem+Extension.swift in Sources */,
 				2795465E1E9C720C00D36D83 /* MBHUDView.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
+				6C4702A1202AD9F900BB712F /* LinkTextView.swift in Sources */,
 				2795460C1E9C720C00D36D83 /* LocationManager.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				2795466F1E9C720C00D36D83 /* NumberKeyboardProtocol.swift in Sources */,

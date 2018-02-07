@@ -31,6 +31,7 @@ class MKUIViewModel: BaseListViewModel {
         self.dataArray.append(MKDataListModel(title: "RingedPages", detail: "RingedPages", route: "RingedPagesViewController", routeSB: "RingedPages"))
         self.dataArray.append(MKDataListModel(title: "PickerTextField", detail: "PickerTextField", route: "PickerTextFieldViewController", routeSB: "PickerTextField"))
         self.dataArray.append(MKDataListModel(title: "H5AndNativeDemo", detail: "H5AndNativeDemo", route: "H5AndNativeDemo", routeSB: "H5AndNative"))
+        self.dataArray.append(MKDataListModel(title: "LinkTextView", detail: "LinkTextViewController", route: "LinkTextViewController", routeSB: "LinkText"))
         
     }
 
