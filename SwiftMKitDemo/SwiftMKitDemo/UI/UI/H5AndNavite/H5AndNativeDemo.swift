@@ -26,7 +26,7 @@ class H5AndNativeDemo: BaseViewController {
     }
 
     @IBAction func toNextVC(_ sender: Any) {
-        self.route(name: "MKIndicatorButtonViewController", h5Config: ["MKIndicatorButtonViewController":"https://www.baidu.com"], params: ["title":"热修复"])
+//        self.route(toUrl: "MKIndicatorButtonViewController", params: ["title":"热修复" as AnyObject], pop: ["MKIndicatorButtonViewController":"https://www.baidu.com"])
     }
     
     @IBAction func toLocalH5(_ sender: Any) {

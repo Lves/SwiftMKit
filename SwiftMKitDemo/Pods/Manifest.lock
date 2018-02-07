@@ -11,7 +11,7 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (3.0.0):
     - CocoaLumberjack/Extensions
-  - CryptoSwift (0.6.9)
+  - CryptoSwift (0.7.2)
   - EZSwiftExtensions (1.7)
   - FDFullscreenPopGesture (1.1)
   - HanekeSwift (0.10.1)
@@ -42,7 +42,7 @@ DEPENDENCIES:
   - Aspects (~> 1.4.0)
   - Charts (~> 3.0.0)
   - CocoaLumberjack/Swift (~> 3.0.0)
-  - CryptoSwift (~> 0.6.9)
+  - CryptoSwift (~> 0.7.0)
   - EZSwiftExtensions (~> 1.7.0)
   - FDFullscreenPopGesture (~> 1.1)
   - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, branch `feature/swift-3`)
@@ -75,7 +75,7 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
-  CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
+  CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
   EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
@@ -95,6 +95,6 @@ SPEC CHECKSUMS:
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   WebViewJavascriptBridge: a4390df79bf622fc068dd035c8b5f67590c0ba05
 
-PODFILE CHECKSUM: 999944c29a7509e2287ec665399346b461467821
+PODFILE CHECKSUM: f5f21aef0922fbc06d05c31b46b1e9e243b11fec
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1
