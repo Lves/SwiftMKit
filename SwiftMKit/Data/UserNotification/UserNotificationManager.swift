@@ -60,7 +60,9 @@ open class UserNotificationManager: NSObject {
     static var settings = MutableProperty<UNNotificationSettings?>(nil)
     
     static func registerForRemoteNotifications() {
-        UIApplication.shared.registerForRemoteNotifications()
+        let _ = Async.main {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
     }
     static func requestAuthorization(_ options: UserNotificationOption, completionHandler: @escaping (Bool, Error?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions(rawValue: options.rawValue)) { (granted, error) in
