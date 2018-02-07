@@ -29,7 +29,7 @@ class LinkTextViewController: BaseViewController,LinkTextViewDelegate {
         linkView.alignment = .left
         /// 可选类型设置 end
         let linkModel1 = LinkTextModel(range: NSRange(location: 6, length: 8), textColor: UIColor.blue, url: "https://www.baidu.com")
-        let linkModel2 = LinkTextModel(range: NSRange(location: 15, length: 6), textColor: UIColor.blue, url: "https://www.jd.com")
+        let linkModel2 = LinkTextModel(range: NSRange(location: 15, length: 6), textColor: UIColor.blue, url: "https://www.jd.com",showUnderline:true)
         let linkModel3 = LinkTextModel(range: NSRange(location: 22, length: 4), textColor: UIColor.red, url: "https://www.idumiao.com", font: UIFont.systemFont(ofSize: 25),highlightedBgColor:UIColor.blue)
         //设置链接
         linkView.linkArray = [linkModel1, linkModel2, linkModel3]
