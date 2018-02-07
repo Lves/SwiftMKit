@@ -25,6 +25,8 @@ class LinkTextView: UIView {
     private var ctFrame:CTFrame?
     private lazy var attributedString:NSMutableAttributedString? = {
         let attributedString = self.content?.getAttributedString(withFont: self.font, lineSpacing: self.lineSpacing, alignment:self.alignment,textColor:self.textColor ?? UIColor.black)
+         attributedString?.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clear, range: NSRange(location: 0, length: attributedString?.length ?? 0))
+        attributedString?.addAttribute(NSUnderlineStyleAttributeName, value: 0, range: NSRange(location: 0, length: attributedString?.length ?? 0))
         if let linkList = self.linkArray{
             for linkModel in linkList{
                 if let textColor = linkModel.textColor{
@@ -33,7 +35,10 @@ class LinkTextView: UIView {
                 if let font = linkModel.font{
                     attributedString?.addAttribute(NSFontAttributeName, value: font, range: linkModel.range)
                 }
-                attributedString?.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clear, range: NSRange(location: 0, length: attributedString?.length ?? 0))
+               
+                if linkModel.showUnderline {
+                    attributedString?.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: linkModel.range)
+                }
             }
         }
         return attributedString
