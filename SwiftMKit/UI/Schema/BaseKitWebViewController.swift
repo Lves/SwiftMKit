@@ -123,6 +123,8 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     var needRefreshCallBack: WVJBResponseCallback?
     /// 标识：webView加载失败后，是否需要显示网络错误页面（如果有）
     var showBadNetworkViewWhenFail = false
+    ///跳转前用
+    var beforRouteBlock:(() -> UIViewController?)?
     
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -293,7 +295,11 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                                 self?.setObjectParams(vc: vc, paramsDic: paramsDic)
                                 self?.needBackRefresh = refresh
                                 self?.needRefreshCallBack = responseCallback
-                                self?.toNextViewController(viewController: vc, pop: pop)
+                                if let topViewController = self?.beforRouteBlock?() {
+                                      topViewController.toNextViewController(viewController: vc, pop: pop)
+                                }else {
+                                     self?.toNextViewController(viewController: vc, pop: pop)
+                                }
                             }
                         })
                     }
