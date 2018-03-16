@@ -21,10 +21,15 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         static let PannelTitleColor : UIColor = UIColor.gray
         static let BackGroundTitleColor : UIColor = UIColor.darkGray
     }
-    
-    open lazy var webView: WKWebView = {
-        return self.createWebView()
-    }()
+    weak var _webView: WKWebView?
+    var webView: WKWebView {
+        if let webV = _webView {
+            return webV
+        }
+        let webV = self.createWebView()
+        _webView = webV
+        return webV
+    }
     private func createWebView() -> WKWebView {
         
         let wkContentVc = WKUserContentController()
@@ -76,7 +81,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                 webView.evaluateJavaScript("navigator.userAgent") { [weak self] (result, error) in
                     UserDefaults.standard.register(defaults: ["UserAgent": value ?? ""])
                     if let wv = self?.createWebView() {
-                        self?.webView = wv
+                        self?._webView = wv
                         _ = self?.webViewBridge
                         self?.webView.evaluateJavaScript("navigator.userAgent", completionHandler: {_ in})
                     }
@@ -650,8 +655,8 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
 
     
     deinit {
-        webView.removeObserver(self, forKeyPath: keyPathForProgress)
-        webView.removeObserver(self, forKeyPath: keyPathForTitle)
-        webView.scrollView.delegate = nil
+        _webView?.removeObserver(self, forKeyPath: keyPathForProgress)
+        _webView?.removeObserver(self, forKeyPath: keyPathForTitle)
+        _webView?.scrollView.delegate = nil
     }
 }
