@@ -229,6 +229,20 @@ extension String {
         let rect:CGRect = text.boundingRect(with: size, options: option, attributes: attributes, context: nil)
         return rect;
     }
+    /**
+     *  获取字符串的宽度和高度
+     *
+     *  @param text:NSString
+     *  @param font:UIFont
+     *
+     *  @return CGRect
+     */
+    func textRectSize(font:UIFont,size:CGSize) -> CGRect {
+        let attributes = [NSFontAttributeName: font]
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        let rect:CGRect = self.boundingRect(with: size, options: option, attributes: attributes, context: nil)
+        return rect;
+    }
     /*
      *  url字符串拼接参数
      */
