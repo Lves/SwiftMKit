@@ -57,7 +57,7 @@ class LinkTextView: UIView {
         backgroundColor = UIColor.white
     }
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     override func draw(_ rect: CGRect) {
         //1.0 上下文
