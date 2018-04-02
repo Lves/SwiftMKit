@@ -376,6 +376,9 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
     fileprivate func getBehindString(_ string : String, range : NSRange) -> String {
         let length = string.length
         let rangeLength = length > range.location ? length - range.location : 0
+        if range.location >= length {
+            return "" //防止越界
+        }
         return self.text.toNSString.substring(with: NSMakeRange(range.location, rangeLength))
     }
     //限制两位小数逻辑处理

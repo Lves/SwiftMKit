@@ -80,7 +80,9 @@ public extension UITextField {
         let newString = text.replacingOccurrences(of: " ", with: "")
         
         if oldString as String == newString && string as String == "" {
-            range.location -= 1
+            if range.location > 0 {
+                range.location -= 1
+            }
             text = text.replacingCharacters(in: range, with: string as String).toNSString
         }
         text = text.replacingOccurrences(of: " ", with: "").toNSString
