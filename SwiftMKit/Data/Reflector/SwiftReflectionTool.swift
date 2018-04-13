@@ -3,7 +3,7 @@
 //  JimuDuMiao
 //
 //  Created by cheny on 2017/7/7.
-//  Copyright © 2017年 jm. All rights reserved.
+//  Copyright © 2017年 Pintec. All rights reserved.
 //
 
 import UIKit
