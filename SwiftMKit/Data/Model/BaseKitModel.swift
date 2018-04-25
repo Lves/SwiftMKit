@@ -40,7 +40,7 @@ class BaseKitModel: NSObject {
     }
     
     deinit {
-        print("Deinit: \(NSStringFromClass(type(of: self)))")
+//        print("Deinit: \(NSStringFromClass(type(of: self)))")
         BaseKitModelService.cache.removeAllObjects()
     }
 }
