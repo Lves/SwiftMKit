@@ -103,6 +103,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     open var disableUserSelect = false
     open var disableLongTouch = false
     open var showRefreshHeader: Bool = true
+    open var showBackgroundLab:Bool = true
     open var showNavigationBarTopLeftCloseButton: Bool = true
     open var shouldAllowRirectToUrlInView: Bool = true
     open var showNavRightToolPannelItem: Bool = true {
@@ -169,7 +170,9 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         NetApiClient.shared.startNotifyNetworkStatus()
         isTitleFixed = (self.title?.length ?? 0) > 0
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
-        self.view.addSubview(self.getBackgroundLab())
+        if showBackgroundLab {
+            self.view.addSubview(self.getBackgroundLab())
+        }
         progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.screenW, height: 0))
         progressView?.trackTintColor = UIColor.clear
         self.view.addSubview(progressView!)
