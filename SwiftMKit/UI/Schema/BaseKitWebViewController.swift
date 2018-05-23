@@ -429,9 +429,11 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         if (navigationAction.targetFrame == nil) { //新窗口打不开的bug
             webView.load(navigationAction.request)
         }
+        refreshNavigationBarTopLeftCloseButton()
         decisionHandler(ret ? .allow : .cancel)
     }
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
