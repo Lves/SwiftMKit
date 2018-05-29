@@ -34,8 +34,8 @@ public extension UIDevice {
             return ""
         }
     }
-    //VendorId 即 idfv
-    static func getVendorId() -> String{
+    //VenderId 即 idfv
+    static func getVenderId() -> String{
         return UIDevice.current.uuid
     }
     //IDFA
