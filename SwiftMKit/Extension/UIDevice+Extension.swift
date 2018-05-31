@@ -38,6 +38,9 @@ public extension UIDevice {
     static func getVenderId() -> String{
         return UIDevice.current.uuid
     }
+    static func getVendorId() -> String{
+        return getVenderId()
+    }
     //IDFA
     static func getIDFA() -> String{
         return UIDevice.current.idfa
