@@ -23,7 +23,7 @@ public class SmarterTool: NSObject {
     
     open weak var delegate: SmarterToolDelegate?
     
-    var button:JDJellyButton!
+    var button:JDJellyButton?
     
     override init() {
         super.init()
@@ -38,9 +38,12 @@ public class SmarterTool: NSObject {
     
     func attach(toView view: UIView, homeIcon: String = "icon_st_apple") {
         button = JDJellyButton()
-        button.attach(toRootView: view, mainbutton: UIImage(named: homeIcon)!)
-        button.delegate = self
-        button.datasource = self
+        button?.attach(toRootView: view, mainbutton: UIImage(named: homeIcon)!)
+        button?.delegate = self
+        button?.datasource = self
+    }
+    func removeSelf(){
+        button?.Container.removeFromSuperview()
     }
 
 }
@@ -48,7 +51,7 @@ extension SmarterTool:JellyButtonDelegate
 {
     func JellyButtonHasBeenTap(touch:UITouch,image:UIImage,groupindex:Int,arrindex:Int)
     {
-        button.MainButton.closingButtonGroup(expandagain: false)
+        button?.MainButton.closingButtonGroup(expandagain: false)
         if arrindex == 1 {
             delegate?.routeToEvnSwitch()
         } else if arrindex == 0 {
