@@ -33,7 +33,8 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     private func createWebView() -> WKWebView {
         
         let wkContentVc = WKUserContentController()
-        let cookieScript = WKUserScript(source: "", injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
+        let cookieScript = WKUserScript(source: "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, user-scalable=no'); document.getElementsByTagName('head')[0].appendChild(meta);", injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: true)
+//        let wkUScript = WKUserScript.init(source: "", injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         wkContentVc.addUserScript(cookieScript)
         let config = WKWebViewConfiguration()
         config.userContentController = wkContentVc

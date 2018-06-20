@@ -57,26 +57,26 @@ public extension UIDevice {
     var uuid: String {
         get {
             if let id = DocumentCache.shared().object(forKey: Constant.UUIDString) as? String {
-                DDLogInfo("UUID: \(id)")
+//                DDLogInfo("UUID: \(id)")
                 return id
             }
             let id = UIDevice.current.identifierForVendor?.uuidString ?? ""
             if id.length > 0 {
                 DocumentCache.shared().setObject(id as NSCoding, forKey: Constant.UUIDString)
             }
-            DDLogInfo("UUID: \(id)")
+//            DDLogInfo("UUID: \(id)")
             return id
         }
     }
     var idfa: String {
         get {
             if let id = DocumentCache.shared().object(forKey: Constant.IDFAString) as? String {
-                DDLogInfo("IDFA: \(id)")
+//                DDLogInfo("IDFA: \(id)")
                 return id
             }
             let id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
             DocumentCache.shared().setObject(id as NSCoding, forKey: Constant.IDFAString)
-            DDLogInfo("IDFA: \(id)")
+//            DDLogInfo("IDFA: \(id)")
             return id
         }
     }
