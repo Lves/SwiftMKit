@@ -74,7 +74,7 @@ class CrashLogViewController: BaseListKitViewController {
     }
 }
 
-class CrashLogViewModel: BaseListViewModel {
+class CrashLogViewModel: BaseListKitViewModel {
     override var listLoadNumber: UInt {
         return 20
     }
