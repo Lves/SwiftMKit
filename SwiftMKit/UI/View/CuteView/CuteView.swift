@@ -197,7 +197,7 @@ class CuteView: UIView {
         frontView.layer.removeAllAnimations()
     }
     
-    func handleDragGesture(_ recognizer: UIPanGestureRecognizer) {
+    @objc func handleDragGesture(_ recognizer: UIPanGestureRecognizer) {
         let dragPoint = recognizer.location(in: self.containerView)
         
         if (recognizer.state == .began) {

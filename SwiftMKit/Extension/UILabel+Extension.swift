@@ -12,7 +12,7 @@ import UIKit
 public extension UILabel {
     func addCharactersSpacing(_ spacing:CGFloat, text:String) {
         let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSMakeRange(0, text.characters.count))
+        attributedString.addAttribute(.kern, value: spacing, range: NSMakeRange(0, text.count))
         self.attributedText = attributedString
     }
 }

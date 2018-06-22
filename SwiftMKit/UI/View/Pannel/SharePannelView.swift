@@ -120,13 +120,13 @@ open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
         }
     }
     
-    dynamic var backgroundView : UIView = UIView() //背影
-    dynamic var pannelView : UIView = UIView() //面板整体
-    dynamic var boderView : UIView = UIView() //图标界面
-    dynamic var btnCancel : UIButton = UIButton(type:.custom) //取消按钮
-    dynamic var lineView : UIView = UIView() //分割线
+    @objc dynamic var backgroundView : UIView = UIView() //背影
+    @objc dynamic var pannelView : UIView = UIView() //面板整体
+    @objc dynamic var boderView : UIView = UIView() //图标界面
+    @objc dynamic var btnCancel : UIButton = UIButton(type:.custom) //取消按钮
+    @objc dynamic var lineView : UIView = UIView() //分割线
     
-    dynamic var headerView : UIView? {
+    @objc dynamic var headerView : UIView? {
         didSet{
             if let tempHeaderView = headerView {
                 tempHeaderView.removeFromSuperview()
@@ -134,7 +134,7 @@ open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
             }
         }
     }
-    dynamic var footerView : UIView? {
+    @objc dynamic var footerView : UIView? {
         didSet{
             if let tempFooterView = footerView {
                 tempFooterView.removeFromSuperview()
@@ -153,7 +153,7 @@ open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
         setupUI(frame)
     }
     
-    dynamic func setupUI(_ frame : CGRect){
+    @objc dynamic func setupUI(_ frame : CGRect){
         
         self.backgroundColor = UIColor.clear
         
@@ -232,12 +232,12 @@ open class SharePannelView: UIView ,ToolsPannelScrollViewDelegate{
     }
     
     //MARK: Action
-    dynamic func tapBackgroundView(_ gusture:UITapGestureRecognizer){
+    @objc dynamic func tapBackgroundView(_ gusture:UITapGestureRecognizer){
         self.tappedCancel()
     }
     
-    dynamic func tappedCancel(){
-        UIView.animate(withDuration: InnerConstant.TimeInterval, animations: { _ in
+    @objc dynamic func tappedCancel(){
+        UIView.animate(withDuration: InnerConstant.TimeInterval, animations: {
             
             self.backgroundView.alpha = 0
             self.pannelView.frame = CGRect(x: 0, y: self.h, width: self.pannelView.w, height: self.pannelView.h)
@@ -318,14 +318,14 @@ open class ToolsPannelScrollView: UIScrollView {
         setupUI()
     }
     
-    dynamic func setupUI() {
+    @objc dynamic func setupUI() {
         self.isUserInteractionEnabled = true
         self.backgroundColor = UIColor.clear
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
     }
     
-    dynamic static func getToolsScrollViewHeight() -> Float {
+    @objc dynamic static func getToolsScrollViewHeight() -> Float {
         let height : CGFloat = InnerConstant.OriginY + InnerConstant.IcoWidth + InnerConstant.IcoAndTitleSpace + InnerConstant.TitleLabelHeight + InnerConstant.LastlySpace
         return Float(height)
     }

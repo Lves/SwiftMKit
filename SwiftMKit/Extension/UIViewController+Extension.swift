@@ -117,7 +117,7 @@ public extension UIViewController {
             let count = self.navigationController?.viewControllers.count ?? 0
             for index in 0..<count {
                 if let viewController = self.navigationController?.viewControllers[count - 1 - index] {
-                    if viewController.className == name {
+                    if NSStringFromClass(viewController.classForCoder) == name {
                         vc = viewController
                         break
                     }
@@ -229,7 +229,7 @@ public extension UIViewController {
             let count = self.navigationController?.viewControllers.count ?? 0
             for index in 0..<count {
                 if let viewController = self.navigationController?.viewControllers[count - 1 - index] {
-                    if viewController.className == name {
+                    if NSStringFromClass(viewController.classForCoder) == name {
                         return index
                     }
                 }
@@ -242,7 +242,7 @@ public extension UIViewController {
         if let nav = self.navigationController{
             let subVcs = nav.childViewControllers
             for vc in subVcs {
-                if vc.className == name {
+                if NSStringFromClass(vc.classForCoder) == name {
                     return true
                 }
             }

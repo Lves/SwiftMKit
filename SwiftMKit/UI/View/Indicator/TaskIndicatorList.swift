@@ -45,7 +45,7 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
     }
     
     
-    func task_list_resume(notify:Notification) {
+    @objc func task_list_resume(notify:Notification) {
         DDLogVerbose("List Task resume")
         guard notify.name.rawValue.length == 0 else { //只接受本地的调用
             return
@@ -57,7 +57,7 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
             UIApplication.shared.showNetworkActivityIndicator()
         }
     }
-    func task_list_suspend(notify:Notification) {
+    @objc func task_list_suspend(notify:Notification) {
         DDLogVerbose("List Task suspend")
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if self.runningTasks.contains(task) {
@@ -68,7 +68,7 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
             }
         }
     }
-    func task_list_cancel(notify:Notification) {
+    @objc func task_list_cancel(notify:Notification) {
         DDLogVerbose("List Task cancel")
         if let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask {
             if self.runningTasks.contains(task) {
@@ -79,7 +79,7 @@ open class TaskIndicatorList: NSObject, IndicatorProtocol {
             }
         }
     }
-    func task_list_end(notify:Notification) {
+    @objc func task_list_end(notify:Notification) {
         DDLogVerbose("List Task complete")
         Async.main {
             UIApplication.shared.hideNetworkActivityIndicator()

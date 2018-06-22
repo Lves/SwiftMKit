@@ -84,7 +84,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                     if let wv = self?.createWebView() {
                         self?._webView = wv
                         _ = self?.webViewBridge
-                        self?.webView.evaluateJavaScript("navigator.userAgent", completionHandler: {_ in})
+                        self?.webView.evaluateJavaScript("navigator.userAgent", completionHandler: {_,_ in})
                     }
                 }
             }
@@ -242,7 +242,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         }
         DDLogInfo("Request url: \(urlStr)")
         //清除旧数据
-        webView.evaluateJavaScript("document.body.innerHTML='';") { [weak self] _ in
+        webView.evaluateJavaScript("document.body.innerHTML='';") { [weak self] _,_ in
             let request = URLRequest(url: urlResult)
             if let request = self?.willLoadRequest(request) {
                 self?.webView.load(request)
@@ -443,10 +443,10 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             header.endRefreshing()//结束下拉刷新
         }
         if disableUserSelect {
-            webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none';") {_ in}
+            webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none';") {_,_ in}
         }
         if disableLongTouch {
-            webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none';") {_ in}
+            webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none';") {_,_ in}
         }
         
         refreshNavigationBarTopLeftCloseButton()
@@ -539,17 +539,17 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         return labBackground
     }
     
-    open func click_nav_back(_ sender: UIBarButtonItem) {
+    @objc open func click_nav_back(_ sender: UIBarButtonItem) {
         if webView.canGoBack {
             webView.goBack()
         } else {
             self.routeBack()
         }
     }
-    open func click_nav_close(_ sender: UIBarButtonItem) {
+    @objc open func click_nav_close(_ sender: UIBarButtonItem) {
         self.routeBack()
     }
-    open func click_nav_more(_ sender: UIBarButtonItem) {
+    @objc open func click_nav_more(_ sender: UIBarButtonItem) {
         
         webViewToolsPannelView = SharePannelView(frame: CGRect(x: 0, y: 0, width: self.view.w, height: self.view.h+64))
         webViewToolsPannelView?.delegate = self

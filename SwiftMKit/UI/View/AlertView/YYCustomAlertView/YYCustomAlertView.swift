@@ -301,12 +301,12 @@ class YYCustomAlertView: UIView {
     }
     
     // Call the delegates
-    internal func buttonTouchUpInside(_ sender: UIButton!) {
+    @objc internal func buttonTouchUpInside(_ sender: UIButton!) {
         onButtonTouchUpInside?(self, sender.tag)
     }
     
     // Handle device orientation changes
-    internal func deviceOrientationDidChange(_ notification: Notification) {
+    @objc internal func deviceOrientationDidChange(_ notification: Notification) {
         let interfaceOrientation = UIApplication.shared.statusBarOrientation
         let startRotation = (self.value(forKeyPath: "layer.transform.rotation.z") as AnyObject).floatValue
         
@@ -344,7 +344,7 @@ class YYCustomAlertView: UIView {
     }
     
     // Handle keyboard show changes
-    internal func keyboardWillShow(_ notification: Notification) {
+    @objc internal func keyboardWillShow(_ notification: Notification) {
         let screenSize = self.calculateScreenSize()
         let dialogSize = self.calculateDialogSize()
         
@@ -365,7 +365,7 @@ class YYCustomAlertView: UIView {
     }
     
     // Handle keyboard hide changes
-    internal func keyboardWillHide(_ notification: Notification) {
+    @objc internal func keyboardWillHide(_ notification: Notification) {
         let screenSize = self.calculateScreenSize()
         let dialogSize = self.calculateDialogSize()
         

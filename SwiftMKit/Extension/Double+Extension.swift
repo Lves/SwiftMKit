@@ -30,3 +30,35 @@ public extension Double {
         return String(format: "%.\(decimals)f", self)
     }
 }
+
+
+precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
+infix operator ** : PowerPrecedence
+
+extension Double {
+    
+    /// EZSE: Converts Double to String
+    public var toString: String { return String(self) }
+    
+    /// EZSE: Converts Double to Int
+    public var toInt: Int { return Int(self) }
+    
+    /// EZSE: Creating the exponent operator
+    static public func ** (lhs: Double, rhs: Double) -> Double {
+        return pow(lhs, rhs)
+    }
+}
+
+// MARK: - Deprecated 1.8
+extension Double {
+    
+    /// EZSE: Absolute value of Double.
+    public var abs: Double {
+        if self > 0 {
+            return self
+        } else {
+            return -self
+        }
+    }
+    
+}

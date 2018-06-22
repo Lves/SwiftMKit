@@ -1,5 +1,5 @@
 //
-//  IQTextView.h
+// IQTextView.h
 // https://github.com/hackiftekhar/IQKeyboardManager
 // Copyright (c) 2013-16 Iftekhar Qurashi.
 //
@@ -34,6 +34,11 @@
  Set textView's placeholder text. Default is nil.
  */
 @property(nullable, nonatomic,copy) IBInspectable NSString    *placeholder;
+
+/**
+ To set textView's placeholder text color. Default is nil.
+ */
+@property(nullable, nonatomic,copy) IBInspectable UIColor    *placeholderTextColor;
 
 @end
 

@@ -91,19 +91,19 @@ public extension NSObject {
     }
     // Returns the property type
     func getTypeOfProperty (_ name: String) -> Any.Type {
-        var type: Mirror = Mirror(reflecting: self)
-        for child in type.children {
+        var mirror: Mirror = Mirror(reflecting: self)
+        for child in mirror.children {
             if child.label! == name {
-                return  type(of: child.value)
+                return type(of: child.value)
             }
         }
-        while let parent = type.superclassMirror {
+        while let parent = mirror.superclassMirror {
             for child in parent.children {
                 if child.label! == name {
                     return type(of: child.value)
                 }
             }
-            type = parent
+            mirror = parent
         }
         return NSNull.Type.self
     }

@@ -336,7 +336,7 @@ class MKTreeContainerTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor(colorLiteralRed: 35/255.0, green: 39/255.0, blue: 57/255.0, alpha: 1.0)
+        contentView.backgroundColor = UIColor(r: 35/255.0, g: 39/255.0, b: 57/255.0, a: 1.0)
         lblLeft.textColor = UIColor.lightText
         lblRight.textColor = UIColor.white
     }

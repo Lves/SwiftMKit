@@ -108,7 +108,7 @@ open class SideMenu: UIViewController, UIGestureRecognizerDelegate {
     }
     
     ///  监听滑动手势
-    func panGestureRecognized(_ recognizer: UIPanGestureRecognizer) {
+    @objc func panGestureRecognized(_ recognizer: UIPanGestureRecognizer) {
         if !interactive {
             return
         }
@@ -204,7 +204,7 @@ open class SideMenu: UIViewController, UIGestureRecognizerDelegate {
         }) 
     }
     
-    open func click_mask() {
+    @objc open func click_mask() {
         DDLogInfo("Hide Side Menu")
         if let vc = menuViewController {
             delegate?.sideMenuDidHideMenuViewController(self, menuViewController: vc)

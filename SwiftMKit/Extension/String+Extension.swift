@@ -92,7 +92,7 @@ extension String {
             hash.appendFormat("%02x", result[i])
         }
         
-        result.deallocate(capacity: digestLen)
+        result.deallocate()
         
         let encryptString = String(format: hash as String)
         
@@ -123,14 +123,14 @@ extension String {
     
     // MARK: Reverse
     func reverse() -> String {
-        return String(self.characters.reversed())
+        return String(self.reversed())
     }
     
     ///  加密手机号（186****6789）
     func encryPhoneNo() -> String {
         if self.length == 11 {
-            let startIndex = self.characters.index(self.startIndex, offsetBy: 3)
-            let endIndex = self.characters.index(startIndex, offsetBy: 4)
+            let startIndex = self.index(self.startIndex, offsetBy: 3)
+            let endIndex = self.index(startIndex, offsetBy: 4)
             let range = (startIndex ..< endIndex)
             let newPhone = self.replacingCharacters(in: range, with: "****")
             return newPhone
@@ -201,16 +201,16 @@ extension String {
     func getAttributedString(withFont font: UIFont, lineSpacing: CGFloat, alignment: NSTextAlignment? = .left,textColor:UIColor? = nil) -> NSMutableAttributedString {
         guard self.length > 0 else { return NSMutableAttributedString() }
         
-        var attributes:[String : Any] = [NSFontAttributeName:font]
+        var attributes:[NSAttributedStringKey : Any] = [.font:font]
         if let textColor =  textColor {
-            attributes[NSForegroundColorAttributeName] = textColor
+            attributes[.foregroundColor] = textColor
         }
         let attributedString = NSMutableAttributedString(string: self,
                                                          attributes:attributes)
         let style = NSMutableParagraphStyle()
         style.lineSpacing = lineSpacing
         style.alignment = alignment ?? .left
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(.paragraphStyle, value: style, range: NSMakeRange(0, attributedString.length))
         return attributedString
     }
 
@@ -224,7 +224,7 @@ extension String {
      *  @return CGRect
      */
     func getTextRectSize(text:NSString,font:UIFont,size:CGSize) -> CGRect {
-        let attributes = [NSFontAttributeName: font]
+        let attributes = [NSAttributedStringKey.font: font]
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         let rect:CGRect = text.boundingRect(with: size, options: option, attributes: attributes, context: nil)
         return rect;
@@ -238,7 +238,7 @@ extension String {
      *  @return CGRect
      */
     func textRectSize(font:UIFont,size:CGSize) -> CGRect {
-        let attributes = [NSFontAttributeName: font]
+        let attributes = [NSAttributedStringKey.font: font]
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         let rect:CGRect = self.boundingRect(with: size, options: option, attributes: attributes, context: nil)
         return rect;
@@ -282,7 +282,7 @@ extension String {
         var i = 1
         
         if self.contains("."){
-            while i < self.characters.count{
+            while i < self.count{
                 if outNumber.hasSuffix("0"){
                     outNumber.remove(at: outNumber.index(before: outNumber.endIndex))
                     i = i + 1

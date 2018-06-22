@@ -26,7 +26,7 @@ class DDLogViewController: BaseKitViewController {
     
     override func loadData() {
         super.loadData()
-        if let logger = DDLog.allLoggers().filter({ $0 is DDFileLogger }).first as? DDFileLogger {
+        if let logger = DDLog.allLoggers.filter({ $0 is DDFileLogger }).first as? DDFileLogger {
             let path = logger.currentLogFileInfo.filePath ?? ""
             let content = try? String.init(contentsOfFile: path)
             textView.text = content

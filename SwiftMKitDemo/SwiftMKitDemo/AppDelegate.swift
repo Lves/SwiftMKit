@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DemoNetworkConfig.Release = false
         DemoNetworkConfig.Evn = .product
         DDLog.setup(level: .debug)
-        DDTTYLogger.sharedInstance().logFormatter = DDLogMKitFormatter()
+        DDTTYLogger.sharedInstance.logFormatter = DDLogMKitFormatter()
         MagicalRecord.setShouldDeleteStoreOnModelMismatch(true)
         MagicalRecord.setupCoreDataStack()
         IQKeyboardManager.shared().isEnabled = true

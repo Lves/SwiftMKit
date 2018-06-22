@@ -26,7 +26,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
     lazy var dataSource: [String] = {
         var array = [String]()
         let s = "ABCDEFG"
-        for i in 0..<s.characters.count {
+        for i in 0..<s.count {
             array.append(String(s[i]))
         }
         

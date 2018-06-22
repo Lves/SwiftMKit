@@ -31,13 +31,3 @@ public struct MStack<T> {
         return array.last
     }
 }
-
-extension MStack: Sequence {
-    public func makeIterator() -> AnyIterator<T> {
-        var curr = self
-        return AnyIterator {
-            _ -> T? in
-            return curr.pop()
-        }
-    }
-}

@@ -10,7 +10,6 @@ import Foundation
 import ReactiveSwift
 import ReactiveCocoa
 import Result
-import EZSwiftExtensions
 
 public extension UITextField {
     //MARK: - 去除空格
@@ -44,7 +43,7 @@ public extension UITextField {
             return self.placeHolderColor
         }
         set {
-            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
+            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[.foregroundColor: newValue!])
         }
     }
     @IBInspectable public var placeHolderFont: UIFont? {
@@ -52,7 +51,7 @@ public extension UITextField {
             return self.placeHolderFont
         }
         set {
-            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSFontAttributeName: newValue!])
+            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[.font: newValue!])
         }
     }
     
@@ -142,8 +141,8 @@ public extension UITextField {
                 let length = self.offset(from: selectionStart, to: selectionEnd)
                 let txt = self.text ?? ""
                 let index = txt.index(txt.startIndex, offsetBy: location)
-                let splitTxt = txt.substring(to: index)
-                let list = splitTxt.split(" ")
+                let splitTxt = txt[..<index]
+                let list = splitTxt.split(separator: " ")
                 let count = list.count - 1
                 if count == 1 {
                     

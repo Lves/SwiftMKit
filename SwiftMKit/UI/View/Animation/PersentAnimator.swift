@@ -48,7 +48,7 @@ open class PersentAnimator: UIPercentDrivenInteractiveTransition {
         view.addGestureRecognizer(popRecognizer)
     }
     
-    func handlePopRecognizer(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+    @objc func handlePopRecognizer(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view?.superview)
         switch (gestureRecognizer.state) {

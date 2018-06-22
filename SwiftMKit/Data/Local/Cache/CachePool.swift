@@ -17,7 +17,7 @@ public struct CachePoolConstant {
     static let MimeType4Image = "image"
 }
 
-private class CacheModel : NSObject, NSCoding, CacheModelProtocol {
+@objc(CacheModel)private class CacheModel : NSObject, NSCoding, CacheModelProtocol {
     var key: String = ""
     var name: String = ""
     var filePath: URL?

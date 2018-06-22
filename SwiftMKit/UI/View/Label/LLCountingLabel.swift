@@ -157,7 +157,7 @@ class LLCountingLabel: UILabel {
     }
     
     
-    func updateValue(timer:Timer)  {
+    @objc func updateValue(timer:Timer)  {
         let now  = NSDate.timeIntervalSinceReferenceDate
         self.progress = (now - self.lastUpdate!) + self.progress
         self.lastUpdate = now

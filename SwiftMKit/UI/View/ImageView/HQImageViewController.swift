@@ -84,7 +84,7 @@ public class HQImageViewController: BaseKitViewController {
             scrollView.addSubview(zoomView)
         }
         
-        Async.main(after: 0.25) { _ in
+        Async.main(after: 0.25) {
             if self.imageModels.count > 1 {
                 self.pageControl.isHidden = false
             }

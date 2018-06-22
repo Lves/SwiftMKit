@@ -12,9 +12,11 @@ fileprivate let signatureCacheKey = AssociationKey<SignatureCache>()
 /// Holds the method selector cache of the runtime subclass.
 fileprivate let selectorCacheKey = AssociationKey<SelectorCache>()
 
+internal let noImplementation: IMP = unsafeBitCast(Int(0), to: IMP.self)
+
 extension Reactive where Base: NSObject {
-	/// Create a signal which sends a `next` event at the end of every invocation
-	/// of `selector` on the object.
+	/// Create a signal which sends a `next` event at the end of every 
+	/// invocation of `selector` on the object.
 	///
 	/// It completes when the object deinitializes.
 	///
@@ -24,14 +26,14 @@ extension Reactive where Base: NSObject {
 	/// - parameters:
 	///   - selector: The selector to observe.
 	///
-	/// - returns:
-	///   A trigger signal.
+	/// - returns: A trigger signal.
 	public func trigger(for selector: Selector) -> Signal<(), NoError> {
 		return base.intercept(selector).map { _ in }
 	}
 
-	/// Create a signal which sends a `next` event, containing an array of bridged
-	/// arguments, at the end of every invocation of `selector` on the object.
+	/// Create a signal which sends a `next` event, containing an array of 
+	/// bridged arguments, at the end of every invocation of `selector` on the 
+	/// object.
 	///
 	/// It completes when the object deinitializes.
 	///
@@ -41,8 +43,7 @@ extension Reactive where Base: NSObject {
 	/// - parameters:
 	///   - selector: The selector to observe.
 	///
-	/// - returns:
-	///   A signal that sends an array of bridged arguments.
+	/// - returns: A signal that sends an array of bridged arguments.
 	public func signal(for selector: Selector) -> Signal<[Any?], NoError> {
 		return base.intercept(selector).map(unpackInvocation)
 	}
@@ -55,9 +56,8 @@ extension NSObject {
 	///   - object: The object to be intercepted.
 	///   - selector: The selector of the method to be intercepted.
 	///
-	/// - returns:
-	///   A signal that sends the corresponding `NSInvocation` after every
-	///   invocation of the method.
+	/// - returns: A signal that sends the corresponding `NSInvocation` after 
+	///            every invocation of the method.
 	@nonobjc fileprivate func intercept(_ selector: Selector) -> Signal<AnyObject, NoError> {
 		guard let method = class_getInstanceMethod(objcClass, selector) else {
 			fatalError("Selector `\(selector)` does not exist in class `\(String(describing: objcClass))`.")
@@ -78,8 +78,7 @@ extension NSObject {
 			let subclass: AnyClass = swizzleClass(self)
 			let subclassAssociations = Associations(subclass as AnyObject)
 
-			// FIXME: Compiler asks to handle a mysterious throw.
-			try! ReactiveCocoa.synchronized(subclass) {
+			ReactiveCocoa.synchronized(subclass) {
 				let isSwizzled = subclassAssociations.value(forKey: interceptedKey)
 
 				let signatureCache: SignatureCache
@@ -103,7 +102,7 @@ extension NSObject {
 				selectorCache.cache(selector)
 
 				if signatureCache[selector] == nil {
-					let signature = NSMethodSignature.signature(withObjCTypes: typeEncoding)
+					let signature = NSMethodSignature.objcSignature(withObjCTypes: typeEncoding)
 					signatureCache[selector] = signature
 				}
 
@@ -119,7 +118,8 @@ extension NSObject {
 						.flatMap { $0 != _rac_objc_msgForward ? $0 : nil }
 
 					if let impl = immediateImpl {
-						class_addMethod(subclass, interopAlias, impl, typeEncoding)
+						let succeeds = class_addMethod(subclass, interopAlias, impl, typeEncoding)
+						precondition(succeeds, "RAC attempts to swizzle a selector that has message forwarding enabled with a runtime injected implementation. This is unsupported in the current version.")
 					}
 				}
 			}
@@ -129,7 +129,7 @@ extension NSObject {
 
 			// Start forwarding the messages of the selector.
 			_ = class_replaceMethod(subclass, selector, _rac_objc_msgForward, typeEncoding)
-			
+
 			return state.signal
 		}
 	}
@@ -140,7 +140,7 @@ extension NSObject {
 /// - parameters:
 ///   - realClass: The runtime subclass to be swizzled.
 private func enableMessageForwarding(_ realClass: AnyClass, _ selectorCache: SelectorCache) {
-	let perceivedClass: AnyClass = class_getSuperclass(realClass)
+	let perceivedClass: AnyClass = class_getSuperclass(realClass)!
 
 	typealias ForwardInvocationImpl = @convention(block) (Unmanaged<NSObject>, AnyObject) -> Void
 	let newForwardInvocation: ForwardInvocationImpl = { objectRef, invocation in
@@ -155,8 +155,18 @@ private func enableMessageForwarding(_ realClass: AnyClass, _ selectorCache: Sel
 			}
 		}
 
-		let method = class_getInstanceMethod(perceivedClass, selector)!
-		let typeEncoding = method_getTypeEncoding(method)
+		let method = class_getInstanceMethod(perceivedClass, selector)
+		let typeEncoding: String
+
+		if let runtimeTypeEncoding = method.flatMap(method_getTypeEncoding) {
+			typeEncoding = String(cString: runtimeTypeEncoding)
+		} else {
+			let methodSignature = (objectRef.takeUnretainedValue() as AnyObject)
+				.objcMethodSignature(for: selector)
+			let encodings = (0 ..< methodSignature.objcNumberOfArguments!)
+				.map { UInt8(methodSignature.objcArgumentType(at: $0).pointee) }
+			typeEncoding = String(bytes: encodings, encoding: .ascii)!
+		}
 
 		if class_respondsToSelector(realClass, interopAlias) {
 			// RAC has preserved an immediate implementation found in the runtime
@@ -168,15 +178,45 @@ private func enableMessageForwarding(_ realClass: AnyClass, _ selectorCache: Sel
 			//
 			// However, the IMP cache would be thrashed due to the swapping.
 
-			let interopImpl = class_getMethodImplementation(realClass, interopAlias)
-			let previousImpl = class_replaceMethod(realClass, selector, interopImpl, typeEncoding)
-			invocation.invoke()
-			_ = class_replaceMethod(realClass, selector, previousImpl, typeEncoding)
+			let topLevelClass: AnyClass = object_getClass(objectRef.takeUnretainedValue())!
+
+			// The locking below prevents RAC swizzling attempts from intervening the
+			// invocation.
+			//
+			// Given the implementation of `swizzleClass`, `topLevelClass` can only be:
+			// (1) the same as `realClass`; or (2) a subclass of `realClass`. In other
+			// words, this would deadlock only if the locking order is not followed in
+			// other nested locking scenarios of these metaclasses at compile time.
+
+			synchronized(topLevelClass) {
+				func swizzle() {
+					let interopImpl = class_getMethodImplementation(topLevelClass, interopAlias)!
+
+					let previousImpl = class_replaceMethod(topLevelClass, selector, interopImpl, typeEncoding)
+					invocation.objcInvoke()
+
+					_ = class_replaceMethod(topLevelClass, selector, previousImpl ?? noImplementation, typeEncoding)
+				}
+
+				if topLevelClass != realClass {
+					synchronized(realClass) {
+						// In addition to swapping in the implementation, the message
+						// forwarding needs to be temporarily disabled to prevent circular
+						// invocation.
+						_ = class_replaceMethod(realClass, selector, noImplementation, typeEncoding)
+						swizzle()
+						_ = class_replaceMethod(realClass, selector, _rac_objc_msgForward, typeEncoding)
+					}
+				} else {
+					swizzle()
+				}
+			}
 
 			return
 		}
 
-		if let impl = method_getImplementation(method), impl != _rac_objc_msgForward {
+		let impl: IMP = method.map(method_getImplementation) ?? _rac_objc_msgForward
+		if impl != _rac_objc_msgForward {
 			// The perceived class, or its ancestors, responds to the selector.
 			//
 			// The implementation is invoked through the selector alias, which
@@ -189,8 +229,8 @@ private func enableMessageForwarding(_ realClass: AnyClass, _ selectorCache: Sel
 				_ = class_replaceMethod(realClass, alias, impl, typeEncoding)
 			}
 
-			invocation.setSelector(alias)
-			invocation.invoke()
+			invocation.objcSetSelector(alias)
+			invocation.objcInvoke()
 
 			return
 		}
@@ -199,8 +239,8 @@ private func enableMessageForwarding(_ realClass: AnyClass, _ selectorCache: Sel
 		// inheritance hierarchy, or the default handler returned by the runtime
 		// if it finds no implementation.
 		typealias SuperForwardInvocation = @convention(c) (Unmanaged<NSObject>, Selector, AnyObject) -> Void
-		let impl = class_getMethodImplementation(perceivedClass, ObjCSelector.forwardInvocation)
-		let forwardInvocation = unsafeBitCast(impl, to: SuperForwardInvocation.self)
+		let forwardInvocationImpl = class_getMethodImplementation(perceivedClass, ObjCSelector.forwardInvocation)
+		let forwardInvocation = unsafeBitCast(forwardInvocationImpl, to: SuperForwardInvocation.self)
 		forwardInvocation(objectRef, ObjCSelector.forwardInvocation, invocation)
 	}
 
@@ -217,7 +257,7 @@ private func enableMessageForwarding(_ realClass: AnyClass, _ selectorCache: Sel
 ///   - realClass: The runtime subclass to be swizzled.
 ///   - signatureCache: The method signature cache.
 private func setupMethodSignatureCaching(_ realClass: AnyClass, _ signatureCache: SignatureCache) {
-	let perceivedClass: AnyClass = class_getSuperclass(realClass)
+	let perceivedClass: AnyClass = class_getSuperclass(realClass)!
 
 	let newMethodSignatureForSelector: @convention(block) (Unmanaged<NSObject>, Selector) -> AnyObject? = { objectRef, selector in
 		if let signature = signatureCache[selector] {
@@ -331,8 +371,7 @@ private final class SignatureCache {
 /// - parameters:
 ///   - types: The type encoding C string of the method.
 ///
-/// - returns:
-///   `true`.
+/// - returns: `true`.
 private func checkTypeEncoding(_ types: UnsafePointer<CChar>) -> Bool {
 	// Some types, including vector types, are not encoded. In these cases the
 	// signature starts with the size of the argument frame.
@@ -353,19 +392,18 @@ private func checkTypeEncoding(_ types: UnsafePointer<CChar>) -> Bool {
 /// - parameters:
 ///   - invocation: The `NSInvocation` to unpack.
 ///
-/// - returns:
-///   An array of objects.
+/// - returns: An array of objects.
 private func unpackInvocation(_ invocation: AnyObject) -> [Any?] {
 	let invocation = invocation as AnyObject
 	let methodSignature = invocation.objcMethodSignature!
-	let count = UInt(methodSignature.numberOfArguments!)
+	let count = methodSignature.objcNumberOfArguments!
 
 	var bridged = [Any?]()
 	bridged.reserveCapacity(Int(count - 2))
 
 	// Ignore `self` and `_cmd` at index 0 and 1.
 	for position in 2 ..< count {
-		let rawEncoding = methodSignature.argumentType(at: position)
+		let rawEncoding = methodSignature.objcArgumentType(at: position)
 		let encoding = ObjCTypeEncoding(rawValue: rawEncoding.pointee) ?? .undefined
 
 		func extract<U>(_ type: U.Type) -> U {
@@ -376,7 +414,7 @@ private func unpackInvocation(_ invocation: AnyObject) -> [Any?] {
 				                   alignedTo: MemoryLayout<U>.alignment)
 			}
 
-			invocation.copy(to: pointer, forArgumentAt: Int(position))
+			invocation.objcCopy(to: pointer, forArgumentAt: Int(position))
 			return pointer.assumingMemoryBound(to: type).pointee
 		}
 
@@ -421,7 +459,7 @@ private func unpackInvocation(_ invocation: AnyObject) -> [Any?] {
 			let buffer = UnsafeMutableRawPointer.allocate(bytes: size, alignedTo: alignment)
 			defer { buffer.deallocate(bytes: size, alignedTo: alignment) }
 
-			invocation.copy(to: buffer, forArgumentAt: Int(position))
+			invocation.objcCopy(to: buffer, forArgumentAt: Int(position))
 			value = NSValue(bytes: buffer, objCType: rawEncoding)
 		}
 

@@ -186,7 +186,7 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
         self.routeBack()
     }
     @IBAction func click_last(_ sender: UIButton) {
-        var index = dataArray.indexesOf(asset!).first!
+        var index = dataArray.index(of: asset!)!
         index = max(index - 1, 0)
         let video = dataArray[index]
         playAsset(video)
@@ -200,7 +200,7 @@ class MKPHAssetVideoDetailViewController: BaseViewController {
 //        player.delayToolBarHidden()
     }
     @IBAction func click_next(_ sender: UIButton) {
-        var index = dataArray.indexesOf(asset!).first!
+        var index = dataArray.index(of: asset!)!
         index = min(index + 1, dataArray.count - 1)
         let video = dataArray[index]
         playAsset(video)

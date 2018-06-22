@@ -111,17 +111,17 @@ class MKQuestionCollectionViewCell: UICollectionViewCell, UITableViewDelegate, U
     fileprivate func headerViewHeightWithText(_ text:String) -> CGFloat {
         let font = UIFont.systemFont(ofSize: InnerConst.QuestionFontOfSize)
         let labelW: CGFloat = listView.size.width - 20.0
-        let rect: CGRect = text.boundingRect(with: CGSize(width: labelW, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading] , attributes: [NSFontAttributeName: font] , context: nil)
+        let rect: CGRect = text.boundingRect(with: CGSize(width: labelW, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading] , attributes: [.font: font] , context: nil)
         return rect.height+50.0
     }
     
     fileprivate func cellHeightWithText(_ text:String) -> CGFloat {
         var font = UIFont.systemFont(ofSize: 14)
         if #available(iOS 8.2, *) {
-            font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightLight)
+            font = UIFont.systemFont(ofSize: 14, weight: .light)
         }
         let labelW: CGFloat = listView.size.width - 31.0
-        let rect: CGRect = text.boundingRect(with: CGSize(width: labelW, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading] , attributes: [NSFontAttributeName:font] , context: nil)
+        let rect: CGRect = text.boundingRect(with: CGSize(width: labelW, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading] , attributes: [.font:font] , context: nil)
         return rect.height + 30.0
     }
     

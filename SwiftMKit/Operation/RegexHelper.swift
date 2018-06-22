@@ -16,7 +16,7 @@ struct RegexHelper {
     }
     
     func match(_ input: String) -> Bool {
-        let matches = regex.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
+        let matches = regex.matches(in: input, options: [], range: NSMakeRange(0, input.count))
         return matches.count > 0
     }
 }

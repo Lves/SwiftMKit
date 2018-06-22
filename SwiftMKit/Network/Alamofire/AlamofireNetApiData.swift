@@ -78,7 +78,7 @@ open class AlamofireNetApiData: NetApiData {
                     sink.send(error: err)
                 }
             }
-            disposable.add { [weak self] in
+            disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
             }
@@ -127,7 +127,7 @@ open class AlamofireNetApiData: NetApiData {
                     sink.send(error: err)
                 }
             }
-            disposable.add { [weak self] in
+            disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
             }
@@ -178,7 +178,7 @@ open class AlamofireNetApiData: NetApiData {
                     sink.send(error: err)
                 }
             }
-            disposable.add { [weak self] in
+            disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
             }
@@ -273,7 +273,7 @@ open class AlamofireNetApiData: NetApiData {
 
                 
             })
-            disposable.add { [weak self] in
+            disposable.observeEnded { [weak self] in
                 task.suspend()
                 NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
                 guard let wself = self else { return }
@@ -329,7 +329,7 @@ open class AlamofireNetApiData: NetApiData {
                     sink.send(error: err)
                 }
             }
-            disposable.add { [weak self] in
+            disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
                 NetApiData.removeApi(wself)
             }

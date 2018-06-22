@@ -11,9 +11,9 @@ import UIKit
 
 open class SendCodeButton: UIButton {
     fileprivate var timer: Timer?
-    fileprivate var stopTime: Int = 0
+    fileprivate var stopTime: Double = 0
     
-    open var countDownSeconds: Int = 60
+    open var countDownSeconds: Double = 60
     open var timeupTitle: String = "重新获取"
     var selectedSubffix:String = "秒后可重发"
     
@@ -27,11 +27,11 @@ open class SendCodeButton: UIButton {
     open func countDown() {
         countDown(countDownSeconds)
     }
-    open func countDown(_ seconds: Int) {
+    open func countDown(_ seconds: Double) {
         stop()
         self.isSelected = true
         self.isUserInteractionEnabled = false
-        self.stopTime = Date().timeIntervalSince1970.toInt + seconds
+        self.stopTime = Date().timeIntervalSince1970.advanced(by: seconds)
         self.showRemainSecond()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SendCodeButton.timerCountDown), userInfo: nil, repeats: true)
     }
@@ -44,11 +44,11 @@ open class SendCodeButton: UIButton {
     }
     
     fileprivate func showRemainSecond() {
-        let now = Date().timeIntervalSince1970.toInt
+        let now = Date().timeIntervalSince1970.advanced(by: 0)
         setTitle("\(stopTime - now)\(selectedSubffix)", for: .selected)
     }
     @objc fileprivate func timerCountDown() {
-        let now = Date().timeIntervalSince1970.toInt
+        let now = Date().timeIntervalSince1970.advanced(by: 0)
         if now > stopTime {
             stop()
             setTitle(timeupTitle, for: UIControlState())

@@ -44,7 +44,7 @@ class CrashLogViewController: BaseListKitViewController {
         _viewModel.fetchData()
     }
     
-    func clear() {
+    @objc func clear() {
         let alert = UIAlertController(title: "确认", message: "确定要清空所有崩溃日志？", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "清空", style: .destructive, handler: { [weak self] _ in
             LocalCrashLogReporter.shared.clean()

@@ -189,7 +189,7 @@ class MKCoverFlowViewController: BaseViewController , UICollectionViewDelegate ,
         
     }
     
-    func btnCompleteClick(_ sender: UIButton) {
+    @objc func btnCompleteClick(_ sender: UIButton) {
         if sender.tag == questions.count - 1 {
             if answeredCount == questions.count {
                 showTip("提交成功")

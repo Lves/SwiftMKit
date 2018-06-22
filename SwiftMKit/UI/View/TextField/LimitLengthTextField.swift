@@ -11,7 +11,7 @@ import Foundation
 
 public class UITextFieldMaxLengthObserver: NSObject {
     
-    public func textChanged(textField: UITextField) {
+    @objc public func textChanged(textField: UITextField) {
         let destText = textField.text
         let maxLength = textField.maxLength
         if let destText = destText {

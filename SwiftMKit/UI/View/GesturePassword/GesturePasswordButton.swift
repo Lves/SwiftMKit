@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import EZSwiftExtensions
 
 @IBDesignable
 open class GesturePasswordButton: UIView {

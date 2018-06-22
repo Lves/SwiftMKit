@@ -101,16 +101,16 @@ open class BaseKitViewController : UIViewController {
 
 public extension UIViewController {
     
-    public func showTip(_ tip: String, completion : @escaping () -> Void = {}) {
+    @objc public func showTip(_ tip: String, completion : @escaping () -> Void = {}) {
         showTip(tip, view: self.view, completion: completion)
     }
-    public func showTip(_ tip: String, duration: TimeInterval, completion : @escaping () -> Void = {}) {
+    @objc public func showTip(_ tip: String, duration: TimeInterval, completion : @escaping () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: duration, offset: nil, completion: completion)
     }
-    public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
+    @objc public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
     }
-    public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
+    @objc public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
         MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
     }
     public func showLoading(_ text: String = "", detailText: String = "") {

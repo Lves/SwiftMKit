@@ -10,7 +10,28 @@ fileprivate let lifetimeKey = AssociationKey<Lifetime?>(default: nil)
 /// Holds the `Lifetime.Token` of the object.
 fileprivate let lifetimeTokenKey = AssociationKey<Lifetime.Token?>(default: nil)
 
-extension Reactive where Base: NSObject {
+internal func lifetime(of object: AnyObject) -> Lifetime {
+	if let object = object as? NSObject {
+		return object.reactive.lifetime
+	}
+
+	return synchronized(object) {
+		let associations = Associations(object)
+
+		if let lifetime = associations.value(forKey: lifetimeKey) {
+			return lifetime
+		}
+
+		let (lifetime, token) = Lifetime.make()
+
+		associations.setValue(token, forKey: lifetimeTokenKey)
+		associations.setValue(lifetime, forKey: lifetimeKey)
+
+		return lifetime
+	}
+}
+
+extension Reactive where Base: AnyObject & NSObjectProtocol {
 	/// Returns a lifetime that ends when the object is deallocated.
 	@nonobjc public var lifetime: Lifetime {
 		return base.synchronized {
@@ -23,7 +44,11 @@ extension Reactive where Base: NSObject {
 			let objcClass: AnyClass = (base as AnyObject).objcClass
 			let objcClassAssociations = Associations(objcClass as AnyObject)
 
+			#if swift(>=4.0)
+			let deallocSelector = sel_registerName("dealloc")
+			#else
 			let deallocSelector = sel_registerName("dealloc")!
+			#endif
 
 			// Swizzle `-dealloc` so that the lifetime token is released at the
 			// beginning of the deallocation chain, and only after the KVO `-dealloc`.
@@ -49,8 +74,8 @@ extension Reactive where Base: NSObject {
 						if let existingImpl = existingImpl {
 							impl = existingImpl
 						} else {
-							let superclass: AnyClass = class_getSuperclass(objcClass)
-							impl = class_getMethodImplementation(superclass, deallocSelector)
+							let superclass: AnyClass = class_getSuperclass(objcClass)!
+							impl = class_getMethodImplementation(superclass, deallocSelector)!
 						}
 
 						typealias Impl = @convention(c) (UnsafeRawPointer, Selector) -> Void
@@ -61,7 +86,7 @@ extension Reactive where Base: NSObject {
 
 					if !class_addMethod(objcClass, deallocSelector, newImpl, "v@:") {
 						// The class has an existing `dealloc`. Preserve that as `existingImpl`.
-						let deallocMethod = class_getInstanceMethod(objcClass, deallocSelector)
+						let deallocMethod = class_getInstanceMethod(objcClass, deallocSelector)!
 
 						// Store the existing implementation to `existingImpl` to ensure it is
 						// available before our version is swapped in.

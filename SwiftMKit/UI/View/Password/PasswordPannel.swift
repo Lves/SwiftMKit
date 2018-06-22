@@ -108,9 +108,9 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         coverView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan)))
     }
     
-    func pan() {}
+    @objc func pan() {}
     
-    func removePanel() {
+    @objc func removePanel() {
         self.removeFromSuperview()
         self.coverView.removeFromSuperview()
     }

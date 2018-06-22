@@ -23,17 +23,23 @@ extension NSObject {
 	internal func swizzle(_ pairs: (Selector, Any)..., key hasSwizzledKey: AssociationKey<Bool>) {
 		let subclass: AnyClass = swizzleClass(self)
 
-		try! ReactiveCocoa.synchronized(subclass) {
+		ReactiveCocoa.synchronized(subclass) {
 			let subclassAssociations = Associations(subclass as AnyObject)
 
 			if !subclassAssociations.value(forKey: hasSwizzledKey) {
 				subclassAssociations.setValue(true, forKey: hasSwizzledKey)
 
 				for (selector, body) in pairs {
-					let method = class_getInstanceMethod(subclass, selector)
+					let method = class_getInstanceMethod(subclass, selector)!
 					let typeEncoding = method_getTypeEncoding(method)!
 
-					class_replaceMethod(subclass, selector, imp_implementationWithBlock(body), typeEncoding)
+					if method_getImplementation(method) == _rac_objc_msgForward {
+						let succeeds = class_addMethod(subclass, selector.interopAlias, imp_implementationWithBlock(body), typeEncoding)
+						precondition(succeeds, "RAC attempts to swizzle a selector that has message forwarding enabled with a runtime injected implementation. This is unsupported in the current version.")
+					} else {
+						let succeeds = class_addMethod(subclass, selector, imp_implementationWithBlock(body), typeEncoding)
+						precondition(succeeds, "RAC attempts to swizzle a selector that has already a runtime injected implementation. This is unsupported in the current version.")
+					}
 				}
 			}
 		}
@@ -53,8 +59,7 @@ extension NSObject {
 /// - parameters:
 ///   - instance: The instance to be swizzled.
 ///
-/// - returns:
-///   The runtime subclass of the perceived class of the instance.
+/// - returns: The runtime subclass of the perceived class of the instance.
 internal func swizzleClass(_ instance: NSObject) -> AnyClass {
 	if let knownSubclass = instance.associations.value(forKey: knownRuntimeSubclassKey) {
 		return knownSubclass
@@ -105,7 +110,7 @@ private func subclassName(of class: AnyClass) -> String {
 ///   - class: The class to swizzle.
 ///   - perceivedClass: The class to be reported by the methods.
 private func replaceGetClass(in class: AnyClass, decoy perceivedClass: AnyClass) {
-	let getClass: @convention(block) (Any) -> AnyClass = { _ in
+	let getClass: @convention(block) (UnsafeRawPointer?) -> AnyClass = { _ in
 		return perceivedClass
 	}
 

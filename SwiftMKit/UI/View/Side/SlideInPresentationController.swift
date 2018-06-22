@@ -118,7 +118,7 @@ extension SlideInPresentationController {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         dimmingView.addGestureRecognizer(recognizer)
     }
-    func handleTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
         presentingViewController.dismissVC(completion: nil)
     }
 }

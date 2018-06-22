@@ -136,7 +136,7 @@ class SwiftReflectionTool: NSObject {
         return name as String
     }
     fileprivate class func getTypeOf(property: objc_property_t) -> Any {
-        guard let attributesAsNSString: NSString = NSString(utf8String: property_getAttributes(property)) else { return Any.self }
+        guard let attributesAsNSString: NSString = NSString(utf8String: property_getAttributes(property)!) else { return Any.self }
         let attributes = attributesAsNSString as String
         let slices = attributes.components(separatedBy: "\"")
         guard slices.count > 1 else { return valueType(withAttributes: attributes) }
@@ -185,6 +185,6 @@ class SwiftReflectionTool: NSObject {
 private extension String {
     func substring(from fromIndex: Int, to toIndex: Int) -> String? {
         let substring = self[self.index(self.startIndex, offsetBy: fromIndex)..<self.index(self.startIndex, offsetBy: toIndex)]
-        return substring
+        return String(substring)
     }
 }

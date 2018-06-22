@@ -54,7 +54,7 @@ class MKOrderTableViewCell: UITableViewCell {
     func setCustomImageViewCenter(_ pt: CGPoint, alpha: CGFloat, animated: Bool) {
         if animated {
             let options = UIViewAnimationOptions.curveEaseOut
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: options, animations: { [weak self] _ in
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: options, animations: { [weak self] in
                 self?.imgEdit.center = pt
                 self?.imgEdit.alpha = alpha
                 }, completion: nil)

@@ -36,7 +36,7 @@ class HQImageView: UIImageView {
         self.addGestureRecognizer(tap)
     }
     
-    func showHighQualityImage(recoginzer: UITapGestureRecognizer) {
+    @objc func showHighQualityImage(recoginzer: UITapGestureRecognizer) {
         if recoginzer.numberOfTouches != 1 {
             return
         }
@@ -46,7 +46,7 @@ class HQImageView: UIImageView {
             }.map{
                 ($0 as! HQImageView).imageViewHighQualitySrc!
             }
-        let index = imageUrls?.indexesOf(imageViewHighQualitySrc ?? "").first ?? 0
+        let index = imageUrls?.index(of: imageViewHighQualitySrc ?? "") ?? 0
         
         let imageModels : [HQImageModel] = (self.superview?.subviews
             .filter {

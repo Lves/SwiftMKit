@@ -71,7 +71,7 @@ open class PasswordTextView : UIView, UITextFieldDelegate {
             borderWidth = 0.5
         }
     }
-    func active() {
+    @objc func active() {
         inputTextField.becomeFirstResponder()
     }
     func inactive() {
@@ -99,9 +99,9 @@ open class PasswordTextView : UIView, UITextFieldDelegate {
             let centerX = floatIndex + floatIndex * rectangleWidth + rectangleWidth/2
             let centerY = rectangleHeight/2
             if self.isShow {
-                let textAttribute = [NSForegroundColorAttributeName: textColor,
-                                            NSFontAttributeName: textFont] as [String : Any]
-                let strSize = string.size(attributes: textAttribute)
+                let textAttribute:[NSAttributedStringKey: Any] = [NSAttributedStringKey.foregroundColor: textColor,
+                                            NSAttributedStringKey.font: textFont]
+                let strSize = string.size(withAttributes: textAttribute)
                 let center = CGPoint(x: centerX - strSize.width/2, y: centerY - strSize.height/2)
                 string.draw(at: center, withAttributes: textAttribute)
             } else {

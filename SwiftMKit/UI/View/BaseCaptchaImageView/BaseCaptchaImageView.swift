@@ -35,7 +35,7 @@ open class BaseCaptchaImageView: UIButton {
         return nil
     }
     
-    func refresh() {
+    @objc func refresh() {
         setTitle("", for: UIControlState())
         indicator.startAnimating()
         setBackgroundImage(nil, for: UIControlState())

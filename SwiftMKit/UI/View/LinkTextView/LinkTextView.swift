@@ -25,19 +25,19 @@ class LinkTextView: UIView {
     private var ctFrame:CTFrame?
     private lazy var attributedString:NSMutableAttributedString? = {
         let attributedString = self.content?.getAttributedString(withFont: self.font, lineSpacing: self.lineSpacing, alignment:self.alignment,textColor:self.textColor ?? UIColor.black)
-         attributedString?.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clear, range: NSRange(location: 0, length: attributedString?.length ?? 0))
-        attributedString?.addAttribute(NSUnderlineStyleAttributeName, value: 0, range: NSRange(location: 0, length: attributedString?.length ?? 0))
+         attributedString?.addAttribute(.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: attributedString?.length ?? 0))
+        attributedString?.addAttribute(.underlineStyle, value: 0, range: NSRange(location: 0, length: attributedString?.length ?? 0))
         if let linkList = self.linkArray{
             for linkModel in linkList{
                 if let textColor = linkModel.textColor{
-                    attributedString?.addAttribute(NSForegroundColorAttributeName, value: textColor, range: linkModel.range)
+                    attributedString?.addAttribute(.foregroundColor, value: textColor, range: linkModel.range)
                 }
                 if let font = linkModel.font{
-                    attributedString?.addAttribute(NSFontAttributeName, value: font, range: linkModel.range)
+                    attributedString?.addAttribute(.font, value: font, range: linkModel.range)
                 }
                
                 if linkModel.showUnderline {
-                    attributedString?.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: linkModel.range)
+                    attributedString?.addAttribute(.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: linkModel.range)
                 }
             }
         }
@@ -160,12 +160,12 @@ class LinkTextView: UIView {
     }
     func updateBackgroundColor(linkData:LinkTextModel)  {
         if let hBgColor = linkData.highlightedBgColor {
-            attributedString?.addAttribute(NSBackgroundColorAttributeName, value: hBgColor, range: linkData.range)
+            attributedString?.addAttribute(.backgroundColor, value: hBgColor, range: linkData.range)
             setNeedsDisplay()
         }
     }
     func removeBackgroundColor(linkData:LinkTextModel) {
-        attributedString?.removeAttribute(NSBackgroundColorAttributeName, range: linkData.range)
+        attributedString?.removeAttribute(.backgroundColor, range: linkData.range)
         setNeedsDisplay()
     }
     

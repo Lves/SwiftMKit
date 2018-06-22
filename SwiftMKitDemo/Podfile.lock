@@ -1,100 +1,107 @@
 PODS:
-  - Alamofire (4.2.0)
+  - Alamofire (4.7.2)
   - Aspects (1.4.1)
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
-  - CocoaLumberjack/Core (3.0.0)
-  - CocoaLumberjack/Default (3.0.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (3.0.0):
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Swift (3.4.2):
     - CocoaLumberjack/Default
-  - CocoaLumberjack/Swift (3.0.0):
-    - CocoaLumberjack/Extensions
-  - CryptoSwift (0.7.2)
-  - EZSwiftExtensions (1.7)
+  - CryptoSwift (0.10.0)
   - FDFullscreenPopGesture (1.1)
-  - HanekeSwift (0.10.1)
-  - IQKeyboardManager (4.0.9)
-  - JSPatch (1.1.3):
-    - JSPatch/Core (= 1.1.3)
-  - JSPatch/Core (1.1.3)
+  - HanekeSwift (1.1)
+  - IQKeyboardManager (6.0.4)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
-  - MBProgressHUD (1.0.0)
-  - MJExtension (3.0.13)
-  - MJRefresh (3.1.12)
+  - MBProgressHUD (1.1.0)
+  - MJExtension (3.0.15)
+  - MJRefresh (3.1.15.3)
   - PINCache (2.3)
-  - pop (1.0.9)
-  - PulsingHalo (0.2.5)
-  - ReachabilitySwift (3)
-  - ReactiveCocoa (5.0.2):
-    - ReactiveSwift (~> 1.1)
-  - ReactiveSwift (1.1.1):
+  - pop (1.0.10)
+  - PulsingHalo (0.2.8)
+  - ReactiveCocoa (7.2.0):
+    - ReactiveSwift (~> 3.1)
+  - ReactiveSwift (3.1.0):
     - Result (~> 3.2)
-  - Result (3.2.1)
-  - SnapKit (3.0.2)
-  - WebViewJavascriptBridge (5.0.9)
+  - Result (3.2.4)
+  - SnapKit (4.0.0)
+  - WebViewJavascriptBridge (6.0.3)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.2.0)
+  - Alamofire (~> 4.7.0)
   - Aspects (~> 1.4.0)
-  - Charts (~> 3.0.0)
-  - CocoaLumberjack/Swift (~> 3.0.0)
-  - CryptoSwift (~> 0.7.0)
-  - EZSwiftExtensions (~> 1.7.0)
+  - Charts (~> 3.1.0)
+  - CocoaLumberjack/Swift (~> 3.4.0)
+  - CryptoSwift (~> 0.10.0)
   - FDFullscreenPopGesture (~> 1.1)
-  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, branch `feature/swift-3`)
-  - IQKeyboardManager (~> 4.0.0)
-  - JSPatch (~> 1.1.0)
+  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`, commit `500aece`)
+  - IQKeyboardManager (~> 6.0.0)
   - MagicalRecord (~> 2.3.0)
-  - MBProgressHUD (~> 1.0.0)
+  - MBProgressHUD (~> 1.1.0)
   - MJExtension (~> 3.0.0)
   - MJRefresh (~> 3.1.0)
   - PINCache (~> 2.3.0)
   - pop (~> 1.0.0)
   - PulsingHalo (~> 0.2.0)
-  - ReachabilitySwift (~> 3)
-  - ReactiveCocoa (~> 5.0.0)
-  - SnapKit (~> 3.0.0)
-  - WebViewJavascriptBridge (~> 5.0.0)
+  - ReactiveCocoa (~> 7.2.0)
+  - SnapKit (~> 4.0.0)
+  - WebViewJavascriptBridge (~> 6.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Aspects
+    - Charts
+    - CocoaLumberjack
+    - CryptoSwift
+    - FDFullscreenPopGesture
+    - IQKeyboardManager
+    - MagicalRecord
+    - MBProgressHUD
+    - MJExtension
+    - MJRefresh
+    - PINCache
+    - pop
+    - PulsingHalo
+    - ReactiveCocoa
+    - ReactiveSwift
+    - Result
+    - SnapKit
+    - WebViewJavascriptBridge
 
 EXTERNAL SOURCES:
   HanekeSwift:
-    :branch: feature/swift-3
-    :git: https://github.com/Haneke/HanekeSwift
+    :commit: 500aece
+    :git: https://github.com/Haneke/HanekeSwift.git
 
 CHECKOUT OPTIONS:
   HanekeSwift:
-    :commit: 1157a124ec699f4ad926cb054f1d0bfce88ae7a9
-    :git: https://github.com/Haneke/HanekeSwift
+    :commit: 500aece
+    :git: https://github.com/Haneke/HanekeSwift.git
 
 SPEC CHECKSUMS:
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
-  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
-  CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
-  EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
-  IQKeyboardManager: 322c7405df3eb5f7e50dede32ea937bf3d4364e0
-  JSPatch: 02cfed591cb907bbfe80a346666e5a35fc2d349d
+  HanekeSwift: cb662a1f22b10ff3ff1d7b5030ae451da5d93831
+  IQKeyboardManager: 29514134ef0334a6fa33cf4eee11c36c064baeaf
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  MJExtension: 5932755f451458eefa24239358817f8d291240c7
-  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJExtension: 3f039575db1b135a20699ad298713b26acec1528
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
-  PulsingHalo: cddcc388293326ccc6cfc9af1abff27434035bb5
-  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  ReactiveCocoa: 17bc0968fd6c69c72dba8b272bc3c4700a0d3ea3
-  ReactiveSwift: 2489549e3231a6ff68ec99f3d320bb264f10ba0a
-  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
-  WebViewJavascriptBridge: a4390df79bf622fc068dd035c8b5f67590c0ba05
+  pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  PulsingHalo: 64938e4bd3893b823abdf01478084cd92445af2b
+  ReactiveCocoa: 476dae7ca790f40d30d186a1bd7ebae4290395d5
+  ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
 
-PODFILE CHECKSUM: f5f21aef0922fbc06d05c31b46b1e9e243b11fec
+PODFILE CHECKSUM: 65a5ca0bf1b0cade0435fc2eb765b7dec1d218c2
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

@@ -15,8 +15,8 @@ public extension Action {
     public func bindEnabled(_ button: UIButton) {
         self.privateCocoaAction.isEnabled.producer.startWithValues { enabled in
             button.isEnabled = enabled
-            button.viewController?.view.isUserInteractionEnabled = enabled
-            button.viewController?.view.endEditing(false)
+            button.viewContainingController?.view.isUserInteractionEnabled = enabled
+            button.viewContainingController?.view.endEditing(false)
         }
     }
     public var toCocoaAction: CocoaAction<Any> {
