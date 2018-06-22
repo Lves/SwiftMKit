@@ -24,7 +24,7 @@ open class BaseCaptchaImageView: UIButton {
         setTitle("", for: UIControlState())
         isUserInteractionEnabled = true
         self.addTarget(self, action: #selector(BaseCaptchaImageView.refresh), for: .touchUpInside)
-        indicator.center = self.center
+        indicator.center = CGPoint(x: self.w * 0.5, y: self.h * 0.5)
         indicator.hidesWhenStopped = true
         indicator.isHidden = false
         self.addSubview(indicator)
