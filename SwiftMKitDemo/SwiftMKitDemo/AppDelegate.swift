@@ -31,9 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MagicalRecord.setupCoreDataStack()
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().shouldResignOnTouchOutside = true
-        NetApiClient.shared.startNotifyNetworkStatus()
-        // debug时可显示加密库的log
-//        EncryptedNetworkManager.setShowLog(true)
+        NetworkListener.listen()
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = UserNotificationManager.sharedInstance
             MKUserNotificationViewController.registerNotificationCategory()

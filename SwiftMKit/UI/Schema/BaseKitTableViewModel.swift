@@ -14,7 +14,7 @@ import MJRefresh
 
 open class BaseKitTableViewModel: NSObject {
     open weak var viewController: BaseKitTableViewController!
-    open var hud: HUDProtocol {
+    open var hud: HudProtocol {
         get { return self.viewController.hud }
     }
     open var indicator: IndicatorProtocol {
@@ -123,16 +123,16 @@ extension BaseKitTableViewModel {
         showTip(tip, view: self.view, completion: completion)
     }
     public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
-        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
+        MBHud.shared.showTip(inView: view, text: tip, image: image, animated: true, completion: completion)
     }
     public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
-        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
+        MBHud.shared.showTip(inView: view, text: tip, offset: offset, animated: true, completion: completion)
     }
     public func showLoading(_ text: String = "") {
-        viewController.showLoading(text)
+        viewController.showIndicator(inView: viewController.view, text: text)
     }
     public func showLoading(_ text: String, view: UIView) {
-        viewController.showLoading(text, view: view)
+        viewController.showIndicator(inView: view, text: text)
     }
     public func hideLoading() {
         viewController.hideLoading()

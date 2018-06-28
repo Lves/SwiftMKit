@@ -28,33 +28,31 @@ extension DataResponse {
 open class AlamofireNetApiData: NetApiData {
     
     open func transferParameterEncoding() -> ParameterEncoding { return URLEncoding.default }
-    open override func transferURLRequest(_ request:URLRequest) -> URLRequest {
+    open override func transfer(request: URLRequest) -> URLRequest {
         let encoding = transferParameterEncoding()
         let mutableURLRequest = try! encoding.encode(request, with: query)
         return mutableURLRequest
     }
     
     // MARK: Request
-    open override func requestJSON() -> SignalProducer<NetApiProtocol, NetError> {
-        NetApiData.addApi(self)
+    open override func requestJson() -> SignalProducer<NetApiProtocol, NetError> {
+        NetApiMetric.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
-            let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.request(urlRequest)
-            self.request = request
-            self.indicator?.bindTask(request.task!)
+            let request = Alamofire.request(self.createURLRequest())
+            self.task = request.task
             let timeBegin = Date()
             request.responseJSON { [weak self] response in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
                 DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
-                let transferedResponse = wself.transferResponseJSON(response.toNetApiResponse())
+                let transferedResponse: NetApiResponse<Any, NSError> = wself.transferResponse(response.toNetApiResponse())
                 switch transferedResponse.result {
                 case .success:
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("JSON: \(value)")
                         wself.response = response.toNetApiResponse()
-                        wself.fillJSON(value)
+                        wself.fill(json: value)
                         sink.send(value: wself)
                         sink.sendCompleted()
                         return
@@ -80,30 +78,28 @@ open class AlamofireNetApiData: NetApiData {
             }
             disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
             }
         }
     }
     open override func requestData() -> SignalProducer<NetApiProtocol, NetError> {
-        NetApiData.addApi(self)
+        NetApiMetric.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
-            let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.request(urlRequest)
-            self.request = request
-            self.indicator?.bindTask(request.task!)
+            let request = Alamofire.request(self.createURLRequest())
+            self.task = request.task
             let timeBegin = Date()
             request.responseData { [weak self] response in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
                 DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
-                let transferedResponse = wself.transferResponseData(response.toNetApiResponse())
+                let transferedResponse: NetApiResponse<Data, NSError> = wself.transferResponse(response.toNetApiResponse())
                 switch transferedResponse.result {
                 case .success:
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("Data: \(value.count) bytes")
                         wself.response = response.toNetApiResponse()
-                        wself.fillJSON(value)
+                        wself.fill(json: value)
                         sink.send(value: wself)
                         sink.sendCompleted()
                         return
@@ -129,32 +125,30 @@ open class AlamofireNetApiData: NetApiData {
             }
             disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
             }
         }
     }
     
     
     open override func requestString() -> SignalProducer<NetApiProtocol, NetError> {
-        NetApiData.addApi(self)
+        NetApiMetric.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
-            let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.request(urlRequest)
-            self.request = request
-            self.indicator?.bindTask(request.task!)
+            let request = Alamofire.request(self.createURLRequest())
+            self.task = request.task
             let timeBegin = Date()
             request.responseString { [weak self] response in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
                 DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
-                let transferedResponse = wself.transferResponseString(response.toNetApiResponse())
+                let transferedResponse: NetApiResponse<String, NSError> = wself.transferResponse(response.toNetApiResponse())
                 switch transferedResponse.result {
                 case .success:
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("String: \(transferedResponse.result.value ?? "")")
                         wself.response = response.toNetApiResponse()
-                        wself.fillJSON(value)
+                        wself.fill(json: value)
                         sink.send(value: wself)
                         sink.sendCompleted()
                         return
@@ -180,26 +174,25 @@ open class AlamofireNetApiData: NetApiData {
             }
             disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
             }
         }
     }
     
     open override func requestMultipartUpload() -> SignalProducer<MultipartUploadNetApiProtocol, NetError>{
-        let urlRequest = NetApiData.getURLRequest(self)
-        let session = URLSession.shared
-        let task = session.dataTask(with: urlRequest)
-        let timeBegin = Date()
-        return SignalProducer { [unowned self] sink,disposable in
+        NetApiMetric.add(api: self)
+        return SignalProducer { [unowned self] sink, disposable in
             let wself  = self as! MultipartUploadNetApiProtocol
+            let request = self.createURLRequest()
+            let task = URLSession.shared.dataTask(with: request)
+            self.task = task
+            let timeBegin = Date()
             task.resume()
-//            NotificationCenter.default.post(name: Notification.Name.Task.DidResume, object: task)
             NotificationCenter.default.post(
                 name: Notification.Name.Task.DidResume,
                 object: nil,
                 userInfo: [Notification.Key.Task: task]
             )
-            self.indicator?.bindTask(task)
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 //参数
                 for (key, value) in wself.query {
@@ -213,23 +206,23 @@ open class AlamofireNetApiData: NetApiData {
                         multipartFormData.append(fileModel.uploadData, withName: fileModel.fileName, fileName: fileModel.fileName, mimeType: fileModel.mimetype)
                     }
                 }
-            }, with: urlRequest, encodingCompletion: { (encodingResult) in
+            }, with: request, encodingCompletion: { (encodingResult) in
                 task.suspend()
                 NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON {  [weak self] response in
                         guard let wself = self else { return }
-                        NetApiData.removeApi(wself)
+                        NetApiMetric.remove(api: wself)
                         DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
-                        let transferedResponse = wself.transferResponseJSON(response.toNetApiResponse())
+                        let transferedResponse: NetApiResponse<Any, NSError> = wself.transferResponse(response.toNetApiResponse())
                         switch transferedResponse.result {
                         case .success:
                             DDLogInfo("请求成功: \(wself.url)")
                             if let value = transferedResponse.result.value {
                                 DDLogVerbose("JSON: \(value)")
                                 wself.response = response.toNetApiResponse()
-                                wself.fillJSON(value)
+                                wself.fill(json: value)
                                 task.suspend()
                                 NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil,userInfo: [Notification.Key.Task: task])
                                 sink.send(value: wself as! MultipartUploadNetApiProtocol)
@@ -277,7 +270,7 @@ open class AlamofireNetApiData: NetApiData {
                 task.suspend()
                 NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: task)
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
             }
         }
         
@@ -285,27 +278,25 @@ open class AlamofireNetApiData: NetApiData {
     }
     
     open override func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError> {
-        NetApiData.addApi(self)
+        NetApiMetric.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
             let wself  = self as! UploadNetApiProtocol
-            let uploadData = NetApiClient.createBody(withParameters: wself.query, filePathKey: wself.uploadDataName, mimetype: wself.uploadDataMimeType ?? "", uploadData: wself.uploadData!)
-            let urlRequest = NetApiData.getURLRequest(self)
-            let request = Alamofire.upload(uploadData, with: urlRequest)
-            self.request = request
-            self.indicator?.bindTask(request.task!)
+            let uploadData = self.createBody(withParameters: wself.query, filePathKey: wself.uploadDataName, mimetype: wself.uploadDataMimeType ?? "", uploadData: wself.uploadData!)
+            let request = Alamofire.upload(uploadData, with: self.createURLRequest())
+            self.task = request.task
             let timeBegin = Date()
             request.responseJSON { [weak self] response in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
                 DDLogWarn("请求耗时: \(NSDate().timeIntervalSince(timeBegin).secondsToHHmmssString())")
-                let transferedResponse = wself.transferResponseJSON(response.toNetApiResponse())
+                let transferedResponse: NetApiResponse<Any, NSError> = wself.transferResponse(response.toNetApiResponse())
                 switch transferedResponse.result {
                 case .success:
                     DDLogInfo("请求成功: \(wself.url)")
                     if let value = transferedResponse.result.value {
                         DDLogVerbose("JSON: \(value)")
                         wself.response = response.toNetApiResponse()
-                        wself.fillJSON(value)
+                        wself.fill(json: value)
                         sink.send(value: wself as! UploadNetApiProtocol)
                         sink.sendCompleted()
                         return
@@ -331,7 +322,7 @@ open class AlamofireNetApiData: NetApiData {
             }
             disposable.observeEnded { [weak self] in
                 guard let wself = self else { return }
-                NetApiData.removeApi(wself)
+                NetApiMetric.remove(api: wself)
             }
         }
     }

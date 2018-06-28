@@ -12,8 +12,8 @@ import ReactiveCocoa
 import ReactiveSwift
 import CocoaLumberjack
 
-open class FingerPrint {
-    open class func isSupport() -> SignalProducer<LAContext, NSError> {
+public struct FingerPrint {
+    public static func isSupport() -> SignalProducer<LAContext, NSError> {
         return SignalProducer { sink,disposable in
             let context = LAContext()
             var error: NSError?
@@ -28,7 +28,7 @@ open class FingerPrint {
         }
     }
     
-    open class func authenticate(_ title: String) -> SignalProducer<Bool, NSError> {
+    public static func authenticate(_ title: String) -> SignalProducer<Bool, NSError> {
         return FingerPrint.isSupport().flatMap(.concat) { (context) -> SignalProducer<Bool, NSError> in
             return SignalProducer { sink,disposable in
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: title, reply: {

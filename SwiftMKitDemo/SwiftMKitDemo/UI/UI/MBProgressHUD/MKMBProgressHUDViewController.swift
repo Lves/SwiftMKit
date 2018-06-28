@@ -60,26 +60,26 @@ class MKMBProgressHUDViewController: BaseListViewController {
         switch indexPath.row {
         case 0:
             self.showLoading()
-            let _ = Async.main(after: 1) { [weak self] in
+            Async.main(after: 1) { [weak self] in
                 self?.hideLoading()
             }
         case 1:
-            self.showLoading("Loading...")
-            let _ = Async.main(after: 1) { [weak self] in
+            self.showLoading(text: "Loading...")
+            Async.main(after: 1) { [weak self] in
                 self?.hideLoading()
             }
         case 2:
-            self.showLoading("Loading...", detailText: "Parsing data\n(1/1)")
-            let _ = Async.main(after: 1) { [weak self] in
+            self.showLoading(text: "Loading...", detailText: "Parsing data\n(1/1)")
+            Async.main(after: 1) { [weak self] in
                 self?.hideLoading()
             }
         case 3:
-            self.showProgress("Loading...")
-            let _ = Async.background { [weak self] in
+            self.showProgress(inView: self.view, text: "Loading...")
+            Async.background { [weak self] in
                 var progress: Float = 0.0
                 while progress < 1.0 {
                     progress += 0.01
-                    let _ = Async.main {
+                    Async.main {
                         self?.changeProgress(progress)
                     }
                     usleep(500)
@@ -89,12 +89,12 @@ class MKMBProgressHUDViewController: BaseListViewController {
                 }
             }
         case 4:
-            self.showProgress("Loading...", detailText: "", view: self.view, cancelEnable: true, cancelButtonTitle: "取消")
-            let _ = Async.background { [weak self] in
+            self.showProgress(inView: self.view, text: "Loading...", cancelEnable: true, cancelTitle: "取消")
+            Async.background { [weak self] in
                 var progress: Float = 0.0
                 while progress < 1.0 {
                     progress += 0.01
-                    let _ = Async.main {
+                    Async.main {
                         self?.changeProgress(progress)
                     }
                     usleep(500)
@@ -104,7 +104,7 @@ class MKMBProgressHUDViewController: BaseListViewController {
                 }
             }
         case 5:
-            self.showProgressAnnularDeterminate("Loading...", detailText: "", view: self.view, cancelEnable: true, cancelButtonTitle: "取消")
+            self.showProgress(inView: self.view, text: "Loading...", detailText: "", cancelEnable: true, cancelTitle: "取消", type: .annularDeterminate)
             let _ = Async.background { [weak self] in
                 var progress: Float = 0.0
                 while progress < 1.0 {
@@ -119,7 +119,7 @@ class MKMBProgressHUDViewController: BaseListViewController {
                 }
             }
         case 6:
-            self.showProgressHorizontalBar("Loading...", detailText: "", view: self.view, cancelEnable: true, cancelButtonTitle: "取消")
+            self.showProgress(inView: self.view, text: "Loading...", detailText: "", cancelEnable: true, cancelTitle: "取消", type: .determinateHorizontalBar)
             let _ = Async.background { [weak self] in
                 var progress: Float = 0.0
                 while progress < 1.0 {
@@ -136,9 +136,9 @@ class MKMBProgressHUDViewController: BaseListViewController {
         case 7:
             self.showTip("Message here!")
         case 8:
-            self.showTip("Message here!", view: self.view, offset: CGPoint(x: 0, y: MBProgressMaxOffset), completion: {})
+            self.showTip(inView: self.view, text: "Message here!", offset: CGPoint(x: 0, y: MBProgressMaxOffset), completion: {})
         case 9:
-            self.showTip("Done", image: UIImage(named: "icon_hud_checkmark"))
+            self.showTip(inView: self.view, text: "Done", image: UIImage(named: "icon_hud_checkmark"))
         default:
             break
         }

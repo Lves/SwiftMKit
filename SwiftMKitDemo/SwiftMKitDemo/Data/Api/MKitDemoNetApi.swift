@@ -8,13 +8,14 @@
 
 import UIKit
 import Alamofire
+import CocoaLumberjack
 
 class PX500NetApi: AlamofireNetApiData {
     static let baseQuery = ["consumer_key": PX500Config.consumerKey]
     fileprivate var _query: [String: Any] = [:]
     override var query: [String: Any] {
         get {
-            let result = NetApiData.combineQuery(PX500NetApi.baseQuery, append: _query)
+            let result = combineQuery(PX500NetApi.baseQuery, append: _query)
             return result ?? [:]
         }
         set {
@@ -69,9 +70,9 @@ class PX500PopularPhotosApiData: PX500NetApi {
                       "include_store": "store_download",
                       "include_states": "votes"]
         self.url = "/photos"
-        self.method = .GET
+        self.method = .get
     }
-    override func fillFrom(map: [String : Any]) {
+    override func fill(map: [String : Any]) {
         if let array = map["photos"] as? [Any] {
             self.photos = NSObject.arrayFromJson(array)
         }
@@ -79,7 +80,7 @@ class PX500PopularPhotosApiData: PX500NetApi {
 }
 class PX500PopularPhotosCoreDataApiData: PX500PopularPhotosApiData {
     var photosCoreData: [PX500PhotoEntity]?
-    override func fillFrom(map: [String : Any]) {
+    override func fill(map: [String : Any]) {
         if let array = map["photos"] as? [Any] {
             self.photosCoreData =  NSObject.arrayFromJson(array, page: self.page - 1, number: self.number)
         }
@@ -91,9 +92,9 @@ class PX500PhotoDetailApiData: PX500NetApi {
         super.init()
         self.query = [:]
         self.url = "/photos/" + photoId
-        self.method = .GET
+        self.method = .get
     }
-    override func fillFrom(map: [String : Any]) {
+    override func fill(map: [String : Any]) {
         self.photo =  NSObject.objectFromJson(map["photo"])
     }
 }
@@ -109,9 +110,9 @@ class BuDeJieADApiData: BuDeJieNetApi {
                       "client": "iphone" as AnyObject,
                       "ver": "4.0" as AnyObject]
         self.url = "/api_open.php"
-        self.method = .GET
+        self.method = .get
     }
-    override func fillFrom(map: [String : Any]) {
+    override func fill(map: [String : Any]) {
         print("\(map)")
         if let array = (map["result"] as? [String : Any])?["list"] as? [Any] {
             ads =  NSObject.arrayFromJson(array)

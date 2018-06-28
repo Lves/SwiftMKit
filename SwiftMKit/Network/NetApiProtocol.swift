@@ -9,12 +9,24 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import CocoaLumberjack
 
 public enum ApiFormatType {
     case json, data, string, upload, multipartUpload
 }
 public enum ApiMethod: String {
-    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+    case options = "OPTIONS"
+    case get     = "GET"
+    case head    = "HEAD"
+    case post    = "POST"
+    case put     = "PUT"
+    case patch   = "PATCH"
+    case delete  = "DELETE"
+    case trace   = "TRACE"
+    case connect = "CONNECT"
+}
+public enum ApiTaskStatus {
+    case standby, running, stop
 }
 public enum NetStatusCode: Int {
     case `default` = 0
@@ -29,22 +41,15 @@ public enum NetStatusCode: Int {
     case timeOut = 504
 }
 
-public protocol NetApiIndicatorProtocol {
-    weak var indicator: IndicatorProtocol? { get set }
-    weak var view: UIView? { get set }
-    var text: String? { get set }
+public protocol IndicatorProtocol {
+    var runningApis: [NetApiProtocol] { get set }
+    func bind(api: NetApiProtocol, view: UIView?, text: String?)
+    mutating func removeApi(forTask task: URLSessionTask)
 }
-open class NetApiIndicator : NetApiIndicatorProtocol {
-    open weak var indicator: IndicatorProtocol?
-    open weak var view: UIView?
-    open var text: String?
-    init(indicator: IndicatorProtocol, view: UIView?, text: String? = nil) {
-        self.indicator = indicator
-        self.view = view
-        self.text = text
-    }
-    func bindTask(_ task: URLSessionTask) {
-        indicator?.bindTask(task, view: view, text: text)
+public extension IndicatorProtocol {
+    mutating func removeApi(forTask task: URLSessionTask) {
+        guard let index = runningApis.index(where: { $0.task == task }) else { return }
+        runningApis.remove(at: index)
     }
 }
 
@@ -107,31 +112,33 @@ public struct NetApiResponse<Value, NError: Error> {
     }
 }
 
-public protocol NetApiProtocol: class {
+public protocol NetApiRequestHandler {
+    func transfer(request:URLRequest) -> URLRequest
+    func requestJson() -> SignalProducer<NetApiProtocol, NetError>
+    func requestData() -> SignalProducer<NetApiProtocol, NetError>
+    func requestString() -> SignalProducer<NetApiProtocol, NetError>
+    func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError>
+    func requestMultipartUpload( ) -> SignalProducer<MultipartUploadNetApiProtocol, NetError>
+}
+public protocol NetApiResponseHandler {
+    func fill(json: Any)
+    func fill(map: [String: Any])
+    func fill(array: [Any])
+    func transferResponse(_ response: NetApiResponse<Any, NSError>) -> NetApiResponse<Any, NSError>
+    func transferResponse(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError>
+    func transferResponse(_ response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError>
+}
+
+public protocol NetApiProtocol: class, NetApiRequestHandler, NetApiResponseHandler {
     var error: NetError? { get set }
     var query: [String: Any] { get }
     var method: ApiMethod { get }
     var url: String { get }
     var timeout: TimeInterval { get set }
-    var request: Any? { get set }
+    var request: URLRequest? { get set }
+    var task: URLSessionTask? { get set }
     var response: NetApiResponse<Any, NSError>? { get set }
-    var indicator: NetApiIndicator? { get set }
-    
-    func fillJSON(_ json: Any)
-    func fillFrom(map: [String: Any])
-    func fillFrom(array: [Any])
-    func transferURLRequest(_ request:URLRequest) -> URLRequest
-    func transferResponseJSON(_ response: NetApiResponse<Any, NSError>) -> NetApiResponse<Any, NSError>
-    func transferResponseData(_ response: NetApiResponse<Data, NSError>) -> NetApiResponse<Data, NSError>
-    func transferResponseString(_ response: NetApiResponse<String, NSError>) -> NetApiResponse<String, NSError>
-    func requestJSON() -> SignalProducer<NetApiProtocol, NetError>
-    func requestData() -> SignalProducer<NetApiProtocol, NetError>
-    func requestString() -> SignalProducer<NetApiProtocol, NetError>
-    func requestUpload() -> SignalProducer<UploadNetApiProtocol, NetError>
-    func requestMultipartUpload( ) -> SignalProducer<MultipartUploadNetApiProtocol, NetError>
-    
 }
-
 
 public protocol UploadNetApiProtocol: NetApiProtocol {
     var uploadData: Data? { get set }
@@ -154,8 +161,55 @@ public class UploadFileModel: NSObject {
     }
 }
 
-
 public extension NetApiProtocol {
+    func createURLRequest() -> URLRequest {
+        var mutableURLRequest = URLRequest(url: URL(string: url)!)
+        mutableURLRequest.httpMethod = method.rawValue
+        mutableURLRequest.timeoutInterval = timeout
+        let parameterString = query.stringFromHttpParameters()
+        DDLogInfo("请求地址: \(method.rawValue) \(mutableURLRequest.url?.absoluteString ?? "")?\(parameterString)")
+        mutableURLRequest = transfer(request: mutableURLRequest)
+        request = mutableURLRequest
+        return mutableURLRequest
+    }
+    func combineQuery(_ base: [String: Any]?, append: [String: Any]?) -> [String: Any]? {
+        if var queryBase = base {
+            if let queryAppend = append {
+                for (key, value) in queryAppend {
+                    queryBase[key] = value
+                }
+            }
+            return queryBase
+        }
+        return base
+    }
+    func createBody(withParameters parameters: [String: Any]?, filePathKey: String?, mimetype: String, uploadData: Data) -> Data {
+        let body = NSMutableData()
+        let boundary = generateBoundaryString()
+        
+        if parameters != nil {
+            for (key, value) in parameters! {
+                body.appendString("--\(boundary)\r\n")
+                body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.appendString("\(value)\r\n")
+            }
+        }
+        
+        body.appendString("--\(boundary)\r\n")
+        body.appendString("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\r\n")
+        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+        body.append(uploadData)
+        body.appendString("\r\n")
+        
+        body.appendString("--\(boundary)--\r\n")
+        return body as Data
+    }
+    /// Create boundary string for multipart/form-data request
+    ///
+    /// - returns:            The boundary string that consists of "Boundary-" followed by a UUID string.
+    func generateBoundaryString() -> String {
+        return "******"
+    }
     
     func signal(format:ApiFormatType = .json) -> SignalProducer<Self, NetError> {
         if let err = error {
@@ -165,7 +219,7 @@ public extension NetApiProtocol {
         }
         switch format {
         case .json:
-            return self.requestJSON().map { _ in
+            return self.requestJson().map { _ in
                 return self
             }
         case .data:
@@ -189,9 +243,7 @@ public extension NetApiProtocol {
     }
     
     func setIndicator(_ indicator: IndicatorProtocol?, view: UIView? = nil, text: String? = nil) -> Self {
-        if let indicator = indicator {
-            self.indicator = NetApiIndicator(indicator: indicator, view: view ?? UIViewController.topController?.view, text: text)
-        }
+        indicator?.bind(api: self, view: view, text: text)
         return self
     }
     

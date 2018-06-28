@@ -23,12 +23,12 @@ open class BaseKitViewController : UIViewController {
         }
     }
     
-    fileprivate var _hud: HUDProtocol = MBHUDView.shared
-    open var hud: HUDProtocol {
+    fileprivate var _hud: HudProtocol = MBHud.shared
+    open var hud: HudProtocol {
         get { return _hud }
     }
     lazy open var indicator: IndicatorProtocol = {
-        return TaskIndicator(hud: self.hud)
+        return SingleApiIndicator(hud: self.hud)
     }()
     
     open var viewModel: BaseKitViewModel? {
@@ -101,44 +101,29 @@ open class BaseKitViewController : UIViewController {
 
 public extension UIViewController {
     
-    @objc public func showTip(_ tip: String, completion : @escaping () -> Void = {}) {
-        showTip(tip, view: self.view, completion: completion)
+    public func showTip(_ text: String?) {
+        showTip(inView: self.view, text: text)
     }
-    @objc public func showTip(_ tip: String, duration: TimeInterval, completion : @escaping () -> Void = {}) {
-        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: duration, offset: nil, completion: completion)
+    public func showTip(inView view: UIView, text: String?, detailText: String? = nil, image: UIImage? = nil, hideAfterDelay: TimeInterval = HudConstant.hideTipAfterDelay, offset: CGPoint? = nil, animated: Bool = true, completion: @escaping (() -> Void) = {}) {
+        MBHud.shared.showTip(inView: view, text: text, detailText: detailText, image: image, hideAfterDelay: hideAfterDelay, offset: offset, animated: animated, completion: completion)
     }
-    @objc public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
-        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: image, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: nil, completion: completion)
+    public func showLoading(text: String? = nil, detailText: String? = nil) {
+        showIndicator(inView: self.view, text: text, detailText: detailText)
     }
-    @objc public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
-        MBHUDView.shared.showHUDTextAddedTo(view, animated: true, text: tip, detailText: nil, image: nil, hideAfterDelay: HUDConstant.HideTipAfterDelay, offset: offset, completion: completion)
+    public func showIndicator(inView view: UIView, text: String?, detailText: String? = nil, animated: Bool = true) {
+        MBHud.shared.showIndicator(inView: view, text: text, detailText: detailText, animated: animated)
     }
-    public func showLoading(_ text: String = "", detailText: String = "") {
-        showLoading(text, detailText: detailText, view: self.view)
-    }
-    public func showLoading(_ text: String, detailText: String = "", view: UIView) {
-        MBHUDView.shared.showHUDAddedTo(view, animated: true, text: text, detailText: detailText)
-    }
-    public func showProgress(_ text: String = "", detailText: String = "") {
-        showProgress(text, detailText: detailText, view: self.view)
-    }
-    public func showProgress(_ text: String, detailText: String = "", view: UIView, cancelEnable: Bool = false, cancelButtonTitle: String? = nil) {
-        MBHUDView.shared.showHUDProgressAddedTo(view, animated: true, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelButtonTitle)
-    }
-    public func showProgressAnnularDeterminate(_ text: String, detailText: String = "", view: UIView, cancelEnable: Bool = false, cancelButtonTitle: String? = nil) {
-        MBHUDView.shared.showHUDProgressAnnularDeterminateAddedTo(view, animated: true, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelButtonTitle)
-    }
-    public func showProgressHorizontalBar(_ text: String, detailText: String = "", view: UIView, cancelEnable: Bool = false, cancelButtonTitle: String? = nil) {
-        MBHUDView.shared.showHUDProgressHorizontalBarAddedTo(view, animated: true, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelButtonTitle)
+    public func showProgress(inView view: UIView, text: String?, detailText: String? = nil, cancelEnable: Bool? = false, cancelTitle: String? = nil, type: HudType = .determinate, animated: Bool = true) {
+        MBHud.shared.showProgress(inView: view, text: text, detailText: detailText, cancelEnable: cancelEnable, cancelTitle: cancelTitle, type: type, animated: animated)
     }
     public func changeProgress(_ progress: Float) {
-        MBHUDView.shared.changeHUDProgress(progress)
+        MBHud.shared.change(progress: progress)
     }
     public func hideLoading() {
         hideLoading(self.view)
     }
     public func hideLoading(_ view: UIView) {
-        let _ = MBHUDView.shared.hideHUDForView(view, animated: true)
+        MBHud.shared.hide(forView: view, animated: true)
     }
 }
 

@@ -12,7 +12,7 @@ import Alamofire
 
 open class BaseKitViewModel: NSObject {
     open weak var viewController: BaseKitViewController!
-    open var hud: HUDProtocol {
+    open var hud: HudProtocol {
         get { return self.viewController.hud }
     }
     open var indicator: IndicatorProtocol {
@@ -36,19 +36,19 @@ open class BaseKitViewModel: NSObject {
 extension BaseKitViewModel {
     
     public func showTip(_ tip: String, completion : @escaping () -> Void = {}) {
-        viewController?.showTip(tip, view: viewController.view, completion: completion)
+        viewController.showTip(inView: viewController.view, text: tip, completion: completion)
     }
     public func showTip(_ tip: String, image: UIImage?, completion : @escaping () -> Void = {}) {
-        viewController?.showTip(tip, image: image, completion: completion)
+        viewController.showTip(inView: viewController.view, text: tip, image: image, completion: completion)
     }
     public func showTip(_ tip: String, view: UIView, offset: CGPoint = CGPoint.zero, completion : @escaping () -> Void = {}) {
-        viewController?.showTip(tip, view: view, offset: offset, completion: completion)
+        viewController.showTip(inView: view, text: tip, offset: offset, completion: completion)
     }
-    public func showLoading(_ text: String = "") {
-        viewController?.showLoading(text)
+    public func showLoading(text: String? = nil, detailText: String? = nil) {
+        viewController.showLoading(text: text, detailText: detailText)
     }
     public func showLoading(_ text: String, view: UIView) {
-        viewController?.showLoading(text, view: view)
+        viewController.showIndicator(inView: view, text: text)
     }
     public func hideLoading() {
         viewController?.hideLoading()

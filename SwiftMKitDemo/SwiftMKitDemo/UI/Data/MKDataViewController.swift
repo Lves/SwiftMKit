@@ -24,7 +24,7 @@ class MKDataViewController: BaseListViewController {
     override var listView: UIScrollView! {
         get { return tableView }
     }
-    var networkStatus: String = NetApiClient.shared.networkStatus.value.description {
+    var networkStatus: String = NetworkListener.networkStatus.value.rawValue {
         didSet {
             tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         }
@@ -36,8 +36,8 @@ class MKDataViewController: BaseListViewController {
     }
     override func bindingData() {
         super.bindingData()
-        NetApiClient.shared.networkStatus.producer.startWithValues { [weak self] status in
-            self?.networkStatus = status.description
+        NetworkListener.networkStatus.producer.startWithValues { [weak self] status in
+            self?.networkStatus = status.rawValue
         }
         locationInfo = "Locating"
         LocationManager.shared.getlocation { [weak self] (location, error) in

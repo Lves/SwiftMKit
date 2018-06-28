@@ -168,7 +168,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     
     open override func setupUI() {
         super.setupUI()
-        NetApiClient.shared.startNotifyNetworkStatus()
+        NetworkListener.listen()
         isTitleFixed = (self.title?.length ?? 0) > 0
         self.view.backgroundColor = InnerConst.RootViewBackgroundColor
         if showBackgroundLab {
@@ -190,7 +190,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         
         loadData()
 
-        NetApiClient.shared.networkStatus.producer.startWithValues {[weak self](sender) in
+        NetworkListener.networkStatus.producer.startWithValues {[weak self](sender) in
             if sender == .reachableViaWWAN || sender == .reachableViaWiFi {
                 DDLogInfo("[Network Status] WIFI或者蜂窝网络, status: \(sender)")
                 if self?.isBadNetwork == true && self?.isFinishedOnce == false {

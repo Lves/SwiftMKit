@@ -13,19 +13,19 @@ public enum Environment: Int {
     case local, dev, gray, preProduct, product, custom
 }
 
-open class NetworkConfig {
+public class NetworkConfig {
     
-    fileprivate struct Constant {
+    private struct Constant {
         static let Evn = "NetworkEvn"
     }
     
-    fileprivate init() {
+    private init() {
     }
     
-    open static let shared = NetworkConfig()
+    public static let shared = NetworkConfig()
     
-    open static var Release: Bool = true
-    open static var Evn: Environment {
+    public static var Release: Bool = true
+    public static var Evn: Environment {
         get {
             if Release {
                 return .product

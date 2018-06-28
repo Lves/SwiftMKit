@@ -45,7 +45,7 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
     }
     
     lazy open var listIndicator: IndicatorProtocol = {
-        return TaskIndicatorList(listView: self.listView, viewController: self)
+        return ListApiIndicator(listView: self.listView, viewController: self)
     }()
     
     open func listViewHeaderWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
@@ -142,11 +142,6 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
                 }
             }
         }
-    }
-
-    open override func showTip(_ tip: String, view: UIView, offset: CGPoint, completion: @escaping () -> Void) {
-        endListRefresh()
-        super.showTip(tip, view: view, offset: offset, completion: completion)
     }
    
     deinit {
