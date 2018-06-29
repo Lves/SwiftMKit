@@ -13,7 +13,7 @@ class MKUIViewModel: BaseListViewModel {
         super.init()
         self.dataArray = [MKDataListModel]()
         self.dataArray.append(MKDataListModel(title: "Empty View", detail: "Empty View", route: "MKEmptyViewController", routeSB: "MKEmptyView"))
-        self.dataArray.append(MKDataListModel(title: "Web View", detail: "UIWebView", route: "http://www.baidu.com"))
+        self.dataArray.append(MKDataListModel(title: "Web View", detail: "WKWebView", route: "https://www.baidu.com"))
         self.dataArray.append(MKDataListModel(title: "Segment View", detail: "Segment View", route: "MKSegmentViewController", routeSB: "MKSegmentView"))
         self.dataArray.append(MKDataListModel(title: "Side View", detail: "Side View", route: "MKSideViewController", routeSB: "MKSideView"))
         self.dataArray.append(MKDataListModel(title: "Tree View", detail: "Tree View", route: "MKTreeViewController", routeSB: "MKTreeView"))

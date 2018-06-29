@@ -13,6 +13,7 @@ import MJRefresh
 import WebKit
 import WebViewJavascriptBridge
 
+@objcMembers
 open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate, SharePannelViewDelegate, UIScrollViewDelegate {
     
     struct InnerConst {

@@ -17,9 +17,7 @@ open class BaseKitViewController : UIViewController {
     /// 页面参数（大部分用于初始化使用）
     open var params = [String: Any]() {
         didSet {
-            for (key,value) in params {
-                self.setValue(value, forKey: key)
-            }
+            self.setValuesForKeys(params)
         }
     }
     
