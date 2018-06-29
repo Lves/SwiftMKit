@@ -27,24 +27,26 @@ extension String {
         let base64String = plainData!.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         return base64String
     }
-    
+    public subscript(index: Int) -> Character {
+        let index = self.index(self.startIndex, offsetBy: index)//.startIndex.advancedBy(index)
+        return self[index]
+    }
     /// EZSE: Cut string from range
     public subscript(integerRange: Range<Int>) -> String {
         let start = index(startIndex, offsetBy: integerRange.lowerBound)
         let end = index(startIndex, offsetBy: integerRange.upperBound)
         return String(self[start..<end])
     }
-    
+
     /// EZSE: Cut string from closedrange
     public subscript(integerClosedRange: ClosedRange<Int>) -> String {
         return self[integerClosedRange.lowerBound..<(integerClosedRange.upperBound + 1)]
     }
-    
+
     /// EZSE: Character count
     public var length: Int {
         return self.count
     }
-    
     /// EZSE: Counts number of instances of the input inside String
     public func count(_ substring: String) -> Int {
         return components(separatedBy: substring).count - 1

@@ -128,11 +128,3 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
         pages.reloadData()
     }
 }
-
-public extension String {
-    public subscript(index: Int) -> Character {
-        let index = self.index(self.startIndex, offsetBy: index)//.startIndex.advancedBy(index)
-        return self[index]
-    }
-}
-

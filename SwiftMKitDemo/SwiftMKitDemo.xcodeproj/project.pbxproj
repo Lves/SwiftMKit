@@ -87,13 +87,6 @@
 		2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */; };
 		278CAA541CD1F93A008AC629 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */; };
 		278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CAA551CD20970008AC629 /* BaseWebViewModel.swift */; };
-		279545F41E9C720C00D36D83 /* MachExceptionHandler.c in Sources */ = {isa = PBXBuildFile; fileRef = 279544FE1E9C720B00D36D83 /* MachExceptionHandler.c */; };
-		279545F51E9C720C00D36D83 /* MachThreadBacktrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 279545001E9C720B00D36D83 /* MachThreadBacktrace.c */; };
-		279545F61E9C720C00D36D83 /* SwiftCrashConsoleReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545021E9C720B00D36D83 /* SwiftCrashConsoleReporter.swift */; };
-		279545F71E9C720C00D36D83 /* SwiftCrashDefaultFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 279545041E9C720B00D36D83 /* SwiftCrashDefaultFormatter.m */; };
-		279545F81E9C720C00D36D83 /* SwiftCrashHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545051E9C720B00D36D83 /* SwiftCrashHandler.swift */; };
-		279545F91E9C720C00D36D83 /* SwiftCrashReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545071E9C720B00D36D83 /* SwiftCrashReport.swift */; };
-		279545FA1E9C720C00D36D83 /* SwiftCrashUmengReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2795450A1E9C720B00D36D83 /* SwiftCrashUmengReporter.m */; };
 		279545FB1E9C720C00D36D83 /* MBinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795450D1E9C720B00D36D83 /* MBinarySearchTree.swift */; };
 		279545FC1E9C720C00D36D83 /* MBinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795450E1E9C720B00D36D83 /* MBinaryTree.swift */; };
 		279545FD1E9C720C00D36D83 /* MLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795450F1E9C720B00D36D83 /* MLinkedList.swift */; };
@@ -321,6 +314,13 @@
 		7A99BF5220E4CA920029726D /* NetApiMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99BF5120E4CA920029726D /* NetApiMetric.swift */; };
 		7AA6311120E5DEA30071D3BB /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA6311020E5DEA30071D3BB /* ImageTools.swift */; };
 		868BA5E9AE9EDED0A192ABA9 /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */; };
+		9ADF025420E5D950008BD6FA /* MachThreadBacktrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */; };
+		9ADF025520E5D950008BD6FA /* SwiftCrashUmengReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */; };
+		9ADF025620E5D950008BD6FA /* SwiftCrashConsoleReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024920E5D94F008BD6FA /* SwiftCrashConsoleReporter.swift */; };
+		9ADF025720E5D950008BD6FA /* SwiftCrashHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024A20E5D94F008BD6FA /* SwiftCrashHandler.swift */; };
+		9ADF025820E5D950008BD6FA /* SwiftCrashDefaultFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024C20E5D94F008BD6FA /* SwiftCrashDefaultFormatter.m */; };
+		9ADF025920E5D950008BD6FA /* SwiftCrashReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF025120E5D94F008BD6FA /* SwiftCrashReport.swift */; };
+		9ADF025A20E5D950008BD6FA /* MachExceptionHandler.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF025220E5D94F008BD6FA /* MachExceptionHandler.c */; };
 		FF6D5557E11EB08BEAAE0A05 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0309A9864D0980C2ED5378 /* Pods_SwiftMKitDemoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -446,19 +446,6 @@
 		2789380A1CD0CC4300F43699 /* BaseListFetchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseListFetchViewModel.swift; sourceTree = "<group>"; };
 		278CAA531CD1F93A008AC629 /* BaseWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		278CAA551CD20970008AC629 /* BaseWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWebViewModel.swift; sourceTree = "<group>"; };
-		279544FE1E9C720B00D36D83 /* MachExceptionHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MachExceptionHandler.c; sourceTree = "<group>"; };
-		279544FF1E9C720B00D36D83 /* MachExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachExceptionHandler.h; sourceTree = "<group>"; };
-		279545001E9C720B00D36D83 /* MachThreadBacktrace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MachThreadBacktrace.c; sourceTree = "<group>"; };
-		279545011E9C720B00D36D83 /* MachThreadBacktrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachThreadBacktrace.h; sourceTree = "<group>"; };
-		279545021E9C720B00D36D83 /* SwiftCrashConsoleReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashConsoleReporter.swift; sourceTree = "<group>"; };
-		279545031E9C720B00D36D83 /* SwiftCrashDefaultFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashDefaultFormatter.h; sourceTree = "<group>"; };
-		279545041E9C720B00D36D83 /* SwiftCrashDefaultFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashDefaultFormatter.m; sourceTree = "<group>"; };
-		279545051E9C720B00D36D83 /* SwiftCrashHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashHandler.swift; sourceTree = "<group>"; };
-		279545061E9C720B00D36D83 /* SwiftCrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReport.h; sourceTree = "<group>"; };
-		279545071E9C720B00D36D83 /* SwiftCrashReport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashReport.swift; sourceTree = "<group>"; };
-		279545081E9C720B00D36D83 /* SwiftCrashReportProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReportProtocol.h; sourceTree = "<group>"; };
-		279545091E9C720B00D36D83 /* SwiftCrashUmengReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashUmengReporter.h; sourceTree = "<group>"; };
-		2795450A1E9C720B00D36D83 /* SwiftCrashUmengReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashUmengReporter.m; sourceTree = "<group>"; };
 		2795450D1E9C720B00D36D83 /* MBinarySearchTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBinarySearchTree.swift; sourceTree = "<group>"; };
 		2795450E1E9C720B00D36D83 /* MBinaryTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBinaryTree.swift; sourceTree = "<group>"; };
 		2795450F1E9C720B00D36D83 /* MLinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLinkedList.swift; sourceTree = "<group>"; };
@@ -705,6 +692,18 @@
 		86FE2AD90661A2C71A315F4F /* Pods-SwiftMKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B9E51E2DB25BF77A21FA8E9 /* Pods-SwiftMKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		976D2F4D60A997459D1E40F8 /* Pods-SwiftMKitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MachThreadBacktrace.c; sourceTree = "<group>"; };
+		9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashUmengReporter.m; sourceTree = "<group>"; };
+		9ADF024920E5D94F008BD6FA /* SwiftCrashConsoleReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashConsoleReporter.swift; sourceTree = "<group>"; };
+		9ADF024A20E5D94F008BD6FA /* SwiftCrashHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashHandler.swift; sourceTree = "<group>"; };
+		9ADF024B20E5D94F008BD6FA /* MachExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachExceptionHandler.h; sourceTree = "<group>"; };
+		9ADF024C20E5D94F008BD6FA /* SwiftCrashDefaultFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashDefaultFormatter.m; sourceTree = "<group>"; };
+		9ADF024D20E5D94F008BD6FA /* MachThreadBacktrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachThreadBacktrace.h; sourceTree = "<group>"; };
+		9ADF024E20E5D94F008BD6FA /* SwiftCrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReport.h; sourceTree = "<group>"; };
+		9ADF024F20E5D94F008BD6FA /* SwiftCrashReportProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReportProtocol.h; sourceTree = "<group>"; };
+		9ADF025020E5D94F008BD6FA /* SwiftCrashUmengReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashUmengReporter.h; sourceTree = "<group>"; };
+		9ADF025120E5D94F008BD6FA /* SwiftCrashReport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashReport.swift; sourceTree = "<group>"; };
+		9ADF025220E5D94F008BD6FA /* MachExceptionHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MachExceptionHandler.c; sourceTree = "<group>"; };
 		ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C2B7AF4869491ACCA6A35784 /* Pods_SwiftMKitDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -919,7 +918,6 @@
 		279544FC1E9C720B00D36D83 /* SwiftMKit */ = {
 			isa = PBXGroup;
 			children = (
-				279544FD1E9C720B00D36D83 /* CrashReport */,
 				2795450B1E9C720B00D36D83 /* Data */,
 				279545351E9C720B00D36D83 /* Extension */,
 				279545521E9C720B00D36D83 /* ImportedModules */,
@@ -932,29 +930,10 @@
 			path = ../SwiftMKit;
 			sourceTree = "<group>";
 		};
-		279544FD1E9C720B00D36D83 /* CrashReport */ = {
-			isa = PBXGroup;
-			children = (
-				279544FE1E9C720B00D36D83 /* MachExceptionHandler.c */,
-				279544FF1E9C720B00D36D83 /* MachExceptionHandler.h */,
-				279545001E9C720B00D36D83 /* MachThreadBacktrace.c */,
-				279545011E9C720B00D36D83 /* MachThreadBacktrace.h */,
-				279545021E9C720B00D36D83 /* SwiftCrashConsoleReporter.swift */,
-				279545031E9C720B00D36D83 /* SwiftCrashDefaultFormatter.h */,
-				279545041E9C720B00D36D83 /* SwiftCrashDefaultFormatter.m */,
-				279545051E9C720B00D36D83 /* SwiftCrashHandler.swift */,
-				279545061E9C720B00D36D83 /* SwiftCrashReport.h */,
-				279545071E9C720B00D36D83 /* SwiftCrashReport.swift */,
-				279545081E9C720B00D36D83 /* SwiftCrashReportProtocol.h */,
-				279545091E9C720B00D36D83 /* SwiftCrashUmengReporter.h */,
-				2795450A1E9C720B00D36D83 /* SwiftCrashUmengReporter.m */,
-			);
-			path = CrashReport;
-			sourceTree = "<group>";
-		};
 		2795450B1E9C720B00D36D83 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9ADF024620E5D94F008BD6FA /* CrashReport */,
 				6C711D201F1F6AFF00268915 /* Reflector */,
 				2795450C1E9C720B00D36D83 /* DataStructure */,
 				279545141E9C720B00D36D83 /* FingerPrint */,
@@ -1876,6 +1855,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9ADF024620E5D94F008BD6FA /* CrashReport */ = {
+			isa = PBXGroup;
+			children = (
+				9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */,
+				9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */,
+				9ADF024920E5D94F008BD6FA /* SwiftCrashConsoleReporter.swift */,
+				9ADF024A20E5D94F008BD6FA /* SwiftCrashHandler.swift */,
+				9ADF024B20E5D94F008BD6FA /* MachExceptionHandler.h */,
+				9ADF024C20E5D94F008BD6FA /* SwiftCrashDefaultFormatter.m */,
+				9ADF024D20E5D94F008BD6FA /* MachThreadBacktrace.h */,
+				9ADF024E20E5D94F008BD6FA /* SwiftCrashReport.h */,
+				9ADF024F20E5D94F008BD6FA /* SwiftCrashReportProtocol.h */,
+				9ADF025020E5D94F008BD6FA /* SwiftCrashUmengReporter.h */,
+				9ADF025120E5D94F008BD6FA /* SwiftCrashReport.swift */,
+				9ADF025220E5D94F008BD6FA /* MachExceptionHandler.c */,
+			);
+			name = CrashReport;
+			path = ../CrashReport;
+			sourceTree = "<group>";
+		};
 		D94E82CEF6ED9C0653237B9A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2429,12 +2428,14 @@
 				279546511E9C720C00D36D83 /* RiskEvaluationQuestionCollectionViewCell.swift in Sources */,
 				279546961E9C720C00D36D83 /* RingedPages.swift in Sources */,
 				279546461E9C720C00D36D83 /* BaseListFetchKitViewController.swift in Sources */,
+				9ADF025720E5D950008BD6FA /* SwiftCrashHandler.swift in Sources */,
 				279546951E9C720C00D36D83 /* PagesCarousel.swift in Sources */,
 				2795466D1E9C720C00D36D83 /* NumberKeyboard.swift in Sources */,
 				279546AB1E9C720C00D36D83 /* VideoPlayer.swift in Sources */,
 				279545FB1E9C720C00D36D83 /* MBinarySearchTree.swift in Sources */,
 				2795461B1E9C720C00D36D83 /* Double+Extension.swift in Sources */,
 				279546201E9C720C00D36D83 /* NSMutableData+Extension.swift in Sources */,
+				9ADF025620E5D950008BD6FA /* SwiftCrashConsoleReporter.swift in Sources */,
 				279546491E9C720C00D36D83 /* BaseListKitViewModel.swift in Sources */,
 				2795462A1E9C720C00D36D83 /* UIDevice+Extension.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
@@ -2471,19 +2472,20 @@
 				2795460F1E9C720C00D36D83 /* DDLogMKitFormatter.swift in Sources */,
 				2795465D1E9C720C00D36D83 /* Hud.swift in Sources */,
 				279546111E9C720C00D36D83 /* SwiftMKitLog.xcdatamodeld in Sources */,
-				279545F41E9C720C00D36D83 /* MachExceptionHandler.c in Sources */,
+				9ADF025420E5D950008BD6FA /* MachThreadBacktrace.c in Sources */,
 				2795469C1E9C720C00D36D83 /* SlideInPresentationManager.swift in Sources */,
 				279546141E9C720C00D36D83 /* PushManager.swift in Sources */,
 				2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */,
 				7A51B63C20DBB19400060113 /* Date+Extension.swift in Sources */,
 				2795464C1E9C720C00D36D83 /* IndicatorButton.swift in Sources */,
 				279546521E9C720C00D36D83 /* CuteView.swift in Sources */,
+				9ADF025920E5D950008BD6FA /* SwiftCrashReport.swift in Sources */,
 				2783E0391DB62E4D005E087C /* MKDataViewController.swift in Sources */,
 				279546481E9C720C00D36D83 /* BaseListKitViewController.swift in Sources */,
+				9ADF025520E5D950008BD6FA /* SwiftCrashUmengReporter.m in Sources */,
 				2783E01D1DB626FD005E087C /* MKTreeViewController.swift in Sources */,
 				279545FF1E9C720C00D36D83 /* MSearch.swift in Sources */,
 				279546A71E9C720C00D36D83 /* SmarterTool.swift in Sources */,
-				279545F51E9C720C00D36D83 /* MachThreadBacktrace.c in Sources */,
 				2783E0051DB626FD005E087C /* MKEmptyCustomViewController.swift in Sources */,
 				2795464B1E9C720C00D36D83 /* PersentAnimator.swift in Sources */,
 				2783E0151DB626FD005E087C /* MKOrderTableViewCell.swift in Sources */,
@@ -2495,10 +2497,8 @@
 				279546941E9C720C00D36D83 /* ImagePageControl.swift in Sources */,
 				2783DFFF1DB626FD005E087C /* MKCoverFlowViewController.swift in Sources */,
 				2783E0081DB626FD005E087C /* MKNormalEmptyViewController.swift in Sources */,
-				279545F91E9C720C00D36D83 /* SwiftCrashReport.swift in Sources */,
 				278938091CD0CC3500F43699 /* BaseListFetchViewController.swift in Sources */,
 				6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */,
-				279545F81E9C720C00D36D83 /* SwiftCrashHandler.swift in Sources */,
 				279546061E9C720C00D36D83 /* SessionDelegate.swift in Sources */,
 				2783E01E1DB626FD005E087C /* MKUITreeViewCellTableViewCell.swift in Sources */,
 				279546591E9C720C00D36D83 /* GesturePasswordProtocol.swift in Sources */,
@@ -2513,7 +2513,6 @@
 				279546121E9C720C00D36D83 /* BaseKitEntity.swift in Sources */,
 				6C406E151EFA54380052BDA8 /* CLLoopViewController.swift in Sources */,
 				278937FC1CD0A5CC00F43699 /* TestStudentEntity+CoreDataProperties.swift in Sources */,
-				279545F61E9C720C00D36D83 /* SwiftCrashConsoleReporter.swift in Sources */,
 				3FC9DF541CBFD6D400C2D938 /* GlobalConfig.swift in Sources */,
 				278938011CD0A5CC00F43699 /* PX500UserEntity.swift in Sources */,
 				279546551E9C720C00D36D83 /* MKitEmptyView.swift in Sources */,
@@ -2521,7 +2520,6 @@
 				279546331E9C720C00D36D83 /* AlamofireNetApiData.swift in Sources */,
 				273E41281DD2FE3800A09830 /* MKUserNotificationViewController.swift in Sources */,
 				279546661E9C720C00D36D83 /* JDJellyButton.swift in Sources */,
-				279545FA1E9C720C00D36D83 /* SwiftCrashUmengReporter.m in Sources */,
 				2795465F1E9C720C00D36D83 /* HQImageView.swift in Sources */,
 				279546191E9C720C00D36D83 /* DDLog+Extension.swift in Sources */,
 				279546AA1E9C720C00D36D83 /* PickerTextField.swift in Sources */,
@@ -2546,6 +2544,7 @@
 				279545FE1E9C720C00D36D83 /* MQueue.swift in Sources */,
 				7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */,
 				2749CECA1DD95E4300D713B0 /* MKPHAssetVideoViewController.swift in Sources */,
+				9ADF025A20E5D950008BD6FA /* MachExceptionHandler.c in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				273E412A1DD2FE4B00A09830 /* MKUserNotificationViewModel.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
@@ -2554,6 +2553,7 @@
 				2783DFFD1DB626FD005E087C /* MKCoverFlowSelectBtnsCollectionViewCell.swift in Sources */,
 				2795462B1E9C720C00D36D83 /* UIFont+Extension.swift in Sources */,
 				2783E01B1DB626FD005E087C /* MKSideViewController.swift in Sources */,
+				9ADF025820E5D950008BD6FA /* SwiftCrashDefaultFormatter.m in Sources */,
 				279546701E9C720C00D36D83 /* LLCountingLabel.swift in Sources */,
 				2783E02F1DB62716005E087C /* MKNetworkRequestViewController.swift in Sources */,
 				2783E0061DB626FD005E087C /* MKEmptyListViewController.swift in Sources */,
@@ -2595,7 +2595,6 @@
 				2795460C1E9C720C00D36D83 /* LocationManager.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				2795466F1E9C720C00D36D83 /* NumberKeyboardProtocol.swift in Sources */,
-				279545F71E9C720C00D36D83 /* SwiftCrashDefaultFormatter.m in Sources */,
 				3FC9DF621CBFD6D400C2D938 /* BaseListViewController.swift in Sources */,
 				2783E00C1DB626FD005E087C /* MKGesturePasswordViewController.swift in Sources */,
 				279546221E9C720C00D36D83 /* NSRange+Extension.swift in Sources */,
