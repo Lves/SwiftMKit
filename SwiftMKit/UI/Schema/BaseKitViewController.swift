@@ -102,8 +102,18 @@ public extension UIViewController {
     public func showTip(_ text: String?) {
         showTip(inView: self.view, text: text)
     }
+    public func showTip(_ text: String, completion : @escaping () -> Void = {}) {
+        showTip(inView: self.view, text: text, completion: completion)
+    }
+
+    public func showTip(_ text: String,duration: TimeInterval = HudConstant.hideTipAfterDelay , completion : @escaping () -> Void = {}) {
+        showTip(inView: self.view, text: text, hideAfterDelay:duration, completion: completion)
+    }
     public func showTip(inView view: UIView, text: String?, detailText: String? = nil, image: UIImage? = nil, hideAfterDelay: TimeInterval = HudConstant.hideTipAfterDelay, offset: CGPoint? = nil, animated: Bool = true, completion: @escaping (() -> Void) = {}) {
         MBHud.shared.showTip(inView: view, text: text, detailText: detailText, image: image, hideAfterDelay: hideAfterDelay, offset: offset, animated: animated, completion: completion)
+    }
+    public func showLoading(inView view: UIView,text: String? = nil) {
+        showIndicator(inView: view, text: text, detailText: nil)
     }
     public func showLoading(text: String? = nil, detailText: String? = nil) {
         showIndicator(inView: self.view, text: text, detailText: detailText)

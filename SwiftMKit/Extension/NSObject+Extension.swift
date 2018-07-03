@@ -71,6 +71,30 @@ public extension NSObject {
         let fullName = NSClassFromString(className) as? NSObject.Type
         return fullName
     }
+    //获得去除Module后的类名
+    var className:String{
+        get{
+            let bundleName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
+            let className = NSStringFromClass(self.classForCoder)
+            let prefix = "\(bundleName)."
+            if className.hasPrefix(prefix) && className.length > prefix.length{
+                return String(className.suffix(className.length-prefix.length))
+            }
+            return className
+        }
+    }
+    public static var className: String {
+        get{
+            let bundleName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
+            let className = NSStringFromClass(self)
+            let prefix = "\(bundleName)."
+            if className.hasPrefix(prefix) && className.length > prefix.length{
+                return String(className.suffix(className.length-prefix.length))
+            }
+            return className
+        }
+    }
+
 
     class func dictToJson(_ object:[String: Any]?) -> NSString{
         

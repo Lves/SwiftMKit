@@ -117,7 +117,8 @@ public extension UIViewController {
             let count = self.navigationController?.viewControllers.count ?? 0
             for index in 0..<count {
                 if let viewController = self.navigationController?.viewControllers[count - 1 - index] {
-                    if NSStringFromClass(viewController.classForCoder) == name {
+                    
+                    if viewController.className == name { //NSStringFromClass(viewController.classForCoder)  这个返回的包含module名，不可用
                         vc = viewController
                         break
                     }
