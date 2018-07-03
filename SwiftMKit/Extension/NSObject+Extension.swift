@@ -78,7 +78,8 @@ public extension NSObject {
             let className = NSStringFromClass(self.classForCoder)
             let prefix = "\(bundleName)."
             if className.hasPrefix(prefix) && className.length > prefix.length{
-                return String(className.suffix(className.length-prefix.length))
+                let startIndex = className.index(prefix.startIndex, offsetBy: prefix.length)
+                return  String(className[startIndex...])
             }
             return className
         }
@@ -89,7 +90,8 @@ public extension NSObject {
             let className = NSStringFromClass(self)
             let prefix = "\(bundleName)."
             if className.hasPrefix(prefix) && className.length > prefix.length{
-                return String(className.suffix(className.length-prefix.length))
+                let startIndex = className.index(prefix.startIndex, offsetBy: prefix.length)
+                return  String(className[startIndex...])
             }
             return className
         }
