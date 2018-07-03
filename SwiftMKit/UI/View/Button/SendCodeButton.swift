@@ -45,7 +45,7 @@ open class SendCodeButton: UIButton {
     
     fileprivate func showRemainSecond() {
         let now = Date().timeIntervalSince1970.advanced(by: 0)
-        setTitle("\(stopTime - now)\(selectedSubffix)", for: .selected)
+        setTitle("\(Int(stopTime - now))\(selectedSubffix)", for: .selected)
     }
     @objc fileprivate func timerCountDown() {
         let now = Date().timeIntervalSince1970.advanced(by: 0)
