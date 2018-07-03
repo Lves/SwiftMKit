@@ -23,6 +23,7 @@ public struct ImageTools {
         }
         return nil
     }
+    //WWDC 2018 中苹果推荐的加载大图的方式
     public func getLargeImage(source: String, extension: String, scaleTo size: CGSize) -> UIImage? {
         let url = Bundle.main.url(forResource: source, withExtension: `extension`)
         let sourceOpt = [kCGImageSourceShouldCache : false] as CFDictionary
