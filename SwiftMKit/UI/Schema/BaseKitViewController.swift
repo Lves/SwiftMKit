@@ -12,7 +12,7 @@ import CocoaLumberjack
 import Alamofire
 import ObjectiveC
 import SnapKit
-
+@objcMembers
 open class BaseKitViewController : UIViewController {
     /// 页面参数（大部分用于初始化使用）
     open var params = [String: Any]() {
