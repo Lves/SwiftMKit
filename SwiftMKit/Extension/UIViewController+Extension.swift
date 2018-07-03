@@ -11,7 +11,7 @@ import UIKit
 import CocoaLumberjack
 
 public extension UIViewController {
-    public static var topController: UIViewController? {
+    @objc public static var topController: UIViewController? {
         get {
             var window = UIApplication.shared.keyWindow
             if window?.windowLevel != UIWindowLevelNormal {

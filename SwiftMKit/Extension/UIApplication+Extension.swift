@@ -17,7 +17,9 @@ public extension UIApplication {
         let lockQueue = DispatchQueue(label: "com.cdts.LockQueue", attributes: [])
         lockQueue.sync {
             if UIApplication.activityCount == 0 {
-                self.isNetworkActivityIndicatorVisible = true
+                Async.main { [weak self] in
+                     self?.isNetworkActivityIndicatorVisible = true
+                }
             }
             UIApplication.activityCount += 1
         }
