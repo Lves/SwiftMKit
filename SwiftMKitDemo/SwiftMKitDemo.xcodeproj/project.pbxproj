@@ -300,6 +300,8 @@
 		6C4702A6202ADAF500BB712F /* LinkText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4702A5202ADAF500BB712F /* LinkText.storyboard */; };
 		6C4702A8202ADB1000BB712F /* LinkTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */; };
 		6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */; };
+		7A49523420ECD2D10050CE84 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49523320ECD2D10050CE84 /* RequestHandler.swift */; };
+		7A49523620ECD2F60050CE84 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49523520ECD2F60050CE84 /* ApiClient.swift */; };
 		7A51B63020DB9E4F00060113 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B62F20DB9E4F00060113 /* Reachability.swift */; };
 		7A51B63220DBAE0100060113 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63120DBAE0100060113 /* CGRect+Extension.swift */; };
 		7A51B63420DBAE4C00060113 /* UIViewEZ+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63320DBAE4C00060113 /* UIViewEZ+Extension.swift */; };
@@ -311,8 +313,11 @@
 		7A5688E61F039B0C003BEC89 /* BaseCaptchaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */; };
 		7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */; };
 		7A68DCDB1EFCF1C000CE9E43 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */; };
+		7A8E72CD20EDCC0B00F0585F /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E72CC20EDCC0B00F0585F /* Array+Extension.swift */; };
 		7A99BF5220E4CA920029726D /* NetApiMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99BF5120E4CA920029726D /* NetApiMetric.swift */; };
+		7A9DE94F20EF6911004FE5B3 /* TaskIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9DE94E20EF6911004FE5B3 /* TaskIndicator.swift */; };
 		7AA6311120E5DEA30071D3BB /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA6311020E5DEA30071D3BB /* ImageTools.swift */; };
+		7AB0C93020EB7C350045D2EA /* NetworkDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0C92F20EB7C350045D2EA /* NetworkDemo.swift */; };
 		868BA5E9AE9EDED0A192ABA9 /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */; };
 		9ADF025420E5D950008BD6FA /* MachThreadBacktrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */; };
 		9ADF025520E5D950008BD6FA /* SwiftCrashUmengReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */; };
@@ -675,6 +680,8 @@
 		6C4702A5202ADAF500BB712F /* LinkText.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LinkText.storyboard; sourceTree = "<group>"; };
 		6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextViewController.swift; sourceTree = "<group>"; };
 		6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReflectionTool.swift; sourceTree = "<group>"; };
+		7A49523320ECD2D10050CE84 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
+		7A49523520ECD2F60050CE84 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		7A51B62F20DB9E4F00060113 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7A51B63120DBAE0100060113 /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
 		7A51B63320DBAE4C00060113 /* UIViewEZ+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewEZ+Extension.swift"; sourceTree = "<group>"; };
@@ -686,8 +693,11 @@
 		7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCaptchaImageView.swift; sourceTree = "<group>"; };
 		7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitService.swift; sourceTree = "<group>"; };
 		7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		7A8E72CC20EDCC0B00F0585F /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		7A99BF5120E4CA920029726D /* NetApiMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetApiMetric.swift; sourceTree = "<group>"; };
+		7A9DE94E20EF6911004FE5B3 /* TaskIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskIndicator.swift; sourceTree = "<group>"; };
 		7AA6311020E5DEA30071D3BB /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
+		7AB0C92F20EB7C350045D2EA /* NetworkDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDemo.swift; sourceTree = "<group>"; };
 		854BAAE539F6CBB5423DDA35 /* Pods-SwiftMKitDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		86FE2AD90661A2C71A315F4F /* Pods-SwiftMKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B9E51E2DB25BF77A21FA8E9 /* Pods-SwiftMKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -1068,6 +1078,7 @@
 			isa = PBXGroup;
 			children = (
 				279545361E9C720B00D36D83 /* Action+Extension.swift */,
+				7A8E72CC20EDCC0B00F0585F /* Array+Extension.swift */,
 				279545371E9C720B00D36D83 /* CollectionType+Extension.swift */,
 				7A51B63520DBAE9600060113 /* CGFloat+Extension.swift */,
 				7A51B63120DBAE0100060113 /* CGRect+Extension.swift */,
@@ -1117,6 +1128,7 @@
 			isa = PBXGroup;
 			children = (
 				279545551E9C720B00D36D83 /* Alamofire */,
+				7A9DE94D20EF68FB004FE5B3 /* Indicator */,
 				279545571E9C720B00D36D83 /* Async */,
 				279545591E9C720B00D36D83 /* ConnectPeer */,
 				2795455C1E9C720B00D36D83 /* NetworkListener.swift */,
@@ -1135,6 +1147,8 @@
 			isa = PBXGroup;
 			children = (
 				279545561E9C720B00D36D83 /* AlamofireNetApiData.swift */,
+				7A49523320ECD2D10050CE84 /* RequestHandler.swift */,
+				7A49523520ECD2F60050CE84 /* ApiClient.swift */,
 			);
 			path = Alamofire;
 			sourceTree = "<group>";
@@ -1698,6 +1712,7 @@
 			isa = PBXGroup;
 			children = (
 				3F33D38C1CC203370061C5B0 /* MKitDemoNetApi.swift */,
+				7AB0C92F20EB7C350045D2EA /* NetworkDemo.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1840,6 +1855,14 @@
 				7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */,
 			);
 			path = BaseCaptchaImageView;
+			sourceTree = "<group>";
+		};
+		7A9DE94D20EF68FB004FE5B3 /* Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				7A9DE94E20EF6911004FE5B3 /* TaskIndicator.swift */,
+			);
+			path = Indicator;
 			sourceTree = "<group>";
 		};
 		92606744023F345A76BD07D7 /* Frameworks */ = {
@@ -2440,6 +2463,7 @@
 				2795462A1E9C720C00D36D83 /* UIDevice+Extension.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,
 				2783E0141DB626FD005E087C /* MKUIViewModel.swift in Sources */,
+				7A49523420ECD2D10050CE84 /* RequestHandler.swift in Sources */,
 				7A51B63A20DBB09800060113 /* UIColorEZ+Extension.swift in Sources */,
 				7A99BF5220E4CA920029726D /* NetApiMetric.swift in Sources */,
 				278937FF1CD0A5CC00F43699 /* TestTeacherEntity.swift in Sources */,
@@ -2449,6 +2473,7 @@
 				278937FB1CD0A5CC00F43699 /* PX500PhotosEntity.swift in Sources */,
 				279545FD1E9C720C00D36D83 /* MLinkedList.swift in Sources */,
 				3FC9DF5A1CBFD6D400C2D938 /* PX500PhotosModel.swift in Sources */,
+				7A49523620ECD2F60050CE84 /* ApiClient.swift in Sources */,
 				279546171E9C720C00D36D83 /* Action+Extension.swift in Sources */,
 				279546911E9C720C00D36D83 /* PasswordPannel.swift in Sources */,
 				2795469A1E9C720C00D36D83 /* SlideInPresentationAnimator.swift in Sources */,
@@ -2563,12 +2588,14 @@
 				279546071E9C720C00D36D83 /* CachePool.swift in Sources */,
 				279546471E9C720C00D36D83 /* BaseListFetchKitViewModel.swift in Sources */,
 				279546251E9C720C00D36D83 /* NSUserDefault+Extension.swift in Sources */,
+				7A8E72CD20EDCC0B00F0585F /* Array+Extension.swift in Sources */,
 				279546101E9C720C00D36D83 /* LocalCrashLogReporter.swift in Sources */,
 				7A51B63E20DBB45E00060113 /* UIViewControllerEZ+Extension.swift in Sources */,
 				2795462C1E9C720C00D36D83 /* UIImage+Extension.swift in Sources */,
 				279546341E9C720C00D36D83 /* Async.swift in Sources */,
 				279546601E9C720C00D36D83 /* HQImageViewController.swift in Sources */,
 				2789380B1CD0CC4300F43699 /* BaseListFetchViewModel.swift in Sources */,
+				7AB0C93020EB7C350045D2EA /* NetworkDemo.swift in Sources */,
 				279546901E9C720C00D36D83 /* SharePannelView.swift in Sources */,
 				2795464F1E9C720C00D36D83 /* CoverFlowLayout.swift in Sources */,
 				2795460A1E9C720C00D36D83 /* MemoryCache.swift in Sources */,
@@ -2606,6 +2633,7 @@
 				2783E0161DB626FD005E087C /* MKOrderTableViewController.swift in Sources */,
 				279546581E9C720C00D36D83 /* GesturePasswordButton.swift in Sources */,
 				279546431E9C720C00D36D83 /* BaseKitViewModel.swift in Sources */,
+				7A9DE94F20EF6911004FE5B3 /* TaskIndicator.swift in Sources */,
 				7A51B63820DBAFBB00060113 /* StringEZ+Extension.swift in Sources */,
 				2783E0011DB626FD005E087C /* MKCustomPullRefreshViewController.swift in Sources */,
 				6C406E031EFA433B0052BDA8 /* MKMBProgressHUDViewController.swift in Sources */,

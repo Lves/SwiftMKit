@@ -20,12 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         setenv("XcodeColors", "YES", 0);
         SwiftCrashReport.install(LocalCrashLogReporter.self)
         DemoNetworkConfig.Release = false
         DemoNetworkConfig.Evn = .product
-        DDLog.setup(level: .debug)
+        DDLog.setup(level: .verbose)
         DDTTYLogger.sharedInstance.logFormatter = DDLogMKitFormatter()
         MagicalRecord.setShouldDeleteStoreOnModelMismatch(true)
         MagicalRecord.setupCoreDataStack()
@@ -45,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushManager.shared.addManagers([SystemPush()])
         PushManager.shared.finishLaunch(application: application, didFinishLaunchingWithOptions: launchOptions)
 
+        NetworkDemo().test()
         return true
     }
     

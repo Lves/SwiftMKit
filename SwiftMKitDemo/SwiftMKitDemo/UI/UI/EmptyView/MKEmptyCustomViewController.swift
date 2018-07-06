@@ -19,6 +19,7 @@ class MKEmptyCustomViewController: BaseViewController {
 //        emptyView?.yOffset = -150
         emptyView?.titleLabel.textColor = UIColor.blue
         loadData()
+        NetworkDemo().test()
     }
     override func loadData() {
         super.loadData()

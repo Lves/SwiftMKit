@@ -28,18 +28,18 @@ public enum ApiMethod: String {
 public enum ApiTaskStatus {
     case standby, running, stop
 }
-public enum NetStatusCode: Int {
-    case `default` = 0
-    case success = 200
-    case businessSuccess = 2000
-    case canceled = -999
-    case validateFailed = -99999
-    case forceUpgrade = -10000
-    case badRequest = 400
-    case unAuthorized = 401
-    case loginOtherDevice = 403
-    case timeOut = 504
-}
+//public enum NetStatusCode: Int {
+//    case `default` = 0
+//    case success = 200
+//    case businessSuccess = 2000
+//    case canceled = -999
+//    case validateFailed = -99999
+//    case forceUpgrade = -10000
+//    case badRequest = 400
+//    case unAuthorized = 401
+//    case loginOtherDevice = 403
+//    case timeOut = 504
+//}
 
 public protocol IndicatorProtocol {
     var runningApis: [NetApiProtocol] { get set }

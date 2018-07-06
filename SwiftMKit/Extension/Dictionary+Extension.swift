@@ -45,4 +45,9 @@ extension Dictionary {
         return parameterArray.joined(separator: "&")
     }
 
+    
+    func toModel<T>(_ type: T.Type) -> T? where T : Decodable {
+        guard let data = try? JSONSerialization.data(withJSONObject: self) else { return nil }
+        return try? JSONDecoder().decode(type, from: data)
+    }
 }
