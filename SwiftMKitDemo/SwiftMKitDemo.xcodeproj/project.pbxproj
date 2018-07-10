@@ -311,6 +311,7 @@
 		7A51B63C20DBB19400060113 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63B20DBB19400060113 /* Date+Extension.swift */; };
 		7A51B63E20DBB45E00060113 /* UIViewControllerEZ+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63D20DBB45E00060113 /* UIViewControllerEZ+Extension.swift */; };
 		7A5688E61F039B0C003BEC89 /* BaseCaptchaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */; };
+		7A5FE41320F4638B00792D8E /* RequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FE41220F4638B00792D8E /* RequestApi.swift */; };
 		7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */; };
 		7A68DCDB1EFCF1C000CE9E43 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */; };
 		7A8E72CD20EDCC0B00F0585F /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E72CC20EDCC0B00F0585F /* Array+Extension.swift */; };
@@ -691,6 +692,7 @@
 		7A51B63B20DBB19400060113 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		7A51B63D20DBB45E00060113 /* UIViewControllerEZ+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerEZ+Extension.swift"; sourceTree = "<group>"; };
 		7A5688E51F039B0C003BEC89 /* BaseCaptchaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCaptchaImageView.swift; sourceTree = "<group>"; };
+		7A5FE41220F4638B00792D8E /* RequestApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestApi.swift; sourceTree = "<group>"; };
 		7A68DCD81EFCF17700CE9E43 /* BaseKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitService.swift; sourceTree = "<group>"; };
 		7A68DCDA1EFCF1C000CE9E43 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		7A8E72CC20EDCC0B00F0585F /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 			children = (
 				279545561E9C720B00D36D83 /* AlamofireNetApiData.swift */,
 				7A49523320ECD2D10050CE84 /* RequestHandler.swift */,
+				7A5FE41220F4638B00792D8E /* RequestApi.swift */,
 				7A49523520ECD2F60050CE84 /* ApiClient.swift */,
 			);
 			path = Alamofire;
@@ -2459,6 +2462,7 @@
 				2795461B1E9C720C00D36D83 /* Double+Extension.swift in Sources */,
 				279546201E9C720C00D36D83 /* NSMutableData+Extension.swift in Sources */,
 				9ADF025620E5D950008BD6FA /* SwiftCrashConsoleReporter.swift in Sources */,
+				7A5FE41320F4638B00792D8E /* RequestApi.swift in Sources */,
 				279546491E9C720C00D36D83 /* BaseListKitViewModel.swift in Sources */,
 				2795462A1E9C720C00D36D83 /* UIDevice+Extension.swift in Sources */,
 				278CAA561CD20970008AC629 /* BaseWebViewModel.swift in Sources */,

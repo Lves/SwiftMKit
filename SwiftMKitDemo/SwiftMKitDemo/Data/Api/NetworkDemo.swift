@@ -88,11 +88,58 @@ class DMRequestHandler: RequestHandler {
         }
     }
 }
+
+class ToutiaoApi: NSObject, RequestApi {
+    
+    var sessionIdentifier: String { return "ToutiaoRequestHandler" }
+    var baseURLString: String { return "https://m.toutiao.com" }
+    var baseHeader: [String : Any]? { return nil }
+    var timeoutIntervalForRequest: TimeInterval { return 15 }
+    var timeoutIntervalForResource: TimeInterval { return 45 }
+    var url: String { return "" }
+    var method: HTTPMethod { return .get }
+    var params: [String: Any]? { return nil }
+    var headers: HTTPHeaders? { return nil }
+    var error: NetError?
+    var requestHandler: RequestHandler? {
+        return DMRequestHandler()
+    }
+    weak var indicator: Indicator?
+    
+    func setIndicator(indicator: Indicator?, view: UIView? = UIViewController.topController?.view, text: String? = nil) -> Self {
+        self.indicator = indicator
+        self.indicator?.add(api: self, view: view, text: text)
+        return self
+    }
+    var validate: DataRequest.Validation {
+        return { request, response, data in
+            return DataRequest.ValidationResult.success
+        }
+    }
+    
+    func fill(map: [String: Any]) {}
+    func fill(array: [Any]) {}
+    
+    deinit {
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
+    }
+}
+
+class ToutiaoNewsApi: ToutiaoApi {
+    var news: [NewsModel]?
+    override var url: String {
+        return "list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A135FBC4B22C266&cp=5B42EC2276D6BE1&min_behot_time=0&_signature=QN5xRwAAG57.qIChCSxRQkDecV&i="
+    }
+    override func fill(map: [String : Any]) {
+        self.news = toModel([NewsModel].self, value: map["data"])
+    }
+}
 class DMRequestApi: NSObject, RequestApi {
     
-
+    
     var sessionIdentifier: String { return "DMRequestHandler" }
-    var baseURLString: String { return "http://miracle-web-app.qa-01.idumiao.com" }
+    var baseURLString: String { return "http://localhost:8093" }
+//    var baseURLString: String { return "http://miracle-web-app.qa-01.idumiao.com" }
     var baseHeader: [String : Any]? { return ["x-device-info" : "Xiaomi/19/android/8022000/6"] }
     var timeoutIntervalForRequest: TimeInterval { return 15 }
     var timeoutIntervalForResource: TimeInterval { return 45 }
@@ -100,8 +147,16 @@ class DMRequestApi: NSObject, RequestApi {
     var method: HTTPMethod { return .get }
     var params: [String: Any]? { return nil }
     var headers: HTTPHeaders? { return nil }
+    var error: NetError?
     var requestHandler: RequestHandler? {
         return DMRequestHandler()
+    }
+    weak var indicator: Indicator?
+    
+    func setIndicator(indicator: Indicator?, view: UIView? = UIViewController.topController?.view, text: String? = nil) -> Self {
+        self.indicator = indicator
+        self.indicator?.add(api: self, view: view, text: text)
+        return self
     }
     var validate: DataRequest.Validation {
         return { request, response, data in
@@ -110,7 +165,7 @@ class DMRequestApi: NSObject, RequestApi {
                 let map = dict {
                 if let statusCode = (map["statusCode"] as? String)?.toInt(),
                     let message = map["errorMessage"] as? String,
-                    statusCode == NetStatusCode.unAuthorized.rawValue {
+                    statusCode != NetStatusCode.success.rawValue {
                     let error = NetError(statusCode: statusCode, message: message)
                     return DataRequest.ValidationResult.failure(error)
                 }
@@ -140,6 +195,14 @@ class DMRequestApi: NSObject, RequestApi {
     func fill(map: [String: Any]) {}
     func fill(array: [Any]) {}
     
+    public override init() {
+        super.init()
+    }
+    public convenience init(error: NetError) {
+        self.init()
+        self.error = error
+    }
+    
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
     }
@@ -163,6 +226,9 @@ class MiracleRequestApi: DMRequestApi {
         }
         return result
     }
+    override init() {
+        super.init()
+    }
 }
 class LoanRequestApi: DMRequestApi {
     override var sessionIdentifier: String { return "LoanRequestHandler" }
@@ -183,9 +249,15 @@ class LoanRequestApi: DMRequestApi {
         }
         return result
     }
+    override init() {
+        super.init()
+    }
 }
 enum AdType: Int {
-    case Home = 201
+    case home = 201
+}
+class TimeoutApi: DMRequestApi {
+    override var url: String { return "timeout" }
 }
 class LoginApi: DMRequestApi {
     var mobile: String
@@ -237,19 +309,23 @@ class LoginTokenApi: DMRequestApi {
 class LoanUserInfo: LoanRequestApi {
     var userInfo: [String: Any]?
     override var url: String {
-        return "/app/user/v5/user/info1"
+        return "/app/user/v5/user/info"
     }
     override func fill(map: [String : Any]) {
         userInfo = map
     }
 }
 class AdApi: MiracleRequestApi {
-    var type: AdType
+    var type: AdType = .home
     var ads: [AdModel]?
     override var url: String {
         return "/api/v1/discoveries/list/\(type.rawValue)"
     }
+    override init() {
+        super.init()
+    }
     init(type: AdType) {
+        super.init()
         self.type = type
     }
     override func fill(array: [Any]) {
@@ -263,4 +339,14 @@ struct AdModel: Codable {
     var address: String
     var name: String
     var weight: Int
+}
+
+struct NewsModel: Codable {
+    var title: String
+    var abstract: String
+    var datetime: String
+    var tag: String
+    var url: String
+    var image_url: String
+    var group_id: String
 }

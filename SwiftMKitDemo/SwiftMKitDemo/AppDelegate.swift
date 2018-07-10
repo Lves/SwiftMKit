@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushManager.shared.addManagers([SystemPush()])
         PushManager.shared.finishLaunch(application: application, didFinishLaunchingWithOptions: launchOptions)
 
-        NetworkDemo().test()
         return true
     }
     

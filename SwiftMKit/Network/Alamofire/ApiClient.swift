@@ -38,6 +38,14 @@ struct ApiClient {
         return sessionManager
     }
     
+    static func clearCookie() {
+        DDLogInfo("清除Cookie")
+        let cookieJar = HTTPCookieStorage.shared
+        
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
+    }
     
     private static var runningApis = [RequestApi]()
 

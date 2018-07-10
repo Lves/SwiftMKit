@@ -28,6 +28,10 @@ open class BaseKitViewController : UIViewController {
     lazy open var indicator: IndicatorProtocol = {
         return SingleApiIndicator(hud: self.hud)
     }()
+    lazy open var taskIndicator: Indicator = {
+        return TaskIndicator(hud: self.hud)
+    }()
+    
     
     open var viewModel: BaseKitViewModel? {
         get { return nil }

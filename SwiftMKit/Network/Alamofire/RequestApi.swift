@@ -1,0 +1,294 @@
+//
+//  RequestApi.swift
+//  SwiftMKitDemo
+//
+//  Created by wei.mao on 2018/7/10.
+//  Copyright © 2018年 cdts. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+import ReactiveSwift
+import CocoaLumberjack
+
+public protocol RequestIndicator {
+    var indicator: Indicator? { get set }
+    func setIndicator(indicator: Indicator?, view: UIView?, text: String?) -> Self
+}
+public struct UploadApiModel {
+    var data: Data
+    var name: String
+    var fileName: String
+    var mimeType: String
+}
+public protocol UploadApiProtocol {
+    var files: [UploadApiModel] { get set }
+}
+public protocol RequestApi: class, RequestIndicator {
+    var url: String { get }
+    var method: HTTPMethod { get }
+    var params: [String: Any]? { get }
+    var headers: HTTPHeaders? { get }
+    var requestHandler: RequestHandler? { get }
+    
+    var sessionIdentifier: String { get }
+    var baseHeader: [String: Any]? { get }
+    var baseURLString: String { get }
+    var timeoutIntervalForRequest: TimeInterval { get }
+    var timeoutIntervalForResource: TimeInterval { get }
+    var error: NetError? { get set }
+    func fill(data: Any)
+    func fill(map: [String: Any])
+    func fill(array: [Any])
+    
+    func adapt(_ result: Result<Any>) -> Result<Any>
+    func adapt(_ result: Result<Data>) -> Result<Data>
+    func adapt(_ result: Result<String>) -> Result<String>
+    
+    var validate: DataRequest.Validation { get }
+}
+public extension RequestApi {
+    
+    func toModel<T>(_ type: T.Type, value: Any?) -> T? where T : Decodable {
+        guard let value = value else { return nil }
+        return toModel(type, value: value)
+    }
+    func toModel<T>(_ type: T.Type, value: Any) -> T? where T : Decodable {
+        guard let data = try? JSONSerialization.data(withJSONObject: value) else { return nil }
+        return try? JSONDecoder().decode(type, from: data)
+    }
+    
+    func fill(data: Any) {
+        if let map = data as? [String: Any] {
+            fill(map: map)
+        } else if let array = data as? [Any] {
+            fill(array: array)
+        }
+    }
+    
+    func adapt(_ result: Result<Any>) -> Result<Any> {
+        return result
+    }
+    func adapt(_ result: Result<Data>) -> Result<Data> {
+        return result
+    }
+    func adapt(_ result: Result<String>) -> Result<String> {
+        return result
+    }
+    
+}
+public extension RequestApi {
+    private func getDataRequest() -> DataRequest {
+        let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
+        let sessionManager = ApiClient.getSessionManager(api: self)
+        let request = sessionManager.request(requestUrl, method: self.method, parameters: self.params, headers: self.headers)
+        if let task = request.task {
+            self.indicator?.register(api: self, task: task)
+        }
+        request.resume()
+        return request.validate(self.validate)
+    }
+    private func handleError<T>(_ error:Error, response: DataResponse<T>) -> (NetError, Bool) {
+        let error = error as NSError
+        if let statusCode = StatusCode(rawValue:error.code) {
+            switch(statusCode) {
+            case .canceled:
+                DDLogWarn("[Api] 请求取消: \(response.request?.url?.absoluteString ?? "" )")
+                let err = NetError(statusCode: NetStatusCode.canceled.rawValue, message: "请求取消")
+                self.error = err
+                return (err, true)
+            default:
+                break
+            }
+        }
+        let err = error is NetError ? error as! NetError : NetError(error: error)
+        err.response = response.response
+        self.error = err
+        DDLogError("[Api] 请求失败: \(response.request?.url?.absoluteString ?? "" ), 错误: \(err)")
+        return (err, false)
+    }
+    private func requestJson() -> SignalProducer<Self, NetError> {
+        ApiClient.add(api: self)
+        return SignalProducer { [unowned self] sink, disposable in
+            self.getDataRequest().responseJSON { [weak self] response in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+                DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                let result = strongSelf.adapt(response.result)
+                switch result {
+                case .success:
+                    if let value = result.value {
+                        DDLogVerbose("[Api] 请求成功：Json: \(value)")
+                        strongSelf.fill(data: value)
+                    } else {
+                        DDLogVerbose("[Api] 请求成功")
+                    }
+                    sink.send(value: strongSelf)
+                    sink.sendCompleted()
+                    return
+                case .failure(let error):
+                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    if canceled {
+                        sink.sendInterrupted()
+                    } else {
+                        sink.send(error: error)
+                    }
+                }
+            }
+            disposable.observeEnded {[weak self] in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+                
+            }
+        }
+    }
+    private func requestData() -> SignalProducer<Self, NetError> {
+        ApiClient.add(api: self)
+        return SignalProducer { [unowned self] sink,disposable in
+            self.getDataRequest().responseData { [weak self] response in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+                DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                let result = strongSelf.adapt(response.result)
+                switch result {
+                case .success:
+                    if let value = result.value {
+                        DDLogVerbose("[Api] 请求成功：Data: \(value.count) bytes")
+                        strongSelf.fill(data: value)
+                    } else {
+                        DDLogVerbose("[Api] 请求成功")
+                    }
+                    sink.send(value: strongSelf)
+                    sink.sendCompleted()
+                    return
+                case .failure(let error):
+                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    if canceled {
+                        sink.sendInterrupted()
+                    } else {
+                        sink.send(error: error)
+                    }
+                }
+            }
+            disposable.observeEnded { [weak self] in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+            }
+        }
+    }
+    private func requestString() -> SignalProducer<Self, NetError> {
+        ApiClient.add(api: self)
+        return SignalProducer { [unowned self] sink,disposable in
+            self.getDataRequest().responseString { [weak self] response in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+                DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                let result = strongSelf.adapt(response.result)
+                switch result {
+                case .success:
+                    if let value = result.value {
+                        DDLogVerbose("[Api] 请求成功：String: \(value)")
+                        strongSelf.fill(data: value)
+                    } else {
+                        DDLogVerbose("[Api] 请求成功")
+                    }
+                    sink.send(value: strongSelf)
+                    sink.sendCompleted()
+                    return
+                case .failure(let error):
+                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    if canceled {
+                        sink.sendInterrupted()
+                    } else {
+                        sink.send(error: error)
+                    }
+                }
+            }
+            disposable.observeEnded { [weak self] in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+            }
+        }
+    }
+    func signal(format:RequestType = .json) -> SignalProducer<Self, NetError> {
+        if let err = error {
+            return SignalProducer { sink, _ in
+                sink.send(error: err)
+            }
+        }
+        switch format {
+        case .json:
+            return self.requestJson()
+        case .data:
+            return self.requestData()
+        case .string:
+            return self.requestString()
+        case .upload:
+            return self.requestUpload()
+        default:
+            return SignalProducer { [unowned self] sink, _ in sink.send(value: self) }
+        }
+        
+    }
+}
+
+
+public extension RequestApi {
+    
+    fileprivate func requestUpload() -> SignalProducer<Self, NetError> {
+        ApiClient.add(api: self)
+        return SignalProducer { [unowned self] sink,disposable in
+            ApiClient.remove(api: self)
+            let data = self.createBody(upload: self as! UploadApiProtocol, params: self.params)
+            
+            let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
+            let sessionManager = ApiClient.getSessionManager(api: self)
+            let request = sessionManager.upload(data, to: requestUrl, method: self.method, headers: self.headers)
+            if let task = request.task {
+                self.indicator?.register(api: self, task: task)
+            }
+            request.resume()
+            request.validate(self.validate).responseJSON { [weak self] response in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+                DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                let result = strongSelf.adapt(response.result)
+                switch result {
+                case .success:
+                    if let value = result.value {
+                        DDLogVerbose("[Api] 请求成功：Json: \(value)")
+                        strongSelf.fill(data: value)
+                    } else {
+                        DDLogVerbose("[Api] 请求成功")
+                    }
+                    sink.send(value: strongSelf)
+                    sink.sendCompleted()
+                    return
+                case .failure(let error):
+                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    if canceled {
+                        sink.sendInterrupted()
+                    } else {
+                        sink.send(error: error)
+                    }
+                }
+            }
+            disposable.observeEnded { [weak self] in
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+            }
+        }
+    }
+    func createBody(upload: UploadApiProtocol, params: [String: Any]?) -> Data {
+        let multipart = MultipartFormData()
+        if let params = params {
+            for (key, value) in params {
+                multipart.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: key)
+            }
+        }
+        for file in upload.files {
+            multipart.append(file.data, withName: file.name, fileName: file.fileName, mimeType: file.mimeType)
+        }
+        return try! multipart.encode()
+    }
+}
