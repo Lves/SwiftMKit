@@ -49,8 +49,8 @@ class MKNetworkRequestViewController: BaseListViewController {
     }
     override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
         if let cell = tableViewCell as? MKNetworkRequestTableViewCell {
-            if let model = object as? PX500PopularPhotoModel {
-                cell.photoModel = model
+            if let model = object as? NewsModel {
+                cell.newsModel = model
             }
         }
     }

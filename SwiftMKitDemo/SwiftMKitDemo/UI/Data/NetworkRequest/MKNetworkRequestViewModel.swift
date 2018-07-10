@@ -12,18 +12,18 @@ import ReactiveSwift
 
 class MKNetworkRequestViewModel: BaseListViewModel {
     
-    var signalPX500Photos: SignalProducer<PX500PopularPhotosApiData, NetError> {
+    var signalNews: SignalProducer<ToutiaoNewsListApi, NetError> {
         get {
-            return (PX500PopularPhotosApiData(page:self.dataIndex+1, number:self.listLoadNumber) + self.listIndicator).get { [weak self] data in
-                if let photos = data.photos {
-                    self?.updateDataArray(photos)
+            return ToutiaoNewsListApi(start: (self.dataArray.last as? NewsModel)?.behot_time ?? 0, count: 20).setIndicator(indicator: taskListIndicator).get { [weak self] data in
+                if let news = data.news {
+                    self?.updateDataArray(news)
                 }
             }
         }
     }
     
     override func fetchData() {
-        signalPX500Photos.start()
+        signalNews.start()
     }
     
     

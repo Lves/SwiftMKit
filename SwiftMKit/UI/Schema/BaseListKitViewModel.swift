@@ -25,8 +25,8 @@ open class BaseListKitViewModel: BaseKitViewModel {
             return BaseListKitViewController()
         }
     }
-    open var listIndicator: IndicatorProtocol {
-        get { return self.listViewController.listIndicator }
+    open var taskListIndicator: Indicator {
+        get { return self.listViewController.taskListIndicator }
     }
     var dataArray:[Any] {
         get {

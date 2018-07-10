@@ -15,8 +15,8 @@ open class BaseKitViewModel: NSObject {
     open var hud: HudProtocol {
         get { return self.viewController.hud }
     }
-    open var indicator: IndicatorProtocol {
-        get { return self.viewController.indicator }
+    open var taskIndicator: Indicator {
+        get { return self.viewController.taskIndicator }
     }
     open var view: UIView {
         get { return self.viewController.view }

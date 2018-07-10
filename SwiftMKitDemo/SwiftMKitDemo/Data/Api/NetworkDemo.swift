@@ -15,14 +15,15 @@ public struct NetworkDemo {
     func test() {
         LoginApi(mobile: "18600586544", password: "123123")
             .signal().on(failed: { (error) in
+                
         }) { api in
-            LoginService.accessKey = api.accessKey!
-            LoginService.token = api.token!
-            LoginService.username = api.username!
-            LoanUserInfo().signal().on(failed: { (error) in
-            }) { api in
-
-                }.start()
+//            LoginService.accessKey = api.accessKey!
+//            LoginService.token = api.token!
+//            LoginService.username = api.username!
+//            LoanUserInfo().signal().on(failed: { (error) in
+//            }) { api in
+//
+//                }.start()
             
         }.start()
 //        AdApi(type: .Home).signal().on(failed: { (error) in
@@ -89,57 +90,12 @@ class DMRequestHandler: RequestHandler {
     }
 }
 
-class ToutiaoApi: NSObject, RequestApi {
-    
-    var sessionIdentifier: String { return "ToutiaoRequestHandler" }
-    var baseURLString: String { return "https://m.toutiao.com" }
-    var baseHeader: [String : Any]? { return nil }
-    var timeoutIntervalForRequest: TimeInterval { return 15 }
-    var timeoutIntervalForResource: TimeInterval { return 45 }
-    var url: String { return "" }
-    var method: HTTPMethod { return .get }
-    var params: [String: Any]? { return nil }
-    var headers: HTTPHeaders? { return nil }
-    var error: NetError?
-    var requestHandler: RequestHandler? {
-        return DMRequestHandler()
-    }
-    weak var indicator: Indicator?
-    
-    func setIndicator(indicator: Indicator?, view: UIView? = UIViewController.topController?.view, text: String? = nil) -> Self {
-        self.indicator = indicator
-        self.indicator?.add(api: self, view: view, text: text)
-        return self
-    }
-    var validate: DataRequest.Validation {
-        return { request, response, data in
-            return DataRequest.ValidationResult.success
-        }
-    }
-    
-    func fill(map: [String: Any]) {}
-    func fill(array: [Any]) {}
-    
-    deinit {
-        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
-    }
-}
-
-class ToutiaoNewsApi: ToutiaoApi {
-    var news: [NewsModel]?
-    override var url: String {
-        return "list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A135FBC4B22C266&cp=5B42EC2276D6BE1&min_behot_time=0&_signature=QN5xRwAAG57.qIChCSxRQkDecV&i="
-    }
-    override func fill(map: [String : Any]) {
-        self.news = toModel([NewsModel].self, value: map["data"])
-    }
-}
 class DMRequestApi: NSObject, RequestApi {
     
     
-    var sessionIdentifier: String { return "DMRequestHandler" }
-    var baseURLString: String { return "http://localhost:8093" }
-//    var baseURLString: String { return "http://miracle-web-app.qa-01.idumiao.com" }
+    var sessionIdentifier: String { return "DMRequestApi" }
+//    var baseURLString: String { return "http://localhost:8093" }
+    var baseURLString: String { return "http://miracle-web-app.qa-01.idumiao.com" }
     var baseHeader: [String : Any]? { return ["x-device-info" : "Xiaomi/19/android/8022000/6"] }
     var timeoutIntervalForRequest: TimeInterval { return 15 }
     var timeoutIntervalForResource: TimeInterval { return 45 }
@@ -208,7 +164,7 @@ class DMRequestApi: NSObject, RequestApi {
     }
 }
 class MiracleRequestApi: DMRequestApi {
-    override var sessionIdentifier: String { return "MiracleRequestHandler" }
+    override var sessionIdentifier: String { return "MiracleRequestApi" }
     override var baseURLString: String { return super.baseURLString + "/miracle" }
     
     override func adapt(_ result: Result<Any>) -> Result<Any> {
@@ -231,7 +187,7 @@ class MiracleRequestApi: DMRequestApi {
     }
 }
 class LoanRequestApi: DMRequestApi {
-    override var sessionIdentifier: String { return "LoanRequestHandler" }
+    override var sessionIdentifier: String { return "LoanRequestApi" }
     override var baseURLString: String { return super.baseURLString + "/loan" }
     
     override func adapt(_ result: Result<Any>) -> Result<Any> {
@@ -332,21 +288,10 @@ class AdApi: MiracleRequestApi {
         self.ads = toModel([AdModel].self, value: array)
     }
 }
-
 struct AdModel: Codable {
     var id: Int
     var fileID: String
     var address: String
     var name: String
     var weight: Int
-}
-
-struct NewsModel: Codable {
-    var title: String
-    var abstract: String
-    var datetime: String
-    var tag: String
-    var url: String
-    var image_url: String
-    var group_id: String
 }

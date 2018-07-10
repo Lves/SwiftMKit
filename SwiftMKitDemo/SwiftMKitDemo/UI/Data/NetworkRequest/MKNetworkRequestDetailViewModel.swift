@@ -42,7 +42,7 @@ class MKNetworkRequestDetailViewModel: BaseViewModel {
     
     fileprivate var signalPX500Photo: SignalProducer<PX500PhotoDetailApiData, NetError> {
         get {
-            return PX500PhotoDetailApiData(photoId: photoId!).setIndicator(self.indicator, view: self.view).signal().on(
+            return PX500PhotoDetailApiData(photoId: photoId!).signal().on(
                 failed: { [weak self] error in
                     self?.showTip(error.message)
                 },

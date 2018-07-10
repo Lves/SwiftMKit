@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Alamofire
 import CocoaLumberjack
 
@@ -117,5 +118,79 @@ class BuDeJieADApiData: BuDeJieNetApi {
         if let array = (map["result"] as? [String : Any])?["list"] as? [Any] {
             ads =  NSObject.arrayFromJson(array)
         }
+    }
+}
+
+
+class ToutiaoApi: NSObject, RequestApi {
+    
+    var sessionIdentifier: String { return "ToutiaoRequestHandler" }
+    var baseURLString: String { return "https://m.toutiao.com" }
+    var baseHeader: [String : Any]? { return nil }
+    var timeoutIntervalForRequest: TimeInterval { return 15 }
+    var timeoutIntervalForResource: TimeInterval { return 45 }
+    var url: String { return "" }
+    var method: HTTPMethod { return .get }
+    var params: [String: Any]? { return nil }
+    var headers: HTTPHeaders? { return nil }
+    var error: NetError?
+    var requestHandler: RequestHandler? {
+        return DMRequestHandler()
+    }
+    weak var indicator: Indicator?
+    
+    func setIndicator(indicator: Indicator?, view: UIView? = UIViewController.topController?.view, text: String? = nil) -> Self {
+        self.indicator = indicator
+        self.indicator?.add(api: self, view: view, text: text)
+        return self
+    }
+    var validate: DataRequest.Validation {
+        return { request, response, data in
+            return DataRequest.ValidationResult.success
+        }
+    }
+    
+    func fill(map: [String: Any]) {}
+    func fill(array: [Any]) {}
+    
+    public override init() {
+        super.init()
+    }
+    public convenience init(error: NetError) {
+        self.init()
+        self.error = error
+    }
+    deinit {
+        DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
+    }
+}
+
+
+struct NewsModel: Codable {
+    var title: String
+    var abstract: String
+    var datetime: String
+    var tag: String
+    var url: String
+    var image_url: String?
+    var behot_time: Int
+}
+
+
+class ToutiaoNewsListApi: ToutiaoApi {
+    var news: [NewsModel]?
+    var start: Int
+    var count: Int
+    override var url: String {
+        
+        return "list/?tag=__all__&ac=wap&count=\(count)&format=json_raw&as=A1556B94F4A6B7C&cp=5B4426DB871C2E1&max_behot_time=1531210439&_signature=n-sGNgAAxLognffQdwWJBJ.rBi&i=\(start)"
+    }
+    init(start: Int, count: Int) {
+        self.start = start
+        self.count = count
+        super.init()
+    }
+    override func fill(map: [String : Any]) {
+        self.news = toModel([NewsModel].self, value: map["data"])
     }
 }

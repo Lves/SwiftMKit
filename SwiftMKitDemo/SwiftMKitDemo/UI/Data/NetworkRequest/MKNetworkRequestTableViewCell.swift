@@ -11,11 +11,10 @@ import Haneke
 
 class MKNetworkRequestTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imgHead: UIImageView!
     @IBOutlet weak var imgPic: HQImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblContent: UILabel!
-    @IBOutlet weak var constraintImagePicAspect: NSLayoutConstraint!
+    @IBOutlet weak var constraintImageHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,57 +29,20 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imgPic.image = nil
-        aspectConstraint = nil
-    }
-    
-    internal var aspectConstraint : NSLayoutConstraint? {
-        didSet {
-            if oldValue != nil {
-                imgPic.removeConstraint(oldValue!)
-            }
-            if aspectConstraint != nil {
-                imgPic.addConstraint(aspectConstraint!)
-            }
-        }
-    }
-    func setPostImage(_ image : UIImage) {
-        let aspect = image.size.width / image.size.height
-        constraintImagePicAspect.constant = aspect
-        setNeedsLayout()
-        imgPic.image = image
     }
 
-    var photoModel: PX500PopularPhotoModel? {
+    var newsModel: NewsModel? {
         didSet {
-            self.lblTitle?.text = photoModel?.name
-            self.lblContent?.text = photoModel?.descriptionString
-            self.imgHead.hnk_setImageFromURL(URL(string: (photoModel?.userpic)!)!, placeholder: UIImage(named:"icon_user_head"))
-            if let imageUrl = photoModel?.imageurl {
-                imgPic.imageViewHighQualitySrc = imageUrl
-                self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
-                    [weak self] image in
-                    self?.setPostImage(image)
-                    self?.layoutIfNeeded()
-                }
-            }else {
+            self.lblTitle?.text = newsModel?.title
+            self.lblContent?.text = newsModel?.abstract
+            if let imageUrl = newsModel?.image_url {
+                self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: UIImage(named:"icon_user_head"))
+                self.imgPic.imageViewHighQualitySrc = imageUrl
+            } else {
                 self.imgPic.image = nil
-            }
-        }
-    }
-    
-    var photoEntity: PX500PhotoEntity? {
-        didSet {
-            self.lblTitle?.text = photoEntity?.name
-            self.lblContent?.text = photoEntity?.descriptionString
-            self.imgHead.hnk_setImageFromURL(URL(string: (photoEntity?.user?.userPicUrl)!)!, placeholder: UIImage(named:"icon_user_head"))
-            if let imageUrl = photoEntity?.imageUrl {
-                self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
-                    [weak self] image in
-                    self?.setPostImage(image)
-                    self?.layoutIfNeeded()
-                }
-            }else {
-                self.imgPic.image = nil
+                self.imgPic.imageViewHighQualitySrc = nil
+                self.constraintImageHeight.constant = 1
+                self.setNeedsLayout()
             }
         }
     }

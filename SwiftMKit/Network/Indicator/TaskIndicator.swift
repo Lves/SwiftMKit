@@ -94,6 +94,7 @@ public class TaskIndicator: Indicator {
                 self.hud?.change(text: text)
             }
             showing = true
+            holdHiding = false
         case .stop:
             UIApplication.shared.hideNetworkActivityIndicator()
             guard let view = view else { return }

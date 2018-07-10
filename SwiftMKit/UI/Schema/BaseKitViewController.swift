@@ -25,9 +25,6 @@ open class BaseKitViewController : UIViewController {
     open var hud: HudProtocol {
         get { return _hud }
     }
-    lazy open var indicator: IndicatorProtocol = {
-        return SingleApiIndicator(hud: self.hud)
-    }()
     lazy open var taskIndicator: Indicator = {
         return TaskIndicator(hud: self.hud)
     }()

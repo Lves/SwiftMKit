@@ -15,7 +15,7 @@ class MKCoreDataNetworkRequestViewModel: BaseListFetchViewModel {
     
     fileprivate var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NetError> {
         get {
-            return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).setIndicator(self.listIndicator).signal().on(
+            return PX500PopularPhotosCoreDataApiData(page:self.dataIndex+1, number:self.listLoadNumber).signal().on(
                 failed: { [weak self] error in
                     self?.showTip(error.message)
                 }, value: { [weak self] data in

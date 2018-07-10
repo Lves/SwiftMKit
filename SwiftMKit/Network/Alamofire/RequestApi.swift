@@ -80,6 +80,7 @@ public extension RequestApi {
 public extension RequestApi {
     private func getDataRequest() -> DataRequest {
         let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
+        DDLogInfo("[Api] 请求发起: [\(method.rawValue)]\(requestUrl.absoluteURL.absoluteString)?\(params?.stringFromHttpParameters() ?? "")")
         let sessionManager = ApiClient.getSessionManager(api: self)
         let request = sessionManager.request(requestUrl, method: self.method, parameters: self.params, headers: self.headers)
         if let task = request.task {
@@ -229,6 +230,17 @@ public extension RequestApi {
             return SignalProducer { [unowned self] sink, _ in sink.send(value: self) }
         }
         
+    }
+    
+    func get(_ success: @escaping (Self) -> Void) -> SignalProducer<Self, NetError> {
+        return get(success, error: { error in UIViewController.topController?.showTip(error.message)})
+    }
+    func get(_ success: @escaping (Self) -> Void, error: @escaping (NetError) -> Void) -> SignalProducer<Self, NetError> {
+        return signal().on(
+            failed: error,
+            value: { data in
+                success(data)
+        })
     }
 }
 

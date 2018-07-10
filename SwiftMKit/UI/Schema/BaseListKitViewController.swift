@@ -44,8 +44,8 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
         }
     }
     
-    lazy open var listIndicator: IndicatorProtocol = {
-        return ListApiIndicator(listView: self.listView, viewController: self)
+    lazy open var taskListIndicator: Indicator = {
+        return TaskListIndicator(listView: self.listView, viewController: self)
     }()
     
     open func listViewHeaderWithRefreshingBlock(_ refreshingBlock:@escaping MJRefreshComponentRefreshingBlock)->MJRefreshHeader{
@@ -60,7 +60,7 @@ open class BaseListKitViewController: BaseKitViewController, UITableViewDelegate
     open override func setupUI() {
         super.setupUI()
         emptyView?.inView = self.listView!
-        let _ = listIndicator
+        let _ = taskListIndicator
         if self.listViewType == .none || self.listViewType == .loadMoreOnly {
             self.listView?.mj_header = nil
         }
