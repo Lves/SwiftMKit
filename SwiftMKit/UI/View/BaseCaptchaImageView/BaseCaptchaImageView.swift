@@ -31,7 +31,7 @@ open class BaseCaptchaImageView: UIButton {
         refresh()
     }
     
-    func getApi() -> SignalProducer<NetApiProtocol, NetError>? {
+    func getApi() -> SignalProducer<RequestApi, NetError>? {
         return nil
     }
     
@@ -45,7 +45,7 @@ open class BaseCaptchaImageView: UIButton {
             self?.indicator.stopAnimating()
             self?.setTitle("点击刷新", for: .normal)
             },value: { [weak self] api in
-                if let imgData = api.response?.data {
+                if let imgData = api.responseData {
                     self?.setBackgroundImage(UIImage(data: imgData), for: .normal)
                 }
                 self?.isUserInteractionEnabled = true

@@ -11,6 +11,10 @@ import UIKit
 import Alamofire
 import CocoaLumberjack
 
+public enum ApiTaskStatus {
+    case standby, running, stop
+}
+
 public protocol Indicator: class {
     func add(api: RequestApi, view: UIView?, text: String?)
     func register(api: RequestApi, task: URLSessionTask)

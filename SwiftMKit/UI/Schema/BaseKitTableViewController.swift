@@ -24,8 +24,8 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
     }
     open var completion: () -> Void = {}
     open var hud: HudProtocol = MBHud()
-    lazy open var indicator: IndicatorProtocol = {
-        return SingleApiIndicator(hud: self.hud)
+    lazy open var taskIndicator: Indicator = {
+        return TaskIndicator(hud: self.hud)
     }()
     
     open var viewModel: BaseKitTableViewModel? {
@@ -136,11 +136,6 @@ open class BaseKitTableViewController: UITableViewController, UIGestureRecognize
     deinit {
         DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
         NotificationCenter.default.removeObserver(self)
-        DDLogInfo("Running apis: \(indicator.runningApis.count)")
-        for api in indicator.runningApis {
-            DDLogInfo("Cancel api: \(api)")
-            api.task?.cancel()
-        }
     }
 
     // MARK: - Table view data source

@@ -11,15 +11,15 @@ import ReactiveSwift
 
 class BaseKitService: NSObject {
 
-    class func signalFor<T: NetApiProtocol>(api: T) -> SignalProducer<T, NetError> {
+    class func signalFor<T: RequestApi>(api: T) -> SignalProducer<T, NetError> {
         return api.signal()
     }
 
-    class func validate<T: NetApiProtocol>(_ conditions: [(Bool, String)], completion: () -> T) -> T where T: NSObject {
+    class func validate<T: RequestApi>(_ conditions: [(Bool, String)], completion: () -> T) -> T where T: NSObject {
         let cond = conditions.map { ($0, NetStatusCode.validateFailed.rawValue, $1) }
         return validate(cond, completion: completion)
     }
-    class func validate<T: NetApiProtocol>(_ conditions: [(Bool, Int, String)], completion: () -> T) -> T where T: NSObject {
+    class func validate<T: RequestApi>(_ conditions: [(Bool, Int, String)], completion: () -> T) -> T where T: NSObject {
         for condition in conditions {
             if condition.0 {
                 let error = NetError(statusCode: condition.1, message: condition.2)

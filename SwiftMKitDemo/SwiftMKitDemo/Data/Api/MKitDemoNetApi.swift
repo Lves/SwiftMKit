@@ -22,6 +22,7 @@ class WangYiApi: NSObject, RequestApi {
     var method: HTTPMethod { return .get }
     var params: [String: Any]? { return nil }
     var headers: HTTPHeaders? { return nil }
+    var responseData: Data?
     var error: NetError?
     var requestHandler: RequestHandler?
     weak var indicator: Indicator?

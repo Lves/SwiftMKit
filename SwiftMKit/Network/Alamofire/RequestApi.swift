@@ -15,14 +15,14 @@ public protocol RequestIndicator {
     var indicator: Indicator? { get set }
     func setIndicator(_ indicator: Indicator?, view: UIView?, text: String?) -> Self
 }
-public struct UploadApiModel {
+public struct UploadFileModel {
     var data: Data
     var name: String
     var fileName: String
     var mimeType: String
 }
 public protocol UploadApiProtocol {
-    var files: [UploadApiModel]? { get set }
+    var files: [UploadFileModel]? { get set }
 }
 public protocol RequestApi: class, RequestIndicator {
     var url: String { get }
@@ -36,6 +36,7 @@ public protocol RequestApi: class, RequestIndicator {
     var baseURLString: String { get }
     var timeoutIntervalForRequest: TimeInterval { get }
     var timeoutIntervalForResource: TimeInterval { get }
+    var responseData: Data? { get set }
     var error: NetError? { get set }
     func fill(data: Any)
     func fill(map: [String: Any])
@@ -115,6 +116,7 @@ public extension RequestApi {
                 guard let strongSelf = self else { return }
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                strongSelf.responseData = response.data
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
@@ -150,6 +152,7 @@ public extension RequestApi {
                 guard let strongSelf = self else { return }
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                strongSelf.responseData = response.data
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
@@ -184,6 +187,7 @@ public extension RequestApi {
                 guard let strongSelf = self else { return }
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                strongSelf.responseData = response.data
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
@@ -264,6 +268,7 @@ public extension RequestApi {
                 guard let strongSelf = self else { return }
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                strongSelf.responseData = response.data
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
