@@ -14,7 +14,7 @@ class MKNetworkRequestViewModel: BaseListViewModel {
     
     var signalNews: SignalProducer<ToutiaoNewsListApi, NetError> {
         get {
-            return ToutiaoNewsListApi(start: (self.dataArray.last as? NewsModel)?.behot_time ?? 0, count: 20).setIndicator(indicator: taskListIndicator).get { [weak self] data in
+            return ToutiaoNewsListApi(start: (self.dataArray.last as? NewsModel)?.behot_time ?? 0, count: 20).setIndicator(taskListIndicator).get { [weak self] data in
                 if let news = data.news {
                     self?.updateDataArray(news)
                 }

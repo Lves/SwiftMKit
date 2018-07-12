@@ -139,7 +139,7 @@ class ToutiaoApi: NSObject, RequestApi {
     }
     weak var indicator: Indicator?
     
-    func setIndicator(indicator: Indicator?, view: UIView? = UIViewController.topController?.view, text: String? = nil) -> Self {
+    func setIndicator(_ indicator: Indicator?, view: UIView? = UIViewController.topController?.view, text: String? = nil) -> Self {
         self.indicator = indicator
         self.indicator?.add(api: self, view: view, text: text)
         return self

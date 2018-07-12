@@ -13,7 +13,7 @@ import CocoaLumberjack
 
 public protocol RequestIndicator {
     var indicator: Indicator? { get set }
-    func setIndicator(indicator: Indicator?, view: UIView?, text: String?) -> Self
+    func setIndicator(_ indicator: Indicator?, view: UIView?, text: String?) -> Self
 }
 public struct UploadApiModel {
     var data: Data
@@ -22,7 +22,7 @@ public struct UploadApiModel {
     var mimeType: String
 }
 public protocol UploadApiProtocol {
-    var files: [UploadApiModel] { get set }
+    var files: [UploadApiModel]? { get set }
 }
 public protocol RequestApi: class, RequestIndicator {
     var url: String { get }
@@ -298,8 +298,10 @@ public extension RequestApi {
                 multipart.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: key)
             }
         }
-        for file in upload.files {
-            multipart.append(file.data, withName: file.name, fileName: file.fileName, mimeType: file.mimeType)
+        if let files = upload.files {
+            for file in files {
+                multipart.append(file.data, withName: file.name, fileName: file.fileName, mimeType: file.mimeType)
+            }
         }
         return try! multipart.encode()
     }
