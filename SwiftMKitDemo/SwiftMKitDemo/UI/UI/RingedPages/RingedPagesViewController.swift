@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Haneke
 
 class RingedPagesViewController: UIViewController, RingedPagesDataSource, RingedPagesDelegate {
     
@@ -81,7 +80,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
         }
         
         if let fromUrl : String = dataSource[index] {
-            imgv?.hnk_setImageFromURL(NSURL(string: fromUrl)!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) { image in
+            imgv?.hnk_setImageFromURL(NSURL(string: fromUrl)!, placeholder:UIImage(named:"default_image"), format: Format<UIImage>(name: "original")) { image in
                 imgv?.image = image
             }
         }

@@ -12,9 +12,9 @@ import ReactiveSwift
 
 class MKNetworkRequestViewModel: BaseListViewModel {
     
-    var signalNews: SignalProducer<ToutiaoNewsListApi, NetError> {
+    var signalNews: SignalProducer<NewsListApi, NetError> {
         get {
-            return ToutiaoNewsListApi(start: (self.dataArray.last as? NewsModel)?.behot_time ?? 0, count: 20).setIndicator(taskListIndicator).get { [weak self] data in
+            return NewsListApi(offset: dataIndex * listLoadNumber, size: listLoadNumber).setIndicator(taskListIndicator).get(format: .string) { [weak self] data in
                 if let news = data.news {
                     self?.updateDataArray(news)
                 }

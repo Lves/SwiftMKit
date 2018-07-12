@@ -14,7 +14,6 @@ import MJExtension
 import ReactiveSwift
 import Alamofire
 
-
 open class NetApiData: NSObject, NetApiProtocol {
     
     private struct Const {

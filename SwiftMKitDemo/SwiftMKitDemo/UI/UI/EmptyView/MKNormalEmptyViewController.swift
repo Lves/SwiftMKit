@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 class MKNormalEmptyViewController: BaseViewController {
 
@@ -16,6 +18,8 @@ class MKNormalEmptyViewController: BaseViewController {
     override func loadData() {
         super.loadData()
         emptyView?.show()
+        
+        
     }
 
 }

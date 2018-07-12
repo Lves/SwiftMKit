@@ -94,7 +94,6 @@ class DMRequestApi: NSObject, RequestApi {
     
     
     var sessionIdentifier: String { return "DMRequestApi" }
-//    var baseURLString: String { return "http://localhost:8093" }
     var baseURLString: String { return "http://miracle-web-app.qa-01.idumiao.com" }
     var baseHeader: [String : Any]? { return ["x-device-info" : "Xiaomi/19/android/8022000/6"] }
     var timeoutIntervalForRequest: TimeInterval { return 15 }

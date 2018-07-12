@@ -311,4 +311,13 @@ extension String {
         return nil
     }
 
+    var friendlyTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh_CN")
+        dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+        if let date = dateFormatter.date(from: self) {
+            return date.friendlyTime
+        }
+        return self
+    }
 }

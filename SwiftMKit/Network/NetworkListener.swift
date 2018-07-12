@@ -11,6 +11,7 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 import ReactiveSwift
+import Alamofire
 
 public enum NetworkStatus: String {
     case unknown                = "Unknown"
@@ -22,29 +23,24 @@ public enum NetworkStatus: String {
 
 public struct NetworkListener {
     public static var networkStatus = MutableProperty<NetworkStatus>(.unknown)
-    private static var reachability: Reachability?
+    private static var manager: NetworkReachabilityManager?
     
     public static func listen() {
-        reachability = Reachability.init()
-        reachability?.whenReachable = { reachability in
-            if reachability.isReachableViaWiFi {
+        manager = NetworkReachabilityManager()
+        manager?.listener = { status in
+            switch status {
+            case .reachable(.ethernetOrWiFi):
                 DDLogInfo("当前网络: WiFi")
                 self.networkStatus.value = .reachableViaWiFi
-            } else {
+            case .reachable(.wwan):
                 DDLogInfo("当前网络: Cellular")
                 self.networkStatus.value = .reachableViaWWAN
+            default:
+                DDLogInfo("网络无法连接")
+                self.networkStatus.value = .notReachable
             }
         }
-        reachability?.whenUnreachable = { reachability in
-            DDLogInfo("网络无法连接")
-            self.networkStatus.value = .notReachable
-        }
-        
-        do {
-            try self.reachability?.startNotifier()
-        } catch {
-            DDLogError("Unable to start notifier")
-        }
+        manager?.startListening()
     }
     
     

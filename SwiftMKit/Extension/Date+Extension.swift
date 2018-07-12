@@ -8,6 +8,44 @@
 
 import Foundation
 
+extension Date {
+    var friendlyTime: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EE MM dd HH:mm:ss Z yyyy"
+        formatter.locale = Locale(identifier: "en")
+        let calendar = Calendar.current
+        var result = ""
+        var formatterSr = "HH:mm"
+        
+        if calendar.isDateInToday(self) { //今天
+            let interval = Int(Date().timeIntervalSince(self))  //比较两个时间的差值
+            if interval < 60 {
+                result = "刚刚"
+            }else if interval < 60 * 60 {
+                result = "\(interval/60)分钟前"
+            }else if interval < 60 * 60 * 24 {
+                result = "\(interval / (60 * 60))小时前"
+            }
+        } else if calendar.isDateInYesterday(self) {  //昨天
+            formatterSr = "昨天 " + formatterSr
+            formatter.dateFormat = formatterSr
+            result = formatter.string(from: self)
+        } else {
+            //该方法可以获取两个时间之间的差值
+            let comps = calendar.dateComponents([Calendar.Component.year], from: self, to: Date())
+            if comps.year! >= 1 {  //更早时间
+                formatterSr = "yyyy-MM-dd " + formatterSr
+            }else { //一年以内
+                formatterSr = "MM-dd " + formatterSr
+            }
+            
+            formatter.dateFormat = formatterSr
+            result = formatter.string(from: self)
+        }
+        
+        return result
+    }
+}
 
 extension Date {
     

@@ -64,8 +64,6 @@
 		2783E01F1DB626FD005E087C /* MKUITreeViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2783DFFA1DB626FD005E087C /* MKUITreeViewCellTableViewCell.xib */; };
 		2783E02A1DB62716005E087C /* MKNetworkRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0221DB62716005E087C /* MKNetworkRequestTableViewCell.swift */; };
 		2783E02B1DB62716005E087C /* MKNetworkRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2783E0231DB62716005E087C /* MKNetworkRequestTableViewCell.xib */; };
-		2783E02C1DB62716005E087C /* MKNetworkRequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0241DB62716005E087C /* MKNetworkRequestDetailViewController.swift */; };
-		2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0251DB62716005E087C /* MKNetworkRequestDetailViewModel.swift */; };
 		2783E02E1DB62716005E087C /* MKNetworkRequestView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2783E0261DB62716005E087C /* MKNetworkRequestView.storyboard */; };
 		2783E02F1DB62716005E087C /* MKNetworkRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0271DB62716005E087C /* MKNetworkRequestViewController.swift */; };
 		2783E0301DB62716005E087C /* MKNetworkRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2783E0281DB62716005E087C /* MKNetworkRequestViewModel.swift */; };
@@ -302,7 +300,6 @@
 		6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */; };
 		7A49523420ECD2D10050CE84 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49523320ECD2D10050CE84 /* RequestHandler.swift */; };
 		7A49523620ECD2F60050CE84 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49523520ECD2F60050CE84 /* ApiClient.swift */; };
-		7A51B63020DB9E4F00060113 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B62F20DB9E4F00060113 /* Reachability.swift */; };
 		7A51B63220DBAE0100060113 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63120DBAE0100060113 /* CGRect+Extension.swift */; };
 		7A51B63420DBAE4C00060113 /* UIViewEZ+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63320DBAE4C00060113 /* UIViewEZ+Extension.swift */; };
 		7A51B63620DBAE9600060113 /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51B63520DBAE9600060113 /* CGFloat+Extension.swift */; };
@@ -429,8 +426,6 @@
 		2783DFFA1DB626FD005E087C /* MKUITreeViewCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKUITreeViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		2783E0221DB62716005E087C /* MKNetworkRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNetworkRequestTableViewCell.swift; sourceTree = "<group>"; };
 		2783E0231DB62716005E087C /* MKNetworkRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKNetworkRequestTableViewCell.xib; sourceTree = "<group>"; };
-		2783E0241DB62716005E087C /* MKNetworkRequestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNetworkRequestDetailViewController.swift; sourceTree = "<group>"; };
-		2783E0251DB62716005E087C /* MKNetworkRequestDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNetworkRequestDetailViewModel.swift; sourceTree = "<group>"; };
 		2783E0261DB62716005E087C /* MKNetworkRequestView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MKNetworkRequestView.storyboard; sourceTree = "<group>"; };
 		2783E0271DB62716005E087C /* MKNetworkRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNetworkRequestViewController.swift; sourceTree = "<group>"; };
 		2783E0281DB62716005E087C /* MKNetworkRequestViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKNetworkRequestViewModel.swift; sourceTree = "<group>"; };
@@ -684,7 +679,6 @@
 		6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReflectionTool.swift; sourceTree = "<group>"; };
 		7A49523320ECD2D10050CE84 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		7A49523520ECD2F60050CE84 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
-		7A51B62F20DB9E4F00060113 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7A51B63120DBAE0100060113 /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
 		7A51B63320DBAE4C00060113 /* UIViewEZ+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewEZ+Extension.swift"; sourceTree = "<group>"; };
 		7A51B63520DBAE9600060113 /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
@@ -894,7 +888,6 @@
 				2783E0261DB62716005E087C /* MKNetworkRequestView.storyboard */,
 				2783E0271DB62716005E087C /* MKNetworkRequestViewController.swift */,
 				2783E0351DB62BD4005E087C /* MKCoreDataNetworkRequestViewController.swift */,
-				2783E0241DB62716005E087C /* MKNetworkRequestDetailViewController.swift */,
 				2783E0311DB6271C005E087C /* Cell */,
 				2783E0321DB62725005E087C /* ViewModel */,
 			);
@@ -915,7 +908,6 @@
 			children = (
 				2783E0281DB62716005E087C /* MKNetworkRequestViewModel.swift */,
 				2783E0331DB62BB6005E087C /* MKCoreDataNetworkRequestViewModel.swift */,
-				2783E0251DB62716005E087C /* MKNetworkRequestDetailViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1141,7 +1133,6 @@
 				7A99BF5120E4CA920029726D /* NetApiMetric.swift */,
 				2795455F1E9C720B00D36D83 /* NetError.swift */,
 				279545601E9C720B00D36D83 /* NetworkConfig.swift */,
-				7A51B62F20DB9E4F00060113 /* Reachability.swift */,
 				279545611E9C720B00D36D83 /* Upgrade */,
 			);
 			path = Network;
@@ -1937,7 +1928,6 @@
 				3FC9DEF21CBFD35900C2D938 /* Frameworks */,
 				3FC9DEF31CBFD35900C2D938 /* Resources */,
 				F4F046577E613A2F253A3A17 /* [CP] Embed Pods Frameworks */,
-				EA2A84363EB6D9DC92389B35 /* [CP] Copy Pods Resources */,
 				F0341C181DAF528400435765 /* Embed Frameworks */,
 				27963FE31DD46FEF007BA28A /* Embed App Extensions */,
 			);
@@ -1959,7 +1949,6 @@
 				3FC9DF061CBFD35900C2D938 /* Frameworks */,
 				3FC9DF071CBFD35900C2D938 /* Resources */,
 				9784876EBA4A3CC342CCC8BB /* [CP] Embed Pods Frameworks */,
-				706DB8A176B73B11062EB860 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1979,7 +1968,6 @@
 				3FC9DF101CBFD35A00C2D938 /* Sources */,
 				3FC9DF111CBFD35A00C2D938 /* Frameworks */,
 				3FC9DF121CBFD35A00C2D938 /* Resources */,
-				E63D16DECFCEE7F3A4BA6E58 /* [CP] Copy Pods Resources */,
 				5A49EE33AF7D5E9EBD94C708 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -2199,18 +2187,15 @@
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions/EZSwiftExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/JSPatch/JSPatch.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PulsingHalo/PulsingHalo.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -2225,18 +2210,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSPatch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PulsingHalo.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -2247,21 +2229,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		706DB8A176B73B11062EB860 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		81C1809CDC19FF283B2A72B1 /* [CP] Check Pods Manifest.lock */ = {
@@ -2294,18 +2261,15 @@
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions/EZSwiftExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/JSPatch/JSPatch.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PulsingHalo/PulsingHalo.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -2320,18 +2284,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSPatch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PulsingHalo.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -2342,36 +2303,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E63D16DECFCEE7F3A4BA6E58 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EA2A84363EB6D9DC92389B35 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F4F046577E613A2F253A3A17 /* [CP] Embed Pods Frameworks */ = {
@@ -2386,18 +2317,15 @@
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions/EZSwiftExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/JSPatch/JSPatch.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PulsingHalo/PulsingHalo.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -2412,18 +2340,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSPatch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PulsingHalo.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -2507,7 +2432,6 @@
 				9ADF025420E5D950008BD6FA /* MachThreadBacktrace.c in Sources */,
 				2795469C1E9C720C00D36D83 /* SlideInPresentationManager.swift in Sources */,
 				279546141E9C720C00D36D83 /* PushManager.swift in Sources */,
-				2783E02D1DB62716005E087C /* MKNetworkRequestDetailViewModel.swift in Sources */,
 				7A51B63C20DBB19400060113 /* Date+Extension.swift in Sources */,
 				2795464C1E9C720C00D36D83 /* IndicatorButton.swift in Sources */,
 				279546521E9C720C00D36D83 /* CuteView.swift in Sources */,
@@ -2626,7 +2550,6 @@
 				2795465E1E9C720C00D36D83 /* MBHud.swift in Sources */,
 				3F33D38D1CC203370061C5B0 /* MKitDemoNetApi.swift in Sources */,
 				6C4702A1202AD9F900BB712F /* LinkTextView.swift in Sources */,
-				7A51B63020DB9E4F00060113 /* Reachability.swift in Sources */,
 				2795460C1E9C720C00D36D83 /* LocationManager.swift in Sources */,
 				278937FE1CD0A5CC00F43699 /* TestTeacherEntity+CoreDataProperties.swift in Sources */,
 				2795466F1E9C720C00D36D83 /* NumberKeyboardProtocol.swift in Sources */,
@@ -2634,7 +2557,6 @@
 				2783E00C1DB626FD005E087C /* MKGesturePasswordViewController.swift in Sources */,
 				279546221E9C720C00D36D83 /* NSRange+Extension.swift in Sources */,
 				2795469D1E9C720C00D36D83 /* CrashLogDetailViewController.swift in Sources */,
-				2783E02C1DB62716005E087C /* MKNetworkRequestDetailViewController.swift in Sources */,
 				279546321E9C720C00D36D83 /* UIViewController+Extension.swift in Sources */,
 				27A5B20E1CC86E88005A59CA /* SwiftMKitDemo.xcdatamodeld in Sources */,
 				279546151E9C720C00D36D83 /* SystemPush.swift in Sources */,

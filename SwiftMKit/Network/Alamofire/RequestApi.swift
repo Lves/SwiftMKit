@@ -232,11 +232,11 @@ public extension RequestApi {
         
     }
     
-    func get(_ success: @escaping (Self) -> Void) -> SignalProducer<Self, NetError> {
-        return get(success, error: { error in UIViewController.topController?.showTip(error.message)})
+    func get(format:RequestType = .json, _ success: @escaping (Self) -> Void) -> SignalProducer<Self, NetError> {
+        return get(format: format, success, error: { error in UIViewController.topController?.showTip(error.message)})
     }
-    func get(_ success: @escaping (Self) -> Void, error: @escaping (NetError) -> Void) -> SignalProducer<Self, NetError> {
-        return signal().on(
+    func get(format:RequestType = .json, _ success: @escaping (Self) -> Void, error: @escaping (NetError) -> Void) -> SignalProducer<Self, NetError> {
+        return signal(format: format).on(
             failed: error,
             value: { data in
                 success(data)

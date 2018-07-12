@@ -57,6 +57,7 @@ class MKUIViewController: BaseListViewController, SmarterToolDelegate {
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: InnerConst.CellIdentifier)
         }
+        
         return cell
     }
     override func configureCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {

@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import CocoaLumberjack
 import ReactiveCocoa
-import Haneke
 import FDFullscreenPopGesture
 
 class MKNetworkRequestViewController: BaseListViewController {
@@ -55,11 +54,8 @@ class MKNetworkRequestViewController: BaseListViewController {
         }
     }
     override func didSelectCell(_ tableViewCell: UITableViewCell, object: Any, indexPath: IndexPath) {
-        if let model = object as? PX500PopularPhotoModel {
-            self.route(toName: InnerConst.SegueToNext, params: ["photoId":model.photoId!])
+        if let model = object as? NewsModel {
+            self.route(toUrl: model.getDetailUrl())
         }
-    }
-    deinit {
-        print("aa")
     }
 }

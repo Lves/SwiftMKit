@@ -7,13 +7,15 @@
 //
 
 import UIKit
-import Haneke
+import Kingfisher
 
 class MKNetworkRequestTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imgPic: HQImageView!
+    @IBOutlet weak var imgPic: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblContent: UILabel!
+    @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var lblComments: UILabel!
     @IBOutlet weak var constraintImageHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
@@ -33,17 +35,19 @@ class MKNetworkRequestTableViewCell: UITableViewCell {
 
     var newsModel: NewsModel? {
         didSet {
-            self.lblTitle?.text = newsModel?.title
-            self.lblContent?.text = newsModel?.abstract
-            if let imageUrl = newsModel?.image_url {
-                self.imgPic.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: UIImage(named:"icon_user_head"))
-                self.imgPic.imageViewHighQualitySrc = imageUrl
+            guard let newsModel = newsModel else { return }
+            self.lblTitle?.text = newsModel.title
+            self.lblContent?.text = newsModel.digest + "..."
+            if let imageUrl = newsModel.imgsrc {
+                self.imgPic.kf.setImage(with: URL(string: imageUrl)!, placeholder: UIImage(named: "default_image"))
             } else {
                 self.imgPic.image = nil
-                self.imgPic.imageViewHighQualitySrc = nil
-                self.constraintImageHeight.constant = 1
+                self.constraintImageHeight.constant = 0
                 self.setNeedsLayout()
             }
+            self.lblTime.text = newsModel.displayTime
+            self.lblComments.text = "\(newsModel.displayCommentCount)跟帖"
         }
     }
+    
 }

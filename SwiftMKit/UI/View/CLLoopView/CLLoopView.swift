@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Haneke
+import Kingfisher
 
 public protocol CLLoopViewDelegate{
     func selectLoopViewPage(idx:Int);
@@ -182,10 +182,12 @@ public class CLLoopView: UIView,UIScrollViewDelegate {
         if fromUrl == nil {
             return
         }
-        toImagev.hnk_setImageFromURL(URL(string: fromUrl ?? "")!, placeholder:UIImage(named:"view_default_loading"), format: Format<UIImage>(name: "original")) {
-            [weak self] image in
-            toImagev.image = image
-            self?.layoutIfNeeded()
+        toImagev.kf.setImage(with: URL(string: fromUrl ?? "")!, placeholder:UIImage(named:"default_image")) {
+            [weak self] image, error, cacheType, imageURL in
+            if let image = image {
+                toImagev.image = image
+                self?.layoutIfNeeded()
+            }
         }
     }
     

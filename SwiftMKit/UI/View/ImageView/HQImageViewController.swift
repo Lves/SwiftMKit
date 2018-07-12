@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import Haneke
+import Kingfisher
 
 public class HQImageViewController: BaseKitViewController {
 
@@ -78,9 +78,11 @@ public class HQImageViewController: BaseKitViewController {
             zoomView.tag = InnerConst.zoomViewTag + i - 1
             zoomView.isUserInteractionEnabled = true
             zoomView.delegate = self
-            zoomView.imageView?.hnk_setImageFromURL(URL(string: imageUrl)!, placeholder: image, format: Format<UIImage>(name: "original"), failure: nil, success: { (image) in
-                zoomView.image = image
-            })
+            zoomView.imageView?.kf.setImage(with: URL(string: imageUrl)!, placeholder: image) { image, error, cacheType, imageURL in
+                if let image = image {
+                    zoomView.image = image
+                }
+            }
             scrollView.addSubview(zoomView)
         }
         

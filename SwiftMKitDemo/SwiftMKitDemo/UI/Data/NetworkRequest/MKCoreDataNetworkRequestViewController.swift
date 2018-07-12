@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import CocoaLumberjack
 import ReactiveCocoa
-import Haneke
 
 enum DataStoreType: Int {
     case memory, coreData

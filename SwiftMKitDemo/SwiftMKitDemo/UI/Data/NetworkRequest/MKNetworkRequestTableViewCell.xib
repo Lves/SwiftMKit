@@ -32,24 +32,40 @@
                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" image="view_default_loading" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-nd-3iQ" customClass="HQImageView" customModule="SwiftMKitDemo" customModuleProvider="target">
-                        <rect key="frame" x="211.5" y="16" width="155.5" height="100"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" image="default_image" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-nd-3iQ">
+                        <rect key="frame" x="238" y="16" width="129" height="80"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="OP5-RJ-V25"/>
-                            <constraint firstAttribute="width" secondItem="cSM-nd-3iQ" secondAttribute="height" multiplier="380:244" id="dxN-5h-enW"/>
+                            <constraint firstAttribute="height" constant="80" id="OP5-RJ-V25"/>
+                            <constraint firstAttribute="width" secondItem="cSM-nd-3iQ" secondAttribute="height" multiplier="116:72" id="dxN-5h-enW"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVm-9V-aFQ">
+                        <rect key="frame" x="15" y="73.5" width="28" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Laz-2P-lPC">
+                        <rect key="frame" x="51" y="73.5" width="61" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gJR-8L-D3X" secondAttribute="bottom" constant="15" id="8sN-PC-tsG"/>
+                    <constraint firstItem="pVm-9V-aFQ" firstAttribute="leading" secondItem="22D-V2-o0F" secondAttribute="leading" constant="15" id="0Td-sz-N3o"/>
+                    <constraint firstItem="pVm-9V-aFQ" firstAttribute="top" secondItem="gJR-8L-D3X" secondAttribute="bottom" constant="15" id="Arj-O6-BKO"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="gJR-8L-D3X" secondAttribute="bottom" priority="750" constant="8" id="Qba-0q-mCW"/>
                     <constraint firstItem="cSM-nd-3iQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pw6-Al-taY" secondAttribute="trailing" constant="15" id="Qci-PA-rkN"/>
                     <constraint firstItem="gJR-8L-D3X" firstAttribute="leading" secondItem="pw6-Al-taY" secondAttribute="leading" id="RP8-FM-PgO"/>
+                    <constraint firstItem="Laz-2P-lPC" firstAttribute="leading" secondItem="pVm-9V-aFQ" secondAttribute="trailing" constant="8" id="T1J-ai-Izc"/>
                     <constraint firstItem="cSM-nd-3iQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gJR-8L-D3X" secondAttribute="trailing" constant="15" id="TBF-Q5-OPM"/>
+                    <constraint firstItem="Laz-2P-lPC" firstAttribute="centerY" secondItem="pVm-9V-aFQ" secondAttribute="centerY" id="Wuv-Db-g4Y"/>
                     <constraint firstAttribute="trailing" secondItem="cSM-nd-3iQ" secondAttribute="trailing" constant="16" id="pmo-RH-REU"/>
                     <constraint firstItem="pw6-Al-taY" firstAttribute="top" secondItem="22D-V2-o0F" secondAttribute="topMargin" constant="8" id="qPk-id-CNd"/>
                     <constraint firstItem="gJR-8L-D3X" firstAttribute="top" secondItem="pw6-Al-taY" secondAttribute="bottom" constant="3" id="tBh-EP-jRE"/>
                     <constraint firstItem="pw6-Al-taY" firstAttribute="leading" secondItem="22D-V2-o0F" secondAttribute="leading" constant="15" id="vkN-aZ-j8X"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pVm-9V-aFQ" secondAttribute="bottom" constant="15" id="zfb-SR-2mz"/>
                     <constraint firstItem="cSM-nd-3iQ" firstAttribute="top" secondItem="22D-V2-o0F" secondAttribute="top" constant="16" id="zv2-jz-pIc"/>
                 </constraints>
                 <variation key="default">
@@ -61,13 +77,15 @@
             <connections>
                 <outlet property="constraintImageHeight" destination="OP5-RJ-V25" id="Y5i-Ze-rHe"/>
                 <outlet property="imgPic" destination="cSM-nd-3iQ" id="8cP-AM-Qr4"/>
+                <outlet property="lblComments" destination="Laz-2P-lPC" id="Tar-73-GXX"/>
                 <outlet property="lblContent" destination="gJR-8L-D3X" id="Fia-pI-asf"/>
+                <outlet property="lblTime" destination="pVm-9V-aFQ" id="EnC-y7-KLU"/>
                 <outlet property="lblTitle" destination="pw6-Al-taY" id="kr2-VE-0kY"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="9.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="view_default_loading" width="308" height="127"/>
+        <image name="default_image" width="450" height="301"/>
     </resources>
 </document>

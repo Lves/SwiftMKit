@@ -11,6 +11,7 @@ def pods
     pod 'CocoaLumberjack/Swift', '~> 3.4.0'
     pod 'ReactiveCocoa', '~> 7.2.0'
     pod 'Alamofire', '~> 4.7.0'
+    pod 'Kingfisher', '~> 4.8.0'
     pod 'MagicalRecord', '~> 2.3.0'
     pod 'MJExtension', '~> 3.0.0'
     pod 'MJRefresh', '~> 3.1.0'
@@ -21,7 +22,7 @@ def pods
     pod 'SnapKit', '~> 4.0.0'
     pod 'pop', '~> 1.0.0'
     pod 'Aspects', '~> 1.4.0'
-    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift.git', :commit => '500aece'
+#    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift.git', :commit => '500aece'
     pod 'MBProgressHUD', '~> 1.1.0'
     
     pod 'Charts', '~> 3.1.0'
