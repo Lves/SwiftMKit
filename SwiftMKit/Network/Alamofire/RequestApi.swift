@@ -81,7 +81,7 @@ public extension RequestApi {
 public extension RequestApi {
     private func getDataRequest() -> DataRequest {
         let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
-        DDLogInfo("[Api] 请求发起: [\(method.rawValue)]\(requestUrl.absoluteURL.absoluteString)?\(params?.stringFromHttpParameters() ?? "")")
+        DDLogInfo("[Api] 请求发起: [\(method.rawValue)] \(requestUrl.absoluteURL.absoluteString)?\(params?.stringFromHttpParameters() ?? "")")
         let sessionManager = ApiClient.getSessionManager(api: self)
         let request = sessionManager.request(requestUrl, method: self.method, parameters: self.params, headers: self.headers)
         if let task = request.task {
@@ -121,10 +121,10 @@ public extension RequestApi {
                 switch result {
                 case .success:
                     if let value = result.value {
-                        DDLogVerbose("[Api] 请求成功：Json: \(value)")
+                        DDLogInfo("[Api] 请求成功：Json: \(value)")
                         strongSelf.fill(data: value)
                     } else {
-                        DDLogVerbose("[Api] 请求成功")
+                        DDLogInfo("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
