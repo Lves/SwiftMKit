@@ -12,21 +12,27 @@ import PINCache
 import CocoaLumberjack
 import ReactiveCocoa
 
+extension Notification.Name {
+    public struct Location {
+        public static let Updated = Notification.Name(rawValue: "com.swiftkit.notification.name.location.update")
+    }
+}
 open class LocationManager : NSObject, CLLocationManagerDelegate {
     
-    static let NotificationLocationUpdatedName = "NotificationLocationUpdated"
-    
     fileprivate struct Constant {
-        static let Longitude = "LocationLongitude"
-        static let Latitude = "LocationLatitude"
-        static let CurCityName = "LocationCurCityName"
+        static let longitude = "LocationLongitude"
+        static let latitude = "LocationLatitude"
+        static let currentCityName = "LocationCurrentCityName"
     }
+    
+    public typealias LocatieCompletion = (CLLocation?, NSError?) -> ()
     
     lazy open var manager = CLLocationManager()
     open static var shared = LocationManager()
-    fileprivate var locatieCompletion: ((CLLocation?, NSError?) -> ())?
+    fileprivate var locatieCompletion: LocatieCompletion?
     fileprivate var autoStop: Bool = false
     
+    @discardableResult
     open class func start(autoStop: Bool = false, accuracy: CLLocationAccuracy = kCLLocationAccuracyBest, always: Bool = false) -> Bool {
         if always {
             shared.manager.requestAlwaysAuthorization()
@@ -50,12 +56,12 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
         shared.manager.stopUpdatingLocation()
         DDLogInfo("Stopped");
     }
-    open func getlocation(_ complete: @escaping (CLLocation?, NSError?) -> ()) {
+    open func getlocation(_ complete: @escaping LocatieCompletion) {
         locatieCompletion = { location, error in
             complete(location, error)
             LocationManager.stop()
         }
-        let _ = LocationManager.start()
+        LocationManager.start()
     }
     
     @objc open func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -71,16 +77,15 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
             //获取城市信息
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location, completionHandler: { array , error in
-                if (array?.count ?? 0) > 0 {
-                    let placemark = array?.first
-                    self.curCityName = placemark?.locality
-                    if (placemark?.locality == nil) {
-                        self.curCityName = placemark?.administrativeArea
-                    }
+                guard array?.count ?? 0 > 0 else { return }
+                let placemark = array?.first
+                self.currentCityName = placemark?.locality
+                if (placemark?.locality == nil) {
+                    self.currentCityName = placemark?.administrativeArea
                 }
             })
             
-            NotificationCenter.default.post(name: Notification.Name(rawValue: LocationManager.NotificationLocationUpdatedName), object: nil)
+            NotificationCenter.default.post(name: Notification.Name.Location.Updated, object: nil)
         }
         if autoStop {
             LocationManager.stop()
@@ -94,39 +99,39 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     var cache = PINDiskCache.shared()
     open var longitude: Double? {
         get {
-            return cache.object(forKey: Constant.Longitude) as? Double
+            return cache.object(forKey: Constant.longitude) as? Double
         }
         set {
             if let value = newValue {
-                cache.setObject(value as NSCoding, forKey: Constant.Longitude)
+                cache.setObject(value as NSCoding, forKey: Constant.longitude)
             }else {
-                cache.removeObject(forKey: Constant.Longitude)
+                cache.removeObject(forKey: Constant.longitude)
             }
         }
     }
     open var latitude: Double? {
         get {
-            return cache.object(forKey: Constant.Latitude) as? Double
+            return cache.object(forKey: Constant.latitude) as? Double
         }
         set {
             if let value = newValue {
-                cache.setObject(value as NSCoding, forKey: Constant.Latitude)
+                cache.setObject(value as NSCoding, forKey: Constant.latitude)
             }else {
-                cache.removeObject(forKey: Constant.Latitude)
+                cache.removeObject(forKey: Constant.latitude)
             }
         }
     }
     
-    open var curCityName:String? {
+    open var currentCityName:String? {
         get{
-            return cache.object(forKey: Constant.CurCityName) as? String
+            return cache.object(forKey: Constant.currentCityName) as? String
         }
         set {
-            DDLogInfo("当前城市: \(curCityName ?? "")")
+            DDLogInfo("当前城市: \(currentCityName ?? "")")
             if let value = newValue {
-                cache.setObject(value as NSCoding, forKey: Constant.CurCityName)
+                cache.setObject(value as NSCoding, forKey: Constant.currentCityName)
             }else {
-                cache.removeObject(forKey: Constant.CurCityName)
+                cache.removeObject(forKey: Constant.currentCityName)
             }
         }
     }

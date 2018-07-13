@@ -108,7 +108,6 @@
 		279546101E9C720C00D36D83 /* LocalCrashLogReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795452A1E9C720B00D36D83 /* LocalCrashLogReporter.swift */; };
 		279546111E9C720C00D36D83 /* SwiftMKitLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2795452B1E9C720B00D36D83 /* SwiftMKitLog.xcdatamodeld */; };
 		279546121E9C720C00D36D83 /* BaseKitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795452E1E9C720B00D36D83 /* BaseKitEntity.swift */; };
-		279546131E9C720C00D36D83 /* BaseKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795452F1E9C720B00D36D83 /* BaseKitModel.swift */; };
 		279546141E9C720C00D36D83 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545311E9C720B00D36D83 /* PushManager.swift */; };
 		279546151E9C720C00D36D83 /* SystemPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545321E9C720B00D36D83 /* SystemPush.swift */; };
 		279546161E9C720C00D36D83 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279545341E9C720B00D36D83 /* UserNotificationManager.swift */; };
@@ -463,7 +462,6 @@
 		2795452A1E9C720B00D36D83 /* LocalCrashLogReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalCrashLogReporter.swift; sourceTree = "<group>"; };
 		2795452C1E9C720B00D36D83 /* SwiftMKitLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftMKitLog.xcdatamodel; sourceTree = "<group>"; };
 		2795452E1E9C720B00D36D83 /* BaseKitEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitEntity.swift; sourceTree = "<group>"; };
-		2795452F1E9C720B00D36D83 /* BaseKitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseKitModel.swift; sourceTree = "<group>"; };
 		279545311E9C720B00D36D83 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		279545321E9C720B00D36D83 /* SystemPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPush.swift; sourceTree = "<group>"; };
 		279545341E9C720B00D36D83 /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
@@ -1032,7 +1030,6 @@
 			isa = PBXGroup;
 			children = (
 				2795452E1E9C720B00D36D83 /* BaseKitEntity.swift */,
-				2795452F1E9C720B00D36D83 /* BaseKitModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2341,7 +2338,6 @@
 				279546291E9C720C00D36D83 /* UIColor+Extension.swift in Sources */,
 				279546981E9C720C00D36D83 /* SideMenu.swift in Sources */,
 				2783E0191DB626FD005E087C /* MKSegmentViewController.swift in Sources */,
-				279546131E9C720C00D36D83 /* BaseKitModel.swift in Sources */,
 				2795465A1E9C720C00D36D83 /* GesturePasswordView.swift in Sources */,
 				2795462D1E9C720C00D36D83 /* UIImageView+Extension.swift in Sources */,
 				2795464A1E9C720C00D36D83 /* YYCustomAlertView.swift in Sources */,
