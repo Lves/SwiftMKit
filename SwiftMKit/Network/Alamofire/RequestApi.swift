@@ -254,10 +254,9 @@ public extension RequestApi {
     fileprivate func requestUpload() -> SignalProducer<Self, NetError> {
         ApiClient.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
-            ApiClient.remove(api: self)
             let data = self.createBody(upload: self as! UploadApiProtocol, params: self.params)
-            
             let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
+            DDLogInfo("[Api] 请求发起: [\(self.method.rawValue)]\(requestUrl.absoluteURL.absoluteString)?\(self.params?.stringFromHttpParameters() ?? "")")
             let sessionManager = ApiClient.getSessionManager(api: self)
             let request = sessionManager.upload(data, to: requestUrl, method: self.method, headers: self.headers)
             if let task = request.task {
