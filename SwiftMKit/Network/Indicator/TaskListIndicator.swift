@@ -33,24 +33,20 @@ public class TaskListIndicator: Indicator {
         notificationCenter.removeObserver(self)
         notificationCenter.addObserver(forName: Notification.Name.Task.DidResume, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task List Indicator resume")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .running)
+            self?.turning(status: .running)
         }
         notificationCenter.addObserver(forName: Notification.Name.Task.DidSuspend, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task List Indicator suspend")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .stop)
+            self?.turning(status: .stop)
         }
         notificationCenter.addObserver(forName: Notification.Name.Task.DidCancel, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task List Indicator cancel")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .stop)
+            self?.turning(status: .stop)
             self?.remove(task: task)
         }
         notificationCenter.addObserver(forName: Notification.Name.Task.DidComplete, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task Indicator complete")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .stop)
+            self?.turning(status: .stop)
             self?.remove(task: task)
         }
     }
@@ -60,7 +56,7 @@ public class TaskListIndicator: Indicator {
         runningTasks.remove(at: index)
     }
     
-    public func turning(for task: URLRequest, status: ApiTaskStatus) {
+    public func turning(status: ApiTaskStatus) {
         switch status {
         case .running:
             UIApplication.shared.showNetworkActivityIndicator()

@@ -298,16 +298,15 @@ public extension RequestApi {
     fileprivate func requestUploadMultipart() -> SignalProducer<Self, NetError> {
         ApiClient.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
-            ApiClient.remove(api: self)
-            let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
             let sessionManager = ApiClient.getSessionManager(api: self)
+            sessionManager.startRequestsImmediately = true
             let request = self.getMultipartyUploadRequest()
             let fakeTask = URLSessionTask()
             self.indicator?.register(api: self, task: fakeTask)
             NotificationCenter.default.post(name: Notification.Name.Task.DidResume, object: nil, userInfo: [Notification.Key.Task: fakeTask])
             sessionManager.upload(multipartFormData: { [unowned self] formData in
                 self.fillMultipartData(upload:self as! UploadApiProtocol, params: self.params, multipart: formData)
-            }, to: requestUrl, encodingCompletion: { [weak self] result in
+            }, with: request, encodingCompletion: { [weak self] result in
                 guard let strongSelf = self else { return }
                 switch result {
                 case .success(let uploadRequest, _, _):
