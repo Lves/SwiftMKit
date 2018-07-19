@@ -90,7 +90,7 @@ public extension RequestApi {
         request.resume()
         return request.validate(self.validate)
     }
-    private func handleError<T>(_ error:Error, request: URLRequest? = nil, response: URLResponse? = nil) -> (NetError, Bool) {
+    private func handleError(_ error:Error, request: URLRequest? = nil, response: HTTPURLResponse? = nil) -> (NetError, Bool) {
         let error = error as NSError
         if let statusCode = StatusCode(rawValue:error.code) {
             switch(statusCode) {
@@ -232,8 +232,6 @@ public extension RequestApi {
             return self.requestUpload()
         case .uploadMultipart:
             return self.requestUploadMultipart()
-        default:
-            return SignalProducer { [unowned self] sink, _ in sink.send(value: self) }
         }
         
     }
