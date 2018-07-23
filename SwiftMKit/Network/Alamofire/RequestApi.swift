@@ -90,12 +90,12 @@ public extension RequestApi {
         request.resume()
         return request.validate(self.validate)
     }
-    private func handleError<T>(_ error:Error, response: DataResponse<T>) -> (NetError, Bool) {
+    private func handleError(_ error:Error, request: URLRequest? = nil, response: HTTPURLResponse? = nil) -> (NetError, Bool) {
         let error = error as NSError
         if let statusCode = StatusCode(rawValue:error.code) {
             switch(statusCode) {
             case .canceled:
-                DDLogWarn("[Api] 请求取消: \(response.request?.url?.absoluteString ?? "" )")
+                DDLogWarn("[Api] 请求取消: \(request?.url?.absoluteString ?? "" )")
                 let err = NetError(statusCode: NetStatusCode.canceled.rawValue, message: "请求取消")
                 self.error = err
                 return (err, true)
@@ -104,9 +104,9 @@ public extension RequestApi {
             }
         }
         let err = error is NetError ? error as! NetError : NetError(error: error)
-        err.response = response.response
+        err.response = response
         self.error = err
-        DDLogError("[Api] 请求失败: \(response.request?.url?.absoluteString ?? "" ), 错误: \(err)")
+        DDLogError("[Api] 请求失败: \(request?.url?.absoluteString ?? "" ), 错误: \(err)")
         return (err, false)
     }
     private func requestJson() -> SignalProducer<Self, NetError> {
@@ -130,7 +130,7 @@ public extension RequestApi {
                     sink.sendCompleted()
                     return
                 case .failure(let error):
-                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    let (error, canceled) = strongSelf.handleError(error, request: response.request, response: response.response)
                     if canceled {
                         sink.sendInterrupted()
                     } else {
@@ -166,7 +166,7 @@ public extension RequestApi {
                     sink.sendCompleted()
                     return
                 case .failure(let error):
-                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    let (error, canceled) = strongSelf.handleError(error, request: response.request, response: response.response)
                     if canceled {
                         sink.sendInterrupted()
                     } else {
@@ -201,7 +201,7 @@ public extension RequestApi {
                     sink.sendCompleted()
                     return
                 case .failure(let error):
-                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    let (error, canceled) = strongSelf.handleError(error, request: response.request, response: response.response)
                     if canceled {
                         sink.sendInterrupted()
                     } else {
@@ -230,8 +230,8 @@ public extension RequestApi {
             return self.requestString()
         case .upload:
             return self.requestUpload()
-        default:
-            return SignalProducer { [unowned self] sink, _ in sink.send(value: self) }
+        case .uploadMultipart:
+            return self.requestUploadMultipart()
         }
         
     }
@@ -254,10 +254,9 @@ public extension RequestApi {
     fileprivate func requestUpload() -> SignalProducer<Self, NetError> {
         ApiClient.add(api: self)
         return SignalProducer { [unowned self] sink,disposable in
-            ApiClient.remove(api: self)
             let data = self.createBody(upload: self as! UploadApiProtocol, params: self.params)
-            
             let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
+            DDLogInfo("[Api] 请求发起: [\(self.method.rawValue)]\(requestUrl.absoluteURL.absoluteString)?\(self.params?.stringFromHttpParameters() ?? "")")
             let sessionManager = ApiClient.getSessionManager(api: self)
             let request = sessionManager.upload(data, to: requestUrl, method: self.method, headers: self.headers)
             if let task = request.task {
@@ -282,7 +281,7 @@ public extension RequestApi {
                     sink.sendCompleted()
                     return
                 case .failure(let error):
-                    let (error, canceled) = strongSelf.handleError(error, response: response)
+                    let (error, canceled) = strongSelf.handleError(error, request: response.request, response: response.response)
                     if canceled {
                         sink.sendInterrupted()
                     } else {
@@ -296,8 +295,82 @@ public extension RequestApi {
             }
         }
     }
+    fileprivate func requestUploadMultipart() -> SignalProducer<Self, NetError> {
+        ApiClient.add(api: self)
+        return SignalProducer { [unowned self] sink,disposable in
+            let sessionManager = ApiClient.getSessionManager(api: self)
+            sessionManager.startRequestsImmediately = true
+            let request = self.getMultipartyUploadRequest()
+            let fakeTask = URLSessionTask()
+            self.indicator?.register(api: self, task: fakeTask)
+            NotificationCenter.default.post(name: Notification.Name.Task.DidResume, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+            sessionManager.upload(multipartFormData: { [unowned self] formData in
+                self.fillMultipartData(upload:self as! UploadApiProtocol, params: self.params, multipart: formData)
+            }, with: request, encodingCompletion: { [weak self] result in
+                guard let strongSelf = self else { return }
+                switch result {
+                case .success(let uploadRequest, _, _):
+                    uploadRequest.validate(strongSelf.validate).responseJSON { [weak self] response in
+                        guard let strongSelf = self else { return }
+                        ApiClient.remove(api: strongSelf)
+                        DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
+                        strongSelf.responseData = response.data
+                        let result = strongSelf.adapt(response.result)
+                        switch result {
+                        case .success:
+                            NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+                            if let value = result.value {
+                                DDLogVerbose("[Api] 请求成功：Json: \(value)")
+                                strongSelf.fill(data: value)
+                            } else {
+                                DDLogVerbose("[Api] 请求成功")
+                            }
+                            sink.send(value: strongSelf)
+                            sink.sendCompleted()
+                            return
+                        case .failure(let error):
+                            let (error, canceled) = strongSelf.handleError(error, request: response.request, response: response.response)
+                            if canceled {
+                                NotificationCenter.default.post(name: Notification.Name.Task.DidCancel, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+                                sink.sendInterrupted()
+                            } else {
+                                NotificationCenter.default.post(name: Notification.Name.Task.DidSuspend, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+                                sink.send(error: error)
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    let (error, canceled) = strongSelf.handleError(error, request: request, response: nil)
+                    if canceled {
+                        NotificationCenter.default.post(name: Notification.Name.Task.DidCancel, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+                        sink.sendInterrupted()
+                    } else {
+                        NotificationCenter.default.post(name: Notification.Name.Task.DidSuspend, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+                        sink.send(error: error)
+                    }
+                }
+            })
+            disposable.observeEnded { [weak self] in
+                NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil, userInfo: [Notification.Key.Task: fakeTask])
+                guard let strongSelf = self else { return }
+                ApiClient.remove(api: strongSelf)
+            }
+        }
+    }
+    private func getMultipartyUploadRequest() -> URLRequest {
+        let requestUrl = try! self.baseURLString.asURL().appendingPathComponent(self.url)
+        DDLogInfo("[Api] 请求发起: [\(method.rawValue)]\(requestUrl.absoluteURL.absoluteString)?\(params?.stringFromHttpParameters() ?? "")")
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headers
+        return request
+    }
     func createBody(upload: UploadApiProtocol, params: [String: Any]?) -> Data {
         let multipart = MultipartFormData()
+        fillMultipartData(upload: upload, params: params, multipart: multipart)
+        return try! multipart.encode()
+    }
+    func fillMultipartData(upload: UploadApiProtocol, params: [String: Any]?, multipart: MultipartFormData) {
         if let params = params {
             for (key, value) in params {
                 multipart.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: key)
@@ -308,6 +381,5 @@ public extension RequestApi {
                 multipart.append(file.data, withName: file.name, fileName: file.fileName, mimeType: file.mimeType)
             }
         }
-        return try! multipart.encode()
     }
 }

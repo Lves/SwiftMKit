@@ -14,12 +14,11 @@ class MKNormalEmptyViewController: BaseViewController {
 
     override func setupUI() {
         super.setupUI()
+        loadData()
     }
     override func loadData() {
         super.loadData()
         emptyView?.show()
-        
-        
     }
 
 }

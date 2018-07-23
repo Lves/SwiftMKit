@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 import CocoaLumberjack
 
-public class SystemPush: PushManagerProtocol {
+public struct SystemPush: PushManagerProtocol {
     
     public func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: Data) {
         let token = deviceToken.hexString

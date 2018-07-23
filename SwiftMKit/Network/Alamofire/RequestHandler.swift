@@ -12,7 +12,7 @@ import ReactiveSwift
 import CocoaLumberjack
 
 public enum RequestType {
-    case json, data, string, upload, multipartUpload
+    case json, data, string, upload, uploadMultipart
 }
 
 public enum NetStatusCode: Int {

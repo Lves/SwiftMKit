@@ -52,25 +52,21 @@ public class TaskIndicator: Indicator {
         notificationCenter.removeObserver(self)
         notificationCenter.addObserver(forName: Notification.Name.Task.DidResume, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task Indicator resume")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .running, view: model.view, text: model.text)
+            self?.turning(status: .running, view: model.view, text: model.text)
         }
         notificationCenter.addObserver(forName: Notification.Name.Task.DidSuspend, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task Indicator suspend")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .stop, view: model.view, text: model.text)
+            self?.turning(status: .stop, view: model.view, text: model.text)
         }
         notificationCenter.addObserver(forName: Notification.Name.Task.DidCancel, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task Indicator cancel")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .stop, view: model.view, text: model.text)
+            self?.turning(status: .stop, view: model.view, text: model.text)
             self?.remove(task: task)
             self?.remove(api: api)
         }
         notificationCenter.addObserver(forName: Notification.Name.Task.DidComplete, object: nil, queue: nil) { [weak self] (notify) in
             DDLogVerbose("Task Indicator complete")
-            guard let task = notify.userInfo?[Notification.Key.Task] as? URLSessionTask, let request = task.originalRequest else { return }
-            self?.turning(for: request, status: .stop, view: model.view, text: model.text)
+            self?.turning(status: .stop, view: model.view, text: model.text)
             self?.remove(task: task)
             self?.remove(api: api)
         }
@@ -85,7 +81,7 @@ public class TaskIndicator: Indicator {
         models.remove(at: index)
     }
     
-    public func turning(for task: URLRequest, status: ApiTaskStatus, view: UIView?, text: String?) {
+    public func turning(status: ApiTaskStatus, view: UIView?, text: String?) {
         switch status {
         case .running:
             UIApplication.shared.showNetworkActivityIndicator()
