@@ -117,7 +117,7 @@ public extension RequestApi {
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                 strongSelf.responseData = response.data
-                DDLogInfo("[Api] 请求结果：Json: \(String(describing: response.result.value))")
+                DDLogInfo("[Api] 请求结果：Json: \((String(describing: response.result.value) as NSString).mkStringByReplaceUnicode())")
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
