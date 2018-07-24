@@ -52,7 +52,9 @@ public class TaskListIndicator: Indicator {
     }
     
     private func remove(task: URLSessionTask) {
-        guard let index = runningTasks.index(where: { $0 == task }) else { return }
+        guard let index = runningTasks.index(where: { $0 == task }) else {
+            return
+        }
         runningTasks.remove(at: index)
     }
     

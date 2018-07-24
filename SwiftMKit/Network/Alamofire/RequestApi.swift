@@ -117,14 +117,15 @@ public extension RequestApi {
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                 strongSelf.responseData = response.data
+                DDLogInfo("[Api] 请求结果：Json: \(String(describing: response.result.value))")
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
                     if let value = result.value {
-                        DDLogInfo("[Api] 请求成功：Json: \(value)")
+//                        DDLogInfo("[Api] 请求成功：Json: \(value)")
                         strongSelf.fill(data: value)
                     } else {
-                        DDLogInfo("[Api] 请求成功")
+//                        DDLogInfo("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -153,14 +154,15 @@ public extension RequestApi {
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                 strongSelf.responseData = response.data
+                DDLogInfo("[Api] 请求结果：Data: \(response.result.value?.count ?? 0) bytes")
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
                     if let value = result.value {
-                        DDLogVerbose("[Api] 请求成功：Data: \(value.count) bytes")
+//                        DDLogVerbose("[Api] 请求成功：Data: \(value.count) bytes")
                         strongSelf.fill(data: value)
                     } else {
-                        DDLogVerbose("[Api] 请求成功")
+//                        DDLogVerbose("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -188,14 +190,15 @@ public extension RequestApi {
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                 strongSelf.responseData = response.data
+                DDLogInfo("[Api] 请求结果：String: \(String(describing: response.result.value))")
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
                     if let value = result.value {
-                        DDLogVerbose("[Api] 请求成功：String: \(value)")
+//                        DDLogVerbose("[Api] 请求成功：String: \(value)")
                         strongSelf.fill(data: value)
                     } else {
-                        DDLogVerbose("[Api] 请求成功")
+//                        DDLogVerbose("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -268,14 +271,15 @@ public extension RequestApi {
                 ApiClient.remove(api: strongSelf)
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                 strongSelf.responseData = response.data
+                DDLogInfo("[Api] 请求结果：Json: \(String(describing: response.result.value))")
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
                     if let value = result.value {
-                        DDLogVerbose("[Api] 请求成功：Json: \(value)")
+//                        DDLogVerbose("[Api] 请求成功：Json: \(value)")
                         strongSelf.fill(data: value)
                     } else {
-                        DDLogVerbose("[Api] 请求成功")
+//                        DDLogVerbose("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -315,15 +319,16 @@ public extension RequestApi {
                         ApiClient.remove(api: strongSelf)
                         DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                         strongSelf.responseData = response.data
+                        DDLogInfo("[Api] 请求结果：Json: \(String(describing: response.result.value))")
                         let result = strongSelf.adapt(response.result)
                         switch result {
                         case .success:
                             NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil, userInfo: [Notification.Key.Task: fakeTask])
                             if let value = result.value {
-                                DDLogVerbose("[Api] 请求成功：Json: \(value)")
+//                                DDLogVerbose("[Api] 请求成功：Json: \(value)")
                                 strongSelf.fill(data: value)
                             } else {
-                                DDLogVerbose("[Api] 请求成功")
+//                                DDLogVerbose("[Api] 请求成功")
                             }
                             sink.send(value: strongSelf)
                             sink.sendCompleted()

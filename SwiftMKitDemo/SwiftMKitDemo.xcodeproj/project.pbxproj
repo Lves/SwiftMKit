@@ -289,6 +289,7 @@
 		6C4702A3202ADA2E00BB712F /* LinkTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4702A2202ADA2E00BB712F /* LinkTextModel.swift */; };
 		6C4702A6202ADAF500BB712F /* LinkText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4702A5202ADAF500BB712F /* LinkText.storyboard */; };
 		6C4702A8202ADB1000BB712F /* LinkTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */; };
+		6C54E6A42106C65F004D834C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54E6A32106C65E004D834C /* AudioToolbox.framework */; };
 		6C711D221F1F6AFF00268915 /* SwiftReflectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */; };
 		7A49523420ECD2D10050CE84 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49523320ECD2D10050CE84 /* RequestHandler.swift */; };
 		7A49523620ECD2F60050CE84 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A49523520ECD2F60050CE84 /* ApiClient.swift */; };
@@ -662,6 +663,7 @@
 		6C4702A2202ADA2E00BB712F /* LinkTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextModel.swift; sourceTree = "<group>"; };
 		6C4702A5202ADAF500BB712F /* LinkText.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LinkText.storyboard; sourceTree = "<group>"; };
 		6C4702A7202ADB1000BB712F /* LinkTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextViewController.swift; sourceTree = "<group>"; };
+		6C54E6A32106C65E004D834C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6C711D211F1F6AFF00268915 /* SwiftReflectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReflectionTool.swift; sourceTree = "<group>"; };
 		7A49523320ECD2D10050CE84 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		7A49523520ECD2F60050CE84 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C54E6A42106C65F004D834C /* AudioToolbox.framework in Frameworks */,
 				868BA5E9AE9EDED0A192ABA9 /* Pods_SwiftMKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1855,6 +1858,7 @@
 		92606744023F345A76BD07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C54E6A32106C65E004D834C /* AudioToolbox.framework */,
 				27D1A9AC1CEEA02A00B511D7 /* CoreLocation.framework */,
 				E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */,
 				3F0309A9864D0980C2ED5378 /* Pods_SwiftMKitDemoTests.framework */,
