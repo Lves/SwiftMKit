@@ -12,12 +12,16 @@ public enum StatusCode: Int {
     case `default` = 0
     case canceled = -999
     case validateFailed = -99999
+    case badRequest = 400
+    case unAuthorized = 401
+    case loginOtherDevice = 403
+
 }
 
 open class NetError : NSError {
     open var response: HTTPURLResponse?
     open var statusCode: Int = 0
-    open var message: String = ""
+    @objc open var message: String = ""
     open static var defaultMessage = "网络异常"
     
     init(statusCode: Int, message: String) {
