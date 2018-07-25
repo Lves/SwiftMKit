@@ -129,6 +129,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     
     var webViewToolsPannelView :SharePannelView?
     var needRefreshCallBack: WVJBResponseCallback?
+    var isAutoUpdateTitle:Bool = true
     /// 标识：webView加载失败后，是否需要显示网络错误页面（如果有）
     var showBadNetworkViewWhenFail = false
     ///跳转前用
@@ -374,8 +375,10 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
                
             }
         } else if ((object as AnyObject).isEqual(webView) && ((keyPath ?? "") == keyPathForTitle)) {
-            if (!isTitleFixed && (object as AnyObject).isEqual(webView)) {
-                self.title = self.webView.title;
+            if isAutoUpdateTitle {
+                if (!isTitleFixed && (object as AnyObject).isEqual(webView)) {
+                    self.title = self.webView.title;
+                }
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
