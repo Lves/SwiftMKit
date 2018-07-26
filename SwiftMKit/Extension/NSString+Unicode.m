@@ -18,6 +18,11 @@
     
     CFStringRef transform = CFSTR("Any-Hex/Java");
     CFStringTransform((__bridge CFMutableStringRef)convertedString, NULL, transform, YES);
+
+    [convertedString replaceOccurrencesOfString:@"\\"
+                                     withString:@""
+                                        options:0
+                                          range:NSMakeRange(0, convertedString.length)];
     return convertedString;
 }
 
