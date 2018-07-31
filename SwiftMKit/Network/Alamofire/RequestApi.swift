@@ -119,7 +119,7 @@ public extension RequestApi {
                 strongSelf.responseData = response.data
                 
                 let str:String = response.result.value == nil ? "" :  "\(response.result.value!)"
-                DDLogInfo("[Api] 请求结果：Json: \(str.mkStringByReplaceUnicode() ?? "")")//#import "NSString+Unicode.h"
+                DDLogInfo("[Api] 请求结果：Json: \(str.mkStringByReplaceUnicode() ?? "")")//这里需要在项目Bridging-Header头文件中引入#import "NSString+Unicode.h"
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
