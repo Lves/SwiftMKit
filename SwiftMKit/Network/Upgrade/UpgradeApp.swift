@@ -103,6 +103,7 @@ open class UpgradeApp : NSObject {
                             exit(0)
                         }
                     }
+                    return
                 }
             }
             DDLogError("下载地址错误: \(downloadUrl)")
