@@ -22,13 +22,12 @@ def pods
     pod 'SnapKit', '~> 4.0.0'
     pod 'pop', '~> 1.0.0'
     pod 'Aspects', '~> 1.4.0'
-#    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift.git', :commit => '500aece'
     pod 'MBProgressHUD', '~> 1.1.0'
     
     pod 'Charts', '~> 3.1.0'
     pod 'PulsingHalo', '~> 0.2.0'
     pod 'FDFullscreenPopGesture', '~> 1.1'
-#    pod 'Player', '~> 0.2.0'
+    pod 'AudioKit', '~> 4.3.0'
 end
 
 target 'SwiftMKitDemo' do
