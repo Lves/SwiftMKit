@@ -130,8 +130,6 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     var webViewToolsPannelView :SharePannelView?
     var needRefreshCallBack: WVJBResponseCallback?
     var isAutoUpdateTitle:Bool = true
-    /// 标识：webView加载失败后，是否需要显示网络错误页面（如果有）
-    var showBadNetworkViewWhenFail = false
     ///跳转前用
     var beforRouteBlock:(() -> UIViewController?)?
     
@@ -150,7 +148,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             self.needRefreshCallBack = nil
         }
     }
-
+    /// webView加载失败后，显示网络错误页面（如果有）
     open func setupBadNetworkView() -> UIView? {
         return nil
     }
