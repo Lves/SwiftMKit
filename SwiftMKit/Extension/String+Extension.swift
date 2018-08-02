@@ -336,7 +336,9 @@ extension String {
     
     var decodeUnicode: String {
         let str = NSMutableString(string: self)
+        str.replaceOccurrences(of: "\\U", with: "\\u", options: [], range: NSMakeRange(0, str.length))
         CFStringTransform(str, nil, "Any-Hex/Java" as NSString, true)
+        str.replaceOccurrences(of: "\\\"", with: "\"", options: [], range: NSMakeRange(0, str.length))
         return str as String
     }
 }
