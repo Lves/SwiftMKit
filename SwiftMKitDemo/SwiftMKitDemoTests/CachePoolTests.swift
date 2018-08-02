@@ -38,7 +38,7 @@ class CachePoolTests: XCTestCase {
         let key = (cachePool.addCache(image!, name: fileName))
         XCTAssertNotNil(key)
         sleep(1)
-        let cachedImage = (cachePool.getCache(key)) as? UIImage
+        let cachedImage = (cachePool.getCache(forKey: key)) as? UIImage
         XCTAssertNotNil(cachedImage)
         
         let sizeAfterCache = cachePool.size
@@ -66,19 +66,19 @@ class CachePoolTests: XCTestCase {
         XCTAssertNotNil(key)
         
         sleep(1)
-        let cachedImage = (cachePool.getCache(key)) as? UIImage
+        let cachedImage = (cachePool.getCache(forKey: key)) as? UIImage
         XCTAssertNotNil(cachedImage)
         
         let sizeAfterCache = cachePool.size
         XCTAssertLessThan(sizeBeforeCache, sizeAfterCache)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
         
-        let isRemoved = cachePool.removeCache(key)
+        let isRemoved = cachePool.removeCache(forKey: key)
         XCTAssertTrue(isRemoved)
         let sizeAfterRemoved = cachePool.size
         XCTAssertEqual(sizeBeforeCache, sizeAfterRemoved)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
-        let object = (cachePool.getCache(key))
+        let object = (cachePool.getCache(forKey: key))
         XCTAssertNil(object)
         cachePool.clear()
     }
@@ -86,26 +86,26 @@ class CachePoolTests: XCTestCase {
         let cachePool: CachePoolProtocol = CachePool()
         cachePool.clear()
         let fileName = "icon_user_head"
-        let data = UIImage(named: fileName)?.asData()
+        let data = UIImagePNGRepresentation(UIImage(named: fileName)!)
         XCTAssertNotNil(data)
         let sizeBeforeCache = cachePool.size
         let key = (cachePool.addCache(data!, name: fileName))
         XCTAssertNotNil(key)
         
         sleep(1)
-        let cachedData = (cachePool.getCache(key)) as? NSData
+        let cachedData = (cachePool.getCache(forKey: key)) as? NSData
         XCTAssertNotNil(cachedData)
         
         let sizeAfterCache = cachePool.size
         XCTAssertLessThan(sizeBeforeCache, sizeAfterCache)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
         
-        let isRemoved = cachePool.removeCache(key)
+        let isRemoved = cachePool.removeCache(forKey: key)
         XCTAssertTrue(isRemoved)
         let sizeAfterRemoved = cachePool.size
         XCTAssertEqual(sizeBeforeCache, sizeAfterRemoved)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
-        let object = (cachePool.getCache(key))
+        let object = (cachePool.getCache(forKey: key))
         XCTAssertNil(object)
         cachePool.clear()
     }
@@ -123,19 +123,19 @@ class CachePoolTests: XCTestCase {
         
         
         sleep(1)
-        let cachedFile = UIImage(data: (cachePool.getCache(key) as! NSData))
+        let cachedFile = UIImage(data: (cachePool.getCache(forKey: key) as! Data))
         XCTAssertNotNil(cachedFile)
         
         let sizeAfterCache = cachePool.size
         XCTAssertLessThan(sizeBeforeCache, sizeAfterCache)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
         
-        let isRemoved = cachePool.removeCache(key)
+        let isRemoved = cachePool.removeCache(forKey: key)
         XCTAssertTrue(isRemoved)
         let sizeAfterRemoved = cachePool.size
         XCTAssertEqual(sizeBeforeCache, sizeAfterRemoved)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
-        let object = (cachePool.getCache(key))
+        let object = (cachePool.getCache(forKey: key))
         XCTAssertNil(object)
         cachePool.clear()
     }
@@ -158,17 +158,17 @@ class CachePoolTests: XCTestCase {
         let key1 = (cachePool.addCache(image!, name: fileName + "1"))
         XCTAssertNotNil(key1)
         sleep(1)
-        var cachedImage1 = (cachePool.getCache(key1)) as? UIImage
+        var cachedImage1 = (cachePool.getCache(forKey: key1)) as? UIImage
         XCTAssertNotNil(cachedImage1)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
         let key2 = (cachePool.addCache(image!, name: fileName + "2"))
         XCTAssertNotNil(key2)
         sleep(1)
-        let cachedImage2 = (cachePool.getCache(key2)) as? UIImage
+        let cachedImage2 = (cachePool.getCache(forKey: key2)) as? UIImage
         XCTAssertNotNil(cachedImage2)
         XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
         
-        cachedImage1 = (cachePool.getCache(key1)) as? UIImage
+        cachedImage1 = (cachePool.getCache(forKey: key1)) as? UIImage
         XCTAssertNil(cachedImage1)
         cachePool.clear()
     }
@@ -191,7 +191,7 @@ class CachePoolTests: XCTestCase {
             let key1 = (cachePool.addCache(image!, name: fileName + i.toString))
             XCTAssertNotNil(key1)
             sleep(1)
-            let cachedImage1 = (cachePool.getCache(key1)) as? UIImage
+            let cachedImage1 = (cachePool.getCache(forKey: key1)) as? UIImage
             XCTAssertNotNil(cachedImage1)
             XCTAssertLessThanOrEqual(cachePool.size, cachePool.capacity)
         }

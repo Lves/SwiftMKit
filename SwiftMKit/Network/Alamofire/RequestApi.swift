@@ -118,16 +118,17 @@ public extension RequestApi {
                 DDLogInfo("[Api] 请求完成: \(response.request?.url?.absoluteString ?? "" ), 耗时: \(String(format:"%.2f", response.timeline.requestDuration))")
                 strongSelf.responseData = response.data
                 
-                let str:String = response.result.value == nil ? "" :  "\(response.result.value!)"
-                DDLogInfo("[Api] 请求结果：Json: \(str.mkStringByReplaceUnicode() ?? "")")//这里需要在项目Bridging-Header头文件中引入#import "NSString+Unicode.h"
+                let str: String = response.result.value == nil ? "" :  "\(response.result.value!)"
+                #if DEBUG
+                DDLogInfo("[Api] 请求结果：Json: \(str.decodeUnicode)")
+                #else
+                DDLogInfo("[Api] 请求结果：Json: \(str)")
+                #endif
                 let result = strongSelf.adapt(response.result)
                 switch result {
                 case .success:
                     if let value = result.value {
-//                        DDLogInfo("[Api] 请求成功：Json: \(value)")
                         strongSelf.fill(data: value)
-                    } else {
-//                        DDLogInfo("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -161,10 +162,7 @@ public extension RequestApi {
                 switch result {
                 case .success:
                     if let value = result.value {
-//                        DDLogVerbose("[Api] 请求成功：Data: \(value.count) bytes")
                         strongSelf.fill(data: value)
-                    } else {
-//                        DDLogVerbose("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -197,10 +195,7 @@ public extension RequestApi {
                 switch result {
                 case .success:
                     if let value = result.value {
-//                        DDLogVerbose("[Api] 请求成功：String: \(value)")
                         strongSelf.fill(data: value)
-                    } else {
-//                        DDLogVerbose("[Api] 请求成功")
                     }
                     sink.send(value: strongSelf)
                     sink.sendCompleted()
@@ -327,10 +322,7 @@ public extension RequestApi {
                         case .success:
                             NotificationCenter.default.post(name: Notification.Name.Task.DidComplete, object: nil, userInfo: [Notification.Key.Task: fakeTask])
                             if let value = result.value {
-//                                DDLogVerbose("[Api] 请求成功：Json: \(value)")
                                 strongSelf.fill(data: value)
-                            } else {
-//                                DDLogVerbose("[Api] 请求成功")
                             }
                             sink.send(value: strongSelf)
                             sink.sendCompleted()

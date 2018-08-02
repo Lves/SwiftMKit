@@ -24,7 +24,7 @@ class NumberKeyboardTests: XCTestCase {
     }
 
     func testInputDotNormalType() {
-        numberKeyboard.type = .Normal
+        numberKeyboard.type = .normal
         
         var old = "12.3"
         var new = "1.2.3"
@@ -68,7 +68,7 @@ class NumberKeyboardTests: XCTestCase {
 
     }
     func testInputDotMoneyType() {
-        numberKeyboard.type = .Money
+        numberKeyboard.type = .money
         var old = "12.3"
         var new = "1.2.3"
         var (final, _) = numberKeyboard.matchInputDot(old, new: new)
@@ -119,7 +119,7 @@ class NumberKeyboardTests: XCTestCase {
         
     }
     func testInputNumberNormalType() {
-        numberKeyboard.type = .Normal
+        numberKeyboard.type = .normal
         var old = "0"
         var new = "01"
         var (final, _) = numberKeyboard.matchInputNumber(old, new: new)
@@ -181,7 +181,7 @@ class NumberKeyboardTests: XCTestCase {
         XCTAssertEqual(final, "123.321")
     }
     func testInputNumberMoneyType() {
-        numberKeyboard.type = .Money
+        numberKeyboard.type = .money
         
         var old = "0"
         var new = "01"
@@ -244,7 +244,7 @@ class NumberKeyboardTests: XCTestCase {
         XCTAssertEqual(final, "10.10")
     }
     func testInputNoDotType() {
-        numberKeyboard.type = .NoDot
+        numberKeyboard.type = .noDot
         
         var old = "0"
         var new = "01"
@@ -265,7 +265,7 @@ class NumberKeyboardTests: XCTestCase {
         XCTAssertEqual(final, "01")
     }
     func testDeleteNumberNormalType() {
-        numberKeyboard.type = .Normal
+        numberKeyboard.type = .normal
         
         var old = "01"
         var new = "0"
@@ -292,7 +292,7 @@ class NumberKeyboardTests: XCTestCase {
         XCTAssertEqual(final, "0.")
     }
     func testDeleteDotNormalType() {
-        numberKeyboard.type = .Normal
+        numberKeyboard.type = .normal
         
         var old = "0.1"
         var new = "01"
@@ -331,7 +331,7 @@ class NumberKeyboardTests: XCTestCase {
         XCTAssertEqual(final, "23")
     }
     func testmatchConfirmNormalType() {
-        numberKeyboard.type = .Normal
+        numberKeyboard.type = .normal
         
         var input = "1"
         var (output) = numberKeyboard.matchConfirm(input)

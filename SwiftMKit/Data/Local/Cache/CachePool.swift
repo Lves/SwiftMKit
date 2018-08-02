@@ -160,6 +160,7 @@ open class CachePool: CachePoolProtocol {
         return false
     }
     
+    @discardableResult
     open func clear() -> Bool {
         let cachepath = cachePath()
         if fileManager.fileExists(atPath: cachepath) {

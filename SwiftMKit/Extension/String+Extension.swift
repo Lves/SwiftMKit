@@ -333,4 +333,10 @@ extension String {
         }
         return self
     }
+    
+    var decodeUnicode: String {
+        let str = NSMutableString(string: self)
+        CFStringTransform(str, nil, "Any-Hex/Java" as NSString, true)
+        return str as String
+    }
 }
