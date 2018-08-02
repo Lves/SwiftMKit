@@ -154,7 +154,6 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     open func setupBadNetworkView() -> UIView? {
         return nil
     }
-    private var isFinishedOnce = false
     private var isBadNetwork = false
     private func showBadNetworkView() {
         guard let badNetwork_view = setupBadNetworkView() else { return }
@@ -195,16 +194,15 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         NetworkListener.networkStatus.producer.startWithValues {[weak self](sender) in
             if sender == .reachableViaWWAN || sender == .reachableViaWiFi {
                 DDLogInfo("[Network Status] WIFI或者蜂窝网络, status: \(sender)")
-                if self?.isBadNetwork == true && self?.isFinishedOnce == false {
+                if self?.isBadNetwork == true {
+                    self?.isBadNetwork = false
                     self?.removeBadNetworkView()
                     self?.loadData()
                 }
             } else {
                 DDLogInfo("[Network Status] 无网络, status: \(sender)")
                 self?.isBadNetwork = true
-                if self?.isFinishedOnce == false || self?.showBadNetworkViewWhenFail == true {
-                    self?.showBadNetworkView()
-                }
+                self?.showBadNetworkView()
             }
         }
     }
@@ -442,7 +440,6 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        isFinishedOnce = true
         if let header = self.webView.scrollView.mj_header {
             header.endRefreshing()//结束下拉刷新
         }
@@ -469,9 +466,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
             return
         }
         self.showTip(tip)
-        if showBadNetworkViewWhenFail == true {
-            showBadNetworkView()
-        }
+        showBadNetworkView()
     }
     
     open func refreshNavigationBarTopLeftCloseButton() {
