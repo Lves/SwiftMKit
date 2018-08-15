@@ -47,7 +47,7 @@ class CrashLogViewController: BaseListKitViewController {
     @objc func clear() {
         let alert = UIAlertController(title: "确认", message: "确定要清空所有崩溃日志？", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "清空", style: .destructive, handler: { [weak self] _ in
-            LocalCrashLogReporter.shared.clean()
+//            LocalCrashLogReporter.shared.clean()
             self?._viewModel.fetchData()
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
@@ -79,9 +79,9 @@ class CrashLogViewModel: BaseListKitViewModel {
         return 20
     }
     override func fetchData() {
-        let array = LocalCrashLogReporter.shared.queryCrashLog(page: Int(dataIndex), number: Int(listLoadNumber))
-        updateDataArray(array)
-        listViewController.endListRefresh()
+//        let array = LocalCrashLogReporter.shared.queryCrashLog(page: Int(dataIndex), number: Int(listLoadNumber))
+//        updateDataArray(array)
+//        listViewController.endListRefresh()
     }
     
 }

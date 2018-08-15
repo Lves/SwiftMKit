@@ -310,13 +310,6 @@
 		7AF7592B20F8BADA00425C7B /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF7592920F8BADA00425C7B /* AudioViewController.swift */; };
 		7AF7592C20F8BADA00425C7B /* AudioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AF7592A20F8BADA00425C7B /* AudioViewController.xib */; };
 		868BA5E9AE9EDED0A192ABA9 /* Pods_SwiftMKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */; };
-		9ADF025420E5D950008BD6FA /* MachThreadBacktrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */; };
-		9ADF025520E5D950008BD6FA /* SwiftCrashUmengReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */; };
-		9ADF025620E5D950008BD6FA /* SwiftCrashConsoleReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024920E5D94F008BD6FA /* SwiftCrashConsoleReporter.swift */; };
-		9ADF025720E5D950008BD6FA /* SwiftCrashHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024A20E5D94F008BD6FA /* SwiftCrashHandler.swift */; };
-		9ADF025820E5D950008BD6FA /* SwiftCrashDefaultFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF024C20E5D94F008BD6FA /* SwiftCrashDefaultFormatter.m */; };
-		9ADF025920E5D950008BD6FA /* SwiftCrashReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF025120E5D94F008BD6FA /* SwiftCrashReport.swift */; };
-		9ADF025A20E5D950008BD6FA /* MachExceptionHandler.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF025220E5D94F008BD6FA /* MachExceptionHandler.c */; };
 		FF6D5557E11EB08BEAAE0A05 /* Pods_SwiftMKitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0309A9864D0980C2ED5378 /* Pods_SwiftMKitDemoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -684,18 +677,6 @@
 		86FE2AD90661A2C71A315F4F /* Pods-SwiftMKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B9E51E2DB25BF77A21FA8E9 /* Pods-SwiftMKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemo/Pods-SwiftMKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		976D2F4D60A997459D1E40F8 /* Pods-SwiftMKitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoTests/Pods-SwiftMKitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MachThreadBacktrace.c; sourceTree = "<group>"; };
-		9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashUmengReporter.m; sourceTree = "<group>"; };
-		9ADF024920E5D94F008BD6FA /* SwiftCrashConsoleReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashConsoleReporter.swift; sourceTree = "<group>"; };
-		9ADF024A20E5D94F008BD6FA /* SwiftCrashHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashHandler.swift; sourceTree = "<group>"; };
-		9ADF024B20E5D94F008BD6FA /* MachExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachExceptionHandler.h; sourceTree = "<group>"; };
-		9ADF024C20E5D94F008BD6FA /* SwiftCrashDefaultFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftCrashDefaultFormatter.m; sourceTree = "<group>"; };
-		9ADF024D20E5D94F008BD6FA /* MachThreadBacktrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachThreadBacktrace.h; sourceTree = "<group>"; };
-		9ADF024E20E5D94F008BD6FA /* SwiftCrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReport.h; sourceTree = "<group>"; };
-		9ADF024F20E5D94F008BD6FA /* SwiftCrashReportProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashReportProtocol.h; sourceTree = "<group>"; };
-		9ADF025020E5D94F008BD6FA /* SwiftCrashUmengReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftCrashUmengReporter.h; sourceTree = "<group>"; };
-		9ADF025120E5D94F008BD6FA /* SwiftCrashReport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCrashReport.swift; sourceTree = "<group>"; };
-		9ADF025220E5D94F008BD6FA /* MachExceptionHandler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MachExceptionHandler.c; sourceTree = "<group>"; };
 		ADE7E32919533CC57E84085F /* Pods-SwiftMKitDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftMKitDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftMKitDemoUITests/Pods-SwiftMKitDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C2B7AF4869491ACCA6A35784 /* Pods_SwiftMKitDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FCB060F7A214CA1686BB06 /* Pods_SwiftMKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftMKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -925,7 +906,6 @@
 			isa = PBXGroup;
 			children = (
 				7A9ACD7620FC3F1E00C4232B /* Array */,
-				9ADF024620E5D94F008BD6FA /* CrashReport */,
 				6C711D201F1F6AFF00268915 /* Reflector */,
 				2795450C1E9C720B00D36D83 /* DataStructure */,
 				279545141E9C720B00D36D83 /* FingerPrint */,
@@ -1860,26 +1840,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9ADF024620E5D94F008BD6FA /* CrashReport */ = {
-			isa = PBXGroup;
-			children = (
-				9ADF024720E5D94F008BD6FA /* MachThreadBacktrace.c */,
-				9ADF024820E5D94F008BD6FA /* SwiftCrashUmengReporter.m */,
-				9ADF024920E5D94F008BD6FA /* SwiftCrashConsoleReporter.swift */,
-				9ADF024A20E5D94F008BD6FA /* SwiftCrashHandler.swift */,
-				9ADF024B20E5D94F008BD6FA /* MachExceptionHandler.h */,
-				9ADF024C20E5D94F008BD6FA /* SwiftCrashDefaultFormatter.m */,
-				9ADF024D20E5D94F008BD6FA /* MachThreadBacktrace.h */,
-				9ADF024E20E5D94F008BD6FA /* SwiftCrashReport.h */,
-				9ADF024F20E5D94F008BD6FA /* SwiftCrashReportProtocol.h */,
-				9ADF025020E5D94F008BD6FA /* SwiftCrashUmengReporter.h */,
-				9ADF025120E5D94F008BD6FA /* SwiftCrashReport.swift */,
-				9ADF025220E5D94F008BD6FA /* MachExceptionHandler.c */,
-			);
-			name = CrashReport;
-			path = ../CrashReport;
-			sourceTree = "<group>";
-		};
 		D94E82CEF6ED9C0653237B9A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2367,14 +2327,12 @@
 				279546511E9C720C00D36D83 /* RiskEvaluationQuestionCollectionViewCell.swift in Sources */,
 				279546961E9C720C00D36D83 /* RingedPages.swift in Sources */,
 				279546461E9C720C00D36D83 /* BaseListFetchKitViewController.swift in Sources */,
-				9ADF025720E5D950008BD6FA /* SwiftCrashHandler.swift in Sources */,
 				279546951E9C720C00D36D83 /* PagesCarousel.swift in Sources */,
 				2795466D1E9C720C00D36D83 /* NumberKeyboard.swift in Sources */,
 				279546AB1E9C720C00D36D83 /* VideoPlayer.swift in Sources */,
 				279545FB1E9C720C00D36D83 /* MBinarySearchTree.swift in Sources */,
 				2795461B1E9C720C00D36D83 /* Double+Extension.swift in Sources */,
 				279546201E9C720C00D36D83 /* NSMutableData+Extension.swift in Sources */,
-				9ADF025620E5D950008BD6FA /* SwiftCrashConsoleReporter.swift in Sources */,
 				7A5FE41320F4638B00792D8E /* RequestApi.swift in Sources */,
 				279546491E9C720C00D36D83 /* BaseListKitViewModel.swift in Sources */,
 				2795462A1E9C720C00D36D83 /* UIDevice+Extension.swift in Sources */,
@@ -2409,16 +2367,13 @@
 				2795460F1E9C720C00D36D83 /* DDLogMKitFormatter.swift in Sources */,
 				2795465D1E9C720C00D36D83 /* Hud.swift in Sources */,
 				279546111E9C720C00D36D83 /* SwiftMKitLog.xcdatamodeld in Sources */,
-				9ADF025420E5D950008BD6FA /* MachThreadBacktrace.c in Sources */,
 				2795469C1E9C720C00D36D83 /* SlideInPresentationManager.swift in Sources */,
 				279546141E9C720C00D36D83 /* PushManager.swift in Sources */,
 				7A51B63C20DBB19400060113 /* Date+Extension.swift in Sources */,
 				2795464C1E9C720C00D36D83 /* IndicatorButton.swift in Sources */,
 				279546521E9C720C00D36D83 /* CuteView.swift in Sources */,
-				9ADF025920E5D950008BD6FA /* SwiftCrashReport.swift in Sources */,
 				2783E0391DB62E4D005E087C /* MKDataViewController.swift in Sources */,
 				279546481E9C720C00D36D83 /* BaseListKitViewController.swift in Sources */,
-				9ADF025520E5D950008BD6FA /* SwiftCrashUmengReporter.m in Sources */,
 				2783E01D1DB626FD005E087C /* MKTreeViewController.swift in Sources */,
 				279545FF1E9C720C00D36D83 /* MSearch.swift in Sources */,
 				279546A71E9C720C00D36D83 /* SmarterTool.swift in Sources */,
@@ -2480,7 +2435,6 @@
 				279545FE1E9C720C00D36D83 /* MQueue.swift in Sources */,
 				7A68DCD91EFCF17700CE9E43 /* BaseKitService.swift in Sources */,
 				2749CECA1DD95E4300D713B0 /* MKPHAssetVideoViewController.swift in Sources */,
-				9ADF025A20E5D950008BD6FA /* MachExceptionHandler.c in Sources */,
 				3FC9DF641CBFD6D400C2D938 /* BaseViewController.swift in Sources */,
 				273E412A1DD2FE4B00A09830 /* MKUserNotificationViewModel.swift in Sources */,
 				278937F81CD0A5CC00F43699 /* PX500PhotoEntity+CoreDataProperties.swift in Sources */,
@@ -2489,7 +2443,6 @@
 				2783DFFD1DB626FD005E087C /* MKCoverFlowSelectBtnsCollectionViewCell.swift in Sources */,
 				2795462B1E9C720C00D36D83 /* UIFont+Extension.swift in Sources */,
 				2783E01B1DB626FD005E087C /* MKSideViewController.swift in Sources */,
-				9ADF025820E5D950008BD6FA /* SwiftCrashDefaultFormatter.m in Sources */,
 				279546701E9C720C00D36D83 /* LLCountingLabel.swift in Sources */,
 				2783E02F1DB62716005E087C /* MKNetworkRequestViewController.swift in Sources */,
 				2783E0061DB626FD005E087C /* MKEmptyListViewController.swift in Sources */,

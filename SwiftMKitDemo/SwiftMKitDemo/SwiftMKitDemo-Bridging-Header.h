@@ -5,4 +5,3 @@
 #include <sys/param.h>
 #include <sys/mount.h>
 #import <CommonCrypto/CommonCrypto.h>
-#import "SwiftCrashReport.h"
