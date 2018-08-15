@@ -60,8 +60,8 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
     func register(){
         if #available(iOS 10.0, *) {
             let notifiCenter = UNUserNotificationCenter.current()
-            let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-            notifiCenter.delegate = appDelegate
+//            let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+//            notifiCenter.delegate = appDelegate
         }
     }
     
@@ -97,59 +97,59 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
     
 }
 
-extension AppDelegate : UNUserNotificationCenterDelegate{
-    
-    //MARK: 推送回调方法
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        DDLogInfo("推送注册成功 DeviceToken: \(deviceToken)")
-        PushManager.shared.didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
-    }
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        DDLogError("推送注册失败")
-        PushManager.shared.didFailToRegisterForRemoteNotifications(withError: error)
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if application.applicationState == .active || application.applicationState == .inactive {
-            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
-        }
-        
-        completionHandler(.noData)
-    }
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        if UIApplication.shared.applicationState == .active{ //本地推送，用户活动状态  不做处理
-            return
-        }
-        if let userInfo = notification.userInfo {
-            PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
-        }
-    }
-    //MARK: iOS10新加入的回调方法
-    // 应用在前台收到通知
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        if notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) == true { //远程推送
-            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
-        }else{  //本地推送
-            if UIApplication.shared.applicationState != .active{ //本地推送，用户活动状态  不做处理
-                PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
-            }
-        }
-        completionHandler(.sound)
-    }
-    
-    // 点击通知进入应用
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        if (response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) == true){
-            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo)
-        }else {
-            PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo)
-        }
-        completionHandler()
-    }
-}
+//extension AppDelegate : UNUserNotificationCenterDelegate{
+//
+//    //MARK: 推送回调方法
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        DDLogInfo("推送注册成功 DeviceToken: \(deviceToken)")
+//        PushManager.shared.didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+//    }
+//    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+//        DDLogError("推送注册失败")
+//        PushManager.shared.didFailToRegisterForRemoteNotifications(withError: error)
+//    }
+//
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        if application.applicationState == .active || application.applicationState == .inactive {
+//            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
+//        }
+//
+//        completionHandler(.noData)
+//    }
+//    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+//        if UIApplication.shared.applicationState == .active{ //本地推送，用户活动状态  不做处理
+//            return
+//        }
+//        if let userInfo = notification.userInfo {
+//            PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
+//        }
+//    }
+//    //MARK: iOS10新加入的回调方法
+//    // 应用在前台收到通知
+//    @available(iOS 10.0, *)
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        let userInfo = notification.request.content.userInfo
+//        if notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) == true { //远程推送
+//            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo as [NSObject : AnyObject])
+//        }else{  //本地推送
+//            if UIApplication.shared.applicationState != .active{ //本地推送，用户活动状态  不做处理
+//                PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo as [NSObject : AnyObject])
+//            }
+//        }
+//        completionHandler(.sound)
+//    }
+//
+//    // 点击通知进入应用
+//    @available(iOS 10.0, *)
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        let userInfo = response.notification.request.content.userInfo
+//        if (response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) == true){
+//            PushManager.shared.didReceiveNotification(from: .remote, userInfo: userInfo)
+//        }else {
+//            PushManager.shared.didReceiveNotification(from: .local, userInfo: userInfo)
+//        }
+//        completionHandler()
+//    }
+//}
 
 
