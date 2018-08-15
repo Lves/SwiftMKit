@@ -12,28 +12,6 @@ import CocoaLumberjack
 import ReactiveSwift
 
 public struct NetworkDemo {
-    func test() {
-        LoginApi(mobile: "18600586544", password: "123123")
-            .signal().on(failed: { (error) in
-                
-        }) { api in
-//            LoginService.accessKey = api.accessKey!
-//            LoginService.token = api.token!
-//            LoginService.username = api.username!
-//            LoanUserInfo().signal().on(failed: { (error) in
-//            }) { api in
-//
-//                }.start()
-            
-        }.start()
-//        AdApi(type: .Home).signal().on(failed: { (error) in
-//            let e = error
-//            print(error)
-//        }) { api in
-//            let a = api.ads
-//            print(a)
-//        }.start()
-    }
 }
 public struct LoginService {
     static var accessKey: String?
@@ -59,7 +37,7 @@ class DMRequestHandler: RequestHandler {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         if let accessKey = LoginService.accessKey {
             var urlRequest = urlRequest
-            urlRequest.addValue(accessKey, forHTTPHeaderField: "jm-authorization")
+            urlRequest.addValue(accessKey, forHTTPHeaderField: "xxxxxx")
             return urlRequest
         }
         return urlRequest
@@ -94,8 +72,8 @@ class DMRequestApi: NSObject, RequestApi {
     
     
     var sessionIdentifier: String { return "DMRequestApi" }
-    var baseURLString: String { return "http://miracle-web-app.qa-01.idumiao.com" }
-    var baseHeader: [String : Any]? { return ["x-device-info" : "Xiaomi/19/android/8022000/6"] }
+    var baseURLString: String { return "http://xxxxxx" }
+    var baseHeader: [String : Any]?
     var timeoutIntervalForRequest: TimeInterval { return 15 }
     var timeoutIntervalForResource: TimeInterval { return 45 }
     var url: String { return "" }
@@ -163,85 +141,6 @@ class DMRequestApi: NSObject, RequestApi {
         DDLogError("Deinit: \(NSStringFromClass(type(of: self)))")
     }
 }
-class MiracleRequestApi: DMRequestApi {
-    override var sessionIdentifier: String { return "MiracleRequestApi" }
-    override var baseURLString: String { return super.baseURLString + "/miracle" }
-    
-    override func adapt(_ result: Result<Any>) -> Result<Any> {
-        let result = super.adapt(result)
-        if result.isSuccess, let map = result.value as? [String: Any] {
-            if let data = map["data"] {
-                return Result.success(data)
-            } else if
-                let statusCode = (map["statusCode"] as? String)?.toInt(),
-                let message = map["errorMessage"] as? String,
-                statusCode != NetStatusCode.success.rawValue {
-                let error = NetError(statusCode: statusCode, message: message)
-                return Result.failure(error)
-            }
-        }
-        return result
-    }
-    override init() {
-        super.init()
-    }
-}
-class LoanRequestApi: DMRequestApi {
-    override var sessionIdentifier: String { return "LoanRequestApi" }
-    override var baseURLString: String { return super.baseURLString + "/loan" }
-    
-    override func adapt(_ result: Result<Any>) -> Result<Any> {
-        let result = super.adapt(result)
-        if result.isSuccess, let map = result.value as? [String: Any] {
-            if let data = map["data"] {
-                return Result.success(data)
-            } else if
-                let statusCode = (map["statusCode"] as? String)?.toInt(),
-                let message = map["errorMessage"] as? String,
-                statusCode != NetStatusCode.success.rawValue {
-                let error = NetError(statusCode: statusCode, message: message)
-                return Result.failure(error)
-            }
-        }
-        return result
-    }
-    override init() {
-        super.init()
-    }
-}
-enum AdType: Int {
-    case home = 201
-}
-class TimeoutApi: DMRequestApi {
-    override var url: String { return "timeout" }
-}
-class LoginApi: DMRequestApi {
-    var mobile: String
-    var password: String
-    var result: [String: Any]?
-    var accessKey: String? {
-        return result?["access_key"] as? String
-    }
-    var token: String? {
-        return result?["token"] as? String
-    }
-    var username: String? {
-        return result?["userName"] as? String
-    }
-    override var url: String { return "login" }
-    override var method: HTTPMethod { return .post }
-    override var params: [String : Any]? {
-        return ["username": mobile, "password": password]
-    }
-    
-    init(mobile: String, password: String) {
-        self.mobile = mobile
-        self.password = password
-    }
-    override func fill(map: [String : Any]) {
-        result = map
-    }
-}
 class LoginTokenApi: DMRequestApi {
     var username: String
     var token: String
@@ -261,37 +160,4 @@ class LoginTokenApi: DMRequestApi {
     override func fill(map: [String : Any]) {
         result = map
     }
-}
-class LoanUserInfo: LoanRequestApi {
-    var userInfo: [String: Any]?
-    override var url: String {
-        return "/app/user/v5/user/info"
-    }
-    override func fill(map: [String : Any]) {
-        userInfo = map
-    }
-}
-class AdApi: MiracleRequestApi {
-    var type: AdType = .home
-    var ads: [AdModel]?
-    override var url: String {
-        return "/api/v1/discoveries/list/\(type.rawValue)"
-    }
-    override init() {
-        super.init()
-    }
-    init(type: AdType) {
-        super.init()
-        self.type = type
-    }
-    override func fill(array: [Any]) {
-        self.ads = toModel([AdModel].self, value: array)
-    }
-}
-struct AdModel: Codable {
-    var id: Int
-    var fileID: String
-    var address: String
-    var name: String
-    var weight: Int
 }
