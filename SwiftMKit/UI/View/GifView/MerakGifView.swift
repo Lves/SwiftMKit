@@ -3,7 +3,7 @@
 //  Merak
 //
 //  Created by HeLi on 16/12/13.
-//  Copyright © 2016年 jimubox. All rights reserved.
+//  Copyright © 2016. All rights reserved.
 //
 
 /// 功能： 如何展示一张本地的GIF图片

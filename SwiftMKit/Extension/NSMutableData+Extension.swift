@@ -1,9 +1,8 @@
 //
 //  NSMutableData+Extension.swift
-//  JimuDudu
 //
-//  Created by jimubox on 16/9/5.
-//  Copyright © 2016年 pintec. All rights reserved.
+//  Created by cdts on 16/9/5.
+//  Copyright © 2016年 All rights reserved.
 //
 
 import UIKit

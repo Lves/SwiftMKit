@@ -3,7 +3,7 @@
 //  Merak
 //
 //  Created by HeLi on 16/10/11.
-//  Copyright © 2016年 jimubox. All rights reserved.
+//  Copyright © 2016. All rights reserved.
 //
 
 import Foundation

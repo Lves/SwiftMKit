@@ -3,7 +3,7 @@
 //  Merak
 //
 //  Created by Mao on 6/24/16.
-//  Copyright © 2016 jimubox. All rights reserved.
+//  Copyright © 2016. All rights reserved.
 //
 
 import Foundation

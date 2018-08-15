@@ -1,6 +1,5 @@
 //
 //  LimitLengthTextField.swift
-//  JimuDuMiao
 //
 //  Created by Mao on 04/01/2017.
 //  Copyright © 2017 jm. All rights reserved.

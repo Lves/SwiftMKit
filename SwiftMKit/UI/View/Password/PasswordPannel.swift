@@ -2,7 +2,7 @@
 //  PasswordPannel.swift
 //  SwiftMKitDemo
 //
-//  Created by jimubox on 16/5/24.
+//  Created by cdts on 16/5/24.
 //  Copyright © 2016年 cdts. All rights reserved.
 //
 

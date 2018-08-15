@@ -20,7 +20,7 @@ public extension UIDevice {
         static let UUIDString: String = "UUIDString"
         static let IDFAString: String = "IDFAString"
         static let DeviceName: String = "DeviceName"
-        static let kUUID: String = "com.pintec.uuid"
+        static let kUUID: String = "com.swiftmkit.uuid"
     }
     //MARK: 保存在keychain中的uuid,只使用第一次保存的值
     static func getKeyChainUUID() -> String {

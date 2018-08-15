@@ -1,9 +1,8 @@
 //
 //  SwiftReflectionTool.swift
-//  JimuDuMiao
 //
 //  Created by cheny on 2017/7/7.
-//  Copyright © 2017年 Pintec. All rights reserved.
+//  Copyright © 2017年 All rights reserved.
 //
 
 import UIKit

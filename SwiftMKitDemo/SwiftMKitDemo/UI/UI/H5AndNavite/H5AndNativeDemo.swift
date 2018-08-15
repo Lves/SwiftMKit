@@ -31,8 +31,7 @@ class H5AndNativeDemo: BaseViewController {
     
     @IBAction func toLocalH5(_ sender: Any) {
 //        route(name: "LocalWebViewController")
-        route(toUrl: "http://loan-mobile.qa-02.jimu.com/hybird")
-//        route(toUrl: "http://fund-wechat.qa-01.hongdianfund.com/mixin/hybird?token=hd@20161108")
+        route(toUrl: "https://www.baidu.com")
     }
 }
 

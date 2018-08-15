@@ -3,7 +3,7 @@
 //  Merak
 //
 //  Created by LiXingLe on 16/6/17.
-//  Copyright © 2016年 jimubox. All rights reserved.
+//  Copyright © 2016. All rights reserved.
 //
 
 import Foundation

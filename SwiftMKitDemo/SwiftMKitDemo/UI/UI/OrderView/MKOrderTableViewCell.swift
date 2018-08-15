@@ -5,7 +5,7 @@
 //  Author: cheny
 //  Date: 16/9/17
 //  Version:
-//  Copyright © 2016年 pintec. All rights reserved.
+//  Copyright © 2016年 All rights reserved.
 //
 
 import UIKit

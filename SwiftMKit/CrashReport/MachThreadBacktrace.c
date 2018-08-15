@@ -3,7 +3,7 @@
 //  SwiftCrashReport
 //
 //  Created by yingdong.guo on 16/7/15.
-//  Copyright © 2016年 pintec.com. All rights reserved.
+//  Copyright © 2016年 All rights reserved.
 //
 
 #include "MachThreadBacktrace.h"
