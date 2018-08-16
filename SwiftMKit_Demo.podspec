@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.swift_version = "4.0"
   s.source       = { :git => "https://github.com/Lves/SwiftMKit.git", :tag => s.version.to_s }
   s.source_files  = "SwiftMKit/**/*.{h,m,swift,xcdatamodeld}"
-  s.resources = "SwiftMKit/Data/Log/*.{xcdatamodeld, xcdatamodel}","SwiftMKit/UI/**/**/*.{xib, png}","SwiftMKit/UI/**/*.{xib, png}","SwiftMKit/UI/**/**/**/*.png"
+  s.resources = ["SwiftMKit/Data/Log/*.{xcdatamodeld, xcdatamodel}","SwiftMKit/UI/**/**/*.{xib, png}","SwiftMKit/UI/**/*.{xib, png}","SwiftMKit/UI/**/**/**/*.png"]
 
 
   s.dependency "CocoaLumberjack/Swift", "~> 3.4.0"
