@@ -29,7 +29,7 @@ PODS:
     - Result (~> 3.2)
   - Result (3.2.4)
   - SnapKit (4.0.0)
-  - SwiftMKit_Demo (1.1.5.2):
+  - SwiftMKit_Demo (1.1.5.3):
     - Alamofire (~> 4.7.0)
     - Aspects (~> 1.4.0)
     - CocoaLumberjack/Swift (~> 3.4.0)
@@ -52,7 +52,7 @@ DEPENDENCIES:
   - Charts (~> 3.1.0)
   - FDFullscreenPopGesture (~> 1.1)
   - PulsingHalo (~> 0.2.0)
-  - SwiftMKit_Demo (~> 1.1.5.2)
+  - SwiftMKit_Demo (~> 1.1.5.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -100,9 +100,9 @@ SPEC CHECKSUMS:
   ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SwiftMKit_Demo: 16372096851abcbbc1656dbffdff2af21d9f940a
+  SwiftMKit_Demo: 2690a6cf51c9e132db9c1e2b7e74e033b6ab1de4
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
 
-PODFILE CHECKSUM: a4957e39fcde723439e2935278d1829ed161c6e9
+PODFILE CHECKSUM: a9594538d8271bf755a71caecbe37199fe927223
 
 COCOAPODS: 1.5.3
