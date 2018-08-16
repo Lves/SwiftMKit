@@ -9,7 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
-import SwiftMKit
+import SwiftMKitDemo
 
 class MKSegmentViewController: BaseViewController, SegmentContainerViewControllerDelegate {
 

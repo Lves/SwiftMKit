@@ -1,6 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "SwiftMKit_Demo"
-  s.version      = "1.1.5.2"
+  s.module_name  = "SwiftMKit"
+  s.version      = "1.1.5.3"
   s.summary      = "This is SwiftMKit."
   s.description  = <<-DESC
                    This is description 
