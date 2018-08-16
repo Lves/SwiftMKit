@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import SwiftMKit
 
 class MKiPodAssetViewController: BaseListViewController {
     
@@ -20,7 +21,7 @@ class MKiPodAssetViewController: BaseListViewController {
     var source: [String: [MPMediaItem]] = [:]
     
     lazy fileprivate var _viewModel = BaseListViewModel()
-    override var viewModel: BaseListViewModel!{
+    override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
     override var listView: UIScrollView! {

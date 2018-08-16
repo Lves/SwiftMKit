@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftMKit
 
 @objc(PX500PhotoEntity)
 class PX500PhotoEntity: BaseKitEntity {

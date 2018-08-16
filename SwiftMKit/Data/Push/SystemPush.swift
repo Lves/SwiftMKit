@@ -12,6 +12,9 @@ import CocoaLumberjack
 
 public struct SystemPush: PushManagerProtocol {
     
+    public init() {
+    }
+    
     public func pmp_didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: Data) {
         let token = deviceToken.hexString
         if #available(iOS 10.0, *) {
@@ -42,7 +45,7 @@ public struct SystemPush: PushManagerProtocol {
         }
     }
     
-    func receivePushData(userInfo: [AnyHashable: Any]){
+    public func receivePushData(userInfo: [AnyHashable: Any]){
         DDLogVerbose("\(userInfo)")
         let title: String = "消息推送"
         let message = (userInfo["aps"] as? [AnyHashable: Any])?["alert"] as? String

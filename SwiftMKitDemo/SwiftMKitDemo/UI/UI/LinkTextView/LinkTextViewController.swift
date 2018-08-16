@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftMKit
 
-class LinkTextViewController: BaseViewController,LinkTextViewDelegate {
+class LinkTextViewController: BaseViewController, LinkTextViewDelegate {
     var navi:UINavigationController?
     lazy fileprivate var _viewModel = BaseKitViewModel()
     override var viewModel: BaseKitViewModel!{

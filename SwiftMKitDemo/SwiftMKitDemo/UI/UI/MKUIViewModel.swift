@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftMKit
 
 class MKUIViewModel: BaseListViewModel {
     override init() {

@@ -8,17 +8,17 @@
 
 import UIKit
 
-class LinkTextModel: NSObject {
-    var url:String?
-    var range:NSRange = NSRange(location: 0, length: 0)
-    var font:UIFont?
-    var textColor:UIColor?
-    var highlightedBgColor:UIColor?
-    var showUnderline:Bool = false
-    override init() {
+public class LinkTextModel: NSObject {
+    public var url:String?
+    public var range:NSRange = NSRange(location: 0, length: 0)
+    public var font:UIFont?
+    public var textColor:UIColor?
+    public var highlightedBgColor:UIColor?
+    public var showUnderline:Bool = false
+    public override init() {
         super.init()
     }
-    init(range:NSRange, textColor:UIColor? = nil, url:String?, font:UIFont? = nil, highlightedBgColor:UIColor? = nil, showUnderline:Bool = false) {
+    public init(range:NSRange, textColor:UIColor? = nil, url:String?, font:UIFont? = nil, highlightedBgColor:UIColor? = nil, showUnderline:Bool = false) {
         super.init()
         self.range = range
         self.textColor = textColor

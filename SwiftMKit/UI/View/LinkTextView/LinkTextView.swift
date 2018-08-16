@@ -10,22 +10,22 @@ import UIKit
 import CoreText
 import CoreFoundation
 
-protocol LinkTextViewDelegate:class {
+public protocol LinkTextViewDelegate:class {
     func linkTextView(textView:LinkTextView?, didSelected model:LinkTextModel?)
 }
-class LinkTextView: UIView {
-    var content:String?
-    var font:UIFont = UIFont.systemFont(ofSize: 14)
-    var textColor:UIColor?
-    var lineSpacing:CGFloat = 0
-    var alignment:NSTextAlignment = .left
-    var linkArray:[LinkTextModel]?
-    weak var delegate:LinkTextViewDelegate?
+public class LinkTextView: UIView {
+    public var content:String?
+    public var font:UIFont = UIFont.systemFont(ofSize: 14)
+    public var textColor:UIColor?
+    public var lineSpacing:CGFloat = 0
+    public var alignment:NSTextAlignment = .left
+    public var linkArray:[LinkTextModel]?
+    public weak var delegate:LinkTextViewDelegate?
     
     private var ctFrame:CTFrame?
     private lazy var attributedString:NSMutableAttributedString? = {
         let attributedString = self.content?.getAttributedString(withFont: self.font, lineSpacing: self.lineSpacing, alignment:self.alignment,textColor:self.textColor ?? UIColor.black)
-         attributedString?.addAttribute(.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: attributedString?.length ?? 0))
+        attributedString?.addAttribute(.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: attributedString?.length ?? 0))
         attributedString?.addAttribute(.underlineStyle, value: 0, range: NSRange(location: 0, length: attributedString?.length ?? 0))
         if let linkList = self.linkArray{
             for linkModel in linkList{
@@ -35,7 +35,7 @@ class LinkTextView: UIView {
                 if let font = linkModel.font{
                     attributedString?.addAttribute(.font, value: font, range: linkModel.range)
                 }
-               
+                
                 if linkModel.showUnderline {
                     attributedString?.addAttribute(.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: linkModel.range)
                 }
@@ -44,7 +44,7 @@ class LinkTextView: UIView {
         return attributedString
     }()
     //最好在设置完linkArray后取高度
-    var heigthForContent:CGFloat {
+    public var heigthForContent:CGFloat {
         get{
             return String.getAttributedStringHeight(matchWidth: bounds.width, attributedString: self.attributedString)
         }
@@ -52,14 +52,14 @@ class LinkTextView: UIView {
     
     
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
     }
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         //1.0 上下文
         guard let context = UIGraphicsGetCurrentContext(),let attributedString = self.attributedString else {
             return
@@ -80,7 +80,7 @@ class LinkTextView: UIView {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let point = ((touches as NSSet).anyObject() as? UITouch)?.location(in: self){
             let index = getTapIndex(point: point)
             if index != -1 ,let linkArray = self.linkArray{
@@ -93,7 +93,7 @@ class LinkTextView: UIView {
         }
         
     }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let point = ((touches as NSSet).anyObject() as? UITouch)?.location(in: self){
             let index = getTapIndex(point: point)
             if index != -1 ,let linkArray = self.linkArray{
@@ -110,14 +110,14 @@ class LinkTextView: UIView {
             }
         }
     }
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let linkArray = self.linkArray{
             for linkData in linkArray {
                 removeBackgroundColor(linkData:linkData)
             }
         }
     }
-    func getTapIndex(point:CGPoint) -> CFIndex {
+    public func getTapIndex(point:CGPoint) -> CFIndex {
         var index = -1
         guard let ctFrame = self.ctFrame else{
             return index
@@ -134,7 +134,7 @@ class LinkTextView: UIView {
         // 翻转坐标系
         var transform = CGAffineTransform(translationX: 0, y: bounds.height)
         transform = transform.scaledBy(x: 1, y: -1)
-
+        
         for (i, line) in lines.enumerated() {
             let linePoint = origins[i]
             // 获得每一行的CGRect信息
@@ -150,7 +150,7 @@ class LinkTextView: UIView {
         }
         return index
     }
-    func getLineBounds(line:CTLine, point:CGPoint) -> CGRect{
+    public func getLineBounds(line:CTLine, point:CGPoint) -> CGRect{
         var ascent: CGFloat = 0
         var descent: CGFloat = 0
         var leading: CGFloat = 0
@@ -158,16 +158,16 @@ class LinkTextView: UIView {
         let height: CGFloat = ascent + descent
         return CGRect(x: point.x, y: point.y - descent, width: width, height: height)
     }
-    func updateBackgroundColor(linkData:LinkTextModel)  {
+    public func updateBackgroundColor(linkData:LinkTextModel)  {
         if let hBgColor = linkData.highlightedBgColor {
             attributedString?.addAttribute(.backgroundColor, value: hBgColor, range: linkData.range)
             setNeedsDisplay()
         }
     }
-    func removeBackgroundColor(linkData:LinkTextModel) {
+    public func removeBackgroundColor(linkData:LinkTextModel) {
         attributedString?.removeAttribute(.backgroundColor, range: linkData.range)
         setNeedsDisplay()
     }
     
-
+    
 }

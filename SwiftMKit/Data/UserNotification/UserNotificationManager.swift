@@ -13,20 +13,24 @@ import UserNotifications
 import ReactiveCocoa
 import ReactiveSwift
 
-struct UserNotificationOption : OptionSet {
+public struct UserNotificationOption : OptionSet {
     
-    let rawValue: UInt
+    public let rawValue: UInt
     
-    static let Badge = UserNotificationOption(rawValue: 1 << 0)
-    static let Sound = UserNotificationOption(rawValue: 1 << 1)
-    static let Alert = UserNotificationOption(rawValue: 1 << 2)
-    static let CarPlay = UserNotificationOption(rawValue: 1 << 3)
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
+    public static let Badge = UserNotificationOption(rawValue: 1 << 0)
+    public static let Sound = UserNotificationOption(rawValue: 1 << 1)
+    public static let Alert = UserNotificationOption(rawValue: 1 << 2)
+    public static let CarPlay = UserNotificationOption(rawValue: 1 << 3)
 }
 
 @available(iOS 10.0, *)
 open class UserNotificationManager: NSObject {
     
-    static let sharedInstance = UserNotificationManager()
+    public static let sharedInstance = UserNotificationManager()
     
     open var willPresentNotificationHandler: ((UNNotification) -> Bool)?
     open var didRecieveNotificationHandler: ((UNNotificationResponse) -> Bool)?
@@ -39,7 +43,7 @@ open class UserNotificationManager: NSObject {
         static let BuildDateString = "BuildDateString"
     }
     
-    static var deviceToken: String? {
+    public static var deviceToken: String? {
         get {
             let token = MemoryCache.shared().getObject(forKey: Constant.DeviceTokenName) as? String
             DDLogInfo("Get Push Device Token: \(token ?? "")")
@@ -56,15 +60,15 @@ open class UserNotificationManager: NSObject {
         }
     }
     
-    static var authorizationStatus = MutableProperty<UNAuthorizationStatus>(.notDetermined)
-    static var settings = MutableProperty<UNNotificationSettings?>(nil)
+    public static var authorizationStatus = MutableProperty<UNAuthorizationStatus>(.notDetermined)
+    public static var settings = MutableProperty<UNNotificationSettings?>(nil)
     
-    static func registerForRemoteNotifications() {
+    public static func registerForRemoteNotifications() {
         let _ = Async.main {
             UIApplication.shared.registerForRemoteNotifications()
         }
     }
-    static func requestAuthorization(_ options: UserNotificationOption, completionHandler: @escaping (Bool, Error?) -> Void) {
+    public static func requestAuthorization(_ options: UserNotificationOption, completionHandler: @escaping (Bool, Error?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions(rawValue: options.rawValue)) { (granted, error) in
             if granted {
                 DDLogInfo("推送授权成功")
@@ -79,7 +83,7 @@ open class UserNotificationManager: NSObject {
         }
     }
     
-    static func getNotificationSettings(_ completionHandler: @escaping (UNNotificationSettings) -> Void) {
+    public static func getNotificationSettings(_ completionHandler: @escaping (UNNotificationSettings) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             let _ = Async.main {
                 self.settings.value = settings
@@ -89,11 +93,11 @@ open class UserNotificationManager: NSObject {
         }
     }
     
-    static func addNotify(title: String, body: String, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+    public static func addNotify(title: String, body: String, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
         addNotify(title: title, body: body , userInfo:nil, attachments: nil, triggerTime: triggerTime, repeats: repeats, identifier: identifier, categoryIdentifier: categoryIdentifier, withCompletionHandler: completionHandler)
     }
     //iOS10及以上本地推送
-    static func addNotify(title: String, body: String, userInfo:[AnyHashable:Any]? = [:], attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
+    public static func addNotify(title: String, body: String, userInfo:[AnyHashable:Any]? = [:], attachments: [UNNotificationAttachment]?, triggerTime: TimeInterval, repeats: Bool, identifier: String, categoryIdentifier: String, withCompletionHandler completionHandler: ((NSError?) -> Void)?) {
         // 1. 创建通知内容
         let content = UNMutableNotificationContent()
         content.title = title
@@ -120,16 +124,16 @@ open class UserNotificationManager: NSObject {
             completionHandler?(error as NSError?)
         }
     }
-    static func removeDeliveredNotifies(identifiers: [String]) {
+    public static func removeDeliveredNotifies(identifiers: [String]) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
     }
-    static func removeAllDeliveredNotifies() {
+    public static func removeAllDeliveredNotifies() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
-    static func cancelNotifies(identifiers: [String]) {
+    public static func cancelNotifies(identifiers: [String]) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
-    static func cancelAllNotifies() {
+    public static func cancelAllNotifies() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
     
@@ -187,6 +191,6 @@ class UserNotificationBellowiOS10Manager: NSObject{
     static func cancleAllBellowiOS10Notifies(){
         UIApplication.shared.cancelAllLocalNotifications()
     }
-
+    
 }
 

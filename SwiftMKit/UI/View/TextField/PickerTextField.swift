@@ -30,16 +30,16 @@ extension PickerTextFieldDelegate {
 
 
 public class PickerTextField: UITextField ,UIPickerViewDelegate,UIPickerViewDataSource {
-    var dataArray:[String]?            //PIcker的数据源
-    var defaultIndex:Int = 0           //Picker默认显示dataArray下标
-    var defaultComponent:Int = 0
-    var showPickerDuration:TimeInterval = 0.5
-    var rowHeight:CGFloat = 50
+    public var dataArray:[String]?            //PIcker的数据源
+    public var defaultIndex:Int = 0           //Picker默认显示dataArray下标
+    public var defaultComponent:Int = 0
+    public var showPickerDuration:TimeInterval = 0.5
+    public var rowHeight:CGFloat = 50
     private var textButton: UIButton?
     fileprivate var selectedRow:Int = 0
     public weak var pickerTextFieldDelegate: PickerTextFieldDelegate?
-
-    lazy var coverView:UIView = {
+    
+    public lazy var coverView:UIView = {
         let cover = UIView(frame:CGRect(x: 0, y: 0 , w: PickerFieldConst.ScreenW, h: PickerFieldConst.ScreenH))
         cover.backgroundColor = UIColor(hex6: 0x000000,alpha: 0.35)
         let tapGuest = UITapGestureRecognizer(target: self, action: #selector(PickerTextField.tapCover))
@@ -49,37 +49,37 @@ public class PickerTextField: UITextField ,UIPickerViewDelegate,UIPickerViewData
         return cover
     }()
     
-    lazy var pickerView:UIPickerView = {
+    public lazy var pickerView:UIPickerView = {
         let picker = UIPickerView(frame: CGRect(x: 0, y: 0 , w: PickerFieldConst.ScreenW, h: PickerFieldConst.PickerViewH))
         picker.backgroundColor = UIColor.white
         picker.delegate = self
         picker.dataSource = self
         return picker
     }()
-    lazy var cancleButton:UIButton = {
+    public lazy var cancleButton:UIButton = {
         let button = UIButton()
         button.setTitle("完成", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(PickerTextField.tapCancle), for: .touchUpInside)
         return button
     }()
-    lazy var toolView:UIView = {
+    public lazy var toolView:UIView = {
         let toolView = UIView(frame: CGRect(x: 0, y: PickerFieldConst.ScreenH, w: PickerFieldConst.ScreenW, h: PickerFieldConst.ToolBarH+self.pickerView.h))
         toolView.backgroundColor = PickerFieldConst.ToolBarBackgrountColor
         self.cancleButton.frame = CGRect(x: PickerFieldConst.ScreenW - 55, y: 0, w: 40, h: PickerFieldConst.ToolBarH)
         toolView.addSubview(self.cancleButton)
         self.pickerView.y = self.cancleButton.h
         toolView.addSubview(self.pickerView)
-       return toolView
+        return toolView
     }()
-   
     
     
-    override init(frame: CGRect) {
+    
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
     }
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setUpUI()
     }

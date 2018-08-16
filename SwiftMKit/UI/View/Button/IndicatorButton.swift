@@ -19,14 +19,14 @@ open class IndicatorButton: UIButton {
     
     // MARK: - 公开属性
     /// 标识是否是向下切换title
-    var animateDirection: AnimateDirection = .fromDownToUp
-    var indicatorStyle: UIActivityIndicatorViewStyle = .white {
+    public var animateDirection: AnimateDirection = .fromDownToUp
+    public var indicatorStyle: UIActivityIndicatorViewStyle = .white {
         didSet {
             indicatorView.activityIndicatorViewStyle = indicatorStyle
         }
     }
-    var indicatorPosition: IndicatorPosition = .left
-    var indicatorMargin: CGFloat = 8
+    public var indicatorPosition: IndicatorPosition = .left
+    public var indicatorMargin: CGFloat = 8
     
     open override var isEnabled: Bool {
         willSet {
@@ -154,7 +154,7 @@ open class IndicatorButton: UIButton {
                 self.titleLabel!.alpha = 0
                 self.backView.alpha = 1
                 self.backView.transform = CGAffineTransform.identity
-            }) 
+            })
         }
     }
     
@@ -173,6 +173,6 @@ open class IndicatorButton: UIButton {
                 self.backView.transform = CGAffineTransform.identity
                 self.indicatorView.stopAnimating()
             }
-        }) 
+        })
     }
 }

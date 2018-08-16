@@ -21,7 +21,7 @@ open class BaseListFetchKitViewModel: BaseListKitViewModel {
             return nil
         }
     }
-    override var dataIndex: UInt {
+    public override var dataIndex: UInt {
         didSet {
             self.fetchRequest?.fetchLimit = Int(self.listLoadNumber * (self.dataIndex+1))
         }

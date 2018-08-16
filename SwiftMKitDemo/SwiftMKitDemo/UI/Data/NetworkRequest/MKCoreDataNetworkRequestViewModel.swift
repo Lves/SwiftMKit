@@ -11,7 +11,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import CoreData
 
-class MKCoreDataNetworkRequestViewModel: BaseListFetchViewModel {
+public class MKCoreDataNetworkRequestViewModel: BaseListFetchViewModel {
     
 //    fileprivate var signalPX500PhotosCoreData: SignalProducer<PX500PopularPhotosCoreDataApiData, NetError> {
 //        get {

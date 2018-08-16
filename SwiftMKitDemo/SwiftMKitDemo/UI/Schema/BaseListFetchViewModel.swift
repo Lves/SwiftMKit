@@ -7,7 +7,8 @@
 //
 
 import UIKit
+import SwiftMKit
 
-class BaseListFetchViewModel: BaseListFetchKitViewModel {
-
+open class BaseListFetchViewModel: BaseListFetchKitViewModel {
+   
 }

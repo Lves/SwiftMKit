@@ -57,15 +57,15 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
         _ = managers.map { self.managers.append($0) }
     }
     
-    func register(){
+    public func register(){
         if #available(iOS 10.0, *) {
             let notifiCenter = UNUserNotificationCenter.current()
-//            let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-//            notifiCenter.delegate = appDelegate
+            //            let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+            //            notifiCenter.delegate = appDelegate
         }
     }
     
-    func finishLaunch(application:UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?){
+    public func finishLaunch(application:UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?){
         
         PushManager.shared.register()
         if managers.count > 0{
@@ -80,10 +80,10 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
         }
     }
     
-    func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data){
+    public func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data){
         _ = managers.map { $0.pmp_didRegisterForRemoteNotifications(withDeviceToken: deviceToken) }
     }
-    func didReceiveNotification(from: PushFrom, userInfo: [AnyHashable: Any]){
+    public func didReceiveNotification(from: PushFrom, userInfo: [AnyHashable: Any]){
         storeTempData(userInfo: userInfo, from: from)
         if canReceiveData {
             tempPushUserInfo = nil
@@ -91,7 +91,7 @@ public class PushManager: NSObject , UNUserNotificationCenterDelegate{
             _ = managers.map { $0.pmp_didReceiveNotification(from: from, userInfo: userInfo) }
         }
     }
-    func didFailToRegisterForRemoteNotifications(withError error: Error){
+    public func didFailToRegisterForRemoteNotifications(withError error: Error){
         _ = managers.map { $0.pmp_didFailToRegisterForRemoteNotifications(withError: error) }
     }
     

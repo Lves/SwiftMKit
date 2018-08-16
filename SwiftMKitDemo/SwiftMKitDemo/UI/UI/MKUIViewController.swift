@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftMKit
 
 class MKUIViewController: BaseListViewController, SmarterToolDelegate {
 
@@ -82,6 +82,9 @@ class MKUIViewController: BaseListViewController, SmarterToolDelegate {
     func routeToEvnSwitch() {
         // FIXME: 跳转
 //        UIViewController.topController?.routeToName("CrashLogViewController")
+    }
+    func routeToCrashLog() {
+        
     }
     
 }

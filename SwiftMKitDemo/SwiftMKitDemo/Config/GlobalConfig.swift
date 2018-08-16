@@ -8,6 +8,7 @@
 
 import UIKit
 import PINCache
+import SwiftMKit
 
 struct GlobalConfig {
     static let AppId = "0"

@@ -11,6 +11,7 @@ import CocoaLumberjack
 import MagicalRecord
 import IQKeyboardManager
 import UserNotifications
+import SwiftMKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -13,7 +13,7 @@ public enum Environment: Int {
     case local, dev, gray, preProduct, product, custom
 }
 
-public class NetworkConfig {
+open class NetworkConfig {
     
     private struct Constant {
         static let Evn = "NetworkEvn"

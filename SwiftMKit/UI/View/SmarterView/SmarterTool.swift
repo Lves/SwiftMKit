@@ -25,7 +25,7 @@ public class SmarterTool: NSObject {
     
     var button:JDJellyButton?
     
-    override init() {
+    public override init() {
         super.init()
 
 //        SwiftCrashReport.install(LocalCrashLogReporter.self)
@@ -36,7 +36,7 @@ public class SmarterTool: NSObject {
         DDLog.add(fileLogger)
     }
     
-    func attach(toView view: UIView, homeIcon: String = "icon_st_apple") {
+    public func attach(toView view: UIView, homeIcon: String = "icon_st_apple") {
         button = JDJellyButton()
         button?.attach(toRootView: view, mainbutton: UIImage(named: homeIcon)!)
         button?.delegate = self

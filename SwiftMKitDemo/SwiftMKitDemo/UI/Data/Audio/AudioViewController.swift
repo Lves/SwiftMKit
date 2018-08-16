@@ -9,6 +9,7 @@
 import UIKit
 import AudioKit
 import AudioKitUI
+import SwiftMKit
 
 class AudioViewController: UIViewController, AKKeyboardDelegate {
 

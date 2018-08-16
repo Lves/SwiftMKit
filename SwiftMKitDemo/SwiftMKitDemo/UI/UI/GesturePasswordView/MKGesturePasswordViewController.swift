@@ -10,6 +10,8 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 import ReactiveSwift
+import SwiftMKit
+import LocalAuthentication
 
 class MKGesturePasswordViewController: BaseViewController {
 

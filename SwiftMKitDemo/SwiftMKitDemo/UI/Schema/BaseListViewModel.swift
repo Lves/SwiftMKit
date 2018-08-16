@@ -7,7 +7,8 @@
 //
 
 import UIKit
+import SwiftMKit
 
-class BaseListViewModel: BaseListKitViewModel {
+open class BaseListViewModel: BaseListKitViewModel {
 
 }

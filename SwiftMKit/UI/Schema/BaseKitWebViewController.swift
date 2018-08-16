@@ -23,7 +23,7 @@ open class BaseKitWebViewController: BaseKitViewController, WKNavigationDelegate
         static let BackGroundTitleColor : UIColor = UIColor.darkGray
     }
     weak var _webView: WKWebView?
-    var webView: WKWebView {
+    public var webView: WKWebView {
         if let webV = _webView {
             return webV
         }

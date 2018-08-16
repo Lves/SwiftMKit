@@ -9,6 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import FDFullscreenPopGesture
+import SwiftMKit
 
 class MKSideViewController: BaseViewController, MKSideMenuViewControllerDelegate {
     

@@ -10,6 +10,7 @@ import UIKit
 import CocoaLumberjack
 import ReactiveCocoa
 import ReactiveSwift
+import SwiftMKit
 
 class MKIndicatorButtonViewController: BaseViewController {
     

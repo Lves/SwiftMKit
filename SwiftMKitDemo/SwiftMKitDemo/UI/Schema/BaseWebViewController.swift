@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SwiftMKit
 
-class BaseWebViewController: BaseKitWebViewController {
+open class BaseWebViewController: BaseKitWebViewController {
     
     fileprivate var _viewModel = BaseViewModel()
-    override var viewModel: BaseKitViewModel!{
+    override open var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
     

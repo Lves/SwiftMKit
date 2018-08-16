@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import CocoaLumberjack
 import ReactiveCocoa
+import SwiftMKit
 
 enum DataStoreType: Int {
     case memory, coreData

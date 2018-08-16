@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import SwiftMKit
 
 class MKGalaryCollectionViewController: BaseViewController, GalaryCollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     struct InnerConst {

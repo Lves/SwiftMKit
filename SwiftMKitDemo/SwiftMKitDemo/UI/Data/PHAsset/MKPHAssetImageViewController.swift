@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import SwiftMKit
 
 class MKPHAssetImageViewController: BaseViewController {
 

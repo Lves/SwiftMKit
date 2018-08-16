@@ -9,7 +9,7 @@
 import Foundation
 import CocoaLumberjack
 
-class DDLogMKitFormatter: NSObject, DDLogFormatter {
+public class DDLogMKitFormatter: NSObject, DDLogFormatter {
     /**
      * Formatters may optionally be added to any logger.
      * This allows for increased flexibility in the logging environment.

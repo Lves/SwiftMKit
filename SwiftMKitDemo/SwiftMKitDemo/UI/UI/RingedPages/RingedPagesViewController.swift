@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftMKit
 
 class RingedPagesViewController: UIViewController, RingedPagesDataSource, RingedPagesDelegate {
     
@@ -92,7 +93,7 @@ class RingedPagesViewController: UIViewController, RingedPagesDataSource, Ringed
     func didSelectPage(in pages: RingedPages ,pageIndex: Int) {
         print("pages selected, the current index is \(pages.currentIndex) pageIndex is \(pageIndex)" )
     }
-    func ringedPages(pages: RingedPages, didScrollTo index: Int) {
+    func ringedPages(_ pages: RingedPages, didScrollTo index: Int) {
         print("Did scrolled to index: \(index)")
     }
     

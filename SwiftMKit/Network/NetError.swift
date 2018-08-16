@@ -15,7 +15,7 @@ public enum StatusCode: Int {
     case badRequest = 400
     case unAuthorized = 401
     case loginOtherDevice = 403
-
+    
 }
 
 open class NetError : NSError {
@@ -24,7 +24,7 @@ open class NetError : NSError {
     @objc open var message: String = ""
     open static var defaultMessage = "网络异常"
     
-    init(statusCode: Int, message: String) {
+    public init(statusCode: Int, message: String) {
         self.statusCode = statusCode
         self.message = message
         super.init(domain: "NetError", code: statusCode, userInfo: ["message":message])
@@ -35,7 +35,7 @@ open class NetError : NSError {
             self.message = NetError.defaultMessage
         }
     }
-    convenience init(error: NSError){
+    public convenience init(error: NSError){
         self.init(statusCode: error.code, message: error.description)
     }
     public required init?(coder aDecoder: NSCoder) {

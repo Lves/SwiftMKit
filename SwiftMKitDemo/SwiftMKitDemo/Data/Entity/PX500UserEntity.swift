@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftMKit
 
 @objc(PX500UserEntity)
 class PX500UserEntity: BaseKitEntity {

@@ -14,7 +14,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
     fileprivate struct InnerConstant {
         static let StringNoMoreDataTip = "数据已全部加载完毕"
     }
-    override init() {
+    public override init() {
         super.init()
     }
     open var listViewController: BaseListKitViewController! {
@@ -28,7 +28,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
     open var taskListIndicator: Indicator {
         get { return self.listViewController.taskListIndicator }
     }
-    var dataArray:[Any] {
+    open var dataArray:[Any] {
         get {
             if dataSource.first == nil {
                 dataSource.append([Any]())
@@ -40,7 +40,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
         }
     }
     fileprivate var isDataSourceChanged: Bool = false
-    var dataSource:[[Any]] = [[Any]]() {
+    open var dataSource:[[Any]] = [[Any]]() {
         didSet {
             if self.viewController == nil {
                 return
@@ -63,7 +63,7 @@ open class BaseListKitViewModel: BaseKitViewModel {
                 self.viewController.emptyView?.hide()
             }
             if self.listViewController.listViewType == .refreshOnly ||
-               self.listViewController.listViewType == .none {
+                self.listViewController.listViewType == .none {
                 return
             }
             var noMoreDataTip = InnerConstant.StringNoMoreDataTip
@@ -88,9 +88,9 @@ open class BaseListKitViewModel: BaseKitViewModel {
             }
         }
     }
-    var dataIndex: UInt = 0
-    var listLoadNumber: UInt { get { return 20 } }
-    var listMaxNumber: UInt { get { return UInt.max } }
+    public var dataIndex: UInt = 0
+    open var listLoadNumber: UInt { get { return 20 } }
+    open var listMaxNumber: UInt { get { return UInt.max } }
     
     open func updateDataArray(_ newData: [Any]?) {
         isDataSourceChanged = true

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftMKit
 
 @objc(TestTeacherEntity)
 class TestTeacherEntity: BaseKitEntity {

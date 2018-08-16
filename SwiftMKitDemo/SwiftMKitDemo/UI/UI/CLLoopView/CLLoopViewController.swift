@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftMKit
 
 class CLLoopViewController: UIViewController,CLLoopViewDelegate {
     

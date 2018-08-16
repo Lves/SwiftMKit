@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import Alamofire
 import CocoaLumberjack
+import SwiftMKit
 
 class WangYiApi: NSObject, RequestApi {
     

@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveSwift
 
-class BaseKitService: NSObject {
+open class BaseKitService: NSObject {
 
     class func signalFor<T: RequestApi>(api: T) -> SignalProducer<T, NetError> {
         return api.signal()
