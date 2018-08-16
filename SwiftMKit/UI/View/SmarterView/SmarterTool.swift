@@ -36,9 +36,9 @@ public class SmarterTool: NSObject {
         DDLog.add(fileLogger)
     }
     
-    public func attach(toView view: UIView, homeIcon: String = "icon_st_apple") {
+    public func attach(toView view: UIView, homeIcon: String = "icon_st_apple@2x") {
         button = JDJellyButton()
-        button?.attach(toRootView: view, mainbutton: UIImage(named: homeIcon)!)
+        button?.attach(toRootView: view, mainbutton: Bundle.smkitPngImage(imageName: homeIcon)!)
         button?.delegate = self
         button?.datasource = self
     }
@@ -72,6 +72,7 @@ extension SmarterTool:JDJellyButtonDataSource
     }
     func imagesource(forgroup groupindex:Int) -> [UIImage]
     {
-        return [UIImage(named: "icon_st_file")!, UIImage(named: "icon_st_switch")!, UIImage(named: "icon_st_bug")!]
+        
+        return [Bundle.smkitPngImage(imageName: "icon_st_file@2x")!, Bundle.smkitPngImage(imageName: "icon_st_switch@2x")!, Bundle.smkitPngImage(imageName: "icon_st_bug@2x")!]
     }
 }

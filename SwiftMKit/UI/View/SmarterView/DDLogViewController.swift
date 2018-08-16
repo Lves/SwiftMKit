@@ -17,6 +17,9 @@ class DDLogViewController: BaseKitViewController {
     override var viewModel: BaseKitViewModel!{
         get { return _viewModel }
     }
+    override func awakeFromNib() {
+        print("")
+    }
     
     override func setupUI() {
         super.setupUI()

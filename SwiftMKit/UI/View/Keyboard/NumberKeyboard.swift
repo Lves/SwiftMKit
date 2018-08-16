@@ -37,8 +37,8 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
             viewEnterHiglightColor: UIColor(hex6: 0xFD734C),
             viewDelHiglightColor: UIColor(hex6: 0xC0C7D4),
             viewNumberHiglightColor: UIColor(hex6: 0xC0C7D4),
-            viewDelImage: "kb_keyboard_view_del",
-            viewScreenImage: "kb_keyboard_view_screen")
+            viewDelImage: "kb_keyboard_view_del@2x",
+            viewScreenImage: "kb_keyboard_view_screen@2x")
     }
 
     @IBOutlet weak var btn1: UIButton!
@@ -79,7 +79,8 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
         return keyboard(textField, type: type, theme: Theme.DefaultTheme)
     }
     open static func keyboard(_ textField: UITextField, type: NumberKeyboardType = .normal, theme: NumberKeyboardUITheme) -> NumberKeyboard {
-        let view = Bundle.main.loadNibNamed("NumberKeyboard", owner: self, options: nil)?.first as? NumberKeyboard
+        let view = Bundle.smkitSourceBundle()?.loadNibNamed("NumberKeyboard", owner: self, options: nil)?.first as? NumberKeyboard
+//        let view = Bundle.main.loadNibNamed("NumberKeyboard", owner: self, options: nil)?.first as? NumberKeyboard
         view?.textField = textField
         view?.type = type
         view?.setupUI(theme)
@@ -104,8 +105,10 @@ open class NumberKeyboard: UIView, NumberKeyboardProtocol {
         btnDel.setBackgroundImage(UIImage(color: theme.viewDelHiglightColor), for: .highlighted)
         btnOk.setBackgroundImage(UIImage(color: theme.viewEnterHiglightColor), for: .highlighted)
         btnKey.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), for: .highlighted)
-        btnKey.setImage(UIImage(named: theme.viewScreenImage), for: UIControlState())
-        btnDel.setImage(UIImage(named: theme.viewDelImage), for: UIControlState())
+//        btnKey.setImage(UIImage(named: theme.viewScreenImage), for: UIControlState())
+//        btnDel.setImage(UIImage(named: theme.viewDelImage), for: UIControlState())
+        btnKey.setImage(Bundle.smkitPngImage(imageName: theme.viewScreenImage), for: UIControlState())
+        btnDel.setImage(Bundle.smkitPngImage(imageName: theme.viewDelImage), for: UIControlState())
         for button in buttonNumbers {
             button.setBackgroundImage(UIImage(color: theme.viewNumberColor), for: UIControlState())
             button.setBackgroundImage(UIImage(color: theme.viewNumberHiglightColor), for: .highlighted)

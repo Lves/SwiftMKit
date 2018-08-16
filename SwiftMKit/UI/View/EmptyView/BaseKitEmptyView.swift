@@ -18,6 +18,8 @@ open class BaseKitEmptyView: UIView {
     @IBOutlet weak var lblTitle: UILabel!
     
     open class func getView() -> BaseKitEmptyView {
-        return Bundle.main.loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! BaseKitEmptyView
+        
+        let bun:Bundle = Bundle(path: Bundle(for: BaseKitEmptyView.self).path(forResource: "SMKit", ofType: "bundle")!)!
+        return bun.loadNibNamed(InnerConst.NibName, owner: nil, options: nil)!.first as! BaseKitEmptyView
     }
 }

@@ -74,7 +74,8 @@ open class PasswordPannel: UIView, PasswordTextViewDelegate{
         super.init(coder: aDecoder)
     }
     open static func pannel(_ index: Int = 0) -> PasswordPannel {
-        let view = Bundle.main.loadNibNamed("PasswordPannel", owner: self, options: nil)![index] as! PasswordPannel
+        let view = Bundle.smkitSourceBundle()?.loadNibNamed("PasswordPannel", owner: self, options: nil)![index] as! PasswordPannel
+//        let view = Bundle.main.loadNibNamed("PasswordPannel", owner: self, options: nil)![index] as! PasswordPannel
         view.passwordPannelType = PasswordPannelType(rawValue: index) ?? .normal
         view.setupUI()
         return view

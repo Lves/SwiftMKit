@@ -8,7 +8,7 @@ inhibit_all_warnings!
 use_frameworks!
 
 def pods
-#    pod 'SwiftMKit_Demo', '~> 1.1.5.3'
+    pod 'SwiftMKit_Demo', '~> 1.1.5.3'
 
     pod 'Charts', '~> 3.1.0'
     pod 'PulsingHalo', '~> 0.2.0'
@@ -28,23 +28,23 @@ target 'SwiftMKitDemoUITests' do
     pods
 end
 
-target 'SwiftMKit' do
-    pod  'CocoaLumberjack/Swift', '~> 3.4.0'
-    pod  'ReactiveCocoa', '~> 7.2.0'
-    pod  'Alamofire', '~> 4.7.0'
-    pod  'Kingfisher', '~> 4.8.0'
-    pod  'MagicalRecord', '~> 2.3.0'
-    pod  'MJExtension', '~> 3.0.0'
-    pod  'MJRefresh', '~> 3.1.0'
-    pod  'CryptoSwift', '~> 0.10.0'
-    pod  'IQKeyboardManager', '~> 6.0.0'
-    pod  'WebViewJavascriptBridge', '~> 6.0.0'
-    pod  'PINCache', '~> 2.3.0'
-    pod  'SnapKit', '~> 4.0.0'
-    pod  'pop', '~> 1.0.0'
-    pod  'Aspects', '~> 1.4.0'
-    pod  'MBProgressHUD', '~> 1.1.0'
-end
+#target 'SwiftMKit' do
+#    pod  'CocoaLumberjack/Swift', '~> 3.4.0'
+#    pod  'ReactiveCocoa', '~> 7.2.0'
+#    pod  'Alamofire', '~> 4.7.0'
+#    pod  'Kingfisher', '~> 4.8.0'
+#    pod  'MagicalRecord', '~> 2.3.0'
+#    pod  'MJExtension', '~> 3.0.0'
+#    pod  'MJRefresh', '~> 3.1.0'
+#    pod  'CryptoSwift', '~> 0.10.0'
+#    pod  'IQKeyboardManager', '~> 6.0.0'
+#    pod  'WebViewJavascriptBridge', '~> 6.0.0'
+#    pod  'PINCache', '~> 2.3.0'
+#    pod  'SnapKit', '~> 4.0.0'
+#    pod  'pop', '~> 1.0.0'
+#    pod  'Aspects', '~> 1.4.0'
+#    pod  'MBProgressHUD', '~> 1.1.0'
+#end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
