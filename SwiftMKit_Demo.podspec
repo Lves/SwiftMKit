@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files  = "SwiftMKit/**/*.{h,m,swift,xcdatamodeld}"
   s.resources = ["SwiftMKit/Data/Log/*.{xcdatamodeld, xcdatamodel}","SwiftMKit/SMKit.bundle"]
 
-  s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/SwiftMKit/SwiftMKit/ImportedModules' }
+  s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/SwiftMKit_Demo/SwiftMKit/ImportedModules' }
   s.preserve_paths = 'SwiftMKit/ImportedModules/module.modulemap'
 
   s.dependency "CocoaLumberjack/Swift", "~> 3.4.0"
